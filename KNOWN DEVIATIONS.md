@@ -440,3 +440,47 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   port replays them exactly (visited set before recursion, resolved set
   before the callback) — pinned by the RESOLVE/RESOLVE2 stuck-state
   vectors where a longjmp left is_resolved=true burned in the list.
+
+## utils/cfmt (C-printf engine) + log/messages.{h,cc} + log/log_errors.h
+- snort3 formats through glibc vsnprintf/printf/syslog. The port has zero
+  external crates, so utils/cfmt re-implements the C-printf subset the log
+  layer actually uses, pinned byte-for-byte against glibc by the
+  tools/log_harness vector battery (P17/P17b: ~30 format strings). Not a
+  general printf: no positional args ($n), no %a/%td beyond slots, no
+  wchar, nonlocalizable.
+- Arg values are passed as a typed slice (I/U/F/S) instead of C varargs;
+  the int-slot masking (bare %d keeps low 32 bits sign-extended, %hd
+  %16-bit wraps etc.) reproduces the ABI truncation the C call sites get.
+- FatalError: C _exit(EXIT_FAILURE)s; the port returns Fatal::Quitting
+  and keeps already_fatal on the engine so the reentry guard matches
+  (second call prints NOTHING, returns Reentrant = C _exit(1)).
+  in_main_thread() worker-abort branch and cleanup_fatal_error() stay with
+  the embedding binary.
+- log_safec_error: C assert(false) (SIGABRT in release-less builds); the
+  port panics after the <1000-gated ErrorMessage. The harness vector for
+  P14 includes the glibc assertion note line (prints the harness's own
+  path) — stripped from the replay expectation; everything before it is
+  compared exactly.
+- parse_errors/parse_warnings/reload_errors and the reload description are
+  plain u32/String, not std::atomic (snort3's are process-wide atomics;
+  the port's engine is single-threaded per-policy). get_parse_errors/
+  warnings stay destructive read-and-clear like C; get_reload_errors does
+  NOT reset.
+- warning_flags / logging_flags / output_flags / log_quiet_bypassed are
+  SnortConfig CLASS statics in C: they persist even when get_conf() ==
+  nullptr. The port keeps them directly on LogEngine (faithful: no deref
+  needed to read a static) plus a conf_present bool standing for
+  get_conf() != nullptr, gating exactly the two sites that deref the
+  object (ParseWarning's suppression guard, WriteLogMessage's buffered
+  check). The get_quiet/syslog/buffered accessors mirror the C inline functions.
+- BatchedLogger (use_log_buffered / OUTPUT_FLAG_LOG_BUFFERED) is not
+  ported: WriteLogMessage panics if the bit is armed, matching the
+  harness abort() that made the path observable.
+- ConfigLogger: C's 12 log_limit / 9 log_value integer overloads collapse
+  to signed/unsigned pairs (i64/u64); disable-vs-unlim precedence and
+  the (long long) casts keep output identical. log_list keeps the C
+  quirks: head fmt "%*s%s%.0s%s" swallows the prefix (printed only on
+  continuation lines), null caption prints glibc "(null)", the 75-char
+  wrap test is res.length()+val.length() BEFORE adding ' '+val, and the
+  uncaptioned log_list(list) variant uses its own no-leading-space
+  accumulation + tab\t continuation.

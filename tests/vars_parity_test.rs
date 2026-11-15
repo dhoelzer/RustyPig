@@ -106,10 +106,10 @@ fn vars_harness_full_transcript_replay() {
         }};
     }
 
-    pp!("$HOME_NET", Some("[192.168.0.0/16]"));
-    pp!("$WEB_SERVERS", Some("$HOME_NET")); // ExpandVars of value aborts: name+1 "HOME_NET" not in table
-    pp!("$home_net", Some("10.0.0.0/8"));
-    pp!("$P", Some("a$HOME_NET b"));
+    let _ = pp!("$HOME_NET", Some("[192.168.0.0/16]"));
+    let _ = pp!("$WEB_SERVERS", Some("$HOME_NET")); // ExpandVars of value aborts: name+1 "HOME_NET" not in table
+    let _ = pp!("$home_net", Some("10.0.0.0/8"));
+    let _ = pp!("$P", Some("a$HOME_NET b"));
     // PQ/PR: the C probe prints its abort flag BETWEEN the abort printf
     // and walk_vars ($Q has a walk after; $R does NOT — the walk comes
     // after $S), so these stay split:
@@ -124,16 +124,16 @@ fn vars_harness_full_transcript_replay() {
         drain(&mut c, &mut o);
         o.push_str(&format!("PR abort={}\n", res.is_err() as u8));
     }
-    pp!("$S", Some("$FOO"));
-    pp!("$T", Some("pre$(WEB_SERVERS)post"));
-    pp!("$HTTP_PORTS", Some("x"));
+    let _ = pp!("$S", Some("$FOO"));
+    let _ = pp!("$T", Some("pre$(WEB_SERVERS)post"));
+    let _ = pp!("$HTTP_PORTS", Some("x"));
     // probe: two g_parsepath calls, ONE walk after the pair
     v::parse_path_var(&mut c, "$X", Some("5")).ok();
     drain(&mut c, &mut o);
     v::parse_path_var(&mut c, "$X", Some("$X")).ok();
     drain(&mut c, &mut o);
     walk(&c, &mut o);
-    pp!("HOME_NET", Some("11.0.0.0/8"));
+    let _ = pp!("HOME_NET", Some("11.0.0.0/8"));
     // VarSearch("HOME_NET")
     {
         let s = v::var_search(&mut c, "HOME_NET").unwrap();
@@ -252,9 +252,9 @@ fn vars_harness_full_transcript_replay() {
     }
 
     // ===== alias id-copy on a NON-empty table =====
-    pp!("AL0", Some("[9.9.9.9]"));
+    let _ = pp!("AL0", Some("[9.9.9.9]"));
     // g_parsepath("$AL1", "$AL0"): alias key scan matches stored "AL0"
-    pp!("$AL1", Some("$AL0"));
+    let _ = pp!("$AL1", Some("$AL0"));
 
     // ===== DeleteVars =====
     v::delete_vars(&mut c);

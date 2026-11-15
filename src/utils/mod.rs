@@ -4,4 +4,5 @@ pub mod util_cstring;
 pub mod util;
 pub mod util_unfold;
 pub mod bits;
+pub mod cfmt;
 pub mod sflsq;

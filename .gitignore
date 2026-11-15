@@ -34,3 +34,5 @@ tools/action_harness/registry.cc
 
 tools/vars_harness/copy/
 tools/vars_harness/probe
+tools/log_harness/copy/
+tools/log_harness/probe
