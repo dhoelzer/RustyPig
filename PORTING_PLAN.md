@@ -33,6 +33,7 @@ the plan honestly with a status table rather than claiming more than is built.
 | 15 | helpers/streambuf | ~2.4k | DONE: all 17 streambuf_test.cc TEST_CASEs (97 sections) ported; C++ ground truth = upstream suite passed verbatim (17/17, 832 assertions, tools/streambuf_harness) |
 | 16 | utils/util.cc (pure members + ts_print via TimeCfg) | ~490 | DONE: 3/3 embedded Catch2 cases + stoul/memrchr/ts_print pinning; rotate_file_for_max_size deferred (FILE*/errno layer) |
 | 16c | framework/value + parameter subset + utils/bits bitsets | ~1k | DONE: 15/15 value.cc Catch2 cases (incl. get_addr over-size quirk, set_first_token ss-recreation quirk); strtol/strtoul C-base-0 pinned via glibc probe (octal LONG_MAX clamp, dec ULONG_MAX); Parameter::index/find; validate() deferred to option layer |
+| 16d | hash: hash_key_operations + ghash + primetable (IpsOption::hash deps) | ~1.4k | DONE: 170-line ground-truth vector parity (static-hash do_hash/mix_str/finalize/nearest_prime) + 3/3 ghash_test.cc CppUTest cases; prime tables extracted verbatim |
 | 16b | main/snort_types.h + framework/log levels, Option/OptionTree | ~4k | TODO |
 | 17 | parsers: config_file, parse_rule, parse_so_rule (parse_ip/parse_ports DONE) | ~4k | TODO |
 | 18 | codecs (IP/TCP/UDP normalization) | ~15k | TODO |

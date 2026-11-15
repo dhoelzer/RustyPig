@@ -246,3 +246,25 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - Parameter: range union (Parameter*/RangeQuery*/char*) and validate()
   deferred to the option-parsing layer; index/find_ported verbatim.
 - FixedBitSet<N> = std::bitset<N> subset for the option bit lists.
+
+## hash (hash_key_operations, ghash, primetable)
+- HashKeyOperations: only the static_hash constants (seed 3193/scale 719/
+  hardener 133824503) are implemented; the randomized ctor needs a
+  bit-exact std::mt19937 + uniform_int_distribution port — deferred until
+  the detection layer selects per-thread salting (flagged for revisit).
+- GHash: typed payload D + arena index handles instead of void*/GHashNode*;
+  userkey/userfree map to Rust ownership/Drop. Keys always stored owned
+  (C copied unless userkey), including the string NUL terminator, so
+  do_hash sees strlen+1 bytes exactly as C.
+- GHash(0,...): C constructs then SIGFPEs on first % nrows; Rust
+  constructs and panics on first use. nrows<0 => -nrows literal (no prime
+  lookup): preserved.
+- find_first/find_next: C find_first() advances the cursor before
+  returning the head (verified from source; mid-port "fix" reverted).
+  C find_next() after remove()-of-current returns a dangling pointer
+  (the upstream drain loops rely on freed chunk ->next staying readable:
+  UB); Rust ends the scan cleanly at the freed slot — upstream drain
+  loops terminate in Rust via the same protocol because the cursor was
+  already advanced before the removal.
+- dup insert leaves the ORIGINAL data untouched (HASH_INTABLE short
+  circuit): pinned by GH find-b2 (7, not 8).

@@ -6,6 +6,7 @@
 //! See KNOWN DEVIATIONS.md for audited departures from the C++ original.
 
 pub mod framework;
+pub mod hash;
 pub mod helpers;
 pub mod log;
 pub mod parser;

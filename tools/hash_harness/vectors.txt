@@ -1,0 +1,176 @@
+NP -100 97
+NP 0 3
+NP 4 3
+NP 100 97
+NP -10 7
+NP -4 3
+NP 4095 4079
+NP 8191 8179
+NP 8192 8191
+NP 8193 8191
+NP 40000 39989
+NP 65535 65449
+NP 65536 66553
+NP 100000 100343
+NP 1048575 1048573
+NP 1048576 1179641
+NP 2000000 2097143
+NP 70000000 70123513
+NP 134217728 16908263
+NP 200000001 25034731
+NP 1073741823 134217689
+NP 1073741824 134086639
+NP 2000000000 134086639
+NP -2147483647 134086639
+NP 997 991
+NP 9871 9857
+NP 500 491
+HK  1008623078 2683206297
+HK a 1994777928 2683206297
+HK KeyWord1 4271498742 2683206297
+HK KeyWord100 438257576 2683206297
+HK hello 3690775499 2683206297
+HK snort 1607781526 2683206297
+HK 101010101010101010101010101010101010101010101010101010101010101 3276280508 2683206297
+MS  0 0 0
+MS a 1876517378 803622074 3668259894
+MS KeyWord1 1943945326 1804936484 886053918
+MS KeyWord100 398574172 2171785088 2126447358
+MS hello 624770700 1279271555 1916669673
+MS snort 909672503 1082092450 1133961344
+MS 101010101010101010101010101010101010101010101010101010101010101 3859939952 3100393834 2722625000
+SH 4 1161639616
+SH 0 0
+SH 1 3956879549
+GH nrows0 constructed
+A ins 0 0
+A ins 1 0
+A ins 2 0
+A ins 3 0
+A ins 4 0
+A ins 5 0
+A ins 6 0
+A ins 7 0
+A ins 8 0
+A ins 9 0
+A ins 10 0
+A ins 11 0
+A ins 12 0
+A ins 13 0
+A ins 14 0
+A ins 15 0
+A ins 16 0
+A ins 17 0
+A ins 18 0
+A ins 19 0
+A ins 20 0
+A ins 21 0
+A ins 22 0
+A ins 23 0
+A ins 24 0
+A ins 25 0
+A ins 26 0
+A ins 27 0
+A ins 28 0
+A ins 29 0
+A dup 1
+A cnt 30
+A it 0 KeyWord22 121
+A it 1 KeyWord12 111
+A it 2 KeyWord10 109
+A it 3 KeyWord18 117
+A it 4 KeyWord9 108
+A it 5 KeyWord29 128
+A it 6 KeyWord1 100
+A it 7 KeyWord17 116
+A it 8 KeyWord25 124
+A it 9 KeyWord15 114
+A it 10 KeyWord14 113
+A it 11 KeyWord7 106
+A it 12 KeyWord6 105
+A it 13 KeyWord26 125
+A it 14 KeyWord23 122
+A it 15 KeyWord20 119
+A it 16 KeyWord16 115
+A it 17 KeyWord3 102
+A it 18 KeyWord21 120
+A it 19 KeyWord8 107
+A it 20 KeyWord5 104
+A it 21 KeyWord4 103
+A it 22 KeyWord2 101
+A it 23 KeyWord30 129
+A it 24 KeyWord28 127
+A it 25 KeyWord27 126
+A it 26 KeyWord24 123
+A it 27 KeyWord19 118
+A it 28 KeyWord13 112
+A it 29 KeyWord11 110
+A endcnt 30
+A find17 116
+A rm-miss -1
+A rm17 0
+A cnt2 29
+A it2 0 KeyWord22
+A it2 1 KeyWord12
+A it2 2 KeyWord10
+A it2 3 KeyWord18
+A it2 4 KeyWord9
+A it2 5 KeyWord29
+A it2 6 KeyWord1
+A it2 7 KeyWord25
+A it2 8 KeyWord15
+A it2 9 KeyWord14
+A it2 10 KeyWord7
+A it2 11 KeyWord6
+A it2 12 KeyWord26
+A it2 13 KeyWord23
+A it2 14 KeyWord20
+A it2 15 KeyWord16
+A it2 16 KeyWord3
+A it2 17 KeyWord21
+A it2 18 KeyWord8
+A it2 19 KeyWord5
+A it2 20 KeyWord4
+A it2 21 KeyWord2
+A it2 22 KeyWord30
+A it2 23 KeyWord28
+A it2 24 KeyWord27
+A it2 25 KeyWord24
+A it2 26 KeyWord19
+A it2 27 KeyWord13
+A it2 28 KeyWord11
+B rem 0 KeyWord22 0 29
+B rem 1 KeyWord12 0 28
+B rem 2 KeyWord10 0 27
+B it 0 KeyWord18
+B it 1 KeyWord9
+B it 2 KeyWord29
+B it 3 KeyWord1
+B it 4 KeyWord17
+B it 5 KeyWord25
+B it 6 KeyWord15
+B it 7 KeyWord14
+B it 8 KeyWord7
+B it 9 KeyWord6
+B it 10 KeyWord26
+B it 11 KeyWord23
+B it 12 KeyWord20
+B it 13 KeyWord16
+B it 14 KeyWord3
+B it 15 KeyWord21
+B it 16 KeyWord8
+B it 17 KeyWord5
+B it 18 KeyWord4
+B it 19 KeyWord2
+B it 20 KeyWord30
+B it 21 KeyWord28
+B it 22 KeyWord27
+B it 23 KeyWord24
+B it 24 KeyWord19
+B it 25 KeyWord13
+B it 26 KeyWord11
+GH ins-b 0
+GH dup-b 1
+GH find-b 0
+GH find-b2 7
+GH rm-b -1
