@@ -4,7 +4,7 @@
 use super::sf_ip::SfIp;
 use super::sf_returns::*;
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct SfCidr {
     pub addr: SfIp,
     pub bits: u16,
