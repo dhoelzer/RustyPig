@@ -3,3 +3,5 @@
 /tools/cpp_harness/harness
 /tools/cpp_harness/*.log
 /tools/cpp_harness/cpp_stderr.txt
+tools/unfold_harness/copy/
+tools/unfold_harness/harness

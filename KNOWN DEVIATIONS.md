@@ -175,3 +175,16 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   depends on C's behavior there (EmptyList2Test requires next()==false).
 - mask_char exposed as const; C header's per-instance getter is static
   in practice (constexpr member).
+
+## utils/util_unfold
+- sf_unfold_header/sf_strip_CRLF/sf_strip_LWS take &[u8]/&mut [u8] +
+  Option<&mut i32> out-params; C's NULL-buffer guards become length
+  checks and are unreachable (callers can't pass null slices).
+- sf_unfold_header NUL-termination quirk preserved verbatim: writes NUL
+  at out only when n < outbuf_size, else at outbuf_size-1 (which, given
+  the loop bound n < outbuf_size, can leave a non-NUL-terminated buffer
+  of exactly outbuf_size bytes plus an overwritten last byte, exactly as
+  original).
+- output_bytes (C *output_bytes = outbuf_ptr - outbuf) returned as the
+  second tuple element; matches upstream CHECK(output_len == input_size)
+  and CHECK(output_len == output_size) semantics.

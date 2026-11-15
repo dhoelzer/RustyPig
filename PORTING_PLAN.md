@@ -30,6 +30,8 @@ the plan honestly with a status table rather than claiming more than is built.
 | 12 | helpers/ber + framework/cursor core | ~520 | DONE: all 5 ber_test.cc TEST_CASEs incl. length-overflow cap quirks; Cursor Packet*/CursorData side-table omitted |
 | 12 | helpers/streambuf | ~2.1k tests | TODO |
 | 13 | log/obfuscator | ~340 | DONE: all 10 obfuscator_test.cc CppUTest cases parity |
+| 14 | utils/util_unfold | ~235 | DONE: 2 embedded Catch2 cases + 20-case ground-truth vector parity for sf_strip_CRLF/LWS (tools/unfold_harness) |
+
 
 | 13 | main/snort_types.h + framework/log levels, Option/OptionTree | ~4k | TODO |
 | 14 | parsers: config_file, parse_ip, parse_ports, parse_rule | ~4k | TODO |
