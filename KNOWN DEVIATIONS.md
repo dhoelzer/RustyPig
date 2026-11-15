@@ -278,3 +278,29 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   mutate IpsInfo/RuleStateMap which don't exist yet.
 - PduSection::PsError value: C enum sequence => 5 (PS_MAX aliases
   PS_TRAILER=4); section_to_str has 5 entries (no ERROR string).
+
+## hash cache layer (memcap_allocator, hash_lru_cache, xhash, zhash)
+- HashNode* raw pointers -> arena indices (Option<usize>) into XHash.nodes;
+  link/cursor update order kept verbatim (incl. HashLruCache touch/remove
+  cursor rewiring to gprev BEFORE unlink).
+- C `void* data` -> `usize` payload handle chosen by the caller (test suites
+  use indices into their own payload Vec; NULL_PAYLOAD sentinel for
+  `insert(key, nullptr)`). With datasize>0 C memcpy's into an inline blob;
+  the port never copies payloads, only handles.
+- memcap accounting quirk preserved: free_() decrements unconditionally even
+  for foreign nodes; Rust saturates mem_allocated at 0 instead of unsigned
+  wraparound (C double-free accounting is UB; pinned in memcap tests).
+- xhash test free_anr_lru_delete_free_node_test relies on delete_lru_node()
+  returning *false* right after release_node (node sits on the free list, not
+  in the LRU cache) — C CHECK(ret == HASH_OK) only passes because false==0.
+- XHash::full() quirk preserved: true iff the FREE LIST is empty.
+- allocate_node order pinned: free list -> memcap alloc (max_nodes gate) ->
+  ANR release_lru_node; ANR walk bounded at XHASH_MAX_RECOVERY_WALK=64 in
+  current source (2026 commit), pinned by release_lru_node_walk_is_bounded.
+- ZHash uses a Box<dyn HashOps> stand-in for the virtual do_hash; zhash_test
+  stubs FlowHashKeyOps::do_hash as unfinalized seed*scale+byte accumulation,
+  ported verbatim as flow_test_ops (the real flow_key.cc bob-jenkins mix
+  variant defers to the flow layer).
+- MemCapAllocator::allocate() returns bool (not the calloc'd pointer); the
+  arena allocates the node slot only when accounting permits, matching the
+  observable allocation-count behavior.

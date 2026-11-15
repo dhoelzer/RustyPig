@@ -233,6 +233,144 @@ fn hash_vector_parity() {
     );
 }
 
+/// Port of the hash_row_distribution TEST_GROUP from xhash_test.cc:
+/// pins get_row()/do_hash() semantics of HashKeyOperations.
+mod row_dist {
+    use snort3::hash::*;
+    use std::collections::HashSet;
+
+    struct ForcedScale {
+        ops: HashKeyOperations,
+    }
+    impl ForcedScale {
+        fn new(s: u32, h: u32) -> ForcedScale {
+            ForcedScale {
+                ops: HashKeyOperations {
+                    seed: 3191,
+                    scale: s,
+                    hardener: h,
+                },
+            }
+        }
+        fn unfinalized(&self, key: &[u8]) -> u32 {
+            let mut hash = self.ops.seed;
+            for b in key {
+                hash = hash.wrapping_mul(self.ops.scale);
+                hash = hash.wrapping_add(*b as u32);
+            }
+            hash ^ self.ops.hardener
+        }
+    }
+
+    fn rows_reached(indices: &[u32], nrows: u32) -> u32 {
+        let mut seen = vec![false; nrows as usize];
+        let mut reached = 0;
+        for &index in indices {
+            if !seen[index as usize] {
+                seen[index as usize] = true;
+                reached += 1;
+            }
+        }
+        reached
+    }
+
+    const COLLAPSING_SCALES: [u32; 5] = [131071, 524287, 1310719, 1966079, 4194301];
+    const HARDENERS: [u32; 5] = [133824503, 0x9e37_79b9, 3, 0x0001_0001, 0];
+
+    #[test]
+    fn row_stays_in_range() {
+        let sizes = [1u32, 2, 64, 1021, 1 << 21];
+        // C constructs forced_scale here but only calls the static get_row.
+        let _hash_ops = ForcedScale::new(719, 133824503);
+        for nrows in sizes {
+            for i in 0..10000u32 {
+                assert!(
+                    HashKeyOperations::get_row(
+                        i.wrapping_mul(2654435761).wrapping_add(17),
+                        nrows
+                    ) < nrows
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn row_takes_the_top_bits_on_powers_of_two() {
+        // C constructs forced_scale(719, 133824503) here but never uses it.
+        for k in 1..=22u32 {
+            for i in 0..1000u32 {
+                let hashkey = i.wrapping_mul(2246822519).wrapping_add(5);
+                assert_eq!(
+                    HashKeyOperations::get_row(hashkey, 1u32 << k),
+                    hashkey >> (32 - k)
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn row_reaches_every_row_when_nrows_is_not_a_power_of_two() {
+        let nrows = 1021u32;
+        let mut masked = Vec::new();
+        let mut reduced = Vec::new();
+        for i in 0..200000u32 {
+            let hashkey = i.wrapping_mul(2654435761);
+            masked.push(hashkey & (nrows - 1));
+            reduced.push(HashKeyOperations::get_row(hashkey, nrows));
+        }
+        assert!(rows_reached(&masked, nrows) < nrows / 2);
+        assert_eq!(rows_reached(&reduced, nrows), nrows);
+    }
+
+    #[test]
+    fn do_hash_spreads_a_collapsed_scale() {
+        let nrows = 1u32 << 21;
+        let keys = 20000u32;
+        for scale in COLLAPSING_SCALES {
+            for hardener in HARDENERS {
+                let hash_ops = ForcedScale::new(scale, hardener);
+                let mut masked = Vec::new();
+                let mut reduced = Vec::new();
+                for i in 0..keys {
+                    let key = i.wrapping_mul(7919);
+                    let bytes = key.to_le_bytes();
+                    masked.push(hash_ops.unfinalized(&bytes) & (nrows - 1));
+                    reduced.push(HashKeyOperations::get_row(
+                        hash_ops.ops.do_hash(&bytes),
+                        nrows,
+                    ));
+                }
+                assert!(rows_reached(&masked, nrows) < keys / 2);
+                assert!(rows_reached(&reduced, nrows) > keys - keys / 4);
+            }
+        }
+    }
+
+    #[test]
+    fn the_hardener_moves_the_rows() {
+        let nrows = 1u32 << 16;
+        let keys = 4096u32;
+        let mut first_rows = HashSet::new();
+        for hardener in HARDENERS {
+            let hash_ops = ForcedScale::new(719, hardener);
+            let mut same = 0;
+            for i in 0..keys {
+                let key = i.wrapping_mul(7919);
+                let bytes = key.to_le_bytes();
+                let row = HashKeyOperations::get_row(hash_ops.ops.do_hash(&bytes), nrows);
+                if i == 0 {
+                    first_rows.insert(row);
+                }
+                if row == i % nrows {
+                    same += 1;
+                }
+            }
+            assert!(same < keys / 8);
+        }
+        assert_eq!(first_rows.len(), HARDENERS.len());
+    }
+}
+
 /// Port of ghash_test.cc: create_find_delete_test. C stores (str + i + 1)
 /// pointer offsets of one stack buffer as data and compares pointer
 /// identity; Rust stores tagged indices (see KNOWN DEVIATIONS).
