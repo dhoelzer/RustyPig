@@ -104,6 +104,16 @@ impl Vartable {
         ret
     }
 
+    /// sfvt_add_to_var(nullptr, ...): same path, no var table (rule bodies
+    /// cannot reference $Vars -> SFIP_LOOKUP_UNAVAILABLE for any $ref).
+    pub fn none_add_to_var(dst: &mut SfIpVar, src: &str) -> SfIpRet {
+        let ret = sfvar_parse_iplist(None, dst, src, false);
+        if ret == SfIpRet::Success {
+            return sfvar_validate(dst);
+        }
+        ret
+    }
+
     /// sfvt_define(): add the variable, then store its expanded value form
     /// (sfvt_expand_value) when add succeeded or redefined it.
     pub fn define(&mut self, name: &str, value: &str) -> SfIpRet {

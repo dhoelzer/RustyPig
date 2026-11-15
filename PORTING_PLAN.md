@@ -20,6 +20,7 @@ the plan honestly with a status table rather than claiming more than is built.
 | 6 | utils/util_cstring | ~490 | DONE |
 | 7 | sfip (SfIp/SfCidr/returns + inet_pton/ntop) | ~3.4k | DONE: full sf_ip_test.cc table (114 rows) passing |
 | 8 | helpers/grouped_list.h | ~600 | DONE: 16 grouped_list_test.cc sections parity |
+| 8d | parser/parse_ip (sfip_var_from_string) | ~100 | DONE: engine shared with sf_ipvar; code-mapping tests incl. C quirk ']'/'[]' -> SUCCESS and InetParseErr propagation |
 | 8c | sfip/sf_ipvar + sf_vartable | ~1.7k | DONE: all 6 embedded UNIT_TEST Catch2 sections (merge, contained/negated, no-table, copy/compare, any, kitchen-sink) ported 1:1 |
 | 8b | ports + parser/parse_ports | ~1.5k | DONE: 52-case ground-truth vector parity (no upstream unit suite; tools/cpp_harness) |
 | 9 | helpers/literal_search | ~300 | TODO (no hyperscan: pure-Rust fallback) |
