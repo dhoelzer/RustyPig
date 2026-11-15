@@ -7,6 +7,10 @@
 // buf_size (+ n), current_pos, delta, extensible, buf_id, file_pos.
 
 #![allow(dead_code)]
+// Explicit Default mirrors the C zero-initialization of every Cursor field.
+// (newtype-deriving Default here would hide that intent.)
+// clippy::derivable_impls suppressed deliberately.
+#![allow(clippy::derivable_impls)]
 
 #[derive(Clone)]
 pub struct Cursor {

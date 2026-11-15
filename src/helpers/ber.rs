@@ -9,6 +9,9 @@
 // directly (see KNOWN DEVIATIONS.md).
 
 #![allow(dead_code)]
+// Trailing boolean guards mirror the C original's separate underflow /
+// overflow checks verbatim (read_uncapped / skip).
+#![allow(clippy::needless_bool)]
 
 use crate::framework::cursor::Cursor;
 
