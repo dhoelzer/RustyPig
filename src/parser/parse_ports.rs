@@ -441,6 +441,20 @@ pub fn port_object_parse_string(
     nameflag: bool,
     dump_rule_info: bool,
 ) -> Result<PortObject, (i32, &'static str)> {
+    port_object_parse_string_with_pos(pv_table, name, s, nameflag, dump_rule_info)
+        .map_err(|(e, m, _)| (e, m))
+}
+
+/// Same as port_object_parse_string but also surfaces pop->pos at the point
+/// of failure (parser/vars.cc ParsePortVar feeds it into the ParseAbort
+/// caret message ">>%*s").
+pub fn port_object_parse_string_with_pos(
+    pv_table: Option<&mut PortVarTable>,
+    name: Option<&str>,
+    s: &str,
+    nameflag: bool,
+    dump_rule_info: bool,
+) -> Result<PortObject, (i32, &'static str, usize)> {
     let mut pop = POParser::init(s, pv_table, dump_rule_info);
 
     let po_name = if nameflag {
@@ -448,7 +462,7 @@ pub fn port_object_parse_string(
             Some(n) => Some(n),
             None => {
                 pop.errflag_ = POPERR_NO_NAME;
-                return Err((pop.errflag(), pop.error_string()));
+                return Err((pop.errflag(), pop.error_string(), pop.pos));
             }
         }
     } else {
@@ -457,7 +471,7 @@ pub fn port_object_parse_string(
 
     let mut potmp = match pop.pop_parse_string() {
         Some(p) => p,
-        None => return Err((pop.errflag(), pop.error_string())),
+        None => return Err((pop.errflag(), pop.error_string(), pop.pos)),
     };
 
     potmp.normalize();
@@ -465,14 +479,14 @@ pub fn port_object_parse_string(
     // Catches !:65535
     if potmp.items.is_empty() {
         pop.errflag_ = POPERR_INVALID_RANGE;
-        return Err((pop.errflag(), pop.error_string()));
+        return Err((pop.errflag(), pop.error_string(), pop.pos));
     }
 
     let mut po = PortObject::new();
     po.name = po_name;
     let mut err = 0i32;
     if po.add_port_object(&potmp, &mut err) != 0 {
-        return Err((pop.errflag(), pop.error_string()));
+        return Err((pop.errflag(), pop.error_string(), pop.pos));
     }
     Ok(po)
 }

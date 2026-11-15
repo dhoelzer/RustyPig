@@ -406,3 +406,37 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - get_action_priorities alert_before_pass expansion appends "alert pass "
   with trailing space and skips the normal separator logic (`continue`),
   reproduced exactly including double-space artifacts on adjacent entries.
+
+## parser/vars + parser/var_dependency + parser/parse_conf (ParseIpVar)
+- C logs ParseError/ParseWarning/ParseAbort through file-globals with
+  printf semantics, and ParseAbort longjmps out of every frame. The port
+  pushes ordered ParseMsg values onto VarContext.diag and returns
+  ParseAbort as Err (message recorded in diag first). No abort unwinding
+  is attempted beyond the Err: C's longjmp targets (recovery points,
+  DAQ, Shell) do not exist in the port yet.
+- C reaches the three var tables + var_id through get_ips_policy() and
+  the two weak lists through var_dependency.cc file-statics. The port
+  threads one &mut VarContext; resolve()/set_variable() take a split
+  borrow (&mut list + &mut ctx) — the C callback *can* push to the same
+  weak list mid-resolve (is_resolving_* guards the push path instead);
+  the split borrow makes that structurally impossible, which is exactly
+  what C's guard enforces for every reachable path.
+- VarEntry: C circular doubly-linked list hung off IpsPolicy; the port
+  keeps a Vec with head at index 0 and reproduces insert-after-head
+  (t.insert(1)) so walks match the C head->next chain. addrset
+  (sfip_var_t*) is not carried at this layer — nothing in vars.cc sets
+  it; the config_file layer will attach it with DeleteVars support.
+- DeleteVars: C frees the circular list (incl. addrset); the port drops
+  the Vec (Rust drop) — same observable end state: dp->var_table null,
+  var_id NOT reset (C keeps incrementing; ports match).
+- VarSearch: C constructs std::string(ipvar->value) even when value is
+  nullptr (UB; empty in practice with libstdc++). Port maps None -> "".
+- parse_conf.cc ParseIpVar cannot compile hermetically (detection/rules.h
+  -> OptTreeNode, DAQ...). The harness compiles the verbatim function
+  body in stubs.cc; the vectors exercise the REAL branch behavior
+  (DUPLICATE warn, LOOKUP_FAILURE push vs resolving-error, DEFAULT
+  cross-table PERR).
+- WeakVariable::is_visited / is_resolved are per-list-entry C flags; the
+  port replays them exactly (visited set before recursion, resolved set
+  before the callback) — pinned by the RESOLVE/RESOLVE2 stuck-state
+  vectors where a longjmp left is_resolved=true burned in the list.

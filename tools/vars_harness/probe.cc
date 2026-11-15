@@ -140,6 +140,14 @@ int main()
     walk_vars();
     g_parsepath("$T", "pre$(WEB_SERVERS)post");   // paren form + redefine-after-use
     walk_vars();
+    g_parsepath("$HTTP_PORTS", "x");           // cross-table DEFAULT branch hit vs portvar
+    walk_vars();
+    g_parsepath("$X", "5");                   // plain new var
+    g_parsepath("$X", "$X");                  // self-alias: ExpandVars inside value lookup
+    walk_vars();
+    g_parsepath("HOME_NET", "11.0.0.0/8");    // unprefixed (Lua FQN-style) name; case clash with $HOME_NET?
+    walk_vars();
+    { std::string s2 = VarSearch("HOME_NET"); printf("VSRHOME2 "); hx(s2.c_str()); printf("\n"); }
 
     // ---- cross-table duplicates ----
     printf("PPT start\n");
@@ -148,6 +156,7 @@ int main()
     g_parseport("$ALL_PORTS", "[any]");
     g_parseport("$NEG_ANY", "[!any]");
     g_parseport("$BADPORT", "[80:x]");            // weak port push (not resolving)
+    g_parseport("$HTTP_PORTS", "[8080]");     // dup portvar -> PortVarTableAdd >0 -> WARN
     printf("PPT end\n");
 
     // VarSearch on portvar names

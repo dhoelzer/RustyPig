@@ -57,21 +57,38 @@ VTNEXT id=1
 ABORT undefined variable name: WEB_SERVERS.
 VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
 VTNEXT id=1
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VT 24485454505f504f525453 78 id=1
+VTNEXT id=2
+ABORT undefined variable name: X.
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VT 2458 35 id=2
+VT 24485454505f504f525453 78 id=1
+VTNEXT id=3
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VT 484f4d455f4e4554 31312e302e302e302f38 id=3
+VT 2458 35 id=2
+VT 24485454505f504f525453 78 id=1
+VTNEXT id=4
+VSRHOME2 31312e302e302e302f38
 PPT start
 PERR can not redefine variable name $HOME_NET to be of type 'portvar'. Use a different name.
+PERR can not redefine variable name $HTTP_PORTS to be of type 'portvar'. Use a different name.
 PERR illegal use of negation and 'any': [!any].
+PERR can not redefine variable name $HTTP_PORTS to be of type 'portvar'. Use a different name.
+WARN(3) PortVar '$HTTP_PORTS', already defined.
 PPT end
 VSRHTTP 
-VSRHOME 
+VSRHOME 31312e302e302e302f38
 VSRFOO 
 VSRNOPE 
-ABORT undefined variable name: HOME_NET.
+EXP 24484f4d455f4e4554 -> 31312e302e302e302f38
 EXP 706c61696e -> 706c61696e
 EXP 686173202271756f74656420244e4f545f455850414e444544222074657874 -> 686173202271756f74656420244e4f545f455850414e444544222074657874
 ABORT undefined variable name: WEB_SERVERS.
 ABORT undefined variable name: MISSING.
 ABORT undefined variable name: MISSING.
-ABORT undefined variable name: HOME_NET.
+EXP 24484f4d455f4e45542d35 -> 31312e302e302e302f382d35
 ABORT undefined variable name: MISSINGQ.
 ABORT undefined variable name: MISSINGQ.
 ABORT undefined variable name: T.
@@ -79,7 +96,7 @@ ABORT undefined variable name: FOOb.
 ABORT undefined variable name: .
 ABORT undefined variable name: .
 EXP 24284e4f50453a2d61626329 -> 616263
-EXP 2428484f4d455f4e45543a2d7829 -> 78
+EXP 2428484f4d455f4e45543a2d7829 -> 31312e302e302e302f38
 ABORT boom
 ABORT undefined variable 'NOPE'.
 ABORT undefined variable name: NOPE.
@@ -98,7 +115,10 @@ ABORT PortVar Parse error: (pos=1,error=not a number)
 RESOLVE3 abort=1 resolving=1
 VSRBAD 
 VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
-VTNEXT id=1
+VT 484f4d455f4e4554 31312e302e302e302f38 id=3
+VT 2458 35 id=2
+VT 24485454505f504f525453 78 id=1
+VTNEXT id=4
 RESOLVENETS start
 PERR failed to parse the IP address: $NET0.
 RESOLVENETS end resolving=0
@@ -108,10 +128,16 @@ RESOLVENETS2 end
 VSRNET1 
 VSRNET0 5b332e332e332e335d
 VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
-VT 414c30 5b392e392e392e395d id=1
-VTNEXT id=2
+VT 414c30 5b392e392e392e395d id=4
+VT 484f4d455f4e4554 31312e302e302e302f38 id=3
+VT 2458 35 id=2
+VT 24485454505f504f525453 78 id=1
+VTNEXT id=5
 VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
-VT 24414c31 5b392e392e392e395d id=1
-VT 414c30 5b392e392e392e395d id=1
-VTNEXT id=2
-VT (empty) id_next=2
+VT 24414c31 5b392e392e392e395d id=4
+VT 414c30 5b392e392e392e395d id=4
+VT 484f4d455f4e4554 31312e302e302e302f38 id=3
+VT 2458 35 id=2
+VT 24485454505f504f525453 78 id=1
+VTNEXT id=5
+VT (empty) id_next=5
