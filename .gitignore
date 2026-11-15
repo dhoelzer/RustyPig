@@ -43,3 +43,7 @@ tools/conf_harness/files/
 tools/textlog_harness/copy/
 tools/textlog_harness/probe
 tools/textlog_harness/files/
+tools/sorule_harness/copy/
+tools/sorule_harness/probe
+tools/sorule_harness/catchprobe
+tools/sorule_harness/merged.cc

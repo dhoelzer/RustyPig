@@ -1,0 +1,152 @@
+=== syntax (full channels) ===
+IN alert()
+R 1 STUB [alert()] OPTS []
+IN  alert() 
+R 1 STUB [alert()] OPTS []
+IN #alert()
+R 0 STUB [] OPTS []
+IN # \x0aalert()
+R 1 STUB [alert()] OPTS []
+IN alert#\x0a()
+R 1 STUB [alert ()] OPTS []
+IN alert() # comment
+R 1 STUB [alert()] OPTS []
+IN alert(#\x0a)
+R 1 STUB [alert( )] OPTS []
+IN alert(#)
+R 0 STUB [alert(] OPTS []
+IN alert()#
+R 1 STUB [alert()] OPTS []
+IN /*alert()*/
+R 0 STUB [ ] OPTS []
+IN / *alert()*/
+R 1 STUB [/ *alert()] OPTS []
+IN /* /alert()
+R 0 STUB [] OPTS []
+IN /* *alert()
+R 0 STUB [] OPTS []
+IN /*alert(*/)
+R 0 STUB [ )] OPTS []
+IN alert(/*)
+R 0 STUB [alert(] OPTS []
+IN alert(/*)*/
+R 0 STUB [alert( ] OPTS []
+IN alert(/**)/
+R 0 STUB [alert(] OPTS []
+IN alert/*()*/
+R 0 STUB [alert ] OPTS []
+IN alert/*(*/)
+R 0 STUB [alert )] OPTS []
+IN alert(/**/) 
+R 1 STUB [alert( )] OPTS []
+IN alert( /**/) 
+R 1 STUB [alert( )] OPTS []
+IN alert(/**/ ) 
+R 1 STUB [alert( )] OPTS []
+IN alert( /**/ ) 
+R 1 STUB [alert( )] OPTS []
+IN alert(/* comment */)
+R 1 STUB [alert( )] OPTS []
+=== basic (full channels) ===
+IN alert( sid:1; )
+R 1 STUB [alert( sid:1; )] OPTS []
+IN alert( sid:1 /*comment*/; )
+R 1 STUB [alert( sid:1  ; )] OPTS []
+IN alert( sid:1 # comment\x0a; )
+R 1 STUB [alert( sid:1 # comment ; )] OPTS []
+IN alert( sid:1; /*id:0;*/ )
+R 1 STUB [alert( sid:1; )] OPTS []
+IN alert tcp any any -> any any ( )
+R 1 STUB [alert tcp any any -> any any ( )] OPTS []
+IN alert tcp $EXTERNAL_NET any -> $HTTP_SERVERS $HTTP_PORTS ( )
+R 1 STUB [alert tcp $EXTERNAL_NET any -> $HTTP_SERVERS $HTTP_PORTS ( )] OPTS []
+=== stub (full channels) ===
+IN alert( id:0; )
+R 1 STUB [alert( )] OPTS [id:0;]
+IN alert( sid:1; id:0; )
+R 1 STUB [alert( sid:1; )] OPTS [id:0;]
+IN alert( sid:1;id:0; )
+R 1 STUB [alert( sid:1; )] OPTS [id:0;]
+IN alert( id:0;sid:1; )
+R 1 STUB [alert( sid:1; )] OPTS [id:0;]
+IN alert( id:/*comment*/0; )
+R 1 STUB [alert( )] OPTS [id: 0;]
+IN alert( id: #comment\x0a0; )
+R 1 STUB [alert( )] OPTS [id: #comment 0;]
+IN alert( content:"foo"; )
+R 1 STUB [alert( )] OPTS [content:"foo";]
+IN alert( content:"f;o"; )
+R 1 STUB [alert( )] OPTS [content:"f;o";]
+IN alert( content:"f\"o"; )
+R 1 STUB [alert( )] OPTS [content:"f\"o";]
+IN alert( soid; rem:"soid"; /*soid*/ )
+R 1 STUB [alert( soid; rem:"soid"; )] OPTS []
+IN alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS ( msg:"MALWARE-CNC Win.Trojan.Hufysk variant outbound connection"; flow:to_server,established; http_uri; content:"/j.php|3F|u|3D|", fast_pattern,nocase; content:"&v=f2&r=",depth 8,offset 41,nocase; metadata:impact_flag red,policy balanced-ips drop,policy security-ips drop; service:http; reference:url,www.virustotal.com/file/bff436d8a2ccf1cdce56faabf341e97f59285435b5e73f952187bbfaf4df3396/analysis/; classtype:trojan-activity; sid:24062; rev:7; )
+R 1 STUB [alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS ( msg:"MALWARE-CNC Win.Trojan.Hufysk variant outbound connection"; metadata:impact_flag red,policy balanced-ips drop,policy security-ips drop; service:http; reference:url,www.virustotal.com/file/bff436d8a2ccf1cdce56faabf341e97f59285435b5e73f952187bbfaf4df3396/analysis/; classtype:trojan-activity; sid:24062; rev:7; )] OPTS [flow:to_server,established;http_uri;content:"/j.php|3F|u|3D|", fast_pattern,nocase;content:"&v=f2&r=",depth 8,offset 41,nocase;]
+=== get_so_stub parity ===
+IN alert( id:0; )
+GETSTUB 1 [alert( )]
+IN alert( sid:1; id:0; )
+GETSTUB 1 [alert( sid:1; )]
+IN alert( sid:1;id:0; )
+GETSTUB 1 [alert( sid:1; )]
+IN alert( id:0;sid:1; )
+GETSTUB 1 [alert( sid:1; )]
+IN alert( id:/*comment*/0; )
+GETSTUB 1 [alert( )]
+IN alert( id: #comment\x0a0; )
+GETSTUB 1 [alert( )]
+IN alert( content:"foo"; )
+GETSTUB 1 [alert( )]
+IN alert( content:"f;o"; )
+GETSTUB 1 [alert( )]
+IN alert( content:"f\"o"; )
+GETSTUB 1 [alert( )]
+IN alert( soid; rem:"soid"; /*soid*/ )
+GETSTUB 1 [alert( soid; rem:"soid"; )]
+IN alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS ( msg:"MALWARE-CNC Win.Trojan.Hufysk variant outbound connection"; flow:to_server,established; http_uri; content:"/j.php|3F|u|3D|", fast_pattern,nocase; content:"&v=f2&r=",depth 8,offset 41,nocase; metadata:impact_flag red,policy balanced-ips drop,policy security-ips drop; service:http; reference:url,www.virustotal.com/file/bff436d8a2ccf1cdce56faabf341e97f59285435b5e73f952187bbfaf4df3396/analysis/; classtype:trojan-activity; sid:24062; rev:7; )
+GETSTUB 1 [alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS ( msg:"MALWARE-CNC Win.Trojan.Hufysk variant outbound connection"; metadata:impact_flag red,policy balanced-ips drop,policy security-ips drop; service:http; reference:url,www.virustotal.com/file/bff436d8a2ccf1cdce56faabf341e97f59285435b5e73f952187bbfaf4df3396/analysis/; classtype:trojan-activity; sid:24062; rev:7; )]
+=== extras ===
+IN 
+R 0 STUB [] OPTS []
+IN alert
+R 0 STUB [alert] OPTS []
+IN alert(
+R 0 STUB [alert(] OPTS []
+IN alert(a b id:1 c d; )
+R 1 STUB [alert( )] OPTS [a b id:1 c d;]
+IN alert( sid:1;  content:"x"; sid:2; )
+R 1 STUB [alert( sid:1; sid:2; )] OPTS [content:"x";]
+IN alert( content:"a\\\\"; )
+R 1 STUB [alert( )] OPTS [content:"a\\\\";]
+IN alert( rem:"unbalanced" )
+R 0 STUB [alert( ] OPTS []
+IN alert( sid:1;\x0a\x09content:"x"; )
+R 1 STUB [alert( sid:1; )] OPTS [content:"x";]
+IN alert( sid:1; msg:" a  b "; )
+R 1 STUB [alert( sid:1; msg:" a  b "; )] OPTS []
+IN alert /*x*/ ( flow:to_server; sid:9; )
+R 1 STUB [alert ( sid:9; )] OPTS [flow:to_server;]
+IN alert(#c\x0aflowbits:set;A; )
+R 1 STUB [alert( flowbits:set; )] OPTS [A;]
+IN alert( soid:5; );
+R 1 STUB [alert( soid:5; )] OPTS []
+IN alert( sid:1; /*unterminated )
+R 0 STUB [alert( sid:1; ] OPTS []
+IN alert( content:"a;b"; sid:1 )
+R 0 STUB [alert( ] OPTS [content:"a;b";]
+IN alert(   sid:1;   )
+R 1 STUB [alert( sid:1; )] OPTS []
+IN alert\x0a(\x0asid:1;\x0a)
+R 1 STUB [alert ( sid:1; )] OPTS []
+IN alert( id :0; )
+R 1 STUB [alert( )] OPTS [id :0;]
+IN alert( sid :1; )
+R 1 STUB [alert( sid :1; )] OPTS []
+IN alert( msg; )
+R 1 STUB [alert( msg; )] OPTS []
+IN alert( msg:a;b;c )
+R 0 STUB [alert( msg:a;] OPTS [b;]
+IN alert( soid; ) # tail after rule
+R 1 STUB [alert( soid; )] OPTS []
+=== done ===

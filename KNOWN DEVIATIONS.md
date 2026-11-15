@@ -551,3 +551,16 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   SystemTime::unix_epoch. TextLog_Roll calls now() three times like C
   (suppression check, name, last=) so a real clock's tick mid-roll
   stays as C-observable as it was there.
+
+## parser/parse_so_rule.rs (so-rule stub FSM)
+- C walks const char* as raw chars; the Rust port scans bytes and pushes
+  chars from byte values. Rules reaching --dump-dynamic-rules are ASCII
+  (the FSM only compares against ASCII punctuation and std::isspace is
+  the C-locale set), so byte-scanning is equivalent; a non-ASCII UTF-8
+  byte would behave exactly as the char value C's (signed) char would for
+  isspace purposes — none of the comparison branches treat it specially.
+- C's `if (*accum == stub)` guard compares CONTENTS (std::string
+  operator==), and both operands alias when accum==&stub. The port keeps
+  a Target enum (Stub/Opt) and replicates: Stub side always sets prev,
+  Opt side only when opt content == stub content (vectors exercise both
+  the equal and unequal Opt paths).
