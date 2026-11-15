@@ -336,3 +336,19 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - SegmentedLruCache::set_max_size uses integer division per segment, e.g.
   C++ with size 17 over 4 segments => 4 each. C get_max_size() sums the
   per-segment caps (may be < requested); preserved.
+
+## framework/range (RangeCheck)
+- C `RangeCheck` methods take `const char*`; Rust `parse`/`validate` take
+  `&[u8]` (the rule layer feeds ASCII). `validate(s, r)` takes
+  `Option<&[u8]>` for the nullable `r` bound string.
+- C `get_num` uses `strtoll` + errno; Rust `c_strtoll` models ERANGE by
+  saturating at LLONG_MIN/MAX and *failing* the parse on overflow, matching
+  errno != 0 -> false probes: "+9223372036854775808" fails,
+  "-9223372036854775809" fails, "-9223372036854775808" succeeds at i64::MIN.
+- Octal quirk pinned: "08" fails because strtoll stops at '8' and get_num
+  requires the whole token consumed; "0123" = 83 octal.
+- `hash()` narrows i64 min/max to u32 exactly as C casts int64_t members to
+  uint32_t before mixing; op is hashed as its C enum discriminant (0..8).
+- The C probe harness (tools/range_harness) exercises private members because
+  the class exposes min/max as protected; the Rust port publishes them
+  (range.cc's own UNIT_TEST block does the same via friend access).

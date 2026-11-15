@@ -13,3 +13,7 @@ tools/hash_harness/harness
 tools/hash_harness/build_errs.txt
 tools/streambuf_harness/probe*
 !tools/streambuf_harness/probe*.cc
+tools/range_harness/copy/
+tools/range_harness/probe
+tools/range_harness/probe.cc
+tools/range_harness/probe.o
