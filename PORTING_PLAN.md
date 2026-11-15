@@ -31,7 +31,8 @@ the plan honestly with a status table rather than claiming more than is built.
 | 13 | log/obfuscator | ~340 | DONE: all 10 obfuscator_test.cc CppUTest cases parity |
 | 14 | utils/util_unfold | ~235 | DONE: 2 embedded Catch2 cases + 20-case ground-truth vector parity for sf_strip_CRLF/LWS (tools/unfold_harness) |
 | 15 | helpers/streambuf | ~2.4k | DONE: all 17 streambuf_test.cc TEST_CASEs (97 sections) ported; C++ ground truth = upstream suite passed verbatim (17/17, 832 assertions, tools/streambuf_harness) |
-| 16 | main/snort_types.h + framework/log levels, Option/OptionTree | ~4k | TODO |
+| 16 | utils/util.cc (pure members + ts_print via TimeCfg) | ~490 | DONE: 3/3 embedded Catch2 cases + stoul/memrchr/ts_print pinning; rotate_file_for_max_size deferred (FILE*/errno layer) |
+| 16b | main/snort_types.h + framework/log levels, Option/OptionTree | ~4k | TODO |
 | 17 | parsers: config_file, parse_rule, parse_so_rule (parse_ip/parse_ports DONE) | ~4k | TODO |
 | 18 | codecs (IP/TCP/UDP normalization) | ~15k | TODO |
 | 19 | detection option engines | ~30k+ | TODO (subset) |

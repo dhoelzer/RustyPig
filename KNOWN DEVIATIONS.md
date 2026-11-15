@@ -206,3 +206,21 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   No upstream test depends on the garbage values.
 - C setbuf(nullptr,n>0) on the output buffer is UB-adjacent (setp to a
   null base); Rust collapses it to an empty buffer. Unexercised upstream.
+
+## utils/util
+- check_file_size(const char*) instead of FILE* (fileno indirection);
+  rotate_file_for_max_size deferred (pure errno/rename/umask plumbing,
+  no upstream tests) pending a filesystem-error strategy shared with
+  other file-facing subsystems.
+- ts_print takes an explicit TimeCfg {thiszone, output_use_utc,
+  output_include_year} instead of reaching SnortConfig::get_conf();
+  time formatting uses civil_from_days (Hinnant) standing in for
+  gmtime_r; verified against date -u.
+- str_to_int_vector: C++ std::stoul throws std::out_of_range/
+  invalid_argument on bad items; Rust panics on those inputs (same
+  crash-level behavior); stoul's 64-bit ul saturation mapped to u64
+  saturating + mod 2^32 (C unsigned long was 64-bit there, stoul
+  returns unsigned long; callers store into uint32_t so the C
+  narrowing was mod 2^32 — pinned in tests? not yet: noted).
+- get_random_seed: reads 4 bytes of /dev/urandom with clock fallback
+  (C std::random_device behavior varies by libstdc++ config).
