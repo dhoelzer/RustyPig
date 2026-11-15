@@ -1,0 +1,147 @@
+<any>: NULL
+  err=3: not a number
+<80>: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+  err=0: unknown POParse error
+dup: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+<80:100>: [80:100] | nc=21 cnt_any=0 pure_not=0 hp80=1 name=noname h=6553607
+  err=0: unknown POParse error
+dup: [80:100] | nc=21 cnt_any=0 pure_not=0 hp80=1 name=noname h=6553607
+<:100>: [0:100] | nc=101 cnt_any=0 pure_not=0 hp80=1 name=noname h=6553607
+  err=0: unknown POParse error
+dup: [0:100] | nc=101 cnt_any=0 pure_not=0 hp80=1 name=noname h=6553607
+<100:>: [100:65535] | nc=65436 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [100:65535] | nc=65436 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+<80:>: [80:65535] | nc=65456 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [80:65535] | nc=65456 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+<80,80>: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+  err=0: unknown POParse error
+dup: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+<1:2,3:4>: [1:4] | nc=4 cnt_any=0 pure_not=0 hp80=0 name=noname h=262151
+  err=0: unknown POParse error
+dup: [1:4] | nc=4 cnt_any=0 pure_not=0 hp80=0 name=noname h=262151
+<!,80>: [0:79] [81:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [0:79] [81:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+<![80,90]>: [0:79] [81:89] [91:65535] | nc=65534 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [0:79] [81:89] [91:65535] | nc=65534 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+<[80,90],100:200>: [80:80] [90:90] [100:200] | nc=103 cnt_any=0 pure_not=0 hp80=1 name=noname h=13107207
+  err=0: unknown POParse error
+dup: [80:80] [90:90] [100:200] | nc=103 cnt_any=0 pure_not=0 hp80=1 name=noname h=13107207
+<[80]>: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+  err=0: unknown POParse error
+dup: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+<100:90>: NULL
+  err=8: invalid port range
+<abc>: NULL
+  err=3: not a number
+<80,abc>: NULL
+  err=3: not a number
+<100:4294967396>: [100:100] | nc=1 cnt_any=0 pure_not=0 hp80=0 name=noname h=6553607
+  err=0: unknown POParse error
+dup: [100:100] | nc=1 cnt_any=0 pure_not=0 hp80=0 name=noname h=6553607
+<70000>: NULL
+  err=10: value out of bounds for a port
+<[80>: NULL
+  err=2: no end of list bracket. Elements must be comma separated, and no spaces may appear between brackets.
+<80]>: NULL
+  err=4: extra list bracket
+<[[80]]>: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+  err=0: unknown POParse error
+dup: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+<>: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+  err=0: unknown POParse error
+dup: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+< >: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+  err=0: unknown POParse error
+dup: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+<	>: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+  err=0: unknown POParse error
+dup: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+<:>: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+  err=0: unknown POParse error
+dup: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+<!>: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+  err=0: unknown POParse error
+dup: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+<!:>: NULL
+  err=8: invalid port range
+<!0:65535>: NULL
+  err=8: invalid port range
+<!80>: [0:79] [81:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [0:79] [81:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+<!100:200>: [0:99] [201:65535] | nc=65435 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [0:99] [201:65535] | nc=65435 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+<0:65535>: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+  err=0: unknown POParse error
+dup: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+<80 : 100>: NULL
+  err=3: not a number
+<80 , 90>: [80:80] [90:90] | nc=2 cnt_any=0 pure_not=0 hp80=1 name=noname h=5898247
+  err=0: unknown POParse error
+dup: [80:80] [90:90] | nc=2 cnt_any=0 pure_not=0 hp80=1 name=noname h=5898247
+<[80,90]>: [80:80] [90:90] | nc=2 cnt_any=0 pure_not=0 hp80=1 name=noname h=5898247
+  err=0: unknown POParse error
+dup: [80:80] [90:90] | nc=2 cnt_any=0 pure_not=0 hp80=1 name=noname h=5898247
+<1:,3:>: [1:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [1:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+<65535>: [65535:65535] | nc=1 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [65535:65535] | nc=1 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+<[89:91]90>: [89:91] | nc=3 cnt_any=0 pure_not=0 hp80=0 name=noname h=5963783
+  err=0: unknown POParse error
+dup: [89:91] | nc=3 cnt_any=0 pure_not=0 hp80=0 name=noname h=5963783
+<80,,90>: [80:80] [90:90] | nc=2 cnt_any=0 pure_not=0 hp80=1 name=noname h=5898247
+  err=0: unknown POParse error
+dup: [80:80] [90:90] | nc=2 cnt_any=0 pure_not=0 hp80=1 name=noname h=5898247
+<:>: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+  err=0: unknown POParse error
+dup: [0:65535] | nc=-1 cnt_any=1 pure_not=0 hp80=0 name=noname h=7
+<21,23,25,443>: [21:21] [23:23] [25:25] [443:443] | nc=4 cnt_any=0 pure_not=0 hp80=0 name=noname h=12255238
+  err=0: unknown POParse error
+dup: [21:21] [23:23] [25:25] [443:443] | nc=4 cnt_any=0 pure_not=0 hp80=0 name=noname h=12255238
+<1024:65535>: [1024:65535] | nc=64512 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [1024:65535] | nc=64512 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+<0,80,65535>: [0:0] [80:80] [65535:65535] | nc=3 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [0:0] [80:80] [65535:65535] | nc=3 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+<80	90>: [80:80] [90:90] | nc=2 cnt_any=0 pure_not=0 hp80=1 name=noname h=5898247
+  err=0: unknown POParse error
+dup: [80:80] [90:90] | nc=2 cnt_any=0 pure_not=0 hp80=1 name=noname h=5898247
+<999999999999999999999>: NULL
+  err=10: value out of bounds for a port
+<[80,80]>: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+  err=0: unknown POParse error
+dup: [80:80] | nc=1 cnt_any=0 pure_not=0 hp80=1 name=noname h=5242887
+<8,9,10>: [8:10] | nc=3 cnt_any=0 pure_not=0 hp80=0 name=noname h=655367
+  err=0: unknown POParse error
+dup: [8:10] | nc=3 cnt_any=0 pure_not=0 hp80=0 name=noname h=655367
+<![8,9]>: [0:7] [10:65535] | nc=65534 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [0:7] [10:65535] | nc=65534 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+<1:2:3>: [0:3] | nc=4 cnt_any=0 pure_not=0 hp80=0 name=noname h=196615
+  err=0: unknown POParse error
+dup: [0:3] | nc=4 cnt_any=0 pure_not=0 hp80=0 name=noname h=196615
+<80:>: [80:65535] | nc=65456 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [80:65535] | nc=65456 cnt_any=0 pure_not=0 hp80=1 name=noname h=16711928
+<!!80>: [0:79] [81:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [0:79] [81:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+<[!80]>: [0:79] [81:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+  err=0: unknown POParse error
+dup: [0:79] [81:65535] | nc=65535 cnt_any=0 pure_not=0 hp80=0 name=noname h=16711928
+<$FOO>: NULL
+  err=11: unrecognized variable
+var-def: [80:80] [443:443] | nc=2 cnt_any=0 pure_not=0 hp80=1 name=HTTP_PORTS h=12255238
+  err=0
+var-ref: [80:80] [99:99] [443:443] | nc=3 cnt_any=0 pure_not=0 hp80=1 name=noname h=12255238
+  err=0
+<$NOPE>: NULL err=11
+sub: [80:84] [87:90] | nc=9 cnt_any=0 pure_not=0 hp80=1 name=noname h=5898247

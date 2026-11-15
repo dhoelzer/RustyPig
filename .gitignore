@@ -1,1 +1,5 @@
 /target
+/tools/cpp_harness/copy/
+/tools/cpp_harness/harness
+/tools/cpp_harness/*.log
+/tools/cpp_harness/cpp_stderr.txt

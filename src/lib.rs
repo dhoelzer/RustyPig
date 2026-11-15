@@ -6,5 +6,7 @@
 //! See KNOWN DEVIATIONS.md for audited departures from the C++ original.
 
 pub mod helpers;
+pub mod parser;
+pub mod ports;
 pub mod sfip;
 pub mod utils;
