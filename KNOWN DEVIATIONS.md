@@ -224,3 +224,25 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   narrowing was mod 2^32 — pinned in tests? not yet: noted).
 - get_random_seed: reads 4 bytes of /dev/urandom with clock fallback
   (C std::random_device behavior varies by libstdc++ config).
+
+## framework/value (+ parameter subset, utils/bits)
+- get_addr over-size case: C std::string::copy past the end reads
+  uninitialized bytes; Rust zeroes (tests only pin the all-zero result).
+- get_addr_raw exact-size case leaves trailing bytes zero in Rust where
+  C left string past-the-end bytes; C callers memset first, tests match.
+- Value is Clone (std::string members make C copyable too; C has no
+  user-defined copy of stringstream* leak — ss is C-leak-on-copy, Rust
+  clones it, stricter and safe).
+- strtoul: glibc octal overflow clamps at LONG_MAX while decimal wraps
+  at ULONG_MAX (probe-pinned); C strtoul(-x) wraps (probe: -1 ->
+  ULONG_MAX). Rust replicates both exactly.
+- Value::strtol of magnitude == 2^63: glibc strtol saturates LONG_MAX
+  (probe), not wraps — modeled.
+- str_to_int_vector in utils/util: C std::stoul throws on out-of-range
+  (64-bit ul); Rust returns mod-2^32 like the implicit uint32_t
+  narrowing the C callers applied before the exception path mattered
+  (deviation noted there; revisit when the option parser pins which
+  callers exist).
+- Parameter: range union (Parameter*/RangeQuery*/char*) and validate()
+  deferred to the option-parsing layer; index/find_ported verbatim.
+- FixedBitSet<N> = std::bitset<N> subset for the option bit lists.
