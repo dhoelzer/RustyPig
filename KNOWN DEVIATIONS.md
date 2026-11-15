@@ -523,3 +523,31 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   declaration, 0 in the parse_conf.h shim used by the harness) is an
   explicit parameter in the port; call sites pass 1 like the real
   header default.
+
+## log/text_log.rs + main/thread.rs (buffered logging + file naming)
+- C TextLog is a malloc'd header + flexible char array behind a FILE*.
+  The port uses a Vec buffer sized maxBuf+1 (the extra slot is the C
+  buf[maxBuf] NUL slot) and a std::fs::File; glibc line buffering
+  (setvbuf _IOLBF) is irrelevant because every byte reaches the handle
+  through a TextLog_Flush write_all — the flush points are the file-
+  stream boundary.
+- fatal_error mid-roll (TextLog_Roll's reopen drops is_critical to the
+  true default, vector H4) cannot _exit in a library: the port marks the
+  TextLog dead, and every later operation is a silent no-op, mirroring
+  that the C process was gone. The parity test clears already_fatal per
+  "forked child" exactly as the probe's fork boundaries did.
+- C stdout inside TextLog is the literal FILE*; the port injects a
+  StdoutSink so the replay can order fwrite output against marker
+  printfs the same way the merged probe stream did.
+- TextLog_Size for the stdout handle is 0 in the port; in C it is
+  fstat(1)->st_size but is never observable (Roll bails on stdout first
+  and maxFile comparisons on an unrolled stdout stream always flush).
+- thread.cc's populate/invalidate_instance_maps (CSV writer) defer with
+  the thread layer: ThreadConfig::get_instance_tid etc. are stubs in the
+  harness; the naming half is fully ported with the umask/mkdir(0770)
+  and id[8] 7-digit snprintf truncation quirks intact.
+- The C probe stubbed time() (constant fake clock, explicit bumps). The
+  port threads a Clock callback; production callers wire
+  SystemTime::unix_epoch. TextLog_Roll calls now() three times like C
+  (suppression check, name, last=) so a real clock's tick mid-roll
+  stays as C-observable as it was there.

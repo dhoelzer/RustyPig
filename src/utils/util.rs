@@ -296,3 +296,20 @@ mod tests {
         assert_eq!(ts_print_mmdd(&cfg, 1794746096, 789), "11/15-12:34:56.000789");
     }
 }
+
+unsafe extern "C" {
+    fn strerror(errnum: i32) -> *const std::ffi::c_char;
+}
+
+/// util.cc:100 get_error(errnum). C uses the GNU strerror_r branch
+/// (config.h HAVE_GNU_STRERROR_R); the port links glibc strerror
+/// directly — same fixed text, same thread-safety on glibc.
+pub fn get_error(errnum: i32) -> String {
+    unsafe {
+        let p = strerror(errnum);
+        if p.is_null() {
+            return format!("Unknown error {errnum}");
+        }
+        std::ffi::CStr::from_ptr(p).to_string_lossy().into_owned()
+    }
+}

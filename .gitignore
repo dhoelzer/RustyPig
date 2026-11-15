@@ -40,3 +40,6 @@ tools/conf_harness/copy/
 tools/conf_harness/probe
 
 tools/conf_harness/files/
+tools/textlog_harness/copy/
+tools/textlog_harness/probe
+tools/textlog_harness/files/

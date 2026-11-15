@@ -2,3 +2,4 @@
 
 pub mod obfuscator;
 pub mod messages;
+pub mod text_log;
