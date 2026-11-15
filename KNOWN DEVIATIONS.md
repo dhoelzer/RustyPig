@@ -304,3 +304,14 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - MemCapAllocator::allocate() returns bool (not the calloc'd pointer); the
   arena allocates the node slot only when accounting permits, matching the
   observable allocation-count behavior.
+
+## hash/lru_cache_local
+- C++ template <Key,Value,Hash> -> Rust <K,V> (HashMap; C Hash param had no
+  observable behavior in the suite). entry_size passed in explicitly instead
+  of compile-time sizeof math; tests pin 2*sizeof(Key)+sizeof(Value)+8
+  (x86-64 std::list iterator).
+- C returns `Value&` from find_else_create; Rust returns a stable arena handle
+  (entry()/set_entry). C references stay valid across splice by luck of
+  std::list; the handle model has identical observable reads/writes.
+- Constructor WarningMessage on clamp is not emitted (log layer not ported).
+- External stats struct by reference -> owned stats + get_stats() copy.
