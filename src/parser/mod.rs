@@ -1,4 +1,6 @@
 pub mod messages;
+pub mod config_file;
+pub mod parse_conf;
 pub mod parse_ip;
 pub mod parse_ports;
 pub mod parse_utils;

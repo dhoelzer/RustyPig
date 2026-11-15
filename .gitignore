@@ -36,3 +36,7 @@ tools/vars_harness/copy/
 tools/vars_harness/probe
 tools/log_harness/copy/
 tools/log_harness/probe
+tools/conf_harness/copy/
+tools/conf_harness/probe
+
+tools/conf_harness/files/

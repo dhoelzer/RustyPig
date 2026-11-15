@@ -52,6 +52,10 @@ pub struct IpsPolicy {
 
     pub var_id: u32,
 
+    // policy.h:274 — the seed hint parse_include uses at depth 0
+    // (parse_conf.cc:210). Empty string == C default-constructed std::string.
+    pub includer: String,
+
     pub default_rule_state: Enable,
     pub obfuscate_pii: bool,
 
@@ -74,6 +78,7 @@ impl IpsPolicy {
             rules_loaded: 0,
             rules_shared: 0,
             var_id: 0,
+            includer: String::new(),
             default_rule_state: Enable::InheritEnable,
             obfuscate_pii: false,
             action_override: String::new(),
@@ -138,6 +143,58 @@ impl IpsPolicy {
             self.configured_action[selector as usize]
         } else {
             None
+        }
+    }
+}
+// ---------------------------------------------------------------------------
+// ChecksumFlag + NetworkPolicy checksum subset
+// (policy.h:128-135 and the checksum members of policy.h:233-234). The
+// conf harness pins the full GetChecksumFlags table, so the enum is
+// transcribed verbatim. NetworkPolicy's other members (CodecManager,
+// DataBus, InspectionPolicy, FilePolicy ... ) belong to the detection and
+// DAQ layers and defer with them.
+// ---------------------------------------------------------------------------
+
+pub const CHECKSUM_FLAG__IP: u32 = 0x0000_0001;
+pub const CHECKSUM_FLAG__TCP: u32 = 0x0000_0002;
+pub const CHECKSUM_FLAG__UDP: u32 = 0x0000_0004;
+pub const CHECKSUM_FLAG__ICMP: u32 = 0x0000_0008;
+pub const CHECKSUM_FLAG__ALL: u32 = 0x0000_000f;
+pub const CHECKSUM_FLAG__DEF: u32 = 0x8000_0000;
+
+#[derive(Debug)]
+pub struct NetworkPolicy {
+    // C defaults: checksum_eval = ALL|DEF, checksum_drop = DEF.
+    pub checksum_eval: u32,
+    pub checksum_drop: u32,
+}
+
+impl NetworkPolicy {
+    // policy.h: bool checksum_drops(uint16_t codec_cksum_err_flag)
+    pub fn checksum_drops(&self, codec_cksum_err_flag: u16) -> bool {
+        (self.checksum_drop & (codec_cksum_err_flag as u32)) != 0
+    }
+
+    // policy.h inline accessors (used by the checksum drop/eval codecs)
+    pub fn ip_checksums(&self) -> bool {
+        self.checksum_eval & CHECKSUM_FLAG__IP != 0
+    }
+    pub fn udp_checksums(&self) -> bool {
+        self.checksum_eval & CHECKSUM_FLAG__UDP != 0
+    }
+    pub fn tcp_checksums(&self) -> bool {
+        self.checksum_eval & CHECKSUM_FLAG__TCP != 0
+    }
+    pub fn icmp_checksums(&self) -> bool {
+        self.checksum_eval & CHECKSUM_FLAG__ICMP != 0
+    }
+}
+
+impl Default for NetworkPolicy {
+    fn default() -> Self {
+        NetworkPolicy {
+            checksum_eval: CHECKSUM_FLAG__ALL | CHECKSUM_FLAG__DEF,
+            checksum_drop: CHECKSUM_FLAG__DEF,
         }
     }
 }

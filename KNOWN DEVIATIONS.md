@@ -484,3 +484,42 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   wrap test is res.length()+val.length() BEFORE adding ' '+val, and the
   uncaptioned log_list(list) variant uses its own no-leading-space
   accumulation + tab\t continuation.
+
+## parser/parse_conf.rs + parser/config_file.rs (config core)
+- C++ file-statics (`files` location stack, `rules_file_depth`,
+  `s_ips_policy`, `lua_conf`, `snort_conf_dir`, and parser.cc's
+  `s_special_includer`) are modeled as explicit state on ParseConf /
+  ConfFiles / SnortConfig. The Rust engine must thread them because
+  there are no process-wide mutable globals here.
+- `assert(arg)` in get_config_file/parse_include: the port relies on
+  call sites never passing null (the probe's nullptr parse_rules_file
+  case is modeled by Option, not by a failed assert).
+- ParseAbort semantics: ExpandVars inside parse_include longjmps in C,
+  skipping everything after the logged abort. The port returns early
+  with the abort already in the diag sink, which produces the same
+  observable trace (abort text logged, no PERR follows, no push).
+- parse_stream (rule layer) is out of scope; a StreamSeam callback +
+  stream_reads counter stands on the seam. The harness's stubbed
+  parse_stream re-enters parse_include to pin rules_file_depth and the
+  includer vs get_parse_file vs special_includer seed selection; the
+  test drives the identical reentries through the same seam.
+- std::ifstream open test is approximated by stat success: nonexistent
+  -> err, directory "opens" (vector: adir no PERR), which matches C on
+  Linux for the paths exercised. EACCES-only files (ifstream fails,
+  metadata succeeds) are indistinguishable in the current call sites;
+  revisit when file-policy paths land. stat uses metadata() (follows
+  symlinks, like stat(2)); C valid_file uses stat(2) as well.
+- get_error(errno): C reads errno after the failed ifstream open
+  (ENOENT in practice); the port hardcodes strerror(2) at the single
+  call site, linking glibc strerror directly (extern block), keeping
+  the vector text byte-exact.
+- NetworkPolicy in main/policy.rs carries only the checksum subset
+  (eval/drop + the four inline accessors + checksum_drops); CodecManager,
+  DataBus, InspectionPolicy vectors, FilePolicy defer with detection.
+- The C Location `const char* code` null-vs-empty distinction is kept
+  via Option<String>: print_parse_file renders "?" only for null
+  (vector #C5 vs #C6).
+- push_parse_location's C++ default argument (line = 1 in the
+  declaration, 0 in the parse_conf.h shim used by the harness) is an
+  explicit parameter in the port; call sites pass 1 like the real
+  header default.

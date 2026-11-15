@@ -1,0 +1,161 @@
+#A1
+CK args=(null) drop=f eval=f reads=0
+CK args= drop=f eval=f reads=0
+CK args=all drop=f eval=f reads=0
+CK args=none drop=0 eval=0 reads=0
+CK args=ip drop=1 eval=1 reads=0
+CK args=tcp drop=2 eval=2 reads=0
+CK args=udp drop=4 eval=4 reads=0
+CK args=icmp drop=8 eval=8 reads=0
+CK args=noip drop=e eval=e reads=0
+CK args=notcp drop=d eval=d reads=0
+CK args=noudp drop=b eval=b reads=0
+CK args=noicmp drop=7 eval=7 reads=0
+CK args=ip tcp drop=3 eval=3 reads=0
+CK args=ip noip drop=0 eval=0 reads=0
+CK args=noip notcp drop=c eval=c reads=0
+CK args=all none drop=0 eval=0 reads=0
+CK args=none all drop=f eval=f reads=0
+CK args=ip ip drop=1 eval=1 reads=0
+CK args=ip all notcp drop=d eval=d reads=0
+ERROR: unknown command line checksum option: bogus.
+ERROR: unknown command line checksum option: bogus.
+CK args=bogus drop=0 eval=0 reads=0
+ERROR: unknown command line checksum option: bogus.
+ERROR: unknown command line checksum option: bogus.
+CK args=ip bogus drop=0 eval=0 reads=0
+ERROR: unknown command line checksum option: bogus.
+ERROR: unknown command line checksum option: bogus.
+CK args=bogus ip drop=0 eval=0 reads=0
+CK args=ip  tcp drop=3 eval=3 reads=0
+CK args=ip	udp drop=5 eval=5 reads=0
+CK args=   drop=f eval=f reads=0
+#B1
+CONF conf /etc/snort/snort.lua
+CONF dir /etc/snort/
+CONF conf snort.lua
+CONF dir ./
+CONF conf ./x.lua
+CONF dir ./
+CONF conf a/b
+CONF dir a/
+CONF conf a/
+CONF dir a/
+CONF conf /x
+CONF dir /
+CONF conf dir with space/f.lua
+CONF dir dir with space/
+#C1
+LOC empty file (null)
+LOC line=0
+LOC file_get dir with space/f.lua
+Loading /abs/main.rules:
+LOC1 file=/abs/main.rules path=/abs/main.rules line=0
+LOC1b line=2
+Loading inc.rules:
+LOC2 file=inc.rules path=inc.rules
+Finished inc.rules:
+LOCback file=/abs/main.rules line=2
+Loading x.rules:
+Finished x.rules:
+Finished /abs/main.rules:
+LOCempty file=(null)
+LOC file_get2 dir with space/f.lua
+#C2
+LOCnullpush file=(null)
+#C3: show_file_codes on
+Loading I:p1.rules:
+Finished I:p1.rules:
+#C4: empty code -> ?
+Loading p2.rules:
+Finished p2.rules:
+#C6: empty code, show_file_codes on (distinct from null '?')
+Loading :e.rules:
+Finished :e.rules:
+#C5: null code -> ? with show_file_codes on
+Loading ?:q.rules:
+C5 file=q.rules line=7
+Finished ?:q.rules:
+#D1
+Loading sub/main.rules:
+GC1 code-none file sub/target.rules
+GC1 code=F
+GC3 file incdir/target.rules
+GC3 code=I
+Finished sub/main.rules:
+GC4 file ./target.rules
+GC4 code=F
+GC5 file ././target.rules
+GC5 code=F
+GC6 code=A file=/tmp/confprobe_outside.rules
+GC7 code=(null) file-after=./nope.rules
+GC8 code=(null)
+#D1b: absolute arg is returned without any existence check
+GC10 code=A file=/absent/deep/rules.rules
+#D2: empty-string arg via relative walk
+GC9 code=F
+#E1
+Loading b.rules:
+Finished b.rules:
+E1 reads=1
+E1 top file=(null)
+#E2
+ERROR: can't open missing.rules
+
+#E3: $VAR expansion (ExpandVars is the var-layer glue under test)
+Loading b.rules:
+Finished b.rules:
+#E4: ParseIpVar outcomes through the REAL callback
+R1=1
+WARNING: Var '$NETX' redefined.
+R2=1
+ERROR: failed to parse the IP address: [x].
+R3=0
+ERROR: failed to parse the IP address: !any.
+R4=0
+ERROR: failed to parse the IP address: .
+R5=0
+R6=0
+ERROR: failed to parse the IP address: 1.2.3.4/33.
+R7=0
+ERROR: failed to parse the IP address: $UNDEF.
+R8=0
+R9=1
+#E5: parse_rules_string depth witness
+E5 reads=3
+#E6: rules-file open fail
+ERROR: unable to open rules file 'nope.rules': No such file or directory
+E6 reads=4
+#E7: get_rule_list walks sc->rule_lists
+RL second=1
+RL nope=0
+#E8: nested include via rules_file (depth != 0)
+Loading b.rules:
+Loading b.rules:
+Finished b.rules:
+Finished b.rules:
+#E9: parse_rules_string(ips_policy=false) -> special includer
+Loading b.rules:
+Finished b.rules:
+#E10: nested include at depth != 0 (seed = get_parse_file)
+Loading b.rules:
+Loading b.rules:
+Finished b.rules:
+Finished b.rules:
+#E11: parse_rules_string(ips_policy=false) -> special includer seed
+Loading b.rules:
+Finished b.rules:
+#E12: parse_rules_string(ips_policy=true) -> policy includer seed
+Loading holder2.rules:
+Finished holder2.rules:
+E10 includer-unchanged=sub/holder.rules
+#E13: include_path wins over the depth seed
+ERROR: can't open x/none-here.rules
+
+Loading target.rules:
+Finished target.rules:
+#E14: special seed at depth 0, full miss
+ERROR: can't open holder2.rules
+
+#F1 counters err=15 warn=1
+#F2 counters2 err=0 warn=0

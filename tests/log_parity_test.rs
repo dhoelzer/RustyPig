@@ -1,3 +1,4 @@
+#![allow(clippy::approx_constant)] // 3.14159 etc. replay the C probe's literal arguments
 // Whole-transcript replay of tools/log_harness/vectors.txt: the C probe
 // compiled ORIGINAL log/messages.cc; this test drives LogEngine + cfmt
 // through the identical call sequence and compares the merged
