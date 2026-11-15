@@ -228,7 +228,7 @@ fn hash_vector_parity() {
     let itlines = a_it + a_it2 + b_it + lines.iter().filter(|l| l.starts_with("B rem ")).count();
     // cursor position checks are enforced inline; total coverage:
     assert!(
-        np >= 20 && hk == 7 && ms == 7 && sh == 3 && gh == 6 && acount >= 65,
+        np >= 20 && hk == 11 && ms == 11 && sh == 3 && gh == 6 && acount >= 65,
         "np={np} hk={hk} ms={ms} sh={sh} gh={gh} acount={acount} itlines={itlines}"
     );
 }

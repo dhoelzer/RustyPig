@@ -268,3 +268,13 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   already advanced before the removal.
 - dup insert leaves the ORIGINAL data untouched (HASH_INTABLE short
   circuit): pinned by GH find-b2 (7, not 8).
+
+## framework/ips_option + pdu_section
+- IpsOption is a concrete base struct here (name+type+hash+==); C's
+  virtual eval/action/retry/get_pattern live in the detection layer.
+  `option_eq` stands in for operator== (Rust has no user ==, and PartialEq
+  is reserved for structural equality).
+- Instantiator statics (set_priority/classtype/sid/...) deferred: they
+  mutate IpsInfo/RuleStateMap which don't exist yet.
+- PduSection::PsError value: C enum sequence => 5 (PS_MAX aliases
+  PS_TRAILER=4); section_to_str has 5 entries (no ERROR string).

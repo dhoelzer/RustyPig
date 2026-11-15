@@ -93,6 +93,7 @@ int main() {
     //    hardener 133824503); do_hash with strlen+1 and 0
     HashKeyOperations h(1009);
     const char* keys[] = {"", "a", "KeyWord1", "KeyWord100", "hello", "snort",
+        "ips_test", "not_ips_test", "hello_world", "not_hello_world",
         "101010101010101010101010101010101010101010101010101010101010101"};
     for (auto k : keys) emit_hko(h, k);
 
