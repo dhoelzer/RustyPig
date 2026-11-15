@@ -1,4 +1,5 @@
 pub mod base64_encoder;
+pub mod ber;
 pub mod bitop;
 pub mod boyer_moore;
 pub mod boyer_moore_search;

@@ -5,6 +5,7 @@
 //!   helpers::{bitop, boyer_moore, base64_encoder, ring (RingLogic/Ring), utf}
 //! See KNOWN DEVIATIONS.md for audited departures from the C++ original.
 
+pub mod framework;
 pub mod helpers;
 pub mod parser;
 pub mod ports;

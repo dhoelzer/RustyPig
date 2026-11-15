@@ -147,3 +147,18 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - C++ iostream fixed+precision is sticky stream state; here each
   put_f64 formats the value with its own precision ({:.*} == printf %.*f,
   same rounding), so no stream-state leakage either way.
+
+## helpers/ber + framework/cursor core
+- Cursor ported with only the fields ber uses (name/buf/size/pos/delta/
+  extensible/buf_id/file_pos). Packet* wiring, the CursorData side-table,
+  extensible-buffer growth APIs, and the copy-ctor semantics remain TODO
+  with the detection layer.
+- C Cursor borrows an external buffer pointer (tests point it at
+  sub-array views, e.g. buf+4); the Rust Cursor owns a Vec and sub-array
+  views are materialized (set("test", &buf[4..])) so ber's cap check
+  `total > UINT32_MAX - (c - beg)` computes identically: beg is the view's
+  offset-0 base, exactly like C's beg = buf + 4.
+- BerReader holds beg/cursor/end as offsets (usize) instead of raw
+  pointers; deref guards (cursor+1 > end etc.) kept verbatim.
+- C BerElement::data is const uint8_t*; here the offset into the Cursor
+  buffer. Both tests comparing data == buf + N check the same number.
