@@ -49,3 +49,15 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - ntop returns String; C returned a caller-owned char buffer.
 - `SfIpRet` added `LookupUnavailable(17)` (present in current sf_returns.h)
   beyond the C test-harness codes[] array (17 entries) — same numeric layout.
+
+## helpers/grouped_list.rs GroupedList<T>
+
+- C++ raw self-referential linked list ported to an index arena owned by the
+  container. Observable semantics (list1 iteration order, group chains with
+  push-on-front `group = this`, GrpRef pointer-to-pointer head updates,
+  leave_group repeatedly-callable no-op, erase counts) verified against all
+  16 Catch sections ported 1:1 to tests/grouped_list_test.rs.
+- delete_element() tombstones (value taken via Default) rather than freeing;
+  group refs walking a deleted element would be UB in C++ — here they read a
+  clean None. No shipped test path hits that case.
+- Holder value requires T: Default (C++ default-constructs it).
