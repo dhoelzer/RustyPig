@@ -17,8 +17,8 @@ the plan honestly with a status table rather than claiming more than is built.
 | 3 | helpers/base64_encoder | ~190 | DONE (tests ported) |
 | 4 | helpers/ring + ring_logic | ~340 | DONE (tests ported) |
 | 5 | helpers/utf | ~470 | DONE (iconv bridge pending) |
-| 6 | helpers/parse_number equivalents (framework) | - | TODO: locate original (moved to helpers/parse_number.cc @ later tag) |
-| 7 | helpers/hex_convert, util_*, range utilities | ~2k | TODO |
+| 6 | utils/util_cstring | ~490 | DONE |
+| 7 | sfip (SfIp/SfCidr/returns + inet_pton/ntop) | ~3.4k | DONE: full sf_ip_test.cc table (114 rows) passing |
 | 8 | helpers/grouped_list.h | ~600 | TODO (595 lines of tests exist) |
 | 9 | helpers/literal_search | ~300 | TODO (no hyperscan: pure-Rust fallback) |
 | 10 | helpers/ring2 (2025 lock-free FIFO) | ~300 | TODO |

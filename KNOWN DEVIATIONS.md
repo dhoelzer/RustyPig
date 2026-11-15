@@ -32,3 +32,20 @@ Each entry cites the original source so parity stays measurable and auditable.
 Everything outside `helpers/` — codecs/, detection/, framework/, main/, etc.
 `helpers/{hyper_search, literal_search, json_stream, markup, streambuf, ring2,
 lockless_ring, grouped_list, ber, ...}` are next on the queue.
+
+## sfip (sf_ip.rs / sf_cidr.rs / sf_ip_test.rs)
+
+- `inet_pton`/`inet_ntop`(glibc path) reimplemented in pure Rust rather than
+  FFI to libc, for hermetic unit tests. Behavior matched to glibc on Linux
+  (strict v4 leading-zero rejection is additionally enforced by SfIp::pton,
+  exactly like the original). The SfIp::test_features ntop mode is selected
+  by an explicit `test_features: bool` arg instead of a static bool.
+- `SfIp::set_str()` mirrors `set(src, nullptr)` and therefore FAILS on
+  CIDR/masked inputs (C++ returns SFIP_INET_PARSE_ERR when !srcBits and
+  bits != 128). Pass-through variant `set_addr_str()` returns (ret, bits)
+  mirroring `set(src, &outbits)`.
+- `set_check` in tests mirrors `memcmp(&ip1,&ip2,sizeof(struct))` by
+  comparing ip8+family (C padded-struct compare includes no other live state).
+- ntop returns String; C returned a caller-owned char buffer.
+- `SfIpRet` added `LookupUnavailable(17)` (present in current sf_returns.h)
+  beyond the C test-harness codes[] array (17 entries) — same numeric layout.
