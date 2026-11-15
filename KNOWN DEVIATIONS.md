@@ -116,3 +116,19 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   by pointer-move in both branches (C's copy branch needs T copy-ctor).
 - C size() else-branch quirk preserved verbatim (head + (UINT32_MAX -
   tail) is 1 below the true wrapping difference past 32-bit rollover).
+
+## helpers/ring2
+- Direct translation of the cursor/guard/turn protocol; store is a fixed
+  Vec<u8> in UnsafeCell with raw-pointer access (no &/&mut ever alias the
+  shared store between the SPSC threads). Validated under Miri with
+  -Zmiri-strict-provenance: no UB, no data races.
+- Reader::read returns an owned Vec<u8> instead of C's borrowed pointer
+  into the store; byte-for-byte the same record, observable difference
+  only if a caller dereferenced the record after pop() (no test does).
+- Writer::write_len_check(len) exposes C's early length validation
+  (data_len == 0 / > UINT32_MAX checked before touching data) so the
+  "Oversized record" Catch section is testable without a 4 GB slice.
+- C test's per-test-case Ring2 objects are independent test fixtures here;
+  Rust re-creates the buffer per #[test] (Catch SECTIONs shared one
+  TEST_CASE object; each SECTION started from a fresh REQUIRE empty state,
+  so this is equivalent).

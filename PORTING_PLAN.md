@@ -25,7 +25,7 @@ the plan honestly with a status table rather than claiming more than is built.
 | 8b | ports + parser/parse_ports | ~1.5k | DONE: 52-case ground-truth vector parity (no upstream unit suite; tools/cpp_harness) |
 | 9 | helpers/literal_search + boyer_moore_search | ~360 | DONE: all 14 boyer_moore_search_test.cc CppUTest cases parity; hyperscan backend intentionally out of scope |
 | 10a | helpers/lockless_ring | ~395 | DONE: all 5 Catch sections incl. 4-producer/4-consumer thread tests |
-| 10 | helpers/ring2 (2025 lock-free FIFO) | ~300 | TODO |
+| 10 | helpers/ring2 (2024 SPSC byte ring) | ~520 | DONE: all 30 Catch sections parity; Miri-clean (strict provenance) |
 | 11 | helpers/json_stream | ~400 | TODO |
 | 12 | helpers/streambuf | ~2.1k tests | TODO |
 | 13 | main/snort_types.h + framework/log levels, Option/OptionTree | ~4k | TODO |

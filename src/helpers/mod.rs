@@ -4,5 +4,6 @@ pub mod boyer_moore;
 pub mod boyer_moore_search;
 pub mod grouped_list;
 pub mod lockless_ring;
+pub mod ring2;
 pub mod ring;
 pub mod utf;
