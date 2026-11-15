@@ -1,14 +1,8 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+//! snort3-rust: a functional, behavior-compatible Rust port of Snort 3
+//! (https://github.com/snort3/snort3, C++).
+//!
+//! The module tree mirrors the original `src/` layout. Currently ported:
+//!   helpers::{bitop, boyer_moore, base64_encoder, ring (RingLogic/Ring), utf}
+//! See KNOWN DEVIATIONS.md for audited departures from the C++ original.
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub mod helpers;
