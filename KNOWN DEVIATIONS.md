@@ -363,3 +363,17 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   `rmh/rmt ... cnt=N` lines report the count read *before* the removal call.
 - C `sflist_first(nullptr)` sets *v = null and returns null (the `if (!s)`
   guard); Rust cannot name a null list so that branch is unreachable.
+
+## parser/parse_utils
+- C `ParseError(...)` writes to the message subsystem; Rust returns error
+  strings in the result struct so probes/tests can assert position text
+  ("invalid byte code at N", format/range messages) verbatim.
+- C `errno` is process-global; Rust `parse_int` returns `errno: i32` with
+  the Linux ERANGE value (34). The value returned on the invalid-format path
+  is the *unclamped* strtol value, as in C (early return before clamping).
+- C state-0 char dispatch relies on `isdigit`/`isspace`/`isxdigit` called on
+  possibly-negative chars; for >127 bytes glibc returns 0 for all and the
+  Rust ASCII predicates agree, so behavior is identical.
+- `parse_byte_code` takes `&[u8]` (C `const char*`); the closing-quote check
+  `in[len-1] == '"'` with the decrement-then-stop loop is replayed exactly,
+  including the interior-quote entry into hex mode.

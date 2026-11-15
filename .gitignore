@@ -20,3 +20,6 @@ tools/range_harness/probe.o
 tools/sflsq_harness/copy/
 tools/sflsq_harness/probe
 tools/sflsq_harness/probe.cc
+tools/parse_utils_harness/copy/
+tools/parse_utils_harness/probe
+tools/parse_utils_harness/probe.cc
