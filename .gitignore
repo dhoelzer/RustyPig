@@ -11,3 +11,5 @@ tools/streambuf_harness/test_main.cc
 tools/hash_harness/copy/
 tools/hash_harness/harness
 tools/hash_harness/build_errs.txt
+tools/streambuf_harness/probe*
+!tools/streambuf_harness/probe*.cc
