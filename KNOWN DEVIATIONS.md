@@ -97,3 +97,13 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   `sfvar_alloc`'s `snort_api` pool are omitted; no test consumes them.
 - Alias vars (`sfvar_create_alias`) deep-copy lists but share `id` and
   `value`, mirroring C's shallow alias fields.
+
+## helpers/literal_search + boyer_moore_search
+- HyperSearch backend omitted (hyperscan is a C library dependency); the
+  instantiate() path always returns the Boyer-Moore engine, which is what
+  C returns when HAVE_HYPERSCAN is off. Matcher behavior is identical for
+  the literal use case covered by the tests.
+- C BoyerMooreSearch borrows the caller's pattern pointer; the Rust port
+  stores a copy (same bytes) so the object cannot outlive borrowed data.
+- C search() bumps a raw pointer by skip[]; Rust slices. skip[c] <=
+  pattern_len <= buffer_len in every reachable state, so bounds match.

@@ -23,7 +23,7 @@ the plan honestly with a status table rather than claiming more than is built.
 | 8d | parser/parse_ip (sfip_var_from_string) | ~100 | DONE: engine shared with sf_ipvar; code-mapping tests incl. C quirk ']'/'[]' -> SUCCESS and InetParseErr propagation |
 | 8c | sfip/sf_ipvar + sf_vartable | ~1.7k | DONE: all 6 embedded UNIT_TEST Catch2 sections (merge, contained/negated, no-table, copy/compare, any, kitchen-sink) ported 1:1 |
 | 8b | ports + parser/parse_ports | ~1.5k | DONE: 52-case ground-truth vector parity (no upstream unit suite; tools/cpp_harness) |
-| 9 | helpers/literal_search | ~300 | TODO (no hyperscan: pure-Rust fallback) |
+| 9 | helpers/literal_search + boyer_moore_search | ~360 | DONE: all 14 boyer_moore_search_test.cc CppUTest cases parity; hyperscan backend intentionally out of scope |
 | 10 | helpers/ring2 (2025 lock-free FIFO) | ~300 | TODO |
 | 11 | helpers/json_stream | ~400 | TODO |
 | 12 | helpers/streambuf | ~2.1k tests | TODO |
