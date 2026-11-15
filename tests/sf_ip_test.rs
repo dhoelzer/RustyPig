@@ -201,7 +201,7 @@ fn run_func(func: &str, arg1: &str, arg2: Option<&str>) -> (i32, SfIpRet) {
     if !arg1.is_empty() {
         cidr1.set_str(arg1);
     }
-    let cidr2_empty = arg2.map_or(true, |a| a.is_empty());
+    let cidr2_empty = arg2.is_none_or(|a| a.is_empty());
     let mut cidr2 = SfCidr::new();
     if !cidr2_empty {
         cidr2.set_str(arg2.unwrap());

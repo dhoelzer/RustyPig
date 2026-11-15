@@ -100,8 +100,8 @@ impl<T: Default> GroupedList<T> {
         //   &mate == the mate field of THIS new element (prev head points
         //   into it only after some group surgery); in C++ `&mate` is the
         //   address of the new element's own mate member.
-        if head.is_some() {
-            self.nodes[head.unwrap()].grp = Some(GrpRef::MateOf(idx));
+        if let Some(h) = head {
+            self.nodes[h].grp = Some(GrpRef::MateOf(idx));
         }
         // group = this
         self.groups[slot] = Some(idx);

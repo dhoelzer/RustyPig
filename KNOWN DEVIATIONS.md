@@ -132,3 +132,18 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   Rust re-creates the buffer per #[test] (Catch SECTIONs shared one
   TEST_CASE object; each SECTION started from a fresh REQUIRE empty state,
   so this is equivalent).
+
+## helpers/json_stream
+- Sink is dyn std::io::Write instead of std::ostream&; byte output identical
+  for all test content.
+- C std::quoted(key) emulated: '"' and '\\' backslash-escaped, everything
+  else verbatim (glibc default quote/escape chars).
+- isprint uses the C "C" locale set (0x20..0x7E) explicitly.
+- put() overload set split by name (put_null / put_i64 / uput_u64 /
+  put_cstr / put_string_q / put_string / put_f64 / put_true / put_false)
+  because Rust has no overload resolution; put_cstr(None) models C's
+  put(key, nullptr) -> "null", empty c-string/empty std::string short
+  circuits preserved.
+- C++ iostream fixed+precision is sticky stream state; here each
+  put_f64 formats the value with its own precision ({:.*} == printf %.*f,
+  same rounding), so no stream-state leakage either way.

@@ -10,6 +10,8 @@
 //! "safe" helpers check for). All search helpers return a byte offset (isize)
 //! mirroring the C returned pointer (as offset from s), or -1 for null.
 
+// Index-carrying loops mirror the C original's pointer walks verbatim.
+#![allow(clippy::needless_range_loop)]
 pub const SNORT_SNPRINTF_SUCCESS: i32 = 0;
 pub const SNORT_SNPRINTF_TRUNCATION: i32 = 1;
 pub const SNORT_SNPRINTF_ERROR: i32 = -1;
@@ -47,7 +49,7 @@ pub fn snort_strncpy(dst: &mut [u8], src: &[u8], dst_size: usize) -> i32 {
     dst[dst_size - 1] = 0;
 
     // strncpy semantics: copy min(strlen(src)+1, dst_size) bytes, padding with NUL
-    let src_len = src.iter().position(|&b| b == 0).map_or(src.len(), |p| p);
+    let src_len = src.iter().position(|&b| b == 0).unwrap_or(src.len());
     let n = src_len.min(dst_size - 1);
     dst[..n].copy_from_slice(&src[..n]);
     for b in &mut dst[n..dst_size] {

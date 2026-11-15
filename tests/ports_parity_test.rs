@@ -28,11 +28,10 @@ fn parse_items(line: &str) -> Vec<(bool, u16, u16)> {
             let inner = &line[k + 1..end];
             let neg = inner.starts_with('!');
             let rest = inner.trim_start_matches('!');
-            if let Some((a, hh)) = rest.split_once(':') {
-                if let (Ok(a), Ok(hh)) = (a.parse(), hh.parse()) {
+            if let Some((a, hh)) = rest.split_once(':')
+                && let (Ok(a), Ok(hh)) = (a.parse(), hh.parse()) {
                     out.push((neg, a, hh));
                 }
-            }
             k = end + 1;
         } else {
             k += 1;

@@ -10,6 +10,8 @@
 // original performs on little-endian hosts are replicated with from_le_bytes
 // views so fast_lt6/gt6 ordering semantics match the x86 original bit-for-bit.
 
+// Index-carrying loops mirror the C original's pointer walks verbatim.
+#![allow(clippy::needless_range_loop)]
 use super::sf_returns::*;
 
 pub const INET6_ADDRSTRLEN: usize = 46;
@@ -101,7 +103,7 @@ pub fn inet_pton(fam: i16, ip: &str, dst: &mut [u8]) -> i32 {
                     if digits == 4 {
                         return 0;
                     }
-                    val = val * 16 + (b[i] as char).to_digit(16).unwrap() as u32;
+                    val = val * 16 + (b[i] as char).to_digit(16).unwrap();
                     digits += 1;
                     i += 1;
                 }
@@ -199,9 +201,10 @@ pub fn inet_pton(fam: i16, ip: &str, dst: &mut [u8]) -> i32 {
 }
 
 /// snort_inet_ntop (sf_ip.cc), both test_features modes:
-///  - false: standard (glibc-style) formatting
-///  - true:  "%04x" full expansion, no compression
-/// IPv6 always needs bufsize >= INET6_ADDRSTRLEN, IPv4 >= INET_ADDRSTRLEN.
+///
+/// false: standard (glibc-style) formatting; true: "%04x" full expansion,
+/// no compression. IPv6 always needs bufsize >= INET6_ADDRSTRLEN,
+/// IPv4 >= INET_ADDRSTRLEN.
 pub fn snort_inet_ntop_raw(fam: i16, ip_raw: &[u8], test_features: bool) -> Option<String> {
     if fam == AF_INET {
         if ip_raw.len() < 4 {
@@ -553,7 +556,7 @@ impl SfIp {
     }
 
     fn cidr_mask(&mut self, val: i32) -> SfIpRet {
-        if val < 0 || val > 128 {
+        if !(0..=128).contains(&val) {
             return SfIpRet::ArgErr;
         }
         if val == 128 {
@@ -624,11 +627,10 @@ impl SfIp {
         {
             ip_start += 1;
         }
-        if ob {
-            if let Some(cb) = buf[ip_start..].iter().rposition(|&c| c == b']') {
+        if ob
+            && let Some(cb) = buf[ip_start..].iter().rposition(|&c| c == b']') {
                 buf[ip_start + cb] = 0;
             }
-        }
         // find '/' within ip (NUL-terminated slice)
         let ip_slice_end = buf[ip_start..].iter().position(|&c| c == 0).map_or(buf.len(), |p| ip_start + p);
         let mut bits: i32;
@@ -758,11 +760,10 @@ pub fn sfip_ntop_raw_bytes(ip: &SfIp) -> &[u8] {
 
 /// sfip_str_to_fam: two or more ':' => v6; any '.' => v4; else AF_UNSPEC.
 pub fn sfip_str_to_fam(str: &str) -> i16 {
-    if let Some(s) = str.find(':') {
-        if str[s + 1..].contains(':') {
+    if let Some(s) = str.find(':')
+        && str[s + 1..].contains(':') {
             return AF_INET6;
         }
-    }
     if str.contains('.') {
         return AF_INET;
     }

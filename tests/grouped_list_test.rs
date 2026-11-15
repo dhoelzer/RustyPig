@@ -37,7 +37,7 @@ fn basic() {
     // SECTION 1 element
     {
         let mut cont = GroupedList::<Type>::new();
-        let mut group = cont.new_group();
+        let group = cont.new_group();
         let data = t(1, "one");
         let el = cont.append(group, data.clone());
         assert_ne!(el, ElemRef(0)); // el != nullptr (holder idx would mean null)
@@ -99,7 +99,7 @@ fn groups_3_groups() {
 
     assert_eq!(cont.erase_group(gb), 1);
     assert_eq!(cont.group_head(gb), None);
-    check_container(&cont, &[d3.clone()]);
+    check_container(&cont, std::slice::from_ref(&d3));
 
     assert_eq!(cont.erase_group(gc), 1);
     assert_eq!(cont.group_head(gc), None);
@@ -190,7 +190,7 @@ fn leaving_group_end() {
     let mut cont = GroupedList::<Type>::new();
     let ga = cont.new_group();
     let (d1, d2, d3) = (t(1, "one"), t(2, "two"), t(3, "three"));
-    let el1 = cont.append(ga, d1.clone());
+    let _el1 = cont.append(ga, d1.clone());
     let el2 = cont.append(ga, d2.clone());
     let el3 = cont.append(ga, d3.clone());
     assert_eq!(cont.group_head(ga), Some(el3));
@@ -261,7 +261,7 @@ fn memory_delete_element() {
     let ga = cont.new_group();
     let data = t(1, "one");
     let el = cont.append(ga, data.clone());
-    check_container(&cont, &[data.clone()]);
+    check_container(&cont, std::slice::from_ref(&data));
     cont.delete_element(el);
     check_container(&cont, &[]);
     // C++ leaves group_a dangling but never reads it; cont destructor is next.
@@ -273,7 +273,7 @@ fn memory_delete_group() {
     let ga = cont.new_group();
     let data = t(1, "one");
     cont.append(ga, data.clone());
-    check_container(&cont, &[data.clone()]);
+    check_container(&cont, std::slice::from_ref(&data));
     cont.erase_group(ga);
     assert_eq!(cont.group_head(ga), None);
     check_container(&cont, &[]);
@@ -287,7 +287,7 @@ fn memory_delete_element_then_group() {
     cont.append(ga, d1.clone());
     let el2 = cont.append(gb, d2.clone());
     cont.delete_element(el2);
-    check_container(&cont, &[d1.clone()]);
+    check_container(&cont, std::slice::from_ref(&d1));
     cont.erase_group(ga);
     assert_eq!(cont.group_head(ga), None);
     check_container(&cont, &[]);
@@ -301,7 +301,7 @@ fn memory_delete_group_then_element() {
     cont.append(ga, d1.clone());
     let el2 = cont.append(gb, d2.clone());
     cont.erase_group(ga);
-    check_container(&cont, &[d2.clone()]);
+    check_container(&cont, std::slice::from_ref(&d2));
     cont.delete_element(el2);
     check_container(&cont, &[]);
 }
@@ -318,7 +318,7 @@ fn memory_delete_elements_remain_then_group() {
     check_container(&cont, &[d1.clone(), d3.clone()]);
     cont.erase_group(ga);
     assert_eq!(cont.group_head(ga), None);
-    check_container(&cont, &[d3.clone()]);
+    check_container(&cont, std::slice::from_ref(&d3));
 }
 
 #[test]
@@ -332,7 +332,7 @@ fn memory_delete_group_then_elements_remain() {
     cont.erase_group(ga);
     check_container(&cont, &[d2.clone(), d3.clone()]);
     cont.delete_element(el2);
-    check_container(&cont, &[d3.clone()]);
+    check_container(&cont, std::slice::from_ref(&d3));
 }
 
 #[test]

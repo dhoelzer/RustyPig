@@ -212,7 +212,7 @@ impl<'tbl> POParser<'tbl> {
         }
         let _ = erange;
         let c = val as i32; // C's (int) cast wraps
-        if c > 65535 || c < 0 {
+        if !(0..=65535).contains(&c) {
             self.errflag_ = POPERR_BOUNDS;
             return 0;
         }
@@ -328,10 +328,7 @@ impl<'tbl> POParser<'tbl> {
             if c == b'$' {
                 // Don't dup this again - the returned PortObject has already
                 // been dup'ed
-                potmp = match self.pop_parse_var() {
-                    Some(p) => p,
-                    None => return None,
-                };
+                potmp = self.pop_parse_var()?;
             } else if c == b'[' {
                 // Start of a list. Tokenize list and recurse on it.
                 list_count += 1;
@@ -383,10 +380,7 @@ impl<'tbl> POParser<'tbl> {
                 continue;
             } else {
                 self.pop_unget_char();
-                potmp = match self.pop_parse_port() {
-                    Some(p) => p,
-                    None => return None,
-                };
+                potmp = self.pop_parse_port()?;
             }
 
             let mut potmp = potmp;

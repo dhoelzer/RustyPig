@@ -536,17 +536,15 @@ pub fn sfvar_parse_iplist(
             /* Apply the negation */
             if negation != neg_ip {
                 /* Check for a negated "any" */
-                if let Some(h) = copy_var.head.first() {
-                    if h.flags & SFIP_ANY != 0 {
+                if let Some(h) = copy_var.head.first()
+                    && h.flags & SFIP_ANY != 0 {
                         return SfIpRet::NotAny;
                     }
-                }
                 /* Negated, zeroed IP == "!any" */
-                if let Some(h) = copy_var.head.first() {
-                    if !h.ip.is_set() {
+                if let Some(h) = copy_var.head.first()
+                    && !h.ip.is_set() {
                         return SfIpRet::NotAny;
                     }
-                }
                 _negate_lists(&mut copy_var);
             }
 
@@ -677,11 +675,10 @@ pub fn sfvar_alloc(table: &super::sf_vartable::Vartable, variable: &str) -> (Opt
         return (None, stat);
     }
 
-    if let Some(h) = ret.head.first() {
-        if h.flags & SFIP_ANY != 0 && h.flags & SFIP_NEGATED != 0 {
+    if let Some(h) = ret.head.first()
+        && h.flags & SFIP_ANY != 0 && h.flags & SFIP_NEGATED != 0 {
             return (None, SfIpRet::NotAny);
         }
-    }
 
     if sfvar_validate(&ret) == SfIpRet::Conflict {
         return (None, SfIpRet::Conflict);

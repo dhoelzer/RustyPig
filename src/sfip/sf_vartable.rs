@@ -119,12 +119,11 @@ impl Vartable {
     pub fn define(&mut self, name: &str, value: &str) -> SfIpRet {
         let combined = format!("{name} {value}");
         let (ret, idx) = self.add_str(&combined);
-        if ret == SfIpRet::Success || ret == SfIpRet::Duplicate {
-            if let Some(i) = idx {
+        if (ret == SfIpRet::Success || ret == SfIpRet::Duplicate)
+            && let Some(i) = idx {
                 let expanded = sfvt_expand_value(self, name, value);
                 self.vars[i].value = expanded;
             }
-        }
         ret
     }
 }
@@ -183,10 +182,7 @@ fn sfvt_expand_value(table: &Vartable, _name: &str, value: &str) -> Option<Strin
                 return None; // goto error
             }
             let vartmp = &tmp[varstart..ptr];
-            let ipvar = match table.lookup_var(vartmp) {
-                None => return None, // goto error
-                Some(v) => v,
-            };
+            let ipvar = table.lookup_var(vartmp)?;
             if let Some(iv) = &ipvar.value {
                 ret.push_str(iv);
             }
