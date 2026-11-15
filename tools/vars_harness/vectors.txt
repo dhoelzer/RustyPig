@@ -1,0 +1,117 @@
+VIA 5b5d 1
+VIA 21205b205d 0
+VIA 312e322e332e34 1
+VIA 312e322e33 0
+VIA 312f38 1
+VIA 3a3a31 1
+VIA 3a303a78 1
+VIA 3a78313a 0
+VIA 616e79 1
+VIA 616e797468696e67 1
+VIA 24464f4f 0
+VIA 464f4f 0
+VIA 244d495353494e47 0
+VIA 21312e322e332e34 1
+VIA 5b312e322e332e345d 1
+VIA 203a3a31 1
+VIA 2d312e322e332e34 0
+VIA 31302e302e302e302f38 1
+VIA 313a322f33 0
+VIA 24 0
+VIA 2446 0
+VIA 424152 1
+VIA 612e622e63 0
+VIL 5b312e322e332e342c352e362e372e385d 1
+VIL 5b312e322e332e342c785d 0
+VIL 312e322e332e34 1
+VIL 5b615d5b625d 0
+VIL 5b312e322e332e34 1
+VIL 215b312e322e332e342c616e795d 1
+VIL 5b5b5d5d 1
+VIL 5b205d 0
+VIL 5b24464f4f2c616e795d 0
+VIL 21616e79 1
+VIL 5b244d495353494e472c312e322e332e345d 0
+VIL 5b312e322e332e342c 0
+VT 24484f4d455f4e4554 5b3139322e3136382e302e302f31365d id=0
+VTNEXT id=1
+ABORT undefined variable name: HOME_NET.
+VT 24484f4d455f4e4554 5b3139322e3136382e302e302f31365d id=0
+VTNEXT id=1
+WARN(3) Var '$HOME_NET' redefined
+
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VTNEXT id=1
+ABORT undefined variable name: HOME_NET.
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VTNEXT id=1
+ABORT undefined variable name: MISSING_VAR.
+PQ abort=1
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VTNEXT id=1
+ABORT bad value in variable definition.  Make sure you don't have a '$' in the var name.
+PR abort=1
+ABORT undefined variable name: FOO.
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VTNEXT id=1
+ABORT undefined variable name: WEB_SERVERS.
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VTNEXT id=1
+PPT start
+PERR can not redefine variable name $HOME_NET to be of type 'portvar'. Use a different name.
+PERR illegal use of negation and 'any': [!any].
+PPT end
+VSRHTTP 
+VSRHOME 
+VSRFOO 
+VSRNOPE 
+ABORT undefined variable name: HOME_NET.
+EXP 706c61696e -> 706c61696e
+EXP 686173202271756f74656420244e4f545f455850414e444544222074657874 -> 686173202271756f74656420244e4f545f455850414e444544222074657874
+ABORT undefined variable name: WEB_SERVERS.
+ABORT undefined variable name: MISSING.
+ABORT undefined variable name: MISSING.
+ABORT undefined variable name: HOME_NET.
+ABORT undefined variable name: MISSINGQ.
+ABORT undefined variable name: MISSINGQ.
+ABORT undefined variable name: T.
+ABORT undefined variable name: FOOb.
+ABORT undefined variable name: .
+ABORT undefined variable name: .
+EXP 24284e4f50453a2d61626329 -> 616263
+EXP 2428484f4d455f4e45543a2d7829 -> 78
+ABORT boom
+ABORT undefined variable 'NOPE'.
+ABORT undefined variable name: NOPE.
+ABORT undefined variable name: NOPE.
+EXP 24284e4f50453a2d613a6229 -> 613a62
+ABORT undefined variable name: .
+RESOLVE start
+ABORT PortVar Parse error: (pos=1,error=not a number)
+>>[80:x]
+>>^.
+RESOLVE abort=1 resolving=1
+RESOLVE2 abort=0 resolving=0
+ABORT PortVar Parse error: (pos=1,error=not a number)
+>>[1:x]
+>>^.
+RESOLVE3 abort=1 resolving=1
+VSRBAD 
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VTNEXT id=1
+RESOLVENETS start
+PERR failed to parse the IP address: $NET0.
+RESOLVENETS end resolving=0
+IPVARNET0 ret=1
+RESOLVENETS2 start
+RESOLVENETS2 end
+VSRNET1 
+VSRNET0 5b332e332e332e335d
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VT 414c30 5b392e392e392e395d id=1
+VTNEXT id=2
+VT 24484f4d455f4e4554 31302e302e302e302f38 id=0
+VT 24414c31 5b392e392e392e395d id=1
+VT 414c30 5b392e392e392e395d id=1
+VTNEXT id=2
+VT (empty) id_next=2
