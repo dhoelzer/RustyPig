@@ -6,3 +6,4 @@
 //! See KNOWN DEVIATIONS.md for audited departures from the C++ original.
 
 pub mod helpers;
+pub mod utils;
