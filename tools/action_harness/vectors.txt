@@ -1,0 +1,18 @@
+AS 0 drop
+AS 1 reject
+AS 2 alert
+AS 3 log
+AS 4 pass
+AS 5 ERROR
+AT drop 0
+AT reject 1
+AT alert 2
+AT log 3
+AT pass 4
+AT nope 5
+AT  5
+PRI0 [pass reject drop alert log]
+PRI1 [reject drop alert pass log]
+MAX2 7
+PRI2 [pass reject drop alert log]
+AS2 0 drop

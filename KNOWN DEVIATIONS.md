@@ -388,3 +388,21 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   pointer for `--` is to the NUL terminator and thus non-null.
 - `get_arg` cannot yield the C sentinel "" vs null ambiguity for val; empty
   Vec means C "".
+
+## framework/ips_action + main/policy (IpsPolicy action variables)
+- C keeps the action registry in file-statics mutated at plugin load
+  (PluginManager -> ActionManager::get_interface); Rust threads an explicit
+  &mut ActionRegistry so tests control registration order deterministically.
+- IpsAction* payloads: policy.action / configured_action hold Option<()>
+  placeholders until the actions/ layer exists; get_action()'s selector-vs-
+  type-array indexing split (selector 0 -> action[type], else
+  configured_action[selector]) is ported verbatim around the placeholders.
+- C policy.cc cannot compile hermetically (DAQ, DataBus, Shell); its 3 Catch
+  cases were ported by reading and pinned indirectly via the compiled-
+  original ActionManager registry harness (tools/action_harness).
+- get_interface duplicate-name quirk pinned: unordered_map::emplace does not
+  overwrite, but s_act_index++ fires unconditionally, so a re-registered name
+  burns a type index forever (vector MAX2 = 7 with only 6 names).
+- get_action_priorities alert_before_pass expansion appends "alert pass "
+  with trailing space and skips the normal separator logic (`continue`),
+  reproduced exactly including double-space artifacts on adjacent entries.

@@ -26,3 +26,8 @@ tools/parse_utils_harness/probe.cc
 tools/arglist_harness/copy/
 tools/arglist_harness/probe
 tools/arglist_harness/probe.cc
+tools/action_harness/copy/
+tools/action_harness/probe
+tools/action_harness/probe.cc
+tools/action_harness/registry.o
+tools/action_harness/registry.cc
