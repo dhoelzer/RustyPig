@@ -17,3 +17,6 @@ tools/range_harness/copy/
 tools/range_harness/probe
 tools/range_harness/probe.cc
 tools/range_harness/probe.o
+tools/sflsq_harness/copy/
+tools/sflsq_harness/probe
+tools/sflsq_harness/probe.cc

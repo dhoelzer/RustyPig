@@ -352,3 +352,14 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - The C probe harness (tools/range_harness) exercises private members because
   the class exposes min/max as protected; the Rust port publishes them
   (range.cc's own UNIT_TEST block does the same via friend access).
+
+## utils/sflsq (SF_LIST)
+- C `NODE_DATA = void*`; Rust `SfList<T>` requires `T: Copy` (pointer-shaped
+  payloads). Arena indices stand in for `SF_LNODE*`; `ListCursor` stands for
+  the `SF_LNODE**` out-parameter.
+- `sflist_free`/`free_all`/`static_free_all` reduce to ownership drop in
+  Rust; `free_all(cb)` keeps the callback-per-node observable behavior.
+- Probe replay pins gcc's right-to-left printf argument evaluation: the
+  `rmh/rmt ... cnt=N` lines report the count read *before* the removal call.
+- C `sflist_first(nullptr)` sets *v = null and returns null (the `if (!s)`
+  guard); Rust cannot name a null list so that branch is unreachable.

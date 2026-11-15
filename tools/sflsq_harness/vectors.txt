@@ -1,0 +1,17 @@
+new cnt=0
+hh/tt cnt=4 -1 0 1 2
+first -1
+next-end 1 cursor-null=0
+rmh -1 cnt=4
+rmt 2 cnt=3
+mid cnt=2 0 1
+before cnt=4 100 200 0 1
+drain 100
+drain 200
+drain 0
+drain 1
+empty cnt=0
+rmh-empty 0
+rmt-empty 0
+one cnt=1 42
+empty2 cnt=0
