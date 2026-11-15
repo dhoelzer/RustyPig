@@ -188,3 +188,21 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - output_bytes (C *output_bytes = outbuf_ptr - outbuf) returned as the
   second tuple element; matches upstream CHECK(output_len == input_size)
   and CHECK(output_len == output_size) semantics.
+
+## helpers/streambuf
+- streambuf get/put-area pointers (eback/gptr/egptr, pbase/pptr/epptr)
+  modeled as i64 offsets into the owned store; C pubsetbuf(char*,n) takes
+  &[u8] lifetime for input; for output, the `new char[n]` the tests pass
+  is taken as Vec<u8> (Rust cannot express caller-owned new[]; the
+  take_data() owner-transfer contract is preserved as Vec handoff).
+- libstdc++ public entry points (in_avail/sgetc/sbumpc/snextc/sungetc/
+  sputbackc/sgetc-pbackfail/sgetn/sputc/sputn/pub*) replicated from
+  /usr/include/c++/14 semantics; tests use an istream/ostream emulation
+  with the sentry/gcount/badbit/tellg/tellp mechanics of libstdc++ 14
+  (read sets eofbit|failbit on shortfall; write -> badbit on sputn
+  shortfall; tellg/tellp return -1 when fail/bad; sentry blocks on bad).
+- ostreambuf_infl::xsgetn reads [pptr,epptr) like the original quirk;
+  C leaves those bytes uninitialized, Rust guarantees 0 (Vec zeroing).
+  No upstream test depends on the garbage values.
+- C setbuf(nullptr,n>0) on the output buffer is UB-adjacent (setp to a
+  null base); Rust collapses it to an empty buffer. Unexercised upstream.

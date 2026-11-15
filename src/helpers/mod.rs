@@ -7,5 +7,6 @@ pub mod grouped_list;
 pub mod lockless_ring;
 pub mod json_stream;
 pub mod ring2;
+pub mod streambuf;
 pub mod ring;
 pub mod utf;

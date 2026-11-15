@@ -5,3 +5,6 @@
 /tools/cpp_harness/cpp_stderr.txt
 tools/unfold_harness/copy/
 tools/unfold_harness/harness
+tools/streambuf_harness/copy/
+tools/streambuf_harness/test
+tools/streambuf_harness/test_main.cc
