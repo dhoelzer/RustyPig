@@ -377,3 +377,14 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - `parse_byte_code` takes `&[u8]` (C `const char*`); the closing-quote check
   `in[len-1] == '"'` with the decrement-then-stop loop is replayed exactly,
   including the interior-quote entry into hex mode.
+
+## parser/arg_list (ArgList)
+- C stores `char*` into argv + a `std::string buf` backing single-char keys;
+  Rust clones owned `Vec<u8>` tokens. The `buf.assign(s,1)` quirk (short-opt
+  key is exactly one char) is preserved on purpose, not cleaned up.
+- C's truthiness test on the pending `arg` pointer distinguishes `--`
+  (pending = empty string, still non-null -> flushes key="") from no pending
+  arg; Rust models this with pending = Some("") which matches, since the C
+  pointer for `--` is to the NUL terminator and thus non-null.
+- `get_arg` cannot yield the C sentinel "" vs null ambiguity for val; empty
+  Vec means C "".

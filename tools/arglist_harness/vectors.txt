@@ -1,0 +1,60 @@
+ARGV a [prog] [-i] [eth0] [--pcap] [f.pcap] [-v]
+GA (i)=(eth0)
+GA (pcap)=(f.pcap)
+GA (v)=()
+GA end
+ARGV b [prog] [-n] [-4]
+GA (n)=()
+GA (4)=()
+GA end
+ARGV c [prog] [-sABC]
+GA (s)=(ABC)
+GA end
+ARGV d [prog] [--]
+GA ()=()
+GA end
+ARGV e [prog] [-]
+GA (-)=()
+GA end
+ARGV f [prog] [-o] [x] [-p]
+GA (o)=(x)
+GA (p)=()
+GA end
+ARGV g [prog] [--long=val=ue]
+GA (long)=(val=ue)
+GA end
+ARGV h [prog] [--novalue] [next]
+GA (novalue)=(next)
+GA end
+ARGV i [prog] [plain] [args]
+GA ()=(plain)
+GA ()=(args)
+GA end
+ARGV j [prog] [-x] [--y] [-z]
+GA (x)=()
+GA (y)=()
+GA (z)=()
+GA end
+ARGV k [prog] [pos1] [-a] [pos2]
+GA ()=(pos1)
+GA (a)=(pos2)
+GA end
+ARGV empty [prog]
+GA end
+ARGV ll [prog] [-] [-]
+GA (-)=()
+GA (-)=()
+GA end
+ARGV m [prog] [-4] [-n]
+GA (4)=()
+GA (n)=()
+GA end
+ARGV n [prog] [-x1] [-y2] [-z]
+GA (x)=(1)
+GA (y)=(2)
+GA (z)=()
+GA end
+ARGV o [prog] [--a=] [b]
+GA (a)=()
+GA ()=(b)
+GA end

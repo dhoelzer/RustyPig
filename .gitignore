@@ -23,3 +23,6 @@ tools/sflsq_harness/probe.cc
 tools/parse_utils_harness/copy/
 tools/parse_utils_harness/probe
 tools/parse_utils_harness/probe.cc
+tools/arglist_harness/copy/
+tools/arglist_harness/probe
+tools/arglist_harness/probe.cc
