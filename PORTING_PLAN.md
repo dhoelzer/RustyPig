@@ -29,6 +29,8 @@ the plan honestly with a status table rather than claiming more than is built.
 | 11 | helpers/json_stream | ~820 | DONE: 43 sections parity (json_stream_test.cc basic + 6 embedded escape) |
 | 12 | helpers/ber + framework/cursor core | ~520 | DONE: all 5 ber_test.cc TEST_CASEs incl. length-overflow cap quirks; Cursor Packet*/CursorData side-table omitted |
 | 12 | helpers/streambuf | ~2.1k tests | TODO |
+| 13 | log/obfuscator | ~340 | DONE: all 10 obfuscator_test.cc CppUTest cases parity |
+
 | 13 | main/snort_types.h + framework/log levels, Option/OptionTree | ~4k | TODO |
 | 14 | parsers: config_file, parse_ip, parse_ports, parse_rule | ~4k | TODO |
 | 15 | codecs (IP/TCP/UDP normalization) | ~15k | TODO |

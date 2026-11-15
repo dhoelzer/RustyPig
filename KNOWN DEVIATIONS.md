@@ -162,3 +162,16 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   pointers; deref guards (cursor+1 > end etc.) kept verbatim.
 - C BerElement::data is const uint8_t*; here the offset into the Cursor
   buffer. Both tests comparing data == buf + N check the same number.
+
+## log/obfuscator
+- C std::set<Block, by-offset> -> BTreeMap<u32 offset, usize length>:
+  identical offset-ordered iteration and identical offset-only element
+  identity (the C comparator treats blocks with equal offsets as equal,
+  which std::set emplace dedupes on); push()'s replace-if-longer kept.
+- C's two-iterator cursor (cur_buf map iterator + it set iterator)
+  becomes cur_buf: Option<String> + it: position index; first()/next()
+  re-walk the sorted vec. C's UB-ish paths (deref cur_buf when the map
+  is empty, next() before first()) return false here instead; no test
+  depends on C's behavior there (EmptyList2Test requires next()==false).
+- mask_char exposed as const; C header's per-instance getter is static
+  in practice (constexpr member).
