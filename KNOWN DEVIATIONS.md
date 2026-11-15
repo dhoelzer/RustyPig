@@ -107,3 +107,12 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   stores a copy (same bytes) so the object cannot outlive borrowed data.
 - C search() bumps a raw pointer by skip[]; Rust slices. skip[c] <=
   pattern_len <= buffer_len in every reachable state, so bounds match.
+
+## helpers/lockless_ring
+- Direct translation: same free-running u32 head/tail counters, same
+  EMPTY/STORING/STORED/LOADING slot protocol, same round_up_to_power_of_2.
+- T: Default replaces C value-initialization of slot payloads.
+- USE_MOVE_TO_DEQUEUE template flag kept but inert: Rust reads the payload
+  by pointer-move in both branches (C's copy branch needs T copy-ctor).
+- C size() else-branch quirk preserved verbatim (head + (UINT32_MAX -
+  tail) is 1 below the true wrapping difference past 32-bit rollover).

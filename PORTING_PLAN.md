@@ -24,6 +24,7 @@ the plan honestly with a status table rather than claiming more than is built.
 | 8c | sfip/sf_ipvar + sf_vartable | ~1.7k | DONE: all 6 embedded UNIT_TEST Catch2 sections (merge, contained/negated, no-table, copy/compare, any, kitchen-sink) ported 1:1 |
 | 8b | ports + parser/parse_ports | ~1.5k | DONE: 52-case ground-truth vector parity (no upstream unit suite; tools/cpp_harness) |
 | 9 | helpers/literal_search + boyer_moore_search | ~360 | DONE: all 14 boyer_moore_search_test.cc CppUTest cases parity; hyperscan backend intentionally out of scope |
+| 10a | helpers/lockless_ring | ~395 | DONE: all 5 Catch sections incl. 4-producer/4-consumer thread tests |
 | 10 | helpers/ring2 (2025 lock-free FIFO) | ~300 | TODO |
 | 11 | helpers/json_stream | ~400 | TODO |
 | 12 | helpers/streambuf | ~2.1k tests | TODO |

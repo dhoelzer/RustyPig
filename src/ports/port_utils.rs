@@ -128,7 +128,7 @@ pub fn port_object_item_list_from_bits(parray: &PortBitSet, n: usize) -> Vec<Por
             i += 1;
             continue;
         }
-        let mut lport = i;
+        let lport = i;
         let mut hport = i;
         nports -= 1;
 

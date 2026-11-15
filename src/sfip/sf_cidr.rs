@@ -70,10 +70,10 @@ impl SfCidr {
     }
 
     pub fn is_set(&self) -> bool {
-        (self.addr.is_set()
+        self.addr.is_set()
             || ((self.addr.get_family() as i16 == AF_INET
                 || self.addr.get_family() as i16 == AF_INET6)
-                && self.bits != 128))
+                && self.bits != 128)
     }
 
     fn ip32_raw(ip: &SfIp, k: usize) -> u32 {

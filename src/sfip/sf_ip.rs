@@ -154,7 +154,6 @@ pub fn inet_pton(fam: i16, ip: &str, dst: &mut [u8]) -> i32 {
                     words[n] = ((qb[0] as u16) << 8) | qb[1] as u16;
                     words[n + 1] = ((qb[2] as u16) << 8) | qb[3] as u16;
                     n += 2;
-                    i = b.len();
                     break;
                 }
                 if b.get(i) == Some(&b':') {
@@ -711,6 +710,7 @@ impl SfIp {
         SfIpRet::Success
     }
 
+    #[allow(dead_code)] // ported for parity with C sf_ip.cc
     fn zero_ip6_ptr(&self) -> [u8; 16] {
         self.ip8
     }
