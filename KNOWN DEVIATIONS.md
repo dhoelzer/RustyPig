@@ -315,3 +315,24 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   std::list; the handle model has identical observable reads/writes.
 - Constructor WarningMessage on clamp is not emitted (log layer not ported).
 - External stats struct by reference -> owned stats + get_stats() copy.
+
+## hash/lru_cache_shared + lru_segmented_cache_shared
+- Data = std::shared_ptr<Value> -> Rc<RefCell<Value>>: C tests mutate the
+  pointee through the shared_ptr; RefCell models that dynamically and the
+  single-threaded port needs no mutex (public lock()/unlock() omitted; C
+  cross-thread pinning semantics are provided structurally by Rc liveness).
+- Purgatory retained as Vec<Data> (pruned payloads outlive the operation,
+  same as C++ delaying destructors past the lock).
+- C quirk pinned: stats.bytes_in_use/items_in_use are NEVER updated by
+  LruCacheShared itself; suite asserts both == 0. stats struct field order
+  is load-bearing (C get_counts() reinterprets it as the peg array).
+- LruCacheLocal prunes while current>max AND list.size()>1; LruCacheShared
+  prunes while current>max AND !list.empty() (can evict every entry) —
+  asymmetry between the two classes preserved.
+- SegmentedLruCache get_segment_idx XOR-folds raw key bytes (C
+  reinterpret_cast<const uint8_t*>(&val)); Rust reads via
+  std::slice::from_raw_parts on the aligned Copy key. segment_count must be
+  a power of two (asserted as in C).
+- SegmentedLruCache::set_max_size uses integer division per segment, e.g.
+  C++ with size 17 over 4 segments => 4 each. C get_max_size() sums the
+  per-segment caps (may be < requested); preserved.
