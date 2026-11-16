@@ -564,3 +564,46 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   a Target enum (Stub/Opt) and replicates: Stub side always sets prev,
   Opt side only when opt content == stub content (vectors exercise both
   the equal and unequal Opt paths).
+
+## rule-tree core (detection/{rules,sfrim,treenodes,signature} + parse_rule + parser RTN lifecycle)
+- `RuleTreeCache` (parser.cc XHash) keeps C's insert/release shape but looks
+  `get_user_data` up by RTN-pointer identity instead of bucket-chain
+  `key_compare`. C's `RuleTreeHashKeyOps::do_hash` re-reads RTN content, so
+  every key_compare match provably lands in the query's own chain — but the
+  chain ORDER for multi-match buckets (own entry vs never-released orphans
+  from deleteRtnFromOtn remove=false) is not pinned by any locked vector.
+  The transcript pins the observable outcome: reduce_rtns never re-shares a
+  head through find_rtn ("shared p1=0 p2=0") and every node keeps its own
+  RTN. If a future vectors block pins bucket order, revisit here first.
+- `OtnMap` is an insertion-order Vec, not a GHash(10000): every observation
+  site in scope (OtnLookup point lookups, otn_count/dup counters,
+  reduce_rtns/find_first traversal feeding finish_ports counters) is
+  order-insensitive in the locked transcript — summed counters and point
+  lookups only. GHash traversal order would only matter for a future
+  dump_rules/ShowPolicyStats block.
+- PortTable merged-port compile path (PortTableCompile/Finalize/GHASH) is
+  not part of this layer; the rule core consumes only the INPUT-list half
+  (FindInputPortObjectPorts/AddObject) with identity-preserving handles,
+  which is what the transcript exercises (spo/dpo names, noname sharing,
+  finish_ports counters incl. bleedover-limit gate and any-any conversion).
+- FastPatternConfig ctor: harness copy replaces the ctor body (real one
+  resolves MpseManager::get_search_api and drags the MPSE monolith);
+  search_api stays null and is never read on any locked path. Same shape
+  mirrors into the Rust port (fp_config.rs knobs).
+- SoManager::get_so_eval is an abort-witness in the harness; s_so_rule is
+  never set (probe has so-stub OTNs, not so-rule parse state), so the Rust
+  so-channel models the gid/sid/rev copy + addRtnToOtn-so branch with
+  so_rtn unused, exactly as witness semantics pin it.
+- ParseAbort == FatalError: C terminates the process; the Rust port returns
+  Err(Fatal::Quitting) after emitting the identical diagnostics. The probe
+  pinned both fatal port channels as FATAL_DEMO subprocess blocks; the
+  replay test drives the same calls in-process, asserts Fatal::Quitting
+  (the rc=1 counterpart), and greps the diagnostics through the exact
+  build.sh filter (`grep -e FATAL -e Quitting`).
+- FatalError rc: probe exits 1 via the main-thread cleanup+exit path
+  (set_thread_type(STHREAD_TYPE_MAIN)); cleanup_fatal_error internals
+  (event/alert flush) are the embedding binary's and remain deferred with
+  the log-output layers.
+- `parse_rule_state` (rule-state stub): C frees rtn->sip/dip + header and
+  deletes the otn; Rust models this with ownership drop. The RuleState add
+  itself (key from policy_id + sigInfo, s_rule_action snapshot) is literal.

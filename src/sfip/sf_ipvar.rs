@@ -99,6 +99,15 @@ pub fn sfipnode_alloc(str: &str) -> (Option<SfIpNode>, SfIpRet) {
 
 /// Deep copy that owns its own data (sfvar_deep_copy); id/name/value start
 /// unset exactly like C's calloc + node-list copy only.
+/// C check sites use `var->head && var->head->flags & SFIP_ANY` (the FIRST
+/// node of the positive list; sfipnode_alloc(any) sets SFIP_ANY on the node).
+pub fn sfvar_is_any(var: &SfIpVar) -> bool {
+    match var.head.first() {
+        Some(n) => n.flags & SFIP_ANY != 0,
+        None => false,
+    }
+}
+
 pub fn sfvar_deep_copy(var: &SfIpVar) -> SfIpVar {
     SfIpVar {
         head: var.head.clone(),

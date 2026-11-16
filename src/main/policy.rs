@@ -7,7 +7,14 @@
 // ActionManager statics; the Rust port threads an explicit
 // framework::ips_action::ActionRegistry instead (see deviations).
 
+use std::cell::RefCell;
+use std::collections::BTreeMap;
+use std::rc::Rc;
+
 use crate::framework::ips_action::{ActionRegistry, ActionType};
+use crate::ports::port_table::PortTable;
+use crate::ports::port_var_table::PortVarTable;
+use crate::sfip::sf_vartable::Vartable;
 
 pub type PolicyId = u32;
 pub type ActionSelector = u8;
@@ -59,13 +66,24 @@ pub struct IpsPolicy {
     pub default_rule_state: Enable,
     pub obfuscate_pii: bool,
 
+    // C ctor sets obfuscate_pii = true (policy.cc:144); the Default derive
+    // keeps false for the older call sites, new() mirrors the C ctor.
     pub action_override: String,
+
+    // policy.h:282 std::map<std::string, std::string> (action name rewrite).
+    pub action_map: BTreeMap<String, String>,
 
     // name -> (action_name, action_type, selector); C std::map, ordered.
     pub action_vars: Vec<(String, (String, ActionType, ActionSelector))>,
     // Holds all plugin actions associated with this policy.
     pub action: Vec<Option<()>>, // IpsAction* placeholders; payloads later
     pub configured_action: Vec<Option<()>>,
+
+    // vartable_t* ip_vartable (sfvt_alloc_table in the C ctor)
+    pub ip_vartable: Vartable,
+    // PortVarTable* portVarTable / PortTable* nonamePortVarTable
+    pub port_var_table: PortVarTable,
+    pub noname_port_var_table: Rc<RefCell<PortTable>>,
 }
 
 impl IpsPolicy {
@@ -77,14 +95,18 @@ impl IpsPolicy {
             enable_builtin_rules: false,
             rules_loaded: 0,
             rules_shared: 0,
-            var_id: 0,
+            var_id: 1, // C policy.cc ctor: var_id = 1
             includer: String::new(),
             default_rule_state: Enable::InheritEnable,
-            obfuscate_pii: false,
+            obfuscate_pii: true, // C policy.cc ctor: obfuscate_pii = true
             action_override: String::new(),
             action_vars: Vec::new(),
             action: Vec::new(),
-            configured_action: Vec::new(),
+            configured_action: vec![None; 1],
+            action_map: BTreeMap::new(), // C ctor: configured_action(1, nullptr)
+            ip_vartable: Vartable::new(),
+            port_var_table: PortVarTable::create(),
+            noname_port_var_table: Rc::new(RefCell::new(PortTable::new())),
         }
     }
 

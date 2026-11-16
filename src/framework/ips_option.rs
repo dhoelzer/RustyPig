@@ -91,6 +91,18 @@ impl IpsOption {
         self.name == other.name
     }
 
+    /// virtual CursorActionType get_cursor_type() const { return CAT_NONE; }
+    /// (base; ProbeOption == base => CAT_NONE in the harness seam)
+    pub fn get_cursor_type(&self) -> CursorActionType {
+        CursorActionType::CatNone
+    }
+
+    /// virtual section_flags get_pdu_section(bool) const — base returns PS_NONE
+    /// flags (same as default_pdu_section()).
+    pub fn get_pdu_section(&self, _to_server: bool) -> crate::framework::pdu_section::SectionFlags {
+        Self::default_pdu_section()
+    }
+
     /// bool is_buffer_setter() const { return get_cursor_type() > CAT_ADJUST; }
     pub fn is_buffer_setter(cursor_type: CursorActionType) -> bool {
         cursor_type > CursorActionType::CatAdjust

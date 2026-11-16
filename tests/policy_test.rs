@@ -40,11 +40,13 @@ fn policy_existing_action_variable() {
     policy.commit_action_variable("REACT_DEFINED", "react", None, &reg);
     assert!(policy.has_action_variable("REACT_DEFINED"));
 
-    // the C tuple stored (action_name, get_type(name), selector)
+    // the C tuple stored (action_name, get_type(name), selector); the C
+    // ctor seeds configured_action(1, nullptr), so the first commit gets
+    // selector 1 (policy.cc: IpsPolicy(PolicyId id) : configured_action(1, nullptr)).
     let (an, at, sel) = policy.get_action_variable("REACT_DEFINED").unwrap();
     assert_eq!(an, "react");
     assert_eq!(at, reg.get_action_type("react"));
-    assert_eq!(sel, 0);
+    assert_eq!(sel, 1);
 }
 
 #[test]
