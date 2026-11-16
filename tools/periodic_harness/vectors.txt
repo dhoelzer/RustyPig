@@ -1,0 +1,32 @@
+P0 fired:
+P1 fired: 4
+P1 fired: 1 4
+P1 fired: 99 4
+P1 fired: 3 1 4
+P1 fired: 4
+P1 fired: 99 1 4
+P1 fired: 4
+P1 fired: 3 1 4
+P2 fired: 99 4
+P2 fired: 1 4
+P2 fired: 4
+P2 fired: 3 99 1 4
+P3 fired: 4
+P3 fired: 106 105 1 4
+P3 fired: 99 4
+P3 fired: 3 1 4
+P3 fired: 7 4
+P3b fired: 99 1 4
+P3b fired: 4
+P3b fired: 3 1 4
+P3b fired: 99 4
+P3b fired: 7 1 4
+P3b fired: 4
+P4 fired:
+P4b fired:
+P4c fired:
+P4d fired: 8
+P5 fired: 1
+P5b fired: 1 1
+P5c fired:
+DONE

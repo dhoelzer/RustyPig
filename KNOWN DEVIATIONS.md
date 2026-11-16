@@ -732,3 +732,25 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   that's not guaranteed by the standard. The probe was rewritten to bind the
   return value in a statement first (evaluation-order-safe), and the
   relocked transcript (md5 28c79a7f88c8...) is the locked truth.
+
+## time/periodic.{h,cc} (row 17e)
+
+- `std::list` at file scope is mirrored by a `thread_local!` `Vec` (same
+  order, same splice-at-index insert, `retain` for `remove_if`). Snort's
+  periodic machinery is single-threader; no pinned vector observes
+  cross-thread sharing, so per-thread storage is fidelity-neutral here.
+- C compares hook function pointers with `==` (pointer identity). Rust does
+  the same via `std::ptr::fn_addr_eq`, which is the defined form of the C
+  comparison (bare `fn` `!=` is linted for codegen-unit instability).
+- No witness seams needed: the only upstream include is
+  `main/snort_types.h` (SO_PUBLIC), and the upstream test guard is the
+  `CATCH_TEST_BUILD` macro (guarded `TEST_CASE("periodic", "[periodic]")`
+  block compiled verbatim in-harness); probe + Catch gate both use the real
+  translator with zero stubs.
+- Quirks pinned: equal-priority registration is LIFO (the insert scan stops
+  at the first node with priority >= the new one, and insertion happens
+  BEFORE it); `check()` reloads `time_left = period` on fire, so period p
+  fires every p+1 checks (period 0 = every check); the arg pointer is
+  dereferenced at CALL time (label changes between register and fire
+  change what fires); `unregister_handler` is by hook fn pointer and removes
+  ALL nodes with that hook (P5: one call removes both duplicates).

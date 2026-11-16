@@ -63,3 +63,7 @@ tools/codec_harness/copy/
 tools/codec_harness/probe
 tools/codec_harness/gate
 tools/codec_harness/gate.txt
+tools/periodic_harness/copy/
+tools/periodic_harness/probe
+tools/periodic_harness/gate
+tools/periodic_harness/gate.txt
