@@ -1,0 +1,22 @@
+<J>J1<LN>21<JJ>{ "sections": [  ] }
+<JE>
+<J>J2<LN>288<JJ>{ "sections": [ { "name": "Summary Statistics", "groups": [ { "name": "g2", "counters": [ { "name": "neg", "value": -5 }, { "name": "flag", "value": true }, { "name": "f", "value": 0.250 }, { "name": "pc", "value": "strval" }, { "name": "pct", "value": 2, "percent": 33.300 } ] } ] } ] }
+<JE>
+<J>J3<LN>277<JJ>{ "sections": [ { "name": "S3", "groups": [ { "name": "g3", "counters": [ { "name": "live", "value": 1 } ], "tables": [ { "name": "t", "columns": [ "name", "v" ], "rows": [ [ "row-one", 12 ], [ "x-that-is-over-twenty-five-chars-long", "val", null ], [ "solo" ] ] } ] } ] } ] }
+<JE>
+<J>J4<LN>116<JJ>{ "sections": [ { "name": "S4", "groups": [ { "name": "z", "counters": [ { "name": "zero", "value": 0 } ] } ] } ] }
+<JE>
+<J>J5<LN>53<JJ>{ "sections": [ { "name": "S5", "groups": [  ] } ] }
+<JE>
+<J>J5b<LN>20<JJ>{ "still": "here" }
+<JE>
+<J>J5c<LN>43<JJ>{ "nullptr": null, "t": true, "f": false }
+<JE>
+<J>J6<LN>93<JJ>{ "specials": "\" \\ \b \f \n \r \t", "ctrl": "\u0001\u0002\u0003", "del": "~\u007f\u0080" }
+<JE>
+<J>J7<LN>37<JJ>{ "a": [ { "n": 1 }, { "m": -2 } ] }
+<JE>
+<J>J8<LN>63<JJ>{ "p1": 0.1, "p3": 0.125, "p2": 0.12, "i": 7, "str": "0.125" }
+<JE>
+<E>a<b>c|\"q|pre\tpost|<EE>
+DONE

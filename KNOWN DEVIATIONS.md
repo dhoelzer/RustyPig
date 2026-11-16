@@ -834,3 +834,30 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   exact (trailing space misses the MemoryCap side effect, S6);
   `render_text` calls `set_log_conn` twice (conn then nullptr) -- and
   the probe passes nullptr at entry, so 2 nulls / 1 call pin.
+
+## utils/stats/output_json + helpers/json_stream touch (row 17h)
+
+- The existing `helpers/json_stream.rs` port gained
+  `put_string_bytes(key, &[u8])`: C `std::string` is a byte container,
+  and pinned probe inputs (0x01-0x03, 0x80) are not valid UTF-8, so a
+  `&str`-only API cannot feed them. The escape layer was already
+  byte-based; this is the same body, byte entry.
+- `put_value`'s trailing C `else json.put(key)` arm covers `std::
+  variant` exhaustiveness; the Rust match over the `Value` enum is
+  exhaustive without it (same observable behavior).
+- Harness: three upstream suites link into ONE gate binary (11 + 6 +
+  basic). The embedded `-DUNIT_TEST` CU of json_stream.cc must REPLACE
+  the plain object (same TU) or the link duplicates every symbol --
+  same pitfall as codec_harness, now with a build.sh comment.
+- Pinned quirks (documented, not fixed): JSON renderer writes the
+  `percent` key the TEXT renderer ignores; Value::Str goes through
+  put_string (empty renders `""`) while table COLUMNS go through the
+  early-returning overload (empty column = zero output, no separator);
+  null char* emits `null` (split consumed) but empty char* emits
+  NOTHING (split not consumed); empty std::string key-put likewise
+  consumes no separator; `close()` endls only at level 0 with
+  level_array 0; the tables array opens for a group with ONLY
+  row-less-but-present tables... when the group is otherwise
+  renderable, so `"tables": [  ]` appears (J3/J5 pair); escape uses
+  C-locale isprint on raw bytes -- 0x7f is NOT printable-escaped
+  (`\u007f`), matching the `\u00xx` lowercase form.

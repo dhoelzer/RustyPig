@@ -75,3 +75,16 @@ tools/stx_harness/copy/
 tools/stx_harness/probe
 tools/stx_harness/gate
 tools/stx_harness/gate.txt
+tools/sjson_harness/copy/
+tools/sjson_harness/probe
+tools/sjson_harness/gate
+tools/sjson_harness/gate.txt
+tools/sjson_harness/catch_main.cc
+tools/sjson_harness/output_json.o
+tools/sjson_harness/utils.o
+tools/sjson_harness/json_stream.o
+tools/sjson_harness/json_stream_ut.o
+tools/sjson_harness/probe.o
+tools/sjson_harness/stxj_gate.o
+tools/sjson_harness/js_gate.o
+tools/sjson_harness/catch_main.o

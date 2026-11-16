@@ -204,6 +204,13 @@ impl<'a> JsonStream<'a> {
 
     /// C put_string(): always writes, even empty.
     pub fn put_string(&mut self, key: Option<&str>, val: &str) {
+        self.put_string_bytes(key, val.as_bytes());
+    }
+
+    /// Byte-faithful entry for C `std::string` inputs that are not
+    /// valid UTF-8 (C strings are byte containers; the escape layer
+    /// already works on bytes). Same body as put_string.
+    pub fn put_string_bytes(&mut self, key: Option<&str>, val: &[u8]) {
         self.split();
         if let Some(k) = key {
             quoted(self.out, k);
@@ -211,7 +218,7 @@ impl<'a> JsonStream<'a> {
         }
         self.emit(b"\"");
         let mut esc = String::new();
-        escape_json_append(&mut esc, val.as_bytes());
+        escape_json_append(&mut esc, val);
         self.emit(esc.as_bytes());
         self.emit(b"\"");
     }
