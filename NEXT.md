@@ -22,7 +22,7 @@ Verify loop: `cargo test` (expect running total), `cargo clippy --all-targets`
 (must be 0 warnings), rebuild the harness and diff `vectors.txt` (HARNESS_STABLE).
 Commit + **push** at every milestone.
 
-## Done (pushed; 36 commits, last = `114b6ec`)
+## Done (pushed; 42 commits, last = `731eaaf` = row 17 keystone)
 
 Bottom-up per `PORTING_PLAN.md` rows 1–17a, DONE in the table (each with the
 harness + replay citation): bitop, boyer_moore, base64, ring/ring2, utf,
@@ -38,6 +38,8 @@ ips_action+policy action-variables, xhash/zhash/hash_lru_cache/memcap layer,
 `24cf06e`), **log/text_log + main/thread.cc naming** (87-line transcript,
 `93f58a7`), **parser/parse_so_rule FSM** (upstream Catch2 tables gate + 152-line
 transcript, `114b6ec`).
+**rule-tree core row 17 keystone** (rules/sfrim/treenodes/signature/parse_rule/
+parser lifecycle; 225-line transcript + Catch 11/11, `731eaaf`).
 
 Suite at last clean push: **320 tests, clippy 0, tree clean.** Full layer table in
 `PORTING_PLAN.md`.
@@ -80,14 +82,49 @@ Quirks pinned by the transcript (do not "fix" them):
 - ACTSTR prints "alert alert" (static single-buffer probe helper aliasing).
 
 Deferred with later rows: rtn_checks.cc (rule_func CHECK arms all abort-
-witnessed), parse_stream end-to-end (row 18), port compile/merge (row 19+),
-GHash traversal order (OtnMap Vec stands in; every in-scope observation is
-order-insensitive).
+witnessed), port compile/merge (row 19+), GHash traversal order (OtnMap Vec
+stands in; every in-scope observation is order-insensitive).
+
+## DONE this session (this commit): parser/parse_stream, plan row 17b
+
+Harness (same tools/rules_harness): build.sh now compiles the ORIGINAL
+parse_stream.cc verbatim (witness deleted from stubs.cc); probe drives the
+real parse_rules_string end-to-end: S1 (ExpandVars errors + doubled-sid
+dup channel -> OTN collapses to key (1,0), misses at (1,10)/(1,11)), S2
+(tokenizer escapes/hex x41, GLUED literal-backslash-n token "1nalert" —
+the probe string is rev:1\\n with NO real newline, syntax-error storms from
+the first-match fsm[] walk on '-' / '>>', incomplete-rule EOF at num 7),
+S3 (include channel: can't-open ParseError, no location pushed), and
+FATAL_DEMO=3 (ParseAbort through the real FSM, rc=1). Transcript now 246
+lines, two-build + probe-md5 DETERMINISTIC; Catch gate still 11/11 (the
+stream TU itself has 0 upstream UNIT_TEST tables).
+
+Rust port: `src/parser/parse_stream.rs` (literal FSM: StreamCtx carries the
+PROCESS-WIDE get_token statics prev=EOF/pos=0 across parse_rules_string
+calls; fsm[] ordered table with r#match field and Option<&str> punct —
+None=keep-table like C nullptr, Some("")=clear; linear first-match
+get_state; exec with SPX/DPX fall-throughs and EOB's tbd -> END re-entry;
+include channel fused into this module threading ParseConf+SnortConfig+
+ConfFiles and re-entering parse_stream, ifstream -> std::fs::read).
+`RuleCoreState.stats_rules` parks the C rules++ counter (never printed).
+`tests/rules_parity_test.rs` now drives Rep.pc/conf/conf_files/sctx (the
+ParseConf file-statics) and replays the 246-line transcript + 3 fatal
+channels byte-for-byte. Confirmed row 16q seam ParseConf::parse_include
+stays test-facing (its seam closure can't see RuleCoreState).
+
+Stream quirks pinned: get_state miss -> ParseError("syntax error") + walk
+continues at fsm[0] (ERR/next 0/punct "" CLEARS the table); "include" KEY
+row gates option_begin but rps.key latches anyway (get_escape("include")
+-> esc 1); commented-out {9,0,EOB} row kept verbatim/inert; every rules++
+EOB counts latched or not; prev/pos sharing means call #2 inherits the
+un-consumed state of call #1 (a fresh ctx is WRONG — the probe's S1/S2/S3
+rely on it).
 
 ## Task queue after this milestone
 
-1. `parser/parse_stream.{h,cc}` + end-to-end `parse_rules_string` with real
-   rules (the seam currently test-doubles it; conf milestone only pinned the seam).
+1. ~~`parser/parse_stream.{h,cc}` + end-to-end `parse_rules_string`~~ DONE
+   (row 17b, this session): real parse_stream.cc compiled in rules_harness,
+   246-line transcript + FATAL_DEMO=3 replayed byte-for-byte.
 1a. `detection/rtn_checks.cc` arms (every CHECK now an abort-witness; small)
     + real `RuleTreeCache` bucket semantics if a future vectors block pins
     find_rtn chain order.

@@ -50,7 +50,7 @@ s = s[:blk] + seg + s[end:]
 open(p, "w").write(s)
 FIXPOLICY
 
-cp "$SRC"/src/parser/{vars.h,vars.cc,var_dependency.h,var_dependency.cc,parse_ports.h,parse_ports.cc,parse_rule.h,parse_so_rule.h,parse_so_rule.cc,config_file.h,config_file.cc,parse_conf.h,parse_conf.cc,parse_stream.h} "$C"/parser/
+cp "$SRC"/src/parser/{vars.h,vars.cc,var_dependency.h,var_dependency.cc,parse_ports.h,parse_ports.cc,parse_rule.h,parse_so_rule.h,parse_so_rule.cc,config_file.h,config_file.cc,parse_conf.h,parse_conf.cc,parse_stream.h,parse_stream.cc} "$C"/parser/
 cp "$SRC"/src/ports/{port_object.h,port_object.cc,port_object2.h,port_object2.cc,port_item.h,port_item.cc,port_utils.h,port_utils.cc,port_var_table.h,port_var_table.cc,port_table.h,port_table.cc,rule_port_tables.h,rule_port_tables.cc,port_group.h,port_group.cc} "$C"/ports/
 
 cp "$SRC"/src/utils/{sflsq.h,sflsq.cc,util.h,util.cc,util_cstring.h,util_cstring.cc,bits.h,cpp_macros.h,util_net.h,util_net.cc,snort_bounds.h} "$C"/utils/
@@ -913,16 +913,9 @@ void ClearIpsOptionsVars()
 }
 void show_pcre_counts() { }
 
-// ---------------- parse_stream witness (rules-reading seam) ---------------
-// parse_stream.{h,cc} is a LATER milestone; parse_rules_string (real,
-// parse_conf.cc) ends here. The probe drives rule semantics directly
-// through parse_rule_* calls; witness records the seam hit.
-void parse_stream(std::istream& in, snort::SnortConfig*)
-{
-    std::string line;
-    while ( std::getline(in, line) )
-        printf("STREAM %s\n", line.c_str());
-}
+// parse_stream.{h,cc} is now COMPILED VERBATIM (parser cp + OBJS_SRC):
+// the earlier STREAM-echo witness is gone; parse_rules_string drives the
+// real tokenizer FSM (get_token/get_state/exec) end-to-end.
 STUBEOF
 
 # ---------------- Catch gate: pristine originals, strips for link ---------
@@ -980,7 +973,7 @@ g++ -std=c++17 -O0 -w -DUNIT_TEST -I"$C" -fsyntax-only \
 # link closure shared by BOTH binaries (gate: pristine+UNIT_TEST; probe: same)
 OBJS_SRC=(
   "$C"/parser/vars.cc "$C"/parser/var_dependency.cc "$C"/parser/parse_ports.cc
-  "$C"/parser/parse_conf.cc "$C"/parser/config_file.cc
+  "$C"/parser/parse_conf.cc "$C"/parser/config_file.cc "$C"/parser/parse_stream.cc
   "$C"/ports/port_object.cc "$C"/ports/port_object2.cc "$C"/ports/port_item.cc
   "$C"/ports/port_utils.cc "$C"/ports/port_var_table.cc "$C"/ports/port_table.cc
   "$C"/ports/rule_port_tables.cc "$C"/ports/port_group.cc
@@ -1013,6 +1006,7 @@ emit_fatal ()
 {
   # 1: undefined $VAR port -> ParseAbort "PortVar Lookup failed"
   # 2: raw literal port parse error -> ParseAbort "Rule--PortVar Parse error"
+  # 3: same var abort, but fed through the REAL parse_stream FSM
   # probe exits non-zero there (real shell: FatalError -> cleanup + exit 1);
   # tolerate so the pin stays stable.
   echo "FATAL$1 start"
@@ -1025,6 +1019,7 @@ emit_fatal ()
 set +e
 emit_fatal 1 >> "$H"/vectors.txt
 emit_fatal 2 >> "$H"/vectors.txt
+emit_fatal 3 >> "$H"/vectors.txt
 set -e
 
 # ---------------- Catch gate binary ---------------------------------------

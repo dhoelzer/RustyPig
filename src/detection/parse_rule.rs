@@ -241,6 +241,8 @@ pub struct RuleCoreState {
     pub opt_keywords: Vec<String>, // probe_register_option feed
     pub opt_keyword_hit: bool,
     pub log: LogEngine,
+    // parse_stream.cc file-static `rules` counter (every FSM_EOB).
+    pub stats_rules: u32,
 }
 
 
@@ -297,6 +299,7 @@ impl RuleCoreState {
             opt_keywords: Vec::new(),
             opt_keyword_hit: false,
             log: LogEngine::default(),
+            stats_rules: 0,
         }
     }
 

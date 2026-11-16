@@ -106,6 +106,21 @@ impl ParseConf {
         }
     }
 
+    /// file-static accessors for the parse_stream include channel (C
+    /// reaches these as globals; the port threads ParseConf).
+    pub fn depth(&self) -> i32 {
+        self.rules_file_depth
+    }
+    pub fn bump_rules_file_depth(&mut self, d: i32) {
+        self.rules_file_depth += d;
+    }
+    pub fn ips_policy_flag(&self) -> bool {
+        self.ips_policy
+    }
+    pub fn set_ips_policy(&mut self, v: bool) {
+        self.ips_policy = v;
+    }
+
     /// const char* get_parse_file() (67-73): stack top path else conf.
     pub fn get_parse_file<'a>(&'a self, conf_files: &'a ConfFiles) -> &'a str {
         match self.files.last() {

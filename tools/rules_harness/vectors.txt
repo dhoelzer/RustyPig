@@ -210,8 +210,24 @@ port rule counts
     both       1       0       0       0
    total      10       2       2       2
 SPECIAL-INC INC
-STREAM alert ip any any -> any any (sid:3; rev:1;)
-AFTER-STRING PE=0
+ERROR: Undefined variable in the string: $EXTERNAL_NET.
+ERROR: undefined variable in the string: $HOME_NET.
+ERROR: GID 1 SID 0 in rule duplicates previous rule, with different protocol.
+S1 PE=3 PW=0
+S1 otn(1,0)=1 spid=1 ndo=3 ruleIdx=11
+S1 miss(1,10)=1 miss(1,11)=1
+ERROR: GID 1 SID 0 in rule duplicates previous rule, with different protocol.
+ERROR: syntax error
+ERROR: unknown rule action 'any'
+ERROR: syntax error
+ERROR: unknown rule action 'any'
+ERROR: incomplete rule
+S2 PE=6 PW=0
+S2 R12 dpo=- ndo=0
+S2 R14=0 R15=0
+ERROR: can't open no_such_file.conf
+
+S3 PE=1
 DONE
 FATAL1 start
 FATAL1 rc=1
@@ -223,3 +239,8 @@ FATAL2 rc=1
 FATAL: ***Rule--PortVar Parse error: (pos=1,error=not a number)
 Fatal Error, Quitting..
 FATAL2 end
+FATAL3 start
+FATAL3 rc=1
+FATAL: ***PortVar Lookup failed on '$NOPE'.
+Fatal Error, Quitting..
+FATAL3 end

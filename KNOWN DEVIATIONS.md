@@ -607,3 +607,31 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - `parse_rule_state` (rule-state stub): C frees rtn->sip/dip + header and
   deletes the otn; Rust models this with ownership drop. The RuleState add
   itself (key from policy_id + sigInfo, s_rule_action snapshot) is literal.
+
+## parser/parse_stream (row 17b)
+
+- C file-static counters (`chars/tokens/lines/comments/keys/rules/lists/strings`) live in a
+  `StreamCtx` the driver owns; `rules` is parked on `RuleCoreState.stats_rules`. C prints none
+  of them in the locked scope (`printf` lines are commented out upstream), so their home is
+  plumbing, never observable transcript.
+- C `parse_stream` reaches `inc_parse_position`/`parse_include`/`get_config_file` through
+  globals; the port threads `&ParseConf` (+ `SnortConfig`/`ConfFiles` args) instead. The C++
+  `ifstream`/`stringstream` is modeled by a byte cursor + `std::fs::read`; the ENOENT branch
+  pins glibc `strerror` text via the existing parse_conf port.
+- `parse_include`/`parse_rules_file` re-entry is fused into `parse_stream.rs` (single channel)
+  rather than reusing `ParseConf::parse_include`'s seam closure: the seam type cannot hand the
+  recursion the live `RuleCoreState`, and C has no such boundary. `ParseConf::parse_include`
+  remains for conf-layer tests (row 16q).
+- `exec(FSM_END)` calls `parse_rule_opt_end` only when `rps.otn` is Some. C derefs
+  `rps.otn` unconditionally, but that statement is reachable on a null otn only when
+  `parse_rule_open` returned null mid-body (s_ignore set), and upstream `parse_rule_opt_end`
+  early-returns on exactly `s_ignore` — observable behavior identical (skip is silent).
+- `State.punct` is `Option<&str>`: `None` models C `nullptr` (the `if (s->punct)` guard skips
+  the table update), `Some("")` models C's non-null empty table (update CLEARS). One edge NOT
+  pinned by vectors: while `punct == nullptr` (SP/DIR/DIP/SPX-region rows carry null punct)
+  C's `strchr(punct, c)` is UB; glibc resolves the NUL and MATCHES c == '\0'. The Rust helper
+  returns false for `None`. No locked vector feeds NUL through that state, so the difference is
+  unobservable in the transcript; flagged here as the one intentional simplification.
+- TT_NONE-valued fsm rows (the two num-14 SET/ADD rows) carry `ttype 0` in Rust exactly like
+  C, where the get_state test is `!s->type || type == s->type`; TT_NONE tokens never reach
+  get_state (the loop breaks) — kept verbatim.

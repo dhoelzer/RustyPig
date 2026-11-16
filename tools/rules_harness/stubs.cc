@@ -316,13 +316,6 @@ void ClearIpsOptionsVars()
 }
 void show_pcre_counts() { }
 
-// ---------------- parse_stream witness (rules-reading seam) ---------------
-// parse_stream.{h,cc} is a LATER milestone; parse_rules_string (real,
-// parse_conf.cc) ends here. The probe drives rule semantics directly
-// through parse_rule_* calls; witness records the seam hit.
-void parse_stream(std::istream& in, snort::SnortConfig*)
-{
-    std::string line;
-    while ( std::getline(in, line) )
-        printf("STREAM %s\n", line.c_str());
-}
+// parse_stream.{h,cc} is now COMPILED VERBATIM (parser cp + OBJS_SRC):
+// the earlier STREAM-echo witness is gone; parse_rules_string drives the
+// real tokenizer FSM (get_token/get_state/exec) end-to-end.

@@ -165,8 +165,13 @@ int main()
             parse_rule_nets(sc, "any", true, rta, false);
             if ( mode == 1 )
                 parse_rule_ports(sc, "$NOPE", true, rta, false);
-            else
+            else if ( mode == 2 )
                 parse_rule_ports(sc, "notaport", true, rta, false);
+            else
+                // mode 3: ParseAbort flows through the REAL parse_stream
+                // FSM (header port var) and must terminate the process.
+                parse_rules_string(sc,
+                    "alert tcp any $NOPE -> any any (sid:9; rev:1;)\n", false);
             printf("unreachable\n");
             return 0;
         }
@@ -592,14 +597,53 @@ int main()
     print_stats("final-fb0", 0, 0, 0);
     print_stats("final-fb3", 3, 1, 2);
 
-    // ---- parser_append_* + parse_rules_string seam (real parse_conf.cc;
-    // parse_stream witness echoes rule lines verbatim) ----
+    // ---- parser_append_* (real parse_conf.cc; stream now REAL:
+    // parser/parse_stream.cc compiled verbatim) ----
     parser_append_rules("alert tcp any any -> any 80 (sid:1; rev:1;)");
     parser_append_rules_special("pass ip any any -> any any (sid:2; rev:1;)", "INC");
     printf("SPECIAL-INC %s\n", parser_get_special_includer());
+
+    // ---- parse_stream end-to-end (real get_token FSM + get_state + exec)
+    // sid band 10-16 untouched elsewhere. warning_flags stays 0 (upstream
+    // default, snort_config.cc:110) so the FSM escape/string warnings bump
+    // the counter but print nothing: PW= pins the latch. ----
+    parse_rules_string(sc,
+        "alert ip any any -> any any (msg:\"R10\"; sid:10; rev:1;)\n"
+        "alert tcp $EXTERNAL_NET any -> $HOME_NET [80,443] (msg:\"R11\"; sid:11; rev:1; content:\"abc\";)\n",
+        false);
+    printf("S1 PE=%u PW=%u\n", get_parse_errors(), get_parse_warnings());
+    {
+        // meta layer doubled: sid never reaches sigInfo -> the OTN lands
+        // under key (1,0); R11 (tcp) hits the dup/protocol type error.
+        OptTreeNode* o = OtnLookup(sc->otn_map, 1, 0);
+        printf("S1 otn(1,0)=1 spid=%u ndo=%u ruleIdx=%d\n",
+            o->snort_protocol_id, o->num_detection_opts, o->ruleIndex);
+        printf("S1 miss(1,10)=%d miss(1,11)=%d\n",
+            (int)!OtnLookup(sc->otn_map, 1, 10), (int)!OtnLookup(sc->otn_map, 1, 11));
+    }
+    // tokenizer escapes + errors
     reset_parse_errors();
-    parse_rules_string(sc, "alert ip any any -> any any (sid:3; rev:1;)", false);
-    printf("AFTER-STRING PE=%u\n", get_parse_errors());
+    parse_rules_string(sc,
+        "alert tcp any any -> any any (sid:12; rev:1; content:\"a\\x41b\";)  # tail comment\n"
+        "alert tcp any any -> any any (sid:13; rev:1\\n"
+        "alert tcp any any - any any (sid:14; rev:1;)\n"
+        "alert tcp any any >> any any (sid:15; rev:1;)\n",
+        false);
+    printf("S2 PE=%u PW=%u\n", get_parse_errors(), get_parse_warnings());
+    {
+        OptTreeNode* o = OtnLookup(sc->otn_map, 1, 12);
+        RuleTreeNode* r = (o && o->proto_node_num) ? o->proto_nodes[0] : nullptr;
+        printf("S2 R12 dpo=%s ndo=%u\n",
+            r && r->dst_portobject && r->dst_portobject->name
+                ? r->dst_portobject->name : "-", o ? o->num_detection_opts : 0);
+        printf("S2 R14=%d R15=%d\n", (int)!!OtnLookup(sc->otn_map, 1, 14),
+            (int)!!OtnLookup(sc->otn_map, 1, 15));
+    }
+    // include channel (real parse_include: ExpandVars + get_config_file +
+    // can't-open ParseError; depth stays 0 so no location is pushed)
+    reset_parse_errors();
+    parse_rules_string(sc, "include no_such_file.conf\n", false);
+    printf("S3 PE=%u\n", get_parse_errors());
 
     // tear otn map (exercises ~OptTreeNode + FreeRuleTreeNodes path)
     delete sc->otn_map; sc->otn_map = nullptr;

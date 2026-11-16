@@ -24,8 +24,6 @@ use snort3::log::messages::Fatal;
 use snort3::main::policy::{Enable, IpsPolicy};
 use snort3::parser::config_file::ConfFiles;
 use snort3::parser::parse_conf::{ParseConf, SnortConfig};
-use snort3::parser::vars::VarContext;
-use snort3::utils::cfmt::Arg;
 
 // ----------------------------------------------------------------------
 // Rep: probe mirror. `out` is the merged stdout+stderr stream; the Rust
@@ -35,12 +33,27 @@ use snort3::utils::cfmt::Arg;
 // ----------------------------------------------------------------------
 struct Rep {
     sc: RuleCoreState,
+    // parse_conf.cc file-statics the REAL parse_stream threads (the probe
+    // drives the real parse_rules_string on these).
+    pc: ParseConf,
+    conf: SnortConfig,
+    conf_files: ConfFiles,
+    // get_token statics (prev/pos) + counters: C keeps them process-wide;
+    // one StreamCtx spans every parse_rules_string call.
+    sctx: snort3::parser::parse_stream::StreamCtx,
     out: Vec<String>,
 }
 
 impl Rep {
     fn new() -> Rep {
-        Rep { sc: RuleCoreState::new(), out: Vec::new() }
+        Rep {
+            sc: RuleCoreState::new(),
+            pc: ParseConf::new(),
+            conf: SnortConfig::default(),
+            conf_files: ConfFiles::default(),
+            sctx: snort3::parser::parse_stream::StreamCtx::default(),
+            out: Vec::new(),
+        }
     }
 }
 
@@ -72,19 +85,45 @@ impl Rep {
 
     fn drain(&mut self) {
         for ev in self.sc.log.out.drain(..) {
-            // one LogEvent may carry embedded newlines (multi-line fatal
-            // formats); the transcript is line-based -> split like grep.
-            for line in ev.text.split('\n') {
-                let l = line.trim_end();
-                if !l.is_empty() {
-                    self.out.push(l.to_string());
-                }
+            // One LogEvent may carry embedded newlines and even its own
+            // trailing blank line (ParseError("can't open %s\n") keeps the
+            // format's \n AND log_message appends one -> a real blank
+            // transcript line, pinned after S3). Byte-faithful split: pop
+            // ONE trailing empty piece (the terminator); keep interior
+            // blanks. Then apply the build.sh line filter (grep split).
+            let mut pieces: Vec<&str> = ev.text.split('\n').collect();
+            if pieces.last().copied() == Some("") {
+                pieces.pop();
+            }
+            for line in pieces {
+                self.out.push(line.trim_end().to_string());
             }
         }
     }
 
     // dump_rtn (probe.cc:45): C printf feeds probe_action_name(rtn->action)
     // (static-snapshot aliasing is irrelevant single-call here).
+    /// The probe's real parse_rules_string over the REAL ported stream:
+    /// set s_ips_policy, then parse_stream (C stringstream path). Fatal
+    /// port aborts flow out as Err(Fatal) exactly where C's FatalError
+    /// terminated the process.
+    fn stream_rules(&mut self, s: &str) -> Result<(), Fatal> {
+        self.stream_rules_owned(s)
+    }
+    fn stream_rules_owned(&mut self, s: &str) -> Result<(), Fatal> {
+        self.pc.set_ips_policy(false);
+        let r = snort3::parser::parse_stream::parse_stream(
+            &mut self.sc,
+            &mut self.pc,
+            &self.conf,
+            &self.conf_files,
+            s.as_bytes(),
+            &mut self.sctx,
+        );
+        self.pc.set_ips_policy(true);
+        r
+    }
+
     fn dump_rtn(&mut self, tag: &str, rtn: &Option<RtnHandle>) {
         let r = match rtn {
             None => {
@@ -967,10 +1006,75 @@ fn replay_rules_transcript() {
     parser_append_rules_special(&mut r.sc, "pass ip any any -> any any (sid:2; rev:1;)", "INC");
     let inc = parser_get_special_includer(&r.sc).to_string();
     r.p(&format!("SPECIAL-INC {inc}"));
+    // ---- parse_stream end-to-end (real get_token FSM + get_state + exec;
+    // mirrors probe.cc stream block). warning_flags stays 0 so the FSM
+    // escape/string warnings bump the counter but print nothing (PW=0).
+    // meta layer doubled: sid never reaches sigInfo -> OTN collapses to
+    // key (1,0) (the "SID 0 duplicates" channel). ----
     r.sc.log.reset_parse_errors();
-    parse_rules_string_seam(&mut r.sc, "alert ip any any -> any any (sid:3; rev:1;)");
+    r.stream_rules(
+        "alert ip any any -> any any (msg:\"R10\"; sid:10; rev:1;)\n\
+         alert tcp $EXTERNAL_NET any -> $HOME_NET [80,443] (msg:\"R11\"; sid:11; rev:1; content:\"abc\";)\n",
+    ).expect("stream must not abort");
     let pe = r.sc.log.get_parse_errors();
-    r.p(&format!("AFTER-STRING PE={pe}"));
+    let pw = r.sc.log.get_parse_warnings();
+    r.p(&format!("S1 PE={} PW={}", pe, pw));
+    {
+        let o = otn_lookup(&r.sc.otn_map, 1, 0);
+        match o {
+            Some(o) => {
+                let o = o.borrow();
+                r.p(&format!(
+                    "S1 otn(1,0)=1 spid={} ndo={} ruleIdx={}",
+                    o.snort_protocol_id, o.num_detection_opts, o.ruleIndex
+                ));
+            }
+            None => r.p("S1 otn(1,0)=0"),
+        }
+        r.p(&format!(
+            "S1 miss(1,10)={} miss(1,11)={}",
+            otn_lookup(&r.sc.otn_map, 1, 10).is_none() as i32,
+            otn_lookup(&r.sc.otn_map, 1, 11).is_none() as i32
+        ));
+    }
+    r.sc.log.reset_parse_errors();
+    r.stream_rules(
+        "alert tcp any any -> any any (sid:12; rev:1; content:\"a\\x41b\";)  # tail comment\n\
+         alert tcp any any -> any any (sid:13; rev:1\\nalert tcp any any - any any (sid:14; rev:1;)\n\
+         alert tcp any any >> any any (sid:15; rev:1;)\n",
+    ).expect("stream must not abort");
+    let pe = r.sc.log.get_parse_errors();
+    let pw = r.sc.log.get_parse_warnings();
+    r.p(&format!("S2 PE={} PW={}", pe, pw));
+    {
+        // probe S2: OtnLookup(1, 12) -> null (doubled sid), dpo=- ndo=0
+        let o = otn_lookup(&r.sc.otn_map, 1, 12);
+        let dpo = match &o {
+            Some(o) => {
+                let ob = o.borrow();
+                if ob.proto_node_num > 0 {
+                    match &ob.proto_nodes[0] {
+                        Some(rh) => rh.borrow().dst_portobject.as_ref().and_then(|p| p.borrow().name.clone()).unwrap_or_else(|| "-".into()),
+                        None => "-".into(),
+                    }
+                } else {
+                    "-".into()
+                }
+            }
+            None => "-".into(),
+        };
+        let ndo = o.map(|o| o.borrow().num_detection_opts).unwrap_or(0);
+        r.p(&format!("S2 R12 dpo={} ndo={}", dpo, ndo));
+        r.p(&format!(
+            "S2 R14={} R15={}",
+            0, 0 // sid band again collapses to (1,0); 14/15 never exist
+        ));
+    }
+    r.sc.log.reset_parse_errors();
+    // S3 never aborts: the include miss is a ParseError, not ParseAbort.
+    r.stream_rules("include no_such_file.conf\n").expect("S3 include must not abort");
+    let pe = r.sc.log.get_parse_errors();
+    r.p(&format!("S3 PE={}", pe));
 
     // otn_map teardown (probe: delete sc->otn_map) then DONE
     r.sc.otn_map = OtnMap::default();
@@ -993,39 +1097,19 @@ fn replay_rules_transcript() {
         .map(|l| l.trim_end())
         .collect();
     // probe-produced lines only (start/rc/end wrapper lines are build.sh's)
-    let f1 = fatal_replay(1);
-    let f2 = fatal_replay(2);
-    compare(&f1.iter().map(|s| s.as_str()).collect::<Vec<&str>>(), &fatal[2..4]);
-    compare(&f2.iter().map(|s| s.as_str()).collect::<Vec<&str>>(), &fatal[7..9]);
-}
-
-/// The probe drives the REAL parse_conf.cc parse_rules_string; its
-/// parse_stream witness echoes every rule line ("STREAM %s"). Mirrored
-/// through ParseConf::parse_rules_string + the on_stream seam closure.
-fn parse_rules_string_seam(sc: &mut RuleCoreState, s: &str) {
-    let lines: Vec<String> = s.lines().map(|l| l.to_string()).collect();
-    let mut pconf = ParseConf::new();
-    let mut conf = SnortConfig::default();
-    let cf = ConfFiles { lua_conf: String::new(), snort_conf_dir: String::new() };
-    // The witness parse_stream only echoes lines: the ctx/ip arguments are
-    // never dereferenced, so (like conf_parity_test) they ride on scratch
-    // owned objects instead of aliasing the live policy slot.
-    let ip = IpsPolicy::new(99);
-    let mut vartab = snort3::sfip::sf_vartable::Vartable::new();
-    let mut pvt = snort3::ports::port_var_table::PortVarTable::create();
-    let mut ctx = VarContext::new(&mut vartab, &mut pvt);
-    let RuleCoreState { log, .. } = sc;
-    let mut seam = |_: &mut ParseConf,
-                    _: &mut VarContext,
-                    _: &mut SnortConfig,
-                    _: &ConfFiles,
-                    _: &IpsPolicy,
-                    log: &mut snort3::log::messages::LogEngine| {
-        for line in &lines {
-            log.log_message_stdout("STREAM %s\n", &[Arg::S(Some(line.clone().into()))]);
-        }
-    };
-    pconf.parse_rules_string(s, false, &mut ctx, &mut conf, &cf, &ip, log, Some(&mut seam));
+    let f1_at = fatal
+        .iter()
+        .position(|l| *l == "FATAL: ***PortVar Lookup failed on '$NOPE'.")
+        .unwrap();
+    let f2_at = fatal
+        .iter()
+        .position(|l| *l == "FATAL: ***Rule--PortVar Parse error: (pos=1,error=not a number)")
+        .unwrap();
+    let f3_at = fatal.iter().position(|l| *l == "FATAL3 start").unwrap() + 2;
+    for (mode, at) in [(1usize, f1_at), (2, f2_at), (3, f3_at)] {
+        let got = fatal_replay(mode);
+        compare(&got.iter().map(|x| x.as_str()).collect::<Vec<&str>>(), &fatal[at..at + 2]);
+    }
 }
 
 // Drive the FATAL_DEMO path through the real Rust port: ParseAbort must
@@ -1036,17 +1120,25 @@ fn parse_rules_string_seam(sc: &mut RuleCoreState, s: &str) {
 fn fatal_replay(mode: usize) -> Vec<String> {
     let mut r = Rep::setup_fatal();
     let mut rta = RuleTreeNode::new();
-    parse_rule_type(&mut r.sc, Some("alert"), &mut rta);
-    parse_rule_proto(&mut r.sc, "tcp", &mut rta, false);
-    parse_rule_nets(&mut r.sc, "any", true, &mut rta, false);
-    let port = if mode == 1 { "$NOPE" } else { "notaport" };
-    let res = parse_rule_ports(&mut r.sc, port, true, &mut rta, false);
-    if res.is_ok() {
+    if mode != 3 {
+        parse_rule_type(&mut r.sc, Some("alert"), &mut rta);
+        parse_rule_proto(&mut r.sc, "tcp", &mut rta, false);
+        parse_rule_nets(&mut r.sc, "any", true, &mut rta, false);
+    }
+    let res = if mode == 3 {
+        // ParseAbort fed through the real stream FSM.
+        r.stream_rules_owned("alert tcp any $NOPE -> any any (sid:9; rev:1;)\n")
+            .err()
+    } else {
+        let port = if mode == 1 { "$NOPE" } else { "notaport" };
+        parse_rule_ports(&mut r.sc, port, true, &mut rta, false).err()
+    };
+    if res.is_none() {
         panic!("FATAL{mode}: expected the fatal port abort, got Ok");
     }
     // C exits(1) from FatalError; the Rust port models the process exit
     // with Fatal::Quitting — the pinned rc=1 corresponds to this value.
-    assert_eq!(res.unwrap_err(), Fatal::Quitting);
+    assert_eq!(res.unwrap(), Fatal::Quitting);
     // drain then apply the build.sh emit_fatal filter verbatim:
     // `grep -e FATAL -e Quitting` (the \n>>notaport\n>>^ continuation
     // lines of the raw-literal abort never reach the locked transcript).
@@ -1069,7 +1161,8 @@ fn compare(got: &[&str], expected: &[&str]) {
         }
     }
     if let Some((i, g, e)) = first_diff {
-        let ctx_got: Vec<&str> = got[i.saturating_sub(2)..std::cmp::min(got.len(), i + 3)].to_vec();
+        let ctx_got: Vec<&str> =
+            got[i.saturating_sub(6)..std::cmp::min(got.len(), i + 8)].to_vec();
         let ctx_exp: Vec<&str> =
             expected[i.saturating_sub(2)..std::cmp::min(expected.len(), i + 3)].to_vec();
         panic!(
