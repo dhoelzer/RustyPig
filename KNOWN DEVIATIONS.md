@@ -789,3 +789,48 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   suite itself never CHECKs this pair, the probe does); overflow(eof)
   returns not_eof after a no-pending sync, and EOF_INT only when sync
   fails.
+
+## utils/stats snapshot+renderer + framework/counts.h (row 17g)
+
+- `Value` is `std::variant<monostate,bool,i64,u64,double,string>` ->
+  Rust enum, one variant per alternative; `std::get_if` becomes a match.
+  `Counter` keeps C's borrowed/owned name split: `set_name(const char*)`
+  borrows (Rust spells the C lifetime contract `&'static str`, which is
+  what every pinned call site passes), `set_name(const
+  std::string&)` owns; `get_name()` prefers borrowed exactly as C.
+- `std::deque` nesting -> `Vec` (append-order only is observable);
+  `std::optional` -> `Option`.
+- The renderer's externals are trait seams, NOT placeholders:
+  `StatsLogSink` stands at `set_log_conn/LogLabel/LogText/LogCount/
+  LogStat` (log_stats.cc's THREAD_LOCAL `s_ctrlcon` routing and
+  `LogStat`'s own formatting belong to the log layer's later row --
+  `LogLabel/LogCount/LogText` already ported there for row 17 stay
+  separate from this seam), and `MemoryReport` stands at
+  `memory::MemoryCap::print(verbose, initial)`. `SnortConfig::
+  log_verbose()` (a static) becomes `RenderEnv::log_verbose`.
+- C++ iomanipulators are STREAM STATE: `setw` applies to the next insert
+  only; `right/left` stick; `append_table_line` saves/restores
+  `line.flags()`. The Rust port emits per-insert `{:>25}`/`{:<10}`/etc.
+  format strings -- same bytes, no surviving state (deviation is the
+  mechanism, not the output; the 44-line transcript is byte-exact).
+  `1e6` formats as `1000000.000` (C++ `ostringstream << fixed << setprecision(3)`),
+  which Rust `{:.3}` reproduces.
+- Harness: `main/policy.h` and `main/snort_config.h` are the VERBATIM
+  proven rules_harness grafts (data_bus_wit, PolicyMap private->public,
+  api_options `#define API_OPTIONS 0`); this TU reads only `log_verbose
+  ()`, grafted with the real upstream body + `LOGGING_FLAG__VERBOSE =
+  0x00000001` (snort_config.h:112). The upstream suite compiles verbatim
+  as-is: it `#include`s `../output_text.cc` directly, so the gate tests
+  the FILE-STATICS at function granularity, and ships its own log/memory
+  witnesses (zero stubs).
+- Quirks pinned (md5 523e29b3f031...): first-column truncation is a
+  BYTE resize at 25 (`x-that-is-over-twenty-fiv`); counter names
+  truncate the same way before LogCount (so the logged name itself is
+  cut); `counter.percent` is NEVER consulted by the text renderer (only
+  `total` decides LogStat vs LogCount -- S3 pct-only counter); tables
+  render before counters in a group; a group with no renderable content
+  is skipped without emitting its label while the section label above
+  still prints (S7); section-name equality with "Summary Statistics" is
+  exact (trailing space misses the MemoryCap side effect, S6);
+  `render_text` calls `set_log_conn` twice (conn then nullptr) -- and
+  the probe passes nullptr at entry, so 2 nulls / 1 call pin.

@@ -71,3 +71,7 @@ tools/stats_rb_harness/copy/
 tools/stats_rb_harness/probe
 tools/stats_rb_harness/gate
 tools/stats_rb_harness/gate.txt
+tools/stx_harness/copy/
+tools/stx_harness/probe
+tools/stx_harness/gate
+tools/stx_harness/gate.txt

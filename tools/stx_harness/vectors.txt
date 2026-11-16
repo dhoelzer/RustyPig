@@ -1,0 +1,44 @@
+CASE S1
+<LL>Summary Statistics<LL_END>
+<MC>verbose=0 initial=0<MC_END>
+S1 set_conn_called=1 set_conn_nulls=2
+CASE S2
+<LL>Module Statistics<LL_END>
+<LL>appid<LL_END>
+<LT>                  packets: 0<LT_END>
+<LT>                    drop%: 0           	(  0.000%)<LT_END>
+<LT>                  neg-int: 0<LT_END>
+<LT>                -0 double: 0<LT_END>
+CASE S3
+<LL>Other<LL_END>
+<LL>long<LL_END>
+<LC>name-that-is-definitely-over-twenty-five-chars 7<LC_END>
+<LC2>with-total 1/4<LC2_END>
+<LC>pct-only 2<LC_END>
+CASE S4
+<LL>T Sections<LL_END>
+<LL>tables<LL_END>
+<LT>                     name: count      percent   <LT_END>
+<LT>                  row-one: 12         33.300    <LT_END>
+<LT>x-that-is-over-twenty-fiv: val                  <LT_END>
+<LT>                     solo: <LT_END>
+<LT>                          second    <LT_END>
+<LT>                        a bb        <LT_END>
+<LC>tail 9<LC_END>
+CASE S5
+<LL>V2<LL_END>
+<LL>values<LL_END>
+<LT>                        v: <LT_END>
+<LT>                     true: <LT_END>
+<LT>                    false: <LT_END>
+<LT>                      -42: <LT_END>
+<LT>                    1.250: <LT_END>
+<LT>              1000000.000: <LT_END>
+<LT>                         : <LT_END>
+<LT>                   active: <LT_END>
+<LT>                     mono: 0<LT_END>
+CASE S6
+<LL>Summary Statistics <LL_END>
+CASE S7
+<LL>S7sec<LL_END>
+DONE
