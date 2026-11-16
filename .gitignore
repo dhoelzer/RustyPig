@@ -47,3 +47,7 @@ tools/sorule_harness/copy/
 tools/sorule_harness/probe
 tools/sorule_harness/catchprobe
 tools/sorule_harness/merged.cc
+
+tools/rules_harness/copy/
+tools/rules_harness/probe
+tools/rules_harness/catchprobe
