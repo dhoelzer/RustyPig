@@ -1,3 +1,4 @@
+pub mod codec;
 pub mod ips_action;
 pub mod cursor;
 pub mod parameter;

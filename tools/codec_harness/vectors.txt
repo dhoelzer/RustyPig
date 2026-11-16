@@ -1,0 +1,66 @@
+B init off=1 size=0
+B alloc ok=1
+B alloc off=0 size=1
+B a1 ok=1
+B a1 off=2 size=1
+B a2 ok=1
+B a2 off=0 size=3
+B pre ok=1
+B pre off=0 size=1
+B clear off=1 size=0
+B over a1=1 a2=0
+B over off=1 size=1
+B fit off=0 size=2
+B zero off=0 size=2
+B cleared off=2 size=0
+B fresh-over ok=0
+B fresh-over off=2 size=0
+B off off=2 size=4
+B off-clr off=0 size=0
+B off-geo off=4 size=0
+T r0 f=8000000000000000 t=7 lyr=200 -> 200 fwd=1
+T r1 f=8040000000000000 t=7 lyr=200 -> 7 fwd=1
+T r2 f=0000000000000000 t=0 lyr=200 -> 64 fwd=0
+T r3 f=0000000000000000 t=0 lyr=128 -> 127 fwd=0
+T r4 f=0040000000000000 t=3 lyr=128 -> 64 fwd=0
+T r5 f=0040000000000000 t=200 lyr=128 -> 200 fwd=0
+T r6 f=8000000000000000 t=0 lyr=0 -> 0 fwd=1
+T r7 f=0000000000000000 t=0 lyr=255 -> 64 fwd=0
+T next-set=1 eth-set=0
+T2 next-set=1 eth-set=0 dsize=9
+H1 r=1 cdo=0
+EV 116 295
+H2 r=1
+EV 116 279
+H3 r=1 cdbad=1
+EV 116 279
+EV 116 295
+H4 r=1 cdbad=1
+EV 116 279
+H4b r=1 cdbad=1
+EV 116 295
+H5 r=1 cdbad=0
+EV 116 272
+EV 116 295
+H6 r=1 cdbad=0
+EV 116 295
+H7 r=1 cdbad=0
+H8 r=1 cdbad=0
+O1 curr=1 flags=0000
+O2 curr=3 flags=0008
+EV 116 296
+O3 curr=3 flags=0408
+O4 iter0 curr=2 flags=0008
+EV 116 296
+O4 iter1 curr=2 flags=0408
+O4 iter2 curr=2 flags=0408
+O7 curr=6 flags=0400
+EV 116 296
+O8 curr=1 flags=0400
+O9 curr=4 flags=0000
+EV 116 296
+O10 curr=6 flags=0400
+O11 curr=2 flags=0008
+CD next_id=0 lyr=0 inv=0 bits=0 flags=0 ipl=0 ext=0 cur=0 csum=1 tun=0 cook=0
+CD cook2=1
+DONE

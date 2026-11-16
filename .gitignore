@@ -58,3 +58,8 @@ tools/rules_harness/installer_stub.cc
 tools/sorule_harness/catch_main.cc
 tools/streambuf_harness/test_main.cc
 tools/rules_harness/probe_asan
+
+tools/codec_harness/copy/
+tools/codec_harness/probe
+tools/codec_harness/gate
+tools/codec_harness/gate.txt

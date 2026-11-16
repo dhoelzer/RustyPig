@@ -677,3 +677,58 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   the 1573 site is `#ifdef UNIT_TEST`-only), and it SWALLOWS the first rule made
   in-process afterwards. Production snort shares the same file static across
   `parse_rules_string` calls, so this is behavior to reproduce, not fix.
+
+## framework/codec.{h,cc} (row 17d)
+
+- `IpProtocol`/`ProtocolId` are NOT Rust enums. C declares enumerators with
+  the SAME value (`IP == HOPOPTS == ETHERTYPE_NOT_SET == 0`;
+  `PROTO_NOT_SET == RESERVED == PORT_SCAN == 255`) and `IPV6ExtensionOrder`
+  leans on that aliasing when it casts `(ProtocolId)ip_proto`. A Rust enum
+  would forbid the duplicates and silently change which arm matches, so the
+  subset here is `pub type` + consts modules
+  (`ip_protocol::HOPOPTS == ip_protocol::IP == 0`, etc.) preserving both the
+  aliases and the cast. Full protocol tables ship with the codecs row.
+- The `Codec` CLASS is half-deferred: its virtual `decode/encode/update/
+  format` vtable and the `CodecApi` plugin struct are part of plugin loading,
+  out of scope for this build. What IS ported is everything framework/codec.cc
+  holds: `codec_event`, `CheckIPV6HopOptions`, `CheckIPv6ExtensionOrder`
+  (as free functions; the C probe reaches them through a ProbeCodec subclass
+  that `using`-declares the two protected members, so the translation is
+  honest), `Buffer`, `EncState`, `CodecData`, `CompoundLayer`, `RawData`, and
+  the header constant tables.
+- `CodecData` drops the `conf` back-pointer in practice (kept as an Option
+  field but never dereferenced by the pinned vectors) and `EncState` drops
+  the `const ip::IpApi&` reference (the IpApi lands with the packet layer;
+  nothing in `get_ttl`/`*_set()` touches it). `RawData` drops `daq_msg`
+  (DAQ is row 20). `Codec::PKT_MAX` and `CDAPI_VERSION` are ported verbatim
+  alongside them.
+- Harness witness seams (all logged at build.sh): `detection/detection_engine.h`
+  witness whose `queue_event` prints `EV gid sid` (the real header drags the
+  whole detection engine); `catch/snort_catch.h` replaced by a plain-catch
+  shim (the snort `TestCaseInstaller` needs the snort main binary; the four
+  `[buffer]` TEST_CASEs register identically, and the gate compiles the
+  VERBATIM upstream `#ifdef UNIT_TEST` block from codec.cc); `utils/util.cc`
+  + `log/messages.cc` not linked (real ones drag snort_config), their needed
+  symbols (`snort_strdup/strndup`) are verbatim-body witnesses in stubs.cc;
+  `layer::get_inner_ip6_frag` link witness (layer.cc itself needs packet.h).
+- Quirks pinned verbatim by the 66-line transcript: hop-by-hop `switch`
+  `default:` falls THROUGH into the TLV length check (a non-enum type latches
+  `CODEC_IP6_BAD_OPT` + EV 279 and STILL runs the TLV block — H3/H4/H4b
+  separate the latch from the 295 length error); the `raw.len <
+  total_octets` TRUNCATED event does NOT return (H6: EV 272, then the walk
+  continues to EV 295, `return true` from `ip6_opt_receiver_skips`);
+  `ip6_opt_receiver_skips` uses the RFC 8200 0xC0 action bits; the
+  second-"Destination Options" exception needs routing-seen AND the NEXT
+  id's order == `IPV6_ORDER_MAX` (O4/DSTOPTS-next fires UNORDERED on calls
+  2-3; O11/IPV6-next stays silent); `CODEC_LAYERS_EXCEEDED` is spelled `0x400`
+  upstream — identical to `CODEC_IP6_EXT_OOO` — kept as written, not "fixed";
+  `Buffer` base starts one byte PAST the array (the C comment says so; probes
+  pin it via array-relative `data_off`); `allocate()` leaves public `off`
+  untouched while `clear()` zeroes it; `get_ttl` reverse path computes
+  `MAX_TTL - lyr_ttl` then clamps to `MIN_TTL`.
+- C printf evaluation order nuance: the FIRST lock of these vectors relied
+  on GCC emitting the side-effecting `CheckIPV6HopOptions(...)` call (via the
+  event witness writes) BEFORE the label `printf`'s other args read it — but
+  that's not guaranteed by the standard. The probe was rewritten to bind the
+  return value in a statement first (evaluation-order-safe), and the
+  relocked transcript (md5 28c79a7f88c8...) is the locked truth.
