@@ -22,7 +22,7 @@ Verify loop: `cargo test` (expect running total), `cargo clippy --all-targets`
 (must be 0 warnings), rebuild the harness and diff `vectors.txt` (HARNESS_STABLE).
 Commit + **push** at every milestone.
 
-## Done (pushed; 42 commits, last = `731eaaf` = row 17 keystone)
+## Done (pushed; 43 commits, last = `09539a8` = row 17b parse_stream)
 
 Bottom-up per `PORTING_PLAN.md` rows 1–17a, DONE in the table (each with the
 harness + replay citation): bitop, boyer_moore, base64, ring/ring2, utf,
@@ -85,7 +85,7 @@ Deferred with later rows: rtn_checks.cc (rule_func CHECK arms all abort-
 witnessed), port compile/merge (row 19+), GHash traversal order (OtnMap Vec
 stands in; every in-scope observation is order-insensitive).
 
-## DONE this session (this commit): parser/parse_stream, plan row 17b
+## DONE this session (pushed `09539a8`): parser/parse_stream, plan row 17b
 
 Harness (same tools/rules_harness): build.sh now compiles the ORIGINAL
 parse_stream.cc verbatim (witness deleted from stubs.cc); probe drives the
