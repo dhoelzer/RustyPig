@@ -919,3 +919,53 @@ Fidelity quirks kept literal:
 - `js == nullptr` contract: returns RET_QUIT before touching `*ptr`
   or `*bytes_copied` (vector row N12); Rust models it as
   `Option<&mut JsState>` with the same untouched-caller-state shape.
+
+## time/{clock_defs.h,stopwatch.h} (row 17j)
+
+Structural (behavior preserved; default non-TSC config):
+
+- `SnortClock`/`hr_duration`/`hr_time`: libstdc++ `high_resolution_clock`
+  == `steady_clock`, `rep = int64_t`, `period = nano`, so durations
+  and time points are plain signed 64-bit nanosecond tick counts
+  (`i64` aliases). The `USE_TSC_CLOCK` build flavor (`TscClock`, raw
+  tick integers, `clock_scale() != 1`) is not this build's config and
+  is not ported.
+- The C macros (`TO_TICKS`/`TO_USECS`/`TO_NSECS`/`TO_DURATION`/
+  `operator""_ticks`/`TIME_POINT_ZERO`/`CLOCK_ZERO`/`DURA_ZERO`)
+  become `clock_defs` fns and consts. `TO_DURATION(v, t)` at every
+  production site casts into an `hr_duration`, so it is
+  micro-to-nano multiplication; a duration-typed first parameter was
+  dropped as it can only ever select the same conversion.
+- `SnortClock::now()`: C++ steady_clock's epoch is unspecified
+  (typically boot); Rust `Instant`'s base is unspecified too. No
+  locked vector prints an absolute tick — the port anchors `Instant`
+  lazily and reports ns since anchor, reproducing every pinned
+  delta/equality observation.
+- C++'s `Stopwatch<Clock>` uses the clock only statically (
+  `Clock::now()`); Rust carries `PhantomData<C>` (never read).
+- `elapsed += get_delta()` / `elapsed + get_delta()` are C signed
+  arithmetic on `rep` (wraps on gcc); kept literal as `wrapping_add`
+  / `wrapping_sub`.
+
+Quirks pinned, not fixed:
+
+- `DURA_ZERO` literally expands to `Clock::duration::zero()` — scope
+  dependent on a name `Clock` existing (inside `Stopwatch` the
+  template parameter is that name; upstream's test declares its own
+  `struct Clock`). The harness probe therefore pins equivalence via
+  the literal `0_ticks` rather than inventing a file-scope `Clock`
+  alias upstream never defines.
+- Never-started `Stopwatch::start_time`: TSC config seed is explicit
+  (`= CLOCK_ZERO`); non-TSC default-initializes, and chrono's
+  `time_point` implicit default ctor value-initializes the duration
+  to 0 — so the effective value is 0 in BOTH configs. The locked
+  harness build is non-TSC (`NONTSC_START_UNSET=0` is not a locked
+  vector); both values were confirmed live via a scratch probe
+  compiled against the same copy tree with and without
+  `-DUSE_TSC_CLOCK` (TSC also revealed `time_point/duration ==
+  uint64_t` there — unsigned, unlike the non-TSC signed i64 — one
+  more reason the TSC flavor stays a documented, unported
+  configuration).
+- `cancel()` on a STOPPED clock keeps accumulated lap time (only
+  `reset()` clears `elapsed`); upstream's last [stopwatch] SECTION
+  pins it and the Rust translation replays it.

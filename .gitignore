@@ -97,3 +97,7 @@ tools/jsnorm_harness/catch_main.o
 tools/jsnorm_harness/jsnorm.o
 tools/jsnorm_harness/jsnorm_ut.o
 tools/jsnorm_harness/probe.o
+tools/stopwatch_harness/copy/
+tools/stopwatch_harness/probe
+tools/stopwatch_harness/gate
+tools/stopwatch_harness/gate.txt
