@@ -53,7 +53,7 @@ lifecycle slice. The ips_options meta layer is OUT; test-doubled at the
 `IpsManager::option_*` seam (probe assigns sigInfo after parse_rule_open, exactly
 what meta option modules do).
 
-What exists (`tools/rules_harness/`, WIP-committed, NOT pushed yet):
+What exists (`tools/rules_harness/`, WIP-committed in this push):
 - `build.sh` (~730 lines): copy-tree + surgery + shims + compile; both binaries.
 - `probe.cc` (~330 lines): drives action registry, PolicyMap/IpsPolicy wiring,
   rules R1–R9 (dup rev/rev-lower/proto-conflict/action-conflict, builtin gid,
@@ -170,7 +170,7 @@ git -c credential.helper=*** '{ echo username=dhoelzer; echo password=$TOK; }; f
 > keystone): `detection/{rules,sfrim,treenodes,rtn_checks,signature}` + full
 > `parser/parse_rule.cc` + `parser/parser.cc` RTN lifecycle, with the ips_options
 > meta layer test-doubled at the `IpsManager::option_*` seam. Its harness is
-> half-built in `tools/rules_harness/` (WIP-committed unpushed... wait keep simple (build.sh + probe.cc written;
+> half-built in `tools/rules_harness/` (WIP-committed; build.sh + probe.cc written;
 > ALL sources now compile; the probe LINK currently fails with ~30 undefined
 > witness symbols). NEXT.md "IN PROGRESS" lists every root cause already
 > diagnosed (stubs.cc regeneration heredoc, parser.cc slice boundary must extend
