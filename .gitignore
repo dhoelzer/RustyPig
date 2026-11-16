@@ -88,3 +88,12 @@ tools/sjson_harness/probe.o
 tools/sjson_harness/stxj_gate.o
 tools/sjson_harness/js_gate.o
 tools/sjson_harness/catch_main.o
+tools/jsnorm_harness/copy/
+tools/jsnorm_harness/probe
+tools/jsnorm_harness/gate
+tools/jsnorm_harness/gate.txt
+tools/jsnorm_harness/catch_main.cc
+tools/jsnorm_harness/catch_main.o
+tools/jsnorm_harness/jsnorm.o
+tools/jsnorm_harness/jsnorm_ut.o
+tools/jsnorm_harness/probe.o

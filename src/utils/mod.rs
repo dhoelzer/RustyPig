@@ -7,3 +7,5 @@ pub mod bits;
 pub mod cfmt;
 pub mod sflsq;
 pub mod stats;
+pub mod jsnorm_tables;
+pub mod jsnorm;

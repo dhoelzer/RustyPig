@@ -861,3 +861,61 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   renderable, so `"tables": [  ]` appears (J3/J5 pair); escape uses
   C-locale isprint on raw bytes -- 0x7f is NOT printable-escaped
   (`\u007f`), matching the `\u00xx` lowercase form.
+
+## utils/util_jsnorm.{h,cc} (row 17i)
+
+Structural (safety-relevant, behavior preserved):
+
+- C threads ONE shared byte buffer through the nested decodes by
+  pointer aliasing (SFCC output buffer = Unescape src = Unescape dst;
+  Unescape output = PNorm src = PNorm dst). Rust passes a per-stage
+  snapshot read view + the same write buffer. Safe because every scan
+  step writes at most one byte where it has already consumed one, so
+  the write cursor never overtakes the read cursor of the stage.
+- Dbuf `data` pointer + size/len -> `size`/`len` over a caller-owned
+  slice. All C pointer arithmetic (`overwrite`, `cur_ptr`,
+  outBounds) becomes plain index arithmetic.
+- `iis_unicode_map` (raw `uint8_t*`, caller-owned, possibly null) ->
+  `Option<&[u8]>` cloned into the decode state. C's `unicode_map[iNorm]`
+  with iNorm up to 0xffff would read far past any real table (UB); the
+  Rust port substitutes NON_ASCII_CHAR for out-of-table indexes —
+  unreachable with the pinned 256-byte map in the transcript.
+- `strtoul(buf, &p, radix)` -> hand-rolled same-radix accumulation
+  (digits are already class-checked by the FSM; 8 digits max, no
+  overflow); the C `int` assignment of the unsigned result is a
+  bit-identical u32->i32 wrap.
+- `ConvertToChar`'s `buf[buflen] = ANY` can write index 8 of a
+  `uint8_t buf[8]` (stack OOB in C, value never read). The Rust
+  buffer carries the extra slot so the store is literal, not UB.
+- Table event bytes: class-marker rows carry IS_* bit values in an
+  `event` u8 exactly as C does; `valid_chars`/`hex_lookup` recomputed
+  as provably-equal functions (class masks / digit values) instead of
+  copied 256-row literals.
+
+Fidelity quirks kept literal:
+
+- `hex_lookup[c]` returns −1 for non-hex bytes; `iNorm <<= 4;
+  iNorm |= −1` poisons every bit. Reachable because class-marker
+  rows ALSO match via the raw `m->event == uc` comparison: input
+  bytes 0x01/0x02/0x04 are numerically equal to IS_OCT/IS_DEC/IS_HEX
+  and therefore match those rows with a garbage byte (CONV-style arms
+  then see `hex_lookup[c] = -1`). Kept as C `int` semantics
+  (wrapping_shl + sign-extended or); not pinned by the locked
+  transcript but transcribed literally.
+- The `iNorm == -1` check after a u8 unicode_map read is dead in C
+  (cppcheck-suppressed `knownConditionTrueFalse`); kept literally.
+- Unescape RET_INV pointer step-back is commented out in C; the
+  comment is kept commented. SFCC's step-back (`(*ptr-1) > start`)
+  is live and transcribed (usize-guarded, never saturates).
+- `PNORM_ACT_WITHIN_QUOTES` SWITCH-falls-through into `default:`
+  (no-op) — arm simply ends.
+- UNESC_ACT_SPACE returns BEFORE the switch-tail `prev_event = c`
+  store when the quote branch fires; the early `return` is literal.
+- `multiple_levels` is u8 and `num_spaces` u16 in C; Rust wraps them
+  the same way (`wrapping_add`), the alerts compare via `i32::from`.
+- C allocates the 65535-byte `decoded_out_vec` on EVERY `JSNorm_exec`
+  call whatever the action; Rust allocates the equivalent local Vec
+  in the function body (allocation itself is not transcript-visible).
+- `js == nullptr` contract: returns RET_QUIT before touching `*ptr`
+  or `*bytes_copied` (vector row N12); Rust models it as
+  `Option<&mut JsState>` with the same untouched-caller-state shape.
