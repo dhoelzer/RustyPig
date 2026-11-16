@@ -144,44 +144,4 @@ git -c credential.helper=*** '{ echo username=dhoelzer; echo password=$TOK; }; f
   `PortTablePrintInputEx(pt, rule_index_map_print_index)`:
   rule_index_map_print_index MUST come from real sfrim/parser code, not stub.
 
-## PROMPT FOR THE NEXT AGENT (paste verbatim)
-
-> You are continuing the C++-to-Rust port of Snort 3 in `/opt/data/snort3-rust`
-> (repo `github.com/dhoelzer/RustyPig`, branch master), using `/opt/data/snort3-src`
-> @ fe29cbe7403a as ground truth. Start by reading `PORTING_PLAN.md` (status
-> table + method), `KNOWN DEVIATIONS.md`, and `NEXT.md` in the repo root — they
-> are authoritative. The `porting-legacy-codebases` skill encodes the workflow.
->
-> The method is fixed and non-negotiable: for each subsystem, build a C++
-> harness under `tools/<name>_harness/` that COMPILES THE ORIGINAL sources and
-> emits a deterministic labeled transcript (`vectors.txt`); port the subsystem
-> to Rust as a literal transcription that reproduces original behavior exactly —
-> quirks, abort side-effects, diagnostics, ordering, printf formatting included;
-> validate with a whole-transcript replay test in `tests/`; if upstream ships
-> embedded Catch2 `UNIT_TEST` tables, also build a `-DUNIT_TEST` gate binary.
-> Never fabricate behavior from memory; the harness transcript is truth.
-> Keep `cargo test` all-green and `cargo clippy --all-targets` at ZERO warnings
-> at every commit, and commit + push to origin at every milestone (see the push
-> recipe in NEXT.md; the token lives in /opt/data/.env, never echo it).
->
-> Current state: 319 tests green, clippy 0, HEAD `114b6ec` on origin (parser/vars,
-> log/cfmt, parse_conf+config_file, text_log+thread, parse_so_rule all DONE with
-> harness citations). The ACTIVE milestone is the rule-tree core (plan row 17
-> keystone): `detection/{rules,sfrim,treenodes,rtn_checks,signature}` + full
-> `parser/parse_rule.cc` + `parser/parser.cc` RTN lifecycle, with the ips_options
-> meta layer test-doubled at the `IpsManager::option_*` seam. Its harness is
-> half-built in `tools/rules_harness/` (WIP-committed; build.sh + probe.cc written;
-> ALL sources now compile; the probe LINK currently fails with ~30 undefined
-> witness symbols). NEXT.md "IN PROGRESS" lists every root cause already
-> diagnosed (stubs.cc regeneration heredoc, parser.cc slice boundary must extend
-> past CreateRuleType to cover deleteRtnToOtn/addRtnToOtn/rule_index_map_print_index/
-> parser_get_rule_ids/parser_get_rule_index, log.cc LogLabel/LogCount, PortObject2
-> restored, etc.). Resume exactly there: finish the link, run the probe, lock a
-> deterministic `vectors.txt`, verify both Catch gates (rules 2 cases, sfrim 1
-> case; gate binary compiles pristine `-DUNIT_TEST` originals), then write the
-> Rust port + `tests/rules_parity_test.rs`, re-run full suite + clippy, update
-> `.gitignore`, `PORTING_PLAN.md`, `KNOWN DEVIATIONS.md`, and commit+push. Do not
-> re-do completed milestones; do not re-read whole plan rows already DONE. If a
-> vectors run flakes, make it deterministic first (fixed ids/clock/order) — never
-> lock a nondeterministic transcript.
 
