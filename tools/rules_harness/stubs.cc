@@ -296,15 +296,11 @@ SoEvalFunc SoManager::get_so_eval(const char*, const char*, void**) { std::abort
 void sfthd_node_free(THD_NODE*) { std::abort(); }
 THD_NODE* detection_filter_create(DetectionFilterConfig*, struct THDX_STRUCT*) { std::abort(); }
 void detection_filter_free(THD_NODE*) { std::abort(); }
-int RuleListEnd(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckBidirectional(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckProto(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckSrcIP(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckDstIP(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckSrcPortEqual(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckDstPortEqual(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckSrcPortNotEq(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckDstPortNotEq(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
+// protocols/layer.cc not linked: ip.cc inlines (off_w_flags/id on 6o paths)
+// call layer::get_inner_ip6_frag(); mock packets never take those paths.
+#include "protocols/layer.h"
+const snort::ip::IP6Frag* snort::layer::get_inner_ip6_frag() { return nullptr; }
+const snort::ip::IP6Frag* snort::layer::get_inner_ip6_frag(const snort::Packet* const) { return nullptr; }
 void flowbits_counts(unsigned& t, unsigned& u, unsigned& s) { t = u = s = 0; }
 void flowbits_print_deps(std::ostream&) { std::abort(); }
 void get_flowbits_dependencies(void*, bool&, std::vector<std::string>&) { std::abort(); }

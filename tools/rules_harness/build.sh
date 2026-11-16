@@ -26,14 +26,15 @@
 #                           IpsManager::option_* witness (name-only; probe
 #                           registers opt names in opt_begin; no real option
 #                           objects); flowbits witnesses abort if reached;
-#   rtn_checks + FP funcs-> link stubs (packet-path only, never called);
+#   rtn_checks is REAL now (verbatim copy + probe mock Packet); FP funcs
+#   still -> link stubs (packet-path only, never called);
 #   ParseRules*/config monolith funcs in parser.cc: cut (documented).
 set -euo pipefail
 SRC=/opt/data/snort3-src
 H=$(cd "$(dirname "$0")" && pwd)
 C=$H/copy
 rm -rf "$C"
-mkdir -p "$C"/{trace,search_engines,main,parser,ports,utils,hash,protocols,log,sfip,framework,detection,target_based,time,managers,catch,filterz,control,ips_options,helpers,packet_io,filters,profiler}
+mkdir -p "$C"/{trace,search_engines,main,parser,ports,utils,hash,protocols,log,sfip,framework,detection,target_based,time,managers,catch,filterz,control,ips_options,helpers,packet_io,filters,profiler,flowz}
 
 cp "$SRC"/src/main/{snort_types.h,thread.h,thread.cc} "$C"/main/
 cp "$SRC"/src/main/policy.h "$C"/main/
@@ -82,7 +83,8 @@ sed -i 's|#include "protocols/packet.h"||' "$C"/target_based/snort_protocols.cc
 
 cp "$SRC"/src/detection/{rules.h,rules.cc,treenodes.h,treenodes.cc,sfrim.h,sfrim.cc,signature.h,signature.cc,rule_option_types.h,fp_config.h,detection_buf.h,fp_utils.h,fp_utils.cc} "$C"/detection/
 cp "$SRC"/src/framework/{ips_action.h,ips_option.cc,cursor.h,pdu_section.h,counts.h,base_api.h,ips_option.h,decode_data.h,mpse.h,mpse_batch.h} "$C"/framework/
-cp "$SRC"/src/protocols/{ip.h,ipv4.h,ipv6.h,layer.h,protocol_ids.h,mpls.h} "$C"/protocols/
+cp "$SRC"/src/protocols/{ip.h,ipv4.h,ipv6.h,layer.h,protocol_ids.h,mpls.h,packet.h,geneve.h} "$C"/protocols/
+cp "$SRC"/src/protocols/ip.cc "$C"/protocols/   # compiles VERBATIM (config.h witness exists; layer.h copied)
 cp "$SRC"/src/framework/inspector.h "$C"/framework/
 cp "$SRC"/src/catch/{catch.hpp,snort_catch.h} "$C"/catch/
 cp "$SRC"/src/packet_io/active_action.h "$C"/packet_io/
@@ -170,15 +172,45 @@ namespace snort { namespace BatchedLogger { namespace BatchedLogManager {
 inline void log(void*, unsigned, const char*, va_list) { __builtin_abort(); }
 } } }
 EOF
-cat > "$C"/protocols/packet.h <<'EOFPKT'
+cat > "$C"/flowz/flow_fwd.h <<'EOFFLOW'
 #pragma once
 #include <cstdint>
-// witness: real protocols/packet.h drags the DAQ/dataplane monolith.
-// Harness TUs need only the Packet fwd + snort::MAX_PORTS (real line 119)
-// + the inlines that detection/fp_utils.cc statics assert on.
-namespace snort { class Packet; constexpr int32_t MAX_PORTS = 65536; }
-struct Packet;
-EOFPKT
+#include <vector>
+#include "protocols/layer.h"   // packet.h Layer* member (real chain: flow.h pulled it)
+// witness: flow/flow.h drags the flow monolith. protocols/packet.h inlines
+// touch exactly three flow members (flags.client_initiated flow.h:555,
+// ssn_state.snort_protocol_id, + FilteringState flow.h:122 POD). Stub =
+// those shapes only; harness mock Packets leave flow null so the accessors
+// that deref it never run -> zero vector surface (documented deviation).
+namespace snort {
+class Flow {
+public:
+    struct { bool client_initiated : 1; } flags = {};
+    struct { int snort_protocol_id = 0; } ssn_state = {};
+};
+}
+struct FilteringState { uint64_t flow = 0; uint64_t pkt = 0; uint64_t session = 0; };
+EOFFLOW
+# protocols/packet.h is now the REAL struct (rtn_checks.cc + probe compile
+# it). Only surgery (logged): drop <daq_common.h> (DAQ not linked) and swap
+# flow/flow.h for the flow_fwd witness above.
+# daq_common.h: real header lives in tre/ (not present in this checkout);
+# witness shim supplies ONLY the POD/typedef/macros packet.h mentions. None
+# of the accessors touching them run in the probe (mock Packet never sets
+# pkth) -> documented witness, zero vector surface.
+cat > "$C"/daq_common.h <<'EOFDAQ'
+#pragma once
+#include <cstdint>
+typedef void* DAQ_Msg_h;
+struct DAQ_PktHdr_t {
+    uint64_t flags = 0;
+    int ingress_group = 0;
+    int egress_group = 0;
+};
+#define DAQ_PKTHDR_UNKNOWN            -1
+#define DAQ_PKT_FLAG_SIGNIFICANT_GROUPS 0x0000000000000020
+EOFDAQ
+sed -i 's|#include "flow/flow.h"|#include "flowz/flow_fwd.h"|' "$C"/protocols/packet.h
 cat > "$C"/trace/trace_api.h <<'EOFT'
 #pragma once
 // witness: real trace/trace_api.h drags TraceConfig/trace monolith.
@@ -281,23 +313,9 @@ cat > "$C"/detection/extract.h <<'EOF'
 // parse_rule.cc only needs ClearIpsOptionsVars (verbatim body in stubs.cc).
 void ClearIpsOptionsVars();
 EOF
-cat > "$C"/detection/rtn_checks.h <<'EOF'
-#pragma once
-#include "framework/ips_option.h"
-#include "main/snort_types.h"
-struct RuleFpList;
-struct RuleTreeNode;
-namespace snort { struct Packet; }
-int RuleListEnd(snort::Packet*, RuleTreeNode*, RuleFpList*, int);
-int CheckBidirectional(snort::Packet*, RuleTreeNode*, RuleFpList*, int);
-int CheckProto(snort::Packet*, RuleTreeNode*, RuleFpList*, int);
-int CheckSrcIP(snort::Packet*, RuleTreeNode*, RuleFpList*, int);
-int CheckDstIP(snort::Packet*, RuleTreeNode*, RuleFpList*, int);
-int CheckSrcPortEqual(snort::Packet*, RuleTreeNode*, RuleFpList*, int);
-int CheckDstPortEqual(snort::Packet*, RuleTreeNode*, RuleFpList*, int);
-int CheckSrcPortNotEq(snort::Packet*, RuleTreeNode*, RuleFpList*, int);
-int CheckDstPortNotEq(snort::Packet*, RuleTreeNode*, RuleFpList*, int);
-EOF
+# detection/rtn_checks.{h,cc}: REAL now (old witness header + link-abort
+# stubs retired; the CHECK funcs run their Original bodies under the probe)
+cp "$SRC"/src/detection/{rtn_checks.h,rtn_checks.cc} "$C"/detection/
 cp "$SRC"/src/detection/service_map.h "$C"/detection/
 cp "$SRC"/src/detection/fp_config.cc "$C"/detection/fp_config_copy.cc
 cat > "$C"/managers/mpse_manager.h <<'EOF'
@@ -893,15 +911,11 @@ SoEvalFunc SoManager::get_so_eval(const char*, const char*, void**) { std::abort
 void sfthd_node_free(THD_NODE*) { std::abort(); }
 THD_NODE* detection_filter_create(DetectionFilterConfig*, struct THDX_STRUCT*) { std::abort(); }
 void detection_filter_free(THD_NODE*) { std::abort(); }
-int RuleListEnd(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckBidirectional(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckProto(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckSrcIP(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckDstIP(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckSrcPortEqual(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckDstPortEqual(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckSrcPortNotEq(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
-int CheckDstPortNotEq(snort::Packet*, RuleTreeNode*, RuleFpList*, int) { std::abort(); }
+// protocols/layer.cc not linked: ip.cc inlines (off_w_flags/id on 6o paths)
+// call layer::get_inner_ip6_frag(); mock packets never take those paths.
+#include "protocols/layer.h"
+const snort::ip::IP6Frag* snort::layer::get_inner_ip6_frag() { return nullptr; }
+const snort::ip::IP6Frag* snort::layer::get_inner_ip6_frag(const snort::Packet* const) { return nullptr; }
 void flowbits_counts(unsigned& t, unsigned& u, unsigned& s) { t = u = s = 0; }
 void flowbits_print_deps(std::ostream&) { std::abort(); }
 void get_flowbits_dependencies(void*, bool&, std::vector<std::string>&) { std::abort(); }
@@ -981,6 +995,7 @@ OBJS_SRC=(
   "$C"/hash/ghash.cc "$C"/hash/hash_key_operations.cc "$C"/hash/primetable.cc
   "$C"/hash/xhash.cc "$C"/hash/hash_lru_cache.cc "$C"/hash/hashes.cc
   "$C"/sfip/sf_ip.cc "$C"/sfip/sf_cidr.cc "$C"/sfip/sf_ipvar.cc "$C"/sfip/sf_vartable.cc
+  "$C"/protocols/ip.cc
   "$C"/log/messages.cc "$C"/log/log_stats.cc
   "$C"/target_based/snort_protocols.cc "$C"/time/tsc_clock.cc
   "$C"/detection/treenodes.cc "$C"/detection/fp_utils.cc
@@ -993,7 +1008,7 @@ OBJS_SRC=(
 g++ -std=c++17 -O0 -g -w -I"$C" -o "$H"/probe \
   "$H"/probe.cc "$H"/stubs.cc \
   "$C"/parser/parse_rule.cc "$C"/parser/parser.cc \
-  "$C"/detection/rules.cc "$C"/detection/sfrim.cc "$C"/detection/signature.cc \
+  "$C"/detection/rules.cc "$C"/detection/rtn_checks.cc "$C"/detection/sfrim.cc "$C"/detection/signature.cc \
   "$C"/helpers/json_stream.cc \
   "${OBJS_SRC[@]}"
 
@@ -1026,7 +1041,7 @@ set -e
 g++ -std=c++17 -O0 -w -DUNIT_TEST -I"$C" -o "$H"/catchprobe \
   "$H"/catch_main.cc "$H"/installer_stub.cc "$H"/stubs.cc \
   "$C"/parser/parse_rule.cc "$C"/parser/parser.cc \
-  "$C"/detection/rules.cc "$C"/detection/sfrim.cc "$C"/detection/signature.cc \
+  "$C"/detection/rules.cc "$C"/detection/rtn_checks.cc "$C"/detection/sfrim.cc "$C"/detection/signature.cc \
   "$C"/helpers/json_stream.cc \
   "${OBJS_SRC[@]}"
 

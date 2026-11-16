@@ -57,3 +57,4 @@ tools/rules_harness/catch_main.cc
 tools/rules_harness/installer_stub.cc
 tools/sorule_harness/catch_main.cc
 tools/streambuf_harness/test_main.cc
+tools/rules_harness/probe_asan

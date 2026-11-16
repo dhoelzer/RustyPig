@@ -228,6 +228,60 @@ S2 R14=0 R15=0
 ERROR: can't open no_such_file.conf
 
 S3 PE=1
+RC-START
+OPEN null (ignore)
+RCswallow lookup920=0
+OTN 1:921:1 spid=3 nodes=3 ri=12 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=~ dip=~ spo=any dpo=noname nrf=1
+OTN 1:922:1 spid=3 nodes=3 ri=13 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN NIL
+  RTN act=drop(0) sel=0 spid=3 flags=77 en=1 refc=1 sip=~ dip=~ spo=any dpo=any nrf=1
+OTN 1:923:1 spid=1 nodes=3 ri=14 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN NIL
+  RTN act=pass(8) sel=0 spid=1 flags=67 en=1 refc=1 sip=~ dip=~ spo=any dpo=any nrf=1
+RC921 tcp dp80 tcp arms: DpEq SrcIP DstIP Proto End
+RC921 tcp dp80 eval pb=002 sp=1234 dp=80 cp1=2 cp0=1
+RC921 tcp dp81 tcp arms: DpEq SrcIP DstIP Proto End
+RC921 tcp dp81 eval pb=002 sp=1234 dp=81 cp1=0 cp0=1
+RC921 tcp oobnet tcp arms: DpEq SrcIP DstIP Proto End
+RC921 tcp oobnet eval pb=002 sp=1234 dp=80 cp1=0 cp0=0
+RC921 dip-neg tcp arms: DpEq SrcIP DstIP Proto End
+RC921 dip-neg eval pb=002 sp=1234 dp=80 cp1=0 cp0=0
+RC921 sip-oob tcp arms: DpEq SrcIP DstIP Proto End
+RC921 sip-oob eval pb=002 sp=1234 dp=80 cp1=0 cp0=0
+RC921 icmp tcp arms: DpEq SrcIP DstIP Proto End
+RC921 icmp eval pb=008 sp=1234 dp=80 cp1=0 cp0=1
+RC921 udp tcp arms: DpEq SrcIP DstIP Proto End
+RC921 udp eval pb=004 sp=1234 dp=80 cp1=0 cp0=1
+RC921 teredo tcp arms: DpEq SrcIP DstIP Proto End
+RC921 teredo eval pb=080 sp=1234 dp=80 cp1=0 cp0=1
+RC922 fwd tcp arms: Bidi Proto End
+RC922 fwd eval pb=002 sp=7 dp=7 cp1=1 cp0=1
+RC922 rev tcp arms: Bidi Proto End
+RC922 rev eval pb=002 sp=7 dp=7 cp1=1 cp0=1
+RC922 rev-oob tcp arms: Bidi Proto End
+RC922 rev-oob eval pb=002 sp=7 dp=7 cp1=1 cp0=1
+RC922 icmp tcp arms: Bidi Proto End
+RC922 icmp eval pb=008 sp=7 dp=7 cp1=1 cp0=1
+RC923 udp ip arms: Proto End
+RC923 udp eval pb=004 sp=0 dp=0 cp1=4 cp0=1
+RC923 icmp ip arms: Proto End
+RC923 icmp eval pb=008 sp=0 dp=0 cp1=0 cp0=1
+RC900 http dp80 http arms: DpEq SrcIP DstIP End
+RC900 http dp80 eval pb=000 sp=1 dp=80 cp1=1 cp0=1
+RC900 http dp81 http arms: DpEq SrcIP DstIP End
+RC900 http dp81 eval pb=000 sp=1 dp=81 cp1=0 cp0=1
+RCFN 921 n2=03
+RCFN 922 n2=77
+RCFN 923 n2=67
+RCFN 900 n1=83
+ARM has80=1 has443=1 has8080=0
+ARM noteq sp8080=1 sp80=0 cp0=1
+ARM proto tcp=2 ip-udp=4 udp-pdu=0 file=32 tcp-pdu=64 cp0=1
 DONE
 FATAL1 start
 FATAL1 rc=1

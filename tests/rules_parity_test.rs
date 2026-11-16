@@ -249,6 +249,10 @@ impl Rep {
         }
         let otn = parse_rule_open(&mut self.sc, &mut rtn, false);
         if otn.is_none() {
+            // C semantics pinned by the R8 block: a null open is closed
+            // with the NULL otn. When s_ignore latched, close's guard eats
+            // the latch (skip_count++, no deref). When NOT latched, C
+            // derefs null -> SEGV; Rust unwraps to a panic (documented).
             self.p("OPEN null (ignore)");
             let _ = parse_rule_close(&mut self.sc, &mut rtn, &None);
             return None;
@@ -1076,6 +1080,148 @@ fn replay_rules_transcript() {
     let pe = r.sc.log.get_parse_errors();
     r.p(&format!("S3 PE={}", pe));
 
+
+    // ---- rtn_checks: real chain eval (probe RC block 1:1). The C file
+    // static s_ignore LEAKS across parse_stream calls: S2's incomplete
+    // rule never reaches parse_rule_close's latch-clear, so the first
+    // rule made in-process after S2/S3 is swallowed. Rust RuleCoreState
+    // carries s_ignore the same way: make_rule(920) hits OPEN null. ----
+    r.p("RC-START");
+    r.make_rule(
+        Some("alert"),
+        "tcp",
+        "any",
+        "any",
+        "->",
+        "any",
+        "any",
+        1,
+        920,
+        1,
+        true,
+    );
+    let h = r.lookup(1, 920);
+    r.p(&format!("RCswallow lookup920={}", u8::from(h.is_some())));
+    r.make_rule(
+        Some("alert"),
+        "tcp",
+        "[10.0.0.0/8]",
+        "any",
+        "->",
+        "[192.168.0.0/16,!192.168.1.0/24]",
+        "[80,443]",
+        1,
+        921,
+        1,
+        true,
+    );
+    r.make_rule(Some("drop"), "tcp", "any", "any", "<>", "any", "any", 1, 922, 1, true);
+    r.make_rule(Some("pass"), "ip", "any", "any", "->", "any", "any", 1, 923, 1, true);
+    let o921 = r.lookup(1, 921);
+    let o922 = r.lookup(1, 922);
+    let o923 = r.lookup(1, 923);
+    let o900 = r.lookup(1, 900);
+    r.dump_otn(&o921);
+    r.dump_otn(&o922);
+    r.dump_otn(&o923);
+    let pb_tcp = snort3::detection::rtn_checks::PROTO_BIT__TCP;
+    let pb_icmp = snort3::detection::rtn_checks::PROTO_BIT__ICMP;
+    let pb_udp = snort3::detection::rtn_checks::PROTO_BIT__UDP;
+    let pb_teredo = snort3::detection::rtn_checks::PROTO_BIT__TEREDO;
+    let pb_none = snort3::detection::rtn_checks::PROTO_BIT__NONE;
+    rc_call(&mut r, "RC921 tcp dp80", &o921, pb_tcp, "10.1.1.1", "192.168.2.2", 1234, 80);
+    rc_call(&mut r, "RC921 tcp dp81", &o921, pb_tcp, "10.1.1.1", "192.168.2.2", 1234, 81);
+    rc_call(&mut r, "RC921 tcp oobnet", &o921, pb_tcp, "10.1.1.1", "8.8.8.8", 1234, 80);
+    rc_call(&mut r, "RC921 dip-neg", &o921, pb_tcp, "10.1.1.1", "192.168.1.5", 1234, 80);
+    rc_call(&mut r, "RC921 sip-oob", &o921, pb_tcp, "8.8.8.8", "192.168.2.2", 1234, 80);
+    rc_call(&mut r, "RC921 icmp", &o921, pb_icmp, "10.1.1.1", "192.168.2.2", 1234, 80);
+    rc_call(&mut r, "RC921 udp", &o921, pb_udp, "10.1.1.1", "192.168.2.2", 1234, 80);
+    rc_call(&mut r, "RC921 teredo", &o921, pb_teredo, "10.1.1.1", "192.168.2.2", 1234, 80);
+    rc_call(&mut r, "RC922 fwd", &o922, pb_tcp, "192.168.5.5", "10.1.1.1", 7, 7);
+    rc_call(&mut r, "RC922 rev", &o922, pb_tcp, "10.1.1.1", "192.168.2.2", 7, 7);
+    rc_call(&mut r, "RC922 rev-oob", &o922, pb_tcp, "10.1.1.1", "8.8.8.8", 7, 7);
+    rc_call(&mut r, "RC922 icmp", &o922, pb_icmp, "10.1.1.1", "192.168.2.2", 7, 7);
+    rc_call(&mut r, "RC923 udp", &o923, pb_udp, "10.1.1.1", "8.8.8.8", 0, 0);
+    rc_call(&mut r, "RC923 icmp", &o923, pb_icmp, "10.1.1.1", "8.8.8.8", 0, 0);
+    rc_call(&mut r, "RC900 http dp80", &o900, pb_none, "10.1.1.1", "192.168.2.2", 1, 80);
+    rc_call(&mut r, "RC900 http dp81", &o900, pb_none, "10.1.1.1", "192.168.2.2", 1, 81);
+    rc_fn_scan(&mut r, 921, &o921);
+    rc_fn_scan(&mut r, 922, &o922);
+    rc_fn_scan(&mut r, 923, &o923);
+    rc_fn_scan(&mut r, 900, &o900);
+
+    // exported arms the parser never installs (probe ARM block 1:1):
+    // NotEq needs except_flag=1, which SetupRTNFuncList hardcodes to 0.
+    {
+        let mut rt = RuleTreeNode::new();
+        parse_rule_type(&mut r.sc, Some("alert"), &mut rt);
+        parse_rule_proto(&mut r.sc, "tcp", &mut rt, false);
+        parse_rule_nets(&mut r.sc, "any", true, &mut rt, false);
+        parse_rule_ports(&mut r.sc, "[80,443]", true, &mut rt, false)
+            .expect("fatal port channel");
+        let chain = vec![
+            snort3::detection::treenodes::RuleFpList {
+                rule_head_func: snort3::detection::treenodes::RuleFuncId::SrcPortNotEq,
+            },
+            snort3::detection::treenodes::RuleFpList {
+                rule_head_func: snort3::detection::treenodes::RuleFuncId::ListEnd,
+            },
+        ];
+        let mut pkt = mk_packet(pb_tcp, "1.1.1.1", "2.2.2.2", 8080, 0);
+        let po = rt.src_portobject.clone();
+        let has = |port: i32| -> i32 {
+            po.as_ref()
+                .map(|h| h.borrow().has_port(port))
+                .unwrap_or(0)
+        };
+        r.p(&format!(
+            "ARM has80={} has443={} has8080={}",
+            has(80),
+            has(443),
+            has(8080)
+        ));
+        use snort3::detection::rtn_checks::call_head;
+        // hand-linked chain: same RuleFpList Vec shape transfer_rtn builds
+        let mut rt2 = rt; // move; chain is local
+        let a1 = call_head(&pkt, &rt2, &chain, 0, 1); // sp 8080 not in po -> pass
+        pkt.sp = 80;
+        let a2 = call_head(&pkt, &rt2, &chain, 0, 1); // sp 80 in po -> fail
+        pkt.sp = 8080;
+        let a3 = call_head(&pkt, &rt2, &chain, 0, 0); // check_ports=0 -> pass
+        r.p(&format!(
+            "ARM noteq sp8080={} sp80={} cp0={}",
+            a1, a2, a3
+        ));
+        let gchain = vec![
+            snort3::detection::treenodes::RuleFpList {
+                rule_head_func: snort3::detection::treenodes::RuleFuncId::Proto,
+            },
+            snort3::detection::treenodes::RuleFpList {
+                rule_head_func: snort3::detection::treenodes::RuleFuncId::ListEnd,
+            },
+        ];
+        pkt.proto_bits = pb_tcp;
+        rt2.snort_protocol_id = 3; // tcp
+        let b1 = call_head(&pkt, &rt2, &gchain, 0, 1);
+        rt2.snort_protocol_id = 1;
+        pkt.proto_bits = pb_udp; // ip legacy mask
+        let b2 = call_head(&pkt, &rt2, &gchain, 0, 1);
+        rt2.snort_protocol_id = 4;
+        pkt.proto_bits = snort3::detection::rtn_checks::PROTO_BIT__PDU; // udp rule, pdu pkt
+        let b3 = call_head(&pkt, &rt2, &gchain, 0, 1);
+        rt2.snort_protocol_id = 5;
+        pkt.proto_bits = snort3::detection::rtn_checks::PROTO_BIT__FILE; // file
+        let b4 = call_head(&pkt, &rt2, &gchain, 0, 1);
+        rt2.snort_protocol_id = 3;
+        pkt.proto_bits = snort3::detection::rtn_checks::PROTO_BIT__PDU; // tcp rule, pdu pkt
+        let b5 = call_head(&pkt, &rt2, &gchain, 0, 1);
+        let b6 = call_head(&pkt, &rt2, &gchain, 0, 0); // check_ports=0 ignores proto
+        r.p(&format!(
+            "ARM proto tcp={} ip-udp={} udp-pdu={} file={} tcp-pdu={} cp0={}",
+            b1, b2, b3, b4, b5, b6
+        ));
+    }
+
     // otn_map teardown (probe: delete sc->otn_map) then DONE
     r.sc.otn_map = OtnMap::default();
     r.p("DONE");
@@ -1173,4 +1319,92 @@ fn compare(got: &[&str], expected: &[&str]) {
         );
     }
     assert_eq!(got.len(), expected.len(), "transcript length mismatch");
+}
+
+// ---- rtn_checks replay helpers (probe rc_call / rc_first_rtn / RCFN) ----
+fn mk_packet(
+    pb: u32,
+    sip_s: &str,
+    dip_s: &str,
+    sp: u16,
+    dp: u16,
+) -> snort3::detection::rtn_checks::PacketLite {
+    // probe mk_packet: calloc mock + REAL IpApi::set(SfIp,SfIp) + REAL
+    // SfIp::set(const char*) (SfIp::set_str in Rust).
+    let mut ip_api = snort3::detection::rtn_checks::IpApiLite::default();
+    let mut sip = snort3::sfip::sf_ip::SfIp::new();
+    let mut dip = snort3::sfip::sf_ip::SfIp::new();
+    sip.set_str(sip_s);
+    dip.set_str(dip_s);
+    ip_api.set(sip, dip);
+    snort3::detection::rtn_checks::PacketLite {
+        proto_bits: pb,
+        sp,
+        dp,
+        ip_api,
+    }
+}
+
+fn rc_fn_name(f: snort3::detection::treenodes::RuleFuncId) -> &'static str {
+    use snort3::detection::treenodes::RuleFuncId as F;
+    match f {
+        F::ListEnd => "End",
+        F::Bidirectional => "Bidi",
+        F::Proto => "Proto",
+        F::SrcIp => "SrcIP",
+        F::DstIp => "DstIP",
+        F::SrcPortEqual => "SpEq",
+        F::DstPortEqual => "DpEq",
+        F::SrcPortNotEq => "SpNe",
+        F::DstPortNotEq => "DpNe",
+    }
+}
+
+fn rc_first_rtn(otn: &Option<OtnHandle>) -> Option<RtnHandle> {
+    let o = otn.as_ref()?;
+    o.borrow().proto_nodes.iter().flatten().next().cloned()
+}
+
+#[allow(clippy::too_many_arguments)] // mirrors probe.cc rc_call arg-for-arg
+fn rc_call(
+    r: &mut Rep,
+    tag: &str,
+    otn: &Option<OtnHandle>,
+    pb: u32,
+    sip_s: &str,
+    dip_s: &str,
+    sp: u16,
+    dp: u16,
+) {
+    let rtn = match rc_first_rtn(otn) {
+        Some(h) => h,
+        None => {
+            r.p(&format!("{tag} NIL"));
+            return;
+        }
+    };
+    let rb = rtn.borrow();
+    let pname = r.sc.proto_ref.get_name(rb.snort_protocol_id).to_string();
+    let arms: Vec<&str> = rb.rule_func.iter().map(|f| rc_fn_name(f.rule_head_func)).collect();
+    r.p(&format!("{} {} arms: {}", tag, pname, arms.join(" ")));
+    let pkt = mk_packet(pb, sip_s, dip_s, sp, dp);
+    let e1 = snort3::detection::rtn_checks::eval_rule(&pkt, &rb, 1);
+    let e0 = snort3::detection::rtn_checks::eval_rule(&pkt, &rb, 0);
+    r.p(&format!(
+        "{} eval pb={:03X} sp={} dp={} cp1={} cp0={}",
+        tag, pkt.proto_bits, pkt.sp, pkt.dp, e1, e0
+    ));
+}
+
+fn rc_fn_scan(r: &mut Rep, sid: u32, otn: &Option<OtnHandle>) {
+    let mut s = format!("RCFN {}", sid);
+    if let Some(o) = otn {
+        let ob = o.borrow();
+        for (i, n) in ob.proto_nodes.iter().enumerate() {
+            if let Some(h) = n {
+                s.push_str(&format!(" n{}={:02X}", i, h.borrow().flags));
+            }
+        }
+    }
+    r.p(&s);
 }

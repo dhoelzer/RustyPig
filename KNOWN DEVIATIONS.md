@@ -635,3 +635,45 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
 - TT_NONE-valued fsm rows (the two num-14 SET/ADD rows) carry `ttype 0` in Rust exactly like
   C, where the get_state test is `!s->type || type == s->type`; TT_NONE tokens never reach
   get_state (the loop breaks) — kept verbatim.
+
+
+## detection/rtn_checks.{h,cc} (rule-header check arms; row 17c)
+
+- `Packet` is NOT ported in this layer (its ctor drags DAQ + flow + stream
+  internals). `rtn_checks.rs` evaluates against `PacketLite`, mirroring EXACTLY the
+  four things the checks read: `p->proto_bits`, `p->ptrs.sp`, `p->ptrs.dp`,
+  `p->ptrs.ip_api.get_src()/get_dst()`. `IpApiLite` keeps ip.h's get_src/get_dst
+  `type != IAT_NONE` gates and the real `IpApi::set(const SfIp&, const SfIp&)`
+  semantics (type=IAT_DATA, plain copies). `has_port`/`sfvar_ip_in` are the
+  already-pinned ports/sfip ports, so the arm bodies are literal transcriptions.
+- C's hand-linked `RuleFpList` chain is the `Vec<RuleFpList>` installed by
+  `setup_rtn_func_list` (row 17); each `fp_list->next->RuleHeadFunc(...)` becomes
+  `call_head(i + 1)`. `eval_rule` mirrors the production entry fp_detect.cc:355
+  (`rtn->rule_func->RuleHeadFunc(p, rtn, rtn->rule_func, check_ports)`).
+- `CheckBidirectional` quirk kept EXACT: the function ignores its `RuleFpList*`
+  param and ends `return 1;` (rtn_checks.cc:149), so on a bidirectional rule the
+  `Proto`/`End` nodes linked AFTER it never run. Pin: RC922 icmp (tcp rule, icmp
+  packet, nets match) -> `cp1=1`; a running Proto node would have returned 0.
+- `CheckProto` returns the RAW `proto_bits[spid] & p->proto_bits` value, not 1
+  (C returns the AND expression): pinned 2/4/32/64 by eval + ARM lines.
+- `check_addr_port` models C's `if (!rule_addr) goto bail;` + null-safe
+  `sfvar_ip_in` (`if (!var || !ip) return false;`) with Options: a null
+  `pkt_addr` (IAT_NONE ip_api) fails the IP test rather than crashing. Not
+  reached by locked vectors (the probe always sets real ips via IpApi::set);
+  kept honest for future Packet integration.
+- Harness boundary for real packet.h (both logged at build.sh): `#include
+  <daq_common.h>` dropped (DAQ not linked; witness POD header supplies
+  `DAQ_PktHdr_t`/`DAQ_Msg_h`/the two macros — none read by locked paths, and the
+  mock Packet never sets `pkth`), `#include "flow/flow.h"` swapped for the
+  flow_fwd witness exposing only the members packet.h's inlines touch
+  (`Flow::flags.client_initiated`, `ssn_state.snort_protocol_id`, the
+  FilteringState POD). Nothing in the harness derefs flow (mock flow=null).
+- `copy/protocols/ip.cc` compiles VERBATIM; the only link witness is
+  `layer::get_inner_ip6_frag()` (ip.cc's off/id accessors; mock packets never
+  reach those paths).
+- `s_ignore` cross-stream LEAK is upstream behavior, now pinned by vectors:
+  latched by `parse_rule_type` mid-stream (S2), never cleared because EOF means
+  that rule's `parse_rule_close` never runs (the sole clear site is 1162-1164 —
+  the 1573 site is `#ifdef UNIT_TEST`-only), and it SWALLOWS the first rule made
+  in-process afterwards. Production snort shares the same file static across
+  `parse_rules_string` calls, so this is behavior to reproduce, not fix.

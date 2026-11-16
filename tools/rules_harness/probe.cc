@@ -17,6 +17,9 @@
 #include "detection/treenodes.h"
 #include "detection/sfrim.h"
 #include "detection/fp_config.h"
+#include "framework/decode_data.h"
+#include "detection/rtn_checks.h"
+#include "protocols/packet.h"
 #include "ports/rule_port_tables.h"
 #include "sfip/sf_vartable.h"
 #include "sfip/sf_ipvar.h"
@@ -26,6 +29,7 @@
 #include "utils/util_cstring.h"
 #include "utils/util.h"
 #include <cstdio>
+#include <cstdlib>
 
 
 
@@ -70,6 +74,66 @@ static void dump_otn(const OptTreeNode* otn)
     for ( unsigned i = 0; i < otn->proto_node_num; ++i )
         dump_rtn("  RTN", otn->proto_nodes[i]);
 }
+// harness-built mock packet: the real Packet ctor/dtor drag DAQ + flow monos;
+// malloc'd zeroed memory + REAL IpApi::set(SfIp,SfIp) pin only what
+// rtn_checks.cc reads (proto_bits, ptrs.sp/dp, ip_api src/dst). SfIp::set
+// with string is REAL code (sf_ip.cc via pton).
+static Packet* mk_packet(uint32_t pb, const char* sip_s, const char* dip_s,
+    uint16_t sp, uint16_t dp)
+{
+    Packet* p = (Packet*)calloc(1, sizeof(Packet));
+    p->proto_bits = pb;
+    p->ptrs.sp = sp;
+    p->ptrs.dp = dp;
+    SfIp sip; sip.set(sip_s);
+    SfIp dip; dip.set(dip_s);
+    p->ptrs.ip_api.set(sip, dip);
+    return p;
+}
+
+// drive the real rule_func chain (built by SetupRTNFuncList in transfer_rtn)
+// against the mock; prints chain length + both check_ports modes + proto name.
+static const char* rc_fn_name(int (*f)(Packet*, RuleTreeNode*, RuleFpList*, int))
+{
+    if ( f == RuleListEnd ) return "End";
+    if ( f == CheckBidirectional ) return "Bidi";
+    if ( f == CheckProto ) return "Proto";
+    if ( f == CheckSrcIP ) return "SrcIP";
+    if ( f == CheckDstIP ) return "DstIP";
+    if ( f == CheckSrcPortEqual ) return "SpEq";
+    if ( f == CheckDstPortEqual ) return "DpEq";
+    if ( f == CheckSrcPortNotEq ) return "SpNe";
+    if ( f == CheckDstPortNotEq ) return "DpNe";
+    return "?";
+}
+
+static RuleTreeNode* rc_first_rtn(OptTreeNode* o)
+{
+    if ( !o ) return nullptr;
+    for ( unsigned i = 0; i < o->proto_node_num; ++i )
+        if ( o->proto_nodes[i] ) return o->proto_nodes[i];
+    return nullptr;
+}
+
+static void rc_call(const char* tag, OptTreeNode* o, uint32_t pb,
+    const char* sip_s, const char* dip_s, uint16_t sp, uint16_t dp)
+{
+    RuleTreeNode* r = rc_first_rtn(o);
+    if ( !r ) { printf("%s NIL\n", tag); return; }
+    if ( !r->rule_func ) { printf("%s NORAISE en=%d\n", tag, r->enabled() ? 1 : 0); return; }
+    int len = 0;
+    printf("%s %s arms:", tag, g_probe_sc->proto_ref->get_name(r->snort_protocol_id));
+    for ( const RuleFpList* i = r->rule_func; i; i = i->next, ++len )
+        printf(" %s", rc_fn_name(i->RuleHeadFunc));
+    printf("\n");
+    Packet* p = mk_packet(pb, sip_s, dip_s, sp, dp);
+    int e1 = r->rule_func->RuleHeadFunc(p, r, r->rule_func, 1);
+    int e0 = r->rule_func->RuleHeadFunc(p, r, r->rule_func, 0);
+    printf("%s eval pb=%03X sp=%u dp=%u cp1=%d cp0=%d\n", tag,
+        p->proto_bits, (unsigned)p->ptrs.sp, (unsigned)p->ptrs.dp, e1, e0);
+    free(p);
+}
+
 
 static void walk_rule_lists()
 {
@@ -644,6 +708,134 @@ int main()
     reset_parse_errors();
     parse_rules_string(sc, "include no_such_file.conf\n", false);
     printf("S3 PE=%u\n", get_parse_errors());
+
+    // ---- rtn_checks: real SetupRTNFuncList chain + REAL eval (rtn_checks.cc
+    // compiled verbatim). Packet is calloc'd mock memory: the real ctor/dtor
+    // drag DAQ/flow; the struct + DecodeData + REAL IpApi::set/SfIp::set pin
+    // exactly what the checks read. sid band 918-923 untouched elsewhere.
+    //
+    // C quirk pinned here: s_ignore (parse_rule.cc file static) LEAKS
+    // ACROSS parse_stream calls. S2's glued "1nalert" token latches
+    // s_ignore inside parse_rule_type ("unknown rule action 'any'"), and
+    // the stream then EOFs without that rule ever reaching parse_rule_close
+    // (the only clearing site, line 1162-1164). The latch is still set for
+    // the FIRST rule made in-process after S2/S3: it is swallowed whole
+    // (proto/nets/ports return early; parse_rule_open -> null; that rule's
+    // own close eats the latch). Production C has the same cross-stream leak.
+    printf("RC-START\n");
+    make_rule("alert", "tcp", "any", "any", "->", "any", "any", 1, 920, 1);
+    printf("RCswallow lookup920=%d\n", !!OtnLookup(sc->otn_map, 1, 920));
+    // real eval targets (literal nets: policy-vars irrelevant post-transfer)
+    make_rule("alert", "tcp", "[10.0.0.0/8]", "any", "->",
+        "[192.168.0.0/16,!192.168.1.0/24]", "[80,443]", 1, 921, 1);
+    make_rule("drop",  "tcp", "any", "any", "<>", "any", "any", 1, 922, 1);
+    make_rule("pass",  "ip",  "any", "any", "->", "any", "any", 1, 923, 1);
+    dump_otn(OtnLookup(sc->otn_map, 1, 921));
+    dump_otn(OtnLookup(sc->otn_map, 1, 922));
+    dump_otn(OtnLookup(sc->otn_map, 1, 923));
+    rc_call("RC921 tcp dp80",   OtnLookup(sc->otn_map, 1, 921), PROTO_BIT__TCP,
+        "10.1.1.1", "192.168.2.2", 1234, 80);
+    rc_call("RC921 tcp dp81",   OtnLookup(sc->otn_map, 1, 921), PROTO_BIT__TCP,
+        "10.1.1.1", "192.168.2.2", 1234, 81);
+    rc_call("RC921 tcp oobnet", OtnLookup(sc->otn_map, 1, 921), PROTO_BIT__TCP,
+        "10.1.1.1", "8.8.8.8", 1234, 80);
+    rc_call("RC921 dip-neg",    OtnLookup(sc->otn_map, 1, 921), PROTO_BIT__TCP,
+        "10.1.1.1", "192.168.1.5", 1234, 80);
+    rc_call("RC921 sip-oob",    OtnLookup(sc->otn_map, 1, 921), PROTO_BIT__TCP,
+        "8.8.8.8", "192.168.2.2", 1234, 80);
+    rc_call("RC921 icmp",       OtnLookup(sc->otn_map, 1, 921), PROTO_BIT__ICMP,
+        "10.1.1.1", "192.168.2.2", 1234, 80);
+    rc_call("RC921 udp",        OtnLookup(sc->otn_map, 1, 921), PROTO_BIT__UDP,
+        "10.1.1.1", "192.168.2.2", 1234, 80);
+    rc_call("RC921 teredo",     OtnLookup(sc->otn_map, 1, 921), PROTO_BIT__TEREDO,
+        "10.1.1.1", "192.168.2.2", 1234, 80);
+    rc_call("RC922 fwd",        OtnLookup(sc->otn_map, 1, 922), PROTO_BIT__TCP,
+        "192.168.5.5", "10.1.1.1", 7, 7);
+    rc_call("RC922 rev",        OtnLookup(sc->otn_map, 1, 922), PROTO_BIT__TCP,
+        "10.1.1.1", "192.168.2.2", 7, 7);
+    rc_call("RC922 rev-oob",    OtnLookup(sc->otn_map, 1, 922), PROTO_BIT__TCP,
+        "10.1.1.1", "8.8.8.8", 7, 7);
+    rc_call("RC922 icmp",       OtnLookup(sc->otn_map, 1, 922), PROTO_BIT__ICMP,
+        "10.1.1.1", "192.168.2.2", 7, 7);
+    rc_call("RC923 udp",        OtnLookup(sc->otn_map, 1, 923), PROTO_BIT__UDP,
+        "10.1.1.1", "8.8.8.8", 0, 0);
+    rc_call("RC923 icmp",       OtnLookup(sc->otn_map, 1, 923), PROTO_BIT__ICMP,
+        "10.1.1.1", "8.8.8.8", 0, 0);
+    rc_call("RC900 http dp80",  OtnLookup(sc->otn_map, 1, 900), PROTO_BIT__NONE,
+        "10.1.1.1", "192.168.2.2", 1, 80);
+    rc_call("RC900 http dp81",  OtnLookup(sc->otn_map, 1, 900), PROTO_BIT__NONE,
+        "10.1.1.1", "192.168.2.2", 1, 81);
+    {
+        OptTreeNode* o = OtnLookup(sc->otn_map, 1, 921);
+        printf("RCFN 921");
+        if ( o ) for ( unsigned i = 0; i < o->proto_node_num; ++i )
+            if ( o->proto_nodes[i] ) printf(" n%u=%02X", i, o->proto_nodes[i]->flags);
+        printf("\n");
+    }
+    {
+        OptTreeNode* o = OtnLookup(sc->otn_map, 1, 922);
+        printf("RCFN 922");
+        if ( o ) for ( unsigned i = 0; i < o->proto_node_num; ++i )
+            if ( o->proto_nodes[i] ) printf(" n%u=%02X", i, o->proto_nodes[i]->flags);
+        printf("\n");
+    }
+    {
+        OptTreeNode* o = OtnLookup(sc->otn_map, 1, 923);
+        printf("RCFN 923");
+        if ( o ) for ( unsigned i = 0; i < o->proto_node_num; ++i )
+            if ( o->proto_nodes[i] ) printf(" n%u=%02X", i, o->proto_nodes[i]->flags);
+        printf("\n");
+    }
+    {
+        OptTreeNode* o = OtnLookup(sc->otn_map, 1, 900);
+        printf("RCFN 900");
+        if ( o ) for ( unsigned i = 0; i < o->proto_node_num; ++i )
+            if ( o->proto_nodes[i] ) printf(" n%u=%02X", i, o->proto_nodes[i]->flags);
+        printf("\n");
+    }
+
+    // exported CHECK arms the parser NEVER installs in this tree: the NotEq
+    // arms need except_flag=1, which SetupRTNFuncList hardcodes to 0 (the
+    // legacy '!' port form rejects pure-not before storage). Hand-link a
+    // 2-node chain to pin their semantics + PortObjectHasPort truth table.
+    {
+        RuleTreeNode r;
+        parse_rule_type(sc, "alert", r);
+        parse_rule_proto(sc, "tcp", r, false);
+        parse_rule_nets(sc, "any", true, r, false);
+        parse_rule_ports(sc, "[80,443]", true, r, false);
+        RuleFpList f1, f2;
+        f1.next = &f2;  f1.RuleHeadFunc = CheckSrcPortNotEq;
+        f2.next = nullptr; f2.RuleHeadFunc = RuleListEnd;
+        Packet* p = mk_packet(PROTO_BIT__TCP, "1.1.1.1", "2.2.2.2", 8080, 0);
+        printf("ARM has80=%d has443=%d has8080=%d\n",
+            PortObjectHasPort(r.src_portobject, 80),
+            PortObjectHasPort(r.src_portobject, 443),
+            PortObjectHasPort(r.src_portobject, 8080));
+        int a1 = f1.RuleHeadFunc(p, &r, &f1, 1);   // sp 8080 not in po -> pass
+        p->ptrs.sp = 80;
+        int a2 = f1.RuleHeadFunc(p, &r, &f1, 1);   // sp 80 in po -> fail
+        p->ptrs.sp = 8080;
+        int a3 = f1.RuleHeadFunc(p, &r, &f1, 0);   // check_ports=0 -> pass
+        printf("ARM noteq sp8080=%d sp80=%d cp0=%d\n", a1, a2, a3);
+        RuleFpList g1, g2;
+        g1.next = &g2;  g1.RuleHeadFunc = CheckProto;
+        g2.next = nullptr; g2.RuleHeadFunc = RuleListEnd;
+        p->proto_bits = PROTO_BIT__TCP;  r.snort_protocol_id = 3;  // tcp
+        int b1 = g1.RuleHeadFunc(p, &r, &g2, 1);
+        r.snort_protocol_id = 1;  p->proto_bits = PROTO_BIT__UDP;   // ip legacy mask
+        int b2 = g1.RuleHeadFunc(p, &r, &g2, 1);
+        r.snort_protocol_id = 4;  p->proto_bits = PROTO_BIT__PDU;   // udp rule, pdu pkt
+        int b3 = g1.RuleHeadFunc(p, &r, &g2, 1);
+        r.snort_protocol_id = 5;  p->proto_bits = PROTO_BIT__FILE;  // file
+        int b4 = g1.RuleHeadFunc(p, &r, &g2, 1);
+        r.snort_protocol_id = 3;  p->proto_bits = PROTO_BIT__PDU;   // tcp rule, pdu pkt
+        int b5 = g1.RuleHeadFunc(p, &r, &g2, 1);
+        int b6 = g1.RuleHeadFunc(p, &r, &g2, 0);  // check_ports=0 ignores proto
+        printf("ARM proto tcp=%d ip-udp=%d udp-pdu=%d file=%d tcp-pdu=%d cp0=%d\n",
+            b1, b2, b3, b4, b5, b6);
+        free(p);
+    }
 
     // tear otn map (exercises ~OptTreeNode + FreeRuleTreeNodes path)
     delete sc->otn_map; sc->otn_map = nullptr;
