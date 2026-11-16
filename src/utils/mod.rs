@@ -6,3 +6,4 @@ pub mod util_unfold;
 pub mod bits;
 pub mod cfmt;
 pub mod sflsq;
+pub mod stats;

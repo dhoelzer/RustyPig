@@ -754,3 +754,38 @@ lockless_ring, grouped_list, ber, ...}` are next on the queue.
   dereferenced at CALL time (label changes between register and fire
   change what fires); `unregister_handler` is by hook fn pointer and removes
   ALL nodes with that hook (P5: one call removes both duplicates).
+
+## utils/stats/response_buf.{h,cc} (row 17f)
+
+- The two externals beyond the TU (`ControlConn` and the global
+  `snort::LogMessage`) become traits: `ControlConn::respond(chunk)` (C
+  calls exactly one site, `respond("%s", data)`, so the chunk arrives
+  pre-formatted; the witness reproduces the `%s` NUL truncation) and
+  `LogSink::log_message(chunk)`. The full ControlConn class belongs to the
+  control/shell layer; only this seam is needed here.
+- The C++ test/probe drives the buffer through `std::ostream`, whose
+  behavior lives in libstdc++, not in this TU. `EmuOstream` reproduces
+  `__ostream_insert`/`__ostream_write` and `ostream::write` with semantics
+  read from /usr/include/c++/14 (sentry skips once bad; sputn shortfall
+  sets badbit -- note `operator<<(const char*)` writes
+  `traits::length(s)` bytes), and `xsputn` is the verbatim
+  `bits/streambuf.tcc` loop. badbit is the STREAM's flag, so it lives on
+  the driver, not on the buffer.
+- C++ vtable dispatch of the protected `overflow`/`sync` through the base
+  streambuf becomes direct methods; `flush`'s buffer is snapshotted before
+  the sink call (borrow split; identical bytes). The destructor flush is
+  the explicit `dtor()` at the C destruction point -- the upstream suite
+  observes it AFTER its CHECKs, and the replay preserves that order.
+- Gate has ZERO stubs: the upstream `response_buf_test.cc` ships its own
+  `ControlConn` (c-tor/respond) and `snort::LogMessage` implementations,
+  which link against the verbatim `response_buf.o`.
+- Quirks pinned in vectors (md5 591a73538b0f...): 1023-byte effective
+  capacity (setp end = sizeof-1); flush writes `*pptr = 0` and send_chunk
+  treats the buffer as a C string, so a chunk with an embedded NUL logs
+  ONLY the prefix (W9) and an all-NUL chunk is silently skipped without
+  touching either sink while the pending area still resets (W10); a
+  failed flush leaves the put area intact so the destructor flush re-sends
+  the SAME bytes (W7's pair of identical 1023-x lines -- and the upstream
+  suite itself never CHECKs this pair, the probe does); overflow(eof)
+  returns not_eof after a no-pending sync, and EOF_INT only when sync
+  fails.

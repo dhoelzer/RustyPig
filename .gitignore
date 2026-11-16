@@ -67,3 +67,7 @@ tools/periodic_harness/copy/
 tools/periodic_harness/probe
 tools/periodic_harness/gate
 tools/periodic_harness/gate.txt
+tools/stats_rb_harness/copy/
+tools/stats_rb_harness/probe
+tools/stats_rb_harness/gate
+tools/stats_rb_harness/gate.txt
