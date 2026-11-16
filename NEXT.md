@@ -53,7 +53,7 @@ lifecycle slice. The ips_options meta layer is OUT; test-doubled at the
 `IpsManager::option_*` seam (probe assigns sigInfo after parse_rule_open, exactly
 what meta option modules do).
 
-What exists (untracked `tools/rules_harness/`):
+What exists (`tools/rules_harness/`, WIP-committed, NOT pushed yet):
 - `build.sh` (~730 lines): copy-tree + surgery + shims + compile; both binaries.
 - `probe.cc` (~330 lines): drives action registry, PolicyMap/IpsPolicy wiring,
   rules R1–R9 (dup rev/rev-lower/proto-conflict/action-conflict, builtin gid,
@@ -61,8 +61,8 @@ What exists (untracked `tools/rules_harness/`):
   (strict reduce toggle), policy-2 RTN sharing via `reduce_rtns`, RuleStateMap
   apply/global-fanout/$action-var, deleteRtnFromOtn lifecycle, direct
   `RuleIndexMap{Create,Add,Get}` API.
-- **Current build state: every TU compiles (0 compile errors); the PROBE LINK
-  fails** with undefined refs: 20× `snort::snort_strdup`/`snort_strndup`,
+- **Current build state (WIP commit): every TU compiles (0 compile errors);
+  the PROBE LINK fails** with undefined refs: 20× `snort::snort_strdup`/`snort_strndup`,
   7× `rule_index_map_print_index`, `LogCount`/`LogLabel` (log.cc), `get_rule_list`,
   `addRtnToOtn` (both overloads), `deleteRtnFromOtn`, `parser_get_rule_index`,
   `add_service_to_otn`, `flowbits_counts`, `get_flowbits_dependencies`,
@@ -170,7 +170,7 @@ git -c credential.helper=*** '{ echo username=dhoelzer; echo password=$TOK; }; f
 > keystone): `detection/{rules,sfrim,treenodes,rtn_checks,signature}` + full
 > `parser/parse_rule.cc` + `parser/parser.cc` RTN lifecycle, with the ips_options
 > meta layer test-doubled at the `IpsManager::option_*` seam. Its harness is
-> half-built in untracked `tools/rules_harness/` (build.sh + probe.cc written;
+> half-built in `tools/rules_harness/` (WIP-committed unpushed... wait keep simple (build.sh + probe.cc written;
 > ALL sources now compile; the probe LINK currently fails with ~30 undefined
 > witness symbols). NEXT.md "IN PROGRESS" lists every root cause already
 > diagnosed (stubs.cc regeneration heredoc, parser.cc slice boundary must extend
