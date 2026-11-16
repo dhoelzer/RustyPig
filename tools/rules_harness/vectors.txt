@@ -1,0 +1,225 @@
+ACTMAX 16 alert=7 pass=8 file=10 bogus=16
+ACTSTR alert alert
+PRIOS pass reject drop react alert log
+PRIOSABP reject drop react alert pass log
+V 0
+V 0
+V 0
+V 1
+V 1
+POLICY now=1 user=0
+R1
+OTN 1:100:2 spid=3 nodes=2 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+RLIST alert mode=7 eval=0
+R2
+OTN 1:100:3 spid=3 nodes=2 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+OTN 1:100:3 spid=3 nodes=2 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+R3 after-lower-rev-dup
+OTN 1:100:3 spid=3 nodes=2 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+ERROR: GID 1 SID 100 in rule duplicates previous rule, with different protocol.
+R4 after-proto-conflict
+OTN 1:100:3 spid=3 nodes=2 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+PE=0 after type
+ERROR: GID 1 SID 100 in rule duplicates previous rule, with different type.
+R5 after-action-conflict
+OTN 1:100:3 spid=3 nodes=2 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+PE=0 after type
+ERROR: 50:1 builtin rules do not support detection options
+R6 builtin
+OTN 50:1:1 spid=1 nodes=2 ri=1 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=pass(8) sel=0 spid=1 flags=67 en=1 refc=1 sip=~ dip=~ spo=any dpo=any nrf=1
+PE=0 after type
+R7 bidir
+OTN 3000001:7:1 spid=3 nodes=2 ri=2 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=55 en=1 refc=1 sip=~ dip=~ spo=noname dpo=any nrf=1
+ERROR: unknown IPS action variable '$NOPE'
+R8 var-miss PE=1
+ERROR: unknown rule action 'not_an_action'
+R8 bad-act PE=1
+R8 open-after-err=0
+ERROR: missing rule action
+R8 no-act PE=1
+R9 badproto spid=6 PE=0
+R9 open=1
+R9 added=1 PE=0
+ERROR: Undefined variable in the string: $UNDEFSRC.
+R10 undef-var PE=1
+OTN 1:898:1 spid=3 nodes=2 ri=4 ndo=0 flags=00 en=0 body=( ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=47 en=1 refc=1 sip=~ dip=~ spo=any dpo=any nrf=1
+R10 PE=0
+R10b negated-conflict PE=0
+R10b added=1
+R11b pure-not PE=0
+R11b added=1
+R12 svc
+OTN 1:900:1 spid=7 nodes=2 ri=7 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  SVC http:7
+  SVC http2:8
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=7 flags=83 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+R12 PE=0
+ERROR: file_id rule 1:901:1 requires file_meta option
+ERROR: file_id rule 1:901:1 requires a fast-pattern option
+ERROR: file_id rule 1:901:1 requires file_data option
+R13 file-id PE=3 added=1
+ERROR: SO rule SOMISSING not loaded.
+R14 so-missing PE=1 lookup=0
+R14b so-missing-warn PE=0 PW=0 lookup=0
+ERROR: 1:100 rule state stubs do not support detection options
+R15 state-stub PE=1 rev=3
+OTN 1:100:3 spid=3 nodes=2 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+R16 meta-skip lookup=0 PE=0
+STATS pre-counters
+--------------------------------------------------
+rule counts
+       total rules loaded: 9
+   total rules not loaded: 4
+          duplicate rules: 4
+               text rules: 8
+            builtin rules: 1
+            option chains: 9
+            chain headers: 13
+COUNT r=9 lr=9 ls=4
+COUNT2 r=9 lr=0 ls=0
+SH base=0
+SH act=0
+SH flags=0
+SH spid=0
+SH po-ptr-eq=1 (strict off)
+SH po-diff=0 strict-off
+SH po-diff=0 strict-on (P80 vs any-content-equal? no)
+SH po-same-name strict-on=0
+SH po-same-name strict-on re=0
+ERROR: Undefined variable in the string: $HOME_NET.
+ERROR: undefined variable in the string: $EXT_NET.
+P2-R1 same-ids
+OTN 1:100:3 spid=3 nodes=3 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=~ dip=~ spo=any dpo=noname nrf=1
+PE=0 after type
+P2-R2 bidir-finish-ports
+OTN 1:910:1 spid=3 nodes=3 ri=9 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=71 en=1 refc=1 sip=~ dip=~ spo=noname dpo=noname nrf=1
+STATS pre-reduce
+--------------------------------------------------
+rule counts
+       total rules loaded: 10
+   total rules not loaded: 4
+          duplicate rules: 5
+               text rules: 9
+            builtin rules: 1
+            option chains: 10
+            chain headers: 15
+P2 after-reduce p2user=0 shared p1=0 p2=0
+OTN 1:100:3 spid=3 nodes=3 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=HOME_NET dip=EXT_NET spo=any dpo=noname nrf=1
+  RTN act=alert(7) sel=0 spid=3 flags=03 en=1 refc=1 sip=~ dip=~ spo=any dpo=noname nrf=1
+OTN 1:910:1 spid=3 nodes=3 ri=9 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN NIL
+  RTN act=alert(7) sel=0 spid=3 flags=71 en=1 refc=1 sip=~ dip=~ spo=noname dpo=noname nrf=1
+STATE apply PE=0 PW=0
+OTN 3000001:7:1 spid=3 nodes=2 ri=2 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=drop(0) sel=1 spid=3 flags=54 en=0 refc=1 sip=~ dip=~ spo=noname dpo=any nrf=1
+STATE global PE=0
+OTN 1:910:1 spid=3 nodes=3 ri=9 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN NIL
+  RTN act=drop(0) sel=0 spid=3 flags=71 en=1 refc=1 sip=~ dip=~ spo=noname dpo=noname nrf=1
+ERROR: unknown IPS action variable '$GHOST' in IPS policy 0
+STATE ghost-var PE=1
+OTN 3000001:7:1 spid=3 nodes=2 ri=2 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=drop(0) sel=1 spid=3 flags=54 en=0 refc=1 sip=~ dip=~ spo=noname dpo=any nrf=1
+ERROR: unknown IPS action variable '$GHOST' in IPS policy 0
+STATE p0-slot PE=1
+OTN 50:1:1 spid=1 nodes=2 ri=1 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN act=pass(8) sel=0 spid=1 flags=67 en=1 refc=1 sip=~ dip=~ spo=any dpo=any nrf=1
+DEL p0 nil=1 refc=57005
+DEL p1 refc=0
+DEL p2 refc=0
+OTN 1:100:3 spid=3 nodes=3 ri=0 ndo=2 flags=00 en=0 body=( content:content |abc|; sid:sid x; ) svc_only=0
+  RTN NIL
+  RTN NIL
+  RTN NIL
+RIM add 2 1 0
+RIM get 1 0:0
+RIM get 0
+RIMPRINT idx=10 [PRE>77:88 ]
+RIMIDS 77:88
+STATS final-fb0
+--------------------------------------------------
+rule counts
+       total rules loaded: 10
+   total rules not loaded: 4
+          duplicate rules: 5
+               text rules: 9
+            builtin rules: 1
+            option chains: 10
+            chain headers: 15
+--------------------------------------------------
+port rule counts
+             tcp     udp    icmp      ip
+     any       5       2       2       2
+     src       1       0       0       0
+     dst       3       0       0       0
+    both       1       0       0       0
+   total      10       2       2       2
+STATS final-fb3
+--------------------------------------------------
+rule counts
+       total rules loaded: 10
+   total rules not loaded: 4
+          duplicate rules: 5
+               text rules: 9
+            builtin rules: 1
+            option chains: 10
+            chain headers: 15
+                 flowbits: 3
+     flowbits not checked: 1
+         flowbits not set: 2
+--------------------------------------------------
+port rule counts
+             tcp     udp    icmp      ip
+     any       5       2       2       2
+     src       1       0       0       0
+     dst       3       0       0       0
+    both       1       0       0       0
+   total      10       2       2       2
+SPECIAL-INC INC
+STREAM alert ip any any -> any any (sid:3; rev:1;)
+AFTER-STRING PE=0
+DONE
+FATAL1 start
+FATAL1 rc=1
+FATAL: ***PortVar Lookup failed on '$NOPE'.
+Fatal Error, Quitting..
+FATAL1 end
+FATAL2 start
+FATAL2 rc=1
+FATAL: ***Rule--PortVar Parse error: (pos=1,error=not a number)
+Fatal Error, Quitting..
+FATAL2 end
