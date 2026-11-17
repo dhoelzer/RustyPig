@@ -368,13 +368,17 @@ impl XHash {
     }
 
     pub fn find_first_node(&mut self) -> Option<usize> {
-        for crow in 0..self.nrows {
-            self.cursor = self.table[crow as usize];
+        // C++: `for ( crow = 0; crow < nrows; crow++ )` — the MEMBER
+        // crow drives the scan (and update_cursor's continuation).
+        self.crow = 0;
+        while self.crow < self.nrows {
+            self.cursor = self.table[self.crow as usize];
             if self.cursor.is_some() {
                 let n = self.cursor;
                 self.update_cursor();
                 return n;
             }
+            self.crow += 1;
         }
         None
     }
