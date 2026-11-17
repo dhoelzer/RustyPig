@@ -1167,3 +1167,89 @@ Structural deviations (behavior preserved):
 - FileCounts reserve-failure accounting goes through the
   driver-owned FileCounts value (same discipline as row 17m) rather
   than a thread-local static.
+
+
+## file_api/file_cache.{h,cc} (row 17p)
+
+Harness reality:
+
+- Two-mode harness `tools/fcache_harness`. Gate = file_cache.cc compiled
+  -DUNIT_TEST VERBATIM: its OWN 7 [file_cache] cases (42 assertions,
+  runner-measured) pass with the plain-catch shim. Probe links the same
+  TU with the UNIT_TEST block inert, plus now-REAL hash/xhash.cc,
+  hash/hash_lru_cache.cc and time/packet_time.cc TUs. The donor
+  `FileCache::*` witness block from tools/filib_harness/stubs.cc is
+  RETIRED at this link (real TU defines the symbols); filib's committed
+  transcript is NOT touched -- the vanished witness lines in the new
+  transcript are the retirement signal (NEXT.md rule).
+- FileHashKey wire layout probe-verified from the real headers with
+  g++ on the harness grafts: sizeof=56, sip@0 sgroup@18 dip@20
+  dgroup@38 file_id@40 asid@48 padding@50; sfip::SfIp=18 (ip8[16] +
+  family i16); sizeof(FileCache::FileNode)=24; sizeof(timeval)=16.
+- Determinism: the FILE-CACHE clock is packet time, not SnortClock.
+  Real packet_time.cc's THREAD_LOCAL s_recent_packet is armed ONLY
+  through packet_time_update (it clamps backwards calls); the CLK
+  tv=... vectors steps pin every expiry math. The SnortClock
+  clock_gettime interposition carried from the donor is orthogonal.
+  THREAD_LOCAL file_counts armed via real file_stats_init() (rc 139
+  otherwise, NEXT.md).
+
+Structural deviations (behavior preserved):
+
+- `std::mutex cache_mutex`, `std::recursive_mutex
+  user_file_data_mutex` and the `std::atomic<int64_t>`
+  block/lookup timeouts are NOT reproduced: the port models the
+  single-threaded data plane the gates run with, Rust exclusive
+  borrows standing in for the locks (precedent
+  hash/lru_cache_shared.rs). `CacheNodePin` keeps the C pin/unpin
+  accounting faithfully; M_PINNED_SKIP pins the pinned-entry expiry
+  skip and clear()'s unconditional force-free.
+- XHash's `void* data` slot carries an index into the wrapper's
+  FileNode arena (no pointer casts). C stores FileNode BY VALUE in
+  the hash node's datasize block (`(FileNode*)hnode->data`); the
+  port keeps it in the arena and clones the one Rc handle. The
+  C++ `ExpectedFileCache::is_node_recovery_ok` / `free_user_data`
+  virtuals are re-asserted by the wrapper around XHash's pin-list
+  hook (hash/xhash.rs precedent): not-recoverable node keys pinned
+  before insert; any ANR victim detected after the insert by its
+  dead back-link, dropping the FileContext exactly as
+  `free_user_data` deletes it (file_cache.cc:68-91).
+- C clear() force-frees EVEN pinned entries (delete under a
+  paused-threads precondition, file_cache.h:85-87 -- dangling by
+  design upstream). Rust drops the Rc instead: no dangling deref is
+  constructible, and the M block's freed=1/remaining=0 semantics
+  replay exactly.
+- THREAD_LOCAL `file_counts` is a driver-owned `&mut FileCounts` at
+  every counting call site (rows 17m/17o discipline).
+  `ErrorMessage(...)` inside set_max_files is a comment until the
+  log row; the clamp itself (instance_max+1) is live and witnessed.
+- C overloads `get_file` at 4 and 7 params; Rust cannot: `get_file`
+  (private, 7-arg) + `get_file_public` (4-arg).
+- The `FileInfo*`/`FileInfo&` parameters of
+  publish_flow_verdict_locked / store_shared_verdict /
+  take_pending_file_data are FileContext handles in every real path;
+  the port threads the whole handle and compares aliasing with
+  `Rc::ptr_eq` instead of raw pointer `==` (mirrors the file_lib
+  assign/copy ptr::eq self-guards, row 17o; each aliased C++ case is
+  a self-guarded no-op).
+- `make_key` keeps C's uint32 `addressSpaceId` -> uint16 `asid`
+  truncation (file_cache.cc:371, file_cache.h:47) and the
+  deliberate client/server swap (dip=client_ip, sip=server_ip) --
+  pinned by F_ASID_TRUNC/F_ASID_SAME, not "fixed".
+- `new FileContext` reaches the globals
+  (InspectorManager::acquire_file_inspector(),
+  SnortConfig::get_conf()); `FileCache::new_file_context` gates nulls
+  exactly as the C++ ctor (file_lib.cc:559-569). `FileContext`
+  itself stays the row-17o seam: only the members file_cache.cc
+  touches are carried; the full body lands with FileFlows/FileContext
+  (row 17q+).
+- FILE_DEBUG/file_trace trace lines omitted exactly as in file_lib.rs
+  (row 17o precedent); the C call sites are kept as comments. The
+  harness FILEDBG lines pin the format strings C-side.
+- Control-console dump path: `printf("%-20s")` byte-width semantics
+  via `pad_c`; byte-carrying names render through
+  `String::from_utf8_lossy` (names carry raw 0xFF/UTF-16, 17o).
+  dump_cache matches sha hex CASE-SENSITIVELY (lowercase probe string
+  misses, uppercase hits; >64 chars miss) -- pinned, not normalized.
+- `log_file_event`'s DataBus body is row 17q (file_lib.cc:613); the
+  call sites stay literal through `FileCacheEventSink`.
