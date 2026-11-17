@@ -1,0 +1,20 @@
+NUM 0 1 2 4 255
+IN [default] -> DEFAULT num=0 back=[default] same=1
+IN [preferred] -> PREFERRED num=1 back=[preferred] same=1
+IN [bind] -> BIND num=2 back=[bind] same=1
+IN [local] -> LOCAL num=4 back=[local] same=1
+IN [interleave] -> UNKNOWN num=255 back=[unknown] same=0
+IN [preferred_many] -> UNKNOWN num=255 back=[unknown] same=0
+IN [fake_policy] -> UNKNOWN num=255 back=[unknown] same=0
+IN [Default] -> UNKNOWN num=255 back=[unknown] same=0
+IN [] -> UNKNOWN num=255 back=[unknown] same=0
+IN [bind ] -> UNKNOWN num=255 back=[unknown] same=0
+VAL 0 -> [default]
+VAL 1 -> [preferred]
+VAL 2 -> [bind]
+VAL 3 -> [unknown]
+VAL 4 -> [local]
+VAL 5 -> [unknown]
+VAL 254 -> [unknown]
+VAL 255 -> [unknown]
+DONE

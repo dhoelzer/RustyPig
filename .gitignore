@@ -115,3 +115,9 @@ tools/chunk_harness/stubs.o
 tools/chunk_harness/stubs_ut.o
 tools/chunk_harness/probe.o
 tools/chunk_harness/stubs.cc
+tools/numa_harness/copy/
+tools/numa_harness/probe
+tools/numa_harness/gate
+tools/numa_harness/gate.txt
+tools/numa_harness/catch_main.cc
+tools/numa_harness/*.o
