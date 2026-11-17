@@ -1108,3 +1108,62 @@ Structural deviations (behavior preserved):
   gate kept literally, including the id-0 quirk (slot 0's id stays 0
   even after add_file_id -> never findable; dup check also never
   fires for id 0).
+
+
+## file_api/file_lib.{h,cc} (row 17o)
+
+Harness reality:
+
+- Two-mode harness. Gate = file_lib.cc compiled -DUNIT_TEST verbatim:
+  its OWN 19 [file_info] cases (334 assertions) run against the real
+  TU with ZERO stubs beyond the plain-catch shim; the gate build also
+  carries the access-control-only private->public header graft (same
+  copy as the probe) so the probe subclass can seed/reset protected
+  members. Probe = same TU with the UNIT_TEST block excised plus a
+  near-verbatim closure; witnesses ONLY where the upstream .cc files
+  drag the DAQ/flow/output monoliths (FileCache, FileService,
+  FileFlows, FileInspect ctor, InspectorManager, DetectionEngine,
+  PacketTracer, trace, DataBus publish, clock). Every witness body
+  prints a WITNESS/FILEDBG/DE/POLICY line, so every transcript line
+  that depends on a witness hit cannot fork silently.
+- FileCache/FileCache::cached_verdict_lookup/apply_verdict witnesses
+  mirror the real bodies' FileInfo-observing parts (file_id==0 gate,
+  fc->verdict assignment, pending resume flag return); the hash-table
+  bookkeeping itself is what plan row 17p+ will port — the transcript
+  pins observable verdict/clock/stat effects only.
+- OpenSSL EVP SHA256 is REAL (node headers + libcrypto.so.3 per the
+  NEXT.md recipe): D1 'abc', G4/G6C digests and sha_to_string UPPERCASE
+  rendering all pin production byte values.
+- Deterministic clock: filib_enable_fake_clock interposes the
+  clock_gettime used by ts_() so 'duration-0.000000'/'-0.250000' lines
+  are exact; file_stats_init() (real body) arms the THREAD_LOCAL
+  file_stats a null deref would otherwise hit.
+
+Structural deviations (behavior preserved):
+
+- C std::string FileInfo members (file_name/url/host_name/
+  extracted_file_name) hold arbitrary bytes in the transcript (0xFF
+  BOM, raw UTF-16LE) -> Vec<u8> fields, not String. All getters hand
+  out &[u8]; the UTF-8 print path (helpers/utf get_UTF8_fname) stays
+  behind the FileContext seam until its row.
+- Pinned UB now panics loudly: the deserialize header memcpy and the
+  serialize string memcpy are unguarded in C (reads past the declared
+  buffer); the Rust port indexes slices equivalently, so a truncated
+  buffer panics instead of reading OOB. The A..E4 replay never hits
+  those paths (the probe crafts buffers that stay in bounds); any
+  future fuzz row must treat them as panic-by-construction.
+- sha256: Option<[u8; 32]> replaces the new[]/delete[] member; C's
+  copy-conditional ("src null sha never clears dst") and
+  reset_sha's conditional sig_state flip are transcription-literal.
+- FileInfo::operator= / copy are explicit assign/copy(&other) pair
+  (self-assign guard via ptr::eq); trait-object fields
+  (user_file_data/file_capture seams) rule out a derive.
+- FileContext: NOT ported this row (cache/service/flows/capture
+  closure). The harness G-blocks pin its observable behavior for the
+  next rows; Rust keeps no FileContext type yet — deliberately, so a
+  half-seam cannot drift.
+- VerdictName is [&str; 8] including the FILE_VERDICT_MAX ->
+  "INVALID" slot (A_VNAMES transcript pins index 7).
+- FileCounts reserve-failure accounting goes through the
+  driver-owned FileCounts value (same discipline as row 17m) rather
+  than a thread-local static.
