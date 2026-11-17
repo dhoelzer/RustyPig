@@ -136,3 +136,10 @@ tools/fid_harness/gate.txt
 tools/fid_harness/catch_main.cc
 tools/fid_harness/*.o
 tools/fid_harness/*.log
+tools/filib_harness/copy/
+tools/filib_harness/probe
+tools/filib_harness/gate
+tools/filib_harness/gate.txt
+tools/filib_harness/catch_main.cc
+tools/filib_harness/*.o
+tools/filib_harness/*.log

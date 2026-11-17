@@ -1,0 +1,273 @@
+A_SZ_BOOL=1 SZ_VERDICT=4 SZ_DIR=4 SZ_CAPST=4 SZ_SIGST=4
+A_SZ_STATE=8 SZ_FID=8 SZ_TYPEID=4 SZ_POLICY=4 SZ_TIMEVAL=16
+A_VNAMES=Unknown|Log|Stop|Block|Reset|Pending|Stop Capture|INVALID
+A_ENUMS vU=0 vL=1 vS=2 vB=3 vR=4 vP=5 vSC=6 vM=7 dl=0 du=1 pos=0,1,2,3,4 cap=0,1,2,3,4 sig=0,1,2,3 enc=0,1
+B0_SIZE=48
+B0_BYTES=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+B0_TAIL_AB=1
+B0_RT sizes_match=1 name_set=0 url_set=0 host_set=0 ftype=0
+B1_SIZE=48 BYTES=0000000000e8030000000000000100000039300000000000000000000000000000000000000000000000000000000000
+B1_RT fid=12345 size=1000 dir=1
+B2_SIZE=148 BYTES=01000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f00000000000000000000000000000000000000000000000000000000000000000000000000000000010d000000746573745f66696c652e747874012000000068747470733a2f2f6578616d706c652e6f72672f646f63756d656e742e706466010b0000006578616d706c652e6f726700000000
+B2_RT name=test_file.txt url=https://example.org/document.pdf host=example.org shahex=000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
+B3_URLLEN=4095 HOSTLEN=256 NAMELEN=4096
+B3_CAPS_OK=1
+B4_URLLEN=0 URL_SET=1 HOSTSET=0
+B4_TAIL_PARTIAL=0 SIG=0 CAP=0
+B5_SHA=3031323334353637383961626364656630313233343536373839616263646566
+B5_SIZE=80
+C0_URL=/var/tmp/test.pdf SET=1
+C1_NAMESET=0
+C2_NAMESET_AFTER_UNSET=0 NAME=x
+C3_NULL_NAME SET=1 EMPTY=1
+C4_WEAK_NULL NAME=real
+C5_WEAK_URL URL=u SET=0
+C5_WEAK_SIZE_HASURL=1
+C6_HOST=first.com
+C7_URLCAP len=4095 first16=aaaaaaaaaaaaaaaa
+C8_HOSTCAP len=256 tail8=hhhhhhhh
+C9_NAMECAP len=4096
+C10_REEVAL=1
+C11_REEVAL=0
+C12_PARTIAL=1
+C13_AFTER_RESET v=0 pc=0 xsz=77 cut=1 exname=0
+C14_FTYPE=60000
+D0_SHASTR=A0A1A2A3A4A5A6A7A8A9AAABACADAEAFB0B1B2B3B4B5B6B7B8B9BABBBCBDBEBF len=64
+D1_SHA256ABC=ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+D1_ABRSHASTR=BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD
+E0_COPY name=copy.bin fid=9 size=55 dir=1 v=6 partial=1 ft=1 fs=1 fc=1 ufd=0 exp=4242:7
+E1_SHA copied=1 eq=1
+E2_SELFCOPY url=keep
+E3_ASG fid=9 url=/u
+E4_KEEP_POLICY=1
+IMGR acquire -> null
+F0_MIME_EMPTY=1 SIZE=0
+FileInspect ctor
+IMGR acquire -> inspector
+F1_CFG=1 sigdepth=10485760 typedepth=1460
+F2_MIME=
+F2_MIME2=pdf
+F3_MAXCAP=0
+F4_RESERVE_ST=4 DEST_NULL=1 RES_FAILS=1
+FileCache ctor max=16
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 6
+FILEDBG[file_inspect] File: Type and Sig not enabled
+G1_R=0 COMPLETE=1 FSIZE=6 DATA_TOT=6
+IMGR acquire -> inspector
+CACHE lookup no-id -> 0
+FILEDBG[file_inspect] File: Type-pdf found
+FILEDBG[file_inspect] File: signature config is disabled
+POLICY type_lookup -> 0
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 4
+G2_MISS MISSES=1 HITS=0 R=1 COMPLETE=1 v=0
+CACHE lookup -> 1
+FILEDBG[file_inspect] file process completed in file context process
+G3_HIT HITS=1 R=1 COMPLETE=1 v=0
+IMGR acquire -> inspector
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=0
+FILEDBG[file_inspect] processing file signature position: 4 sig state 0 
+DE get_current_packet have=0
+FILEDBG[file_inspect] position is full file
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 7 at position 4 with processed_bytes 4
+POLICY signature_lookup -> 4
+FILEDBG[file_inspect] finish signature lookup verdict 4
+CACHE apply 4 resume=0 n=1
+PUBBYTES pub=1 evt=23 len=5 data=5245534554
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_inspect] File advance log: fuid-7, source-https, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-4, total bytes-4, timedout-0, sha256-88D4266FD4E6338D13B845FCF289579D209C897823B9217DA3E161936F031589, extracted name-, extracted cutoff-0, extracted size-0
+G4_SIG R=1 SIGST=3 sha=set v=4 sigproc=1 APPLY=1
+IMGR acquire -> inspector
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=0
+FILEDBG[file_inspect] process_file_signature_sha256:FILE_SIG_DEPTH_FAIL
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 4
+POLICY signature_lookup -> 0
+FILEDBG[file_inspect] File: Sig depth exceeded
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-4, total bytes-4, timedout-0, sha256-, extracted name-, extracted cutoff-0, extracted size-0
+G5_DEPTHFAIL R=0 SIGST=1 DEEP=1 SHA_NULL=1 v=0
+IMGR acquire -> inspector
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=0
+FILEDBG[file_inspect] process_file_signature_sha256:FILE_SIG_DEPTH_FAIL
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 4
+POLICY signature_lookup -> 3
+CACHE apply 3 resume=0 n=2
+PUBBYTES pub=1 evt=23 len=5 data=424c4f434b
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-4, total bytes-4, timedout-0, sha256-, extracted name-, extracted cutoff-0, extracted size-0
+G5B_DEPTHBLOCK R=1 v=3 APPLY=2
+IMGR acquire -> inspector
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=0
+FILEDBG[file_inspect] processing file signature position: 4 sig state 0 
+DE get_current_packet have=0
+FILEDBG[file_inspect] position is full file
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 4
+POLICY signature_lookup -> 1
+FILEDBG[file_inspect] finish signature lookup verdict 1
+CACHE apply 1 resume=0 n=3
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-, file name-inl.bin, duration-0.000000, is orig-0, seen bytes-4, total bytes-4, timedout-0, sha256-88D4266FD4E6338D13B845FCF289579D209C897823B9217DA3E161936F031589, extracted name-, extracted cutoff-0, extracted size-0
+G6_CAP R=1 CAPST=0 WITHIN=1 v=1 CAPEN=1
+G6B_RESERVE ST=3 DEST=1 XSZ=0 CAPEN_AFTER=0
+IMGR acquire -> inspector
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=0
+FILEDBG[file_inspect] processing file signature position: 1 sig state 0 
+DE get_current_packet have=0
+FILEDBG[file_inspect] position is start of file
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 1 with processed_bytes 4
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=0
+FILEDBG[file_inspect] processing file signature position: 3 sig state 0 
+DE get_current_packet have=0
+FILEDBG[file_inspect] position is end of the file
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 3 with processed_bytes 10
+POLICY signature_lookup -> 1
+FILEDBG[file_inspect] finish signature lookup verdict 1
+CACHE apply 1 resume=0 n=4
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-10, total bytes-10, timedout-0, sha256-34D9A39F5449531728FB901205A166388F8A8BEA46B0C72822E114AAD2C86C38, extracted name-, extracted cutoff-0, extracted size-0
+G6C_STREAM a1=1 a2=1 CAPST=3 BUFFERED=0 SIZE=10 v=1
+IMGR acquire -> inspector
+G7_OOO s1=0 CSIZE=0
+FILEDBG[file_inspect] File: Type-pdf found
+FILEDBG[file_inspect] File: signature config is disabled
+POLICY type_lookup -> 1
+CACHE apply 1 resume=0 n=5
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-pdf, file name-, duration-0.000000, is orig-0, seen bytes-0, total bytes-0, timedout-0, sha256-, extracted name-, extracted cutoff-0, extracted size-0
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 4
+G7_OK s2=1 SIZE=4 COMPLETE=1
+IMGR acquire -> inspector
+G8_NAMEBYTES=fffe7200650070006f0072007400e900ac2030042e007400780074000000
+FILEDBG[file_inspect] File: Type-pdf found
+FILEDBG[file_inspect] File: signature config is disabled
+POLICY type_lookup -> 1
+CACHE apply 1 resume=0 n=6
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-pdf, file name-report|E9 AC|0.txt|00|, duration-0.250000, is orig-0, seen bytes-0, total bytes-0, timedout-0, sha256-, extracted name-, extracted cutoff-0, extracted size-0
+File name: report|E9 AC|0.txt|00|
+File type: pdf(42)
+File size: 0
+Processed size: 0
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 4
+G8_UTF16 R=1 COMPLETE=1
+G8_CONV=7265706f7274e9ac302e74787400 LEN=14
+IMGR acquire -> inspector
+Show length: 5 
+41 42 00 7F 5A                                     AB..Z
+FILEDBG[file_inspect] File: Type-pdf found
+FILEDBG[file_inspect] File: signature config is disabled
+POLICY type_lookup -> 1
+CACHE apply 1 resume=0 n=7
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-pdf, file name-, duration-0.000000, is orig-0, seen bytes-0, total bytes-0, timedout-0, sha256-, extracted name-, extracted cutoff-0, extracted size-0
+DE get_current_packet have=0
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 5
+G9_DUMP R=1 FILESTOT=0
+IMGR acquire -> inspector
+DE set_next_packet parent=1 flow=0 next=1
+FFL get_file_flows to_create=0 exists=0 -> null
+FP_EVAL spid=0 have_pkt=1 n=1
+DE get_current_packet have=1
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 6
+FILEDBG[file_inspect] File: Type unknown
+G10_UNKNOWN R=0 FTYPE=65535 FPE=1 TYPEEN=0 SIGEN=0 COMPLETE=1
+IMGR acquire -> inspector
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=1
+FILEDBG[file_inspect] processing file signature position: 4 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_inspect] position is full file
+DE get_current_packet have=1
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 4
+POLICY signature_lookup -> 0
+FILEDBG[file_inspect] finish signature lookup verdict 0
+CACHE apply 0 resume=0 n=8
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-4, total bytes-4, timedout-0, sha256-88D4266FD4E6338D13B845FCF289579D209C897823B9217DA3E161936F031589, extracted name-, extracted cutoff-0, extracted size-0
+G11_MIN R=1 ST=1 RESFAIL=3 SZMIN=0
+IMGR acquire -> inspector
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=1
+FILEDBG[file_inspect] processing file signature position: 4 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_inspect] position is full file
+DE get_current_packet have=1
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 4 with processed_bytes 4
+POLICY signature_lookup -> 0
+FILEDBG[file_inspect] finish signature lookup verdict 0
+CACHE apply 0 resume=0 n=9
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-4, total bytes-4, timedout-0, sha256-88D4266FD4E6338D13B845FCF289579D209C897823B9217DA3E161936F031589, extracted name-, extracted cutoff-0, extracted size-0
+G12_MAX R=1 ST=2 RESFAIL=4
+G13_POOL MAX=1795 INUSE=0
+IMGR acquire -> inspector
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=1
+FILEDBG[file_inspect] processing file signature position: 1 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_inspect] position is start of file
+DE get_current_packet have=1
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 1 with processed_bytes 4
+G13A a=1 CAPST=0 BUFFERED=1 ALLOC=1 INUSE=1 USEDMAX=1
+FILEDBG[file_inspect] file signature is enabled
+DE get_current_packet have=1
+FILEDBG[file_inspect] processing file signature position: 3 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_inspect] position is end of the file
+DE get_current_packet have=1
+FILEDBG[file_inspect] Updating file size of file_id 0 at position 3 with processed_bytes 10
+POLICY signature_lookup -> 0
+FILEDBG[file_inspect] finish signature lookup verdict 0
+CACHE apply 0 resume=0 n=10
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+FILEDBG[file_inspect] File advance log: fuid-0, source-https, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-10, total bytes-10, timedout-0, sha256-34D9A39F5449531728FB901205A166388F8A8BEA46B0C72822E114AAD2C86C38, extracted name-, extracted cutoff-0, extracted size-0
+G13B b=1 ST=0 DEST=1 SZ=10 CAPSZ=10 CAPTOT=1 INUSE=1
+61626364584d41474943
+G13C DEST=1 INUSE=1 MEMCAPFAILRES=1
+G13D INUSE=0 RELTOT=1 RELENR=0 FREETOT=1
+FileCache dtor
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
