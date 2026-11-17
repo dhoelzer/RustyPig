@@ -1010,3 +1010,24 @@ Quirks pinned in the Rust flow:
   `gettop > top` shrink-only restore cleans up at scope exit — and
   C3's number-1 `init` (from C2's `init = 1`) proves globals persist
   across calls on the shared state while isfunction gates the call.
+
+## main/numa.{h,cc} (row 17l)
+
+Harness reality, not port fiction:
+
+- `libnuma`/`hwloc` dev headers are absent on this host; the harness
+  witnesses `<numa.h>`/`<numaif.h>`/`<hwloc.h>` (declarations only;
+  `NumaWrapper`/`HwlocWrapper` inline bodies never run in the probe).
+  The NumaMemPolicy ENUMERATOR VALUES are NOT witness-restated: the
+  numaif witness includes the real kernel UAPI `<linux/mempolicy.h>`,
+  so the pinned ABI (0/1/2/4) is the kernel's own enum.
+
+Structural deviations (behavior preserved):
+
+- C `enum NumaMemPolicy : uint8_t` + implicit integer casts into the
+  enum (the tests stringify raw values) modeled as a Rust `u8`
+  newtype-free constant set: every raw value stays representable and
+  `stringify`'s default arm runs identically for 3/5/254.
+- `NumaWrapper`/`HwlocWrapper` are thin virtual dispatch over libnuma/
+  hwloc syscalls: no logic to port; kept as a doc note (the port's
+  scope is the pure policy-mapping layer the tests exercise).
