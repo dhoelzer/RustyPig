@@ -1,0 +1,16 @@
+C1 rc=1
+C2 rc=1
+C3 rc=1
+PE test luajit failed to load chunk [string "test"]:1: 'end' expected near '<eof>'
+C4 rc=0
+PE test luajit failed to init args [string "args = {"]:1: unexpected symbol near '<eof>'
+C5 rc=0
+PE test init() returned false
+C6 rc=0
+PE test boom
+C7 rc=0
+PE test init() returned false
+C8 rc=0
+C9 rc=1
+ALIVE rc=1
+DONE

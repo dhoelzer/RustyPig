@@ -13,6 +13,7 @@ pub mod framework;
 pub mod hash;
 pub mod helpers;
 pub mod log;
+pub mod lua;
 pub mod parser;
 pub mod ports;
 pub mod sfip;

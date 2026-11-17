@@ -969,3 +969,44 @@ Quirks pinned, not fixed:
 - `cancel()` on a STOPPED clock keeps accumulated lap time (only
   `reset()` clears `elapsed`); upstream's last [stopwatch] SECTION
   pins it and the Rust translation replays it.
+
+## utils/chunk.{h,cc} + lua/{lua.h,lua.cc} (row 17k)
+
+Harness reality, not port fiction:
+
+- Ground truth requires a real LuaJIT: built from source at
+  `/opt/data/tools/luajit-src` (git clone, plain `make`; `make Q=1`
+  breaks the inner host-CC line as `1gcc` — build without `Q`).
+  The C harness links the real static lib, so transcript texts are
+  the real parser's.
+- `ParseError`/`FatalError` witnesses (stubs.cc) isolate the message
+  subsystem; the upstream suite expects nothing from them.
+
+Structural deviations (behavior preserved over the locked corpus):
+
+- `lua_State` modeled as globals map + value Vec; `ManageStack`
+  restores via explicit `ms.restore(state)` at each C-exit scope
+  (Rust `Drop` cannot borrow a sibling). `State`'s newstate-failure
+  `FatalError` branch (process exit) is unrepresentable: kept as a
+  doc note.
+- Lua source subset parser covers exactly what the locked corpus
+  contains: `function NAME() [return <lit>] end`, `NAME = <lit|flat
+  table>`, empty chunks, zero/one-arg global calls. Function values
+  store only their body's `return` expr (no upvalues/params/locals
+  — none of these appear in the corpus).
+- LuaJIT `load`/`pcall` split: C's three load sites (chunk, chunk
+  exec, args dostring) map to `compile_chunk` + `run_chunk` pairs
+  with distinct label rules — loadbuffer chunk label = `name` arg,
+  dostring label = the source text (pins `[string "args = {"]:1`
+  verbatim in C5's message).
+- Message texts for inputs OUTSIDE the locked corpus are generic
+  LuaJIT-style strings; only locked strings are pinned. The non-
+  function call error "attempt to call a non-function object" is
+  shape-only.
+
+Quirks pinned in the Rust flow:
+
+- chunk.cc never pops ParseError's error-message slot; ManageStack's
+  `gettop > top` shrink-only restore cleans up at scope exit — and
+  C3's number-1 `init` (from C2's `init = 1`) proves globals persist
+  across calls on the shared state while isfunction gates the call.

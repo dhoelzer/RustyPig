@@ -101,3 +101,17 @@ tools/stopwatch_harness/copy/
 tools/stopwatch_harness/probe
 tools/stopwatch_harness/gate
 tools/stopwatch_harness/gate.txt
+tools/chunk_harness/copy/
+tools/chunk_harness/probe
+tools/chunk_harness/gate
+tools/chunk_harness/gate.txt
+tools/chunk_harness/catch_main.cc
+tools/chunk_harness/catch_main.o
+tools/chunk_harness/chunk.o
+tools/chunk_harness/chunk_ut.o
+tools/chunk_harness/lua.o
+tools/chunk_harness/lua_ut.o
+tools/chunk_harness/stubs.o
+tools/chunk_harness/stubs_ut.o
+tools/chunk_harness/probe.o
+tools/chunk_harness/stubs.cc
