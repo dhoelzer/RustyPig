@@ -1,0 +1,278 @@
+CLK tv=1000.000000
+A_SZ_FHK=56 OFS_sip=0 OFS_sgroup=18 OFS_dip=20 OFS_dgroup=38 OFS_fileid=40 OFS_asid=48 OFS_pad=50 SZ_SFIP=18
+A_SZ_FILENODE=24 OFS_expire=0 OFS_file=16
+A_DEFAULTS block=86400 lookup=2 maxfiles=65536
+A_ACTS trust=0 allow=1 hold=2 retry=3 rewrite=4 drop=5 block=6 reset=7 max=8
+A_KEYHEX sg=-2 dg=3 id=0x0BADC0DE asid=0x1234 -> 000000000000000000000000000000000000feff0000000000000000000000000000000000000300dec0ad0b000000003412000000000000
+IMGR acquire -> null
+B_ADD1 have=1 same_ptr=1 cache_full=0 expire_off=60 entries=1
+IMGR acquire -> null
+B_GET_FILE hit=1 same=1
+IMGR acquire -> null
+IMGR acquire -> null
+B_GET_FILE create=1 entries=2
+IMGR acquire -> null
+B_ASID_KEY distinct=1 entries=3
+B_CLEAR freed=3 remaining=0
+IMGR acquire -> null
+IMGR acquire -> null
+C_FULL first have=1 1
+IMGR acquire -> null
+C_FULL third have=0 cache_full=1 full=1 fails=0 add_fails=1 total_entries=2 max_entries=2 entries=2
+C_CLEAR freed=2 remaining=0
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+C_RECAPPED d1=1 d2=1 d3=0 entries=2
+WITNESS ThreadConfig::get_instance_max=2
+WITNESS ErrorMessage Maximal number of files cached should be greater than number of threads
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+D_CLAMP m=[1,1,1,0] entries=3
+WITNESS ThreadConfig::get_instance_max=2
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+IMGR acquire -> null
+D_RAISED cleared=3 ninth=1 tenth=0 entries=9
+IMGR acquire -> null
+E_ARM have=1 expire_off=100
+CLK tv=1200.000000
+E_EXPIRED_PINNED found=0 kept_entries=1
+E_EXPIRED_FREE found=0 entries=0
+IMGR acquire -> null
+E_READD fresh_verdict=0 entries=1
+IMGR acquire -> null
+IMGR acquire -> null
+F_FLOWKEY have=1
+IMGR acquire -> null
+IMGR acquire -> null
+F_ASID_TRUNC distinct=1 entries=2
+IMGR acquire -> null
+F_ASID_SAME same=1
+IMGR acquire -> null
+F_ASID_ORIG same=1
+IMGR acquire -> null
+FILEDBG[file_cache] cached_verdict_lookup:File id not found, returning
+G_NOID verdict=0
+IMGR acquire -> null
+IMGR acquire -> null
+POLICY type_lookup -> 1
+POLICY log_file_action a=2
+G_TYPELOG verdict=1 probe_verdict=1
+IMGR acquire -> null
+G_PEND_NODUP verdict=0
+IMGR acquire -> null
+IMGR acquire -> null
+DE get_current_packet have=0
+DE get_current_packet have=0
+DE get_current_packet have=0
+DE get_current_packet have=0
+POLICY type_lookup -> 0
+POLICY signature_lookup -> 3
+PT File: FILE_VERDICT_BLOCK with action block
+ACT delayed=6 force=1
+ACT drop_reason=file
+POLICY log_file_action a=1
+G_SIGBLOCK verdict=3 sha=ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad sha_match_entry=1
+IMGR acquire -> null
+G_MISS verdict=0
+IMGR acquire -> null
+FILEDBG[file_cache] apply_verdict 0
+FILEDBG[file_cache] apply_verdict 1
+FILEDBG[file_cache] apply_verdict 6
+H_STATIC unk=0 log=0 stopcap=0 verdict=6
+FILEDBG[file_cache] apply_verdict 3
+FILEDBG[file_cache] apply_verdict:FILE_VERDICT_BLOCK with action block
+ACT delayed=6 force=1
+ACT drop_reason=file
+MPDBUS get_id name=file_mp_events events=2 -> 42
+MPDBUS publish pub=42 evt=1 have_event=1
+DE get_current_packet have=0
+FILEDBG[file_cache] File Cache Sharing: Publish event with file_id 101
+FILEDBG[file_cache] apply_verdict:storing the file verdict
+H_BLOCK applied=1 verdict=3
+FILEDBG[file_cache] apply_verdict 4
+FILEDBG[file_cache] apply_verdict:FILE_VERDICT_REJECT with action reset
+ACT delayed=7 force=1
+ACT drop_reason=file
+FILEDBG[file_cache] apply_verdict:storing the file verdict
+H_REJECT applied=1 verdict=4
+IMGR acquire -> null
+FILEDBG[file_cache] apply_verdict 5
+FILEDBG[file_cache] File signature lookup: adding new packet to retry queue.
+PT File signature lookup: adding new packet to retry queue.
+ACT delayed=3 force=1
+FFL get_file_flows to_create=1 exists=0 -> new
+FFL add_pending_file 102
+H_PEND_FRESH applied=1 armed_expire=1205
+CLK tv=1205.000000
+FILEDBG[file_cache] apply_verdict 5
+ACT delayed=3 force=1
+FFL get_file_flows to_create=1 exists=1 -> existing
+FFL add_pending_file 102
+H_PEND_RETRANS applied=1
+FileInspect ctor
+CLK tv=1210.000000
+FILEDBG[file_cache] apply_verdict 5
+FILEDBG[file_cache] File signature lookup: timed out after 10000ms.
+PT File signature lookup: timed out after 10000ms.
+H_PEND_EXPIRED applied=1 before=5 after=1 timedout=1 touts=1
+FILEDBG[file_cache] apply_verdict 5
+PT File: FILE_VERDICT_PENDING with action reset due to timeout
+ACT delayed=7 force=1
+POLICY log_file_action a=1
+FILEDBG[file_cache] File signature lookup: timed out after 10000ms.
+PT File signature lookup: timed out after 10000ms.
+H_PEND_BTL applied=1 touts=1 resume_action=BLOCK
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+FILEDBG[file_cache] apply_verdict 5
+FILEDBG[file_cache] File signature lookup: adding new packet to retry queue.
+PT File signature lookup: adding new packet to retry queue.
+ACT delayed=3 force=1
+FILEDBG[file_cache] apply_verdict:FILE_VERDICT_PENDING with action retry
+FFL get_file_flows to_create=1 exists=1 -> existing
+FFL add_pending_file 200
+IMGR acquire -> inspector
+PT add:Insert failed in file cache, returning
+DE get_current_packet have=0
+FILEDBG[file_cache] add:Insert failed in file cache, returning
+IMGR release
+ACT delayed=3 force=1
+PT apply_verdict:FILE_VERDICT_PENDING with action retry
+H_PEND_CACHEFULL applied=1 entries=2
+IMGR release
+IMGR release
+IMGR release
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+I_SHARED_BLOCKED verdict=3
+IMGR acquire -> inspector
+I_SHARED_CONDEMNED verdict=3 name=shared.exe
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+I_SHARED_CONDENM_NEW verdict=4
+IMGR acquire -> inspector
+I_SHARED_KEEP_CONDEMNED verdict=4
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR acquire -> inspector
+IMGR release
+J_DUP_MISS have=0 pending=0
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+J_DUP have=1 pending=0 verdict=3 name=dup.bin cache_dup=0
+IMGR release
+J_NOTCACHEABLE=1
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+J_TAKE src=0 dst=1
+J_TAKE2 dst=1
+IMGR acquire -> inspector
+J_DUP_PEND have=1 pending=1 verdict=5 user_data=0
+IMGR release
+IMGR release
+IMGR release
+IMGR release
+IMGR acquire -> inspector
+FILEDBG[file_cache] resume_pending_verdict:File id not found, returning
+K_RESUME_NOID verdict=0
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+POLICY signature_lookup -> 1
+FILEDBG[file_cache] resume_pending_verdict:applying file cache verdict 1
+FILEDBG[file_cache] apply_verdict 1
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_cache] File advance log: fuid-500, source-, mime type-, file name-resume.exe, duration-0.000000, is orig-0, seen bytes-0, total bytes-0, timedout-0, sha256-, extracted name-, extracted cutoff-0, extracted size-0
+K_RESUME_LOG resolved=1 entry_verdict=1 name=resume.exe url=http://h/r host=h
+CLK tv=6000.000000
+IMGR release
+K_RESUME_PINBALANCED found=0 released=1
+IMGR release
+IMGR release
+L_EMPTY_DUMP begin
+LOGMSG 
+Total number of cache entries: 0
+L_EMPTY_DUMP end
+L_EMPTY_ENTRY begin
+LOGMSG File cache is empty
+L_EMPTY_ENTRY end
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+IMGR release
+L_SHA256_ABC=ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+L_DUMP_ALL begin
+LOGMSG 
+Total number of cache entries: 3
+LOGMSG File Name            | File Type  | Verdict      | SHA256
+LOGMSG mid_name_exact20c...   Unknown file type, done   Pending        BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD
+LOGMSG this_file_name_is...   Unknown file type, done   Block          BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD
+LOGMSG short.exe              Undecided file type, continue...   Log            <pending>
+L_DUMP_ALL end
+L_DUMP_CAP1 begin
+LOGMSG 
+Total number of cache entries: 3
+LOGMSG File Name            | File Type  | Verdict      | SHA256
+LOGMSG mid_name_exact20c...   Unknown file type, done   Pending        BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD
+LOGMSG ... displayed 1 of 3 entries
+L_DUMP_CAP1 end
+L_ENTRY_LOWER begin
+LOGMSG No cache entry found matching SHA256: ba7816
+L_ENTRY_LOWER end
+L_ENTRY_UPPER begin
+LOGMSG 
+SHA256: BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD
+LOGMSG File Name: mid_name_exact20ch.exe
+LOGMSG File Type: Unknown file type, done (id: 65535)
+LOGMSG File Size: 4100
+LOGMSG Verdict: Pending
+LOGMSG Direction: Upload
+LOGMSG File ID: 603
+LOGMSG URL: http://example.com/m
+LOGMSG Host: example.com
+LOGMSG 
+SHA256: BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD
+LOGMSG File Name: this_file_name_is_waaaaaaaaay_too_long.
+LOGMSG File Type: Unknown file type, done (id: 65535)
+LOGMSG File Size: 0
+LOGMSG Verdict: Block
+LOGMSG Direction: Download
+LOGMSG File ID: 0
+L_ENTRY_UPPER end
+L_ENTRY_MISS begin
+LOGMSG No cache entry found matching SHA256: 00
+L_ENTRY_MISS end
+L_ENTRY_TOOLONG begin
+LOGMSG No cache entry found matching SHA256: 00000000000000000000000000000000000000000000000000000000000000000
+L_ENTRY_TOOLONG end
+IMGR release
+IMGR release
+IMGR release
+IMGR acquire -> inspector
+CLK tv=7000.000000
+IMGR release
+M_PINNED_SKIP found=0 during=1 freed=1 remaining=0

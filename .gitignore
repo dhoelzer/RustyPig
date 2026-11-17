@@ -143,3 +143,11 @@ tools/filib_harness/gate.txt
 tools/filib_harness/catch_main.cc
 tools/filib_harness/*.o
 tools/filib_harness/*.log
+
+tools/fcache_harness/copy/
+tools/fcache_harness/probe
+tools/fcache_harness/gate
+tools/fcache_harness/catch_main.cc
+tools/fcache_harness/*.o
+tools/fcache_harness/*.log
+tools/fcache_harness/gate.txt
