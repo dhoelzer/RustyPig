@@ -1031,3 +1031,41 @@ Structural deviations (behavior preserved):
 - `NumaWrapper`/`HwlocWrapper` are thin virtual dispatch over libnuma/
   hwloc syscalls: no logic to port; kept as a doc note (the port's
   scope is the pure policy-mapping layer the tests exercise).
+
+## file_api/file_stats.{h,cc} (row 17m)
+
+Harness reality, not port fiction:
+
+- Probe AND gate both `#include` file_stats.cc verbatim (the upstream
+  test's own trick) to reach the file-static `file_totals`. The
+  upstream test ships its own witness definitions for
+  `file_type_name`, `FileCapture` statics, and `FileService`
+  statics/coll — the gate thus needs ZERO extra stubs; the probe
+  reuses the same witness shapes (buffers_max/in_use constants
+  differ: probe witnesses return 41/7, not the test's 0/0).
+- `file_service.h` keeps those statics private; the probe's graft
+  flips the class to public (same discipline as main/policy.h).
+  The gate itself uses only out-of-class definitions, unaffected.
+- The ORIGINAL probe ordering exposed a real upstream hazard:
+  `file_stats_term()` frees the global WITHOUT nulling; a later
+  `file_stats_clear()` memsets through the dangling pointer (exit-
+  time SEGV). The locked probe documents this observationally
+  (`TERM dangling=1`) and never dereferences freed memory.
+
+Structural deviations (behavior preserved):
+
+- C file-statics/thread-locals -> driver-owned `FileStatsEnv`; the
+  freed-global dangling state is modeled as `None` (Rust cannot
+  reproduce a dangling deref without UB — the `file_stats_clear`
+  post-term memset is skipped in the model).
+- `file_stats_sum` adds per-field in declaration order; the flat
+  walk is proven equivalent by the all-u64 layout pin (NFLAT=22550
+  matches sizeof/8, transcript-pinned).
+- `FileStatsHooks` trait = the harness witness seam (file_type_name
+  / is_file_signature_enabled / collect_mem_usage /
+  collect_cache_usage / buffers_*); C's Builder params on the two
+  collect_* witnesses were unused by the bodies the transcripts
+  pin, so they are omitted from the seam.
+- FileCounts modeled with exact C field order (mechanically diff-
+  checked against the header, 31 members) though only the buffer
+  pair is read by ported functions.
