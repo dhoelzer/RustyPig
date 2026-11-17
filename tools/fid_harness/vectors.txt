@@ -1,0 +1,20 @@
+CLEAR 0 0 [] [] [] ng=0
+P0 mem=0
+A1 mem=2064
+P1 empty find=65535 ctxnull=1
+P2 empty find2=0 ctxnull=1
+PE file type: rule id 1 found duplicate
+DUP kept=[pdf] id=1
+GET id2=[exe] id0=1 id1025=1
+ZERO keptnull=1
+MEXE count=1 id1=0 id2=1 id3=0
+MEXE17 count=0
+MEXE17B count=1 id2=0 id4=1
+MEMPTY count=2 id3=1
+GROWN mem=8256 sznode=2064
+T1 full=42 ctxnull=1
+T2 atnode=42 ctxoff=2
+T3 resume=65535 ctxoff=-1
+T4 nomatch=65535 ctxnull=1
+T5 skipped=65535 ctxnull=1
+DONE

@@ -129,3 +129,10 @@ tools/fstats_harness/catch_main.cc
 tools/fstats_harness/*.o
 tools/fstats_harness/*.log
 tools/fstats_harness/probe_dbg
+tools/fid_harness/copy/
+tools/fid_harness/probe
+tools/fid_harness/gate
+tools/fid_harness/gate.txt
+tools/fid_harness/catch_main.cc
+tools/fid_harness/*.o
+tools/fid_harness/*.log
