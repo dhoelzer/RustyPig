@@ -121,3 +121,11 @@ tools/numa_harness/gate
 tools/numa_harness/gate.txt
 tools/numa_harness/catch_main.cc
 tools/numa_harness/*.o
+tools/fstats_harness/copy/
+tools/fstats_harness/probe
+tools/fstats_harness/gate
+tools/fstats_harness/gate.txt
+tools/fstats_harness/catch_main.cc
+tools/fstats_harness/*.o
+tools/fstats_harness/*.log
+tools/fstats_harness/probe_dbg

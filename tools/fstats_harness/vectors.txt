@@ -1,0 +1,65 @@
+LAYOUT nfl=22550 nfc=31
+SECCTIONS=0
+SECCTIONS=1
+SEC File Statistics ng=1
+ GRP file stats nc=2 nt=0
+  CTR Capture memcap=n:99
+  CTR File cache entries=n:5
+FLATSUM1=70
+SECCTIONS=1
+SEC File Statistics ng=1
+ GRP file stats nc=0 nt=1
+  TBL file stats 5 fc=0
+   COL Type
+   COL TypeDn
+   COL TypeUp
+   COL BytesDn
+   COL BytesUp
+   ROW s:TEST(1) n:2 n:3 n:20 n:30
+   ROW s:Total n:2 n:3 n:20 n:30
+SECCTIONS=1
+SEC File Statistics ng=1
+ GRP file stats nc=0 nt=1
+  TBL file stats 7 fc=0
+   COL Type
+   COL TypeDn
+   COL TypeUp
+   COL SigDn
+   COL SigUp
+   COL BytesDn
+   COL BytesUp
+   ROW s:TEST(1) n:2 n:3 n:9 n:0 n:20 n:30
+   ROW s:Total n:2 n:3 n:9 n:0 n:20 n:30
+SECCTIONS=1
+SEC File Statistics ng=1
+ GRP file stats nc=0 nt=1
+  TBL file stats 7 fc=0
+   COL Type
+   COL TypeDn
+   COL TypeUp
+   COL SigDn
+   COL SigUp
+   COL BytesDn
+   COL BytesUp
+   ROW s:TEST(1) n:2 n:3 n:9 n:0 n:20 n:30
+   ROW s:ZERO(2) n:0 n:0 n:0 n:0 n:0 n:0
+   ROW s:Total n:2 n:3 n:9 n:0 n:20 n:30
+SECCTIONS=1
+SEC File Statistics ng=1
+ GRP file stats nc=0 nt=1
+  TBL file stats 5 fc=0
+   COL Type
+   COL TypeDn
+   COL TypeUp
+   COL BytesDn
+   COL BytesUp
+   ROW s:TEST(1) n:1 n:0 n:0 n:0
+   ROW s:Total n:1 n:0 n:0 n:0
+BUFFERS max=41 in_use=7
+FLATSUMEND=0
+INIT notnull=1
+AFTER_SUM flat_totals=5 flat_thread=0
+AGAIN flat_totals=5
+PRETERM notnull=1
+TERM dangling=1
+DONE
