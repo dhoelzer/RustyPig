@@ -1069,3 +1069,42 @@ Structural deviations (behavior preserved):
 - FileCounts modeled with exact C field order (mechanically diff-
   checked against the header, 31 members) though only the buffer
   pair is read by ported functions.
+
+## file_api/file_identifier.{h,cc} (row 17n)
+
+Harness reality:
+
+- The gate is the TU's own `[FileMagic]` UNIT_TEST block; its six
+  cases are tautologies GIVEN production semantics: add_file_id fills
+  file_magic_rules[] but NEVER inserts trie nodes, so find_file_type_id
+  on any production FileIdentifier is len<=0 -> CONTINUE(0) else
+  CONTINUE->UNKNOWN(65535). Both sides reproduce that for the right
+  reason (ported traversal + empty trie), not by special-casing.
+- The header's private section is grafted public in the harness copy
+  (shared by probe AND gate builds): access control only, no semantic
+  change; the probe grows a witness trie through the production
+  calloc_mem so T-rows pin what the find traversal means once a trie
+  exists. Documented, never silent.
+- GHash's !static_hash branch references get_random_seed() /
+  get_instance_id(); the shim keeps static_hash()==true so the branch
+  is dead, but the linker still needs the symbols -> pinned witnesses
+  (global get_random_seed per util.h, snort::get_instance_id per
+  thread.h) with correct namespaces.
+
+Structural deviations (behavior preserved):
+
+- calloc'd raw node arena (+list of blocks, dtor frees blocks) ->
+  Rc<RefCell<IdentifierNode>>; the in/out `void** context` node
+  identity survives across find calls, drop covers the dtor's
+  snort_free loop.
+- memory_usage() tracks the C byte accounting: nodes are costed at
+  sizeof(IdentifierNode)=2064 (transcript `sznode=2064`), NOT
+  std::mem::size_of::<Rust node>() (Rc/Vec shape is a layout detail,
+  pinned as C_IDENTIFIER_NODE_SIZE).
+- merge-hash: C stores raw MergeNode{shared,append} blobs in GHash;
+  no production path inserts/queries, Rust constructs the GHash with
+  the same ctor args (1000, 16, false) as C init_merge_hash.
+- get_rule_from_id(id<FILE_ID_MAX) bound + `slot.id > 0` presence
+  gate kept literally, including the id-0 quirk (slot 0's id stays 0
+  even after add_file_id -> never findable; dup check also never
+  fires for id 0).
