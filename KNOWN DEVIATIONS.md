@@ -1253,3 +1253,92 @@ Structural deviations (behavior preserved):
   misses, uppercase hits; >64 chars miss) -- pinned, not normalized.
 - `log_file_event`'s DataBus body is row 17q (file_lib.cc:613); the
   call sites stay literal through `FileCacheEventSink`.
+
+## file_api/file_flows.{h,cc} (row 17q)
+
+Harness reality:
+
+- Two-mode harness `tools/fflows_harness` (fcache donor recipe lifted).
+  Gate = file_flows.cc compiled -DUNIT_TEST VERBATIM: its OWN 8
+  [file_flows][lifecycle] cases (22 assertions, runner-measured) pass
+  with the plain-catch shim — the block ships its own `FFTestAccessor`
+  friend struct + `FF_TEST_CONTEXT : public FileContext`, so NO
+  private->public graft is needed on the gate side. Probe = the same TU
+  with the block inert, linked against the REAL file_cache.cc +
+  file_lib.cc + file_stats + capture closure.
+- The donor fcache `FileFlows::*` witness block is RETIRED at this link
+  only (real TU defines the symbols); fcache's committed transcript is
+  NOT touched (vanishing witness lines = retirement signal, NEXT.md
+  rule). `init_file_context` is a DEAD declaration upstream (grep-
+  proven: no definition, no call site in snort3-src) — retiring its
+  witness costs nothing; the port records it as a comment, not code.
+- The ONLY graft delta over the fcache closure donor: `flowz/flow_fwd.h`
+  Flow extended with `get_flow_data`/`set_flow_data` (flow.h:195/200),
+  the single-slot FlowData store the harness pins; `FIXACC` extended to
+  file_api.h (access-only). New witnesses: NetworkPolicy
+  get_base_file_policy pinned storage, `snort::get_file_processed_size`
+  (file_service.cc:256, free linkage), PacketTracer get_time/
+  restart_timer + armable is_daq_activated/get_instance_id/
+  get_max_file_depth/is_file_service_enabled, DetectionEngine
+  queue_event line, FileService get_max_file_depth passthrough.
+
+Structural deviations (behavior preserved):
+
+- C raw owning `FileContext*` slots (current_context, main_context,
+  deferred_delete_context, ppc map) -> `Rc<RefCell<FileContext>>`. The
+  C use-after-free windows the upstream gate cases pin ("caller deref
+  after remove is safe", the retire-then-set orderings) are
+  STRUCTURALLY EXCLUDED by Rc, but every null/erase/park ORDER is
+  transcribed literally, so the observable slot state matches every
+  transcript line (the C `deferred == a` / `current == null` CHECKs
+  have exact Rust analogues via `Rc::ptr_eq`).
+- The m3_new=%d probe vector compares the fresh main_context against
+  the DANGLING old-main pointer; glibc hands `new FileContext` the
+  just-freed chunk so C reads them EQUAL (m3==m2 pinned 0 across every
+  rebuild). The pinned vector value is verbatim; the dangling compare
+  itself cannot and need not be constructed in Rust (UAF structurally
+  excluded above).
+- `std::mutex file_flow_context_mutex` (file_flows.h:61) is declared
+  but NEVER locked in this TU; the port models Rust exclusivity in
+  place of the field (rows 17m/17p deviation pattern).
+- `Flow* flow` lives in the Flow's FlowData slot in C; FileFlows
+  carries the fcache-cache-flow view and the C file-scope statics
+  `FileFlows::file_flow_data_id` (file_flows.cc:56), `static
+  THREAD_LOCAL uint32_t max_file_id` (:57) and the factory's FlowData
+  slot ride `FileEnvLite` Cells plus a driver-passed slot handle at
+  get_file_flows — the CacheFlow Copy set from 17p stays untouched;
+  flow->service lookups ride the FileEnvLite cell.
+- The two `file_process` overloads split into `file_process_multi`
+  (file_id form, file_flows.cc:388) and `file_process` (single-file
+  form, :499) — Rust has no overloading.
+- `FilePolicyBase*` -> `FilePolicyHandle` (file_cache.rs): the C
+  add_ref / `FilePolicyBase::delete_file_policy` pair (file_api.cc:
+  28-41, file_flows.h:120-126) runs through the handle at the exact C
+  points (refs=1->2 at B_CREATE, policy_refs=2->1 at C5_DTOR); the C
+  `delete policy` at count 0 = the Box drop inside delete_file_policy.
+  Handles in the same store compare via `Rc::ptr_eq`.
+- `std::unordered_map<uint64_t, FileContext*>
+  partially_processed_contexts` -> insertion-order Vec of (id, ctx):
+  every C observation here is a point find / size() / count / the dtor
+  retire walk, and the pinned multi-entry walks retire equal-line
+  contexts, so hash order is unobservable (fcache OtnMap precedent).
+- `EventGen` REG_TEST-only members (events_generated, none_found,
+  get_raw, bitmask) compile out in the harness build config and are
+  not ported; `std::bitset<EVENT_MAX>` -> lazily sized Vec<bool>
+  (helpers/event_gen.rs; the bitset order is never observed).
+- FileConfig access is TWO views (FileConfigView read surface for the
+  flows ladder, FileConfigLite construction) because the C TU reads
+  `conf` globals through different owners than the 17p cache seam —
+  source-compat with the committed 17p witnesses preserved via defaulted
+  PacketTracerApi methods (is_daq_activated/restart_timer/daq_log).
+- The heavy FileContext half stays pinned-panic seams with C-line
+  cites (process pair :825/:986, find_file_type_from_ips :1004 — the
+  swap/restore consumer at :1040/:1053 — process_file_signature_sha256
+  :1065 EVP chain, capture ladder :1169-1207, print/iconv cluster
+  :1226-1362 + get_UTF8_fname :85): the fflows probe never crosses
+  them; their bodies + the fflows call sites at file_flows.cc:473/
+  :486/:531 land together in row 17r, so the semantics are never split
+  across rows.
+- C layout constants (A_SZ_FF=216, SZ_SLOT=16, member offsets) are
+  pinned literals: the Rc/Vec port shape does not reproduce a sizeof
+  (fcache SIZEOF_FILE_NODE precedent).
