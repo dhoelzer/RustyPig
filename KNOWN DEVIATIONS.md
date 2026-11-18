@@ -1342,3 +1342,89 @@ Structural deviations (behavior preserved):
 - C layout constants (A_SZ_FF=216, SZ_SLOT=16, member offsets) are
   pinned literals: the Rc/Vec port shape does not reproduce a sizeof
   (fcache SIZEOF_FILE_NODE precedent).
+
+
+## file_api/file_lib heavy FileContext half + file_segment/file_mempool/circular_buffer (row 17r)
+
+Harness reality:
+
+- Fresh `tools/fctx_harness/` copied from the fflows donor; measured witness
+  delta ZERO new symbols (fctx_harness/PLAN.md §3). The gate link carries
+  THREE UT TUs — [file_flows] + [file_cache] carried, [file_mempool] NEW =
+  18 cases / 91 assertions — under the duplicate-symbol rule: every
+  UT-compiled TU's plain .o is excluded from the gate link (nm dup errors
+  otherwise; RECON-verified this row). `file_lib.cc`'s lone UNIT_TEST block
+  (:1363 [file_info], 19 cases, remains filib's gate) is excised with a
+  rfind + brace-balance guard on BOTH builds so those cases never leak into
+  fctx's gate.txt; the early :37/:54 `#ifdef UNIT_TEST` fragments stay.
+- ZERO upstream Catch cases live in the :825–1362 heavy span: ground truth
+  = probe vectors (610 lines, md5 839b5566be0a2191876e0f34b4ed56e4, byte-identical
+  across clean rebuilds incl. the docs-time re-verification) + the 17o G-block
+  pins. The fflows donor's committed vectors stay untouched (retire rule).
+- The heavy-half bodies and the `file_flows.cc:473/:486/:531` call sites land
+  in the SAME commit (semantics never split across rows): the 17q pinned
+  panics are deleted together with their unlock, so no intermediate build
+  carries both a live body and a panic.
+
+Structural deviations (behavior preserved):
+
+- **EVP → hand-rolled SHA-256** (`src/helpers/sha256.rs`, FIPS 180-4, zero
+  external deps): the crate has no OpenSSL dependency and the host has no dev
+  packages, so `EVP_MD_CTX_new/Init_ex/DigestUpdate/copy_ex/DigestFinal/free`
+  map to `Sha256Ctx::{new,init,update,snap,finalize}` / drop (call table in the
+  module header). `Clone` IS `EVP_MD_CTX_copy_ex` (the FLUSH arms :1093-1105/
+  :1117-1129 snapshot the running state; the live ctx stays untouched — pinned
+  by M2_H1 vs M2_HREF). The C `copy_ex`/`!= 1` failure arms are compile-visible
+  dead branches upstream never fires; kept dead, not sed away. The C probe ran
+  REAL libcrypto (node-headers recipe) and the Rust digests match it
+  byte-for-byte (M1_HASH 'abc' = BA78... printed as 2-byte UPPERCASE pairs,
+  file_lib.cc:1280).
+- **Mixed-allocator sha buffer** (file_lib.cc:1096/:1120 `snort_alloc` vs
+  :1139/:1155 `new uint8_t[]`, freed by `snort_free` :737 vs `reset_sha`'s
+  `delete[]` :362-366 — a genuine UB pair in C where no read distinguishes
+  the allocators): the Rust port keeps ONE owned `Option<Vec<u8>>`;
+  `finish_signature_lookup`'s else-branch nulling (C :736-739) lands as
+  `Option::take` — the observable `P1_RESETSHA null_after=1` is pinned, the
+  mismatched free itself is structurally excluded and never replicated.
+- `std::recursive_mutex user_file_data_mutex` (lock_guard sites :1068/:1172/
+  :1191) is not reproduced: Rust exclusivity stands in (row 17p precedent);
+  the lock/unlock ORDER is only modeled where observable.
+- **FileCapture stays a trait seam**: C `process_file_capture` :1169-1187
+  allocates a real `new FileCapture(min,max)` riding the file-static
+  `file_mempool` (file_capture.cc:55) + CircularBuffer + the `std::thread`
+  writer; the port injects `Box<dyn FileCaptureApi>` (`new_capture` factory,
+  file_lib.rs). The capture state ladder (N-block) is pinned through the seam
+  witnesses; the real TU (913+150, 4 [file_capture] cases incl. the async-
+  writer dance) is row 17s proper. The C dtor chain
+  (`stop_file_capture` -> `~FileCapture` ordering, 17q-pinned) is unchanged.
+- `FileSegments`: C's doubly-linked `next/prev` list (always offset-sorted)
+  -> `Vec<FileSegment>` in list order; every cursor (`left`, the closer-end
+  `le` search, the overlap `left = left->next` ladder with the
+  `*left = (*left)->next` caller-slot re-aim) is the same walk over
+  `Option<usize>` indices, so insertion order and FILE_DEBUG print order land
+  exactly as C. `offset` keeps the C uint32_t field width (add/process args
+  are uint64 and truncate at node creation, literally). The
+  `process_one` ↔ `FileContext::process` (position form) mutual recursion is
+  threaded as explicit args + the free `process_pos` entry — no
+  self-referential struct. `clear()` empties the Vec but the owning slot
+  stays Some (O5: queued_ptr=1 after the false-arm clear — the C
+  `file_segments` pointer likewise survives clear; nulling only via
+  `remove_segments` / dtor).
+- `file_segments: Option<()>` -> `Option<Rc<RefCell<FileSegments>>>`; the dtor
+  `delete file_segments` arm is the handle drop.
+  `file_signature_context: Option<()>` -> `Option<Sha256Ctx>` (dtor's
+  `EVP_MD_CTX_free` arm = drop-with-struct, guard meaning preserved).
+  `file_type_context: Option<()>` (C `void*`, file_lib.h:231) STAYS the seam:
+  no pinned path reads it — only the file-type inspector plumbs it, a later row.
+- `IpsContext` writes (file_lib.cc:1021-1027) materialize as `PacketView`
+  fields (file_cache.rs): `file_data: Option<Vec<u8>>` models the non-null
+  `std::string_view` (fdp=1 pin, len re-materialized at the read), plus
+  `proto_bits` (PROTO_BIT__PDU |= reads back 64 in L2_PLAIN), `file_pos`,
+  `file_type_process`. The view folds packet + IpsContext into one value.
+- C layout constants (`A_SZ ctx=424 segs=32 slot=16`) are pinned literals:
+  the Rc/Vec port shape does not reproduce a sizeof (fcache FileNode precedent).
+- The fcache/fflows parity fixtures gained the new `PacketView` fields as
+  zero-init defaults; their replays never drive the :1021-1027 arms, so the
+  17p/17q committed transcripts and expectations are untouched.
+- THREAD_LOCAL / file_counts / FilePolicyHandle / two-FileConfig-view
+  disciplines carry over unchanged from rows 17p/17q.
