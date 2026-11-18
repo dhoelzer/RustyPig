@@ -95,6 +95,10 @@ use super::file_lib::{
     SNORT_FILE_MIDDLE as FILE_MIDDLE, SNORT_FILE_POSITION_UNKNOWN as FILE_POSITION_UNKNOWN,
     SNORT_FILE_START as FILE_START,
 };
+// Row 17r: the seam panics around file_process_multi / file_process are
+// UNLOCKED — the position/offset overloads live in file_lib as free
+// functions (the C mutual-call pair threaded via FlowsRef).
+use super::file_lib::{FlowsRef, process, process_pos};
 use super::file_lib::{EVENT_FILE_DROPPED_OVER_LIMIT, FILE_ID_GID};
 use super::file_stats::FileCounts;
 use crate::helpers::event_gen::EventGen;
@@ -442,7 +446,11 @@ impl FileFlows {
         // partially-cleared partially_processed_contexts."
         let ppc = std::mem::take(&mut self.partially_processed_contexts);
         for (_id, ctx) in ppc {
-            drop(ctx); // retire_victim(elem.second)
+            // retire_victim(elem.second) -> `delete victim`
+            // (file_flows.cc:359): ~FileContext + the IMGR release
+            // witness fire AT this point even while driver-side Rc
+            // aliases live on (17r owner-delete model, file_lib.cc:574).
+            FileContext::owner_delete(&ctx);
         }
 
         // FilePolicyBase::delete_file_policy(file_policy);
@@ -1009,23 +1017,31 @@ impl FileFlows {
                     // C: `context->process(p, file_data, data_size,
                     // SNORT_FILE_FULL, file_policy)` — the position-
                     // form overload = process_pos (Rust split).
-                    let continue_processing = match self.file_policy.as_mut() {
-                        Some(fp) => {
-                            let mut cb = context.borrow_mut();
-                            fp.with_policy_mut(|pol| {
-                                cb.process_pos(p, file_data, data_size, FILE_FULL, Some(pol))
-                            })
-                        }
-                        // C forwarded the (possible null) raw pointer;
-                        // the seam panics regardless -> None arm.
-                        None => context.borrow_mut().process_pos(
-                            p,
-                            file_data,
-                            data_size,
-                            FILE_FULL,
-                            None,
-                        ),
-                    };
+                    // 17r UNLOCKED seam (file_lib.cc:825 process pos
+                    // form). Deviations, both 17q-disciplined:
+                    //  * the C raw `file_policy` pointer rides a handle
+                    //    alias (file_policy.clone() — the Rc alias of
+                    //    the same PolicyStore; aliasing, not ref_count)
+                    //    and is turned into the C-pointer holder
+                    //    Option<&mut dyn FilePolicyApi> inside
+                    //    with_policy_mut, held for the whole ladder;
+                    //  * the C `FileFlows::get_file_flows(p->flow,
+                    //    false)` the ladder resolves later IS this
+                    //    object (flow-data identity) — the flows Ref is
+                    //    Some(self), no static re-resolution.
+                    let policy_alias = self.file_policy.clone();
+                    let mut ff_ref = FlowsRef::Direct(self);
+                    let continue_processing = process_pos(
+                        &context,
+                        p,
+                        file_data,
+                        data_size,
+                        FILE_FULL,
+                        policy_alias,
+                        &mut ff_ref,
+                        env,
+                        counts,
+                    );
                     if context.borrow().info.processing_complete {
                         self.remove_processed_file_context(multi_file_processing_id);
                     }
@@ -1045,16 +1061,23 @@ impl FileFlows {
             &format!("calling context process data_size {data_size}, offset {offset}, position {position}\n"),
         );
         // continue_processing = context->process(p, file_data,
-        //     data_size, offset, file_policy, position);  <-- :488 (17r)
-        let continue_processing = match self.file_policy.as_mut() {
-            Some(fp) => {
-                let mut cb = context.borrow_mut();
-                fp.with_policy_mut(|pol| cb.process(p, file_data, data_size, offset, Some(pol), position))
-            }
-            None => context
-                .borrow_mut()
-                .process(p, file_data, data_size, offset, None, position),
-        };
+        //     data_size, offset, file_policy, position);  <-- :488 (17r
+        // UNLOCKED — offset overload, file_lib free `process`; holder
+        // + flows-Ref deviations as at the :474 site above).
+        let policy_alias = self.file_policy.clone();
+                    let mut ff_ref = FlowsRef::Direct(self);
+        let continue_processing = process(
+            &context,
+            p,
+            file_data,
+            data_size,
+            offset,
+            policy_alias,
+            position,
+            &mut ff_ref,
+            env,
+            counts,
+        );
         if context.borrow().info.processing_complete {
             self.remove_processed_file_context(multi_file_processing_id);
         }
@@ -1145,15 +1168,20 @@ impl FileFlows {
         //     data_size, position, file_policy);   <-- :590 (17r seam;
         // C passes FilePolicyBase* straight through; position-form
         // overload = process_pos)
-        let file_process_ret = match self.file_policy.as_mut() {
-            Some(fp) => {
-                let mut cb = context.borrow_mut();
-                fp.with_policy_mut(|pol| cb.process_pos(p, file_data, data_size, position, Some(pol)))
-            }
-            None => context
-                .borrow_mut()
-                .process_pos(p, file_data, data_size, position, None),
-        };
+        // (17r UNLOCKED — position form again; deviations as at :474)
+        let policy_alias = self.file_policy.clone();
+                    let mut ff_ref = FlowsRef::Direct(self);
+        let file_process_ret = process_pos(
+            &context,
+            p,
+            file_data,
+            data_size,
+            position,
+            policy_alias,
+            &mut ff_ref,
+            env,
+            counts,
+        );
         if env.packet_tracer.is_daq_activated() {
             populate_trace_data(&context.borrow(), env);
         }

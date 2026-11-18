@@ -246,6 +246,14 @@ pub const PKT_PDU_HEAD: u32 = 0x0000_0100;
 pub const PKT_PDU_TAIL: u32 = 0x0000_0200;
 pub const PKT_PDU_FULL: u32 = PKT_PDU_HEAD | PKT_PDU_TAIL;
 
+/// `protocols/packet.h:62` PKT_ALLOW_MULTIPLE_DETECT (file_lib.cc:1026
+/// `p->packet_flags |=` arm of find_file_type_from_ips; row 17r).
+pub const PKT_ALLOW_MULTIPLE_DETECT: u32 = 0x0000_0800;
+/// `framework/decode_data.h:93` PROTO_BIT__PDU (file_lib.cc:1027
+/// `p->proto_bits |=` arm — pinned = 64 by the L2_vectors vector line;
+/// row 17r).
+pub const PROTO_BIT__PDU: u64 = 0x0040;
+
 /// The per-packet state file_cache.cc reads: `p->flow`,
 /// `p->packet_flags`, `p->is_retry()` (packet.h:336), `p->active`, and
 /// the `p->context->conf` that `get_file_config(p->context->conf)`
@@ -256,6 +264,25 @@ pub struct PacketView {
     pub packet_flags: u32,
     pub active: ActiveState,
     pub conf: FileConfigView,
+    // Row 17r (find_file_type_from_ips, file_lib.cc:1021-1027): the
+    // IpsContext witness shape the C TU writes through
+    // `p->context->...` — mirrored as PacketView fields (deviation:
+    // the Rust view folds packet + IpsContext into one value; the
+    // vectors pin the post-write reads L2_PLAIN / L2_*).
+    /// `IpsContext::proto_bits` (framework/decode_data.h ladder; the
+    /// PROTO_BIT__PDU |= arm reads back = 64 in L2_PLAIN).
+    pub proto_bits: u64,
+    /// `IpsContext::file_data` (`std::string_view {ptr, len}`): the
+    /// Some(vec) models the non-null view (fdp=1 pin); len rides the
+    /// Vec (the C truncated int width is re-materialized at the read).
+    pub file_data: Option<Vec<u8>>,
+    /// `IpsContext::file_pos` (uint64; = processed_bytes at the write)
+    pub file_pos: u64,
+    /// `IpsContext::file_type_process` (bool)
+    pub file_type_process: bool,
+    /// `IpsContext::set_snort_protocol_id(SnortProtocolId)` — int
+    /// storage (UNKNOWN_PROTOCOL_ID = 0 per A_ENUM spid=0 pin)
+    pub snort_protocol_id: i32,
 }
 
 impl PacketView {
@@ -288,12 +315,46 @@ pub const FILE_RESUME_LOG: u32 = 2;
 /// the harness share it by value (17p pinned). The full C-declared
 /// field set rides `FileConfigLite` in file_lib.rs (the
 /// `get_file_config()` resolution side; row 17q).
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug)]
 pub struct FileConfigView {
     pub block_timeout_lookup: bool,
     pub mp_dbus: bool,
     /// file_config.h:71 (the `config->trace_type` dead tail gate)
     pub trace_type: bool,
+    // Row 17r (process position-form ladder, file_lib.cc:834/:953):
+    // file_config.h:72-74 `trace_signature` / `trace_stream` + the
+    // :836 `show_data_depth` hexdump clamp. C defaults: false/false/100
+    // (defaults at FileConfigLite; the view's derive-Default zeroes
+    // show_data_depth — harness arms it).
+    pub trace_signature: bool,
+    pub trace_stream: bool,
+    pub show_data_depth: i64,
+    /// file_config.h:48 `file_signature_depth` (the
+    /// process_file_signature_sha256 gate, file_lib.cc:1070; row 17r
+    /// grows the view). Default hand-written below: a derive would
+    /// zero the C 10 MiB default and depth-fail every armed ladder
+    /// off a FileConfigView::default()-built driver config (the old
+    /// doc note "derive-Default zeroes show_data_depth — harness
+    /// arms it" is retired: the trio now defaults to the C values;
+    /// the harness arms stay).
+    pub file_signature_depth: i64,
+}
+
+impl Default for FileConfigView {
+    /// C in-class initializers (file_config.h): everything false,
+    /// show_data_depth 100 (DEFAULT_FILE_SHOW_DATA_DEPTH),
+    /// file_signature_depth DEFAULT_FILE_SIGNATURE_DEPTH (10 MiB).
+    fn default() -> Self {
+        FileConfigView {
+            block_timeout_lookup: false,
+            mp_dbus: false,
+            trace_type: false,
+            trace_signature: false,
+            trace_stream: false,
+            show_data_depth: super::file_lib::DEFAULT_FILE_SHOW_DATA_DEPTH,
+            file_signature_depth: super::file_lib::DEFAULT_FILE_SIGNATURE_DEPTH,
+        }
+    }
 }
 
 impl FileConfigView {
@@ -339,6 +400,12 @@ pub const TRACE_DEBUG_LEVEL: u8 = 7;
 /// mirroring `Trace::enabled`, so the port stays call-site-literal).
 pub trait TraceSink {
     fn file_trace(&mut self, level: u8, msg: &str);
+    /// Row 17r: the C heavy half writes some output to PLAIN stdout /
+    /// std::cout, NOT through file_trace (the K-block trace_stream
+    /// hexdump, file_lib.cc:835; the pinned K1 vectors carry those
+    /// lines WITHOUT the FILEDBG prefix). The seam renders those
+    /// sites; default silent (production Rust writes nothing).
+    fn raw_line(&mut self, _line: &str) {}
 }
 
 pub struct NoTrace;
@@ -353,6 +420,14 @@ impl TraceSink for NoTrace {
 /// GET_CURRENT_PACKET call site regardless of the sink's gate.
 pub trait CurrentPacketApi {
     fn get_current_packet(&mut self);
+    /// `DetectionEngine::set_next_packet(Packet* p)` (detection/
+    /// detection_engine.cc witness; file_lib.cc:1019 in
+    /// find_file_type_from_ips, row 17r). C returns the replacement
+    /// `p` the ladder keeps driving; the Rust port drives the
+    /// caller's PacketView through (deviation: single-view port —
+    /// the witness prints the "DE set_next_packet parent=% flow=%
+    /// next=%" shape and arms the current-packet latch).
+    fn set_next_packet(&mut self, _parent: &PacketView) {}
 }
 
 pub struct NoCurrentPacket;
@@ -769,7 +844,11 @@ impl ExpectedFileCache {
     /// node->file`.
     fn free_user_data(slot: &mut HashSlot) {
         if let Some(file) = slot.payload.file.take() {
-            drop(file);
+            // `delete node->file` (file_cache.cc:90 / :244): ~FileContext
+            // + the IMGR release witness run AT this point (17r
+            // owner-delete model, file_lib.cc:574) even while driver-
+            // side Rc aliases (get_file/dup handles) still live.
+            FileContext::owner_delete(&file);
         }
     }
 
@@ -900,6 +979,26 @@ impl ExpectedFileCache {
         // the 17p harness IMGR-release witness lines pin the moment).
         Self::free_user_data(&mut self.slots[slot_idx]);
         self.free_slots.push(slot_idx);
+    }
+}
+
+impl Drop for ExpectedFileCache {
+    /// file_cache.cc:125 `~FileCache` -> `delete fileHash` ->
+    /// ~ExpectedFileCache (file_cache.cc:63) -> `delete_hash_table()`
+    /// -> per-node free_user_data (file_cache.cc:86-91 `delete
+    /// node->file`). 17r: the pinned tail vectors — the 3 "IMGR
+    /// release" lines after P2_SEGS (the cache entry 1014 + the two
+    /// lookup-created nodes) — fire at THIS walk in C, whatever Rc
+    /// aliases the driver still holds (owner-delete model,
+    /// file_lib.cc:574). Walk order: the C table-row walk
+    /// (xhash.cc:172-186) — the port's slot-index order matches it
+    /// for the pinned set (insertion-ordered slot ids).
+    fn drop(&mut self) {
+        for idx in 0..self.slots.len() {
+            if self.slots[idx].node != usize::MAX {
+                Self::free_user_data(&mut self.slots[idx]);
+            }
+        }
     }
 }
 

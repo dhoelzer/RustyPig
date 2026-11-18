@@ -159,3 +159,11 @@ tools/fflows_harness/catch_main.cc
 tools/fflows_harness/*.o
 tools/fflows_harness/*.log
 tools/fflows_harness/gate.txt
+
+tools/fctx_harness/copy/
+tools/fctx_harness/probe
+tools/fctx_harness/gate
+tools/fctx_harness/catch_main.cc
+tools/fctx_harness/*.o
+tools/fctx_harness/*.log
+tools/fctx_harness/gate.txt

@@ -527,6 +527,14 @@ fn mk_packet(hub: &Hub) -> PacketView {
             ..ActiveState::default()
         },
         conf: *hub.conf_view.borrow(),
+        // row 17r IpsContext-view fields (find_file_type_from_ips
+        // writes): the fflows replay never drives past the
+        // cached-verdict / verdict-pending arms, so zero-init.
+        proto_bits: 0,
+        file_data: None,
+        file_pos: 0,
+        file_type_process: false,
+        snort_protocol_id: 0,
     }
 }
 

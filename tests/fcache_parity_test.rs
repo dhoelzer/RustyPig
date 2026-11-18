@@ -661,6 +661,14 @@ fn mk_packet(hub: &Hub) -> PacketView {
             ..ActiveState::default()
         },
         conf: hub.packet_conf(),
+        // row 17r IpsContext-view fields: this fixture never runs the
+        // find_file_type_from_ips writes (the fcache replay predates
+        // them) — zero-init.
+        proto_bits: 0,
+        file_data: None,
+        file_pos: 0,
+        file_type_process: false,
+        snort_protocol_id: 0,
     }
 }
 

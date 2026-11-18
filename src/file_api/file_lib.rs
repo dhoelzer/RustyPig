@@ -119,6 +119,56 @@ pub trait FileCaptureApi {
     fn get_file_capture_size(&self) -> i64;
     fn get_max_file_capture_size(&self) -> i64;
     fn set_data(&mut self, file_data: &[u8], size: u32);
+    /// `FileCapture::process_buffer(const uint8_t*, int, FilePosition)`
+    /// (file_capture.h:73; the process_file_capture ladder, row 17r —
+    /// port-side seam substitution per PLAN §3: file_capture.cc stays
+    /// its own row, the harness witness implements the buffer-state
+    /// ladder incl. the file_counts stats bumps its REAL body drives).
+    fn process_buffer(&mut self, _file_data: &[u8], _data_size: i32, _position: u32) -> u32 {
+        FILE_CAPTURE_SUCCESS
+    }
+}
+
+/// Row 17r: `new FileCapture(config->capture_min_size,
+/// config->capture_max_size)` (file_lib.cc:1174) rides this factory
+/// seam on FileEnvLite (the capture ENGINE body stays its own row —
+/// port-side seam substitution, PLAN §3).
+pub trait FileCaptureFactory {
+    fn new_capture(&mut self, min: i64, max: i64) -> Option<Box<dyn FileCaptureApi>>;
+}
+
+pub struct NoFileCaptureFactory;
+impl FileCaptureFactory for NoFileCaptureFactory {
+    fn new_capture(&mut self, _min: i64, _max: i64) -> Option<Box<dyn FileCaptureApi>> {
+        None // C `new` never answers null; the caller expects (pinned-absent)
+    }
+}
+
+/// Row 17r: `fp_eval_service_group(p, conf->snort_protocol_id)`
+/// (file_lib.cc:1044; detection/fingerprint engine reach — donor
+/// witness TU stubs.cc prints the "FP_EVAL spid=%u have_pkt=%d n=%u"
+/// pair and, when armed, SWAPS the run-continuation of this context:
+/// "FP_EVAL set_type=%u" / "FP_EVAL swap -> alt"). The seam receives
+/// the live context handle so an armed witness can drive the file_type
+/// write the detection engine performs through service rules.
+pub trait FpEvalApi {
+    fn fp_eval_service_group(
+        &mut self,
+        p: &PacketView,
+        snort_protocol_id: i32,
+        ctx: &Rc<RefCell<FileContext>>,
+    );
+}
+
+pub struct NoFpEval;
+impl FpEvalApi for NoFpEval {
+    fn fp_eval_service_group(
+        &mut self,
+        _p: &PacketView,
+        _snort_protocol_id: i32,
+        _ctx: &Rc<RefCell<FileContext>>,
+    ) {
+    }
 }
 
 /// file_capture.cc:72 `FileCapture::error_capture`
@@ -712,12 +762,13 @@ impl FileInfo {
 // config->trace_type tail is dead in every pinned transcript:
 // trace_type=false pinned).
 //
-// STILL seam/panic (heavy half, row 17r; the fflows probe cuts every
-// path before a call site — file_flows.cc:473/:486/:531): process
-// (both overloads), finish_signature_lookup, file_signature_lookup,
+// PORTED, row 17r (no panics left in this TU): process (both
+// overloads), finish_signature_lookup, file_signature_lookup,
 // find_file_type_from_ips, process_file_type,
 // process_file_signature_sha256, process_file_capture,
-// print_file_data.
+// print_file_data — the heavy FileContext half (file_lib.cc:825-1362
+// + the signature-lookup pair) on top of the file_segment.rs
+// machinery and the zero-dep helpers::sha256 EVP substitute.
 //
 // Support vocabulary this row grows: FileConfigLite (file_config.h
 // fields + file_type_name/get_rule_from_id), FileServiceLite (the
@@ -730,10 +781,20 @@ impl FileInfo {
 
 use super::file_cache::{
     CacheFlow, FileConfigView, FilePolicyApi, FilePolicyHandle, ImgrRc, InspectorApi,
-    PacketTracerApi, PacketView, TRACE_DEBUG_LEVEL,
+    PacketTracerApi, PacketView, PROTO_BIT__PDU, PKT_ALLOW_MULTIPLE_DETECT, TRACE_DEBUG_LEVEL,
+    TRACE_INFO_LEVEL,
 };
+// Row 17r (the heavy half): find_file_type_from_ips reaches the C
+// statics FileFlows::get_file_flows / get_file_policy and the
+// CurrentContextSlot swap/restore pair — the module cycle
+// (file_flows already imports this module) is the C mutual-call shape
+// the port threads explicitly (skill rule: no self-referential
+// structs).
+use super::file_flows::{CurrentContextSlot, FileFlows};
 use super::file_identifier::{FileIdentifier, FileMeta};
+use super::file_segment::FileSegments;
 use crate::helpers::event_gen::DetectionEventSink;
+use crate::helpers::sha256::Sha256Ctx;
 use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 
@@ -755,7 +816,7 @@ pub const DEFAULT_FILE_CAPTURE_BLOCK_SIZE: i64 = 32_768;
 /// Defaults mirror the C in-class initializers (hand-written Default:
 /// derive would zero the non-zero depths — skill rule). No Clone/Debug:
 /// the private FileIdentifier member is neither (fid row); the struct
-/// rides Rc<RefCell<..> throughout, matching the C pointer usage).
+/// rides Rc<RefCell<..> throughout, matching the C pointer usage.
 pub struct FileConfigLite {
     // file_config.h:47-56 in declared order:
     pub file_type_depth: i64,
@@ -778,6 +839,10 @@ pub struct FileConfigLite {
     pub trace_type: bool,
     pub trace_signature: bool,
     pub trace_stream: bool,
+    /// file_config.h:72 `SnortProtocolId snort_protocol_id =
+    /// UNKNOWN_PROTOCOL_ID;` (the find_file_type_from_ips +
+    /// fp_eval_service_group arg; row 17r)
+    pub snort_protocol_id: i32,
     /// the private `FileIdentifier fileIdentifier` member
     pub file_identifier: FileIdentifier,
 }
@@ -801,6 +866,7 @@ impl Default for FileConfigLite {
             trace_type: false,
             trace_signature: false,
             trace_stream: false,
+            snort_protocol_id: 0, // UNKNOWN_PROTOCOL_ID (snort_types.h)
             file_identifier: FileIdentifier::new(),
         }
     }
@@ -834,6 +900,11 @@ impl FileConfigLite {
 pub fn file_config_view_of(cfg: &FileConfigLite) -> FileConfigView {
     FileConfigView {
         block_timeout_lookup: cfg.block_timeout_lookup,
+        trace_type: cfg.trace_type,
+        trace_signature: cfg.trace_signature,
+        trace_stream: cfg.trace_stream,
+        show_data_depth: cfg.show_data_depth,
+        file_signature_depth: cfg.file_signature_depth,
         ..FileConfigView::default()
     }
 }
@@ -1000,6 +1071,20 @@ pub struct FileEnvLite {
     /// file inspector is armed)
     pub file_config: Option<Rc<RefCell<FileConfigLite>>>,
     pub network_policy: Option<Rc<RefCell<dyn NetworkPolicySeam>>>,
+    /// Row 17r: `fp_eval_service_group` (file_lib.cc:1044) — witness
+    /// seam (real fingerprint engine unportable, PLAN §3 WITNESS).
+    pub fpe: Box<dyn FpEvalApi>,
+    /// Row 17r: `new FileCapture(min, max)` factory seam
+    /// (process_file_capture, file_lib.cc:1174; capture engine body
+    /// stays its own row).
+    pub capture_factory: Box<dyn FileCaptureFactory>,
+    /// Row 17r: the C THREAD_LOCAL `FileStats* file_stats` global
+    /// (file_stats.cc) the heavy-half ladders bump
+    /// (files_processed / signatures_processed / data_processed).
+    /// Driver-owned (17m FileStatsEnv discipline); the probe runs
+    /// file_stats_init() at startup so the deref is never null in the
+    /// pinned runs (the heavy-half expects document that).
+    pub stats: std::cell::RefCell<super::file_stats::FileStatsEnv>,
 }
 
 impl Default for FileEnvLite {
@@ -1027,6 +1112,9 @@ impl Default for FileEnvLite {
             flow_service: std::cell::RefCell::new(Vec::new()),
             file_config: None,
             network_policy: None,
+            fpe: Box::new(NoFpEval),
+            capture_factory: Box::new(NoFileCaptureFactory),
+            stats: std::cell::RefCell::new(super::file_stats::FileStatsEnv::default()),
         }
     }
 }
@@ -1078,6 +1166,13 @@ pub const EVENT__MAX_VALUE: i32 = 2;
 /// rule; 0x7f not printable, 0x20 printable).
 fn c_isprint(b: u8) -> bool {
     (0x20..=0x7E).contains(&b)
+}
+
+/// C-locale `isspace` over a (signed) char (the print_file_data
+/// hexdump gate, file_lib.cc:1237; same table as parse_ports' private
+/// copy of the rule).
+fn c_isspace(b: u8) -> bool {
+    matches!(b, 0x09..=0x0D | 0x20)
 }
 
 /// The printable-sanitizer FileEvent::get_filename (pub_sub/
@@ -1152,16 +1247,32 @@ pub struct FileContext {
 
     // file_lib.h private members (defaults verbatim):
     pub(crate) processed_bytes: u64,
-    /// C `void* file_type_context` / `void* file_signature_context`:
-    /// the 17q scope never grows them (finalize_file_type only nulls;
-    /// ~FileContext only frees when set — the EVP chain is 17r).
+    /// C `void* file_type_context`: the file-type identification
+    /// context (the FileDetector side of the find_file_type_from_ips
+    /// ladder is a later row; C only ever nulls it here
+    /// — finalize_file_type + the dtor never free it). 17q shape
+    /// kept (Option<()> == "null unless the type-context row lands").
     pub(crate) file_type_context: Option<()>,
-    pub(crate) file_signature_context: Option<()>,
-    /// C `FileSegments* file_segments` — the segment machinery is a
-    /// later row; null through every pinned 17q/17p path (the dtor
-    /// `delete`, the dtor and remove_segments null-guard arms are
-    /// transcribed literally).
-    pub(crate) file_segments: Option<()>,
+    /// C `EVP_MD_CTX* file_signature_context` (file_lib.h:231): the
+    /// incremental SHA-256 context the process_file_signature_sha256
+    /// ladder drives (file_lib.cc:1065). Zero-dep substitute:
+    /// helpers::sha256::Sha256Ctx; `EVP_MD_CTX_new` ==
+    /// `Some(Sha256Ctx::new())`, `EVP_MD_CTX_free` == drop (the Drop
+    /// arm below), `EVP_MD_CTX_copy_ex` + `EVP_DigestFinal_ex` on the
+    /// copy == `snap()`. NULL-vs-empty kept literal: `None` models the
+    /// C null pointer (the MIDDLE/END early-return arms, M3 pin),
+    /// `Some` the allocated ctx.
+    pub(crate) file_signature_context: Option<Sha256Ctx>,
+    /// C `FileSegments* file_segments` — row 17r: the real segment
+    /// machinery (file_segment.rs). Deviation: the C FileSegments
+    /// back-holds `context` (self-referential raw pair); the port
+    /// keeps it as Rc<RefCell<FileSegments>> owned here, clones the
+    /// handle out of the context borrow, and threads
+    /// `this: &Rc<RefCell<FileContext>>` into the segment walk (no
+    /// self-referential borrow; process_pos re-borrows cleanly).
+    /// `segments_queued()` / the Drop `delete` / `remove_segments`
+    /// all read the Option.
+    pub(crate) file_segments: Option<Rc<RefCell<FileSegments>>>,
     pub(crate) cacheable: bool, // = true
     pub(crate) cache_dup: bool, // = false
     pub(crate) limit_excluded: bool, // = false
@@ -1199,24 +1310,57 @@ pub struct FileContext {
     /// parking the dir in the struct keeps the two statements' order
     /// and the single write exactly as C).
     pub(crate) pending_dir: u32,
+    /// Row 17r: C owns every FileContext through ONE owner slot
+    /// (FileFlows ppc/current-alias, FileCache node->file, or a raw
+    /// caller pointer) and `delete` runs ~FileContext (file_lib.cc:574
+    /// -> the IMGR release witness) AT THE OWNER'S DELETE SITE
+    /// regardless of stray alias pointers elsewhere. The Rc port
+    /// aliases the same object in driver hands, so a plain last-drop
+    /// would move the witness to whenever the aliases happen to die.
+    /// The guard makes the dtor body idempotent: owners run
+    /// `owner_delete()` at the C delete point; the (C-illegal-by-
+    /// construction, port-legal) later Rc last-drops stay silent.
+    pub(crate) dtor_ran: std::cell::Cell<bool>,
 }
 
 impl Drop for FileContext {
-    /// file_lib.cc:574 ~FileContext — every arm, in C order:
+    /// file_lib.cc:574 ~FileContext — idempotent (see dtor_ran): the
+    /// last Rc drop runs the body only if no owner delete-site ran it.
+    fn drop(&mut self) {
+        if !self.dtor_ran.replace(true) {
+            self.run_dtor();
+        }
+    }
+}
+
+impl FileContext {
+    /// file_lib.cc:574-586 every arm, in C order:
     /// `if (file_signature_context) EVP_MD_CTX_free((EVP_MD_CTX*)..);`
     /// `if (file_capture) stop_file_capture();`
     /// `delete file_segments;`
     /// `if (inspector) InspectorManager::release(inspector);`
-    fn drop(&mut self) {
-        if self.file_signature_context.is_some() {
-            self.file_signature_context = None; // EVP_MD_CTX_free (17r)
-        }
+    fn run_dtor(&mut self) {
+        // if (file_signature_context) EVP_MD_CTX_free(..): the Sha256Ctx
+        // slot drops with the struct (row 17r; the C guard arm keeps
+        // its observable meaning — the dtor order below).
         if self.info.file_capture.is_some() {
             self.stop_file_capture(); // guard, then unlocked body
         }
         self.file_segments = None; // delete file_segments (null in 17q)
         if let (Some(imgr), Some(ins)) = (&self.imgr, &self.inspector) {
             imgr.borrow_mut().release(ins);
+        }
+    }
+
+    /// The C `delete <owner slot>` moment for a FileContext: run
+    /// ~FileContext NOW at the owner's release site (file_lib.cc:574;
+    /// the harness IMGR-release witness lines pin the moment), mark
+    /// the guard so the Rc aliases the driver keeps alive never
+    /// re-emit the body late.
+    pub fn owner_delete(ctx: &Rc<RefCell<FileContext>>) {
+        let mut b = ctx.borrow_mut();
+        if !b.dtor_ran.replace(true) {
+            b.run_dtor();
         }
     }
 }
@@ -1246,6 +1390,7 @@ impl FileContext {
             inspector: None,
             imgr,
             pending_dir: FILE_DOWNLOAD,
+            dtor_ran: std::cell::Cell::new(false),
         }
     }
 
@@ -1610,8 +1755,10 @@ impl FileContext {
     /// file_lib.cc:1301 `print_file_name(std::ostream&)` as a string
     /// (populate_trace_data feeds the ostringstream; the
     /// "File name: " prefix + the trailing endl ride the
-    /// PacketTracer::is_daq_activated() gate exactly as C).
-    pub(crate) fn print_file_name_str(&self, env: &FileEnvLite) -> String {
+    /// PacketTracer::is_daq_activated() gate exactly as C). 17r: pub
+    /// (FIXACC parity — the C probe reaches the private member
+    /// directly, file_lib.h joined the harness private->public list).
+    pub fn print_file_name_str(&self, env: &FileEnvLite) -> String {
         let mut out = String::new();
         if self.info.file_name.is_empty() {
             return out; // size_t fname_len == 0 -> return (no prefix)
@@ -1637,7 +1784,10 @@ impl FileContext {
     /// digest early return; else "SHA256: " + 2-byte hex pairs
     /// (uppercase, space-separated) + endl, fmtflags save/restore.
     #[allow(dead_code)] // FileContext::print tail (file_lib.cc:1080; 17r)
-    pub(crate) fn print_file_sha256_str(&self) -> String {
+    /// file_lib.cc:1330 `print_file_sha256(std::ostream&)` as a
+    /// string (uppercase, 4-hex groups). 17r: pub (FIXACC parity —
+    /// the C probe reaches the private member directly).
+    pub fn print_file_sha256_str(&self) -> String {
         let mut out = String::new();
         let hash = match self.info.get_file_sig_sha256() {
             Some(h) => h,
@@ -1655,8 +1805,9 @@ impl FileContext {
     }
 
     /// file_lib.cc:1348 `print(std::ostream&)` (reached only through
-    /// the dead config->trace_type tail).
-    pub(crate) fn print(&self, env: &FileEnvLite) -> String {
+    /// the dead config->trace_type tail). 17r: pub (FIXACC parity —
+    /// the C probe calls the private member directly).
+    pub fn print(&self, env: &FileEnvLite) -> String {
         let mut out = self.print_file_name_str(env);
         if !self.info.url.is_empty() {
             out.push_str("File URI: ");
@@ -1679,6 +1830,13 @@ impl FileContext {
         out.push_str(&format!("File size: {}\n", self.info.file_size));
         out.push_str(&format!("Processed size: {}\n", self.processed_bytes));
         out
+    }
+
+    /// 17r test seam (FIXACC private->public parity: probe.cc arms
+    /// `ctx->processed_bytes = 3` directly for the K9 depth ladder,
+    /// file_lib.h:230 joined the harness's private->public list).
+    pub fn fl_test_processed_bytes_set(&mut self, n: u64) {
+        self.processed_bytes = n;
     }
 
     /// file_lib.cc:744 `set_signature_state(bool gen_sig)` — frees a
@@ -1770,42 +1928,1111 @@ impl FileContext {
         }
     }
 
-    // ---------------- 17r seam bodies (pinned panic) ----------------
-    // The fflows probe cuts every path before it reaches anything
-    // here (file_flows.cc:473/:486/:531: the J sections stop at early
-    // returns or the cached-verdict arm). The same methods are
-    // declared so the FileFlows transcription stays literal around
-    // the seams; each panics when reached (deviation: pinned UB
-    // pattern, row 17o precedent).
+    // ---------------- 17r heavy-half members (row 17r landed) ----------------
+    //
+    // The signature-lookup pair were C members running on the raw
+    // `this`; the port keeps them as associated functions threading
+    // `this: &Rc<RefCell<FileContext>>` so apply_verdict /
+    // log_file_event keep their 17p/17q Rc shapes. The C `policy`
+    // raw pointer is reused at several sites per ladder; the Rust
+    // rides one FilePolicyHandle alias per ladder (Rc alias of the
+    // same PolicyStore — aliasing, not ref_count: the C raw pointer
+    // arg never touches ref_count either; the 17q FilePolicyHandle
+    // note). Each C `policy->X(...)` site opens the object through
+    // with_policy_mut (the C-pointer call shape); the null pointer ==
+    // (None, panic or guard) per C site: C derefs at the lookup and
+    // apply_verdict sites, log_file_event has base-class-default null
+    // arms.
 
-    /// file_lib.cc:986 `process(Packet*, const uint8_t*, int, uint64_t
-    /// offset, FilePolicyBase*, FilePosition)` — heavy body (Profile +
-    /// trace_stream + find_file_type_from_ips + segment queueing +
-    /// process_file_capture + finish_signature_lookup + the
-    /// cached-verdict chain): row 17r.
-    pub fn process(
-        &mut self,
-        _p: &mut PacketView,
-        _file_data: &[u8],
-        _data_size: i32,
-        _offset: u64,
-        _policy: Option<&mut dyn FilePolicyApi>,
-        _position: u32,
-    ) -> bool {
-        unimplemented!("FileContext::process offset form — heavy half, row 17r")
+    /// file_lib.cc:701 finish_signature_lookup.
+    pub fn finish_signature_lookup(
+        this: &Rc<RefCell<FileContext>>,
+        p: &mut PacketView,
+        final_lookup: bool,
+        policy: Option<FilePolicyHandle>,
+        env: &mut FileEnvLite,
+        counts: &mut FileCounts,
+    ) {
+        // Flow* flow = p->flow;
+        let flow = p.flow;
+
+        // if (get_file_sig_sha256())
+        if this.borrow().info.get_file_sig_sha256().is_some() {
+            // verdict = policy->signature_lookup(p, this);
+            // (C derefs the possibly-null policy pointer; pinned-absent
+            // at this site — every armed ladder passes the stub.)
+            let verdict = match policy.as_ref() {
+                Some(h0) => { let mut h = h0.clone(); h.with_policy_mut(|pol| {
+                    let mut cb = this.borrow_mut();
+                    pol.signature_lookup(p, &mut cb)
+                })},
+                None => panic!("C deref of null `FilePolicyBase*` at file_lib.cc:706 signature_lookup — pinned-absent"),
+            };
+            // C keeps the verdict member live across the rest; the port
+            // writes it at the same point.
+            this.borrow_mut().info.verdict = verdict;
+
+            // FILE_DEBUG(..., TRACE_DEBUG_LEVEL, p, "finish signature
+            // lookup verdict %d\n", verdict)  (p arg: no
+            // GET_CURRENT_PACKET — no curbkt seam)
+            env.trace.file_trace(
+                TRACE_DEBUG_LEVEL,
+                &format!("finish signature lookup verdict {verdict}\n"),
+            );
+
+            if verdict != FILE_VERDICT_UNKNOWN || final_lookup {
+                // FileCache* file_cache = FileService::get_file_cache();
+                // if (file_cache) file_cache->apply_verdict(p, this,
+                // verdict, false, policy);
+                match (env.svc.get_file_cache(), policy.clone()) {
+                    // C calls apply_verdict as a STATEMENT here (the bool return
+                    //  value is dropped at the C call site — `let _` keeps that
+                    //  non-observable shape explicit).
+                    (Some(cache), Some(mut h)) => {
+                        let _ = h.with_policy_mut(|pol| {
+                            cache.borrow_mut().apply_verdict(p, this, verdict, false, pol, counts)
+                        });
+                    }
+                    (Some(_), None) => panic!("C deref of null `FilePolicyBase*` at file_lib.cc:714 apply_verdict — pinned-absent"),
+                    (None, _) => {} // C `if (file_cache)` guard
+                }
+
+                // if (PacketTracer::is_active() and (verdict == BLOCK or
+                //     verdict == REJECT))
+                //   PacketTracer::log("File: signature lookup verdict %s\n", ...)
+                if env.packet_tracer.is_active()
+                    && (verdict == FILE_VERDICT_BLOCK || verdict == FILE_VERDICT_REJECT)
+                {
+                    env.packet_tracer.log(&format!(
+                        "File: signature lookup verdict {}\n",
+                        if verdict == FILE_VERDICT_BLOCK {
+                            "block"
+                        } else {
+                            "reject"
+                        }
+                    ));
+                }
+
+                // log_file_event(flow, policy);
+                // (handle-alias open at the C policy-> site; the C
+                //  null pointer reaches log_file_event's null-check
+                //  arms — file_lib.cc:615 `if (!policy) return;` —
+                //  modeled by the None arm)
+                match policy.as_ref() {
+                    Some(h0) => { let mut h = h0.clone(); h.with_policy_mut(|pol| {
+                        this.borrow_mut().log_file_event(&flow, Some(pol), env)
+                    })},
+                    None => this.borrow_mut().log_file_event(&flow, None, env),
+                }
+
+                // config_file_signature(false);
+                this.borrow_mut().info.config_file_signature(false);
+
+                // file_stats->signatures_processed[get_file_type()]
+                //     [get_file_direction()]++;
+                {
+                    let cb = this.borrow();
+                    let ft = cb.info.get_file_type() as usize;
+                    let fd = cb.info.get_file_direction() as usize;
+                    drop(cb);
+                    file_stats_bump_signatures(env, ft, fd);
+                }
+            } else {
+                // cppcheck-suppress knownConditionTrueFalse ;
+                // completion and verdict depend on file processing
+                // if ( processing_complete and (verdict == FILE_VERDICT_UNKNOWN ))
+                // { force_adv_log sandwich + log_file_event }
+                if this.borrow().info.processing_complete && verdict == FILE_VERDICT_UNKNOWN {
+                    this.borrow_mut().force_adv_log = true;
+                    // (handle-alias open at the C policy-> site; the C
+                    //  null pointer reaches log_file_event's null-check
+                    //  arms — file_lib.cc:615 `if (!policy) return;` —
+                    //  modeled by the None arm)
+                    match policy.as_ref() {
+                        Some(h0) => { let mut h = h0.clone(); h.with_policy_mut(|pol| {
+                            this.borrow_mut().log_file_event(&flow, Some(pol), env)
+                        })},
+                        None => this.borrow_mut().log_file_event(&flow, None, env),
+                    }
+                    this.borrow_mut().force_adv_log = false;
+                }
+                // { std::lock_guard<std::recursive_mutex> lock(
+                //       user_file_data_mutex);
+                //   snort_free(sha256); sha256 = nullptr; }
+                // (ud-lock = Rust exclusivity, 17p deviation; the
+                // snort_free-vs-new[] mixed-allocator pair on the C
+                // sha256 slot is structurally excluded in Rust,
+                // PLAN section 5-M — one Option covers both.)
+                this.borrow_mut().info.sha256 = None;
+            }
+        }
     }
 
-    /// file_lib.cc:825 `process(Packet*, const uint8_t*, int,
-    /// FilePosition, FilePolicyBase*)` (the SNORT_FILE_FULL form the
-    /// re-eval arm and the single file_process drive): row 17r.
-    pub fn process_pos(
-        &mut self,
-        _p: &mut PacketView,
-        _file_data: &[u8],
-        _data_size: i32,
-        _position: u32,
-        _policy: Option<&mut dyn FilePolicyApi>,
-    ) -> bool {
-        unimplemented!("FileContext::process position form — heavy half, row 17r")
+    /// file_lib.cc:686 file_signature_lookup — public for the FileCache
+    /// / FileService rows (the fflows J-block never reaches through
+    /// here: the cached-verdict arm returns earlier). Deviation: the C
+    /// `FileFlows::get_file_policy(flow)` static resolves through the
+    /// driver-owned flow handle (FlowsRef, PLAN section 6.2 — the Flow
+    /// monolith does not ride the port; the slot IS the flow's
+    /// FileFlows handle).
+    pub fn file_signature_lookup(
+        this: &Rc<RefCell<FileContext>>,
+        p: &mut PacketView,
+        flows: FlowsRef<'_>,
+    ) -> u32 {
+        // Flow* flow = p->flow;
+        // if (get_file_sig_sha256())
+        if this.borrow().info.get_file_sig_sha256().is_some() {
+            // FilePolicyBase* policy = FileFlows::get_file_policy(flow);
+            // (file_flows.rs get_file_policy_static: fd && fd->file_policy)
+            if let Some(mut handle) = flows.file_policy_handle() {
+                // if (policy) return policy->signature_lookup(p, this);
+                // (the handle type only ever fronts a real object —
+                // FilePolicyHandle::is_null false)
+                return handle.with_policy_mut(|pol| {
+                    let mut cb = this.borrow_mut();
+                    pol.signature_lookup(p, &mut cb)
+                });
+            }
+        }
+
+        // return FILE_VERDICT_UNKNOWN;
+        FILE_VERDICT_UNKNOWN
     }
+
+    /// file_lib.cc:1057 process_file_type — "file type already found
+    /// and no magics to continue": only the CONTINUE type re-enters
+    /// the detection walk.
+    #[allow(clippy::too_many_arguments)] // C method arg set + threaded this
+    pub fn process_file_type(
+        this: &Rc<RefCell<FileContext>>,
+        p: &mut PacketView,
+        file_data: &[u8],
+        data_size: i32,
+        position: u32,
+        flows: &mut FlowsRef<'_>,
+        env: &mut FileEnvLite,
+        counts: &mut FileCounts,
+    ) {
+        if SNORT_FILE_TYPE_CONTINUE == this.borrow().info.file_type_id {
+            find_file_type_from_ips(this, p, file_data, data_size, position, flows, env, counts);
+        }
+    }
+
+    /// file_lib.cc:1065 process_file_signature_sha256 — the
+    /// incremental OpenSSL EVP chain rides the zero-dep
+    /// helpers::sha256::Sha256Ctx (new/init/update verbatim;
+    /// copy_ex + DigestFinal on the copy == snap(), live-ctx
+    /// DigestFinal == finalize; M-block pins match the C digests).
+    /// The C `snort_alloc` (START/MIDDLE FLUSH) vs `new uint8_t[]`
+    /// (END/FULL) pair on sha256 is observably one Option write
+    /// (no C read tells the allocators apart; the END/FULL
+    /// overwrite-vs-`if (!sha256)` difference re-materializes only
+    /// as the same Some([u8; 32])).
+    /// 17r: pub (FIXACC parity — the C probe calls the private member
+    /// directly; file_lib.h:177 joined the harness private->public
+    /// list).
+    pub fn process_file_signature_sha256(
+        &mut self,
+        file_data: &[u8],
+        data_size: i32,
+        position: u32,
+        env: &mut FileEnvLite,
+        counts: &mut FileCounts,
+    ) {
+        // std::lock_guard<std::recursive_mutex> lock(user_file_data_mutex);
+        // (17p single-thread deviation: Rust exclusivity models the lock)
+
+        // if ((int64_t)processed_bytes + data_size > config->file_signature_depth)
+        let depth = self
+            .config
+            .as_ref()
+            .expect("config member null at file_lib.cc:1070 (C derefs; a signature-enabled ladder has the FileInspect armed => config armed — pinned-absent)")
+            .borrow()
+            .file_signature_depth;
+        // (the view field mirrors the FileConfigLite member; both
+        // views answer the one C FileConfig — deviation at the
+        // config slot)
+        if (self.processed_bytes as i64) + (data_size as i64) > depth {
+            // FILE_DEBUG(..., GET_CURRENT_PACKET,
+            // "process_file_signature_sha256:FILE_SIG_DEPTH_FAIL\n")
+            env.curbkt();
+            env.trace.file_trace(
+                TRACE_INFO_LEVEL,
+                "process_file_signature_sha256:FILE_SIG_DEPTH_FAIL\n",
+            );
+            self.info.file_state.sig_state = FILE_SIG_DEPTH_FAIL;
+            counts.file_sig_depth_exceeded += 1;
+            return;
+        }
+
+        // FILE_DEBUG(..., GET_CURRENT_PACKET, "processing file signature
+        // position: %d sig state %d \n", position, file_state.sig_state)
+        // (the trailing space before \n is verbatim C)
+        env.curbkt();
+        env.trace.file_trace(
+            TRACE_DEBUG_LEVEL,
+            &format!(
+                "processing file signature position: {position} sig state {} \n",
+                self.info.file_state.sig_state
+            ),
+        );
+
+        // if (!sha256) sha256 = snort_alloc / = new uint8_t[32]; +
+        // EVP_DigestFinal into it — one Option write per position,
+        // below. Negative data_size: C hands the int to
+        // EVP_DigestUpdate's size_t (huge value, C UB territory; the
+        // pinned vectors keep it >= 0 — saturate, literal otherwise).
+        let n = (data_size.max(0) as usize).min(file_data.len());
+        match position {
+            SNORT_FILE_START => {
+                // if (!file_signature_context) file_signature_context =
+                //     EVP_MD_CTX_new();
+                let ctx = self
+                    .file_signature_context
+                    .get_or_insert_with(Sha256Ctx::new);
+                // EVP_DigestInit_ex(ctx, EVP_sha256(), nullptr);
+                ctx.init();
+                // EVP_DigestUpdate(ctx, file_data, data_size);
+                ctx.update(&file_data[..n]);
+                // FILE_DEBUG(..., GET_CURRENT_PACKET, "position is
+                // start of file\n")
+                env.curbkt();
+                env.trace.file_trace(TRACE_DEBUG_LEVEL, "position is start of file\n");
+                if self.info.file_state.sig_state == FILE_SIG_FLUSH {
+                    // EVP_MD_CTX* tmp = EVP_MD_CTX_new();
+                    // EVP_MD_CTX_copy_ex(tmp, ctx) + DigestFinal_ex(tmp,
+                    // sha256) + EVP_MD_CTX_free(tmp)  ==  snap()
+                    let digest = self
+                        .file_signature_context
+                        .as_ref()
+                        .expect("ctx vanished between arms (impossible)")
+                        .snap();
+                    self.info.sha256 = Some(digest);
+                }
+            }
+
+            SNORT_FILE_MIDDLE => {
+                // if (!file_signature_context) return;   (M3 pin:
+                // None == the C null EVP_MD_CTX* early return)
+                let ctx = match self.file_signature_context.as_mut() {
+                    Some(ctx) => ctx,
+                    None => return,
+                };
+                ctx.update(&file_data[..n]);
+                env.curbkt();
+                env.trace.file_trace(TRACE_DEBUG_LEVEL, "position is middle of the file\n");
+                if self.info.file_state.sig_state == FILE_SIG_FLUSH {
+                    let digest = self
+                        .file_signature_context
+                        .as_ref()
+                        .expect("ctx vanished between arms (impossible)")
+                        .snap();
+                    self.info.sha256 = Some(digest);
+                }
+            }
+
+            SNORT_FILE_END => {
+                // if (!file_signature_context) return;
+                let ctx = match self.file_signature_context.as_mut() {
+                    Some(ctx) => ctx,
+                    None => return,
+                };
+                ctx.update(&file_data[..n]);
+                // sha256 = new uint8_t[SHA256_HASH_SIZE];
+                // EVP_DigestFinal_ex(ctx, sha256, &out_len);
+                self.info.sha256 = Some(ctx.finalize());
+                self.info.file_state.sig_state = FILE_SIG_DONE;
+                env.curbkt();
+                env.trace.file_trace(TRACE_DEBUG_LEVEL, "position is end of the file\n");
+            }
+
+            SNORT_FILE_FULL => {
+                // if (!file_signature_context) file_signature_context =
+                //     EVP_MD_CTX_new();
+                let ctx = self
+                    .file_signature_context
+                    .get_or_insert_with(Sha256Ctx::new);
+                ctx.init();
+                ctx.update(&file_data[..n]);
+                self.info.sha256 = Some(ctx.finalize());
+                self.info.file_state.sig_state = FILE_SIG_DONE;
+                env.curbkt();
+                env.trace.file_trace(TRACE_DEBUG_LEVEL, "position is full file\n");
+            }
+
+            // default: break;  (SNORT_FILE_POSITION_UNKNOWN: nothing)
+            _ => {}
+        }
+    }
+
+    /// file_lib.cc:1226 print_file_data(FILE*, const uint8_t*, int
+    /// len, int max_depth) — the hexdump writer, ported to a String
+    /// (the K1/K2 harness seams route it to stdout verbatim; the C
+    /// fprintf sites are transcribed byte-for-byte, incl. the "Show
+    /// length: %d " trailing-space header, the pos==8 double gap, the
+    /// pos==17 row break and the tail-pad "   "/"    " arms). C-locale
+    /// isprint/isspace over (char) sign.
+    pub fn print_file_data(data: &[u8], len: i32, max_depth: i64) -> String {
+        // if (max_depth < len) len = max_depth;
+        let mut len = len as i64;
+        if max_depth < len {
+            len = max_depth;
+        }
+        let len = len.max(0) as usize;
+
+        let mut out = String::new();
+        out.push_str(&format!("Show length: {len} \n"));
+
+        // C `char str[18]` + cursor; the NUL terminator lands when the
+        // row prints (str[pos] = 0 at pos==17 / at the tail).
+        let mut strbuf: Vec<u8> = Vec::new();
+        let mut pos = 0usize;
+        for b in data.iter().copied().take(len) {
+            // char c = (char)data[i];
+            // isprint(c) and (c == ' ' or !isspace(c)) ? c : '.'
+            let printable = c_isprint(b) && (b == b' ' || !c_isspace(b));
+            strbuf.push(if printable { b } else { b'.' });
+            pos += 1;
+            out.push_str(&format!("{b:02X} "));
+
+            if pos == 17 {
+                out.push_str(&format!("  {}\n", String::from_utf8_lossy(&strbuf)));
+                // C `pos = 0`: the str cursor rewinds and every later
+                // write overwrites from index 0 — the row's content is
+                // dead.  The port's Vec is cleared here to model the
+                // C str[pos]=0-then-overwrite semantics exactly.
+                strbuf.clear();
+                pos = 0;
+            } else if pos == 8 {
+                strbuf.push(b' ');
+                pos += 1;
+                out.push(' ');
+            }
+        }
+        if pos != 0 {
+            // C: `str[pos] = 0; for (; pos < 17; pos++) { if (pos ==
+            // 8) { pos++; fprintf(fp, "%s", "    "); } else fprintf(
+            // fp, "%s", "   "); }` — the body's pos++ at pos==8
+            // SKIPS one iteration on top of the loop's pos++ (a
+            // frozen-range form would emit a stray group); the str
+            // NUL already sits at the vec boundary and nothing reads
+            // pos after the walk, so the cursor rides `pad`
+            // literally.
+            let mut pad = pos;
+            while pad < 17 {
+                if pad == 8 {
+                    pad += 1;
+                    out.push_str("    ");
+                } else {
+                    out.push_str("   ");
+                }
+                pad += 1;
+            }
+            out.push_str(&format!("  {}\n", String::from_utf8_lossy(&strbuf)));
+        }
+        out
+    }
+}
+
+// ==================================================================
+// Row 17r free-function half — the heavy FileContext ladders.
+//
+// The C members run raw-pointer style on `this`; the port threads
+// `this: &Rc<RefCell<FileContext>>` and re-borrows per C
+// statement-group so (a) the cache/apply/log calls keep their Rc
+// shapes, (b) an armed fp_eval witness can write file_type through the
+// handle WITHOUT a ReentrantRuntime panic, and (c) the statement
+// ORDER lands exactly where C put it (the borrow blocks are invisible;
+// they cannot reorder or duplicate a C line — each line appears
+// exactly once across blocks).
+// ==================================================================
+
+/// The flow handle the heavy half threads (file_lib <-> file_flows
+/// mutual-call chain; skill rule for C mutual-call chains: explicit
+/// handle refs, no self-referential structs). The C statics resolve
+/// FileFlows out of the Flow's flow data (file_flows.cc:133
+/// get_file_flows(flow, to_create=false) — the flow's own fd); in the
+/// port that identity is reached two ways:
+/// * Handle: the driver-owned Rc<RefCell> (the fctx probe shape);
+/// * Direct: the in-call `&mut self` FileFlows when file_process_multi
+///   / file_process entered the heavy half — C flow-data identity IS
+///   this object, no static re-resolution needed (and the heavy half
+///   never takes the create arm: :1030 passes to_create=false).
+///
+/// The null arm (get_file_flows answers nullptr — flow carries no fd,
+/// to_create=false) only exists in the Handle form.
+pub enum FlowsRef<'a> {
+    Handle(&'a Rc<RefCell<FileFlows>>),
+    Direct(&'a mut FileFlows),
+}
+
+impl<'a> FlowsRef<'a> {
+    /// `files->get_current_file_context()` (a C const-ish read; takes
+    /// the get_file_context arm when current_file_id rides).
+    pub fn get_current_file_context(
+        &mut self,
+        env: &mut FileEnvLite,
+        counts: &mut FileCounts,
+    ) -> Option<Rc<RefCell<FileContext>>> {
+        match self {
+            FlowsRef::Handle(h) => h.borrow_mut().get_current_file_context(env, counts),
+            FlowsRef::Direct(ff) => ff.get_current_file_context(env, counts),
+        }
+    }
+    /// `files->swap_current_file_context_no_delete(this)`
+    pub fn swap_current_file_context_no_delete(
+        &mut self,
+        new_ctx: &Rc<RefCell<FileContext>>,
+    ) -> CurrentContextSlot {
+        match self {
+            FlowsRef::Handle(h) => h.borrow_mut().swap_current_file_context_no_delete(new_ctx),
+            FlowsRef::Direct(ff) => ff.swap_current_file_context_no_delete(new_ctx),
+        }
+    }
+    /// `files->restore_current_file_context_no_delete(saved)`
+    pub fn restore_current_file_context_no_delete(&mut self, saved: &CurrentContextSlot) {
+        match self {
+            FlowsRef::Handle(h) => h.borrow_mut().restore_current_file_context_no_delete(saved),
+            FlowsRef::Direct(ff) => ff.restore_current_file_context_no_delete(saved),
+        }
+    }
+    /// `FileFlows::get_file_policy(flow)` — the C static: fd &&
+    /// fd->file_policy; None arm == no flows (null fd).
+    pub fn file_policy_handle(self) -> Option<FilePolicyHandle> {
+        match self {
+            FlowsRef::Handle(h) => FileFlows::get_file_policy_static(Some(h)),
+            FlowsRef::Direct(ff) => ff.file_policy.clone(),
+        }
+    }
+}
+
+/// file_lib.cc:905/:932/:736 `file_stats->...` — the C THREAD_LOCAL
+/// `FileStats* file_stats` global (file_stats.cc), driver-owned
+/// through FileEnvLite::stats (17m discipline; the probe runs
+/// file_stats_init() at startup so the C deref is never null in the
+/// pinned runs — the expect documents that). The C arrays are indexed
+/// by the FULL u16 file_type value (MAX_FILE_TYPES rows); a pinned
+/// out-of-range type at the :736 site (UNKNOWN reaches the
+/// signatures_processed arm only via ladder arms that already excluded
+/// it) is C UB the port can never panic on — min-clamped with this
+/// note, and pinned vectors never observe the clamp firing.
+fn file_stats_bump_files(env: &FileEnvLite, ft: usize, dir: usize) {
+    let mut b = env.stats.borrow_mut();
+    let fs = b
+        .file_stats
+        .as_mut()
+        .expect("file_stats null at file_lib.cc:905 (file_stats_init not run; pinned-absent)");
+    let ft = ft.min(fs.files_processed.len() - 1);
+    fs.files_processed[ft][dir] += 1;
+}
+
+fn file_stats_bump_signatures(env: &FileEnvLite, ft: usize, dir: usize) {
+    let mut b = env.stats.borrow_mut();
+    let fs = b
+        .file_stats
+        .as_mut()
+        .expect("file_stats null at file_lib.cc:736 (file_stats_init not run; pinned-absent)");
+    let ft = ft.min(fs.signatures_processed.len() - 1);
+    fs.signatures_processed[ft][dir] += 1;
+}
+
+fn file_stats_add_data(env: &FileEnvLite, ft: usize, dir: usize, size: i32) {
+    let mut b = env.stats.borrow_mut();
+    let fs = b
+        .file_stats
+        .as_mut()
+        .expect("file_stats null at file_lib.cc:932 (file_stats_init not run; pinned-absent)");
+    let ft = ft.min(fs.data_processed.len() - 1);
+    // C `+= data_size` (int widened into PegCount; 2's-complement wrap)
+    fs.data_processed[ft][dir] =
+        (fs.data_processed[ft][dir] as i64).wrapping_add(size as i64) as u64;
+}
+
+/// file_lib.cc:1004 find_file_type_from_ips(Packet* pkt, const
+/// uint8_t* file_data, int data_size, FilePosition position).
+/// The IpsContext writes land on PacketView (deviation at the
+/// PacketView field note); the swap/restore pair drives the REAL
+/// FileFlows slot machinery (the 17q swap_ladder witness, live now —
+/// vectors L2/L3/L4/L5).
+#[allow(clippy::too_many_arguments)]
+pub fn find_file_type_from_ips(
+    this: &Rc<RefCell<FileContext>>,
+    p: &mut PacketView,
+    file_data: &[u8],
+    data_size: i32,
+    position: u32,
+    flows: &mut FlowsRef<'_>,
+    env: &mut FileEnvLite,
+    counts: &mut FileCounts,
+) {
+    // bool depth_exhausted = false;
+    let mut depth_exhausted = false;
+    let mut data_size = data_size;
+    let processed = this.borrow().processed_bytes;
+    // if ((int64_t)processed_bytes + data_size >= config->file_type_depth)
+    // (C member config deref; the port reads the same FileConfig
+    // through the env-resolved FileConfigLite — two-view deviation at
+    // FileContext::config)
+    let conf = env
+        .get_file_config()
+        .expect("get_file_config() null at file_lib.cc:1012 (C conf/config derefs at :1012/:1024/:1045; pinned-absent)");
+    if (processed as i64) + (data_size as i64) >= conf.borrow().file_type_depth {
+        // data_size = config->file_type_depth - processed_bytes;
+        data_size = (conf.borrow().file_type_depth - processed as i64) as i32;
+        // if (data_size < 0) return;
+        if data_size < 0 {
+            return;
+        }
+        depth_exhausted = true;
+    }
+    // const FileConfig* const conf = get_file_config();
+    // (hoisted above: the same object, single resolution — the C pair
+    // `config`/`conf` is one pointer)
+
+    // Packet *p = DetectionEngine::set_next_packet(pkt);
+    // (C drives the RETURNED packet from here on; single-view port —
+    // the seam arms the current-packet latch, `p` continues. Deviation
+    // record: the witness returns the same logical PDU packet in every
+    // pinned run.)
+    env.curpkt.set_next_packet(p);
+
+    // DetectionEngine de;  (ctor: no witness — dead)
+    // p->flow = pkt->flow;  (same view here — no-op)
+
+    // p->context->file_data = { file_data, (unsigned int)data_size };
+    p.file_data = Some(file_data[..(data_size.max(0) as usize)].to_vec());
+    // p->context->file_pos = processed_bytes;
+    p.file_pos = processed;
+    // p->context->file_type_process = true;
+    p.file_type_process = true;
+    // p->context->set_snort_protocol_id(conf->snort_protocol_id);
+    p.snort_protocol_id = conf.borrow().snort_protocol_id;
+    // p->packet_flags |= PKT_ALLOW_MULTIPLE_DETECT;
+    p.packet_flags |= PKT_ALLOW_MULTIPLE_DETECT;
+    // p->proto_bits |= PROTO_BIT__PDU;
+    p.proto_bits |= PROTO_BIT__PDU;
+
+    // The regular set_current_file_context() cannot be used here: it
+    // engages deferred-delete (would free a context still owned via
+    // partially_processed_contexts) and clears current_file_id (would
+    // break the matched restore).
+    // FileFlows* files = FileFlows::get_file_flows(pkt->flow, false);
+    // (to_create=false returns the flow's fd as-is — the FlowsRef
+    // deviation note at the enum: it IS the threaded handle; the null
+    // arm == flows None in the Handle form, never the Direct form)
+    let mut saved = CurrentContextSlot::default();
+    let mut did_swap = false;
+    // const FileContext* context = files->get_current_file_context();
+    let context = flows.get_current_file_context(env, counts);
+    // if (!context or context != this)
+    let differs = match &context {
+        Some(c) => !Rc::ptr_eq(c, this),
+        None => true,
+    };
+    if differs {
+        // saved = files->swap_current_file_context_no_delete(this);
+        saved = flows.swap_current_file_context_no_delete(this);
+        did_swap = true;
+    }
+
+    // fp_eval_service_group(p, conf->snort_protocol_id);
+    let spid = conf.borrow().snort_protocol_id;
+    env.fpe.fp_eval_service_group(p, spid, this);
+
+    /* Check whether file transfer is done or type depth is reached */
+    // if ((position == SNORT_FILE_END) || (position == SNORT_FILE_FULL)
+    //     || depth_exhausted) finalize_file_type();
+    if position == SNORT_FILE_END || position == SNORT_FILE_FULL || depth_exhausted {
+        this.borrow_mut().finalize_file_type();
+    }
+
+    // if (did_swap)
+    if did_swap {
+        // Re-entrant fp_eval_service_group may have replaced
+        // current_context; don't overwrite whatever it installed with a
+        // possibly-stale saved.ctx.
+        // if (files->get_current_file_context() == this)
+        let cur = flows.get_current_file_context(env, counts);
+        let same = cur.is_some() && Rc::ptr_eq(cur.as_ref().unwrap(), this);
+        if same {
+            // files->restore_current_file_context_no_delete(saved);
+            flows.restore_current_file_context_no_delete(&saved);
+        }
+    }
+}
+
+/// file_lib.cc:986 process(Packet* p, const uint8_t* file_data,
+/// int data_size, uint64_t offset, FilePolicyBase* policy,
+/// FilePosition position) — the offset form: lazy `new
+/// FileSegments(this)`, then the segment queue ladder.
+/// Deviation (row 17r): the C `FileSegments*` back-holds `context`
+/// and calls into it (process_one -> context->process position form);
+/// the port keeps the segment Box in the context as
+/// Rc<RefCell<FileSegments>>, clones the handle OUT of the context
+/// borrow, then drives the segment with its own borrow while
+/// process_pos re-borrows the context — same call graph, no
+/// self-referential borrow and no C reentrancy-through-a-live-pointer
+/// hazard. The C `delete file_segments` reaching mid-iterate (reset
+/// via an apply_verdict arm — C UB) leaves the port's Rc segment
+/// alive to the end of the ladder instead of dangling.
+#[allow(clippy::too_many_arguments)]
+pub fn process(
+    this: &Rc<RefCell<FileContext>>,
+    p: &mut PacketView,
+    file_data: &[u8],
+    data_size: i32,
+    offset: u64,
+    policy: Option<FilePolicyHandle>,
+    position: u32,
+    flows: &mut FlowsRef<'_>,
+    env: &mut FileEnvLite,
+    counts: &mut FileCounts,
+) -> bool {
+    // if (!file_segments) file_segments = new FileSegments(this);
+    if this.borrow().file_segments.is_none() {
+        this.borrow_mut().file_segments = Some(Rc::new(RefCell::new(FileSegments::new())));
+    }
+    // return file_segments->process(p, file_data, data_size, offset,
+    //     policy, position);
+    let seg = this
+        .borrow()
+        .file_segments
+        .clone()
+        .expect("just installed above (impossible)");
+    seg.borrow_mut().process(
+        p,
+        file_data,
+        data_size as u64, // C int -> uint64_t arg conversion, literal
+        offset,
+        policy,
+        position,
+        this,
+        flows,
+        env,
+        counts,
+    )
+}
+
+/// file_lib.cc:825 process(Packet* p, const uint8_t* file_data,
+/// int data_size, FilePosition position, FilePolicyBase* policy) —
+/// the position form, THE main processing ladder ("Main File type
+/// processing function").
+///
+/// Return: true = continue processing/log/block this file;
+///         false = ignore this file.
+#[allow(clippy::too_many_arguments)]
+pub fn process_pos(
+    this: &Rc<RefCell<FileContext>>,
+    p: &mut PacketView,
+    file_data: &[u8],
+    data_size: i32,
+    position: u32,
+    policy: Option<FilePolicyHandle>,
+    flows: &mut FlowsRef<'_>,
+    env: &mut FileEnvLite,
+    counts: &mut FileCounts,
+) -> bool {
+    // Profile profile(file_perf_stats); — dead in the pinned runs
+    // (TimeProfilerStats::enabled=false witness; no Profile line
+    // exists in ANY vector, so Rust keeps no file_perf_stats stat).
+    // Flow* flow = p->flow;
+    let flow = p.flow;
+
+    // if ( data_size < 0 ) return true;
+    if data_size < 0 {
+        return true;
+    }
+
+    // if ( config->trace_stream ) FileContext::print_file_data(stdout,
+    //     file_data, data_size, config->show_data_depth);
+    // (C derefs config unguarded — port null-gates, 17q print-tail
+    // precedent; the raw-stdout writes go through TraceSink::raw_line
+    // exactly once per fprintf site reached.)
+    let cfg_stream = this
+        .borrow()
+        .config
+        .as_ref()
+        .map(|c| (c.borrow().trace_stream, c.borrow().show_data_depth));
+    if let Some((true, show_depth)) = cfg_stream {
+        let dump = FileContext::print_file_data(file_data, data_size, show_depth);
+        for line in dump.split_inclusive('\n') {
+            env.trace.raw_line(line);
+        }
+    }
+
+    // file_counts.file_data_total += data_size;
+    counts.file_data_total =
+        (counts.file_data_total as i64).wrapping_add(data_size as i64) as u64;
+
+    // if ((!is_file_type_enabled()) and (!is_file_signature_enabled()))
+    if !this.borrow().info.is_file_type_enabled() && !this.borrow().info.is_file_signature_enabled()
+    {
+        this.borrow_mut().update_file_size(data_size, position, env);
+        this.borrow_mut().info.processing_complete = true;
+        // FILE_DEBUG(..., TRACE_DEBUG_LEVEL, p, "File: Type and Sig
+        // not enabled\n")  (p arg: no GET_CURRENT_PACKET)
+        env.trace
+            .file_trace(TRACE_DEBUG_LEVEL, "File: Type and Sig not enabled\n");
+        if env.packet_tracer.is_active() {
+            env.packet_tracer.log("File: Type and Sig not enabled\n");
+        }
+        return false;
+    }
+
+    // if (cacheable and (FileService::get_file_cache()->cached_verdict_lookup(
+    //         p, this, policy, file_data, data_size) != FILE_VERDICT_UNKNOWN))
+    // { ... } else if (cacheable) file_counts.file_cache_misses++;
+    // (PARITY FIX 17r: C's first condition is the COMPOUND
+    // `cacheable && (lookup != UNKNOWN)` — when cacheable and the lookup
+    // answers UNKNOWN, C falls through to `else if (cacheable)` and DOES
+    // increment file_cache_misses (file_lib.cc:859-863; the K5-K9/O-block
+    // cacheable ladders with an un-cached file_id take that arm). The
+    // pre-fix Rust `if cacheable { ... if v != UNKNOWN {...} } else if
+    // cacheable {...}` put the misses++ arm on the wrong `if`: with
+    // cacheable true the else is unreachable, so file_cache_misses never
+    // incremented anywhere. The C short-circuit keeps the lookup behind
+    // cacheable; the hit arm rides `hit`, not an early return.)
+    let hit = if this.borrow().cacheable {
+        // C derefs the cache pointer (null cache is UB — pinned-absent:
+        // every armed ladder keeps fcache_set_file_cache).
+        let cache = env.svc.get_file_cache().expect(
+            "FileService::get_file_cache() null at file_lib.cc:853 (C deref, pinned-absent)",
+        );
+        let mut h = policy.clone().expect(
+            "null policy at file_lib.cc:853 cached_verdict_lookup (C deref, pinned-absent)",
+        );
+        let v = h.with_policy_mut(|pol| {
+            cache
+                .borrow_mut()
+                .cached_verdict_lookup(p, this, pol, file_data, data_size as u32, counts)
+        });
+        v != FILE_VERDICT_UNKNOWN
+    } else {
+        false
+    };
+    if hit {
+        // file_counts.file_cache_hits++;
+        counts.file_cache_hits += 1;
+        // FILE_DEBUG(..., TRACE_INFO_LEVEL, p, "file process
+        // completed in file context process\n")
+        env.trace.file_trace(
+            TRACE_INFO_LEVEL,
+            "file process completed in file context process\n",
+        );
+        this.borrow_mut().info.processing_complete = true;
+        return true;
+    }
+    // else if (cacheable) file_counts.file_cache_misses++;
+    else if this.borrow().cacheable {
+        counts.file_cache_misses += 1;
+    }
+
+    /*file type id*/
+    // if (is_file_type_enabled())
+    if this.borrow().info.is_file_type_enabled() {
+        // process_file_type(p, file_data, data_size, position);
+        FileContext::process_file_type(this, p, file_data, data_size, position, flows, env, counts);
+
+        /*Don't care unknown file type*/
+        // if (get_file_type() == SNORT_FILE_TYPE_UNKNOWN)
+        if this.borrow().info.get_file_type() == SNORT_FILE_TYPE_UNKNOWN {
+            this.borrow_mut().info.config_file_type(false);
+            this.borrow_mut().info.config_file_signature(false);
+            this.borrow_mut().update_file_size(data_size, position, env);
+            this.borrow_mut().info.processing_complete = true;
+            this.borrow_mut().stop_file_capture();
+            // FILE_DEBUG(..., TRACE_INFO_LEVEL, p, "File: Type unknown\n")
+            env.trace.file_trace(TRACE_INFO_LEVEL, "File: Type unknown\n");
+            if env.packet_tracer.is_active() {
+                env.packet_tracer.log("File: Type unknown\n");
+            }
+            return false;
+        }
+
+        // if (get_file_type() != SNORT_FILE_TYPE_CONTINUE)
+        if this.borrow().info.get_file_type() != SNORT_FILE_TYPE_CONTINUE {
+            // FILE_DEBUG(..., TRACE_INFO_LEVEL, p, "File: Type-%s
+            // found\n", file_type_name(get_file_type()).c_str()) — the
+            // file_type_name FREE global (file_config.cc:80), NOT the
+            // member (the 17q print tail used the member via config):
+            // conf ? conf->file_type_name(id) : "NA". The harness
+            // FreeIdentifier table resolves the pinned ids to "" — the
+            // K-block "Type- found" pins keep the empty name.
+            let ft = this.borrow().info.get_file_type();
+            let tname = match env.get_file_config() {
+                Some(c) => c.borrow().file_type_name(ft),
+                None => "NA".to_string(),
+            };
+            env.trace
+                .file_trace(TRACE_INFO_LEVEL, &format!("File: Type-{tname} found\n"));
+            if env.packet_tracer.is_active() {
+                env.packet_tracer.log(&format!("File: Type-{tname} found\n"));
+            }
+            this.borrow_mut().info.config_file_type(false);
+
+            // if (!(is_file_signature_enabled())) { DEBUG pair }
+            if !this.borrow().info.is_file_signature_enabled() {
+                env.trace
+                    .file_trace(TRACE_INFO_LEVEL, "File: signature config is disabled\n");
+                if env.packet_tracer.is_active() {
+                    env.packet_tracer.log("File: signature config is disabled\n");
+                }
+            }
+
+            // file_stats->files_processed[get_file_type()][get_file_direction()]++;
+            {
+                let cb = this.borrow();
+                let ft = cb.info.get_file_type() as usize;
+                let fd = cb.info.get_file_direction() as usize;
+                drop(cb);
+                file_stats_bump_files(env, ft, fd);
+            }
+            // //Check file type based on file policy
+            // FileVerdict v = policy->type_lookup(p, this);
+            let v = match policy.as_ref() {
+                Some(h0) => { let mut h = h0.clone(); h.with_policy_mut(|pol| {
+                    let mut cb = this.borrow_mut();
+                    pol.type_lookup(p, &mut cb)
+                })},
+                None => panic!("C deref of null `FilePolicyBase*` at file_lib.cc:903 type_lookup — pinned-absent"),
+            };
+            // if ( v != FILE_VERDICT_UNKNOWN )
+            if v != FILE_VERDICT_UNKNOWN {
+                // if (v == FILE_VERDICT_STOP) config_file_signature(false);
+                if v == FILE_VERDICT_STOP {
+                    this.borrow_mut().info.config_file_signature(false);
+                }
+                // FileCache* file_cache = FileService::get_file_cache();
+                // if (file_cache) file_cache->apply_verdict(p, this, v,
+                //     false, policy);
+                match (env.svc.get_file_cache(), policy.clone()) {
+                    // C calls apply_verdict as a STATEMENT here (the bool return
+                    //  value is dropped at the C call site — `let _` keeps that
+                    //  non-observable shape explicit).
+                    (Some(cache), Some(mut h)) => {
+                        let _ = h.with_policy_mut(|pol| {
+                            cache.borrow_mut().apply_verdict(p, this, v, false, pol, counts)
+                        });
+                    }
+                    (Some(_), None) => panic!("C deref of null `FilePolicyBase*` at file_lib.cc:912 apply_verdict — pinned-absent"),
+                    (None, _) => {} // C `if (file_cache)` guard
+                }
+
+                // if (PacketTracer::is_active() and (v == BLOCK or
+                //     v == REJECT)) FILE_DEBUG + PT log pair
+                if env.packet_tracer.is_active()
+                    && (v == FILE_VERDICT_BLOCK || v == FILE_VERDICT_REJECT)
+                {
+                    let kind = if v == FILE_VERDICT_BLOCK { "block" } else { "reject" };
+                    env.trace
+                        .file_trace(TRACE_INFO_LEVEL, &format!("File: file type verdict {kind}\n"));
+                    env.packet_tracer.log(&format!("File: file type verdict {kind}\n"));
+                }
+            }
+
+            // log_file_event(flow, policy);
+            // (handle-alias open at the C policy-> site; the C
+            //  null pointer reaches log_file_event's null-check
+            //  arms — file_lib.cc:615 `if (!policy) return;` —
+            //  modeled by the None arm)
+            match policy.as_ref() {
+                Some(h0) => { let mut h = h0.clone(); h.with_policy_mut(|pol| {
+                    this.borrow_mut().log_file_event(&flow, Some(pol), env)
+                })},
+                None => this.borrow_mut().log_file_event(&flow, None, env),
+            }
+        }
+    }
+
+    /* file signature calculation */
+    // if (is_file_signature_enabled())
+    if this.borrow().info.is_file_signature_enabled() {
+        // FILE_DEBUG(..., TRACE_DEBUG_LEVEL, p, "file signature is enabled\n")
+        env.trace
+            .file_trace(TRACE_DEBUG_LEVEL, "file signature is enabled\n");
+
+        // if (!sha256) process_file_signature_sha256(file_data,
+        //     data_size, position);
+        if this.borrow().info.get_file_sig_sha256().is_none() {
+            this.borrow_mut()
+                .process_file_signature_sha256(file_data, data_size, position, env, counts);
+        }
+
+        // file_stats->data_processed[get_file_type()][get_file_direction()]
+        //     += data_size;
+        {
+            let cb = this.borrow();
+            let ft = cb.info.get_file_type() as usize;
+            let fd = cb.info.get_file_direction() as usize;
+            drop(cb);
+            file_stats_add_data(env, ft, fd, data_size);
+        }
+
+        // update_file_size(data_size, position);
+        this.borrow_mut().update_file_size(data_size, position, env);
+
+        // if ( config->trace_signature ) print_file_sha256(std::cout);
+        // (std::cout, NOT file_trace: the raw_line seam — the M/K8 pins
+        // carry the "SHA256: ..." line unprefixed. C derefs config;
+        // null-gated, 17q print-tail precedent.)
+        let trace_sig = this
+            .borrow()
+            .config
+            .as_ref()
+            .is_some_and(|c| c.borrow().trace_signature);
+        if trace_sig {
+            let s = this.borrow().print_file_sha256_str();
+            env.trace.raw_line(&s);
+        }
+
+        /*Fails to capture, when out of memory or size limit, need lookup*/
+        // if (is_file_capture_enabled()) process_file_capture(file_data,
+        //     data_size, position);
+        if this.borrow().info.is_file_capture_enabled() {
+            process_file_capture(this, file_data, data_size, position, env);
+        }
+
+        // finish_signature_lookup(p, ( file_state.sig_state !=
+        //     FILE_SIG_FLUSH ), policy);
+        let final_lookup = this.borrow().info.file_state.sig_state != FILE_SIG_FLUSH;
+        FileContext::finish_signature_lookup(this, p, final_lookup, policy.clone(), env, counts);
+
+        // if (file_state.sig_state == FILE_SIG_DEPTH_FAIL)
+        if this.borrow().info.file_state.sig_state == FILE_SIG_DEPTH_FAIL {
+            // verdict = policy->signature_lookup(p, this);
+            let v = match policy.as_ref() {
+                Some(h0) => { let mut h = h0.clone(); h.with_policy_mut(|pol| {
+                    let mut cb = this.borrow_mut();
+                    let v = pol.signature_lookup(p, &mut cb);
+                    cb.info.verdict = v;
+                    v
+                })},
+                None => panic!("C deref of null `FilePolicyBase*` at file_lib.cc:955 signature_lookup — pinned-absent"),
+            };
+            // if ( verdict != FILE_VERDICT_UNKNOWN )
+            if v != FILE_VERDICT_UNKNOWN {
+                // FileCache* file_cache = FileService::get_file_cache();
+                // if (file_cache) file_cache->apply_verdict(p, this,
+                //     verdict, false, policy);
+                match (env.svc.get_file_cache(), policy.clone()) {
+                    // C calls apply_verdict as a STATEMENT here (the bool return
+                    //  value is dropped at the C call site — `let _` keeps that
+                    //  non-observable shape explicit).
+                    (Some(cache), Some(mut h)) => {
+                        let _ = h.with_policy_mut(|pol| {
+                            cache.borrow_mut().apply_verdict(p, this, v, false, pol, counts)
+                        });
+                    }
+                    (Some(_), None) => panic!("C deref of null `FilePolicyBase*` at file_lib.cc:960 apply_verdict — pinned-absent"),
+                    (None, _) => {} // C `if (file_cache)` guard
+                }
+                // log_file_event(flow, policy);
+                // (handle-alias open at the C policy-> site; the C
+                //  null pointer reaches log_file_event's null-check
+                //  arms — file_lib.cc:615 `if (!policy) return;` —
+                //  modeled by the None arm)
+                match policy.as_ref() {
+                    Some(h0) => { let mut h = h0.clone(); h.with_policy_mut(|pol| {
+                        this.borrow_mut().log_file_event(&flow, Some(pol), env)
+                    })},
+                    None => this.borrow_mut().log_file_event(&flow, None, env),
+                }
+            } else {
+                // FILE_DEBUG(..., TRACE_INFO_LEVEL, p, "File: Sig depth
+                // exceeded\n") + PT log pair
+                env.trace
+                    .file_trace(TRACE_INFO_LEVEL, "File: Sig depth exceeded\n");
+                if env.packet_tracer.is_active() {
+                    env.packet_tracer.log("File: Sig depth exceeded\n");
+                }
+
+                // force_adv_log = true; log_file_event(flow, policy);
+                // force_adv_log = false; return false;
+                this.borrow_mut().force_adv_log = true;
+                // (handle-alias open at the C policy-> site; the C
+                //  null pointer reaches log_file_event's null-check
+                //  arms — file_lib.cc:615 `if (!policy) return;` —
+                //  modeled by the None arm)
+                match policy.as_ref() {
+                    Some(h0) => { let mut h = h0.clone(); h.with_policy_mut(|pol| {
+                        this.borrow_mut().log_file_event(&flow, Some(pol), env)
+                    })},
+                    None => this.borrow_mut().log_file_event(&flow, None, env),
+                }
+                this.borrow_mut().force_adv_log = false;
+                return false;
+            }
+        }
+    }
+    // else update_file_size(data_size, position);
+    else {
+        this.borrow_mut().update_file_size(data_size, position, env);
+    }
+
+    // return true;
+    true
+}
+
+/// file_lib.cc:1169 process_file_capture(const uint8_t*, int
+/// data_size, FilePosition) -> FileCaptureState. Port-side seam
+/// substitution (PLAN section 3): `new FileCapture(config->
+/// capture_min_size, config->capture_max_size)` rides
+/// FileEnvLite::capture_factory; the capture ENGINE body
+/// (file_capture.cc: circular buffer + mempool + the file_counts
+/// within-packet/buffered/memcap/buffers-allocated bumps its
+/// process_buffer drives) stays its own row — the seam answer carries
+/// N-block pins inside the witness impl, not through the port.
+pub fn process_file_capture(
+    this: &Rc<RefCell<FileContext>>,
+    file_data: &[u8],
+    data_size: i32,
+    position: u32,
+    env: &mut FileEnvLite,
+) -> u32 {
+    // std::lock_guard<std::recursive_mutex> lock(user_file_data_mutex);
+    // (17p single-thread deviation: Rust exclusivity models the lock)
+
+    // if (!file_capture) file_capture = new FileCapture(min, max);
+    if this.borrow().info.file_capture.is_none() {
+        let conf = env.get_file_config().expect(
+            "get_file_config() null at file_lib.cc:1174 (C config deref; a capture-enabled ladder has the inspector armed — pinned-absent)",
+        );
+        let (min, max) = {
+            let cb = conf.borrow();
+            (cb.capture_min_size, cb.capture_max_size)
+        };
+        let cap = env
+            .capture_factory
+            .new_capture(min, max)
+            .expect("new FileCapture -> null (C new never returns null; pinned-absent)");
+        this.borrow_mut().info.file_capture = Some(cap);
+    }
+
+    // file_state.capture_state = file_capture->process_buffer(
+    //     file_data, data_size, position);
+    let state = {
+        let mut cb = this.borrow_mut();
+        let cap = cb
+            .info
+            .file_capture
+            .as_mut()
+            .expect("file_capture slot vanished mid-call (impossible; pinned-absent)");
+        cap.process_buffer(file_data, data_size, position)
+    };
+    this.borrow_mut().info.file_state.capture_state = state;
+
+    // if (file_state.capture_state != FILE_CAPTURE_SUCCESS)
+    //     stop_file_capture_unlocked();
+    if state != FILE_CAPTURE_SUCCESS {
+        // (ud-lock already held in C — the unlocked arm; Rust same body)
+        let mut cb = this.borrow_mut();
+        if cb.info.file_capture.is_some() {
+            cb.info.file_capture = None; // FileCapture* capture = ...; delete capture
+        }
+        cb.info.config_file_capture(false);
+    }
+
+    // return file_state.capture_state;
+    state
 }

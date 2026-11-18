@@ -1,0 +1,610 @@
+FileInspect ctor
+A_SZ ctx=424 segs=32 slot=16
+A_ENUM sig=0,1,2,3 cap=0,1,2,3,4 pos=0,1,2,3,4 ftype_unk=65535 ftype_cont=0 spid=0
+A_CFG typed=1460 sigd=10485760 showd=100 capmin=0 capmax=1048576
+P0_LEN=0>>>
+Show length: 0 
+<<<P0
+P0_LEN=1>>>
+Show length: 1 
+41                                                 A
+<<<P0
+P0_LEN=7>>>
+Show length: 7 
+41 42 43 44 45 46 47                               ABCDEFG
+<<<P0
+P0_LEN=8>>>
+Show length: 8 
+41 42 43 44 45 46 47 48                            ABCDEFGH 
+<<<P0
+P0_LEN=9>>>
+Show length: 9 
+41 42 43 44 45 46 47 48  49                        ABCDEFGH I
+<<<P0
+P0_LEN=17>>>
+Show length: 17 
+41 42 43 44 45 46 47 48  49 4A 4B 4C 4D 4E 4F 50   ABCDEFGH IJKLMNOP
+51                                                 Q
+<<<P0
+P0_LEN=18>>>
+Show length: 18 
+41 42 43 44 45 46 47 48  49 4A 4B 4C 4D 4E 4F 50   ABCDEFGH IJKLMNOP
+51 52                                              QR
+<<<P0
+P0_LEN=20>>>
+Show length: 20 
+41 42 43 44 45 46 47 48  49 4A 4B 4C 4D 4E 4F 50   ABCDEFGH IJKLMNOP
+51 52 53 54                                        QRST
+<<<P0
+P0_CLAMP>>>
+Show length: 9 
+41 42 43 44 45 46 47 48  49                        ABCDEFGH I
+<<<P0
+P0_CTL>>>
+Show length: 36 
+00 01 02 03 04 05 06 07  08 09 0A 0B 0C 0D 0E 0F   ........ ........
+10 11 12 13 14 15 16 17  18 19 1A 1B 1C 1D 1E 1F   ........ ........
+20 21 22 23                                         !"#
+<<<P0
+P0_HI>>>
+Show length: 18 
+7F 80 A0 FF B5 C0 E9 F0  20 09 0A 0B 0C 0D 1C 85   ........  .......
+AA 81                                              ..
+<<<P0
+P0_SIGN>>>
+Show length: 3 
+80 FF 7F                                           ...
+<<<P0
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+P1_SHA>>>
+SHA256: 3031 3233 3435 3637 3839 6162 6364 6566 3031 3233 3435 3637 3839 4142 4344 4546
+<<<P1
+P1_PRINT0>>>
+File type: Undecided file type, continue...(0)
+File size: 0
+Processed size: 0
+<<<P1
+P1_PRINT1>>>
+File name: plain.txt
+File URI: http://e/h
+Host name: host.h
+File type: Undecided file type, continue...(0)
+File size: 0
+Processed size: 0
+<<<P1
+P1_BOM>>>
+File name: AB|00|
+File URI: http://e/h
+Host name: host.h
+File type: Undecided file type, continue...(0)
+File size: 0
+Processed size: 0
+<<<P1
+P1_DAQ>>>
+AB|00|
+<<<P1
+P1_HEX>>>
+File name: a|C3 A9|z|01 80|q
+<<<P1
+P1_RESETSHA null_after=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+K0_NEG ret=1 processed=0
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+Show length: 2 
+07 26                                              .&
+DE get_current_packet have=0
+K1_STREAM ret=0 data_total_plus=6
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+FILEDBG[file_cache] Updating file size of file_id 1012 at position 4 with processed_bytes 5
+FILEDBG[file_cache] File: Type and Sig not enabled
+PT File: Type and Sig not enabled
+K2_OFF ret=0 complete=1 processed=0 file_size=5
+IMGR acquire -> inspector
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:created private copy (pending=0)
+POLICY type_lookup -> 1
+FILEDBG[file_cache] check_verdict:verdict after type lookup 1
+FILEDBG[file_cache] check_verdict:verdict being returned 1
+FILEDBG[file_cache] cached_verdict_lookup:Verdict received from cached_verdict_lookup 1
+FILEDBG[file_cache] apply_verdict 1
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_cache] File advance log: fuid-1014, source-, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-0, total bytes-0, timedout-0, sha256-, extracted name-, extracted cutoff-0, extracted size-0
+POLICY log_file_action a=2
+FILEDBG[file_cache] file process completed in file context process
+K3_HIT ret=1 hits+=1 verdict=1 complete=1 cdup=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+K4_MISS ret=0 misses+=0 processed=0 complete=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=1
+FP_EVAL set_type=65535
+DE get_current_packet have=1
+FILEDBG[file_cache] File: Type unknown
+K5_UNK ret=0 t_en=0 s_en=0 complete=1 processed=0 fpn=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=2
+FP_EVAL set_type=7
+FILEDBG[file_cache] File: Type- found
+POLICY type_lookup -> 2
+FILEDBG[file_cache] apply_verdict 2
+DE get_current_packet have=1
+K6_STOP ret=1 sig=0 t=0 ftype=7 verdict=2 processed=0 size=40 complete=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=3
+FP_EVAL set_type=7
+FILEDBG[file_cache] File: Type- found
+PT File: Type- found
+FILEDBG[file_cache] File: signature config is disabled
+PT File: signature config is disabled
+POLICY type_lookup -> 3
+FILEDBG[file_cache] apply_verdict 3
+PT File: FILE_VERDICT_BLOCK with action block
+ACT delayed=6 force=1
+ACT drop_reason=file
+IMGR acquire -> inspector
+FILEDBG[file_cache] File: file type verdict block
+PT File: file type verdict block
+PUBBYTES pub=1 evt=23 len=5 data=424c4f434b
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+DE get_current_packet have=1
+K7_BLOCK ret=1 verdict=3 ftype=7 complete=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=4
+FP_EVAL set_type=8
+FILEDBG[file_cache] File: Type- found
+PT File: Type- found
+FILEDBG[file_cache] File: signature config is disabled
+PT File: signature config is disabled
+POLICY type_lookup -> 4
+FILEDBG[file_cache] apply_verdict 4
+PT File: FILE_VERDICT_REJECT with action reset
+ACT delayed=7 force=1
+ACT drop_reason=file
+IMGR acquire -> inspector
+FILEDBG[file_cache] File: file type verdict reject
+PT File: file type verdict reject
+PUBBYTES pub=1 evt=23 len=5 data=5245534554
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+DE get_current_packet have=1
+K7b_REJECT ret=1 verdict=4 ftype=8
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=5
+FP_EVAL set_type=7
+POLICY type_lookup -> 0
+DE get_current_packet have=1
+DE get_current_packet have=1
+DE get_current_packet have=1
+SHA256: 0906 7919 CEB0 8FA8 27D3 1546 52B2 A0F5 DA84 5CBD 6492 46AF 8372 CDD7 DE68 5570
+POLICY signature_lookup -> 0
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+K8_SIGKICK ret=1 ftype=7 sha=1 sig_state=3 s_en=0 processed=0 size=40 complete=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE get_current_packet have=1
+FILEDBG[file_cache] process_file_signature_sha256:FILE_SIG_DEPTH_FAIL
+DE get_current_packet have=1
+POLICY signature_lookup -> 0
+FILEDBG[file_cache] File: Sig depth exceeded
+PT File: Sig depth exceeded
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+K9a_DEPTH ret=0 sig_state=1 verdict=0
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE get_current_packet have=1
+FILEDBG[file_cache] process_file_signature_sha256:FILE_SIG_DEPTH_FAIL
+DE get_current_packet have=1
+POLICY signature_lookup -> 1
+FILEDBG[file_cache] apply_verdict 1
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+K9b_DEPTHLOG ret=1 sig_state=1 verdict=1 s_en=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+L1_TRUNC processed=30 ftype=0
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=55 have_pkt=1 n=6
+L2_PLAIN ftype=0 mult=1 proto_bits=64 file_pos=0 fdp=1 ftp=1 fpn=6
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=55 have_pkt=1 n=7
+FP_EVAL swap -> alt
+L3_REENT cur_is_alt=1 cur_is_ctx=0 ftype=65535 finalize=0
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=55 have_pkt=1 n=8
+L4_RESTORE cur_is_ctx=1 ftype=65535 (finalize -> unk)
+IMGR release
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=55 have_pkt=1 n=9
+L5_SWAPPED cur_null=1 cur_ctx=0
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:creating new context
+DE get_current_packet have=1
+FILEDBG[file_cache] process_file_signature_sha256:FILE_SIG_DEPTH_FAIL
+M0_DEPTH sig_state=1 d_exceeded+3
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:creating new context
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 4 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_cache] position is full file
+M1_FULL sha=1 state=3
+M1_HASH>>>
+SHA256: BA78 16BF 8F01 CFEA 4141 40DE 5DAE 2223 B003 61A3 9617 7A9C B410 FF61 F200 15AD
+<<<M1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:creating new context
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 1 sig state 2 
+DE get_current_packet have=1
+FILEDBG[file_cache] position is start of file
+M2_FLUSH1 sha=1 state=2
+M2_H1>>>
+SHA256: 67B6 5215 15EC 7503 325F A029 9F7F DBAF 2CDD E6DF 63B9 C895 1D79 58CE C918 0F26
+<<<M2
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 2 sig state 2 
+DE get_current_packet have=1
+FILEDBG[file_cache] position is middle of the file
+M2_H2>>>
+SHA256: 55A9 B94F BFF2 62DC 0F45 FB43 708F 3D35 5C16 8345 CE47 44F1 D3FF EF34 DA54 C3DC
+<<<M2
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 2 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_cache] position is middle of the file
+M2_MID sha_now=1 state=0
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 3 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_cache] position is end of the file
+M2_END state=3
+M2_H3>>>
+SHA256: 5C0E 7ECD BE99 8042 9ACF EA0F A738 08E5 7391 578C 0900 032B 5809 3555 35D8 0F4D
+<<<M2
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:creating new context
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 4 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_cache] position is full file
+M2_HREF>>>
+SHA256: 5763 0153 077F CB6B 0E7A D66C 1477 CCBC D09D DC9B EB60 C956 AC1C 08F2 08BD 07FA
+<<<M2
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:creating new context
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 2 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 3 sig state 0 
+M3_MISSING sha=0 state=0
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:creating new context
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 4 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_cache] position is full file
+POLICY signature_lookup -> 0
+FILEDBG[file_cache] finish signature lookup verdict 0
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+FILEDBG[file_cache] File advance log: fuid-1035, source-, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-0, total bytes-0, timedout-0, sha256-40800C4DC7925AA3CE2BD450F0B46EFE056DBF5F4A83844555A43564B680A8AE, extracted name-, extracted cutoff-0, extracted size-0
+M4a_FINELSE sha_after=0 verdict=0 sig_en=0 complete=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:creating new context
+DE get_current_packet have=1
+FILEDBG[file_cache] processing file signature position: 4 sig state 0 
+DE get_current_packet have=1
+FILEDBG[file_cache] position is full file
+POLICY signature_lookup -> 1
+FILEDBG[file_cache] finish signature lookup verdict 1
+FILEDBG[file_cache] apply_verdict 1
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+FILEDBG[file_cache] File advance log: fuid-1036, source-, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-0, total bytes-0, timedout-0, sha256-40800C4DC7925AA3CE2BD450F0B46EFE056DBF5F4A83844555A43564B680A8AE, extracted name-, extracted cutoff-0, extracted size-0
+M4b_FINTREE verdict=1 sha=1 sig_en_after=0 file_id=1036
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE get_current_packet have=1
+DE get_current_packet have=1
+POLICY signature_lookup -> 3
+M5_SIGLOOK v0=0 v1=3
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=77 have_pkt=1 n=10
+FP_EVAL set_type=11
+M5_PFT fpn_delta_noref=0 ftype=11
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+N1_START st=0 cap_en=0 state_cap=0
+N2_MAX st=2 cap_en_after=0
+N3_AFTER st=0 cap_en=0
+N4_FULL st=0 within+1 buffered+2
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+N5_MEMCAP st=3 memcap_fail+1 bufs_alloc+3
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE get_current_packet have=1
+O1_FULL ret=0 queued=1 processed=0 size=8 ftype=0
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=11
+FP_EVAL set_type=7
+FILEDBG[file_cache] File: Type- found
+FILEDBG[file_cache] File: signature config is disabled
+POLICY type_lookup -> 0
+DE get_current_packet have=1
+DE get_current_packet have=1
+O2_DROP a=1 b=1 c=0 queued=1 processed=15
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=12
+FP_EVAL set_type=7
+FILEDBG[file_cache] File: Type- found
+FILEDBG[file_cache] File: signature config is disabled
+POLICY type_lookup -> 0
+DE get_current_packet have=1
+O3a a=1 b=1 queued=1 processed=6
+FILEDBG[file_cache] File: Type- found
+FILEDBG[file_cache] File: signature config is disabled
+POLICY type_lookup -> 0
+DE get_current_packet have=1
+FILEDBG[file_cache] processing the current offset 12
+DE get_current_packet have=1
+O3b c=0 processed=18 size=30 complete=1
+O3c d=1 processed=18 complete=1
+FILEDBG[file_cache] File: Type- found
+FILEDBG[file_cache] File: signature config is disabled
+POLICY type_lookup -> 0
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=1
+DE get_current_packet have=1
+O3d e=1 processed=24 queued=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=1
+FILEDBG[file_cache] get_file_context:creating new context
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=13
+FP_EVAL set_type=0
+DE get_current_packet have=1
+FILEDBG[file_cache] Updating file size of file_id 1053 at position 1 with processed_bytes 10
+FILEDBG[file_cache] Adding segment, offset : 20 data_size : 10
+FILEDBG[file_cache] Adding offset : 12 data_size : 8
+O4a a=1 b=1 c=1 processed=10
+FILEDBG[file_cache] not adding to file segment queue offset 5 , current_offset 10
+O4b_drop d=1 processed=10
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=14
+FP_EVAL set_type=0
+DE get_current_packet have=1
+FILEDBG[file_cache] Updating file size of file_id 1053 at position 2 with processed_bytes 12
+FILEDBG[file_cache] processing the current offset 12
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=15
+FP_EVAL set_type=0
+DE get_current_packet have=1
+FILEDBG[file_cache] Updating file size of file_id 1053 at position 2 with processed_bytes 20
+FILEDBG[file_cache] processing the current offset 20
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=16
+FP_EVAL set_type=0
+DE get_current_packet have=1
+FILEDBG[file_cache] Updating file size of file_id 1053 at position 2 with processed_bytes 30
+O4c_drain e=1 processed=30 size=40 complete=0
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=17
+FP_EVAL set_type=0
+DE get_current_packet have=1
+FILEDBG[file_cache] Updating file size of file_id 1053 at position 3 with processed_bytes 40
+FILEDBG[file_cache] File: Type unknown
+O4d_END g=0 processed=0 size=40 complete=1 ftype=65535 queued=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+FILEDBG[file_cache] Adding segment, offset : 20 data_size : 10
+DE set_next_packet parent=1 flow=0 next=1
+FP_EVAL spid=66 have_pkt=1 n=18
+FP_EVAL set_type=65535
+DE get_current_packet have=1
+FILEDBG[file_cache] Updating file size of file_id 1054 at position 1 with processed_bytes 8
+FILEDBG[file_cache] File: Type unknown
+O5_CLEAR r=0 queued_ptr=1 complete=1 processed=8
+FILEDBG[file_cache] Adding segment, offset : 20 data_size : 10
+O5b q2=1 queued=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=1
+IMGR acquire -> inspector
+DE get_current_packet have=1
+P2_SEGS queued1=1 queued2=0
+IMGR release
+IMGR release
+IMGR release
+IMGR release
