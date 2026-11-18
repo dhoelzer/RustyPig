@@ -21,9 +21,10 @@ suites, `cargo clippy --all-targets` **0 warnings** on a forced relint,
 whole-transcript replay tests among 47 test files). GitHub wiki
 https://github.com/dhoelzer/RustyPig/wiki is the public status doc
 (clone at `/tmp/RustyPig.wiki`, remote `RustyPig.wiki.git`, HEAD
-`a90096c` = row 17o — **the 17p AND 17q wiki refreshes are still
-owed**: status rows + deviations sections + stats line
-"71 commits / 406 tests").
+`2ab5a72` = row 17q — **the 17p AND 17q wiki refreshes are DONE**:
+status rows + deviations sections + stats line "266 tracked files /
+~31,400 src lines / 71 commits / 406 tests" all current; the next wiki
+refresh (status row + deviations + stats) is owed when row 17r lands).
 
 ## The method (non-negotiable, used by every row)
 1. **C++ harness** under `tools/<name>_harness/` that compiles the
