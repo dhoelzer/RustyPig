@@ -1,0 +1,146 @@
+A_SZ_FF=216 SZ_SLOT=16 OFS_slot_ctx=0 OFS_slot_id=8
+A_ENUM pos_unk=0 pos_start=1 pos_mid=2 pos_end=3 pos_full=4 sid_none=-1 sid_overlimit=1 sid_max=2 gid=150
+A_FFDATA_ID=1 (post-init)
+B_DISABLED ff=0 pol=0
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+B_CREATE ff=1 pol_is_stub=1 refs=1->2 size_of=216 same_ptr=1 same_nocreate=1 static_pol=1
+FileInspect ctor
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:creating new context
+C1_CREATE have=1 is_new=1 ppc=1 ppc_hit_same=1 fcid=0
+C2_PARK deferred_is_x=1 ppc=0 current_alias_survives=1
+C2_SELFSET deferred_kept=1 current_is_x=1
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:creating new context
+IMGR release
+C2_DRAIN deferred_nonnull=0 current_is_y=1
+IMGR acquire -> inspector
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:created private copy (pending=0)
+C3_DUP have=1 not_entry=1 is_new=0 cache_dup=1 limit_excl=1 cdc=1
+C3_UNDEC cdc=0 deferred_is_dctx=1
+IMGR release
+C3_DRAINED deferred_nonnull=0
+IMGR acquire -> inspector
+POLICY policy_check
+IMGR release
+IMGR acquire -> inspector
+POLICY policy_check
+IMGR release
+IMGR acquire -> inspector
+POLICY policy_check
+C4_MAIN m2_same_m1=1 m3_new=0 m1id=0 m1_cacheable=0 m4id=5 m4_cacheable=1 files_total+=3 main_is_m4=1
+IMGR release
+IMGR release
+C5_DTOR policy_refs=2->1
+IMGR release
+D_INSTANCE id5: 500000002 500000003 (lo=2,3) id0: 4
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+E_IDLADDER miss=0 hit_same=1 alias_same=1
+IMGR release
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+F_POSITION mid=2 full=4 start=1 end=3
+IMGR release
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+DE get_current_packet have=0
+DE queue_event gid=150 sid=1
+DE get_current_packet have=0
+DE get_current_packet have=0
+G_OVERLIMIT a=1 b=1 c=0 d=0 ppc=2 over_cnt=2 maxconc=2
+IMGR release
+IMGR release
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+H_SETNAME1 ret=0 ppc=1 complete=1 url=1 name=1
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+H_SETNAME2 ret=1 ppc=2 complete=0
+IMGR release
+IMGR release
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+I_LOGEVENT verdict=1 name=pub.bin
+IMGR release
+FILEDBG[file_cache] file_process:file service not enabled, returning
+J_SVC_OFF ret=0
+FILEDBG[file_cache] file_process:position of file is unknown, returning
+J_POS_UNK ret=0
+FILEDBG[file_cache] file depth less than zero or offset is more than file depth , returning
+J_DEPTH_NEG ret=0 ppc=0
+FILEDBG[file_cache] file depth less than zero or offset is more than file depth , returning
+J_OFFSET_PAST ret=0 ppc=0
+IMGR acquire -> inspector
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:created private copy (pending=0)
+PT restart_timer
+POLICY policy_check
+POLICY type_lookup -> 1
+FILEDBG[file_cache] check_verdict:verdict after type lookup 1
+FILEDBG[file_cache] check_verdict:verdict being returned 1
+FILEDBG[file_cache] cached_verdict_lookup:Verdict received from cached_verdict_lookup 1
+FILEDBG[file_cache] apply_verdict 1
+PUBBYTES pub=1 evt=23 len=3 data=4c4f47
+PUB pub=7 evt=0 len=0
+DE get_current_packet have=0
+FILEDBG[file_cache] File advance log: fuid-903, source-, mime type-, file name-, duration-0.000000, is orig-0, seen bytes-0, total bytes-0, timedout-0, sha256-, extracted name-, extracted cutoff-0, extracted size-0
+POLICY log_file_action a=2
+PTdaq file+1700000100000000+Matched policy id 0, identification <off>, signature <off>, capture <off>+File with ID 903, name <empty>, type Undecided file type, continue..., size 0, SHA <empty> detected. Verdict Log.$J_CACHEHIT ret=0 hits=1 ppc=0 cdc=0 deferred=1
+IMGR release
+J_RETRANS_NOPOL pol=0 pend_res=1
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+FILEDBG[file_cache] handle_retransmit:queried for verdict
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+FILEDBG[file_cache] handle_retransmit:context is null or verdict not pending, returning
+J_RETRANS_NOFILE cur=0 def=0 pend_res=1
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:trying to get context from cache
+IMGR acquire -> inspector
+DE get_current_packet have=0
+FILEDBG[file_cache] get_file_context:creating new context
+FILEDBG[file_cache] handle_retransmit:queried for verdict
+FILEDBG[file_cache] resume_pending_verdict:node not found, returning
+FILEDBG[file_cache] handle_retransmit:file cache verdict 0
+J_RETRANS_CACHE cur_is_x=1 pend_res=1 verdict=5
+FILEDBG[file_cache] handle_retransmit:queried for verdict
+POLICY signature_lookup -> 1
+J_RETRANS_NOCACHE pend_res=1 verdict=5
+IMGR release
+IMGR release

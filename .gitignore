@@ -151,3 +151,11 @@ tools/fcache_harness/catch_main.cc
 tools/fcache_harness/*.o
 tools/fcache_harness/*.log
 tools/fcache_harness/gate.txt
+
+tools/fflows_harness/copy/
+tools/fflows_harness/probe
+tools/fflows_harness/gate
+tools/fflows_harness/catch_main.cc
+tools/fflows_harness/*.o
+tools/fflows_harness/*.log
+tools/fflows_harness/gate.txt

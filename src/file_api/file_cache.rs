@@ -85,9 +85,13 @@ use std::rc::Rc;
 
 use super::file_lib::{
     FILE_DOWNLOAD, FILE_VERDICT_BLOCK, FILE_VERDICT_LOG, FILE_VERDICT_PENDING,
-    FILE_VERDICT_REJECT, FILE_VERDICT_STOP_CAPTURE, FILE_VERDICT_UNKNOWN, FileInfo, TimeVal,
-    VERDICT_NAME, SHA256_HASH_SIZE,
+    FILE_VERDICT_REJECT, FILE_VERDICT_STOP_CAPTURE, FILE_VERDICT_UNKNOWN, TimeVal, VERDICT_NAME,
+    SHA256_HASH_SIZE,
 };
+// (row 17q) FileContext moved to file_lib.rs; re-exported here so the
+// committed 17p wiring (`use snort3::file_api::file_cache::*`) keeps
+// resolving the type in this module's namespace.
+pub use super::file_lib::FileContext;
 use super::file_stats::FileCounts;
 use crate::hash::{HASH_NOMEM, HASH_OK, XHash};
 use crate::sfip::sf_ip::SfIp;
@@ -174,6 +178,12 @@ pub struct CacheFlow {
     /// flow.h:287 `two_way_traffic()` — read by the log_file_event call
     /// sites (file_lib.cc:615, body row 17q through the event sink).
     pub two_way_traffic: bool,
+    // `char* service` (read by FileContext::set_source, file_lib.cc:
+    // 608): CacheFlow stays Copy with the committed 17p field set (the
+    // fcache test literal + by-value convention); the service name
+    // rides the driver-armed FileEnvLite flow_service Cell (row 17q
+    // deviation — the C char* is static storage anyway, and every
+    // pinned line renders source- with the null/empty answer).
 }
 
 /// `packet_io/active.h:64` `ActiveActionType` values this file sets
@@ -231,6 +241,11 @@ impl ActiveState {
 pub const PKT_RETRANSMIT: u32 = 0x01000000;
 pub const PKT_RETRY: u32 = 0x02000000;
 
+/// `protocols/packet.h:58-59,104` (row 17q: get_file_position arms)
+pub const PKT_PDU_HEAD: u32 = 0x0000_0100;
+pub const PKT_PDU_TAIL: u32 = 0x0000_0200;
+pub const PKT_PDU_FULL: u32 = PKT_PDU_HEAD | PKT_PDU_TAIL;
+
 /// The per-packet state file_cache.cc reads: `p->flow`,
 /// `p->packet_flags`, `p->is_retry()` (packet.h:336), `p->active`, and
 /// the `p->context->conf` that `get_file_config(p->context->conf)`
@@ -248,6 +263,15 @@ impl PacketView {
     pub fn is_retry(&self) -> bool {
         (self.packet_flags & PKT_RETRY) != 0
     }
+    /// `Packet::is_full_pdu()` (packet.h:321) — row 17q
+    /// get_file_position ladder.
+    pub fn is_full_pdu(&self) -> bool {
+        (self.packet_flags & PKT_PDU_FULL) == PKT_PDU_FULL
+    }
+    /// `Packet::is_pdu_start()` (packet.h:324)
+    pub fn is_pdu_start(&self) -> bool {
+        (self.packet_flags & PKT_PDU_HEAD) != 0
+    }
 }
 
 /// `file_api.h:43` `enum FileAction`
@@ -255,14 +279,40 @@ pub const FILE_ACTION_DEFAULT: u32 = 0;
 pub const FILE_RESUME_BLOCK: u32 = 1;
 pub const FILE_RESUME_LOG: u32 = 2;
 
-/// The `FileConfig`/`SnortConfig` fields this TU reads:
-/// `fc->block_timeout_lookup` (file_config.h:59, default false) and
-/// `SnortConfig::get_conf()->mp_dbus` (snort_config.h:391, default
-/// null=false). Full classes: later rows; defaults match C.
+/// The `FileConfig`/`SnortConfig` fields this file reaches through
+/// Copy views: `fc->block_timeout_lookup` (file_config.h:59, default
+/// false) and `SnortConfig::get_conf()->mp_dbus` (snort_config.h:391,
+/// default null=false). Row 17q adds the config-MEMBER fields the
+/// FileContext print tail reads: `trace_type` (file_config.h:71,
+/// default false) — the view stays `Copy` because PacketView::conf and
+/// the harness share it by value (17p pinned). The full C-declared
+/// field set rides `FileConfigLite` in file_lib.rs (the
+/// `get_file_config()` resolution side; row 17q).
 #[derive(Clone, Copy, Debug, Default)]
 pub struct FileConfigView {
     pub block_timeout_lookup: bool,
     pub mp_dbus: bool,
+    /// file_config.h:71 (the `config->trace_type` dead tail gate)
+    pub trace_type: bool,
+}
+
+impl FileConfigView {
+    /// harness-view resolution of `FileConfig::file_type_name`
+    /// (file_config.cc:63-77): the two special-case ids answer
+    /// literally; the private FileIdentifier table does not ride the
+    /// Copy view (deviation: the full table rides `FileConfigLite` —
+    /// `FileEnvLite::file_type_name`; no pinned transcript resolves a
+    /// table id through the config-member path, and the print tail is
+    /// dead with trace_type=false).
+    pub fn file_type_name(&self, id: u32) -> String {
+        if super::file_lib::SNORT_FILE_TYPE_UNKNOWN == id {
+            "Unknown file type, done".to_string()
+        } else if super::file_lib::SNORT_FILE_TYPE_CONTINUE == id {
+            "Undecided file type, continue...".to_string()
+        } else {
+            String::new()
+        }
+    }
 }
 
 // `ThreadConfig::get_instance_max()` seam value (main/thread_config.h:44;
@@ -270,6 +320,8 @@ pub struct FileConfigView {
 // hwloc/thread row). Driver/test-owned value; set_max_files consults it
 // exactly where C calls the static.
 
+/// (file_flows.cc uses SNORT_FILE_END/FILE_START etc.; file_lib.rs
+/// re-exports the FilePosition constants under the C names.)
 /// trace/trace.h levels (harness copy pins the numeric ladder; the witness
 /// gate is `level >= log_level` on a single DEFAULT_TRACE_OPTION_ID entry).
 pub const TRACE_DEFAULT_LEVEL: u8 = 1;
@@ -320,7 +372,7 @@ pub trait InspectorManagerApi {
     fn release(&mut self, ins: &Rc<dyn InspectorApi>);
 }
 
-type ImgrRc = Rc<RefCell<Box<dyn InspectorManagerApi>>>;
+pub(crate) type ImgrRc = Rc<RefCell<Box<dyn InspectorManagerApi>>>;
 
 /// `managers/inspector_manager.h` null-manager default (until the
 /// InspectorManager row); FileContext ctors through it print nothing but
@@ -415,9 +467,85 @@ impl FileFlowsSink for NoopFileFlowsSink {
 /// `FilePolicyBase` virtuals this TU calls (file_api.h:20+; FilePolicy
 /// impl: file_policy.cc row).
 pub trait FilePolicyApi {
+    /// file_api.h:152 `virtual void policy_check(Flow*, FileInfo*)` —
+    /// reached from FileContext::check_policy (file_lib.cc:763, 17q;
+    /// C base no-op, the harness stub prints "POLICY policy_check").
+    /// Default = the C base-class empty body.
+    fn policy_check(&mut self, _flow: &CacheFlow, _file: &mut FileContext) {}
     fn type_lookup(&mut self, p: &mut PacketView, file: &mut FileContext) -> u32;
     fn signature_lookup(&mut self, p: &mut PacketView, file: &mut FileContext) -> u32;
     fn log_file_action(&mut self, flow: &CacheFlow, file: &mut FileContext, action: u32);
+}
+
+/// `FilePolicyBase*` (file_api.h:160-172) ownership handle
+/// (row 17q): the C ref protocol is a raw atomic ref_count with
+/// `add_ref()` (:165) and the static `delete_file_policy` (:168 ->
+/// file_api.cc:34: `if (policy) { assert(policy->ref_count); unsigned
+/// ref = --policy->ref_count; if (!ref) delete policy; }`). The port
+/// wraps `Rc<FilePolicyBox>`... simpler: an Rc-based clone-count model
+/// is WRONG for the pinned witness reads (refs=1->2, policy_refs=2->1
+/// read the C atomic member directly), so the handle carries an
+/// explicit counter over a Box, mirroring the C member; the clone-
+/// discipline at the C sites (set_file_policy pair, NetworkPolicy-
+/// owned base) is the driver's. `ref_count()` answers the probe read.
+#[derive(Clone)]
+pub struct FilePolicyHandle {
+    inner: Rc<RefCell<PolicyStore>>,
+}
+
+struct PolicyStore {
+    policy: Box<dyn FilePolicyApi>,
+    /// std::atomic_uint ref_count (file_api.h:171)
+    ref_count: u32,
+}
+
+impl FilePolicyHandle {
+    /// C `new FilePolicy` sites yield ref_count == 1
+    /// (file_api.h:28 FilePolicyBase() { ref_count = 1; }).
+    pub fn new_boxed(policy: Box<dyn FilePolicyApi>) -> FilePolicyHandle {
+        FilePolicyHandle {
+            inner: Rc::new(RefCell::new(PolicyStore { policy, ref_count: 1 })),
+        }
+    }
+    /// `void add_ref() { ++ref_count; }` (file_api.h:165)
+    pub fn add_ref(&mut self) {
+        self.inner.borrow_mut().ref_count += 1;
+    }
+    /// `static void delete_file_policy(FilePolicyBase* policy)`
+    /// (file_api.cc:34) on the handle's own object: decrement; at 0
+    /// the Box drops (C `delete policy`; ~FilePolicyBase asserts
+    /// !ref_count — already 0). The C null-argument arm = the port's
+    /// Option-slot None (callers pass through Option).
+    pub fn delete_file_policy(&mut self) {
+        let mut st = self.inner.borrow_mut();
+        debug_assert!(st.ref_count > 0); // assert(policy->ref_count)
+        st.ref_count -= 1; // unsigned ref = --policy->ref_count
+    }
+    pub fn ref_count(&self) -> u32 {
+        self.inner.borrow().ref_count
+    }
+    /// C pointer-identity compare `policy == stub_file_policy()` /
+    /// `static_pol == pol` (file_flows probe B_CREATE / get_file_policy
+    /// static): two handles front the same object iff they share the
+    /// store (the C raw pointers compare by address).
+    pub fn same_store(&self, other: &FilePolicyHandle) -> bool {
+        Rc::ptr_eq(&self.inner, &other.inner)
+    }
+    /// Borrow the object (null-ness = C `if (!fp)` arms).
+    pub fn is_null(&self) -> bool {
+        false // the handle type only ever fronts a real object
+    }
+    /// Run a closure with `&mut dyn FilePolicyApi` — the C raw-pointer
+    /// call shape (file_policy->signature_lookup(...) etc.).
+    pub fn with_policy_mut<R, F: FnOnce(&mut dyn FilePolicyApi) -> R>(&mut self, f: F) -> R {
+        let mut st = self.inner.borrow_mut();
+        f(st.policy.as_mut())
+    }
+    /// Read the object immutably.
+    pub fn with_policy<R, F: FnOnce(&dyn FilePolicyApi) -> R>(&self, f: F) -> R {
+        let st = self.inner.borrow();
+        f(st.policy.as_ref())
+    }
 }
 
 /// `control/control.h` `LogRespond(ctrlcon, fmt, ...)` seam.
@@ -458,6 +586,28 @@ impl FileTypeNames for NoFileTypeNames {
 pub trait PacketTracerApi {
     fn is_active(&self) -> bool;
     fn log(&mut self, msg: &str);
+    // Row 17q additions (defaults keep the 17p witness impls source-
+    // compatible; the fflows test arms the real witness bodies):
+    /// packet_io/packet_tracer.h `is_daq_activated()` (the
+    /// file_flows/file_lib `if (is_daq_activated())` gates + the
+    /// print_file_name "File name: "-suppression arm).
+    fn is_daq_activated(&self) -> bool {
+        false
+    }
+    /// `PacketTracer::restart_timer()` (file_flows.cc:429/:521 — the
+    /// witness prints "PT restart_timer").
+    fn restart_timer(&mut self) {}
+    /// `PacketTracer::daq_log(fmt, ...)` (populate_trace_data — the
+    /// witness prints "PTdaq <formatted>").
+    fn daq_log(&mut self, _msg: &str) {}
+    /// `PacketTracer::get_time()` (populate_trace_data's first daq_log
+    /// arg, file_flows.cc:87): the fflows witness PINNED the constant
+    /// 1700000100000000 (stubs.cc — the real body rides the tracer
+    /// monolith clock; the fake SnortClock stays orthogonal, deviation
+    /// documented at the harness).
+    fn get_time(&self) -> u64 {
+        0
+    }
 }
 
 pub struct NoPacketTracer;
@@ -530,126 +680,6 @@ fn time_elapsed_ms(now: &TimeVal, expire_time: &TimeVal, lookup_timeout: i64) ->
         return 0;
     }
     lookup_timeout * 1000 + timersub_ms(now, expire_time)
-}
-
-// ------------------------------------------------------------------
-// FileContext — the cache-reachable subset of file_lib.h's
-// FileContext (full body: row 17q). Every member below is copied from
-// those real declarations; no new behavior.
-// ------------------------------------------------------------------
-
-pub struct FileContext {
-    /// C++ base class `FileInfo` (file_lib.h:50), already ported.
-    pub info: FileInfo,
-
-    // file_lib.h private members this TU touches (defaults verbatim):
-    cacheable: bool, // = true
-    cache_dup: bool, // = false
-    in_use: i32,     // = 0
-    timedout: bool,  // = false
-    /// C `FileConfig* config` / `FileInspect* inspector` raw non-owning
-    /// pointers; the port shares Rc seams with identical null-gating.
-    config: Option<Rc<RefCell<FileConfigView>>>,
-    inspector: Option<Rc<dyn InspectorApi>>,
-    /// The InspectorManager that handed out `inspector` (C reaches the
-    /// static in ~FileContext; the port keeps the Rc so the release
-    /// witness fires at the exact C delete point — 17p harness-pinned).
-    imgr: Option<ImgrRc>,
-}
-
-impl Drop for FileContext {
-    fn drop(&mut self) {
-        // file_lib.cc:574 ~FileContext: `if (inspector)
-        //     InspectorManager::release(inspector);`
-        if let (Some(imgr), Some(ins)) = (&self.imgr, &self.inspector) {
-            imgr.borrow_mut().release(ins);
-        }
-    }
-}
-
-impl FileContext {
-    /// `FileContext()` ctor defaults (file_lib.cc; the ctor's
-    /// InspectorManager / SnortConfig::get_conf() wiring is done by
-    /// FileCache::new_file_context against the seams).
-    fn base(imgr: Option<ImgrRc>) -> FileContext {
-        FileContext {
-            info: FileInfo::default(),
-            cacheable: true,
-            cache_dup: false,
-            in_use: 0,
-            timedout: false,
-            config: None,
-            inspector: None,
-            imgr,
-        }
-    }
-
-    // file_lib.h:194-225 inline accessors, literally:
-    pub fn set_not_cacheable(&mut self) {
-        self.cacheable = false;
-    }
-    pub fn is_cacheable(&self) -> bool {
-        self.cacheable
-    }
-    pub fn pin(&mut self) {
-        self.in_use += 1;
-    }
-    pub fn unpin(&mut self) {
-        if self.in_use > 0 {
-            self.in_use -= 1;
-        }
-    }
-    pub fn is_in_use(&self) -> bool {
-        self.in_use > 0
-    }
-    pub fn set_cache_dup(&mut self) {
-        self.cache_dup = true;
-    }
-    pub fn is_cache_dup(&self) -> bool {
-        self.cache_dup
-    }
-    pub fn get_timedout(&self) -> bool {
-        self.timedout
-    }
-    pub fn set_timedout(&mut self) {
-        self.timedout = true;
-    }
-    pub fn get_config(&self) -> bool {
-        self.config.is_some()
-    }
-    pub fn set_config(&mut self, fc: Option<Rc<RefCell<FileConfigView>>>) {
-        self.config = fc;
-    }
-    fn get_inspector(&self) -> bool {
-        self.inspector.is_some()
-    }
-    fn set_inspector(&mut self, ins: Option<Rc<dyn InspectorApi>>) {
-        self.inspector = ins;
-    }
-
-    /// file_lib.cc:1189 `FileContext::stop_file_capture()`: takes the
-    /// ud lock, `delete`s the FileCapture (the port's info.file_capture
-    /// seam Box -> None == C delete), then `config_file_capture(false)`
-    /// (stop_file_capture_unlocked, file_lib.cc:1195). The capture
-    /// engine body is its own row (17o seam).
-    fn stop_file_capture(&mut self) {
-        if self.info.file_capture.is_some() {
-            self.info.file_capture = None; // FileCapture* capture = ...; delete
-        }
-        self.info.config_file_capture(false);
-    }
-
-    /// file_lib.cc:613 `FileContext::log_file_event(Flow*,
-    /// FilePolicyBase*)` — body row 17q; the call sites stay literal
-    /// via the event-sink seam.
-    fn log_file_event(
-        &self,
-        flow: &CacheFlow,
-        policy: &mut dyn FilePolicyApi,
-        events: &mut dyn FileCacheEventSink,
-    ) {
-        events.file_log_event(self, flow, policy);
-    }
 }
 
 /// file_cache.cc:96 anonymous-namespace `CacheNodePin`: dtor takes
@@ -1912,7 +1942,7 @@ impl FileCache {
                 if resume {
                     file_ctx
                         .borrow()
-                        .log_file_event(&flow, policy, self.events.as_mut());
+                        .log_file_event_sink(&flow, policy, self.events.as_mut());
                     policy.log_file_action(&flow, &mut file_ctx.borrow_mut(), FILE_RESUME_LOG);
                 }
                 return false;
@@ -2136,7 +2166,7 @@ impl FileCache {
             self.trace.file_trace(TRACE_DEBUG_LEVEL, "apply_verdict:Resume block file\n");
             file_ctx
                 .borrow()
-                .log_file_event(&flow, policy, self.events.as_mut());
+                .log_file_event_sink(&flow, policy, self.events.as_mut());
             policy.log_file_action(&flow, &mut file_ctx.borrow_mut(), FILE_RESUME_BLOCK);
         } else {
             // else if (bool is_cacheable = file_ctx->is_cacheable())
@@ -2371,7 +2401,7 @@ impl FileCache {
         dup.borrow_mut().info.verdict = resolved;
         // node->log_file_event(flow, policy);
         node.borrow()
-            .log_file_event(&flow, policy, self.events.as_mut());
+            .log_file_event_sink(&flow, policy, self.events.as_mut());
         {
             // const bool cur_type_enabled = dup->is_file_type_enabled();
             // const bool cur_sig_enabled =
