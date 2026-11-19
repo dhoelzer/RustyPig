@@ -791,25 +791,26 @@ use super::file_cache::{
 // the port threads explicitly (skill rule: no self-referential
 // structs).
 use super::file_flows::{CurrentContextSlot, FileFlows};
-use super::file_identifier::{FileIdentifier, FileMeta};
+use super::file_identifier::{
+    FIdNode, FileIdErrorSink, FileIdentifier, FileMeta, FILE_ID_MAX,
+};
 use super::file_segment::FileSegments;
 use crate::helpers::event_gen::DetectionEventSink;
 use crate::helpers::sha256::Sha256Ctx;
 use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 
-/// file_config.h:40 `#define DEFAULT_MAX_FILES_PER_FLOW 128`
-pub const DEFAULT_MAX_FILES_PER_FLOW: u64 = 128;
-/// file_config.h:26-38 (the DEFAULT_* this half's defaults pin; the
-/// block_timeout / lookup / max_cached trio already lives on
-/// file_cache.rs as the FileCache constants of the same name).
-pub const DEFAULT_FILE_TYPE_DEPTH: i64 = 1460;
-pub const DEFAULT_FILE_SIGNATURE_DEPTH: i64 = 10_485_760; // 10 MiB
-pub const DEFAULT_FILE_SHOW_DATA_DEPTH: i64 = 100;
-pub const DEFAULT_FILE_CAPTURE_MEM: i64 = 100; // 100 MiB
-pub const DEFAULT_FILE_CAPTURE_MAX_SIZE: i64 = 1_048_576; // 1 MiB
-pub const DEFAULT_FILE_CAPTURE_MIN_SIZE: i64 = 0;
-pub const DEFAULT_FILE_CAPTURE_BLOCK_SIZE: i64 = 32_768;
+/// file_config.h:30-:40 macro table — row 17u moved the canonical
+/// numerals to file_config.rs (the three-way dup's one home, PLAN 8
+/// item 1); these pub re-exports keep every existing binding green
+/// (tests/fctx_parity_test.rs:59-:61 imports the old names through
+/// this module; grep-verified before the move). Use-site cites of
+/// file_config.h stay valid.
+pub use super::file_config::{
+    DEFAULT_FILE_CAPTURE_BLOCK_SIZE, DEFAULT_FILE_CAPTURE_MAX_SIZE, DEFAULT_FILE_CAPTURE_MIN_SIZE,
+    DEFAULT_FILE_CAPTURE_MEM, DEFAULT_FILE_SHOW_DATA_DEPTH, DEFAULT_FILE_SIGNATURE_DEPTH,
+    DEFAULT_FILE_TYPE_DEPTH, DEFAULT_MAX_FILES_PER_FLOW,
+};
 
 /// file_config.h:35 `class FileConfig` — every field at the exact C
 /// declared name/type/order, plus the two methods this half reads.
@@ -852,15 +853,15 @@ impl Default for FileConfigLite {
         FileConfigLite {
             file_type_depth: DEFAULT_FILE_TYPE_DEPTH,
             file_signature_depth: DEFAULT_FILE_SIGNATURE_DEPTH,
-            file_block_timeout: super::file_cache::DEFAULT_FILE_BLOCK_TIMEOUT,
-            file_lookup_timeout: super::file_cache::DEFAULT_FILE_LOOKUP_TIMEOUT,
+            file_block_timeout: super::file_config::DEFAULT_FILE_BLOCK_TIMEOUT,
+            file_lookup_timeout: super::file_config::DEFAULT_FILE_LOOKUP_TIMEOUT,
             block_timeout_lookup: false,
             capture_memcap: DEFAULT_FILE_CAPTURE_MEM,
             capture_max_size: DEFAULT_FILE_CAPTURE_MAX_SIZE,
             capture_min_size: DEFAULT_FILE_CAPTURE_MIN_SIZE,
             capture_block_size: DEFAULT_FILE_CAPTURE_BLOCK_SIZE,
             file_depth: 0,
-            max_files_cached: super::file_cache::DEFAULT_MAX_FILES_CACHED,
+            max_files_cached: super::file_config::DEFAULT_MAX_FILES_CACHED,
             max_files_per_flow: DEFAULT_MAX_FILES_PER_FLOW,
             show_data_depth: DEFAULT_FILE_SHOW_DATA_DEPTH,
             trace_type: false,
@@ -873,10 +874,52 @@ impl Default for FileConfigLite {
 }
 
 impl FileConfigLite {
-    /// file_config.cc:48 `FileConfig::get_rule_from_id` ->
+    /// file_config.cc:41-:45 `FileConfig::find_file_type_id` ->
+    /// fileIdentifier.find_file_type_id (the D_forwarders arm:
+    /// `find_empty_trie=65535 ctx_null=1` — the production path never
+    /// inserts into the trie, only add_file_id fills
+    /// file_magic_rules[], fid-harness fact). The C in/out `void**
+    /// context` rides the fid row's `&mut Option<FIdNode>` (the
+    /// pinned surface; the raw shape stays there — wire the raw
+    /// `void**` shim only when a vector demands it).
+    pub fn find_file_type_id(
+        &self,
+        buf: &[u8],
+        file_offset: u64,
+        context: &mut Option<FIdNode>,
+    ) -> u32 {
+        self.file_identifier.find_file_type_id(buf, file_offset, context)
+    }
+
+    /// file_config.cc:48-:51 `FileConfig::process_file_rule(const
+    /// FileMeta&)` -> fileIdentifier.add_file_id (the M1 arm's arm-the
+    /// seam-table path; `S` is the C global ParseError stand-in — see
+    /// file_config.rs's NullParseError note).
+    pub fn process_file_rule<S: FileIdErrorSink>(&mut self, rule: &FileMeta, sink: &mut S) {
+        // C const this= is a language artifact; the C add_file_id
+        // itself mutates file_magic_rules, so the forward is &mut
+        // (crate-wide interior-mutability deviation, same shape as
+        // FileIdentifier::add_file_id).
+        self.file_identifier.add_file_id(rule, sink);
+    }
+
+    /// file_config.cc:53-:56 `FileConfig::get_rule_from_id` ->
     /// fileIdentifier.get_rule_from_id.
     pub fn get_rule_from_id(&self, id: u32) -> Option<&FileMeta> {
         self.file_identifier.get_rule_from_id(id)
+    }
+
+    /// file_config.cc:58-:62 `FileConfig::get_magic_rule_ids_from_
+    /// type` -> fileIdentifier (the M3 version-quoting arm lives in
+    /// the file_identifier row).
+    pub fn get_magic_rule_ids_from_type(
+        &self,
+        r#type: &str,
+        version: &str,
+        ids_set: &mut [u64; FILE_ID_MAX / 64],
+    ) {
+        self.file_identifier
+            .get_magic_rule_ids_from_type(r#type, version, ids_set);
     }
 
     /// file_config.cc:63 `FileConfig::file_type_name(uint32_t)`

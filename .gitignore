@@ -188,3 +188,14 @@ tools/fcshare_harness/*.log
 tools/fcshare_harness/gate.txt
 tools/fcshare_harness/nm_residue.txt
 tools/fcshare_harness/nm_share.txt
+
+tools/fconf_harness/copy/
+tools/fconf_harness/probe
+tools/fconf_harness/probe2
+tools/fconf_harness/gate
+tools/fconf_harness/catch_main.cc
+tools/fconf_harness/*.o
+tools/fconf_harness/*.log
+tools/fconf_harness/gate.txt
+tools/fconf_harness/nm_residue.txt
+tools/fconf_harness/nm_config.txt

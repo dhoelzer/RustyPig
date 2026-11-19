@@ -97,16 +97,19 @@ use crate::hash::{HASH_NOMEM, HASH_OK, XHash};
 use crate::sfip::sf_ip::SfIp;
 
 // ------------------------------------------------------------------
-// file_config.h constants used by the in-class field initializers
-// (the FileConfig class itself: a later row).
+// file_config.h constants used by the in-class field initializers.
+// Row 17u: the numerals moved to their canonical home (file_config.rs
+// over the PLAN 7b table); these pub re-exports keep the 17m bindings
+// green (tests/fcache_parity_test.rs:45 `use file_cache::*` picks the
+// names up off this glob — grep-verified before the move).
 // ------------------------------------------------------------------
 
 /// file_config.h:33 `#define DEFAULT_FILE_BLOCK_TIMEOUT 86400 /*1 day*/`
-pub const DEFAULT_FILE_BLOCK_TIMEOUT: i64 = 86400;
+pub use super::file_config::DEFAULT_FILE_BLOCK_TIMEOUT;
 /// file_config.h:34 `#define DEFAULT_FILE_LOOKUP_TIMEOUT 2 /*2 seconds*/`
-pub const DEFAULT_FILE_LOOKUP_TIMEOUT: i64 = 2;
+pub use super::file_config::DEFAULT_FILE_LOOKUP_TIMEOUT;
 /// file_config.h:39 `#define DEFAULT_MAX_FILES_CACHED 65536`
-pub const DEFAULT_MAX_FILES_CACHED: i64 = 65536;
+pub use super::file_config::DEFAULT_MAX_FILES_CACHED;
 /// file_cache.cc:52 `#define DEFAULT_FILE_LOOKUP_TIMEOUT_CACHED_ITEM 3600`
 const DEFAULT_FILE_LOOKUP_TIMEOUT_CACHED_ITEM: i64 = 3600; // 1 hour
 

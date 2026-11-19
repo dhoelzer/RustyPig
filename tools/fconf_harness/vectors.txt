@@ -1,0 +1,20 @@
+FileInspect ctor
+CONF sizeof_FileConfig=131360 sizeof_FileMeta=128 file_id_max=1024
+D_defaults ftd=1460 sig_depth=10485760 blk_to=86400 lookup=2 btl=0 cap_mem=100 cap_max=1048576 cap_min=0 cap_blk=32768 fdepth=0 max_cached=65536 max_per_flow=128 show_depth=100 tt=0 ts=0 tstream=0 spid=0
+D_forwarders rule_hit=1 rule_id=7 rule_type=exe rule13null=1 find_empty_trie=65535 ctx_null=1
+N_names name=file_inspect name_eq=1 help_eq=1
+T1_unknown id=65535 s=Unknown file type, done
+T2_continue id=0 s=Undecided file type, continue...
+T3_hit id=7 s=exe
+T4_miss id=999 s_empty=1
+F5_free_resolved seam_nonnull=1 name=exe eq=1
+F6_free_null s=NA eq_na=1
+G3_null_arm conf_null_noarg=1 conf_null_sc=1 rearmed=1
+G1_explicit_sc nonnull=1 is_harness_conf=1
+G2_null_sc_default nonnull=1 is_harness_conf=1
+M1_set_rule rule12_hit=1 name12=pdf name_eq=1 groups=1 g0=g
+M2_set_rule_null silent_noop=1 rule13null=1
+M3_magic_ids any_ver_count=1 id7=1 quoted_miss_count=0
+M4_magic_reset pre_count=3 pre=111 post_count=0 post=000 rearmed=1
+S1_load_config_setters ftd=2000 sig=20971520 blk=172800 lut=4 btl=1 cm=250 cms=2097152 cmin=4096 cbs=65536 mfc=131072 mpf=256 sdd=200 tt=1 tsig=1 tst=1 all_mutated=1 fdepth_untouched=1 spid_untouched=1
+FCONF_PROBE_DONE

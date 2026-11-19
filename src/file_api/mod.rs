@@ -4,6 +4,10 @@ pub mod file_cache;
 // the C underscore sort lands before file_capture).
 pub mod file_cache_share;
 pub mod file_capture;
+// row 17u: the file_config.{h,cc} constants' canonical home (the
+// file_cache.rs:104-:109 / file_lib.rs:801-:812 mirrors became pub
+// re-exports of this table).
+pub mod file_config;
 pub mod file_flows;
 pub mod file_identifier;
 pub mod file_lib;
