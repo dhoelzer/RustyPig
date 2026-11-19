@@ -177,3 +177,14 @@ tools/fcap_harness/*.o
 tools/fcap_harness/*.log
 tools/fcap_harness/gate.txt
 tools/fcap_harness/nm_residue.txt
+
+tools/fcshare_harness/copy/
+tools/fcshare_harness/probe
+tools/fcshare_harness/probe2
+tools/fcshare_harness/gate
+tools/fcshare_harness/catch_main.cc
+tools/fcshare_harness/*.o
+tools/fcshare_harness/*.log
+tools/fcshare_harness/gate.txt
+tools/fcshare_harness/nm_residue.txt
+tools/fcshare_harness/nm_share.txt

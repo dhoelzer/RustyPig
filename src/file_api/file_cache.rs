@@ -1169,6 +1169,15 @@ pub struct FileCache {
     /// lives on PacketView::conf).
     pub conf: Rc<RefCell<FileConfigView>>,
     pub events: Box<dyn FileCacheEventSink>,
+    /// 17t seam-closure hand-off queue (the FileCacheShareSink
+    /// default's publish half writes it; the subscriber-side
+    /// `FileCacheShareSink::drain` reads it). Models the process-wide
+    /// MPDataBus between `MPDataBus::publish` (file_cache.cc:569,
+    /// gated :563) and the target thread's deserialize + handle
+    /// (file_inspect.cc:76-:83) — the bus itself stays the unported
+    /// transport half. Tests that replace `events` simply never see
+    /// it move.
+    pub mp_wire: super::file_cache_share::WireQueue,
     pub type_names: Box<dyn FileTypeNames>,
 }
 
@@ -1182,6 +1191,9 @@ impl FileCache {
         let mut file_hash = ExpectedFileCache::new(max_files, FILE_HASH_KEY_BYTES, SIZEOF_FILE_NODE);
         // fileHash->set_max_nodes(max_files);
         file_hash.xh.set_max_nodes(max_files as u32);
+        // 17t: the sink <-> cache hand-off queue (built up front so
+        // both the events field and mp_wire hold clones).
+        let mp_wire = super::file_cache_share::new_wire_queue();
         FileCache {
             file_hash,
             block_timeout: DEFAULT_FILE_BLOCK_TIMEOUT, // std::atomic init
@@ -1197,7 +1209,17 @@ impl FileCache {
             errlog: Box::new(NoErrorLog),
             clock: Box::new(DriverPacketClock::default()),
             conf: Rc::new(RefCell::new(FileConfigView::default())),
-            events: Box::new(NoopFileCacheEventSink),
+            // 17t seam closure: the default sink is the real
+            // FileCacheShare-backed one (file_cache_share.rs) — the
+            // publish side runs the cc:44 encoder (serialize_file_event)
+            // the MP bus would carry (file_inspect.cc:78-:79 bind it);
+            // the trait stays injectable (witness tests override, the
+            // 17s RealFileCaptureFactory posture) and
+            // NoopFileCacheEventSink stays for explicit opt-out.
+            // The sink and the cache share the hand-off queue (the
+            // unported MPDataBus stand-in; module doc on mp_wire).
+            events: Box::new(super::file_cache_share::FileCacheShareSink::with_queue(mp_wire.clone())),
+            mp_wire,
             type_names: Box::new(NoFileTypeNames),
         }
     }

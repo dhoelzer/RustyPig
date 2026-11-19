@@ -1512,3 +1512,48 @@ Structural deviations (behavior preserved):
   answers null, so the 17r pinned-absent `.expect` holds by
   construction; `NoFileCaptureFactory` stays for witness opt-out (the
   17r HubCapture fixtures stay green untouched — vectors unchanged).
+
+## file_api/file_cache_share.{h,cc} (row 17t)
+
+- Unchecked downcasts `static_cast<FileMPEvent&>(de)` (cc:32) and
+  `static_cast<FileMPEvent*>(event)` (cc:49) (risk R6) are typed away:
+  the Rust signatures take `&FileMpEvent` / `Option<&mut FileMpEvent>`
+  directly and NO runtime check is added (fidelity: the C TU checks
+  nothing; the probe feeds only true FileMPEvents, PLAN §7).
+- Dead `new` null-checks (cc:55-:56, cc:69-:70, risk R4) NOT
+  transcribed — `new char[]`/`new FileMPEvent` never return null in
+  C++17; Vec/value allocation has no such arm.
+- Heap-ownership contract (risk R7, vectors `S_D_ownership`) is the
+  documented leak-to-caller shape: cc:54 buffer and cc:68 event are
+  never freed in the TU; Rust MOVES the `Vec<u8>`/`FileMpEvent` to the
+  caller (drop == the probe's delete[] + delete, leak_delta 0).
+- No minimum-length guard preserved (risk R5, cc:65-:66 rejects ONLY
+  null/len==0): the fixed 64-byte header walk is unguarded in C (OOB
+  read for 0<len<64); the Rust slices panic equivalently (file_lib.rs
+  precedent) — NOT validated further.
+- `FileService::get_file_cache()` process static (cc:37,
+  file_service.h:98/:109) has no Rust singleton: `handle` threads
+  `Option<&mut FileCache>`; the cc:38 null-guard == the `None` arm
+  (H1). The unnamed `Flow*` (cc:30) is dropped (never referenced).
+- Wire constants are probe-pinned literals, never `size_of`
+  (vectors.txt:1): `FILE_MP_EVENT_FIXED_LEN=64`, `FILE_HASH_KEY_BYTES=56`
+  (re-export), `SIZEOF_FILE_MP_EVENT=392` witness-only.
+- `hashkey.padding[3]`: the codec memcpys 6 wire bytes in/out
+  (file_events.h:99/:124-:125); the Rust mirror keeps padding
+  implicit-zero (file_cache.rs make_key `{}` discipline) — wire
+  non-zero padding would alias to zeros (unpinned by any vector).
+- handle's cc:35 `FileInfo file = fe.get_file_ctx()` copy arrives at
+  `store_shared_verdict` (already ported, file_cache.rs:1838-:1889)
+  in a FRESH `Rc<RefCell<FileContext>>` wrapper (the port signature
+  takes the ctx form): never ptr-equal to any node, so the existing
+  `Rc::ptr_eq` self-alias no-op guard (file_cache.rs:1858-:1863)
+  behaves exactly as the C self-assignment for event-sourced src.
+- Seam closure: the `FileCache::new` DEFAULT `events` sink is now the
+  real `FileCacheShareSink` (file_cache.rs:1200+ swap; the publish
+  half runs the cc:44 encoder, the drain half cc:63 + handle). The
+  `FileCacheEventSink` trait stays injectable — the fcache/fctx/
+  fflows witness suites override it and stay green untouched (no
+  test relied on the Noop default; 431 -> 444 incl. 13 new fcshare
+  parity cases). The sink<->cache hand-off queue (`mp_wire`) stands
+  in for the unported MPDataBus transport (gate keeps mp_dbus off at
+  the C :563 twin); `NoopFileCacheEventSink` stays for opt-out.

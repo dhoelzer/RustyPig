@@ -1,0 +1,25 @@
+CONST sizeof_FileHashKey=56 fixed_len=64 sizeof_FileMPEvent=392
+S1_null ret=0 buf_null_after=1 len_untouched=1
+S2_zerolen ret_default=0 data_len_default=0 ret_oversized=0 data_len_oversized=0
+S3_ok ret=1 len_out=174 data_len=174 hdr_eq=1 tail_eq=1 tail_off=64 hdr_bytes=D262D0B20000000000000000000000000000000000000000
+D1_nullbuf ret=0 event_untouched=1
+D2_zerolen ret=0 event_untouched=1
+D3_roundtrip ret=1 nonnull=1 timeout_eq=1 key_eq=1 verdict_eq=1 name_eq=1 url_eq=1 sha_eq=1 file_size_eq=1
+D4_lenrec wire_len=174 data_len=174 len_rec_eq=1
+S_D_ownership buf_freed=1 event_freed=1 leak_delta=0 (caller frees cc:54 buffer + cc:68 event)
+H1_nocache handled=1 cache_null=1 guard_hit=1
+IMGR acquire -> null
+H2_copy_then_store node_hit=1 verdict=3 name_len=6 name=h2.bin entries=1 copy_not_alias=1
+H3_blocked verdict=3 name=h2.bin node_unchanged=1
+H4_blocked2 verdict=3 name=h4.bin file_size=77 copy_fired=1
+IMGR acquire -> null
+IMGR acquire -> null
+H_xattr entries_after_first=2 entries_after=2 verdict=1 name=recover.bin recovered=1
+IMGR acquire -> null
+IMGR acquire -> null
+X1_handle_after_clear freed=1 remaining=0 entries_after_clear=0 entries_after=1 verdict=3 name=x1.bin fresh_node=1
+IMGR acquire -> null
+X2_enter entries=1
+X2_dtor_with_live_event event_verdict=4 event_name=x2_hold.bin event_file_size=5 event_owns_copy=1
+X2_ownership event_freed=1 leak_delta=0
+FCSHARE_PROBE_DONE
