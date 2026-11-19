@@ -1557,3 +1557,62 @@ Structural deviations (behavior preserved):
   parity cases). The sink<->cache hand-off queue (`mp_wire`) stands
   in for the unported MPDataBus transport (gate keeps mp_dbus off at
   the C :563 twin); `NoopFileCacheEventSink` stays for opt-out.
+
+## file_api/file_config.{h,cc} (row 17u)
+
+- Const-home re-point is a NO-OP for behaviour: the 11 `DEFAULT_*`
+  consts move to their canonical home `src/file_api/file_config.rs`
+  (file_config.h:30-:40) and the old homes (file_cache.rs trio,
+  file_lib.rs seven) keep their names as `pub use` re-exports — every
+  existing test binding (fctx_parity_test.rs:59-:61, fcache_parity
+  _test.rs:45 glob) stays green untouched.
+- R2 type asymmetry kept literal: `DEFAULT_MAX_FILES_PER_FLOW` is
+  `u64` (the C FIELD max_files_per_flow is uint64_t, h:66) while every
+  sibling default is `i64` (h:65 etc. int64) — the asymmetry is the C
+  shape, not a porting slip. `DEFAULT_FILE_CAPTURE_MEM 100` stays a
+  RAW MiB count (h:35 comment); no unit multiply anywhere (probe
+  D_defaults `cap_mem=100`).
+- R3: `FILE_ID_NAME`/`FILE_ID_HELP` (h:42/:43) land as `&'static str`
+  consts (C literals for the parser/module layer; the file_module row
+  consumes them). N_names `name=file_inspect name_eq=1 help_eq=1`.
+- Typed null arms replace C pointer checks — each pinned by a vector:
+  free `file_type_name` (cc:80-:87) null-conf arm answers **"NA"**
+  (cc:85-:86; C would UB-deref, the port keeps the harness-pinned
+  answer — F6 `s=NA eq_na=1`; the MEMBER file_type_name (cc:64-:78)
+  has NO null path and is pinned separately: T1 UNKNOWN -> "Unknown
+  file type, done", T2 CONTINUE -> "Undecided file type, continue...",
+  T3 rule-hit -> rule type, T4 miss -> "").
+  `snort::get_magic_rule_ids_from_type` (cc:104-:113) null-conf arm
+  -> `ids_set.reset()` (M4 sentinel `pre_count=3 pre=111 post_count=0
+  post=000`, bits 0/7/1023 cleared). `snort::set_rule_id_from_type`
+  (cc:115-:127) null-conf arm -> SILENT no-op, no witness (M2
+  `silent_noop=1 rule13null=1` vs M1 fresh-id-12 arms + reads back).
+  `get_file_config` (cc:89-:100) inspector-null -> `None` (G3 pins
+  BOTH call shapes `conf_null_noarg=1 conf_null_sc=1`: the Rust seam
+  has no `sc` arm — the defaulted arg collapses to the same None).
+- `NullParseError` stands in for C's global ParseError sink
+  (file_identifier.cc:195-:198 duplicate message): no pinned vector
+  arms a duplicate through the shim path (M1 fresh 12, M2 never
+  reaches add_file_id, D_forwarders fresh 7), so the shims answer
+  quietly; a parser row re-arms a real sink via the
+  `process_file_rule` error-sink parameter (1:1 with C's error arm).
+- sizeof strings are PROBE-COMPUTED, never hand-typed:
+  `sizeof_FileConfig=131360` / `sizeof_FileMeta=128` (CONF vector;
+  131360 = the embedded-FileIdentifier blob, file_config.h:75 member).
+  No ported consumer reads them — LEFT-OPEN by design (a Rust layout
+  pin would re-derive the fid row internals).
+- `FileConfigView` (file_cache.rs:319-:343) stays UNTOUCHED — the 17p
+  by-value `PacketView::conf` contract (PLAN 8 item 5) outlives this
+  row; no parallel `FileConfig` struct is forked here (the C h:45-:76
+  field set + hand-written Default already live as `FileConfigLite`,
+  file_lib.rs:820-:873 — the D_defaults oracle).
+- LEFT-OPEN (cited in src/file_api/file_config.rs:225-:250): the four
+  member forwarders (cc:41-:45/:48-:51/:53-:56/:58-:62) ride
+  `FileConfigLite` directly (the struct carrying the ported
+  FileIdentifier member), not a new struct; `file_inspect.h:36
+  FileConfig* config` (the cc:94-:97 cast target) stays the
+  `FileEnvLite::file_config` seam slot until the file_inspect row;
+  the `FileContext.config` type duality (file_lib.rs:1301-:1309)
+  stays open — swapping the 17q view for FileConfigLite re-arms every
+  17p/17r pinned vector; file_stats.rs:22 mirrors FILE_ID_MAX a
+  second time (fid row turf).
