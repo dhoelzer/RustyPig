@@ -1800,3 +1800,108 @@ Structural deviations (behavior preserved):
   `ctor_stole_null` prints `(int)config ? 1 : 0` — HAS-config,
   inverted vs the label; the replay prints is_some() and the pin is
   0 because the steal on an empty slot leaves config null.
+
+## file_api/file_policy.{h,cc} (row 17x)
+
+- The TU has ZERO TEST_CASEs/UNIT_TEST fragments (fpolicy PLAN §0: combined
+  grep measured twice, NEXT.md + PLAN); tools/fpolicy_harness/vectors.txt is
+  the only oracle and compiles the row TU byte-VERBATIM (0 grafts, 0 seds).
+  The Rust port (src/file_api/file_policy.rs) lands the 10 real bodies over
+  the 17v seam; no Rust parity twin was committed this row (new test files
+  only per PLAN §4 "ZERO test edits" — the frozen fcache4/fctx7/fflows8/
+  filib4/fapi2 POLICY-line suites stay unedited and green).
+- Naming: Rust `TypeIdSet` = C `struct FileVerdictWhen` (h:33-:37) and Rust
+  `FileUse` = C `struct FileVerdictUse` (h:39-:45); `FileRule` matches C.
+- Layout: `V1_size base=16 rule=48 policy=152 refs=1` (vectors.txt:1,
+  probe.cc:71-:73) are C++-ABI sizes (FileVerdictWhen 40 = u32+pad+
+  std::string; FilePolicy 152 rides the FilePolicyBase 16 tail). Per the
+  file_cache_share.rs:69 rule they are PINNED LITERALS
+  (C_SIZEOF_FILE_RULE/C_SIZEOF_FILE_POLICY consts), NEVER Rust size_of —
+  the Rust shapes differ (no std::string ABI, no vptr; size_of::<FileRule>
+  = 40, size_of::<FilePolicy> is not a thing worth asserting). The one
+  real overlap, FileUse = 8, IS asserted (`const _: () = assert!`).
+  Cross-checked via static_assert on the donor headers this pass
+  (when=40 use=8 rule=48 policy=152 base=16 + member offsets vec@16
+  map@40 defrule@88 delay@144 — documentation only, nothing reads them).
+- C `private:` (h:82) -> Rust `pub`: the FIXACC step flips the header
+  public for the probe (fpolicy build.sh :261 tuple entry, n=1 private,
+  PLAN R6); Rust states the same visibility with the cite.
+- R2 CASCADE PIN (the big one): `FileServiceLite::enable_file_capture`
+  mirrors the REAL file_service.cc:199-:204 body — sets capture AND calls
+  enable_file_signature (the fpolicy donor stubs.cc:602 now compiles the
+  cascade version itself: `{ file_capture_enabled = true;
+  enable_file_signature(); }`). The pre-existing `set_file_*_enabled`
+  witness arms (17w, finspect stubs.cc:596-:598 NO-cascade version) stay
+  byte-VERBATIM: they are the finspect/fctx harness arms and the frozen
+  finspect show-ladder vectors (lines 68-:82: enable_capture enabled +
+  enable_signature disabled) PIN the no-cascade witness. Two arms, two
+  bodies, no silent drift: `enable_*` = the real trio (file_service.cc:
+  189-:204, the atomic store -> plain field 17p mutex deviation),
+  `set_file_*_enabled` = witness injection. C add_file_id/load call-sites
+  (cc:103/:107/:110/:118/:122/:125) ride `enable_*` only.
+- add_file_id QUIRK pinned: cc:103-:104 `FileService::enable_file_type();
+  type_enabled = true;` UNCONDITIONAL on EVERY rule (V3_add `type_enabled=1
+  svc t=1`); signature/capture arm only on the RULE's use flags
+  (cc:106-:110). std::stoi hex decode (cc:94) -> from_str_radix PANIC on a
+  malformed nibble == the C __throw_invalid_argument/out_of_range arms
+  (R7; vectors never arm junk hex; odd-length tail submits the 1-char
+  window like C's short substr). file_shas stores the KEY as raw bytes
+  (cc:99/cc:152 first-SHA256_HASH_SIZE-bytes) in a BTreeMap (std::map is
+  ordered — find semantics exact).
+- match_file_rule/match_file_signature/policy_check/type_lookup/
+  signature_lookup all drop the C dead unnamed params (Flow*/Packet*);
+  `FileRule&` return -> Rust borrow, the V5_def `is_default=1` pointer
+  identity answers through `same_default` (std::ptr::eq).
+- type_lookup cc:181 copies the matched rule (C local); the port borrows
+  and reads (non-observable, same arm order; the :182-:183 RE-ARM of the
+  FileInfo signature/capture switches from the RULE is pinned —
+  V8_rearm `f s=1 c=1`). signature_lookup cc:189 holds a const REF (no
+  copy — the asymmetry with cc:181 is carried as a comment).
+- verdict_delay ladder cc:157-:160: PENDING×2 then the table verdict,
+  counter decrements PER CALL (V6 `left=0`); the LOG arm of
+  signature_lookup (:210-:212, sig_state == FILE_SIG_DEPTH_FAIL) wins
+  BEFORE the table (the vectors' `5,5 -> 1` arms).
+- signature_lookup capture leg is the 3-arm ladder (cc:191-:208):
+  reserve-OK -> store_file_async -> name-empty arm size 0 (Box drop ==
+  C `delete captured`) else set_extracted_cutoff(false); reserve-fail ->
+  the Option drop covers BOTH C delete arms (FileInfo::reserve_file hands
+  the capture back in dest even on the WITH-capture fail arm,
+  file_lib.rs:666). The FileCounts counts Rc injected on FilePolicy
+  (deviation: C reaches the thread-static file_counts THROUGH
+  FileInfo::reserve_file; C FilePolicy carries NO such member — same
+  convention as RealFileCaptureFactory::counts, file_capture.rs:1381).
+  `store_file_async` joined FileCaptureApi WITHOUT breaking any witness
+  (default `""` = the cc:199 extracted_name-empty arm; the REAL
+  FileCapture overrides delegating the inherent Box-consuming body).
+- policy_check trio + `set_policy_id(0)` (cc:173-:176 single-policy
+  quirk) ride the landed FileInfo setters; config trio written from the
+  POLICY members, NOT the matched rule (V7_pcheck `f t=1 s=0 c=1 pid=0`).
+- NetworkPolicy seam swap WITNESS -> REAL, pub names stable:
+  file_policy.rs::NetworkPolicy models policy.h:215 / policy.cc:44(new)
+  / :51 delete_file_policy / :61-:62 accessor over the EXISTING
+  NetworkPolicySeam (trait file_lib.rs:1097-:1098 + the
+  FileEnvLite::network_policy slot :1165 UNTOUCHED — post-edit line numbers;
+  pre-edit 1046-1054/1121) and the same FilePolicyHandle (new_boxed =
+  policy.cc:57 `new FilePolicy` at ref 1; identity arms ride same_store,
+  file_api.rs:320-:321). The finspect WitnessStubNetPol twins (stubs.cc:
+  696-:697 `POLICY base_file_policy -> stub`) stay resident for the
+  frozen fctx/fflows replays — the swap is DRIVER-SIDE assignment, both
+  arms answer the same trait. NetworkPolicy::add_file_policy_rule
+  (policy.h:198 -> policy.cc:66-:68) NOT ported: its only consumers are
+  the FilePolicyModule config ladder (main/modules.cc:2298/:2350 —
+  WITNESS/out-of-scope, PLAN §3.2); harness arms call
+  FilePolicy::add_file_id directly. file_flows.rs:289 (the
+  `file_policy: Option<FilePolicyHandle>` member) and :1447
+  (get_file_policy_static) grep-verified UNCHANGED — the row only
+  changes which concrete impl sits behind the handle.
+- StubFilePolicy Rust mirrors (fcache/fctx/fflows twins + the C stubs
+  class, stubs.cc:360-:379) STAY for the tests (PLAN §2 retire table:
+  KEEP, zero T-def collision) — the real FilePolicy is ADDITIVE.
+- `~FilePolicy() override = default` (h:62): no T lines in the row .o
+  (nm, R3); Rust = the derived drop path, with the heap-only /
+  delete_file_policy-drain posture doc carried at
+  NetworkPolicy::release_base_file_policy (~FilePolicyBase
+  assert(!ref_count), file_api.cc:31-:32 — the stubs.cc:374-:379 rule).
+- C log_file_action NOT overridden (h:64-:70 list); the FilePolicyApi
+  impl states the base empty body explicitly (proof-via-StubFilePolicy,
+  PLAN §1).

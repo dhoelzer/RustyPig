@@ -222,3 +222,16 @@ tools/finspect_harness/gate.txt
 tools/finspect_harness/nm_residue.txt
 tools/finspect_harness/nm_api.txt
 tools/finspect_harness/nm_inspect.txt
+
+tools/fpolicy_harness/copy/
+tools/fpolicy_harness/probe
+tools/fpolicy_harness/probe2
+tools/fpolicy_harness/gate
+tools/fpolicy_harness/catch_main.cc
+tools/fpolicy_harness/*.o
+tools/fpolicy_harness/*.log
+tools/fpolicy_harness/gate.txt
+tools/fpolicy_harness/nm_residue.txt
+tools/fpolicy_harness/nm_api.txt
+tools/fpolicy_harness/nm_inspect.txt
+tools/fpolicy_harness/nm_policy.txt

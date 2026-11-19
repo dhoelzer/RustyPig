@@ -94,6 +94,17 @@ pub trait FileCaptureApi {
     fn process_buffer(&mut self, _file_data: &[u8], _data_size: i32, _position: u32) -> u32 {
         FILE_CAPTURE_SUCCESS
     }
+    /// Row 17x: `std::string FileCapture::store_file_async()`
+    /// (file_capture.h:90 -> file_capture.cc:564-:584) — reached ONLY
+    /// by FilePolicy::signature_lookup's capture leg
+    /// (file_policy.cc:197, row 17x). The REAL FileCapture overrides
+    /// with the inherent body (file_capture.rs:1195, Box-consuming
+    /// queue push); the default "" answers the cc:199 extracted_name
+    /// EMPTY arm (V9b pins size=0 cutoff=0), which is exactly the
+    /// witness-capture posture (no CWD store from a stub).
+    fn store_file_async(self: Box<Self>) -> String {
+        String::new()
+    }
 }
 
 /// Row 17r: `new FileCapture(config->capture_min_size,
@@ -961,6 +972,39 @@ impl FileServiceLite {
     }
     pub fn set_file_capture_enabled(&mut self, on: bool) {
         self.file_capture_enabled = on;
+    }
+    // ---- Row 17x: the REAL `enable_*` trio bodies (file_service.cc:
+    // 189-:204) — the FilePolicy add_file_id/load arms (cc:103/:107/
+    // :110/:118/:122/:125) call THESE, not the set_* arms above. ----
+    // Distinction pinned (row 17x, KNOWN DEVIATIONS): the set_file_*
+    // _enabled arms above are the finspect/fctx HARNESS witness arms
+    // (stubs.cc:596-:598 donor version, NO cascade — the frozen
+    // finspect show-ladder arm C pins capture-on with signature still
+    // disabled, finspect vectors lines 68-:82), and stay
+    // byte-VERBATIM for the frozen replays. `enable_file_*` below are
+    // the Real FileService bodies; the C donor fpolicy harness now
+    // compiles the cascade version itself (fpolicy stubs.cc:602
+    // `{ file_capture_enabled = true; enable_file_signature(); }` —
+    // the real file_service.cc:200-:204 "Enable file capture, also
+    // enable file signature" comment rides file_service.cc:199).
+    // `void enable_file_type()` — file_service.cc:189-:192 (the
+    // std::atomic store -> plain field, 17p mutex deviation).
+    pub fn enable_file_type(&mut self) {
+        self.file_type_id_enabled = true; // :191
+    }
+    /// `void enable_file_signature()` — file_service.cc:194-:197.
+    pub fn enable_file_signature(&mut self) {
+        self.file_signature_enabled = true; // :196
+    }
+    /// `void enable_file_capture()` — file_service.cc:199-:204: sets
+    /// capture AND cascades `enable_file_signature()` (:203). Pinned
+    /// by the fpolicy vectors V4_load_cap `svc t=0 s=1 c=1` (the
+    /// SERVICE-level cascade lights signature while the policy
+    /// MEMBER stays 0) and V3_add (`svc t=1 s=1 c=0` — capture use
+    /// flag off, no cascade).
+    pub fn enable_file_capture(&mut self) {
+        self.file_capture_enabled = true; // :202
+        self.enable_file_signature(); // :203 the cascade
     }
     pub fn is_file_type_id_enabled(&self) -> bool {
         self.file_type_id_enabled

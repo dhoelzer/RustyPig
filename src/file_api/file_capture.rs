@@ -1356,6 +1356,14 @@ impl FileCaptureApi for FileCapture {
     fn process_buffer(&mut self, file_data: &[u8], data_size: i32, position: u32) -> u32 {
         FileCapture::process_buffer(self, file_data, data_size, position)
     }
+    /// Row 17x: the REAL store_file_async answers the trait slot
+    /// (delegates the inherent Box-consuming body,
+    /// file_capture.cc:564-:584) — FilePolicy::signature_lookup cc:197
+    /// reaches it through the Box<dyn FileCaptureApi> that
+    /// FileInfo::reserve_file handed out.
+    fn store_file_async(self: Box<Self>) -> String {
+        FileCapture::store_file_async(self)
+    }
 }
 
 /// Row 17s seam closure (fcap PLAN §8-3): the real `new

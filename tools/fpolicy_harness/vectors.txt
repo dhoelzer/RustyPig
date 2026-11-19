@@ -1,0 +1,27 @@
+V1_size base=16 rule=48 policy=152 refs=1
+V2_rule tid=0 shaempty=1 verdict=0 t=0 s=0 c=0
+V2_getters t=1 s=1 c=0 svc t=0 s=0 c=0
+V3_add rules=1 shas=1 type_enabled=1 svc t=1 s=1 c=0
+V4_load_cap def t=0 s=0 c=1 svc t=0 s=1 c=1
+V4_load_sig def t=1 s=1 c=0
+V5_match typed=2 wildcard=4 first_rule=1 def=0
+V5_def v=0 is_default=1
+POLICY signature_lookup -> 0
+POLICY signature_lookup -> 5
+POLICY signature_lookup -> 5
+POLICY signature_lookup -> 1
+V6_delay left=0 miss=0
+V7_pcheck f t=1 s=0 c=1 pid=0
+POLICY type_lookup -> 2
+V8_rearm f s=1 c=1
+POLICY signature_lookup -> 0
+POLICY signature_lookup -> 0
+V9b_extract size=0 cutoff=0 handed_off=0 fcapcfg=0
+POLICY signature_lookup -> 1
+POLICY signature_lookup -> 5
+POLICY type_lookup -> 3
+POLICY signature_lookup -> 5
+POLICY type_lookup -> 3
+V10_identity same=0 refs=1
+V_ref add=1 mid=1 drained=1
+FPOLICY_PROBE_DONE

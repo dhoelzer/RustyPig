@@ -28,5 +28,15 @@ pub mod file_identifier;
 pub mod file_inspect;
 pub mod file_lib;
 pub mod file_mempool;
+// row 17x: the file_policy.{h,cc} FilePolicy TU (FileRule table + the
+// enable-flag pairs + the type/signature lookup ladder) — the real
+// FilePolicy sits on the 17v FilePolicyApi/FilePolicyHandle seam
+// (file_api.rs:229/:273) and the NetworkPolicySeam witness swaps to
+// this file's real arm (NetworkPolicySeam trait file_lib.rs:1097-
+// :1098 + FileEnvLite::network_policy slot :1165, both UNTOUCHED
+// pub-name-stable; post-edit positions).
+// Alphabetical slot holds (file_mempool < file_policy < file_segment
+// in the C underscore sort).
+pub mod file_policy;
 pub mod file_segment;
 pub mod file_stats;
