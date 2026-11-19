@@ -237,10 +237,14 @@ pub fn set_rule_id_from_type(
 //     131360` — the embedded-FileIdentifier blob size): no ported
 //     consumer reads it; skipped by design (a Rust layout pin would
 //     re-derive the fid row's internals).
-//   * `file_inspect.h:36` `FileConfig* config` — the FileInspect
-//     member the cc:94-:97 cast reads — stays the
-//     `FileEnvLite::file_config` slot (17q) until the file_inspect
-//     row ports the inspector itself.
+//   * CLOSED (row 17w): `file_inspect.h:36` `FileConfig* config` —
+//     the FileInspect member the cc:94-:97 cast reads — lands as
+//     `src/file_api/file_inspect.rs` `FileInspect::config:
+//     Option<Rc<RefCell<FileConfigLite>>>` (the steal ctor models
+//     file_module.cc:263-:266 `dst = fc; fc = nullptr;`). The
+//     `FileEnvLite::file_config` slot keeps serving the frozen
+//     G1/G2/G3 seams (fconf replay unedited); the FileConfigView
+//     side stays untouched (the duality below).
 //   * `FileContext.config` type duality (two Rc config types coexist
 //     at file_lib.rs:1301-:1309 — the doc comment there names it):
 //     PLAN 8 item 6 keeps it open; swapping the 17q FileConfigView

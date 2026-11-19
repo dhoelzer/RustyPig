@@ -1,0 +1,103 @@
+FIM load_config stole=1
+FIM load_config stole=0
+V8a_steal first=1 second=0
+FIM load_config stole=1
+V8b_ctor cfg=1
+FIM load_config stole=1
+FIM load_config stole=0
+V1_pre ctor_stole_null=0 adv=0
+V1_null_arm ret=1 adv=0
+V1_show silent=1
+Inspector dtor gref=0
+WITNESS ThreadConfig::get_instance_max=1
+SMD conf=1 depth=0
+DBUS get_id name=file_adv_events events=1 -> 7
+V2_trio ret=1 bt=777 lt=9 mf=64
+WITNESS ThreadConfig::get_instance_max=1
+WITNESS ErrorMessage Maximal number of files cached should be greater than number of threads
+SMD conf=1 depth=0
+DBUS get_id name=file_adv_events events=1 -> 7
+V2_clamp mf=2
+V5_skip reg=0 sub=0
+WITNESS ThreadConfig::get_instance_max=1
+SMD conf=1 depth=0
+DBUS get_id name=file_adv_events events=1 -> 7
+MPDBUS reg_helpers name=file_mp_events evt=1 ser=1 deser=1
+MPDBUS sub name=file_mp_events evt=1 handler=file_inspect
+V5_arm reg=1 sub=1
+V4_id a=7
+WITNESS ThreadConfig::get_instance_max=1
+SMD conf=1 depth=0
+DBUS get_id name=file_adv_events events=1 -> 9
+V4_id b=9
+WITNESS ThreadConfig::get_instance_max=1
+SMD conf=1 depth=1461
+DBUS get_id name=file_adv_events events=1 -> 9
+V3_depth typeon=1461 cfgdepth=1461
+WITNESS ThreadConfig::get_instance_max=1
+SMD conf=1 depth=10485761
+DBUS get_id name=file_adv_events events=1 -> 9
+V3_depth sigon=10485761
+WITNESS ThreadConfig::get_instance_max=1
+SMD conf=0 depth=10485761
+DBUS get_id name=file_adv_events events=1 -> 9
+V3_depth gsetter=4242
+CFGLOG               enable_type: disabled
+CFGLOG          enable_signature: disabled
+CFGLOG      block_timeout_lookup: disabled
+CFGLOG            enable_capture: disabled
+CFGLOG            lookup_timeout: 9
+CFGLOG          max_files_cached: 64
+CFGLOG        max_files_per_flow: 128
+CFGLOG           show_data_depth: 100
+CFGLOG                trace_type: disabled
+CFGLOG           trace_signature: disabled
+CFGLOG              trace_stream: disabled
+CFGLOG               enable_type: enabled
+CFGLOG                type_depth: 1460
+CFGLOG          enable_signature: disabled
+CFGLOG      block_timeout_lookup: enabled
+CFGLOG             block_timeout: 777
+CFGLOG            enable_capture: disabled
+CFGLOG            lookup_timeout: 9
+CFGLOG          max_files_cached: 64
+CFGLOG        max_files_per_flow: 128
+CFGLOG           show_data_depth: 100
+CFGLOG                trace_type: disabled
+CFGLOG           trace_signature: disabled
+CFGLOG              trace_stream: disabled
+CFGLOG               enable_type: disabled
+CFGLOG          enable_signature: disabled
+CFGLOG      block_timeout_lookup: disabled
+CFGLOG            enable_capture: enabled
+CFGLOG            capture_memcap: 100
+CFGLOG          capture_max_size: 1048576
+CFGLOG          capture_min_size: 0
+CFGLOG        capture_block_size: 32768
+CFGLOG            lookup_timeout: 9
+CFGLOG          max_files_cached: 64
+CFGLOG        max_files_per_flow: 128
+CFGLOG           show_data_depth: 100
+CFGLOG                trace_type: disabled
+CFGLOG           trace_signature: disabled
+CFGLOG              trace_stream: disabled
+CFGLOG               enable_type: disabled
+CFGLOG          enable_signature: disabled
+CFGLOG      block_timeout_lookup: disabled
+CFGLOG            enable_capture: disabled
+CFGLOG            lookup_timeout: 9
+CFGLOG          max_files_cached: 64
+CFGLOG        max_files_per_flow: 128
+CFGLOG           show_data_depth: 100
+CFGLOG                trace_type: enabled
+CFGLOG           trace_signature: enabled
+CFGLOG              trace_stream: enabled
+V7_base type=1 size=152 apiver=29 apiver_lo=5 ver=0 feat=0 opts=0 name=file_inspect help=configure file inspection
+V7_api itype=0 proto_bits=0 svc=file bufs=0 pinit=1 pterm=0 tinit=0 tterm=0 ctor=1 dtor=1 ssn=0 reset=0
+V7_init fdid=0->1
+FIM load_config stole=1
+V7_wiring ctor_have=1
+Inspector dtor gref=0
+V7_wiring dtor_done=1
+V8c_seam insp=1 cfg=1 thru_same=1
+FINSPECT_PROBE_DONE

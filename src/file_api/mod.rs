@@ -21,6 +21,11 @@ pub mod file_capture;
 pub mod file_config;
 pub mod file_flows;
 pub mod file_identifier;
+// row 17w: the file_inspect.{h,cc} inspector TU (h:36 closure + the
+// REAL get_file_adv_pub_id getter -- file_lib's publish seam is
+// re-pointed to it). Alphabetical slot holds (file_identifier <
+// file_inspect < file_lib in the C underscore sort).
+pub mod file_inspect;
 pub mod file_lib;
 pub mod file_mempool;
 pub mod file_segment;

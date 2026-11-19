@@ -932,6 +932,12 @@ pub fn file_config_view_of(cfg: &FileConfigLite) -> FileConfigView {
 pub struct FileServiceLite {
     file_type_id_enabled: bool,
     file_signature_enabled: bool,
+    // Row 17w: the third enable static (file_service.h `static bool
+    // file_capture_enabled` + `is_file_type_id_enabled`/
+    // `is_file_signature_enabled`/`is_file_capture_enabled` inline
+    // getters) -- the file_config_show gates cc:92/:95/:101 read all
+    // three; the coarse pair above stays as fconf/fflows drive it.
+    file_capture_enabled: bool,
     file_cache: Option<Rc<RefCell<super::file_cache::FileCache>>>,
 }
 
@@ -943,6 +949,27 @@ impl FileServiceLite {
     /// file_service.cc:206
     pub fn is_file_service_enabled(&self) -> bool {
         self.file_type_id_enabled || self.file_signature_enabled
+    }
+    // Row 17w: per-flag arms/readers (the fcache_set_file_service +
+    // direct-static arms of the finspect stubs ride these; the C
+    // std::atomic<bool> -> plain bool, single-threaded posture).
+    pub fn set_file_type_enabled(&mut self, on: bool) {
+        self.file_type_id_enabled = on;
+    }
+    pub fn set_file_signature_enabled(&mut self, on: bool) {
+        self.file_signature_enabled = on;
+    }
+    pub fn set_file_capture_enabled(&mut self, on: bool) {
+        self.file_capture_enabled = on;
+    }
+    pub fn is_file_type_id_enabled(&self) -> bool {
+        self.file_type_id_enabled
+    }
+    pub fn is_file_signature_enabled(&self) -> bool {
+        self.file_signature_enabled
+    }
+    pub fn is_file_capture_enabled(&self) -> bool {
+        self.file_capture_enabled
     }
     /// file_service.h:98 inline (`return file_cache;`)
     pub fn get_file_cache(&self) -> Option<Rc<RefCell<super::file_cache::FileCache>>> {
@@ -1043,8 +1070,11 @@ impl DetectionEventSink for NoopDetectionEvents {
 /// process-wide counters/ids whose C homes are file statics:
 /// `max_file_id` THREAD_LOCAL (file_flows.cc:57), `file_flow_data_id`
 /// (+ the FlowData::create_flow_data_id ++ counter, stubs witness
-/// :575-577), `file_adv_pub_id` (file_inspect.cc:46,
-/// fcache_set_adv_pub_id(7) pinned), the get_file_config()
+/// :575-577), `file_adv_pub_id` (file_inspect.cc:46, PINNED through the
+/// REAL arm of configure() by the finspect row 17w -- setter retired --
+/// and read back through file_inspect::get_file_adv_pub_id), the
+/// `SnortConfig::mp_dbus` harness shim (fcache_set_mp_dbus, armed for
+/// the configure() cc:76-:83 arm), the get_file_config()
 /// resolution and the FileService statics.
 pub struct FileEnvLite {
     pub trace: Box<dyn super::file_cache::TraceSink>,
@@ -1064,6 +1094,14 @@ pub struct FileEnvLite {
     /// `FlowData::flow_data_id` (the create_flow_data_id counter arm,
     /// stubs.cc:577 `return ++flow_data_id;`)
     pub flow_data_id: Cell<u32>,
+    /// Row 17w: `SnortConfig::mp_dbus` (snort_config.h:391) — the
+    /// harness shim armed by fcache_set_mp_dbus (finspect stubs.cc;
+    /// fcapi build.sh:131 `bool mp_dbus = false;`). configure()'s
+    /// cc:76-:83 subscription arm gates on this; the 17p
+    /// FileCache::conf.mp_dbus stays the cache-side view of the SAME
+    /// C static (two views in force, same ruling as the config
+    /// duality — fcapi PLAN R9).
+    pub mp_dbus: Cell<bool>,
     /// main/thread.h `get_instance_id()` witness (stubs.cc:170 hardwired
     /// 0 in the DONOR; the fflows stubs make it armable —
     /// fcache_set_instance_id)
@@ -1116,6 +1154,7 @@ impl Default for FileEnvLite {
             max_file_id: Cell::new(0),
             file_flow_data_id: Cell::new(0),
             flow_data_id: Cell::new(0),
+            mp_dbus: Cell::new(false),
             get_instance_id: Cell::new(0),
             max_file_depth: Cell::new(0),
             svc: FileServiceLite::default(),
@@ -1649,8 +1688,14 @@ impl FileContext {
 
                 // DataBus::publish(get_file_adv_pub_id(),
                 //     FileEventIds::FILE_COMPLETE, file_event, flow);
-                env.publish
-                    .publish_file_complete(env.adv_pub_id.get(), FILE_EVENT_ID_FILE_COMPLETE);
+                // row 17w seam swap: the REAL getter (file_inspect.cc:
+                // :87-:88 over the cc:46 static, whose slot is
+                // env.adv_pub_id) now stands between here and the
+                // publish; the C TU is the getter's only consumer.
+                env.publish.publish_file_complete(
+                    super::file_inspect::get_file_adv_pub_id(env),
+                    FILE_EVENT_ID_FILE_COMPLETE,
+                );
 
                 // std::string filename = file_event.get_filename();
                 // size_t fname_len = filename.length();

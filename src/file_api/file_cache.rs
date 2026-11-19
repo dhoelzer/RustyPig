@@ -1193,6 +1193,25 @@ impl FileCache {
         self.file_hash.xh.set_max_nodes(self.max_files as u32);
     }
 
+    // Row 17w: the three timeout/cap read-backs the finspect V2/V2_clamp
+    // vectors need. C reads the private members through the FIXACC
+    // graft on the copy-tree (build.sh); the graft is harness plumbing
+    // the port does not replicate — named pub getters stand in
+    // (field-visibility deviation, documented 17w).
+    /// the `block_timeout` member read (file_cache.h; std::atomic ->
+    /// plain field, 17p posture)
+    pub fn block_timeout(&self) -> i64 {
+        self.block_timeout
+    }
+    /// the `lookup_timeout` member read
+    pub fn lookup_timeout(&self) -> i64 {
+        self.lookup_timeout
+    }
+    /// the `max_files` member read (post-clamp value observable)
+    pub fn max_files(&self) -> i64 {
+        self.max_files
+    }
+
     /// file_cache.cc:156 `get_num_entries()`
     pub fn get_num_entries(&mut self) -> i64 {
         // std::lock_guard<std::mutex> lock(cache_mutex);

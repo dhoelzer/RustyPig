@@ -1712,3 +1712,91 @@ Structural deviations (behavior preserved):
   moved VERBATIM (PLAN 8 item 2: consolidation must not "improve" the
   model in transit); every impl states its answer, the C default arm
   stays documented per method.
+
+## file_api/file_inspect.{h,cc} (row 17w)
+
+- The TU has ZERO TEST_CASEs/UNIT_TEST fragments (finspect PLAN §2);
+  vectors.txt (103 L, md5 3cbd009e9bb4228ee427ed3fadc64fb4) is the
+  only oracle; tests/finspect_parity_test.rs replays it whole through
+  the REAL ported ladder (configure/show/ctor/dtor-getter/get_file_
+  config closed member) + stubs-witness twins for the unported layers.
+- h:36 CLOSED (the 17u LEFT-OPEN): `FileConfig* config` lands as
+  `FileInspect::config: Option<Rc<RefCell<FileConfigLite>>>` — the
+  FileConfigLite (full-table) side per PLAN 3.3. The 17p
+  `InspectorApi::config -> FileConfigView` trait and the
+  FileContext.config duality stay UNTOUCHED (R7: swapping re-arms
+  every pinned 17p/17r vector). `FileEnvLite::file_config` keeps
+  serving the frozen fconf G1/G2/G3 seams unedited; the fconf
+  line-1 "FileInspect ctor" POSITION PIN is the retired stub-witness
+  print (R6, frozen oracle) — the REAL cc:48 ctor prints NOTHING
+  (vectors line 1 is the witness `FIM load_config` steal print only).
+- The steal ctor: `FileIdModule` is an unported row; the real
+  load_config body (file_module.cc:263-:266, `dst = fc; fc =
+  nullptr;`, plain member NOT virtual, file_module.h:61) IS
+  `Option::take` — the ctor parameter IS the module's config slot.
+  ~FileInspect's `delete config` (cc:53-:57) == Rust drop of the
+  sole Rc (R2 heap-only posture; the C dtor is only reached via the
+  heap file_dtor, mirrored by the V7 wiring arm). No witness-module
+  pointer standover needed in Rust (R3 is a link-level hole only).
+- cc:46 static consolidated: `std::atomic<unsigned> file_adv_pub_id`
+  stays the `FileEnvLite::adv_pub_id: Cell<u32>` slot (17q interim
+  home made canonical; atomics not reproduced, 17v R2 posture). The
+  REAL getter `file_inspect::get_file_adv_pub_id` (cc:87-:88) is now
+  the ONLY reader: file_lib's file_lib.cc:658 publish seam re-points
+  to it (pub name stable — the 17w seam swap); configure()'s cc:74
+  arm is the only writer; the retired stub setter
+  (fcache_set_adv_pub_id) found NO Rust replacement (V4 re-pins
+  through the DataBus::get_id witness id).
+- New env slot `mp_dbus: Cell<bool>` = the SnortConfig::mp_dbus
+  harness shim (fcache_set_mp_dbus); the 17p `FileCache::conf.mp_dbus`
+  stays the cache-side view of the SAME C static (two views, same
+  ruling as the config duality, fcapi R9).
+- FileServiceLite grew the third enable static (file_capture_enabled)
+  + the three per-flag inline getters (file_service.h is_file_type_id/
+  signature/capture_enabled — the show-gate trio at cc:92/:95/:101);
+  the coarse pair setters stay as the frozen fconf/fflows drivers use
+  them. C std::atomic<bool> -> plain bool (17p posture).
+- FileCache: three pub getters (block_timeout/lookup_timeout/
+  max_files) stand in for the harness FIXACC graft that lets the C
+  probe read the private members (build.sh grafts `public:` into the
+  copy-tree; the port never replicates graft plumbing).
+- show() rides the ALREADY-PORTED real ConfigLogger (log/messages.rs,
+  row 17j — CAPTION "%*s: " indention 25, log_flag `return flag`,
+  messages.cc:364-:371/:545-:559): NO new logger type was invented
+  (PLAN's "witness-style trait" collapses onto the real one — the
+  17u const-home precedent). Overload map per PLAN R4: i64 fields ->
+  log_value_int (the `long` twin), the u64 max_files_per_flow (
+  file_config.h:66) -> log_value_uint. The harness prefix `CFGLOG `
+  tags every engine line; the replay drains LogEvents (Stdout phase
+  asserted) and glues the tag + trims the newline — the C logger
+  stubs' printf shape, pinned text verbatim.
+- instrumented set_max_file_depth (NEXT.md:123): the walk body is the
+  REAL file_service.cc:227-:251 (type arm, sig-bump arm, extra-byte
+  arm) over env.get_file_config(); the SMD conf=0/conf=1 prints +
+  env.max_file_depth write are harness instrumentation (the real
+  body is silent; the getter keeps its 17q g_max_file_depth
+  passthrough ruling — file_service proper is row 18+).
+- eval() inline-empty h:33: no Rust method, no vector (R11).
+  mod_ctor/mod_dtor (cc:125/:128, FileIdModule new/delete): PRESENCE
+  documented, never ported, never called (R3 vtable hole — the
+  probe/Rust replay drive file_ctor/file_dtor only).
+- InspectApi record as DATA (cc:147-:175): fn-pointer slots become
+  presence bools (the V7_api 0/1 pins), `sizeof(InspectApi)=152` is
+  a probe pin never faked via size_of (PROBE_SIZEOF precedent), null
+  SnbBufList -> Option, the BaseApi reinterpret-cast prefix trick is
+  unnecessary (field values stated directly). Framework enum consts
+  copied verbatim (PT_INSPECTOR=1, IT_PASSIVE=0, PROTO_BIT__NONE,
+  INSAPI_VERSION split) — the detection/rtn_checks.rs PROTO_BIT
+  mirror precedent covers the cross-TU copy; API_OPTIONS=0 is the
+  HARNESS macro (build.sh:87), NOT a donor fact — documented at the
+  const.
+- Witness println -> Vec<String> shape: the C witness bodies printf;
+  the Rust twins push identical text to a driver-owned collector
+  (`WitnessOut`) — the only shape translation the row makes; the
+  line TEXT is pinned byte-for-byte (DBUS get_id, MPDBUS
+  reg_helpers/sub, SMD conf arms, FIM steal, WITNESS ThreadConfig/
+  ErrorMessage reuse the 17p twins verbatim).
+- Probe quirk noted (NOT a port deviation): vectors line 8 label
+  `ctor_stole_null` prints `(int)config ? 1 : 0` — HAS-config,
+  inverted vs the label; the replay prints is_some() and the pin is
+  0 because the steal on an empty slot leaves config null.

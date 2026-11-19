@@ -210,3 +210,15 @@ tools/fcapi_harness/*.log
 tools/fcapi_harness/gate.txt
 tools/fcapi_harness/nm_residue.txt
 tools/fcapi_harness/nm_api.txt
+
+tools/finspect_harness/copy/
+tools/finspect_harness/probe
+tools/finspect_harness/probe2
+tools/finspect_harness/gate
+tools/finspect_harness/catch_main.cc
+tools/finspect_harness/*.o
+tools/finspect_harness/*.log
+tools/finspect_harness/gate.txt
+tools/finspect_harness/nm_residue.txt
+tools/finspect_harness/nm_api.txt
+tools/finspect_harness/nm_inspect.txt
