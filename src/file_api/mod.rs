@@ -1,4 +1,15 @@
 pub mod circular_buffer;
+// row 17v: the file_api.{h,cc} umbrella TU — the canonical vocabulary +
+// FilePolicyBase home; file_lib.rs / file_cache.rs interim homes are now
+// pub-use re-points to it (17u const-home recipe). Alphabetical head of
+// the file_api_* block (matches the C underscore sort in mod.rs order).
+// module_inception allowed: the file name is PINNED by the C TU pairing
+// (src/file_api/file_api.{h,cc} -> src/file_api/file_api.rs) and by this
+// task; renaming to dodge the lint would break the TU-name mapping the
+// whole queue follows (file_lib.rs, file_cache.rs, ... all match their
+// C TUs one-for-one).
+#[allow(clippy::module_inception)]
+pub mod file_api;
 pub mod file_cache;
 // donor CMakeLists.txt:18-:19 order (file_cache then file_cache_share;
 // the C underscore sort lands before file_capture).

@@ -114,12 +114,10 @@ pub use super::file_config::DEFAULT_MAX_FILES_CACHED;
 const DEFAULT_FILE_LOOKUP_TIMEOUT_CACHED_ITEM: i64 = 3600; // 1 hour
 
 /// file_api.h:121 `struct FileCacheClearReport { uint64_t freed = 0;
-/// uint64_t remaining = 0; };`
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub struct FileCacheClearReport {
-    pub freed: u64,
-    pub remaining: u64,
-}
+/// uint64_t remaining = 0; };` — row 17v: shape MOVED to its canonical
+/// home (super::file_api::FileCacheClearReport, `fccr=16` vector pin);
+/// this re-export keeps the 17p bindings + `clear()`'s return green.
+pub use super::file_api::FileCacheClearReport;
 
 // ------------------------------------------------------------------
 // FileHashKey (file_cache.h:40, PADDING_GUARD block). C hashes and
@@ -304,10 +302,10 @@ impl PacketView {
     }
 }
 
-/// `file_api.h:43` `enum FileAction`
-pub const FILE_ACTION_DEFAULT: u32 = 0;
-pub const FILE_RESUME_BLOCK: u32 = 1;
-pub const FILE_RESUME_LOG: u32 = 2;
+/// `file_api.h:43` `enum FileAction` — row 17v: the numerals moved to
+/// their canonical home (super::file_api, E_enums `action=0,1,2` pin);
+/// this re-export keeps every 17p/17q call-site binding green.
+pub use super::file_api::{FILE_ACTION_DEFAULT, FILE_RESUME_BLOCK, FILE_RESUME_LOG};
 
 /// The `FileConfig`/`SnortConfig` fields this file reaches through
 /// Copy views: `fc->block_timeout_lookup` (file_config.h:59, default
@@ -542,89 +540,20 @@ impl FileFlowsSink for NoopFileFlowsSink {
     fn add_pending_file(&mut self, _file_id: u64) {}
 }
 
-/// `FilePolicyBase` virtuals this TU calls (file_api.h:20+; FilePolicy
-/// impl: file_policy.cc row).
-pub trait FilePolicyApi {
-    /// file_api.h:152 `virtual void policy_check(Flow*, FileInfo*)` —
-    /// reached from FileContext::check_policy (file_lib.cc:763, 17q;
-    /// C base no-op, the harness stub prints "POLICY policy_check").
-    /// Default = the C base-class empty body.
-    fn policy_check(&mut self, _flow: &CacheFlow, _file: &mut FileContext) {}
-    fn type_lookup(&mut self, p: &mut PacketView, file: &mut FileContext) -> u32;
-    fn signature_lookup(&mut self, p: &mut PacketView, file: &mut FileContext) -> u32;
-    fn log_file_action(&mut self, flow: &CacheFlow, file: &mut FileContext, action: u32);
-}
+/// `FilePolicyBase` virtuals (file_api.h:151-:163) — row 17v: the trait
+/// MOVED to its canonical home in super::file_api (the umbrella TU owns
+/// the C base class); this re-export keeps every 17q call-site binding
+/// green. Original interim-home note: virtuals this TU calls (the
+/// FilePolicy impl rides file_policy.cc — unported row).
+pub use super::file_api::FilePolicyApi;
 
-/// `FilePolicyBase*` (file_api.h:160-172) ownership handle
-/// (row 17q): the C ref protocol is a raw atomic ref_count with
-/// `add_ref()` (:165) and the static `delete_file_policy` (:168 ->
-/// file_api.cc:34: `if (policy) { assert(policy->ref_count); unsigned
-/// ref = --policy->ref_count; if (!ref) delete policy; }`). The port
-/// wraps `Rc<FilePolicyBox>`... simpler: an Rc-based clone-count model
-/// is WRONG for the pinned witness reads (refs=1->2, policy_refs=2->1
-/// read the C atomic member directly), so the handle carries an
-/// explicit counter over a Box, mirroring the C member; the clone-
-/// discipline at the C sites (set_file_policy pair, NetworkPolicy-
-/// owned base) is the driver's. `ref_count()` answers the probe read.
-#[derive(Clone)]
-pub struct FilePolicyHandle {
-    inner: Rc<RefCell<PolicyStore>>,
-}
-
-struct PolicyStore {
-    policy: Box<dyn FilePolicyApi>,
-    /// std::atomic_uint ref_count (file_api.h:171)
-    ref_count: u32,
-}
-
-impl FilePolicyHandle {
-    /// C `new FilePolicy` sites yield ref_count == 1
-    /// (file_api.h:28 FilePolicyBase() { ref_count = 1; }).
-    pub fn new_boxed(policy: Box<dyn FilePolicyApi>) -> FilePolicyHandle {
-        FilePolicyHandle {
-            inner: Rc::new(RefCell::new(PolicyStore { policy, ref_count: 1 })),
-        }
-    }
-    /// `void add_ref() { ++ref_count; }` (file_api.h:165)
-    pub fn add_ref(&mut self) {
-        self.inner.borrow_mut().ref_count += 1;
-    }
-    /// `static void delete_file_policy(FilePolicyBase* policy)`
-    /// (file_api.cc:34) on the handle's own object: decrement; at 0
-    /// the Box drops (C `delete policy`; ~FilePolicyBase asserts
-    /// !ref_count — already 0). The C null-argument arm = the port's
-    /// Option-slot None (callers pass through Option).
-    pub fn delete_file_policy(&mut self) {
-        let mut st = self.inner.borrow_mut();
-        debug_assert!(st.ref_count > 0); // assert(policy->ref_count)
-        st.ref_count -= 1; // unsigned ref = --policy->ref_count
-    }
-    pub fn ref_count(&self) -> u32 {
-        self.inner.borrow().ref_count
-    }
-    /// C pointer-identity compare `policy == stub_file_policy()` /
-    /// `static_pol == pol` (file_flows probe B_CREATE / get_file_policy
-    /// static): two handles front the same object iff they share the
-    /// store (the C raw pointers compare by address).
-    pub fn same_store(&self, other: &FilePolicyHandle) -> bool {
-        Rc::ptr_eq(&self.inner, &other.inner)
-    }
-    /// Borrow the object (null-ness = C `if (!fp)` arms).
-    pub fn is_null(&self) -> bool {
-        false // the handle type only ever fronts a real object
-    }
-    /// Run a closure with `&mut dyn FilePolicyApi` — the C raw-pointer
-    /// call shape (file_policy->signature_lookup(...) etc.).
-    pub fn with_policy_mut<R, F: FnOnce(&mut dyn FilePolicyApi) -> R>(&mut self, f: F) -> R {
-        let mut st = self.inner.borrow_mut();
-        f(st.policy.as_mut())
-    }
-    /// Read the object immutably.
-    pub fn with_policy<R, F: FnOnce(&dyn FilePolicyApi) -> R>(&self, f: F) -> R {
-        let st = self.inner.borrow();
-        f(st.policy.as_ref())
-    }
-}
+/// `FilePolicyBase*` (file_api.h:144-:172) ownership handle — row 17v:
+/// the handle (the file_api.cc:28-:43 ref protocol 17q modeled, incl.
+/// the Rc<RefCell<PolicyStore>> shape and the atomic->plain-u32
+/// deviation doc) MOVED VERBATIM to its canonical home in
+/// super::file_api; this re-export keeps file_lib / file_flows /
+/// file_segment and the fctx/fflows fixtures green (17u recipe).
+pub use super::file_api::FilePolicyHandle;
 
 /// `control/control.h` `LogRespond(ctrlcon, fmt, ...)` seam.
 pub trait ControlConsole {

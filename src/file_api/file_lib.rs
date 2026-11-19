@@ -28,8 +28,23 @@ pub const SNORT_FILE_TYPE_UNKNOWN: u32 = u16::MAX as u32;
 pub const SNORT_FILE_TYPE_CONTINUE: u32 = 0;
 /// hash/hashes.h (transcript-pinned digest width)
 pub const SHA256_HASH_SIZE: usize = 32;
-/// file_api.h:45
-pub const UTF_16_LE_BOM_LEN: usize = 2;
+// Row 17v consolidation: the file_api.h vocabulary (the 6 enum const
+// blocks below the caps, FileState, get_character_encoding,
+// UserFileDataBase, UTF_16_LE_BOM_LEN) moved to its canonical home
+// (super::file_api — the umbrella TU, row 17v); these pub re-exports keep
+// every 17o/17q/17r binding green (tests/filib_parity_test.rs +
+// fcache/fctx/fflows glob-import this module; grep-verified before the
+// move — the 17u const-home recipe VERBATIM).
+pub use super::file_api::{
+    FILE_CAPTURE_FAIL, FILE_CAPTURE_MAX, FILE_CAPTURE_MEMCAP, FILE_CAPTURE_MIN,
+    FILE_CAPTURE_SUCCESS, FILE_DOWNLOAD, FILE_SIG_DEPTH_FAIL, FILE_SIG_DONE,
+    FILE_SIG_FLUSH, FILE_SIG_PROCESSING, FILE_UPLOAD, FILE_VERDICT_BLOCK,
+    FILE_VERDICT_LOG, FILE_VERDICT_MAX, FILE_VERDICT_PENDING, FILE_VERDICT_REJECT,
+    FILE_VERDICT_STOP, FILE_VERDICT_STOP_CAPTURE, FILE_VERDICT_UNKNOWN, FileState,
+    SNORT_CHAR_ENCODING_ASCII, SNORT_CHAR_ENCODING_UTF_16LE, SNORT_FILE_END,
+    SNORT_FILE_FULL, SNORT_FILE_MIDDLE, SNORT_FILE_POSITION_UNKNOWN, SNORT_FILE_START,
+    UTF_16_LE_BOM_LEN, UserFileDataBase, get_character_encoding,
+};
 
 /// file_lib.cc:76-78 (hardening caps; PATH_MAX = 4096 on Linux — B3 pins
 /// NAMELEN=4096).
@@ -37,15 +52,11 @@ pub const FILE_URL_CAP: u32 = 4095;
 pub const FILE_NAME_CAP: u32 = 4096;
 pub const FILE_HOST_CAP: u32 = 256;
 
-// FileVerdict (file_api.h:56): C serializes it as a 4-byte int (A_SZ_VERDICT=4).
-pub const FILE_VERDICT_UNKNOWN: u32 = 0;
-pub const FILE_VERDICT_LOG: u32 = 1;
-pub const FILE_VERDICT_STOP: u32 = 2;
-pub const FILE_VERDICT_BLOCK: u32 = 3;
-pub const FILE_VERDICT_REJECT: u32 = 4;
-pub const FILE_VERDICT_PENDING: u32 = 5;
-pub const FILE_VERDICT_STOP_CAPTURE: u32 = 6;
-pub const FILE_VERDICT_MAX: u32 = 7;
+// FileVerdict / FilePosition / FileCaptureState / FileSigState /
+// FileDirection / FileCharEncoding const blocks: MOVED to file_api.rs
+// (row 17v) and re-exported above — wire values pinned there by the
+// fcapi E_enums vector; the old numerals (4-byte-int posture, A_SZ
+// "SZ_VERDICT=4 SZ_DIR=4 SZ_CAPST=4 SZ_SIGST=4") ride unchanged.
 
 /// file_lib.h:38 — 8 entries INCLUDING index 7 (FILE_VERDICT_MAX -> "INVALID").
 pub const VERDICT_NAME: [&str; 8] = [
@@ -59,56 +70,12 @@ pub const VERDICT_NAME: [&str; 8] = [
     "INVALID",
 ];
 
-// FilePosition (file_api.h:66)
-pub const SNORT_FILE_POSITION_UNKNOWN: u32 = 0;
-pub const SNORT_FILE_START: u32 = 1;
-pub const SNORT_FILE_MIDDLE: u32 = 2;
-pub const SNORT_FILE_END: u32 = 3;
-pub const SNORT_FILE_FULL: u32 = 4;
+// FileState struct + get_character_encoding: MOVED to file_api.rs
+// (row 17v; A_SZ_STATE=8 pin), re-exported above.
 
-// FileCaptureState (file_api.h:74)
-pub const FILE_CAPTURE_SUCCESS: u32 = 0;
-pub const FILE_CAPTURE_MIN: u32 = 1;
-pub const FILE_CAPTURE_MAX: u32 = 2;
-pub const FILE_CAPTURE_MEMCAP: u32 = 3;
-pub const FILE_CAPTURE_FAIL: u32 = 4;
-
-// FileSigState (file_api.h:82)
-pub const FILE_SIG_PROCESSING: u32 = 0;
-pub const FILE_SIG_DEPTH_FAIL: u32 = 1;
-pub const FILE_SIG_FLUSH: u32 = 2;
-pub const FILE_SIG_DONE: u32 = 3;
-
-// FileDirection (file_api.h:99)
-pub const FILE_DOWNLOAD: u32 = 0;
-pub const FILE_UPLOAD: u32 = 1;
-
-// FileCharEncoding (file_api.h:104)
-pub const SNORT_CHAR_ENCODING_ASCII: u32 = 0;
-pub const SNORT_CHAR_ENCODING_UTF_16LE: u32 = 1;
-
-/// file_api.h:60 `struct FileState` (A_SZ_STATE=8)
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-#[repr(C)]
-pub struct FileState {
-    pub capture_state: u32,
-    pub sig_state: u32,
-}
-
-/// file_api.h:207 inline
-pub fn get_character_encoding(file_name: &[u8], length: usize) -> u32 {
-    let mut encoding = SNORT_CHAR_ENCODING_ASCII;
-    if length >= UTF_16_LE_BOM_LEN && file_name[..UTF_16_LE_BOM_LEN] == [0xFF, 0xFE] {
-        encoding = SNORT_CHAR_ENCODING_UTF_16LE;
-    }
-    encoding
-}
-
-/// C `UserFileDataBase` (file_api.h) — opaque here; the copy()/clear_data
-/// path only ever deletes it (E0 `ufd=0`).
-pub trait UserFileDataBase {
-    fn as_any(&self) -> &dyn std::any::Any;
-}
+// UserFileDataBase trait: MOVED to file_api.rs (row 17v) — the
+// dead-copy-ctor doc (grep-0 bodies at fe29cbe) travels WITH it;
+// re-exported above.
 
 /// Seam for `FileCapture` (file_api/file_capture.cc — plan row 17p+).
 /// The two members FileInfo::reserve_file/get_max_file_capture_size/

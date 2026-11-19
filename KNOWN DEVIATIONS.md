@@ -1616,3 +1616,99 @@ Structural deviations (behavior preserved):
   stays open — swapping the 17q view for FileConfigLite re-arms every
   17p/17r pinned vector; file_stats.rs:22 mirrors FILE_ID_MAX a
   second time (fid row turf).
+
+## file_api.{h,cc} umbrella TU (row 17v)
+
+- Row-label correction (fcapi PLAN 3, pinned before coding): the queue
+  row's "umbrella/factory TU" label is WRONG at the code level —
+  `file_api.cc` contains ONLY the three FilePolicyBase ref-protocol
+  bodies (cc:28-:29 ctor, cc:31-:32 dtor, cc:34-:43 delete_file_policy):
+  "No static, no global, no factory." The header is the shared
+  vocabulary umbrella; the "factory" reading would invent symbols.
+- Canonical-home consolidation (17u recipe; vectors.md5
+  a953a5017b74f5d44dbba14df48ac5ea pins every wire value). New home
+  `src/file_api/file_api.rs`; OLD sites -> `pub use` re-points so all
+  26 parity suites keep their imports:
+  * file_lib.rs: 6 enum const-blocks (FileVerdict/FilePosition/
+    FileCaptureState/FileSigState/FileDirection/FileCharEncoding),
+    UTF_16_LE_BOM_LEN, FileState, get_character_encoding,
+    UserFileDataBase trait -> re-point to file_api.rs.
+  * file_cache.rs: FileAction trio (:308-:310), FileCacheClearReport
+    (:116-:121), FilePolicyApi trait (:545-:556), FilePolicyHandle +
+    PolicyStore (:558-:612) -> re-point to file_api.rs.
+  * LEAVE-IN-PLACE (explicit ruling, not oversights): FILE_ID_MAX stays
+    at file_identifier.rs:21 (+file_stats.rs:22 mirror) — fid row turf,
+    carried 17u ruling; FileTypeBitSet gets NO Rust wrapper type (word
+    form `&mut [u64; FILE_ID_MAX/64]` stands; C `bitset=128` pinned as
+    a vector, unmatchable by a Rust wrapper anyway).
+- Dead feature macros h:37-:41 (ENABLE_FILE_TYPE_IDENTIFICATION /
+  ENABLE_FILE_SIGNATURE_SHA256 / ENABLE_FILE_CAPTURE / FILE_ALL_ON /
+  FILE_ALL_OFF): ported as wire-pinned u32 consts (M_flags
+  `1,2,4 allon=ffffffff alloff=0`) but DELIBERATELY NOT wired to the
+  FileService enable statics — grep-0 consumers src-wide at fe29cbe
+  (fcapi PLAN 9-R5); connecting dead masks to the live enable path is
+  a semantic invention the vectors cannot catch. FileProcessType
+  (h:91-:96) likewise grep-0-dead: consts 0/1/2 only, no behavior.
+- UserFileDataBase copy-ctor (h:137), copy-assign (h:138) and private
+  copy() (h:141) stay UNPORTED — LEFT-OPEN with grep evidence: zero
+  definitions anywhere in the C tree (`grep -rn 'UserFileDataBase::'
+  src` -> 0 at fe29cbe, re-run this session); any C TU copying one is
+  a LINK ERROR, so a Rust equivalent would fabricate behavior the
+  linker itself forbids (PLAN 9-R4 dead-body trap). Production only
+  ever news/deletes (file_cache.cc:1176, set/get file_lib.cc:541/:554).
+  The 17o opaque trait shape rode the move unchanged.
+- sizeof posture (probe C_sz; NEVER fake layouts, 17u precedent):
+  `fpolbase=16` (vptr 8 + std::atomic_uint 4 + tail pad) and `ufd=8`
+  (vptr-only) are C++-object facts with no Rust counterpart (trait
+  object = fat ptr, no vptr member) — pinned in the vectors + this
+  doc, NOT asserted via size_of. `size_of::<FileState>()==8`
+  (`fstate=8`) and `size_of::<FileCacheClearReport>()==16` (`fccr=16`)
+  DO hold on the ported shapes and are read by the existing
+  filib A_SZ_STATE pin.
+- FileState fields stay plain `u32` (the 4-byte-enum width the filib
+  A_SZ transcript pins; PLAN 9-R6), not newtype enums — wire identity
+  with the E_enums vectors over type flair.
+- The 5 inline position helpers land in value-in/value-out form
+  (`init_file_position(pos, n) -> pos` etc.): C's `FilePosition*`
+  in/out pointer is a calling convention and the P vectors pin the
+  in->out pair, so no Rust pointer params are needed. Name form is
+  snake_case (upstream spells them camelCase — the crate convention
+  holds; these 5 are NEW in Rust, nothing re-points). Quirks pinned
+  NOT fixed: the (END|FULL)->START reset arm precedes the MIDDLE arm
+  (h:183, `P_upd_full9 pos=1`); UNKNOWN survives update
+  (`P_upd_unk0 pos=0`); finalFilePosition promotes UNKNOWN->END with
+  NO guard (h:193, `P_fin_unk pos=3` — the future mime row depends on
+  this exact promotion, PLAN 9-R7).
+- get_character_encoding moved VERBATIM (the &[u8] borrow form from
+  file_lib.rs stands); the memcmp reads EXACTLY 2 bytes only when
+  length>=2 (S_enc `short=0 nonbom=0 bom=1 partial=0`) — no OOB arm.
+- The four h:219-:224 SO_PUBLIC decls: re-export decls only
+  (`pub use super::file_flows::{get_file_processed_size,
+  get_file_position}; pub use super::file_config::{
+  set_rule_id_from_type, get_magic_rule_ids_from_type};`). Bodies live
+  in file_service.cc:256 / file_flows.cc:61 / file_config.cc:104-:127
+  and the transcripts pin those ladders — a second implementation here
+  would fork them (PLAN 9-R8). One cite correction vs the row PLAN:
+  NEXT.md's "cc re-declares the two snort:: shims (h:224-:227)" is a
+  stale line map — the .cc has ONE include + three functions; all four
+  decls ride the header (h:219-:224).
+- FilePolicyBase posture carried through the move (PLAN 9-R2: the
+  deviation doc travels with the code, never dropped):
+  std::atomic_uint -> plain u32 (17p/17q "atomics not reproduced"
+  precedent; single-threaded probe = observationally identical);
+  delete_file_policy(null) -> Option-slot None at callers
+  (`R_del_null silent=1` pins the C guard arm); the two LIVE C asserts
+  (dtor `assert(!ref_count)` cc:32, underflow `assert(policy->
+  ref_count)` cc:38) -> debug_assert in the port; the harness link has
+  NO -DNDEBUG so C ABORTS on them — the R ladder fully drains the heap
+  policy (R_del0) and never dares cc:38: pinned-panic posture, not
+  observable vectors (PLAN 9-R1/R7 precedent 17s flush-over-parked-pop).
+- mod.rs: `pub mod file_api;` + `#[allow(clippy::module_inception)]` —
+  the file name is pinned by the C TU one-to-one mapping the whole
+  queue follows; renaming to dodge the lint would break it.
+- C-faithful signature note: FilePolicyApi keeps type_lookup/
+  signature_lookup REQUIRED (no default body) even though the C base
+  inlines `return FILE_VERDICT_UNKNOWN;` — the 17q interim-home shape
+  moved VERBATIM (PLAN 8 item 2: consolidation must not "improve" the
+  model in transit); every impl states its answer, the C default arm
+  stays documented per method.

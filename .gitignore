@@ -199,3 +199,14 @@ tools/fconf_harness/*.log
 tools/fconf_harness/gate.txt
 tools/fconf_harness/nm_residue.txt
 tools/fconf_harness/nm_config.txt
+
+tools/fcapi_harness/copy/
+tools/fcapi_harness/probe
+tools/fcapi_harness/probe2
+tools/fcapi_harness/gate
+tools/fcapi_harness/catch_main.cc
+tools/fcapi_harness/*.o
+tools/fcapi_harness/*.log
+tools/fcapi_harness/gate.txt
+tools/fcapi_harness/nm_residue.txt
+tools/fcapi_harness/nm_api.txt

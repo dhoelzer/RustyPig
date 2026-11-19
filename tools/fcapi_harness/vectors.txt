@@ -1,0 +1,21 @@
+C_sz fpolbase=16 ufd=8 fstate=8 fccr=16 bitset=128 file_id_max=1024
+E_enums action=0,1,2 verdict=0,1,2,3,4,5,6,7 pos=0,1,2,3,4 cap=0,1,2,3,4 sig=0,1,2,3 ptype=0,1,2 dir=0,1 enc=0,1
+M_flags 1,2,4 allon=ffffffff alloff=0 bom_len=2 b0=255 b1=254
+P_init0 pos=1
+P_init7 pos=2
+P_upd_end0 pos=1
+P_upd_full9 pos=1
+P_upd_mid0 pos=2
+P_upd_unk0 pos=0
+P_fin_start pos=4
+P_fin_mid pos=3
+P_fin_unk pos=3
+P_isstart 01001
+P_isend 00011
+S_enc short=0 nonbom=0 bom=1 partial=0
+R_ctor ref=1
+R_addref ref=2
+R_del1 ref=1
+R_del0 gone=1
+R_del_null silent=1
+FCAPI_PROBE_DONE
