@@ -235,3 +235,17 @@ tools/fpolicy_harness/nm_residue.txt
 tools/fpolicy_harness/nm_api.txt
 tools/fpolicy_harness/nm_inspect.txt
 tools/fpolicy_harness/nm_policy.txt
+
+tools/fsvc_harness/copy/
+tools/fsvc_harness/probe
+tools/fsvc_harness/gate
+tools/fsvc_harness/catch_main.cc
+tools/fsvc_harness/*.o
+tools/fsvc_harness/*.log
+tools/fsvc_harness/gate.txt
+tools/fsvc_harness/nm_residue.txt
+tools/fsvc_harness/nm_api.txt
+tools/fsvc_harness/nm_inspect.txt
+tools/fsvc_harness/nm_policy.txt
+tools/fsvc_harness/nm_service.txt
+tools/fsvc_harness/nm_protocols.txt

@@ -1905,3 +1905,110 @@ Structural deviations (behavior preserved):
 - C log_file_action NOT overridden (h:64-:70 list); the FilePolicyApi
   impl states the base empty body explicitly (proof-via-StubFilePolicy,
   PLAN §1).
+
+## file_api/file_service.{h,cc} (row 17y)
+- The C++ class is ALL-static: the landed Rust port maps the lifecycle
+  to FileServiceLite associated fns over the driver FileEnvLite bundle
+  (init/post_init/verify_reload/close/thread_init/thread_term/reset/
+  get/set_max_file_depth/collect_cache_usage/clear-status pair); the
+  static STATE rides Cell/RefCell interior mutability on the one svc
+  object per env (== the ONE process — the file-scope shadows cc:57-:59
+  live there as shadow_max_files_cached/capture_memcap/capture_block_
+  size Cells, observable ONLY through the verify_reload mismatch arms;
+  the C++ statics themselves have no free-variable home in Rust).
+- `std::atomic<bool> file_type_id_enabled` (cc:48) -> Cell<bool>
+  relaxed store/load pair (the 17p single-thread mutex deviation; the
+  FIXACC direct-static pokes of the probe (V2b capture arm) map to the
+  set_file_capture_enabled setter — the cascade (cc:203) hides
+  t=0,s=0,c=1 from the public API, the V2b pin documents the shape).
+- `is_file_service_enabled` is the REAL EXACT 2-OR (cc:206-:209). The
+  RETIRED harness witness was a 3-OR drift (fpolicy stubs.cc:604); the
+  Rust NEVER copied it (PLAN R3): the capture-only arm answers false
+  (fsvc V2b `c=1 svc=0`). Frozen fpolicy vectors never reach the drift
+  condition (§4 audit — every svc line there has s lit when c lit).
+- `file_processing_initiated` (cc:51) NOT ported: dead upstream —
+  grep-0 readers across src/ minus this TU; it is only ever re-set to
+  false (reset() does not even touch it). Ported as NOTHING (no field,
+  zero wiring) per PLAN §1 — do NOT "fix" it into any Rust logic.
+- `decode_conf` (h:99 public static, cc:54 non-trivial-ctor D-def,
+  sizeof 48 probe-pinned) STAYS SEAM: no DecodeConfig type exists
+  anywhere in src/ (measured grep-0 — owners are the mime/service-
+  inspector rows). The harness reads it only through the probe's
+  sizeof; the Rust tree carries no mirror.
+- The pause predicate cc:99-:101 `main_packet_threads_fully_paused()`
+  (def src/main.cc:325-:340, walks pigs[]/Analyzer — monolith, NEVER
+  pulled): ported as the armable `FileServiceLite::packet_threads_
+  fully_paused` Cell + the `pause_calls` counter seam (the harness
+  twin g_svc_paused/fsvc_pause_calls). The fsvc V3 freeze=0 pin is
+  the ||-short-circuit proof: the max_procs/mp_dbus/cache-null/conf-
+  null arms never reach the Cell. The status check is const-by-
+  contract (h:94): no cache mutation (V3_unchanged).
+- MimeSession::init/exit (cc:121 post_init BEFORE the conf check,
+  cc:179 close) = the OUT-OF-CLOSURE `MimeApi` trait seam on
+  FileEnvLite (mime row stays queued, NEXT.md:126-:131 — the real
+  MimeSession::init news a SearchTool over mpse, the exact drag the
+  fsvc PLAN §2.2 residue measured as compile-only header use; the
+  search_tool.h include rides zero symbols: nm pin mpse=0 in the
+  harness). Drivers pin the print pair at the pinned positions; the
+  silent default is NoMimeSession.
+- The proto arms cc:143/:167 `sc->proto_ref->find("file_id")` are
+  REAL over the landed ProtocolReference (target_based/snort_
+  protocols.rs — the 17y real-cp parity; the harness cp'd the real
+  snort_protocols.cc, residue: zero app-NEW). The Rust SnortConfig
+  seam carries no proto_ref slot -> the REAL ref rides the NEW
+  FileEnvLite.proto_ref (Rc<RefCell<..>>), the conf-null cc:149 arm
+  stays pinned via env.file_config = None (a null sc with UNKNOWN
+  spid is upstream UB — snort.cc:542 always passes non-null; pinned
+  absent, PLAN §4). FILE_ID_PROTO_NAME const added beside the id
+  consts. `FileConfigLite.snort_protocol_id` (h:72) existed since
+  17r — the arm WRITES it (post_init + the UNKNOWN re-arm).
+- FileCapture::init/exit (cc:138/:180) ride NEW defaulted
+  FileCaptureFactory::init_capture/exit_capture arm (the 17s single-
+  thread seam posture: the REAL factory drives the landed statics —
+  block-size/mempool/alive-flag + the exit drain via writer_step,
+  fcap PLAN :794-:796 order; witness factories never spawn — the
+  frozen fcache/fctx twins stay byte-unchanged through the default).
+- FileCache manager wiring: the Rust cache learns its InspectorManager
+  from the env seam (post_init sets cache.imgr — the 17p creator-
+  learns deviation; C's new FileContext reaches the GLOBAL static).
+- collect_cache_usage: C's `stats::Builder&` receiver is INERT —
+  snapshot.h:125 counter is a member-syntax STATIC reading only the
+  Group (measured: ZERO stats symbols in the row residue, §0.4). The
+  Rust fn therefore drops the Builder receiver (the landed snapshot
+  Builder double-borrows the snapshot against a borrowed Group); the
+  Builder::counter associated fn stands in with the same body.
+- get_max_file_depth DUAL VIEW (the 17x dual-view ruling extended,
+  supersedes NEXT.md:123 "instrument it"): FileEnvLite::
+  get_max_file_depth passthrough (17q) stays for the frozen fflows/
+  fcache H/J vectors (the 0/-5 arms); the REAL cc:211-:225 ladder
+  lands as the FileServiceLite assoc fn (the canonical body: fc-arg
+  wins, null conf -1, `>0 ? depth : -1`); against the real fn the
+  fcache g_max_file_depth Cell is INERT (the R4 drift, V8_get -7/-9
+  arms invisible to the real getter). set_max_file_depth: the
+  file_inspect.rs instrumented twin FEEDS the frozen finspect
+  `SMD conf=` lines (test side, KEPT); the REAL cc:227-:252 ladder
+  lands as the canonical assoc fn (V8_set 1460->1461 ++ arm, sig-gt
+  7->20->21, both-off -5 stays). No frozen vector touched either way.
+- The verify_reload ReloadError sink = ErrorLogApi::reload_error
+  defaulted arm (the resident stubs.cc:123 witness KEEP; the three
+  strings BYTE-VERBATIM cc:155/:160/:162 — the capture pair are TWO
+  independent compares, NEVER nested; fsvc pins x3 arms + the shadow
+  copy-vs-compare semantics (the SECOND pass after post_init lands
+  ZERO lines; cc:154 NEVER assigns).
+- close deletes the cache the ONLY-owner way (the landed Rc drop
+  fires the IMGR release at the C delete position — the R2 new/
+  delete pair with post_init, idempotent after: the cc:173 guard +
+  the landed exit guards). thread_init/term = the landed file_stats
+  calloc/free pair (file_stats.rs:180-:186; brace-on-line cc:183/
+  :185 quirk note only).
+- The free snort::get_file_processed_size (cc:254-:270 — NOT a
+  FileService member; namespace-scope) keeps its 17q home in
+  file_flows.rs; row 17y RETIRED the harness's verbatim-copy witness
+  (stubs.cc:711-:727) — the row .o owns the symbol (the landmine
+  inversion), Rust side UNCHANGED, cite-only here.
+- FileServiceLite grew Cell/RefCell fields (was Clone-by-bool): the
+  type is still Clone+Default; no existing consumer clones svc
+  (grep: file_policy takes &mut FileServiceLite, file_inspect takes
+  &FileServiceLite — file_inspect.rs:424, the getters read the Cells
+  through &self). FileEnvLite grew mime/proto_ref slots (all frozen
+  drivers build env with ..FileEnvLite::default() — additive).

@@ -113,6 +113,17 @@ pub trait FileCaptureApi {
 /// port-side seam substitution, PLAN §3).
 pub trait FileCaptureFactory {
     fn new_capture(&mut self, min: i64, max: i64) -> Option<Box<dyn FileCaptureApi>>;
+    /// Row 17y: the static-half pair the FileService lifecycle reaches —
+    /// `FileCapture::init(conf->capture_memcap, conf->capture_block_size)`
+    /// (post_init cc:138) and `FileCapture::exit()` (close cc:180). The
+    /// REAL factory (RealFileCaptureFactory, owns the landed statics)
+    /// drives the landed bodies (file_capture.rs:303 init / :439 exit,
+    /// the 17s single-thread posture: flag + drained queue, no OS
+    /// thread ever exists); the default no-ops keep every witness
+    /// factory (fcache/fctx/fflows/finspect twins — the 17r posture,
+    /// stubs.cc :641-:645 "NEVER call init" arms) byte-UNCHANGED.
+    fn init_capture(&mut self, _memcap: i64, _block_size: i64) {}
+    fn exit_capture(&mut self) {}
 }
 
 pub struct NoFileCaptureFactory;
@@ -934,44 +945,86 @@ pub fn file_config_view_of(cfg: &FileConfigLite) -> FileConfigView {
 /// atomics -> Cell/plain fields, single-threaded port, the 17p mutex
 /// deviation):
 ///   * `bool is_file_service_enabled()` (:206 — true iff a type
-///     signature or file signature service is enabled)
+///     signature or file signature service is enabled — the landed
+///     REAL 2-OR (row 17y retired the harness's 3-OR witness; the
+///     capture flag is NOT in the pair, cc:208, V2b drift pin)
 ///   * `static FileCache* get_file_cache()` (file_service.h:98 inline)
-///   * `int64_t get_max_file_depth(FileConfig* fc = nullptr)` (:214)
-///   * `uint64_t get_file_processed_size(Flow*)` (:256 — body copied
-///     literally at the FileServiceLite method below).
+///   * `int64_t get_max_file_depth(FileConfig* fc = nullptr)` (:214) —
+///     row 17y landed the REAL body as the `FileServiceLite::
+///     get_max_file_depth` associated fn below; the FileEnvLite
+///     passthrough stays for the frozen H/J arms (R4, PLAN 4)
+///   * `uint64_t get_file_processed_size(Flow*)` (:256 — body at the
+///     free fn in file_flows.rs (17q); the FileService C linkage is
+///     namespace-scope, no member ever existed — cite only, row 17y).
 #[derive(Clone, Default)]
 pub struct FileServiceLite {
-    file_type_id_enabled: bool,
-    file_signature_enabled: bool,
+    // cc:48 `std::atomic<bool> FileService::file_type_id_enabled(false)`:
+    // Cell carries the relaxed store/load pair (cc:70/:191/:216/:234,
+    // single-threaded posture). Row 17y Cells (were plain bools) so the
+    // REAL reset(cc:66-:74) clears through &self while reading the env
+    // seams — the C++ all-static class maps to associated fns over the
+    // driver bundle, interior mutability does the rest.
+    file_type_id_enabled: Cell<bool>,
+    file_signature_enabled: Cell<bool>, // cc:49
     // Row 17w: the third enable static (file_service.h `static bool
     // file_capture_enabled` + `is_file_type_id_enabled`/
     // `is_file_signature_enabled`/`is_file_capture_enabled` inline
     // getters) -- the file_config_show gates cc:92/:95/:101 read all
     // three; the coarse pair above stays as fconf/fflows drive it.
-    file_capture_enabled: bool,
-    file_cache: Option<Rc<RefCell<super::file_cache::FileCache>>>,
+    file_capture_enabled: Cell<bool>, // cc:50
+    // cc:53 `FileCache* FileService::file_cache = nullptr` — the RefCell
+    // lets post_init's lazy `new FileCache` (cc:128-:134) and close's
+    // `delete` + null (cc:173-:177) run through &self (static-class port).
+    file_cache: RefCell<Option<Rc<RefCell<super::file_cache::FileCache>>>>,
+    // Row 17y: cc:57-:59 the file-scope reload-comparison shadows
+    // ("FIXIT-L make these params reloadable", cc:56). NOT part of the
+    // C++ class — file statics here owned on the svc object (the ONE
+    // FileServiceLite per env == the ONE process); observable ONLY
+    // through the verify_reload mismatch arms (V4 vs V6).
+    shadow_max_files_cached: Cell<i64>, // cc:57 `static int64_t max_files_cached = 0`
+    shadow_capture_memcap: Cell<i64>, // cc:58
+    shadow_capture_block_size: Cell<i64>, // cc:59
+    // Row 17y: the PAUSE PREDICATE seam (PLAN §3 + R6). The real
+    // main_packet_threads_fully_paused (src/main.cc:325-:340) walks the
+    // pigs[]/Analyzer monolith — NEVER pulled; the port models it as the
+    // armable Cell (harness twin stubs.cc NEW17y `g_svc_paused`, default
+    // FALSE = packet threads running; the donor witness arms 1).
+    // pause_calls mirrors the witness knob fsvc_pause_calls: the
+    // freeze=0 pin (V3_ladder) is the || / short-circuit call-count
+    // proof. h:94 const contract: the STATUS check never touches the
+    // cache (V3_unchanged).
+    pub packet_threads_fully_paused: Cell<bool>,
+    pub pause_calls: Cell<u32>,
 }
 
 impl FileServiceLite {
     pub fn set_file_service_enabled(&mut self, type_on: bool, sig_on: bool) {
-        self.file_type_id_enabled = type_on;
-        self.file_signature_enabled = sig_on;
+        self.file_type_id_enabled.set(type_on);
+        self.file_signature_enabled.set(sig_on);
     }
-    /// file_service.cc:206
+    /// file_service.cc:206-:209 — the EXACT 2-OR:
+    /// `return (file_type_id_enabled.load() or file_signature_enabled);`
+    /// Row 17y: the harness donor witness (stubs.cc:604) computed a 3-OR
+    /// INCLUDING capture; the real body never does. The capture-only arm
+    /// (t=0 s=0 c=1 — reachable only via the FIXACC public-static poke,
+    /// the enable_file_capture cascade hides it from the API) answers
+    /// FALSE: the fsvc V2b_drift line `c=1 svc=0` pins that (PLAN R3).
     pub fn is_file_service_enabled(&self) -> bool {
-        self.file_type_id_enabled || self.file_signature_enabled
+        self.file_type_id_enabled.get() || self.file_signature_enabled.get()
     }
     // Row 17w: per-flag arms/readers (the fcache_set_file_service +
     // direct-static arms of the finspect stubs ride these; the C
-    // std::atomic<bool> -> plain bool, single-threaded posture).
+    // std::atomic<bool> -> Cell<bool> relaxed store/load, single-threaded
+    // posture; the FIXACC direct static pokes of the fsvc probe — the
+    // V2b capture arm — map to these setter arms).
     pub fn set_file_type_enabled(&mut self, on: bool) {
-        self.file_type_id_enabled = on;
+        self.file_type_id_enabled.set(on);
     }
     pub fn set_file_signature_enabled(&mut self, on: bool) {
-        self.file_signature_enabled = on;
+        self.file_signature_enabled.set(on);
     }
     pub fn set_file_capture_enabled(&mut self, on: bool) {
-        self.file_capture_enabled = on;
+        self.file_capture_enabled.set(on);
     }
     // ---- Row 17x: the REAL `enable_*` trio bodies (file_service.cc:
     // 189-:204) — the FilePolicy add_file_id/load arms (cc:103/:107/
@@ -982,52 +1035,427 @@ impl FileServiceLite {
     // finspect show-ladder arm C pins capture-on with signature still
     // disabled, finspect vectors lines 68-:82), and stay
     // byte-VERBATIM for the frozen replays. `enable_file_*` below are
-    // the Real FileService bodies; the C donor fpolicy harness now
-    // compiles the cascade version itself (fpolicy stubs.cc:602
-    // `{ file_capture_enabled = true; enable_file_signature(); }` —
-    // the real file_service.cc:200-:204 "Enable file capture, also
-    // enable file signature" comment rides file_service.cc:199).
+    // the Real FileService bodies; the fsvc harness retired the witness
+    // cascade replica entirely (the REAL body links now — the V2_enable
+    // `casc=1` line pins the cascade against the real TU).
     // `void enable_file_type()` — file_service.cc:189-:192 (the
-    // std::atomic store -> plain field, 17p mutex deviation).
-    pub fn enable_file_type(&mut self) {
-        self.file_type_id_enabled = true; // :191
+    // std::atomic store -> Cell relaxed store, 17p mutex deviation).
+    pub fn enable_file_type(&self) {
+        self.file_type_id_enabled.set(true); // :191
     }
     /// `void enable_file_signature()` — file_service.cc:194-:197.
-    pub fn enable_file_signature(&mut self) {
-        self.file_signature_enabled = true; // :196
+    pub fn enable_file_signature(&self) {
+        self.file_signature_enabled.set(true); // :196
     }
     /// `void enable_file_capture()` — file_service.cc:199-:204: sets
     /// capture AND cascades `enable_file_signature()` (:203). Pinned
     /// by the fpolicy vectors V4_load_cap `svc t=0 s=1 c=1` (the
     /// SERVICE-level cascade lights signature while the policy
     /// MEMBER stays 0) and V3_add (`svc t=1 s=1 c=0` — capture use
-    /// flag off, no cascade).
-    pub fn enable_file_capture(&mut self) {
-        self.file_capture_enabled = true; // :202
+    /// flag off, no cascade); row 17y's fsvc V2_enable `casc=1` rides
+    /// the REAL body.
+    pub fn enable_file_capture(&self) {
+        self.file_capture_enabled.set(true); // :202
         self.enable_file_signature(); // :203 the cascade
     }
     pub fn is_file_type_id_enabled(&self) -> bool {
-        self.file_type_id_enabled
+        self.file_type_id_enabled.get()
     }
     pub fn is_file_signature_enabled(&self) -> bool {
-        self.file_signature_enabled
+        self.file_signature_enabled.get()
     }
     pub fn is_file_capture_enabled(&self) -> bool {
-        self.file_capture_enabled
+        self.file_capture_enabled.get()
     }
     /// file_service.h:98 inline (`return file_cache;`)
     pub fn get_file_cache(&self) -> Option<Rc<RefCell<super::file_cache::FileCache>>> {
-        self.file_cache.clone()
+        self.file_cache.borrow().clone()
     }
-    /// harness arm (`fcache_set_file_cache(c)`)
+    /// harness arm (`fcache_set_file_cache(c)` — stubs.cc:639; against
+    /// the REAL static from 17y it writes the real `file_cache` field).
     pub fn set_file_cache(&mut self, c: Option<Rc<RefCell<super::file_cache::FileCache>>>) {
-        self.file_cache = c;
+        *self.file_cache.borrow_mut() = c;
     }
-    // The remaining FileService statics both halves call —
-    // get_max_file_depth (file_service.cc:214) and
-    // snort::get_file_processed_size (:256) — are ported on
-    // FileEnvLite and as the free function in file_flows.rs (their C
-    // linkage is namespace-scope; the bodies are verbatim there).
+
+    // ==================================================================
+    // Row 17y: the REAL lifecycle bodies (the row TU linked into the
+    // C harness; these were witness stubs through 17x). The C++ class
+    // is ALL-static: the methods ride as associated fns over the
+    // driver-owned FileEnvLite (the seam bundle), and the static state
+    // lives in this object's Cells/RefCell (interior mutability — no
+    // &mut threading needed, matching the C "call from anywhere"
+    // shape). `decode_conf` (h:99, cc:54) STAYS harness-only: no
+    // DecodeConfig exists in the Rust tree (mime/service-inspector
+    // owner rows) — KNOWN DEVIATIONS row 17y.
+    // ==================================================================
+
+    /// file_service.cc:61-:64 `init()` — `FileFlows::init();` ONLY
+    /// (file_flows.h:62-:63 inline -> the FlowData::create_flow_data_id
+    /// counter; the Rust landed arm file_flows.rs:327 carries it
+    /// through env.file_flow_data_id). V14 pin: `ffd=1`.
+    pub fn init(env: &mut FileEnvLite) {
+        super::file_flows::FileFlows::init(env);
+    }
+
+    /// file_service.cc:66-:74 `reset()`:
+    /// `if ( InspectorManager::get_inspector("file_inspect",
+    ///  Module::GLOBAL) ) return;` then clear the THREE enable statics.
+    /// Upstream facts pinned: `Module::GLOBAL` is usage 0
+    /// (framework/module.h:216, before the harness prints `usage=0`);
+    /// `file_processing_initiated` (cc:51) is NEVER touched here — nor
+    /// anywhere else (grep-0 readers upstream; the dead static is not
+    /// ported, KNOWN DEVIATIONS row 17y). The get_inspector gate is the
+    /// NEW17y witness arm (`get_inspector` on InspectorManagerApi,
+    /// default None == no inspector armed) — V9 arms it both ways
+    /// (gate closed -> statics CLEAR; gate open -> statics SURVIVE).
+    /// All-static C++ class: associated fn over the env bundle (the
+    /// svc Cells clear through their interior mutability).
+    pub fn reset(env: &FileEnvLite) {
+        // if ( InspectorManager::get_inspector(...) ) return;
+        if env
+            .imgr
+            .borrow_mut()
+            .get_inspector("file_inspect", 0 /* Module::GLOBAL */)
+            .is_some()
+        {
+            return;
+        }
+        // :70-:72 the three clears (file_processing_initiated absent —
+        // the upstream body never resets it either)
+        env.svc.file_type_id_enabled.set(false);
+        env.svc.file_signature_enabled.set(false);
+        env.svc.file_capture_enabled.set(false);
+    }
+
+    /// file_service.cc:118-:144 `post_init()`. ORDER PINNED (the fsvc
+    /// V5 arms): `reset()` then `MimeSession::init()` BEFORE ANY conf
+    /// check — the null-conf arm still rode the mime init (cc:120-:121
+    /// precede cc:123-:126; the C post_init NEVER touches
+    /// MimeSession::exit — close does). Mime is an OUT-OF-CLOSURE seam
+    /// (the env.mime MimeApi trait; the mime row stays queued,
+    /// NEXT.md:126-:131 — the real MimeSession::init news a SearchTool
+    /// over mpse, the exact drag NEXT.md scoped out). The lazy-cache
+    /// arm is REAL over the landed FileCache (cc:128-:134); the
+    /// capture arm rides the landed FileCapture::init through the
+    /// factory seam (cc:138, the 17s single-thread seam); the proto
+    /// arm (cc:142-:143) is REAL over `sc->proto_ref->find("file_id")`
+    /// — the Rust SnortConfig seam carries no proto_ref slot, the REAL
+    /// ProtocolReference rides env.proto_ref (17y real-cp parity, the
+    /// Rust twin snort_protocols.rs:141; harness seed add("file_id")=6,
+    /// V1 `spid=6`).
+    pub fn post_init(env: &mut FileEnvLite) {
+        // reset();
+        Self::reset(env);
+        // MimeSession::init();  (BEFORE the conf check — pinned order)
+        env.mime.borrow_mut().init();
+
+        // FileConfig* const conf = get_file_config();
+        let conf = env.get_file_config();
+        let Some(conf) = conf else {
+            return; // cc:125-:126
+        };
+
+        // if (!file_cache) { file_cache = new FileCache(
+        //     conf->max_files_cached); ... }
+        if env.svc.file_cache.borrow().is_none() {
+            let (max_files_cached, block_timeout, lookup_timeout) = {
+                let c = conf.borrow();
+                (
+                    c.max_files_cached,
+                    c.file_block_timeout,
+                    c.file_lookup_timeout,
+                )
+            };
+            let mut cache = super::file_cache::FileCache::new(max_files_cached); // :130
+            // the C new FileContext INSIDE the cache's ctor-time use of
+            // the GLOBAL InspectorManager: the Rust cache takes its
+            // manager from the env seam (the 17p creator-learns-the-
+            // manager deviation; file_cache.rs:1110 `pub imgr`) — the
+            // fsvc V10 add -> acquire pin rides this wiring.
+            cache.imgr = env.imgr.clone();
+            cache.set_block_timeout(block_timeout); // :132
+            cache.set_lookup_timeout(lookup_timeout); // :133
+            *env.svc.file_cache.borrow_mut() = Some(Rc::new(RefCell::new(cache)));
+            env.svc.shadow_max_files_cached.set(max_files_cached); // :131
+        }
+
+        // if (file_capture_enabled) { FileCapture::init(
+        //     conf->capture_memcap, conf->capture_block_size); ... }
+        if env.svc.file_capture_enabled.get() {
+            let (memcap, block) = {
+                let c = conf.borrow();
+                (c.capture_memcap, c.capture_block_size)
+            };
+            // the landed capture statics (file_capture.rs:303 init)
+            // behind the factory seam (REAL factory drives the landed
+            // block-size/mempool/alive-flag body; a witness factory
+            // default no-ops — the seam deviation, 17s ruling).
+            env.capture_factory.init_capture(memcap, block);
+            env.svc.shadow_capture_memcap.set(memcap); // :140
+            env.svc.shadow_capture_block_size.set(block); // :141
+        }
+
+        // const SnortConfig* sc = SnortConfig::get_conf();
+        // conf->snort_protocol_id = sc->proto_ref->find("file_id");
+        let spid = env
+            .proto_ref
+            .borrow()
+            .find(crate::target_based::snort_protocols::FILE_ID_PROTO_NAME); // :143
+        conf.borrow_mut().snort_protocol_id = spid as i32;
+    }
+
+    /// file_service.cc:146-:169 `verify_reload(sc)`. reset runs FIRST
+    /// (V4c: the conf-null arm still ran the gate + the clears). The
+    /// three ReloadError arms (cc:155/:160/:162) ride the driver-owned
+    /// log seam (ErrorLogApi::reload_error; the C witness prints
+    /// "WITNESS ReloadError ..." through the resident stubs.cc:123).
+    /// SHADOW SEMANTICS PINNED (V4 vs V6): the compare NEVER assigns —
+    /// only post_init copies the shadows — so a FIRST pass over drifted
+    /// shadows fires the lines, and the SECOND pass after a post_init
+    /// lands ZERO lines (copy-vs-compare pin: cc:154 NEVER assigns).
+    /// The capture pair is compared ONLY under `file_capture_enabled`
+    /// (cc:157) and the two captures are INDEPENDENT ifs (cc:159/:161 —
+    /// V4 arms memcap AND block drift; one drift answers one line).
+    /// `sc`: snort.cc:542 always passes non-null and cc:167 derefs the
+    /// RAW sc — the port reads env.proto_ref directly (the Rust seam
+    /// has no null-config slot; the conf-null arm is pinned via
+    /// env.file_config = None, V4c; cc:149 returns BEFORE any sc deref).
+    pub fn verify_reload(env: &mut FileEnvLite, errlog: &mut dyn super::file_cache::ErrorLogApi) {
+        // reset();
+        Self::reset(env);
+        // FileConfig* const conf = get_file_config(sc);
+        let conf = env.get_file_config();
+        let Some(conf) = conf else {
+            return; // cc:149-:152
+        };
+
+        // cc:154-:156
+        if env.svc.shadow_max_files_cached.get() != conf.borrow().max_files_cached {
+            errlog.reload_error("Changing file_inspect.max_files_cached requires a restart.\n");
+        }
+
+        // cc:157-:163 (the file_capture_enabled guard, TWO independent
+        // compares — NEVER nest: the V4 memcap + block x2-line pin)
+        if env.svc.file_capture_enabled.get() {
+            if env.svc.shadow_capture_memcap.get() != conf.borrow().capture_memcap {
+                errlog.reload_error("Changing file_inspect.capture_memcap requires a restart.\n");
+            }
+            if env.svc.shadow_capture_block_size.get() != conf.borrow().capture_block_size {
+                errlog.reload_error(
+                    "Changing file_inspect.capture_block_size requires a restart.\n",
+                );
+            }
+        }
+
+        // cc:165-:168 the UNKNOWN_PROTOCOL_ID re-arm
+        if conf.borrow().snort_protocol_id
+            == crate::target_based::snort_protocols::UNKNOWN_PROTOCOL_ID as i32
+        {
+            let spid = env
+                .proto_ref
+                .borrow()
+                .find(crate::target_based::snort_protocols::FILE_ID_PROTO_NAME); // :167
+            conf.borrow_mut().snort_protocol_id = spid as i32;
+        }
+    }
+
+    /// file_service.cc:171-:181 `close()`: the ONLY-owner delete + null
+    /// (cc:173-:177 — the cache Rc drops here if no driver alias is
+    /// live, the R2 new/delete pair with post_init), MimeSession::exit
+    /// (cc:179 — the env.mime trait seam; the C witness body prints
+    /// once) and FileCapture::exit (cc:180 — the landed drain-and-flag
+    /// body through the seam, joining the writer the V5 init spawned).
+    /// Idempotent after: the cc:173 guard + the landed exit guards.
+    pub fn close(env: &mut FileEnvLite) {
+        // cc:173-:177: `if (file_cache) { delete file_cache;
+        // file_cache = nullptr; }`
+        if env.svc.file_cache.borrow().is_some() {
+            *env.svc.file_cache.borrow_mut() = None;
+        }
+
+        // MimeSession::exit();
+        env.mime.borrow_mut().exit();
+
+        // FileCapture::exit();  (REAL factory arms the landed drain;
+        // a witness factory default no-ops — the 17s seam posture)
+        env.capture_factory.exit_capture();
+    }
+
+    /// cc:183 `void thread_init() { file_stats_init(); }` (brace-on-line
+    /// quirk) — the landed file_stats.rs:180 calloc model.
+    pub fn thread_init(env: &mut FileEnvLite) {
+        super::file_stats::file_stats_init(env.stats.get_mut());
+    }
+    /// cc:185 `void thread_term() { file_stats_term(); }` — the landed
+    /// file_stats.rs:185 free model (None replaces the C dangling
+    /// pointer, the documented 17p deviation).
+    pub fn thread_term(env: &mut FileEnvLite) {
+        super::file_stats::file_stats_term(env.stats.get_mut());
+    }
+
+    /// cc:211-:225 `get_max_file_depth(FileConfig* fc)` — the REAL
+    /// ladder, row 17y: `fc ? fc : get_file_config()`; null -> -1;
+    /// `file_depth > 0 ? file_depth : -1`. The V8 pins: default arg
+    /// answers the CONFIG 1460 (never the armed fcache g_max_file_depth
+    /// shadow — R4 drift: that Cell stays inert here), null conf -> -1,
+    /// the fc-ARG arm WINS (fc.file_depth -5 -> -1 even with a live
+    /// config). The FileEnvLite passthrough (17q) stays UNTOUCHED for
+    /// the frozen fflows H/J vectors (PLAN 4 verdict).
+    pub fn get_max_file_depth(
+        env: &FileEnvLite,
+        fc: Option<&Rc<RefCell<FileConfigLite>>>,
+    ) -> i64 {
+        // const FileConfig* file_config = fc ? fc : get_file_config();
+        let fc = fc.cloned().or_else(|| env.get_file_config());
+        let Some(fc) = fc else {
+            return -1; // :217-:219
+        };
+        let depth = fc.borrow().file_depth;
+        if depth > 0 {
+            return depth; // :221-:223
+        }
+        -1 // :224
+    }
+
+    /// cc:227-:252 `set_max_file_depth(sc)` — the REAL ladder (the
+    /// canonical body the fsvc V8_set ladder drives; the file_inspect.rs
+    /// instrumented twin that feeds the frozen finspect `SMD conf=`
+    /// lines stays, the 17x dual-view ruling extends to this pair).
+    /// `get_file_config(sc)` == env.get_file_config() with the sc-hopped
+    /// overload collapsed (the C body ignores sc past the get_file_config
+    /// hop; plan §1 — arms: conf null -> return; type-on copies
+    /// file_type_depth (cc:234-:237); sig-on AND file_signature_depth >
+    /// file_depth RAISES (cc:239-:243); `file_depth > 0` -> ++ "extra
+    /// byte for deciding whether file data will be over limit"
+    /// (cc:245-:249); bare return (cc:251). V8 pins 1460->1461,
+    /// 7->20->21, both-off -5 stays.)
+    pub fn set_max_file_depth(env: &FileEnvLite) {
+        let conf = env.get_file_config();
+        let Some(conf) = conf else {
+            return; // cc:229-:232
+        };
+        let mut c = conf.borrow_mut();
+        if env.svc.file_type_id_enabled.get() {
+            c.file_depth = c.file_type_depth; // :236
+        }
+        if env.svc.file_signature_enabled.get() && c.file_signature_depth > c.file_depth {
+            c.file_depth = c.file_signature_depth; // :242
+        }
+        if c.file_depth > 0 {
+            c.file_depth += 1; // :247 the extra byte
+        }
+        // cc:251 bare `return;`
+    }
+
+    /// cc:76-:84 `collect_cache_usage(builder, group)` — null-cache
+    /// early return (:78-:79), the `entries > 0` gate (:82), and the
+    /// snapshot.h:125-:136 inline `builder.counter(group, "File cache
+    /// entries", (uint64_t)entries)` (:83) through the landed
+    /// snapshot::Builder::counter. V10 pins: null cache -> counters=0
+    /// (no line); populated -> one counter named "File cache entries"
+    /// carrying Value::U64(entries); a second call appends (counters=2).
+    /// Row 17y signature deviation: the C takes `stats::Builder&`
+    /// because counter is a member-syntax STATIC (snapshot.h:125 — it
+    /// NEVER reads the builder instance; measured zero stats symbols
+    /// in the row residue, §0.4). The Rust snapshot Builder carries a
+    /// mutable borrow of the snapshot, so threading an inert receiver
+    /// next to the borrowed Group would double-borrow; the landed
+    /// `Builder::counter` associated fn stands in exactly (same body —
+    /// sjson_parity_test.rs already calls it as a static).
+    pub fn collect_cache_usage(
+        env: &FileEnvLite,
+        group: &mut crate::utils::stats::snapshot::Group,
+    ) {
+        // if (!file_cache) return;
+        let Some(cache) = env.svc.get_file_cache() else {
+            return;
+        };
+        // const auto entries = file_cache->get_num_entries();
+        let entries = cache.borrow_mut().get_num_entries();
+        // if (entries > 0) builder.counter(group, "File cache entries",
+        //     static_cast<uint64_t>(entries));
+        if entries > 0 {
+            crate::utils::stats::snapshot::Builder::counter(
+                group,
+                "File cache entries",
+                crate::utils::stats::snapshot::Value::U64(entries as u64),
+            );
+        }
+    }
+
+    /// h:93-:95 + cc:86-:105 `get_file_cache_clear_status()` — the
+    /// 5-arm ladder (enum values pinned by the V1_enum line:
+    /// UNAVAILABLE=2, MULTIPROCESS=1, NOT_INITIALIZED=3,
+    /// PACKET_THREADS_BUSY=4, READY=0):
+    ///
+    ///   1. `!sc` -> UNAVAILABLE (cc:89-:91; harness fsvc_set_conf_null
+    ///      arm models the null SnortConfig — ported as the
+    ///      `conf_present` arg, the SnortConfig seam has no null slot)
+    ///   2. `sc->max_procs != 1 or sc->mp_dbus` -> MULTIPROCESS
+    ///      (cc:93-/:94; max_procs rides the driver arg, mp_dbus the
+    ///      landed env.mp_dbus Cell)
+    ///   3. `!file_cache` -> NOT_INITIALIZED (cc:96-:97)
+    ///   4. `!main_packet_threads_fully_paused()` -> PACKET_THREADS_BUSY
+    ///      (cc:99-:101 via the pause-predicate Cell; pause_calls counts
+    ///      the witnesses — the 1/2/3rd arms SHORT-CIRCUIT before it,
+    ///      the V3 freeze=0 pin)
+    ///   5. READY (cc:104)
+    ///
+    /// h:94 doc-contract: this reads state only — the cache is NEVER
+    /// touched (the V3_unchanged pin).
+    pub fn get_file_cache_clear_status(env: &FileEnvLite, conf_present: bool, max_procs: u32) -> super::file_api::FileCacheClearStatus {
+        // cc:88-:91
+        if !conf_present {
+            return super::file_api::FileCacheClearStatus::Unavailable;
+        }
+        // cc:93-:94 `sc->max_procs != 1 or sc->mp_dbus`
+        if max_procs != 1 || env.mp_dbus.get() {
+            return super::file_api::FileCacheClearStatus::Multiprocess;
+        }
+        // cc:96-:97
+        if env.svc.file_cache.borrow().is_none() {
+            return super::file_api::FileCacheClearStatus::NotInitialized;
+        }
+        // cc:99-:101 the pause witness: call-count + armed value
+        env.svc.pause_calls.set(env.svc.pause_calls.get() + 1);
+        if !env.svc.packet_threads_fully_paused.get() {
+            return super::file_api::FileCacheClearStatus::PacketThreadsBusy;
+        }
+        // cc:104
+        super::file_api::FileCacheClearStatus::Ready
+    }
+
+    /// h:96 + cc:107-:116 `clear_file_cache()`: the status check; ONLY
+    /// READY reaches `file_cache->clear()` (cc:112-:113) — the landed
+    /// FileCache::clear walk (file_cache.rs:1729) fills the report
+    /// (freed/remaining). The non-READY arms return the default result
+    /// untouched (the cc:111 no-fire pin: V3_busyarm `st=4 freed=0
+    /// kept=2`, then the re-paused READY pass clears the SAME entries).
+    pub fn clear_file_cache(env: &FileEnvLite, conf_present: bool, max_procs: u32) -> super::file_api::FileCacheClearResult {
+        // C: `FileCacheClearResult result;` (h:60 default = UNAVAILABLE
+        // status + zeroed report) then `result.status = ...` — clippy's
+        // field_reassign_with_default shape carries the SAME semantics
+        // (status lands from get_file_cache_clear_status, the report
+        // stays the h:60/h:123/h:124 zero-default).
+        let mut result = super::file_api::FileCacheClearResult {
+            status: Self::get_file_cache_clear_status(env, conf_present, max_procs),
+            ..Default::default()
+        };
+
+        // if ( result.status == FileCacheClearStatus::READY )
+        //     result.report = file_cache->clear();
+        if result.status == super::file_api::FileCacheClearStatus::Ready {
+            // h:95 contract-safe here: READY answered with the cache
+            // non-null (cc:113 deref is guarded by the same ladder).
+            let cache = env.svc.get_file_cache().expect("READY implies non-null file_cache (cc:96 runs before cc:104)");
+            result.report = cache.borrow_mut().clear();
+        }
+        result
+    }
+    // The free API `snort::get_file_processed_size` (cc:254-:270) keeps
+    // its 17q home in file_flows.rs (namespace-scope C linkage, never a
+    // FileService member); row 17y retired the harness's verbatim-copy
+    // witness — the row .o owns the symbol, Rust side UNCHANGED.
 }
 
 /// `SnortClock` seam (17q scope: FileContext's
@@ -1085,6 +1513,26 @@ impl PublishApi for NoPublish {
 pub const INTRINSIC_PUB_ID: u32 = 1;
 pub const INTRINSIC_EVENT_ID_FILE_VERDICT: u32 = 23;
 pub const FILE_EVENT_ID_FILE_COMPLETE: u32 = 0;
+
+/// Row 17y: `mime/file_mime_process.h MimeSession::{init,exit}` — the
+/// OUT-OF-CLOSURE pair FileService reaches at cc:121 (post_init, BEFORE
+/// the conf check) and cc:179 (close). The REAL bodies stay queued (the
+/// mime row; NEXT.md:126-:131 — MimeSession::init (file_mime_process.cc:
+/// 948) news a SearchTool over mpse, the exact drag the fsvc PLAN §2.2
+/// scoped out; the harness proves it with the print-pair witnesses).
+/// Seam = the driver pin (same pattern as PublishApi): the fsvc replay
+/// arms print "WITNESS MimeSession::init|exit" at the exact C positions;
+/// the silent default never spawns drag.
+pub trait MimeApi {
+    fn init(&mut self);
+    fn exit(&mut self);
+}
+
+pub struct NoMimeSession;
+impl MimeApi for NoMimeSession {
+    fn init(&mut self) {}
+    fn exit(&mut self) {}
+}
 
 /// `main/policy.h` NetworkPolicy seam for the factory reach
 /// `FileFlows::set_file_policy(get_network_policy()->
@@ -1153,8 +1601,24 @@ pub struct FileEnvLite {
     /// the fflows/fcache harness FileService WITNESS static `g_max_file_depth`
     /// (stubs.cc `static long long g_max_file_depth = 0;`, armed by
     /// fcache_set_max_file_depth) — the value `get_max_file_depth` answers
-    /// through, pinned by the H/J vectors (0, 10, -5 arms).
+    /// through, pinned by the H/J vectors (0, 10, -5 arms). Row 17y note:
+    /// against the REAL FileService::get_max_file_depth (the landed
+    /// FileServiceLite assoc fn) this Cell is INERT (the R4 drift pin,
+    /// fsvc V8_get arms -7/-9 vs the config 1460) — it stays ONLY for the
+    /// frozen fflows/fcache passthrough replays through FileEnvLite::
+    /// get_max_file_depth below.
     pub max_file_depth: Cell<i64>,
+    /// Row 17y: the MimeSession seam (file_service.cc:121 cc:init /
+    /// cc:179 close:exit). Silent default; the fsvc replay arms print
+    /// the witness pair at the pinned C positions.
+    pub mime: Rc<RefCell<Box<dyn MimeApi>>>,
+    /// Row 17y: the `SnortConfig::proto_ref` slot the FileService proto
+    /// arms read (cc:143/:167 `proto_ref->find("file_id")`) — the REAL
+    /// ProtocolReference (the 17y real-cp parity; snort_protocols.rs is
+    /// fully ported, find at :141). Harness seed: ctor seeds
+    /// unknown/ip/icmp/tcp/udp/file (0..5) + add("file_id") -> 6 (the
+    /// fsvc V1 spid pin).
+    pub proto_ref: Rc<RefCell<crate::target_based::snort_protocols::ProtocolReference>>,
     pub svc: FileServiceLite,
     /// flow.h `char* service` for the pinned flow (set_source,
     /// file_lib.cc:608 — see the deviation note there). Empty == null.
@@ -1201,6 +1665,14 @@ impl Default for FileEnvLite {
             mp_dbus: Cell::new(false),
             get_instance_id: Cell::new(0),
             max_file_depth: Cell::new(0),
+            mime: Rc::new(RefCell::new(Box::new(NoMimeSession))),
+            // the real ProtocolReference ctor (the probe's `new
+            // ProtocolReference` — unknown/ip/icmp/tcp/udp/file pre-
+            // seeded, find("file_id") misses until the probe/driver
+            // add()s it: the harness seeds 6)
+            proto_ref: Rc::new(RefCell::new(
+                crate::target_based::snort_protocols::ProtocolReference::new(),
+            )),
             svc: FileServiceLite::default(),
             flow_service: std::cell::RefCell::new(Vec::new()),
             file_config: None,

@@ -446,6 +446,19 @@ impl CurrentPacketApi for NoCurrentPacket {
 pub trait InspectorManagerApi {
     fn acquire_file_inspector(&mut self) -> Option<Rc<dyn InspectorApi>>;
     fn release(&mut self, ins: &Rc<dyn InspectorApi>);
+    /// Row 17y: `InspectorManager::get_inspector(const char* name,
+    /// Module::Usage)` (managers/inspector_manager.h; NEW17y witness
+    /// NEW-4, stubs.cc — the donor carries the acquire trio but NOT
+    /// this one, NEXT.md:139-:142). The ONLY row-side call is the
+    /// reset() gate (file_service.cc:68, usage GLOBAL == 0, before the
+    /// witness's `usage=0` print); the V9 arm latches it both ways
+    /// (armed -> the statics SURVIVE, disarmed -> they CLEAR). Default
+    /// None == no inspector armed (the NullInspectorManager posture;
+    /// all frozen witness twins keep compiling byte-verbatim — the
+    /// default NEVER changes their printed lines).
+    fn get_inspector(&mut self, _name: &str, _usage: u32) -> Option<Rc<dyn InspectorApi>> {
+        None
+    }
 }
 
 pub(crate) type ImgrRc = Rc<RefCell<Box<dyn InspectorManagerApi>>>;
@@ -464,6 +477,13 @@ impl InspectorManagerApi for NullInspectorManager {
 /// `log/messages.h` ErrorMessage seam (file_cache.cc:148 clamp warning).
 pub trait ErrorLogApi {
     fn error_message(&mut self, msg: &str);
+    /// Row 17y: `ReloadError(const char* fmt, ...)` (log/messages.h;
+    /// the RESIDENT harness witness stubs.cc:123 prints "WITNESS
+    /// ReloadError <fmt>" — file_service.cc's verify_reload calls it
+    /// x3 max, cc:155/:160/:162; the fsvc V4 arms pin the three exact
+    /// strings). Default: no sink line (drivers that never pin it,
+    /// fcache/fflows/fctx twins, byte-UNCHANGED).
+    fn reload_error(&mut self, _msg: &str) {}
 }
 
 pub struct NoErrorLog;

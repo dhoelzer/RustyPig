@@ -176,6 +176,39 @@ pub struct FileCacheClearReport {
     pub remaining: u64, // h:124 `uint64_t remaining = 0;`
 }
 
+/// file_service.h:47-:54 `enum class FileCacheClearStatus : uint8_t` —
+/// row 17y landing (the 5-arm ladder's home; the V1_enum vector pins
+/// the wire values r=0 m=1 u=2 n=3 b=4, sizeof=1 per V1_sizes `st=1`).
+/// LIVE: FileService::get_file_cache_clear_status() (file_service.cc:86)
+/// + the FileCacheClearResult default field (h:60, UNAVAILABLE).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(u8)]
+pub enum FileCacheClearStatus {
+    Ready = 0, // h:50 READY
+    Multiprocess = 1, // h:50 MULTIPROCESS
+    Unavailable = 2, // h:51 UNAVAILABLE (the h:60 default)
+    NotInitialized = 3, // h:52 NOT_INITIALIZED
+    PacketThreadsBusy = 4, // h:53 PACKET_THREADS_BUSY
+}
+
+impl Default for FileCacheClearStatus {
+    /// h:60 `FileCacheClearStatus status = UNAVAILABLE;`
+    fn default() -> Self {
+        FileCacheClearStatus::Unavailable
+    }
+}
+
+/// file_service.h:56-:62 `struct FileCacheClearResult` — row 17y.
+/// sizeof=24 pinned by the fsvc V1_sizes line `rs=24` (report 16 +
+/// u8 status + 7 pad); `def=2` pins the default status rendering AS
+/// the UNAVAILABLE enum ordinal. LIVE: FileService::clear_file_cache()
+/// (file_service.cc:107) return.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct FileCacheClearResult {
+    pub status: FileCacheClearStatus, // h:60 (UNAVAILABLE default)
+    pub report: FileCacheClearReport, // h:61
+}
+
 /// file_api.h:110-:114 `struct FileState` (interim home file_lib.rs:90-:96;
 /// A_SZ_STATE=8 = vector `fstate=8`). LIVE: file_lib.h:146 default
 /// `{ FILE_CAPTURE_SUCCESS, FILE_SIG_PROCESSING }`, consumed

@@ -1426,4 +1426,22 @@ impl FileCaptureFactory for RealFileCaptureFactory {
             self.counts.clone(),
         )))
     }
+
+    /// Row 17y: `FileCapture::init(memcap, block_size)` — the static
+    /// half of the landed body (file_capture.rs:303-:315: block-size
+    /// static, init_mempool, file_buffers_max, the alive flag — the no-
+    /// OS-thread posture the fcap/fcache gates already pin), over this
+    /// factory's OWNED statics + counts (RealFileCaptureFactory::new ==
+    /// the C statics-initializer posture, :55-:63).
+    fn init_capture(&mut self, memcap: i64, block_size: i64) {
+        FileCapture::init(&self.shared, &self.counts, memcap, block_size);
+    }
+
+    /// Row 17y: `FileCapture::exit()` — the landed drain-and-flag body
+    /// (file_capture.rs:439-:452; the "joins" the V5-init writer:
+    /// drain via writer_step THEN clear the flag, the fcap PLAN :794-
+    /// :796 order rule; idempotent when never init'd).
+    fn exit_capture(&mut self) {
+        FileCapture::exit(&self.shared);
+    }
 }

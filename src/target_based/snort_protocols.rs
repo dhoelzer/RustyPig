@@ -24,6 +24,12 @@ pub const SNORT_PROTO_MAX: SnortProtocolId = 6;
 pub const UNKNOWN_PROTOCOL_ID: SnortProtocolId = 0;
 pub const INVALID_PROTOCOL_ID: SnortProtocolId = 0xffff;
 
+/// Row 17y: the literal the FileService proto arms look up —
+/// file_service.cc:143 / :167 `proto_ref->find("file_id")` (the ctor
+/// adds "file" at 5, so a probe-seeded add("file_id") lands 6 — the
+/// fsvc V1 `spid=6` pin through the REAL find body).
+pub const FILE_ID_PROTO_NAME: &str = "file_id";
+
 // The is_*_protocol functions depend on the order of these enums.
 pub fn is_network_protocol(proto: SnortProtocolId) -> bool {
     (SNORT_PROTO_IP..=SNORT_PROTO_UDP).contains(&proto)

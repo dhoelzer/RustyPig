@@ -1,0 +1,64 @@
+FIM load_config stole=1
+V1_sizes rc=16 st=1 rs=24 dec=48 def=2 spid=6
+V1_enum r=0 m=1 u=2 n=3 b=4
+V2_enable pre=0 t=1 s=1 c=1 casc=1 svc=1
+V2b_drift c=1 svc=0
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+WITNESS packet_threads_fully_paused=0
+WITNESS packet_threads_fully_paused=1
+V3_ladder unavail=2 multi=1 dbus=1 freeze=0 notinit=3 busy=4 ready=0
+V3_unchanged same=1
+WITNESS packet_threads_fully_paused=1
+IMGR release
+IMGR release
+V3_clear st=0 freed=2 rem=0 entries=0
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+WITNESS packet_threads_fully_paused=0
+WITNESS packet_threads_fully_paused=1
+IMGR release
+IMGR release
+V3_busyarm st=4 freed=0 kept=2 then st=0 freed=2 empty=0
+WITNESS packet_threads_fully_paused=1
+V3_empty st=0 freed=0
+IMGR get_inspector file_inspect usage=0 -> null
+V9_clear t=0 s=0
+IMGR get_inspector file_inspect usage=0 -> inspector
+V9b_gate t=1 s=1
+IMGR get_inspector file_inspect usage=0 -> inspector
+WITNESS ReloadError Changing file_inspect.max_files_cached requires a restart.
+WITNESS ReloadError Changing file_inspect.capture_memcap requires a restart.
+WITNESS ReloadError Changing file_inspect.capture_block_size requires a restart.
+V4_reload t=1 spid=6
+IMGR get_inspector file_inspect usage=0 -> null
+V4c_nullconf t=0 spid=6
+IMGR get_inspector file_inspect usage=0 -> inspector
+WITNESS MimeSession::init
+V5_post cache=1 spid=6 t=0 c=1
+WITNESS packet_threads_fully_paused=1
+V5b_keep st=0 freed=0 same=1
+IMGR get_inspector file_inspect usage=0 -> null
+V6_clean t=0 spid=6
+V8_get def=1460 null=-1 fcneg=-1
+V8_set type=1461
+V8_set2 sig=21
+V8_set3 neg=-5
+V10_null counters=0
+IMGR acquire -> inspector
+V10_ctr counters=1 name=File cache entries v=1
+V10_twice counters=2
+IMGR release
+WITNESS MimeSession::exit
+V11_close had=1 after=0
+V12_cycle done=1
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+DE get_current_packet have=0
+V13_size noff=1 noctx=1 sized=7
+IMGR release
+V14_init ffd=1
+FSVC_PROBE_DONE
