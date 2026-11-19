@@ -1,4 +1,4 @@
-# NEXT.md — takeover context & plan (2026-11-19, post-17u)
+# NEXT.md — takeover context & plan (2026-11-19, post-17v)
 
 This file is the single resume point for a fresh agent. It carries only
 what is not cheaply re-derivable. `PORTING_PLAN.md` (row table, per-row
@@ -14,20 +14,23 @@ prior probe; NEVER `git add` anything under snort3-src). Port repo:
 `/opt/data/snort3-rust` (branch `master`, remote
 `github.com/dhoelzer/RustyPig`).
 
-Current state (measured at the 17u docs pass): plan rows 1–17u DONE (80
-commits counting the 17u docs commit, **446 tests green / 0 FAILED**,
-`cargo clippy --all-targets` **0 warnings**, 36,386 lines Rust across
-117 `src/*.rs` files, 26 `tests/*_parity_test.rs` whole-transcript
-replay tests among 51 test files, 297 tracked files, 33 `tools/*_harness`
+Current state (measured at the 17v docs pass): plan rows 1–17v DONE (82
+commits counting the 17v docs commit, **447 tests green / 0 FAILED**,
+`cargo clippy --all-targets` **0 warnings**, 36,760 lines Rust across
+118 `src/*.rs` files, 27 `tests/*_parity_test.rs` whole-transcript
+replay tests among 52 test files, 304 tracked files, 34 `tools/*_harness`
 dirs). GitHub wiki https://github.com/dhoelzer/RustyPig/wiki is the
 public status doc (clone at `/tmp/RustyPig.wiki`, remote
-`RustyPig.wiki.git`, HEAD `c16d2dc` = row 17t trio LANDED: status row +
+`RustyPig.wiki.git`, HEAD `7662621` = row 17u trio LANDED: status row +
 deviations section + stats line; verified read-only at this docs pass —
-`git -C /tmp/RustyPig.wiki log` — the wiki is NEVER touched by code or
-plan rows). **The 17u wiki trio is OWED** and is owed at the NEXT WIKI
-phase, not by this docs pass (status row + deviations section + stats
-line "297 tracked files / ~36,400 src lines / 80 commits / 446 tests");
-the 17t trio is no longer debt — landed at c16d2dc.
+`git -C /tmp/RustyPig.wiki log --oneline -5` prints
+`7662621 row 17u: status + deviations + stats` atop `c16d2dc row 17t`,
+and `grep -rn '17v' /tmp/RustyPig.wiki` is EMPTY — the wiki is NEVER
+touched by code or plan rows). **The 17v wiki trio is OWED** and is owed
+at the NEXT WIKI phase, not by this docs pass (status row + deviations
+section + stats line "304 tracked files / ~36,800 src lines / 82
+commits / 447 tests"); the 17u trio is no longer debt — landed at
+7662621.
 
 ## The method (non-negotiable, used by every row)
 1. **C++ harness** under `tools/<name>_harness/` that compiles the
@@ -59,7 +62,7 @@ the 17t trio is no longer debt — landed at c16d2dc.
    `tests/fctx_parity_test.rs` (the freshest: 2471 lines, whole
    610-line replay + 3 `up_gate_mempool_*` translations),
    `tests/fflows_parity_test.rs`, `tests/fcache_parity_test.rs`.
-5. **Gates at EVERY commit**: `cargo test` all green (>= 446; never
+5. **Gates at EVERY commit**: `cargo test` all green (>= 447; never
    trust a summed total from a run containing FAILED), clippy
    --all-targets ZERO warnings, `vectors.txt`+`gate.txt` md5 stable
    across >= 2 clean rebuilds, harness `.gitignore` block added
@@ -80,8 +83,9 @@ the 17t trio is no longer debt — landed at c16d2dc.
 - No gdb. Diagnose segfaults via stdout tail + source inspection; THREAD_LOCAL statics must be armed or you get rc 139: `file_stats` via `file_stats_init()`, `packet_time`'s `s_recent_packet` via `packet_time_update()` ONLY (it clamps backwards calls — never backstep by construction).
 
 ## Donor harnesses (copy their build.sh recipes wholesale)
-- `tools/fconf_harness/` — **the NEW donor for the remaining file_api rows (smallest donor, ZERO new witnesses ever, 17u)**: fresh from the fcshare donor; **ZERO cp delta** — file_config.{h,cc} (and everything the queue needs, see table) already sit in the donor cp-list (:38) and compile-list (:370). gate UNCHANGED = "All tests passed (114 assertions in 22 test cases)", gate.txt md5 `4826fc2233044a2d5429413faf0ae1af` (byte-ident to the fcshare donor — the row added ZERO TEST_CASEs). vectors.txt 20 lines md5 `65968e1cc11e9489b89762b6c6f3765e` (committed, NEVER edit); probe probe.cc D/N/T/F/G/M/S arms; stubs.cc = fcshare donor + ONE toggle (`fconf_set_file_inspector_null`, probe-settable InspectorManager null, pointer swap only).
-- `tools/fcshare_harness/` — the 17t donor (superseded by fconf): fresh from the fcap donor; cp-list adds ONLY `file_cache_share.{h,cc}`. vectors.txt 25 lines md5 `03d43c143440bd2a101d56818fd20be4` (committed, NEVER edit); gate UNCHANGED = "All tests passed (114 assertions in 22 test cases)". Its cp-list (:35) + compile-list (:365) ALREADY carry the full file_api closure (incl. file_cache_share now) — see per-candidate table below.
+- `tools/fcapi_harness/` — **the NEW donor for the remaining file_api rows (smallest donor, 17v)**: fresh from the fconf donor; **ZERO cp delta** for the row TU — file_api.{h,cc} sit in the donor cp-list (:54) and the generic compile loop (:386); gate UNCHANGED = "All tests passed (114 assertions in 22 test cases)", gate.txt md5 `4826fc2233044a2d5429413faf0ae1af` (byte-ident to the fconf/fcshare donor — the row added ZERO TEST_CASEs; build.sh self-checks :574-:576 grep-pin the TU's TEST_CASE/UNIT_TEST = 0). vectors.txt 21 lines md5 `a953a5017b74f5d44dbba14df48ac5ea` (committed, NEVER edit); probe arms C_sz/E_enums/M_flags/P_/S_enc/R_ (see PLAN §5); stubs.cc = fconf donor VERBATIM (incl. the fconf_set_file_inspector_null toggle :371). Its cp-list (:54) + compile loop (:386) + explicit block (:409-:414) ALREADY carry the full file_api closure incl. file_api itself — see per-candidate table below. NB the harness dir is `fcapi_harness` (the 17u NEXT.md said `fapi_harness` — pinned name, do not "fix" the code).
+- `tools/fconf_harness/` — the 17u donor (superseded by fcapi; kept for lineage): fresh from the fcshare donor; **ZERO cp delta** — file_config.{h,cc} (and everything the queue needs, see table) already sat in the donor cp-list (:38) and compile-list (:370). vectors.txt 20 lines md5 `65968e1cc11e9489b89762b6c6f3765e` (committed, NEVER edit); probe probe.cc D/N/T/F/G/M/S arms; stubs.cc = fcshare donor + ONE toggle (`fconf_set_file_inspector_null`).
+- `tools/fcshare_harness/` — the 17t donor (superseded by fconf): fresh from the fcap donor; cp-list adds ONLY `file_cache_share.{h,cc}`. vectors.txt 25 lines md5 `03d43c143440bd2a101d56818fd20be4` (committed, NEVER edit); gate UNCHANGED = "All tests passed (114 assertions in 22 test cases)". Its cp-list (:35) + compile-list (:367) ALREADY carry the full file_api closure (incl. file_cache_share now).
 - `tools/fcap_harness/` — the 17s donor (superseded by fcshare): fresh from the fctx donor for 17s; the probe link already resolves FileCapture real + FileService statics armable (stubs.cc:440-445) + FileMPEvent real (copy/pub_sub/file_events.h). vectors.txt 27 lines md5 `0208a69116861a506f0c46a7dc36b2ac` (committed, NEVER edit); unified gate `[file_capture]` 4 + `[file_flows]` 8/22 + `[file_cache]` 7/42 = "All tests passed (114 assertions in 22 test cases)", gate.txt md5 `4826fc2233044a2d5429413faf0ae1af`. Its build.sh cp-list (:36) + compile-list (:365) ALREADY compile `file_api.cc` and `file_config.cc` VERBATIM (their .o link in the probe) — header-only `file_service.h`/`file_policy.h` also copied.
 - `tools/fctx_harness/` — donor for any row reaching FileContext + capture/mempool/segment closure: everything fflows had, PLUS the probe-mode file_lib.cc with ONLY the :1363 UNIT_TEST block excised, the 3-UT-TU gate link (18 cases / 91 assertions), `FileCaptureTestAccess`-shaped witnesses already resident, and the A/K/L/M/N/O probe blocks over the heavy ladder. vectors.txt 610 lines md5 `839b5566be0a2191876e0f34b4ed56e4` (re-verified byte-identical from a from-scratch rebuild at 17r docs time); gate.txt md5 `42349372258e49db1a8f4f60e7a27ed6`. `tools/fctx_harness/PLAN.md` is the RECON→HARNESS→PORT contract example (its §3 ZERO-new-witness measurement held exactly: the fflows donor link already resolved every heavy-half symbol; 17s repeated the trick — fcap measured ZERO new witnesses too).
 - `tools/fflows_harness/` — per-flow FileFlows + FlowData graft donor: the flowz/flow_fwd.h Flow `get_flow_data`/`set_flow_data` single-slot graft (flow.h:195/200), FIXACC access-only file_api.h extension, NetworkPolicy/policy witnesses. vectors.txt 146 lines md5 `bd8c00af7a7047ef5b745a34c2a0df55` (committed, DO NOT touch); gate 8/22 md5 `e14626fc6f112a9786c7098e6b4df40c`.
@@ -92,55 +96,60 @@ the 17t trio is no longer debt — landed at c16d2dc.
 - `tools/fstats_harness/` — file_api header closure, stats snapshot witnesses.
 - `tools/codec_harness/`, `tools/jsnorm_harness` — plain-catch shim recipe.
 
-## Next milestone — row 17v: file_api.{h,cc} (the consolidation row: shared vocabulary + FilePolicyBase canonical home)
+## Next milestone — row 17w: file_inspect.{h,cc} (the inspector TU: configure() arms the REAL FileCache + the ConfigLogger show ladder + the sin_file_flow API record)
 
 Freshly measured this pass against `/opt/data/snort3-src/src/file_api`
-(`wc -l`; `grep -c 'TEST_CASE|ifdef UNIT_TEST'` per TU — ALL SIX
-remaining queue TUs plus file_api itself measure ZERO, so 17v stays
-probe-vectors-only; donor cp/compile column = presence in
-`tools/fconf_harness/build.sh` cp-list :38 and compile-list :370 —
-checked by `grep`, identical lists in fcshare :35/:367 (fcshare compile-list sits at :367)):
+(`wc -l`; `grep -c 'TEST_CASE\|ifdef UNIT_TEST'` per TU — ALL FIVE
+remaining queue TUs measure ZERO, so 17w stays probe-vectors-only;
+donor cp/compile column = presence in `tools/fcapi_harness/build.sh`
+cp-list :54, the generic compile loop :386, and the explicit compile
+block :409-:414 — checked by `grep` this pass):
 
-| candidate | .h+.cc lines | TEST_CASEs | in fconf donor? | blockers |
+| candidate | .h+.cc lines | TEST_CASEs | in fcapi donor? | blockers |
 |---|---|---|---|---|
-| **file_api** (17v PICK) | 227+43 = 270 | **0** | cp'd AND compiled VERBATIM (:38/:370 — the .o already links in every file_api probe since 17q) | consolidation, ZERO new closure: FilePolicyBase trio (file_api.cc:28-:41, ref-count `new` protocol) + enums (FileVerdict/FilePosition/FileAction/FileCaptureState/FileSigState/FileProcessType/FileDirection/FileCharEncoding, h:41-:113) + FILE_ID_MAX/FileTypeBitSet (h:118-:119) + FileCacheClearReport h:121-:125 + UserFileDataBase h:132-:141 + the three inline FilePosition helpers h:174-:197 + get_character_encoding h:214-:223; cc ALSO re-declares the two snort:: shims 17u just ported (h:224-:227). Most pieces ALREADY ride interim homes (FileVerdict et al. in file_lib.rs / file_cache.rs: FilePolicyHandle + policy verbs file_cache.rs:549-:600 cites file_api.cc:34 / FILE_ID_MAX+bitset word form file_identifier.rs:21) — 17v = consolidation + canonical home + the unported parts only (position helpers, FileProcessType, UserFileDataBase). get_file_processed_size/get_file_position DECLARATIONS (h:224-:225) live in file_service.cc:256 + file_flows.cc:61 — ported homes, not this TU. |
-| file_inspect | 42+175 = 217 | 0 | cp'd (.h only, :38); .cc NOT compiled | queue after 17v: include closure NOW fully resident (file_cache 17p + file_cache_share 17t + file_config 17u + file_module.h + file_service.h + pub_sub ids); gate side needs `InspectorManager::get_file_inspector` armable (already the fconf stubs toggle) + Inspector base (framework/inspector.h already cp'd) |
-| file_policy | 94+216 = 310 | 0 | NOT cp'd (ZERO presence in fconf or fcshare cp-list) | drags file_capture.h (REAL 17s) + file_lib (REAL) + hashes (resident) — cp delta = file_policy.{h,cc} only; tractable |
-| file_service | .h 112 cp'd, .cc 270 NOT compiled | 0 | .h only (:38/:35) | drags `main.h` (`main_packet_threads_fully_paused()` file_service.cc:101), mime/file_mime_process, search_engines/search_tool — NEW closure work |
-| file_log (no .h) | 329 | 0 | NOT cp'd | drags log/text_log.h + framework/module (log engine layer, new) |
-| file_module | .h 86 cp'd, .cc 379 NOT compiled | 0 | .h only (:38/:35) | drags main/snort.h + managers/module_manager + lua/lua.h (Lua LIVE 17k but snort.h is heavy); consumes FILE_ID_NAME/FILE_ID_HELP consts 17u landed |
+| **file_inspect** (17w PICK) | 42+175 = 217 | **0** | .h cp'd (:54; also FIXACC :252 + stubs.cc:13); **.cc ZERO presence** (cp delta = file_inspect.cc ONLY) | include closure FULLY RESIDENT (file_cache.cc compiled :412, file_cache_share/file_config/file_flows in the :386 loop, file_service.h + file_module.h + pub_sub/file_events_ids.h cp'd :54/:55, framework/inspector.h cp'd :64). NEW witness bodies (grep-0 in stubs.cc, measured): `DataBus::get_id` (file_inspect.cc:74; only MPDataBus::get_id :298 present), `MPDataBus::register_event_helpers` + `MPDataBus::subscribe` (:81/:82), `ConfigLogger::log_flag/log_value` (declared copy/log/messages.h:63/:70, no bodies), `FileIdModule::load_config` (called by the REAL ctor :50; module body is file_module.cc turf — witness arms the FileConfig* dst). WITNESSES THAT RETIRE on the real link: FileInspect body block stubs.cc:425-436 + `get_file_adv_pub_id` :309 (REAL definition file_inspect.cc:87-:88 over the static atomic :46); `fcache_set_file_inspector` toggle :352-355 must re-arm (real ctor calls load_config, never nullptr-mod). |
+| file_policy | 94+216 = 310 | 0 | NOT cp'd (ZERO `file_policy` hits in build.sh) | includes measured: file_api.h (REAL now 17v) + file_capture.h (REAL 17s) + file_lib.h (REAL) + file_service.h (cp'd) + hash/hashes.h (REAL :386) — cp delta = file_policy.{h,cc} only; FileService::enable_* statics already REAL in stubs (:451-:465); signature_lookup :187-:216 rides FileInfo reserve_file/store_file_async (the 17s RealFileCaptureFactory closure) — tractable, queue next after 17w |
+| file_service | .h 112 cp'd, .cc 270 NOT compiled | 0 | .h only (cp :54) | drags `main.h` (`main_packet_threads_fully_paused()` file_service.cc:101 — grep-0 cp'd, new witness), mime/file_mime_process.h + search_engines/search_tool.h (includes :37/:38, grep-0 cp'd) + utils/stats builder call :76 (snapshot.h cp'd :63 but Builder/Group/GaugeDef layer is stats turf) |
+| file_log (no .h) | 329 | 0 | NOT cp'd | drags log/text_log.h (grep-0 cp'd — TextLog engine layer, new) + Module/PegInfo bodies (framework/module.h cp'd :64, body NOT) ; data_bus/packet_time/file_config/file_flows/file_lib all REAL |
+| file_module | .h 86 cp'd, .cc 379 NOT compiled | 0 | .h only (:54) | drags main/snort.h + managers/module_manager.h + parser/parser.h (all grep-0 cp'd) + lua/lua.h (LuaJIT LIVE at /opt/data/tools/luajit-src since 17k but lua.{h,cc} not in this donor); consumes FILE_ID_NAME/FILE_ID_HELP consts 17u landed; ALSO the home of FileIdModule::load_config — the 17w witness body lives on this row's real TU |
 
-17v plan (`file_api.{h,cc}`, 227+43 — smallest fully tractable, ZERO
-cp delta): new `tools/fapi_harness` from the **fconf** donor (smallest;
-ZERO new witnesses — the probe link already resolves everything this TU
-touches, nm-verify per the fconf PLAN 3/7/8 recipe); vectors =
-FilePolicyBase ref-ladder (ctor ref=1 file_api.cc:28,
-delete_file_policy decrement/delete :34-:41 incl. null-policy guard
-:36, dtor `assert(!ref_count)` :31 posture), the three inline position
-helpers over the START/MIDDLE/END/FULL ladder (h:174-:197, the ftp/
-dce consumers in upstream cite them — probe directly), get_character_
-encoding BOM arms (h:214-:223, UTF_16_LE_BOM "\xFF\xFE" h:50), enum
-wire values (FileVerdict 0-7 h:49-:58 etc. — pins vs the interim
-homes), UserFileDataBase copy semantics h:132-:141. Rust lands
-`src/file_api/file_api.rs` as the canonical vocabulary home and
-re-points the interim homes to it with `pub use` (the 17u const-home
-recipe — leave every existing binding green). Watch the two-view
-LEFT-OPENs from 17u (file_config.rs:225-:250) before re-pointing
-anything pinned by 17p/17r vectors.
+17w plan (`file_inspect.{h,cc}`, 42+175 — smallest fully tractable, cp
+delta ONE file): new `tools/finspect_harness` from the **fcapi** donor
+(smallest; witness delta measured above = 4 NEW witness bodies + 2
+donor witness retirements — nm-verify per the fcapi PLAN recipe);
+vectors = configure() null-config early return + the REAL FileCache
+timeout/cap arm ladder (set_block_timeout/set_lookup_timeout/
+set_max_files from the FileConfig fields — file_cache.rs setters
+ported 17p), `FileService::set_max_file_depth` (stub :469, instrument
+it), the get_file_adv_pub_id static round-trip (DataBus::get_id
+witness id -> static -> getter :87), the mp_dbus=true arm
+(register_event_helpers + subscribe(new FileCacheShare()) witness
+prints), file_config_show over all 13 ConfigLogger keys + the three
+FileService enable flags, the sin_file_flow InspectApi record consts
+(PT_INSPECTOR/API_OPTIONS/FILE_ID_NAME+HELP 17u consts/IT_PASSIVE/
+PROTO_BIT__NONE/"file" + the file_init->REAL FileFlows::init and
+file_ctor wiring — probe reads the BaseApi fields through the
+`sin_file_flow` global). Rust lands `src/file_api/file_inspect.rs`:
+FileInspect over the ported FileConfigLite/FileCache pieces, the
+ConfigLogger trait seam (witness-style), the pub-id static, the API
+record as consts; watch the 17u LEFT-OPENs (file_config.rs:225-:250:
+file_inspect.h:36 `FileConfig* config` IS the named closure target —
+the FileEnvLite::file_config seam slot can land here, but only if no
+17p/17r pinned vector re-arms).
 
-## Alternative quick-win rows (re-measured at the 17u docs pass; ZERO TEST_CASEs + ZERO `#ifdef UNIT_TEST` across ALL remaining file_api TUs)
+## Alternative quick-win rows (re-measured at the 17v docs pass; ZERO TEST_CASEs + ZERO `#ifdef UNIT_TEST` across ALL remaining file_api TUs)
 | target | lines | TEST_CASEs (measured) | notes |
 |---|---|---|---|
 | main/thread_config.cc | 920 | **14** `[ThreadConfig]` at :615–:903 | cpuset parse/affinity/NUMA failure ladders; hwloc witness ladder needed (17l numa precedent); bigger alt |
 | file_service.{h,cc} | 382 (112+270) | 0 | drags `main.h` (`main_packet_threads_fully_paused()` :101), mime/file_mime_process, search_engines/search_tool |
-| file_module.{h,cc} | 465 (379+86) | 0 | drags main/snort.h, module_manager, lua |
+| file_module.{h,cc} | 465 (379+86) | 0 | drags main/snort.h, module_manager, lua; home of FileIdModule::load_config (the 17w witness body) |
 | file_log.cc | 329 (no .h) | 0 | drags log/text_log.h (log engine layer) |
-| file_inspect.{h,cc} | 217 (42+175) | 0 | closure complete since 17u (get_file_inspector toggle live in fconf stubs) — next after file_api |
-| file_policy.{h,cc} | 310 (216+94) | 0 | CaptureFilePolicy rides file_capture.h (REAL 17s) + file_lib + hashes (measured includes) |
-| **file_api.{h,cc}** | 270 (227+43) | 0 | **17v PICK**; TU already VERBATIM-compiled-and-linked inside fconf/fcshare/fcap harnesses |
-| file_config.{h,cc} | 208 (80+128) | 0 | DONE 17u (fconf harness is the freshest donor) |
+| **file_inspect.{h,cc}** | 217 (42+175) | 0 | **17w PICK**; closure complete, cp delta = the .cc only; ConfigLogger/DataBus::get_id/MPDataBus pair/FileIdModule::load_config witnesses land (measured grep-0 in fcapi stubs) |
+| file_policy.{h,cc} | 310 (216+94) | 0 | includes measured file_api.h+file_capture.h+file_lib.h+file_service.h+hashes — ALL already real/cp'd in the fcapi donor; queue next after file_inspect |
+| file_config.{h,cc} | 208 (80+128) | 0 | DONE 17u |
+| file_api.{h,cc} | 270 (227+43) | 0 | DONE 17v (fcapi harness is the freshest donor) |
 | file_cache_share.{h,cc} | 115 (40+75) | 0 | DONE 17t |
-| file_segment / file_mempool / circular_buffer / file_capture | — | DONE 17r/17s | fconf harness supersedes all as donor |
+| file_segment / file_mempool / circular_buffer / file_capture | — | DONE 17r/17s | fcapi harness supersedes all as donor |
 
 ## Backlog (plan rows)
 - 17s: **DONE (dc94885)** — file_capture proper; wiki trio LANDED (746ae26 + 64ae736 repair).
@@ -151,7 +160,13 @@ anything pinned by 17p/17r vectors.
   4826fc2233044a2d5429413faf0ae1af), tests/fconf_parity_test.rs 611L 20/20 replay,
   **446 total green**, clippy 0. **Wiki trio for 17u OWED** (owed at the next WIKI phase:
   status row + deviations section + stats line; wiki HEAD c16d2dc carries through 17t).
-- 17v+: file_api shim (PICK), file_inspect, file_policy, file_service, file_log, file_module
+- 17v: **DONE (254b690)** — file_api umbrella: src/file_api/file_api.rs 467L (canonical vocabulary
+  home + FilePolicyBase ref-protocol + pub-use re-points file_lib/file_cache), tools/fcapi_harness
+  vectors 21 lines md5 a953a5017b74f5d44dbba14df48ac5ea tracked, gate stays 114/22 (gate md5 unchanged
+  4826fc2233044a2d5429413faf0ae1af), tests/fapi_parity_test.rs 243L 21/21 replay,
+  **447 total green**, clippy 0. **Wiki trio for 17v OWED** (owed at the next WIKI phase:
+  status row + deviations section + stats line; wiki HEAD 7662621 carries through 17u).
+- 17w+: file_inspect (PICK), file_policy, file_service, file_log, file_module
   (table above).
 - 18: codecs IP/TCP/UDP normalization (~15k lines) — verified NO upstream TEST_CASEs in
   codecs/; transcripts are the only ground truth there.
