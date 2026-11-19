@@ -1,0 +1,27 @@
+CONST sizeof_FileCapture=72 sizeof_FileCaptureBlock=16 slot_block64=136
+A_nomempool_state=3 (MEMCAP=3)
+A_flush_no_pending_returns=1
+B_memcap1mb_block64 buffers_max=7710 buffers_in_use=0
+B_full st=0 within_packet_d=1
+B_end st=0 buffered_d=0
+B_split st=0 rst=0 blocks=5 len_sum=300 first=0 last=21 capsize=300 buffered_d=1 alloc_d=5 used_max=5 in_use=5
+B_reset_walk blocks=5 len_sum=300 first=0 last=21
+B_store_nameless_noop=1
+B_dtor files_released_d=1 bufs_released_d=5 in_use_after=0
+B_max st=2 rst=2(MAX=2) size_max_d=1 reserve_fail_d=1
+B_errcap st=1(MIN=1) reserve_fail_d=1
+B_reserve_arms min=1(MIN=1) max=2(MAX=2)
+C_counters n=5 | Max file buffer capacity=7710 | Buffers in use=0 | Buffers in free list=7705 | Buffers in release list=5 | Memory usage in bytes=0
+D_exhaust st=3(MEMCAP=3) memcap_fail_d=1 in_use=2
+D_exhaust bufs_freed_d=2 in_use_after=0
+D_reserve_memcap rst=3(MEMCAP=3) fail_reserve_d=0 memcap_total_d=1 in_use=2
+D_reserve_dtored in_use=0 bufs_freed_d=2
+E_resettable=1
+E_hookless_drain q_before=1 q_after=0 in_use=0
+F_ladder rst=0 inuse1=1 storing_when_parked=1 done_mid=0 done_after=2 inuse_mid=1 update_inuse=0 inuse_after=0 released=1
+F_tls_split main_files_released_d=0 (writer-thread TLS invisible, deviation)
+G_queued r1=0 r2=0 inuse2=2 done_mid=0 done_after=1 inuse_half=1 update_inuse=0 inuse_after=0 released=2
+H_async name_len=64 name_eq_sha=1 file_present=1 file_size=14 dir_entries=1
+I_resettable_before=1
+I_exit_then_resettable=1
+FCAP_PROBE_DONE

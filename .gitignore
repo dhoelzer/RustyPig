@@ -167,3 +167,13 @@ tools/fctx_harness/catch_main.cc
 tools/fctx_harness/*.o
 tools/fctx_harness/*.log
 tools/fctx_harness/gate.txt
+
+tools/fcap_harness/copy/
+tools/fcap_harness/probe
+tools/fcap_harness/probe2
+tools/fcap_harness/gate
+tools/fcap_harness/catch_main.cc
+tools/fcap_harness/*.o
+tools/fcap_harness/*.log
+tools/fcap_harness/gate.txt
+tools/fcap_harness/nm_residue.txt

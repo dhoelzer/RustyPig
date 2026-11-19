@@ -122,8 +122,13 @@ from the fctx donor.
 | file_segment / file_mempool / circular_buffer | — | DONE 17r | landed early with the fctx gate |
 
 ## Backlog (plan rows)
-- 17s: file_capture proper (async writer row, above) + wiki trio for 17r
-  (OWED: status row + deviations + stats line).
+- 17s: **DONE (this session, uncommitted)** — file_capture proper (async
+  writer row): `src/file_api/file_capture.rs` (+ `pub mod`), real
+  `RealFileCaptureFactory` default seam closure in file_lib.rs,
+  `tests/fcapture_parity_test.rs` 11 tests (426 total green), fcap harness
+  vectors md5 0208a69116861a506f0c46a7dc36b2ac re-verified. Wiki trio for
+  17r OWED as ever; 17s docs (status row + wiki stats line) ride the
+  parent's doc commit.
 - 17t+: file_service, file_config, file_module, file_cache_share,
   file_log, file_inspect (see table).
 - 18: codecs IP/TCP/UDP normalization (~15k lines) — verified NO

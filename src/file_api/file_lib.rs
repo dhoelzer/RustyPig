@@ -1113,7 +1113,16 @@ impl Default for FileEnvLite {
             file_config: None,
             network_policy: None,
             fpe: Box::new(NoFpEval),
-            capture_factory: Box::new(NoFileCaptureFactory),
+            // Row 17s seam closure: the REAL FileCapture engine
+            // (file_capture.rs over the live file_mempool.rs +
+            // circular_buffer.rs) is now the default `new
+            // FileCapture(min, max)` at file_lib.cc:1174 — C `new`
+            // never answers null, so process_file_capture's
+            // pinned-absent expect at :3005-:3008 holds by
+            // construction. NoFileCaptureFactory (file_lib.rs:140-
+            // :145) stays for witness opt-out injection (the 17r
+            // HubCapture fixtures re-arm their own).
+            capture_factory: Box::new(super::file_capture::RealFileCaptureFactory::new()),
             stats: std::cell::RefCell::new(super::file_stats::FileStatsEnv::default()),
         }
     }

@@ -1428,3 +1428,87 @@ Structural deviations (behavior preserved):
   17p/17q committed transcripts and expectations are untouched.
 - THREAD_LOCAL / file_counts / FilePolicyHandle / two-FileConfig-view
   disciplines carry over unchanged from rows 17p/17q.
+
+## file_api/file_capture.{h,cc} (row 17s)
+
+Harness reality:
+
+- Fresh `tools/fcap_harness/` (fctx donor, retire rule): probe TU is the
+  `-DUNIT_TEST` copy keeping every early hook fragment (:45/:65/:100/:112/
+  :197/:203) + the UT scaffold :620-:807 with ONLY the 4 TEST_CASE bodies
+  (:808-:912) excised; the gate runs those 4 cases verbatim. C transcripts =
+  `vectors.txt` (27 lines, md5 0208a69116861a506f0c46a7dc36b2ac, NEVER
+  edited); witness delta ZERO new stubs (PLAN §3).
+- The 4 upstream cases ARE multi-threaded (1 writer + 2 flush callers);
+  the probe/gate determinism = the AsyncWriterGate hook ladder, and the
+  Rust port replays THAT ladder single-threaded (below).
+
+Structural deviations (behavior preserved):
+
+- **Single-thread async model** (row 17r `user_file_data_mutex` precedent;
+  fcap PLAN §8-2): `capture_mutex`/`capture_cv` (:58-:59) and
+  `std::thread* file_storer` (:60; spawned :171, joined :188) are
+  comment-transcribed, NEVER ported. `writer_thread` (:79-:117) splits at
+  the UT hook sites (:100-:103 / :112-:115) into `writer_pop` +
+  `writer_finish` so the gate-ladder interleavings (pop-before-store,
+  store-before-release, nonempty-idle predicate window — vectors F/G) stay
+  scriptable; `flush()` (:194-:209) inline-performs the writer's
+  iterations (the C predicate :207 waits ON the writer); `exit()`
+  (:178-:192) models join as "drain the queue first" per the C :89-:91
+  comment. A flush over a parked pop PANICS loudly where C would wait on
+  the hook (PLAN §9-1 join face made observable) — pinned by the parity
+  test's scripted release order (:794-:796).
+- **C file-statics live in `FileCaptureShared`** shared by every capture
+  (17r in-object precedent + 17m FileStatsEnv discipline): `file_mempool`,
+  `capture_block_size`, `files_waiting`, `file_storing`, `running`, plus a
+  `file_storer_alive` flag for the :60 thread pointer.
+- **store_file_async consumes `Box<Self>`** (:564-:584): C pushes raw
+  `this` and the writer `delete`s it (:106) — the Rust queue OWNS the Box
+  (move = the ownership transfer). The trait seam
+  `Box<dyn FileCaptureApi>` never reaches the async half: the C queue
+  feeders are `file_policy.cc:195-197` (a later row) and the UT
+  `enqueue` (concrete). A queued capture's `Rc` back-pointer to the
+  shared statics mirrors C's leak-until-drained window.
+- **THREAD_LOCAL `file_counts` merged**: C's `delete file` (:106) bumped
+  the WRITER thread's TLS, invisible on main (probe pin
+  `F_tls_split main_files_released_d=0`, vectors.txt:22). Single-thread
+  port = ONE counts object; which counter bumps where is unchanged, only
+  the per-thread split merges (delta becomes visible 1). Asserted in
+  `tests/fcapture_parity_test.rs` (case-C mirror).
+- **Layout constants pinned, never `size_of`** (fcap PLAN §9-3):
+  `SIZEOF_FILE_CAPTURE=72` (:220/:591 slot math) and
+  `SIZEOF_FILE_CAPTURE_BLOCK=16` (:294/:318/:335/:481 payload offset) +
+  `SLOT_BLOCK64=136` cross-check — probe CONST line only. The block
+  keeps its mempool slot id for m_release/m_free and an owned
+  `payload: Vec<u8>` (capacity = `capture_block_size`; C payload region =
+  slot + 16, the 56-byte tail never written in C — structurally
+  excluded).
+- Block chain `FileCaptureBlock* next` -> `Option<usize>` arena index;
+  `current_data` (:141) -> owned copy (the C dangling-pointer hazard is
+  structural in Rust); `current_data_len > current_data.len()` C UB is
+  unreachable by construction.
+- `fopen(name, "wx")` (:536) -> `OpenOptions::create_new(true)`; the
+  nameless-capture fast-fail (:537-:540, vectors `B_store_nameless_noop`
+  + gate disk-silence) lands as the silent `Err` arm. `write_file_data`
+  (:495-:526) keeps the 3-retry do/while literally; `ferror`'s codes map
+  to the failing call's raw errno (C stdio ferror is 0/1 — the EINTR/
+  EAGAIN arms never fired in C either; pinned deviation).
+- `get_instance_file` (:577) seam's DEFAULT is the harness witness
+  (stubs.cc:182 `s = n` — vectors H `name_eq_sha=1` pin THAT); the real
+  thread.cc:129 formatter needs the NamingConfig/ThreadState/LogEngine
+  trio, injectable via `FileCaptureShared::set_instance_file` (the
+  parity disk test wires an absolute temp dir: threads + cargo rule out
+  the probe's process-wide chdir hygiene trick).
+- `collect_mem_usage` drops the unused-in-body `Builder&` receiver per
+  the fstats FileStatsHooks precedent (the C :595-:599 calls are the
+  builder's statics, `this` never touched); the five counters + their
+  names/values are vector-C verbatim.
+- TestAccess scaffold semantics (resettable/reset/enqueue/
+  released_buffers, :625-:659) land as pub methods (fcap PLAN §8-2);
+  `released_buffers` on a null pool answers 0 where C derefs (pinned
+  deviation, fixture-reset sequence only).
+- Seam closure: `FileEnvLite::default().capture_factory` is now
+  `RealFileCaptureFactory` (file_lib.rs:1115-:1125) — the C `new` never
+  answers null, so the 17r pinned-absent `.expect` holds by
+  construction; `NoFileCaptureFactory` stays for witness opt-out (the
+  17r HubCapture fixtures stay green untouched — vectors unchanged).
