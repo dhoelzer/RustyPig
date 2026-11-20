@@ -1,0 +1,46 @@
+ESP gate-off -> 0
+EV 116 294
+ESP short21 -> 0
+ESP ok24 -> 1 lyr=8 next=6 flags=6
+ESP pad255 -> 1 next=256 dflags=32
+EV 116 456
+ESP maxopts -> 0
+EV 116 296
+ESP order66 -> 1 flags=1030
+ESPPID 50 n=1
+ESPRULES 1 sid0=294 name=esp
+EV 116 272
+FRAG short7 -> 0
+EV 116 456
+FRAG maxopts -> 0
+EV 116 459
+EV 116 458
+FRAG zero8 -> 1 lyr=8 next=17 dflags=0
+FRAG mf -> 1 next=256 dflags=192
+EV 116 459
+EV 116 458
+EV 116 296
+FRAG ooo2 -> 1 next=0
+FRAG off8 -> 1 next=256 dflags=64
+FRAGPID 44 n=1
+FRAG api mod_ctor=0 mod_dtor=0
+PGM len44 -> 1
+PGM len45 -> 1
+PGM type9 -> 1
+EV 116 454
+PGM nak-vuln -> 1
+PGM cksum-guard -> 1
+PGM optlen-ok -> 1
+PGMPID 113 n=1
+PGMRULES 1 sid0=454 name=pgm
+EV 116 465
+AH short15 -> 0
+EV 116 466
+AH badlen -> 0
+AH ok24 -> 1 lyr=24 next=6
+EV 116 456
+AH maxopts -> 0
+EV 116 296
+AH order55 -> 1 next=6
+AHPID 51 n=1
+AHRULES 2 sid0=465 name=auth

@@ -3011,3 +3011,176 @@ Structural deviations (behavior preserved):
   collapsible_if allow. Forced relint 0 across all targets THIS pass
   (2 -> 0 after the fn-level allow above; 11 tests, ZERO in-crate
   #[test] in cd_gre.rs — suite face stays tests/gre_parity_test.rs).
+
+## codecs ip small four (row 18h — ip/cd_esp.cc 227 + cd_frag.cc 190 + cd_pgm.cc 211 + cd_auth.cc 172 = 800 L, the ZERO-gate probe-only row + THE cd_ah name-drift headline)
+
+- **ZERO-GATE row, honest absence, per-file census cited**: combined
+  `grep -c 'TEST_CASE\|TEST_GROUP\|^TEST(\|UNIT_TEST'` = **0/0/0/0**
+  (esp/frag/pgm/auth, ground, re-asserted by build.sh EVERY build — if
+  ground ever ships a suite in these files the row is RE-PLANNED to the
+  gre gate shape and the flip trips the build loudly). NO gate.txt, NO
+  catch_main, NO `-DUNIT_TEST` face, NO E9 dup face (no UT .o exists to
+  collide; the one-symbol-per-.o face IS census-asserted: `nm
+  --defined-only` per row .o == 1 table symbol, `cd_ah` for the auth .o,
+  build.sh :211-:216). consequences for THIS suite: `tests/
+  small4_parity_test.rs` carries ZERO up_gate_* — the 18d/18e/18f
+  zero-suite precedent (absence recorded WITH the census cite, never
+  silently); the two-lineage gate census stays UNDISTURBED (this row
+  adds ZERO gate.txt: `tools/*/gate.txt` face 25 on disk / 9 x `4826fc22`
+  frozen holders / 17 distinct md5s, loop MEASURED INSIDE the row's
+  build.sh :455-:459 — the 15th straight, and the row asserts `test ! -e
+  gate.txt` + `ls | grep -cxE 'gate...' == 0` at :203-:205 — the
+  ZERO-gate face is enforced, not assumed).
+- **ZERO fresh cps PROVEN per-file by INVERTED E4 arms (the row's
+  adaptation of the fresh-cp flipped-assert)**: all 17 `#include "..."`
+  lines of the four TUs resolve in the gre DONOR face (92-file find-
+  count, carried VERBATIM via cp -a); the residency claims are proven by
+  the stripped-tree MUST-die arms IN the build: drop `codecs/ip/
+  checksum.h` -> ONLY cd_pgm dies at cc:28 `fatal error: checksum.h`
+  (`E4_nochecksum_pgm.txt`, build.sh :146-:150; the other three MUST
+  stay rc 0 stderr-empty); drop `log/text_log.h` -> ONLY cd_frag dies at
+  cc:26 (`E4_notextlog_frag.txt`, :156-:159); restored tree compiles
+  rc 0 x4 EVERY build (:161-:166). A live E4 wall here can ONLY mean
+  donor drift -> a loud build failure by policy (NEVER a flipped-assert
+  face to preserve: a permanent stripped build would fight the residency
+  md5 pins — checksum.h `b43628f3` = the 18b lib byte-ident, pgm is the
+  SECOND rider of the residency gre paid; text_log.h `3e827113` = the
+  tun-lineage residency, frag the first rider). Copy count post-row ==
+  96 MEASURED (:125), NEVER typed into docs-first.
+- **THE NAME-DRIFT HEADLINE (cd_auth.cc -> table `cd_ah`, a TRUE drift,
+  18g correction carried and re-pinned)**: table `const BaseApi*
+  cd_ah[] =` at cc:166 (REAL `#ifdef BUILDING_SO` arms :163-:167, sed-
+  pin at build.sh :61-:62); extern `cd_ah` codec_api.cc :40 + load :85
+  (:64-:65 sed-pins); ladder "cd_ah" codec_api.rs :98 UNTOUCHED; the
+  DRIFT TRIPWIRE build.sh :74-:77 greps whole ground
+  `extern const BaseApi\* cd_auth\b` EVERY build and DIES if a hit ever
+  appears (`drift_cd_auth_extern.txt` stays empty) — the inverted arm
+  pins the 18g correction against ground drift. Inside-file riders
+  sed-pinned :79-:85: api struct `ah_api` cc:141 + `#define
+  CD_AUTH_NAME "auth"` cc:30 — so the WALK prints `LOAD auth` +
+  `API ah ... name=auth` while the link symbol is cd_ah: the printed
+  NAME vs table-symbol split rides THROUGH the probe transcript
+  (vectors_faceA:14-:17 + DEC vectors:36-:46 `AH ...`/`AHRULES ...
+  name=auth`). Second drift rider (frag): file==table cd_frag, but api
+  `ipv6_frag_api` cc:159 + `CD_IPV6_FRAG_NAME "ipv6_frag"` cc:31 — the
+  walk prints `LOAD ipv6_frag` (vectors_faceA:2). Rust fold decision:
+  the FILE base stays TRUE to ground (src/codecs/cd_auth.rs, module doc
+  pins the pair), the table constant mirrors the C TABLE name (`CD_AH`)
+  and the record constant the C struct (`AH_API`); the Rust-side
+  tripwire `small4_static_names_tripwire` asserts names[0]=="cd_ah" (cc
+  order: the 34-ladder head) + `!names.contains(&"cd_auth")` + the
+  file-vs-NAME pairs — a Rust-side mistake naming the ladder entry or
+  the table after the file base breaks the TEST, not the build (the
+  cd_hop_opts 18e family precedent, tripwire rule codified 18g, RE-
+  ARMED at this row).
+- **Row-scoped DecodeData seams, left-open rulings (the 18e IpApiLite /
+  18f TeredoPorts / 18g bypass-hook line extended)**: cc-level reads of
+  the C `DecodeData&` land as per-TU read/write structs —
+  `EspDecodeData { is_ip6, decode_flags }` (cc:127 read; cc:152/:170
+  PKT_TRUST writes), `FragDecodeData { decode_flags }` (cc:77/:89 — and
+  NOTE the CONTRAST pin: frag's body carries NO is_ip6 guard at all,
+  cc:48-:127 unconditional, the codec reached only as an IPv6 extension
+  in production; the port keeps that unguarded shape verbatim),
+  `AuthDecodeData { is_ip6 }` (cc:109 — the esp-shaped GUARD). The
+  esp CONFIG GATE cc:100 `codec.conf->esp_decoding()` lands as the
+  decode param `decode_esp: bool`: the production provider (SnortConfig
+  NSDMI `enable_esp = false`, snort_config.h :281, `grep -c` == 1 assert
+  at build.sh :369; the cc:42-:48 esp_params PT_BOOL "false" table
+  pinned Rust-side as ESP_PARAMS) stays QUEUED for the config rows; the
+  vectors:1 `ESP gate-off -> 0` face + the gate unit (zero events, zero
+  mutations) replay both arms. pgm decode's `DecodeData&` is UNNAMED
+  (cc:153) and never read — NO seam param (18g/18c posture). NO tunnel_
+  bypass anywhere: nm U-census `tunnel_bypass` = 0/0/0/0 measured
+  (build.sh :225-:229; contrast gre x1) -> ZERO new witnesses, the WIN
+  trio rides inherited (witness_18f `ea1f79f3` / witness_conf heredoc
+  `4dd91018` byte-ident regen / stubs_18d `f4afd35f` — md5 pins NEVER
+  re-derived).
+- **The raw.len const_cast fold (cd_esp.cc cc:141-:142/:146-:148, the
+  upstream `// FIXIT-L shouldn't this be raw.len = guessed_len?` TODO)**:
+  C mutates the const RawData& through const_cast; Rust keeps a LOCAL
+  len copy (RawData.data/len are immutable in the landed shape). NO
+  vectors line reads raw.len post-decode -> the observable face is
+  identical; the pad arm's comparison stays against the MUTATED value
+  (pad_length < len-14, cc:146 kept EXACT — pad255 -> the TRUST/
+  FINISHED arm). The dead-but-literal cc:167 `to_utype(next_prot_id) >
+  0xFF` guard + its cc:170 PKT_TRUST write are transcribed unchanged
+  (the ground FIXIT-L comment says the arm can NEVER fire off the uint8
+  origin; NO probe arm reaches it — kept diff-evident, deviations: like
+  18g's dead ROUTE walk, NOT excised).
+- **frag sizeof face kept DISTINCT by source line**: cc:52 guards on
+  `ip::MIN_EXT_LEN` (ipv6.h:32, landed fw home) and cc:65/:93 use
+  sizeof(ip::IP6Frag) = 8 — the SAME number, DIFFERENT lines; the port
+  writes the literal 8 at cc:65/:93 with its own cites (never aliased to
+  MIN_EXT_LEN). The cc:64-:71 `DECODE_ZERO_LENGTH_FRAG` arm's COMMENTED
+  `//        return false;` (the FIXIT-L "identical to
+  DEFRAG_ANOMALY_ZERO" note) rides dead: the event fires, decode
+  CONTINUES (vectors:16-:18 the interleave head, replayed NEVER sorted).
+  `#if 0` cc:79-:83 (reserved-flag/DECODE_RF) stays dead ground-side —
+  NO DECODE_RF const lands in the Rust port at all (dead code NOT
+  ported; the absence IS the face). frag R2 census: ground carries NO
+  RuleMap AND NO Parameter (build.sh grep census esp=1 pgm=1 auth=2
+  frag=0 at :357-:360) -> NO module/rules/params symbols exist in
+  cd_frag.rs; the api mod_ctor/mod_dtor nullptr pair cc:170-:171 is the
+  vectors arm `FRAG api mod_ctor=0 mod_dtor=0` + faceA `frag mod_ctor=0`
+  (the asymmetry census 1/0/1/1 arm-pinned BOTH faces).
+- **pgm struct trio as OFFSET READS, not repr(C) (R3: statics are file-
+  internals, lowercase d/b in nm, NOT reachable by symbol poking)**:
+  pgm_nak_detect touches FIVE offsets — type@4 (cc:120), nak.opt.type@36
+  (cc:123), nak.opt.len@37 (cc:132), checksum@6-7 (cc:135 != 0 test),
+  and the cc:112 `sizeof(PgmHeader)` = 44 face pinned as
+  PGM_HEADER_SIZE with its layout cite (4+2+2+6+2+8+4+2+2+4+12 — grep-
+  grounded via the header struct cc:94-:104, never size_of). The cppcheck-
+  suppress members (res/seq/spi/...) stay UNREAD, exactly ground-side.
+  The cc:134-:141 cheap checksum guard rides the LANDED 18b
+  `checksum::cksum_add` (row 18b) — the 18g two-way C-vs-Rust checksum
+  parity pin EXTENDED to pgm's Nak-walk consumer at zero new cost; the
+  vectors face `PGM cksum-guard -> 1` + NO EV is the cross-check
+  (fold-nonzero -> PGM_NAK_ERR). decode returns TRUE UNCONDITIONALLY
+  (cc:157) — vectors `PGM len44/len45/type9 -> 1` with zero events is
+  the counter-intuitive face, replayed exactly.
+- **auth lyr_len face**: cc:98 `lyr_len = 8 + (ah->len << 2)` (the "8
+  bytes excluded" comment) + the cc:100 lyr>len re-check -> 466;
+  MIN_AUTH_LEN = 16 cc:79 with the ground comment "no relation to the
+  AuthHdr.len field" kept on the const. the ip4 ok face vectors:40
+  `AH ok24 -> 1 lyr=24 next=6` rides the cc:109 guard SKIPPING the whole
+  ip6 block (contrast frag) — the is_ip6 seam false arm; order arm
+  vectors:43/:44 pre-sets curr_ip6_extension=5 -> AUTH order 5 <= 5 ->
+  EV 296 rides the SUCCESS (the same interleave face as esp order66,
+  vectors:8/:9 where flags = ENCAP 6 | OOO 0x400 = 1030 — decomposition
+  python-pinned BOTH ends against ground codec.h/decode_data.h in every
+  build, mirrored Rust-side in small4_static_vocab_pins).
+- **Vector discipline**: DEC 46 L md5 `462f0ff6ed44220564c5ef0c8538ad80`
+  + FACE-A 17 L md5 `4755d48c54cc057b3c3c9eafec01c7cf` — both faces
+  FIRST-RUN-SEEDED then drift-then-refuse (build.sh cmp arms + wc 46/17
+  pins :438-:443), O0==O2 BYTE-IDENT both faces every build; FRESH x2
+  rc-0 rebuilds THIS pass printed `SMALL4_HARNESS_OK vectors=46 faceA=17
+  gates=0` with byte-ident logs (receipts cache/scratch/row18hport/
+  small4_{A,B}.log); all-decimal hygiene `0x` grep == 0 on BOTH faces
+  (build.sh :303-:304); known-answer ladders read GROUND lines by sed/
+  grep (event sites esp :108/:131/:135, frag :54/:60/:69/:91/:102/:111,
+  pgm :156, auth :92/:102/:113/:117; PID census off protocol_ids.h;
+  EV-456 count == 3 == one per ip6-guard site; EV-459/458 pairs x2;
+  EV-296 x3), NEVER values typed from air (17p). The Rust replay
+  asserts per-index equality over the WHOLE 46- and 17-line transcripts
+  (ordered, never set-membership) — first run GREEN, 8 tests, ZERO
+  fixture adjustments.
+- **sids/vocabulary ZERO-new census (build.sh :92-:107 ties both sides)**:
+  sids 272/294/454/456/458/459/465/466 ALL resident codec_module.rs /
+  codec_module.h h:-cites — the four TUs add ZERO constants; the row-
+  scoped vocab homes (DECODE_PKT_TRUST 0x20 at cd_esp.rs, DECODE_FRAG
+  0x40 + DECODE_MF 0x80 at cd_frag.rs, with decode_data.h h:140/:141/:
+  :142 cites) land in the port files themselves, framework/codec.rs +
+  parse_conf.rs + codec_api.rs BYTE-UNTOUCHED (18e/18f/18g posture);
+  the esp_params table is row-scoped in cd_esp.rs (Parameter struct
+  range-slot nullptr carry face, parameter.rs:36-:41). Landmine posture
+  re-asserted: zero 18h names in vocab witness_stubs.cc / codec stubs.cc
+  (grep 0 x14, build.sh :86-:90) — no witness block freezes an 18h
+  table, no FACE-II rehearsal armed (18e rule).
+- **clippy face**: forced relint (touch-all .rs) 0 warnings --all-targets
+  THIS pass; the ONLY allow in the new suite is the assertions_on_constants
+  block-form precedent (ext_parity_test.rs:589 face, pinned-dormant-
+  false read-back); the four new TUs carry ZERO clippy allows — the
+  statement-literal shape needed none (the frag offlg wire read lands as
+  the single BE read of bytes 2-3: C's `uint16 field + ntohs` == `
+  u16::from_be_bytes` one face, no double-swap anywhere — logged here
+  because the wire-order posture is a correctness pin).

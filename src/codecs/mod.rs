@@ -29,17 +29,28 @@
 //!   src/codecs/ip/cd_dst_opts.cc (134)             -> cd_dst_opts.rs [18e]
 //!   src/codecs/ip/cd_routing.cc (163)              -> cd_routing.rs  [18e]
 //!   src/codecs/ip/cd_mobility.cc (143)             -> cd_mobility.rs [18e]
-//!   src/codecs/ip/cd_igmp.cc (138)                 -> cd_igmp.rs     [18e]
+//!   src/codecs/ip/cd_igmp.cc (138)                  -> cd_igmp.rs    [18e]
+//!   src/codecs/misc/cd_teredo.cc (161)              -> cd_teredo.rs  [18f]
+//!   src/codecs/misc/cd_gtp.cc (291)                 -> cd_gtp.rs     [18f]
+//!   src/codecs/misc/cd_geneve.cc (282)              -> cd_geneve.rs  [18f]
+//!   src/codecs/ip/cd_gre.cc (366)                   -> cd_gre.rs     [18g]
+//!   src/codecs/ip/cd_esp.cc (227)                   -> cd_esp.rs     [18h]
+//!   src/codecs/ip/cd_frag.cc (190)                  -> cd_frag.rs    [18h]
+//!   src/codecs/ip/cd_pgm.cc (211)                   -> cd_pgm.rs     [18h]
+//!   src/codecs/ip/cd_auth.cc (172; TABLE cd_ah)     -> cd_auth.rs    [18h]
 //! The `codec_module` umbrella landed AT 18d as planned (the FLAT
 //! call stands: the C base names collide nowhere — no cd_module.h
 //! exists, and this row's C-dir provenance (root/ root/ link/) rides
 //! each file's header comment).
 
 pub mod cd_arp;
+pub mod cd_auth;
 pub mod cd_bad_proto;
 pub mod cd_default;
 pub mod cd_dst_opts;
+pub mod cd_esp;
 pub mod cd_eth;
+pub mod cd_frag;
 pub mod cd_geneve;
 pub mod cd_gre;
 pub mod cd_gtp;
@@ -47,6 +58,7 @@ pub mod cd_hop_opts;
 pub mod cd_igmp;
 pub mod cd_mobility;
 pub mod cd_no_next;
+pub mod cd_pgm;
 pub mod cd_raw;
 pub mod cd_routing;
 pub mod cd_teredo;

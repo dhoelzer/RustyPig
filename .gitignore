@@ -417,3 +417,26 @@ tools/gre_harness/E8_*.txt
 tools/gre_harness/gate_md5_lineages.txt
 tools/gre_harness/cp_audit_ok.txt
 tools/gre_harness/*.log
+# row 18h small4_harness (ZERO-gate row: vectors.txt + vectors_faceA.txt
+# STAY tracked -- probe-only, NO gate.txt face to pin; drift tripwires live
+# in build.sh, receipts everywhere else ignored)
+tools/small4_harness/copy/
+tools/small4_harness/o2/
+tools/small4_harness/probe
+tools/small4_harness/probe_O2
+tools/small4_harness/probe_dec
+tools/small4_harness/probe_dec_O2
+tools/small4_harness/*.o
+tools/small4_harness/witness_conf.cc
+tools/small4_harness/vectors_O0.txt
+tools/small4_harness/vectors_O2.txt
+tools/small4_harness/vectors_faceA_O0.txt
+tools/small4_harness/vectors_faceA_O2.txt
+tools/small4_harness/nm_U_*.txt
+tools/small4_harness/E4_*.txt
+tools/small4_harness/drift_cd_auth_extern.txt
+tools/small4_harness/md5_pinned.txt
+tools/small4_harness/gate_md5_lineages.txt
+tools/small4_harness/cp_audit_ok.txt
+tools/small4_harness/.e4_hold_*
+tools/small4_harness/*.log

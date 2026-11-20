@@ -1,0 +1,17 @@
+LOAD esp
+LOAD ipv6_frag
+LOAD pgm
+LOAD auth
+LOADS 4
+API esp type=0 size=112 ver=1900547 name=esp
+HELP esp support for encapsulating security payload
+esp mod_ctor=1 mod_dtor=1
+API frag type=0 size=112 ver=1900547 name=ipv6_frag
+HELP frag support for IPv6 fragment decoding
+frag mod_ctor=0 mod_dtor=0
+API pgm type=0 size=112 ver=1900547 name=pgm
+HELP pgm support for pragmatic general multicast
+pgm mod_ctor=1 mod_dtor=1
+API ah type=0 size=112 ver=1900547 name=auth
+HELP ah support for IP authentication header
+ah mod_ctor=1 mod_dtor=1
