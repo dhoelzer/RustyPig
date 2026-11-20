@@ -2117,3 +2117,120 @@ Structural deviations (behavior preserved):
   rs:62 answers cc:178 including the index-7 INVALID row — grep-
   verified the vectors' walk tail); a verdict > 7 would panic (C
   reads the table unguarded; unreachable for any defined FileVerdict).
+## file_api/file_module.{h,cc} (row 18a — the FileIdModule TU; 86+379)
+
+- The C `class FileIdModule : public snort::Module` base plumbing (C1/
+  C2 ctors, the vtable/typeinfo trio, Usage enum, ProfileStats, the
+  Module::sum_stats/reset_stats base arms): NO Rust Module base forked
+  (the 17z ruling, unchanged — framework/ has no module.rs; the REAL
+  module.o closed it harness-side at 17z and the row .o rides that
+  same closure at 18a, PLAN 0.3 "Resolved-by-donor"). get_name/get_
+  help/get_gid/get_usage/has_dynamic_stats land as consts/consts-fns
+  over the 17u FILE_ID_NAME/FILE_ID_HELP home (file_config.rs:91-:95
+  — the two consts' own note predicted THIS row consumes them),
+  FILE_ID_GID 150 (file_lib.rs:1733) and the `C_USAGE_GLOBAL=0` pin
+  (module.h:216 unscoped order, V1 usage=0). The base sum_stats/reset_
+  stats arms have ZERO observable in the frozen V7 arms (the harness
+  ThreadConfig witness line rides the REAL module::init_stats path;
+  the replay pushes it at the matching session spot) — comment-only
+  slots hold the call order.
+- THREAD_LOCAL `file_trace` (h:44 decl / cc:52 def — THE definition
+  home; the flog stubs.cc:196 standover retired at 18a): the landed
+  tree has no Trace type (the trace row stays queued; the FILE_DEBUG
+  consumers already ride the landed FileTraceSink seam, file_cache.
+  rs:403 — a DIFFERENT face, untouched). The slot models as a data-
+  free token Cell (V3 pins NON-NULLNESS ONLY: armed=1/nulled=0/
+  rearm=1); cc:154 set_trace writes it. ProfileStats get_profile the
+  same token posture (def home file_lib.cc:71, cite-only).
+- load_config STEAL (cc:263-:266) keeps the EXACT 17w-documented
+  shape: an owned `Option<Rc<RefCell<FileConfigLite>>>` fc slot and
+  `*dst = self.fc.take()` — `Option::take` IS `dst = fc; fc = nullptr`
+  (plain member fn, NOT virtual, h:61). Zero file_inspect.rs edits:
+  FileInspect::new (file_inspect.rs:314, frozen 17w seam) already
+  takes `&mut Option<Rc<RefCell<FileConfigLite>>>` + take().
+  Deviation: the C slot is a raw single-owner pointer; the landed
+  slot type is the Rc the frozen seam already speaks (a Box slot
+  would edit the frozen ctor; owner-count semantics unchanged — the
+  V4 leak-vs-ownership pin runs through drop: stolen slot == None ==
+  the cc:148-:152 `if (fc)` skip). PRINTS-FROZEN: the real body has
+  NO print — the old `FIM load_config stole=` line was WITNESS-only;
+  the new vectors grep-assert ZERO (verified this row).
+- `FileMeta rule` (h:80): declared, NEVER touched by any body in the
+  TU (grep of file_module.cc: zero read/write after the h decl) — the
+  member keeps its literal place; default-constructed, never read
+  (contributes only to the V0 mod_ge size pin).
+- The Lua Command pair (cc:281-:351, table cc:369-:376): `LuaCFunction
+  = int(*)(lua_State*)` (module.h:63) has NO Rust value — src/lua is
+  the jsnorm row turf and NO LuaJIT lands in the Rust port (the
+  harness runs REAL libluajit.a, first third-party link in the
+  lineage, PLAN R4). The two bodies land as free fns taking the
+  ALREADY-QUERIED arg (`Option<i32>` / `Option<&[u8]>` standing in
+  for luaL_optint(L,1,100) / luaL_optstring(L,1,nullptr); the
+  unwrap_or(100) pins the sentinel default; the nullptr default folds
+  into the cc:320 empty-arm test). The Command table's func slots
+  land as presence bools (V1 fp0/fp1 = liveness ONLY — the const
+  NEVER calls through); CommandRecord keeps name/params/help/
+  can_run_in_parallel (module.h:72 default). EVERY print arm,
+  the reject ladders (count signed %d digits pre-cast), the -1 ->
+  u32::MAX sentinel fold (cc:303-:304), and the cc:337-:347 in-place
+  isxdigit+toupper normalize (the lowercase "ab" -> 0xAB-row match
+  per the cc:345-:346 comment) transcribe VERBATIM — the dump_cache/
+  dump_cache_entry callees are the landed REAL bodies (file_cache.
+  rs:2589/:2647), LogRespond's control.h:99-:100 null/resp routing
+  rides MacroConsole. `ControlConn::query_from_lua` (control.cc:
+  :41-:48, non-SHELL constant nullptr) stays a DRIVER-side pre-read:
+  the cn=None arm is what the frozen probe took (every LOGMSG-prefixed
+  vectors line is the evidence); the if-arm stays live for a driver
+  that arms a console.
+- The four APP-NEW link residues (PLAN 0.3: 65 U / 23 donor-resolved /
+  42 survivors = 4 app + 2 REAL-LuaJIT + 5 libc + 31 plumbing) land
+  as traits: RulesAppendSeam (W1 parser_append_rules_special, parser.
+  h:60 decl, parser.cc body turf), ModuleManagerSeam (W2 get_includer,
+  module_manager.cc:52 monolith-drag body — header cp'd REAL, body
+  witness per PLAN 3), DecompressBufferSeam (W3 DecodeConfig::
+  set_decompress_buffer_size, mime/file_mime_config.h:72, the 17y
+  decode_conf STAYS-SEAM ruling — the set() arm LEAVES fc untouched,
+  its target is the decode_conf static, NOT FileConfig). parser.h/
+  module_manager.h header drags (6 detection headers + analyzer_
+  command.h + the DIOCTL/TraceOption witness grafts) are harness
+  copy-tree facts — zero Rust surface.
+- get_base_file_policy seam: file_module.{h,cc} reference it ZERO
+  times (grep ground, PLAN 3) — 18a does NOT touch the Network-
+  PolicySeam trio (stubs/ftests untouched, byte-diff-0 verified).
+- Donor trio retirement (R1 inversion, PLAN 2.2/2.3): the 31-L md5-
+  9165739e… FileIdModule witness block (ctor shim :419 + raw storage
+  :423/:424 + load_config witness :431-:438 + file_trace def :196 —
+  byte-ident across finspect/fpolicy/fsvc/flog = the dup proof) is
+  RETIRED in fmod_harness stubs ONLY (per-link rule, the 17y fsvc
+  pattern inverted: the row TU IS the witness turf). The FOUR frozen
+  donors {finspect,fpolicy,fsvc,flog} KEEP their blocks and their
+  vectors/gate/tests byte-frozen (diff-0 measured this row; the
+  trio_stay/retire census test pins both faces). fcache_set_file_
+  inspector re-wires to the REAL ctor harness-side (arm survives, R3).
+- Parameter range strings ("0:max53" family, cc:57-:106) and help
+  strings: NO slots in the landed Parameter (parameter.rs:36-:40,
+  the 17z FL_PARAMS ruling repeated verbatim) — the full range/help
+  pattern is pinned in the FMOD_PARAMS doc comment only. RuleMap
+  (module.h:77-:81) likewise has no landed type: the pair tuple rides
+  FMOD_RULES with the cc:178 { 0, nullptr } terminator's msg slot
+  standing in as "" (the C stop-loop never reads it; V1 msg0_null=0
+  derives from the LIVE row's non-null text, not from a hardcoded 0).
+- get_counts cast (cc:171-:172): the C reinterpret_cast(&file_counts)
+  over the all-PegCount no-padding struct rides a 31-slot u64 view of
+  the landed env.file_counts (the landed file_stats.rs:29-:33 no-
+  padding fact; 31 == the 30 peg-keyed members + internal
+  file_memcap_failures_reserve, file_stats.h:71 "internal only; not
+  in file_pegs[]" — the pegs array stops at 30, the view keeps the
+  C memory window's full struct span).
+- V6 tail position: the C `static FileCache v6_cache` destructor runs
+  at process EXIT — after FMOD_PROBE_DONE (vectors:60/:61 IMGR pair).
+  The Rust local's drop is placed at the matching transcript instant
+  in the replay (deviation: exit-time static dtor position modelled
+  explicitly, the 17z flog sweep-tail precedent).
+- Fixture-note (not a port deviation): the row renders rows with
+  type_name "NA" because the C config chain (file_config.cc:82/
+  :94-:99, the V5-armed inspector's config is NULL) lands the
+  cc:85-:86 "NA" arm — the replay arms the landed FileCache::
+  type_names seam to NaNames mirroring file_config.rs:110, the SAME
+  resolution the 17u G-arms frozen transcript pins.
+

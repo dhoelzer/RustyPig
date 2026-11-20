@@ -38,6 +38,19 @@ pub mod file_lib;
 // (file_lib < file_log < file_mempool in the C underscore sort).
 pub mod file_log;
 pub mod file_mempool;
+// row 18a: the file_module.{h,cc} Module TU (FileIdModule: the 17-param
+// table + 30-peg file_counts readback pair + the lazy-fc set ladder +
+// the end() includer/parser seams + the load_config STEAL home the 17w
+// witness trio froze (cc:263-:266 == Option::take, zero file_inspect.rs
+// edits) + the file_trace THREAD_LOCAL definition + the Lua Command
+// pair as documented seam bodies -- NO LuaJIT in the Rust tree, the
+// func slots are presence bools, deviations row 18a). The four APP-NEW
+// harness residues (parser_append_rules_special / ModuleManager::
+// get_includer / DecodeConfig::set_decompress_buffer_size /
+// ControlConn::query_from_lua) land as traits + driver pre-reads per
+// fmod PLAN 0.3/3. Alphabetical slot holds (file_log < file_mempool <
+// file_module in the C underscore sort).
+pub mod file_module;
 // row 17x: the file_policy.{h,cc} FilePolicy TU (FileRule table + the
 // enable-flag pairs + the type/signature lookup ladder) — the real
 // FilePolicy sits on the 17v FilePolicyApi/FilePolicyHandle seam

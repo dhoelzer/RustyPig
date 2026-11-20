@@ -1,0 +1,61 @@
+V0_sizes str=32 mod_ge=1 pegsz=24 pc8=1 rulemap=16 cmd=40
+V1_ctor name=file_inspect help=configure file inspection gid=150 usage=0 dyn=1 params=17 p0=type_depth d0=1460 pt0=4 pegs=30 peg0=total_files rule0=1 msg0_null=0 cmd0=dump_file_cache cmd1=dump_file_cache_detail cmd2_null=1 tr_opt=1 tname_null=1
+V1_cmds n=2 fp0=1 fp1=1 params0=max_entries def0=100 params1=sha256_prefix def1_null=1
+V1_profile prof_nonnull=1 counts_nonnull=1
+W2 get_includer mod=file_inspect null=0
+W1 rules_append file='' includer='MODULE-INC'
+V2_end_empty ret=1
+W2 get_includer mod=file_inspect null=1
+W1 rules_append file='' includer='(null)'
+V2_end_nullic ret=1
+W3 set_decompress_buffer_size=4096
+V2_set ret=1111 (order d,b,r,x)
+W2 get_includer mod=file_inspect null=0
+W1 rules_append file='include magic.rules' includer='MODULE-INC'
+V2_end_rules ret=1
+V3_trace armed=1 set_trace_nulled=0 rearm=1
+V4_steal_a ins_cfg=1 post_null=1
+Inspector dtor gref=0
+V4_steal_b pre_null=1 post_got=1 again_null=1
+V5_wit_ctor cfg_null=1
+V6_lua state=1 cmds=2 func0=1
+LOGMSG File cache not available
+LOGMSG File cache not available
+IMGR acquire -> inspector
+IMGR acquire -> inspector
+LOGMSG 
+Total number of cache entries: 2
+LOGMSG File Name            | File Type  | Verdict      | SHA256
+LOGMSG delta.bin              NA           Unknown        1111111111111111111111111111111111111111111111111111111111111111
+LOGMSG gamma.bin              NA           Unknown        ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB
+LOGMSG Invalid row count: 0. Use -1 for all entries, or a value >= 1
+LOGMSG Invalid row count: -2. Use -1 for all entries, or a value >= 1
+LOGMSG 
+Total number of cache entries: 2
+LOGMSG File Name            | File Type  | Verdict      | SHA256
+LOGMSG delta.bin              NA           Unknown        1111111111111111111111111111111111111111111111111111111111111111
+LOGMSG ... displayed 1 of 2 entries
+LOGMSG 
+Total number of cache entries: 2
+LOGMSG File Name            | File Type  | Verdict      | SHA256
+LOGMSG delta.bin              NA           Unknown        1111111111111111111111111111111111111111111111111111111111111111
+LOGMSG gamma.bin              NA           Unknown        ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB
+LOGMSG Usage: file_inspect.dump_file_cache_detail(<sha256_prefix>)
+LOGMSG Usage: file_inspect.dump_file_cache_detail(<sha256_prefix>)
+LOGMSG Invalid SHA256 prefix: length must be 1-64 hex characters
+LOGMSG Invalid SHA256 prefix: only hex characters (0-9, a-f, A-F) are allowed
+LOGMSG 
+SHA256: ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB
+LOGMSG File Name: gamma.bin
+LOGMSG File Type: NA (id: 0)
+LOGMSG File Size: 0
+LOGMSG Verdict: Unknown
+LOGMSG Direction: Download
+LOGMSG File ID: 0
+LOGMSG No cache entry found matching SHA256: FFFF
+V6_done
+WITNESS ThreadConfig::get_instance_max=1
+V7_stats pre=0 post=0 reset=0
+FMOD_PROBE_DONE
+IMGR release
+IMGR release
