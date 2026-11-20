@@ -159,6 +159,28 @@ pub mod protocol_id {
     pub const ETHERTYPE_IPV4: ProtocolId = 0x0800;
     /// protocol_ids.h:151 `ETHERTYPE_IPV6 = 0x86DD` (vectors:22 next=34525)
     pub const ETHERTYPE_IPV6: ProtocolId = 0x86DD;
+    // ---- protocol_ids.h additions (row 18d, values re-measured at
+    // fe29cbe by grep on protocol_ids.h THIS pass) ----
+    /// protocol_ids.h:132 `ETHERNET_802_3 = 0x0105` (== 261;
+    /// eth vectors:9 `PIDS 261 n=1`)
+    pub const ETHERNET_802_3: ProtocolId = 0x0105;
+    /// protocol_ids.h:134 `ETHERNET_LLC = 0x0107` (== 263; eth
+    /// vectors:6 `ETH llc -> 1 next=263`)
+    pub const ETHERNET_LLC: ProtocolId = 0x0107;
+    /// protocol_ids.h:143 `ETHERTYPE_MINIMUM = 0x0600` with the C
+    /// comment `// 1536 - lowest ethertype value.` — the cd_eth LLC
+    /// gate (cc:97 <=, the same test again at cc:132 in log)
+    pub const ETHERTYPE_MINIMUM: ProtocolId = 0x0600;
+    /// protocol_ids.h:145 `ETHERTYPE_ARP = 0x0806` (cd_arp
+    /// get_protocol_ids head, cc:63)
+    pub const ETHERTYPE_ARP: ProtocolId = 0x0806;
+    /// protocol_ids.h:148 `ETHERTYPE_REVARP = 0x8035` (cd_arp
+    /// get_protocol_ids tail, cc:64)
+    pub const ETHERTYPE_REVARP: ProtocolId = 0x8035;
+    /// protocol_ids.h:160 `ETHERTYPE_FPATH = 0x8903` — the FabricPath
+    /// dispatch (cd_eth decode arm cc:103, encode cc:147, format
+    /// cc:196, update cc:211)
+    pub const ETHERTYPE_FPATH: ProtocolId = 0x8903;
 }
 
 pub use ip_protocol::IpProtocol;
@@ -352,6 +374,19 @@ impl<'a> Buffer<'a> {
         }
         Some(&self.store[self.base..self.base + self.end as usize])
     }
+    /// codec.h Buffer::data() non-const overload — the write face
+    /// cd_eth encode needs (cc:160 `EtherHdr* ho = (EtherHdr*)buf.
+    /// data();` mutates the allocated head in place). Same
+    /// zero-size-means-invalid rule as the const face (row 18d
+    /// additive wiring, cite codec.h Buffer).
+    #[inline]
+    #[allow(clippy::wrong_self_convention)]
+    pub fn data_mut(&mut self) -> Option<&mut [u8]> {
+        if self.end == 0 {
+            return None;
+        }
+        Some(&mut self.store[self.base..self.base + self.end as usize])
+    }
     #[inline]
     pub fn size(&self) -> u32 {
         self.end
@@ -441,6 +476,12 @@ pub type CodecTable = &'static [&'static CodecApiRecord];
 // the cd_no_next arm needs the :103 entry — home here next to the
 // proto_bits field it muts (cross-TU mirror precedent, 17-series note).
 pub const PROTO_BIT__IP6_EXT: u32 = 0x010000;
+/// decode_data.h:98 `#define PROTO_BIT__ETH 0x000800` — cd_eth decode
+/// arms cc:101/:115 (the OR the vectors print as decimal 2048).
+pub const PROTO_BIT__ETH: u32 = 0x000800;
+/// decode_data.h:109 `#define PROTO_BIT__ARP 0x400000` — cd_arp
+/// decode cc:75 (vectors print decimal 4194304).
+pub const PROTO_BIT__ARP: u32 = 0x400000;
 
 // C: base of protocols/ipv6.h `namespace snort { namespace ip {`
 // constants the codecs touch.

@@ -74,6 +74,13 @@ pub struct SnortConfig {
     // snort_config.h:278 `uint8_t max_ip6_extensions = 0;` (the C
     // NSDMI zero == Rust Default zero).
     pub max_ip6_extensions: u8,
+    // ---- row 18d: the ethernet-rewrite knob cd_eth encode reads ----
+    // snort_config.h:289 `uint8_t* eth_dst = nullptr;` — the nullptr
+    // NSDMI == Rust None; Some([6 bytes]) models the set face
+    // (cd_eth.cc cc:170/:179 `if ( sc->eth_dst )` arms; the null arm
+    // is the MEASURABLE face under the harness witness config, eth
+    // PLAN §2).
+    pub eth_dst: Option<[u8; 6]>,
 }
 
 impl SnortConfig {

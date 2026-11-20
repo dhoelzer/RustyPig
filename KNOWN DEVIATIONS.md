@@ -2416,3 +2416,162 @@ Structural deviations (behavior preserved):
   /cd_raw/codec_api); per-file module headers carry the ground subdir
   misc/ip/root provenance (the NEXT.md path correction: cd_default =
   misc/, cd_bad_proto + cd_no_next = ip/).
+
+## codecs ethernet/arp/module (row 18d — root/cd_eth.cc + codec_module.{h,cc} + link/cd_arp.cc, 730 L)
+
+- **Probe-vectors-only row, second codecs time (zero-suite census)**:
+  the combined grep `TEST_CASE\|TEST_GROUP\|^TEST(\|UNIT_TEST\|TEST_CASE[[:space:]]*(`
+  measures **0 on all four row files** (re-run at this PORT pass; eth
+  PLAN §0 seeds it, the find of test dirs covers ONLY ip/ + misc/ —
+  `find src/codecs/link src/codecs/root -iname '*test*'` EMPTY, PLAN
+  §0). Therefore ZERO upstream suites to translate: the honest
+  artifacts are the 15/15 ORDERED whole-transcript replay + per-file
+  arms in tests/eth_parity_test.rs, and **ZERO up_gate_* mirrors** —
+  the absence itself is recorded here with the census cite (vocab-18c
+  precedent; the CppUTest suites that #include row siblings are
+  host-unbuildable, the E4_cpputest_fatal.txt multi-wall receipt re-
+  proven EVERY eth build: CppUTest headers find 0 hits both include
+  roots). A fake Catch gate here = the 17p anti-pattern.
+- **Gate chain: 12th straight byte-ident — MEASURED**: eth harness
+  ships ZERO gate.txt/gate (build.sh asserts absence); the md5 census
+  over all 24 gate.txt on disk = exactly 9 holders of
+  4826fc2233044a2d5429413faf0ae1af (fcap, fcshare, fconf, fcapi,
+  finspect, fpolicy, fsvc, flog, fmod), echoed LIVE by the eth build
+  (`gate census holders: 9/24`, build.sh :606); fmod REBUILT FRESH
+  at this pass (rc 0; gate md5 4826fc22 + vectors f0fdbab; its
+  gate.txt tail re-read verbatim `All tests passed (114 assertions
+  in 22 test cases)`) and vocab donor rebuilt too (vectors 29L
+  5da70e82 stable). The cd_gre gate-change rule stays untouched and
+  18d pre-digs nothing (no cd_gre TU in the link, no catch grep in
+  the recipe).
+- **daq_dlt graft EXTENDED + cite CORRECTED**: the 18c android.
+  googlesource mirror URL 404s as of this pass (PLAN §2); re-fetched
+  THE-TCPDUMP-GROUP/libpcap **master** pcap/dlt.h (1741 L):
+  `DLT_RAW` = master :112-:114 (14 BSD/OS vs the 12 libpcap/libdaq
+  convention Snort links — the 18c pin CONFIRMED at the master face),
+  new `DLT_EN10MB 1` = master :68, new `DLT_PPP_ETHER 51` = master
+  :243. cd_eth.cc is the graft's SECOND consumer — vectors:2 `HELP
+  support for ethernet protocol (DLT 1) (DLT 51)` (the cc:38
+  ADD_DLT NESTING, EN10MB inner) + vectors:7/:8 `DLT 51` before
+  `DLT 1` (cc:76-:77 emplace order — the INVERSE of the HELP
+  nesting, kept EXACT). The parity test re-composes the ladder via
+  the 18c add_dlt fn so the literal can never drift from the graft
+  consts; row 20 replaces the graft with the real DAQ include chain.
+- **Event-sid double-pin discipline**: DECODE_ETH_HDR_TRUNC **424**
+  lands by enum WALK (h:171 `DECODE_ICMP4_TYPE_OTHER = 418` + six
+  unnumbered :172-:176 -> :177; vectors:3 `EV 116 424`), while
+  DECODE_ARP_TRUNCATED **109** lands by the h:73 enum LITERAL
+  (vectors:12 `EV 116 109`) — walk-assert and literal-assert kept as
+  separate pins so a future enum edit that shifts one face localizes
+  at once.
+- **FULL CodecSid landed early**: h:44-:234 transcribed as a
+  #[repr(u32)] enum with all 170 C-spelling enumerators
+  (non_camel_case_types kept for the header-vs-consts row-by-row
+  audit — renaming breaks the diff). Comment-stripped mechanical walk
+  (skill rule: strip /* */ + // BEFORE regex-digiting); every
+  trailing `// = N` anchor (430 h:183, 440 h:193, 450 h:203, 460
+  h:213, 470 h:223) + DECODE_INDEX_MAX 480 asserted == the walk in
+  codec_sid_walk_vs_header. The landed framework/codec.rs singletons
+  (450/456/272/279/295/296 from row 4/18c) stay canonical homes
+  (tests fixtures bind them; NOT renamed); the enum adds the full
+  row-18 vocabulary without touching them.
+- **log_text seam posture**: the REAL LogEthAddrs body
+  (log/log_text.cc:112) STAYS OUT of the harness link — it drags the
+  packet/appid/sfdaq world (PLAN §1 correction vs the real link);
+  the harness links REAL log/text_log.cc for TextLog_Print + the
+  TextLog ctor world and witnesses a 1-line LogEthAddrs stand-in
+  (witness_conf.cc:40). The probe NEVER calls log(), so Rust models
+  the seam as: LogEthAddrs = documented silent step + TextLog_Print
+  = the ordered-sink fragment with the cc:133/:135 format strings
+  byte-exact (`"  len:0x%04X"` == two leading spaces + %04X upper,
+  spelled `{prot_id:04X}`). Vectors pin NOTHING on this seam — the
+  eth_log_arms unit test asserts ONLY what the C format strings pin.
+- **DEBUG_MSGS seam posture**: codec_module.cc:47-:48 `#ifndef
+  DEBUG_MSGS return nullptr` is the PINNED face (vectors:15
+  `trace=null`; the harness compiles WITHOUT DEBUG_MSGS — it is an
+  autotools build flag, NOT a cargo debug/release concept). The Rust
+  port models the nullptr arm UNCONDITIONALLY and keeps the #else
+  function-local-static TraceOption(nullptr, 0, nullptr) face as a
+  cited comment — NOT a #[cfg] (a cargo-cfg seam would fork the
+  pinned behavior across test/release builds; a real debug_msgs
+  build flips the seam, revisit when the trace row lands).
+- **conf seam extended the 18c way**: cd_eth.cc:164
+  `SnortConfig::get_conf()` — the codecs tree's FIRST unguarded
+  get_conf consumer (witness body NEW for 18d: a static SnortConfig,
+  witness_conf.cc:13 — cd_eth's encode eth arms need sc->eth_dst,
+  and the null-eth_dst arm IS the measurable face under the witness,
+  since snort_config.h:289 NSDMI is nullptr). Rust rides the
+  Option<&SnortConfig> posture: None == the zeroed-config face ==
+  null eth_dst; SnortConfig.eth_dst lands as Option<[u8; 6]>
+  (nullptr NSDMI -> None, additive 18d wiring). encode is vectors-
+  silent, so the arm values come ONLY from the C lines they touch.
+- **cc:161-:162 ternary precedence KEPT EXACT**:
+  `ho->ether_type = enc.ethertype_set() ? htons(to_utype(enc.
+  next_ethertype)) : hi->ether_type;` — htons applies ONLY to the
+  SET arm; the else-arm copies the RAW wire u16 verbatim (a
+  semantic paraphrase would double-swap a net-order value). Pinned
+  by the encode face-5 arm (0x1234 -> wire 0x12,0x34) + face-2
+  (raw 0x08,0x00 copy).
+- **Util dup, INVERTED face (eth PLAN §4)**: linking the TRACKED
+  frozen tools/codec_harness/stubs.cc (md5 be9bdd0b, re-pinned in
+  build.sh) alongside the REAL utils/util.o cp MUST fail — build.sh
+  link arm 10 asserts the failure AND the
+  `multiple definition .* snort_strdup` pattern every build
+  (E6_dup_collision.txt), then link arm 20 uses the harness' OWN
+  tracked stubs_18d.cc (md5 f4afd35f...) with the `RETIRED at 18d:`
+  marker — nm assert 0 `T snort::snort_strndup$` there, exactly 2 in
+  util.o. The frozen stubs.cc stays byte-frozen (frozen-donor rule);
+  the retirement exists in THIS copy only (per-link dup rule, 18a
+  trio pattern inverted: the NEW real cp retires an OLD stub).
+- **NO cd_*[] witness retirement at 18d — VERIFIED 3 ways** (eth
+  PLAN §5): vocab witness_stubs.cc carries exactly cd_ipv4/ipv6/
+  tcp/hopopts stubs, NO cd_arp/cd_eth; 18d links NO table of those
+  names (probe.o zero U-lines + zero witness-table defs asserted);
+  cd_arp[] is DEFINED by 18d's own TU (cd_arp.cc:122, nm `D`). The
+  18e cd_hopopts landmine carries forward UNCHANGED (real table at
+  ip/cd_hop_opts.cc:137, NEXT.md:247). Latent face noted:
+  codec_api.cc STATIC_CODECS externs cd_arp[] INACTIVE at the pinned
+  face — a later flip FREE-resolves to 18d's REAL table, not a fork.
+- **Zero-Lua seam carried (VERIFIED this pass)**: grep -ci lua over
+  all four row files = 0/0/0/0 (build.sh :60-:62 asserts it every
+  build) -> eth_harness links ZERO libluajit (the 18a Lua seam needs
+  nothing here; the Lua rows stay 18a-only).
+- **mod face pins**: vectors:15 `MOD rules=8 gid=116 help=general
+  decoder rules trace=null` — the `while (rm[n].sid) n++` walk of
+  the cc:55-:67 EIGHT-row general_decode_rules stops at the cc:66
+  `{ 0, nullptr }` (the Rust RuleMap.msg stays Option None for the
+  terminator, NEVER read); gid=116 via h:38 + h:249-:250; help via
+  cc:30-:31; the cc:58-:59 two-line entry lands as ONE byte-exact
+  string. CodecModule params = the cc:37 ONE-row `{nullptr, PT_MAX,
+  nullptr, nullptr, nullptr}` terminator table (the landed 17-series
+  Parameter struct omits the range/help slots — both nullptr here,
+  carried deviation, parameter.rs:36-:41); the h:246 `is_list =
+  false` default lands EXPLICIT in the 3-arg ctor arm.
+- **Port-by-reading arms (vectors-silent, honest scope note)**: the
+  probe arms (eth PLAN §3) cover API/HELP/decode-ladders/DLT/PIDS/
+  ARP/MOD — cd_eth log/encode/format/update and cd_arp
+  get_protocol_ids are NEVER called by the probe. They land as
+  literal transcriptions cited line-by-line to the C source and are
+  exercised ONLY by Rust unit arms whose expected values come from
+  the C statements themselves (fpath-no-proto_bits arm, the swap
+  ladders, the += guard, the two-push order) — no vectors line is
+  claimed for them, and no fixture value was invented to justify an
+  assert. The FPATH decode arm is the ONLY arm of three WITHOUT the
+  PROTO_BIT__ETH OR (operand identity audited per arm, literal-
+  transcription rule).
+- **CodecApiRecord module-pair contrast pin**: the four 18c no-op
+  records keep mod_ctor/mod_dtor FALSE; cd_eth (cc:242-:243) and
+  cd_arp (cc:108-:109) land them TRUE — the presence-bool census
+  face of the two-row record table (eth_arp_record_census). Table
+  shape unchanged: the exported null-terminated `const BaseApi*
+  cd_x[]` folds to a 1-element CodecTable slice; codec_api.cc's
+  STATIC_CODECS extern stays a FREE-resolve to the real tables if a
+  later row flips it (noted above).
+- **Vectors stability**: tools/eth_harness/vectors.txt 15 L md5
+  1bd98dbb57dd2f536104995bd76d9bad — three clean rebuilds THIS pass
+  (build.sh runs 1-3), -O0 == -O2 byte-ident cmp arm re-printed,
+  all-decimal hygiene (`grep -c '0x'` == 0, PLAN §3). Posture note
+  (skill rule honored): vectors.txt is a tracked INPUT the build
+  re-verifies but never fabricates — when a verification pass
+  deleted it, the build correctly refused; restored VERBATIM from
+  its own vectors_O0.txt receipt (md5 identical) and rebuilt green.

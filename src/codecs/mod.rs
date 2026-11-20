@@ -22,12 +22,20 @@
 //!   src/codecs/ip/cd_bad_proto.cc (98)             -> cd_bad_proto.rs [18c]
 //!   src/codecs/ip/cd_no_next.cc (116)              -> cd_no_next.rs [18c]
 //!   src/codecs/root/cd_raw.cc (105)                -> cd_raw.rs     [18c]
-//! No `mod.rs` partner TUs: the C `codecs/` root has no umbrella TU
-//! landed here (codec_module.{h,cc} is row 18d turf).
+//!   src/codecs/root/cd_eth.cc (262)                -> cd_eth.rs     [18d]
+//!   src/codecs/codec_module.{h,cc} (269+71)        -> codec_module.rs [18d]
+//!   src/codecs/link/cd_arp.cc (128)                -> cd_arp.rs     [18d]
+//! The `codec_module` umbrella landed AT 18d as planned (the FLAT
+//! call stands: the C base names collide nowhere — no cd_module.h
+//! exists, and this row's C-dir provenance (root/ root/ link/) rides
+//! each file's header comment).
 
+pub mod cd_arp;
 pub mod cd_bad_proto;
 pub mod cd_default;
+pub mod cd_eth;
 pub mod cd_no_next;
 pub mod cd_raw;
 pub mod checksum;
 pub mod codec_api;
+pub mod codec_module;

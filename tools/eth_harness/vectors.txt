@@ -1,0 +1,15 @@
+API eth type=0 size=112 ver=1900547 name=eth
+HELP support for ethernet protocol (DLT 1) (DLT 51)
+EV 116 424
+ETH short -> 0
+ETH v4 -> 1 next=2048 lyr=14 bits=2048
+ETH llc -> 1 next=263
+DLT 51
+DLT 1
+PIDS 261 n=1
+API arp name=arp
+HELPARP support for address resolution protocol
+EV 116 109
+ARP short -> 0
+ARP ok -> 1 lyr=28 bits=4194304
+MOD rules=8 gid=116 help=general decoder rules trace=null

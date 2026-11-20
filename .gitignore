@@ -321,3 +321,21 @@ tools/vocab_harness/cp_audit_ok.txt
 tools/vocab_harness/gate
 tools/vocab_harness/gate.txt
 tools/vocab_harness/*.log
+
+# row 18d eth_harness (probe-only; vectors.txt STAYS tracked)
+tools/eth_harness/copy/
+tools/eth_harness/o2/
+tools/eth_harness/probe
+tools/eth_harness/probe_O2
+tools/eth_harness/*.o
+tools/eth_harness/witness_conf.cc
+tools/eth_harness/vectors_O0.txt
+tools/eth_harness/vectors_O2.txt
+tools/eth_harness/nm_U_*.txt
+tools/eth_harness/E4_*.txt
+tools/eth_harness/E6_*.txt
+tools/eth_harness/E_frozen_stubs_diff*.txt
+tools/eth_harness/cp_audit_ok.txt
+tools/eth_harness/gate
+tools/eth_harness/gate.txt
+tools/eth_harness/*.log
