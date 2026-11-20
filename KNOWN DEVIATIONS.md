@@ -2233,4 +2233,89 @@ Structural deviations (behavior preserved):
   cc:85-:86 "NA" arm — the replay arms the landed FileCache::
   type_names seam to NaNames mirroring file_config.rs:110, the SAME
   resolution the 17u G-arms frozen transcript pins.
+## codecs/ip/checksum.h (row 18b — the 284-L all-inline checksum header lib)
 
+- Union punning NOT modeled with Rust unions (R5 ruling): checksum.h:30-:42
+  / :44-:56 declare `union Pseudoheader { struct {...} hdr; uint16_t
+  arr[6]; }` (+ the :54 arr[18] form). The port keeps the struct as the
+  type and reproduces the `arr` word view via explicit `arr_words()` /
+  `as_bytes()` byte-layout fns (sip@0 dip@4 zero@8 proto@9 len@10 /
+  sip[4]@0 dip[4]@16 zero@32 proto@33 len@34 — the LE compiler layout,
+  zero padding, sizes 12/36 re-asserted Rust-side as const _: () =
+  assert!(...) mirroring the :41/:55 static_asserts). The ONLY observable
+  through the union in C code paths is the word walk (add_ipv{4,6}_
+  pseudoheader reads ph.arr — checksum.h:113/:126), which `arr_words()`
+  answers byte-exactly: PH4 word dump `007f 0100 007f 0100 0600 1400`
+  and PH6 `arr17=0x1400` replay in vectors:15/:16.
+- Endianness posture pinned to the ground host (deviation-from-portable,
+  not from C): read_word (:83-:88 memcpy) compiles to a LITTLE-endian
+  u16 load on x86_64; the port's `u16::from_le_bytes` is value-identical
+  there. On a hypothetical BE host the port would flip while C would too
+  (same memcpy) — the vectors themselves embed LE words (K_cksum15
+  0xbb44 is an LE fact: the odd byte 0xdd joins as 0xdd00 in the final
+  sum), so parity is pinned to the pinned-host family; the later ip-codec
+  rows inherit this posture (csum PLAN §1).
+- The C OVERLOAD SET cannot be named in Rust: icmp_cksum(buf,len,ph6) vs
+  icmp_cksum(buf,len) (:208/:218) and tcp/udp x (Pseudoheader,
+  Pseudoheader6) (:223/:235, :247/:259) land as icmp_cksum/_v6 +
+  tcp_cksum4/6 + udp_cksum4/6 (6 C entry points -> 6 Rust names; the
+  decl block :60-:66 is the overload census). Overload-resolution
+  semantics themselves have no Rust counterpart — the mapping is 1:1
+  arity+type, so no arm ambiguity can drift.
+- The by-reference in/out triple of detail::add_{tcp,udp,ip}_header
+  (`const uint8_t*& d, size_t& len, uint32_t& cksum` — :153-:155 etc.)
+  rides an explicit (slice, len, &mut cksum) -> (advanced slice, new len)
+  return: the CALLERS (:230-:232, :242-:244, :254-:256, :266-:268,
+  :275-:277) re-thread both outputs exactly as C's reference parameters
+  do; the guard bail returns the INPUT slice unadvanced + len 0, which is
+  the vectors' ptr_moved=0 face (probe.cc:9 `d != short_buf`) — third
+  fact beyond the C suite's CHECK_EQUAL(0u, len) (vectors:1-3, Q3; the
+  csum_guard_arms_keeps_cksum_and_cursor test pins the accumulator-
+  untouched face with an armed non-zero cksum, a posture the
+  transcript's cks=0x0000 face cannot distinguish on its own).
+- (ptr,len) window semantics: C walks the CALLER-DECLARED length over a
+  raw pointer; the Rust port takes `&[u8]` + the declared `len` and
+  slices `&buf[..len]` — declared-len-shorter-than-slice is the suite
+  fixture (short_buf[16] walked at 4/15/1/0), declared-len-LONGER is a C
+  OOB read = a Rust index panic (same never-exercised posture as the
+  17t wire-walk ruling; the C suite/probe never does it).
+- uint32 accumulation uses wrapping_add on the cksum chain (C's mod-2^32
+  unsigned arithmetic): the walk itself cannot overflow (<= 60 x 0xffff),
+  but the transcription rule (skill: every C unsigned add ports as
+  wrapping) holds so a future longer-buffer caller cannot trip a debug
+  panic where C silently wrapped.
+- The :59 file-scope `static uint16_t cksum_add(...)` FORWARD DECL + the
+  :280 inline definition pair has NO Rust counterpart (no name-lookup
+  order in Rust); the sole trace is the -O0 nm witness `t
+  _ZN8checksumL9cksum_addEPKvm` (csum build.sh:92 grep) — the Rust
+  `cksum_add` mirrors the :280-:281 definition only (Q6 ruling).
+- CppUTest suite Rust-side (R1/E4, the 16g/16h precedent): NO native C
+  gate exists for this row — the CppUTest headers are absent on the host
+  (build.sh E4 wall receipt re-proven EVERY build: 'CppUTest/
+  CommandLineTestRunner.h: No such file') and the suite's main() (:198-
+  :201) is runner framework, not material. The 3 TEST_GROUPs (:56/:107/
+  :156, all empty `{ };` fixtures -> each #[test] re-creates clean state,
+  skill rule 10) x 10 TESTs translate 1:1 as up_gate_* fns. The FOUR
+  CHECK(true) arms (:122/:130/:143/:149) pin ONLY "the call returned"
+  (the hardening regression proof — pre-hardening the underflow walk
+  SIGSEGV'd, never reached the CHECK; suite prose :20-:26); their exact
+  return values are probe-pinned and cited (vectors:5-8), never asserted
+  blind from CppUTest semantics (unverifiable-fixture rule).
+- add_udp_header statement order (len-= at :185 BEFORE d+= at :186,
+  reversed vs tcp :167/:168 / ip :203/:204): independent locals, no
+  observable difference; kept as a cite note at the Rust fn, statement
+  order otherwise literal.
+- The 2026 hardening REGRESSION itself is a quirk pin, not a deviation:
+  the guard arms (:157-:162/:175-:180/:193-:198) are the CURRENT ground
+  behavior (shallow clone: pre-hardening code unrecoverable, suite header
+  prose :20-:26 is the record); the port transcribes the guarded form
+  ONLY and NEVER the old `len -= N` underflow (NEXT.md:278 ruling).
+- Fixture note (not a deviation): the C suite fills ph.hdr fields
+  individually (:113-:118 etc.) — the Rust struct literals set every
+  field at once (Default for the `ph6{}` zero-init test :127 shape);
+  identical 12/36-byte storage, field order identical.
+- src/codecs/ layout: NEW dir + mod.rs with the single `pub mod checksum`
+  (C `codecs/ip/checksum.h` lands FLAT as src/codecs/checksum.rs — the
+  flat-vs-dir convention call is deferred to 18c when dirs multiply,
+  csum PLAN §7); lib.rs gains `pub mod codecs;` in the existing
+  group ordering (dir-name sort slot before file_api).

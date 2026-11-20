@@ -1,0 +1,16 @@
+G_tcp len4->len=0 cks=0x0000 ptr_moved=0
+G_udp len4->len=0 cks=0x0000
+G_ip  len4->len=0 cks=0x0000
+G_tcp len0->len=0
+P_tcp4_len4=0xf9ff
+P_tcp6_len4=0xffff
+P_udp4_len4=0xeeff
+P_ip_len4=0xffff
+K_tcp4 sum=0x9e7c reverify=1
+K_ip4 sum=0x1d0c reverify=1
+K_cksum16=0xbc43
+K_cksum15=0xbb44
+K_cksum1=0xffdd
+K_cksum0=0xffff
+PH4 arr=007f 0100 007f 0100 0600 1400 sizeof=12
+PH6 sizeof=36 arr17=0x1400

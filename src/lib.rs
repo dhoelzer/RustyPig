@@ -9,6 +9,7 @@
 // (policy, config); rustc reserves that name for binary crates.
 #![allow(special_module_name)]
 
+pub mod codecs;
 pub mod file_api;
 pub mod framework;
 pub mod hash;

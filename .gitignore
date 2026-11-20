@@ -287,3 +287,20 @@ tools/fmod_harness/nm_textlog.txt
 tools/fmod_harness/nm_module.txt
 tools/fmod_harness/file.log
 tools/fmod_harness/nm_fmod.txt
+
+# row 18b csum_harness (probe-only; vectors.txt STAYS tracked)
+tools/csum_harness/copy/
+tools/csum_harness/probe
+tools/csum_harness/probe_O2
+tools/csum_harness/*.o
+tools/csum_harness/hdr_tu.cc
+tools/csum_harness/vectors_O0.txt
+tools/csum_harness/vectors_O2.txt
+tools/csum_harness/*.log
+tools/csum_harness/nm_hdrtu.txt
+tools/csum_harness/probe_D.txt
+tools/csum_harness/residue_U.txt
+tools/csum_harness/donor_defs.txt
+tools/csum_harness/cpputest_fatal.txt
+tools/csum_harness/gate
+tools/csum_harness/gate.txt
