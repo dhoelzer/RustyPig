@@ -1,5 +1,5 @@
 //! `src/codecs` — the ported C `src/codecs` tree (row 18b opened it;
-//! row 18c grew it to 5 files).
+//! row 18c grew it to 5 files; row 18e grew it to 14 TUs + mod.rs).
 //!
 //! FLAT-vs-DIR call lands HERE (csum PLAN §7 deferred it to this row;
 //! NEXT.md 18c note): **stay FLAT with C-name spellings.** The C tree
@@ -25,6 +25,11 @@
 //!   src/codecs/root/cd_eth.cc (262)                -> cd_eth.rs     [18d]
 //!   src/codecs/codec_module.{h,cc} (269+71)        -> codec_module.rs [18d]
 //!   src/codecs/link/cd_arp.cc (128)                -> cd_arp.rs     [18d]
+//!   src/codecs/ip/cd_hop_opts.cc (143)             -> cd_hop_opts.rs [18e]
+//!   src/codecs/ip/cd_dst_opts.cc (134)             -> cd_dst_opts.rs [18e]
+//!   src/codecs/ip/cd_routing.cc (163)              -> cd_routing.rs  [18e]
+//!   src/codecs/ip/cd_mobility.cc (143)             -> cd_mobility.rs [18e]
+//!   src/codecs/ip/cd_igmp.cc (138)                 -> cd_igmp.rs     [18e]
 //! The `codec_module` umbrella landed AT 18d as planned (the FLAT
 //! call stands: the C base names collide nowhere — no cd_module.h
 //! exists, and this row's C-dir provenance (root/ root/ link/) rides
@@ -33,9 +38,14 @@
 pub mod cd_arp;
 pub mod cd_bad_proto;
 pub mod cd_default;
+pub mod cd_dst_opts;
 pub mod cd_eth;
+pub mod cd_hop_opts;
+pub mod cd_igmp;
+pub mod cd_mobility;
 pub mod cd_no_next;
 pub mod cd_raw;
+pub mod cd_routing;
 pub mod checksum;
 pub mod codec_api;
 pub mod codec_module;

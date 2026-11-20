@@ -1,0 +1,9 @@
+LOAD ipv6_hop_opts
+LOAD ipv6_dst_opts
+LOAD ipv6_routing
+LOAD ipv6_mobility
+LOAD igmp
+LOADS 5
+API hopopts type=0 size=112 ver=1900547 name=ipv6_hop_opts
+HELP support for IPv6 hop options
+API igmp type=0 name=igmp mod_ctor=1

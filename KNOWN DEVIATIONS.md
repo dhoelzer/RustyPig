@@ -2575,3 +2575,156 @@ Structural deviations (behavior preserved):
   re-verifies but never fabricates — when a verification pass
   deleted it, the build correctly refused; restored VERBATIM from
   its own vectors_O0.txt receipt (md5 identical) and rebuilt green.
+
+## codecs ipv6 extension codecs (row 18e — ip/cd_hop_opts.cc + cd_dst_opts.cc + cd_routing.cc + cd_mobility.cc + cd_igmp.cc, 721 L)
+
+- **Probe-vectors-only row, third codecs time (zero-suite census)**:
+  the combined grep `TEST_CASE\|TEST_GROUP\|^TEST(\|UNIT_TEST` measures
+  **0 on all five row files** (re-run at this PORT pass and asserted
+  every build by tools/ext_harness/build.sh; ext PLAN §0 seeds it with
+  own per-file cites 143/134/163/143/138 = 721 EXACT, md5-pinned).
+  ip/test = checksum_test.cc 201 + CMakeLists 1 = 202 (the 18b face;
+  ZERO suite units inside the five row files). Therefore ZERO
+  up_gate_* mirrors — the honest artifacts = the tests/ext_parity_test.rs
+  27/27 ORDERED DEC-face replay + the 9/9 ORDERED FACE-A load replay
+  (EXT_PINS: tools/ext_harness/vectors.txt 27 L md5
+  da21842980d042d5871edeaaf502049e + vectors_faceA.txt 9 L md5
+  0fa79b534d2a598b2befb047c95c3579, both -O0==-O2 byte-ident,
+  IMMUTABLE this pass: md5s re-read at the port pass, zero edits),
+  plus per-TU cited arms; the absence of gate mirrors rides the census
+  cite (18c/18d precedent). A fake Catch gate = the 17p anti-pattern.
+- **Gate chain: 13th straight byte-ident — MEASURED**: ext harness
+  ships ZERO gate.txt/gate (build.sh asserts `find "$H" -maxdepth 1
+  -name 'gate*'` == 0); the md5 census over all 24 tools/*/gate.txt =
+  exactly 9 holders of 4826fc2233044a2d5429413faf0ae1af (fcap,
+  fcshare, fconf, fcapi, finspect, fpolicy, fsvc, flog, fmod); fmod
+  rebuilt FRESH at this pass (rc 0, gate md5 4826fc22…, vectors
+  f0fdbab…, tail re-read verbatim 'All tests passed (114 assertions
+  in 22 test cases)') + vocab donor rebuilt (VOCAB_HARNESS_OK
+  vectors=29, 5da70e82 stable, 9-holder echo) — scratch logs row18e/
+  {fmod,vocab}_rebuild_18e.log. cd_gre gate-change rule UNTOUCHED,
+  18e pre-digs nothing (build.sh re-measures the cd_gre.cc anchors:
+  :34 `#ifdef UNIT_TEST`, :352 1× TEST_CASE, 366 L).
+- **THE LANDMINE retired inverted + FACE RULE (ext PLAN §4)**: the
+  frozen vocab witness_stubs.cc:14 cd_hopopts STUB vs the real table
+  ip/cd_hop_opts.cc:137 — E6 co-link MUST fail multiple-definition
+  EVERY build (receipt E6_hopopts_dup_collision.txt); own tracked
+  stubs_18e.cc = frozen vocab MINUS :14 PLUS the RETIRED-at-18e
+  marker, diff-0 proven every build (1 < + >); 3-face census pinned:
+  frozen 4 D tables / retired 3 (nm assert zero cd_hopopts) / real-
+  TU face 5 (cd_hopopts/cd_dstopts/cd_routing/cd_mobility/cd_igmp).
+  RULE: the FACE-A/DEC probes NEVER link any codec_api object — the
+  FACE-II flip (vectors_faceII.txt, build receipt only) proves the
+  frozen LOAD face forks to the REAL name once codec_api.cc is
+  pulled (codec_api.cc:34 extern + :82 load_plugins free-resolve).
+  Rust side: codec_api.rs:82-:85 stub consts + the STATIC_CODECS
+  dormant face UNTOUCHED (ext_static_names_tripwire pins the four
+  18e-only names already in the 34-ladder at :102/:116/:118/:125 and
+  cd_hopopts ABSENT from it — it rides the always-loaded five), per
+  the fmod trio_retirement_census pattern.
+- **The five ladders are NEVER unified (quirks pinned per file, each
+  arm cites)**: hopopts checks `raw.len < 8` BEFORE the maxopts latch
+  (cc:61 vs cc:67); mobility the INVERSE (cc:66 before cc:72);
+  routing a triple (MIN_EXT_LEN cc:77 -> maxopts-with-return cc:83 ->
+  `len < sizeof(IP6Route)` 4 cc:89 — the last DEAD between 8 and 4,
+  transcribed dead not optimized); dstopts' EXCESS arm raises 456
+  WITHOUT returning and the walk continues (cc:63-:64, grep-verified
+  return=0 in :63-:65) — the pair discriminator runs live in
+  tests/ext_parity_test.rs (hop_opts_excess_ext_arm_measured vs
+  dst_opts_excess_without_return; ladder_order_never_unified answers
+  the SAME input {len 7, max 1, cnt 1} with EV 272 (hop), EV 456
+  (mobility) and EV 272 (routing) — three shapes, no shared ladder);
+  write orders differ per file (hop nxt/csum/cnt/bits cc:80-:83 vs
+  dst/route/mob bits/cnt/nxt/csum) and ride verbatim; mobility fires
+  DECODE_MIPV6_BAD_PAYLOAD_PROTO (475) BETWEEN cnt++ and the nxt
+  write, then returns TRUE anyway (cc:89-:90 vs cc:99 — vectors:22/
+  :23 `MOB badpayl -> 1 next=60`, the mobility "TRUE-with-event"
+  quirk pinned by vectors and re-armed by the replay).
+- **456 arm DEAD-at-probe-default face**: the witness SnortConfig
+  keeps max_ip6_extensions = 0 (snort_config.h:278); NO vectors line
+  claims a 456 value on the C faces. The mutated Rust face is
+  MEASURED (ext recon §6.3, never pre-typed): conf2.max = 2 &&
+  cnt = 2 -> EV 456 (hop_opts 456 arm stops there; dstopts 456 THEN
+  continues to 292 — same pair as above).
+- **igmp = the only IpApi rider + the only Module pair of the five**:
+  cd_igmp.cc includes THREE headers only — NO main/snort_config.h
+  (the ext PLAN §0 CORRECTION of NEXT.md's "the same four" claim);
+  decode reads snort.ip_api.is_ip4()/get_ip_opt_data()/get_ip_
+  opt_len() (cc:61/:63/:67). LEFT-OPEN RULING (17v style, the named
+  seam): framework/codec.rs DecodeData has NO ip_api twin (17d
+  pointers-dropped note), so cd_igmp.rs lands the read-only
+  IpApiLite {is_ip4, opt_data: Option<&[u8]>, opt_len} — the
+  PRODUCING layer (which parser row feeds those three and when) is
+  OPEN, NOT a resolved design; the vectors NEVER arm igmp decode
+  (probe face = PIDS/mod pair/rules walk only), so ALL FOUR decode
+  arms land as literal transcription exercised ONLY by cited Rust
+  unit arms (igmp_decode_arms_via_ipapi_lite: A cc:63-:72 double-
+  zero -> 455 + the ONLY false return; B cc:77-:82 flag arm -> 455
+  NO return; C the cc:77 !RTRALT first-operand gate; D the cc:61
+  is_ip4 first-operand gate). The record pair mod_ctor/mod_dtor =
+  the ONLY TRUE pair among the five (cc:118-:119; census test pins
+  (false,false)x4 + (true,true) — vectors_faceA:9 + vectors:26).
+  IgmpModule rides the landed BaseCodecModule 2-arg ctor (params
+  slot None, is_list=false default) + the landed 18d RuleMap struct
+  + rule_count walker (the ONE-row table, msg "DOS IGMP IP options
+  validation attempt" byte-exact, terminator slot never read).
+- **cd_hop_opts comment-out export oddity (5-file contrast pin)**:
+  cc:134-:138 are `//#ifdef BUILDING_SO` / `//SO_PUBLIC` / `//#else`
+  / `//#endif` — cd_hopopts[] is the ONLY unconditional (always-
+  static) export of the five; the other four ride the normal #ifdef
+  alternation and stand on the pinned NON-DSO arm (the 18c folded-
+  DSO-branch deviation carries unchanged). The cc:130-:132 "This
+  codec is static to ensure the symbols CheckIPV6HopOptions and
+  CheckIPv6ExtensionOrder are included in the binary" comment rides
+  the Rust module doc verbatim. Tripwire spellings: file base
+  cd_hop_opts vs extern name cd_hopopts (and the cc:17 header
+  comment's "cd_hopopts.cc author" drift kept as-is in the C).
+- **#if 0 dead block transcribed as dead**: cd_routing.cc:55-:67
+  IP6Route0 ("Keeping this around for future development", the
+  snort_in6_addr[1]/"Up to 23 IP6 addresses" member) — ZERO Rust
+  surface, kept as a comment block beside the live 4-byte IP6Route
+  face (recon §6.5; the second len guard `len < sizeof(IP6Route)`
+  is separately transcribed dead-between-8-and-4, never deleted).
+- **routing event trio independence**: 461/282/283 are three
+  SEPARATE ifs (cc:96-:103), never an else-chain — the probe fired
+  461+283 (q[0]=43, q[2]=0; vectors:18/:19) and the UNPROBED 282
+  face (nxt=HOPOPTS) runs as a cited unit arm (routing_event_trio_
+  independent_arms: 461 then 282, NO 283; the 282/283 pair never
+  co-fires — nxt can't be 0 and 43) + CODEC_ROUTING_SEEN via the
+  landed check (codec.rs:625-:626).
+- **Help/case asymmetry kept byte-exact**: hopopts "support for
+  IPv6 hop options" (capital IPv6) vs dstopts "support for ipv6
+  destination options" (lowercase) — literals NEVER normalized; the
+  ext_record_census names+helps pin all ten literal faces, the
+  shared 112/1900547/PT_CODEC/features=1 face x5 (no features=0
+  outlier at this row), and the LOAD order == probe.cc tabs[] order
+  (ipv6_hop_opts, ipv6_dst_opts, ipv6_routing, ipv6_mobility, igmp;
+  vectors_faceA:1-:5).
+- **Vectors stability**: both pins re-md5'd at the port pass
+  (da218429… / 0fa79b53…, zero drift vs the harness seeds); the
+  harness build.sh re-verifies O0==O2 byte-ident for BOTH faces
+  every build; 0x-hygiene: all-decimal posture preserved (the Rust
+  replay prints the same decimals; grep 0 `0x` in both tracked
+  vectors files asserted pre-port at scratch).
+- **Rust FLAT landing (5 new files, mod.rs wiring only outside them)**:
+  src/codecs/cd_hop_opts.rs / cd_dst_opts.rs / cd_routing.rs /
+  cd_mobility.rs / cd_igmp.rs (C base names per the 18c FLAT rule;
+  mod.rs +5 pub mod lines + the C-dir -> Rust mapping table rows +
+  the header line count note). Call targets ALL reused, zero new
+  subsystems: framework/codec.rs check_ipv6_hop_options +
+  check_ipv6_extension_order + the 18c sids + decode-flags census
+  (CODEC_IPOPT_RTRALT_SEEN/LEN_THREE reused) + parse_conf.rs
+  hit_ip6_maxopts; codec_module.rs RuleMap/rule_count/
+  BaseCodecModule/CodecSid reused. framework/codec.rs and
+  parse_conf.rs and codec_api.rs BYTE-UNTOUCHED this row (the only
+  landed-file edit outside the five is mod.rs — the 17z pattern).
+- **Literal-flow clippy allowances (this row, 4+2 sites)**:
+  needless_bool suppressed at function level on the hop/dst decode
+  tails (the cc:87-:90 / cc:85-:87 if-return + tail `false` stays
+  statement-identical to C — the lint spans the tail, so function-
+  level scope; codec.rs needless_return precedent), collapsible_if
+  on the igmp cc:65/:67/:69 triple nesting (codec.rs:610 precedent),
+  assertions_on_constants block-form on the dormant STATIC_CODECS
+  read-back (vocab_parity_test.rs:254 precedent — the tripwire
+  intent recorded in place). Forced relint 0 across all targets
+  THIS pass.

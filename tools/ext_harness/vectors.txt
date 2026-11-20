@@ -1,0 +1,27 @@
+API hopopts type=0 size=112 ver=1900547 name=ipv6_hop_opts
+HELP hopopts support for IPv6 hop options
+API dstopts type=0 size=112 ver=1900547 name=ipv6_dst_opts
+HELP dstopts support for ipv6 destination options
+API routing type=0 size=112 ver=1900547 name=ipv6_routing
+HELP routing support for IPv6 routing extension
+API mobility type=0 size=112 ver=1900547 name=ipv6_mobility
+HELP mobility support for mobility
+API igmp type=0 size=112 ver=1900547 name=igmp
+HELP igmp support for Internet group management protocol
+EV 116 272
+HOP short7 -> 0
+HOP ok8 -> 1 next=6 lyr=8 bits=65536 cnt=1 csumproto=6
+EV 116 272
+HOP lyr>len -> 0
+HOPPID 0 n=1
+DSTPID 60 n=1
+EV 116 461
+EV 116 283
+ROUTE t0 -> 1 next=43 bits=65536
+ROUTE_PID 43 n=1
+EV 116 475
+MOB badpayl -> 1 next=60
+MOB_PID 135 n=1
+IGMP_PID 2 n=1
+IGMP mod_ctor=1 mod_dtor=1
+IGMP rules=1 sid0=455 name=igmp
