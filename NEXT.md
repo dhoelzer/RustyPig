@@ -1,4 +1,4 @@
-# NEXT.md — takeover context & plan (2026-11-20, post-18g: cd_gre gate-change row landed; donor = gre_harness)
+# NEXT.md — takeover context & plan (2026-11-20, post-18h: ip small four landed; donor = small4_harness, ZERO-gate head)
 
 This file is the single resume point for a fresh agent. It carries only
 what is not cheaply re-derivable. `PORTING_PLAN.md` (row table, per-row
@@ -14,179 +14,176 @@ prior probe; NEVER `git add` anything under snort3-src). Port repo:
 `/opt/data/snort3-rust` (branch `master`, remote
 `github.com/dhoelzer/RustyPig`).
 
-Current state (measured at this 18g verify-mode docs pass): plan rows
-1–18g DONE. **103 commits at HEAD e6901f5** (`git rev-list --count
-HEAD` THIS pass; the 18g commit's own "103rd commit" line checks out —
-this docs commit lands as the **104th**). **541 tests green / 0 FAILED**
-(full `cargo test` re-run AT THIS docs pass: summed `test result` lines
-= 541 passed / 0 failed over 65 result lines; 541 = 530 at 18f + 11
-`tests/gre_parity_test.rs` (`grep -c '#\[test\]'` = 11 re-measured THIS
-pass — note the `--all-targets` variant sums the SAME 541 over 64
-lines; cite one face per pass, both agree); `src/codecs/cd_gre.rs` 668 L
-carries ZERO in-crate `#[test]` (grep 0 re-run THIS pass), `cargo
-clippy --all-targets` **0 warnings** (forced relint THIS pass: touched
-every .rs, `Finished` line present, `grep -c '^warning'` = 0), 45,902
-lines Rust across 141 `src/*.rs` files (`find src -name '*.rs' -exec
-wc -l {} +` THIS pass), 38 `tests/*_parity_test.rs` whole-transcript
-replay tests, 399 tracked files (`git ls-files | wc -l`), 45
-`tools/*_harness` dirs. GitHub wiki
-https://github.com/dhoelzer/RustyPig/wiki
-is the public status doc (clone at `/tmp/RustyPig.wiki`, remote
-`RustyPig.wiki.git`, HEAD `d13ccca` = **row 18f wiki trio LANDED**:
-verified read-only at this docs pass — `git -C /tmp/RustyPig.wiki log
--1` prints `d13ccca row 18f: status + deviations + stats (101 commits /
-389 files / 45,233 src lines / 530 tests ...)` atop `1cacca1 row 18e`,
-and the 18f trio greps PRESENT (`Porting-status.md:96` status row +
-`:103` chapter note + `Deviations-from-Snort-3.md:1573` deviations
-header — the EARLIER NEXT edition's "wiki stops at 18e / 1cacca1, the
-18f trio OWED" line is SUPERSEDED by this measurement: the trio LANDED
-as measured; this docs pass touched the wiki ZERO times). **The 18g
-wiki trio is OWED** and is owed at the NEXT WIKI phase, not by this
-docs pass (`grep -rn 'row 18g' --include='*.md' /tmp/RustyPig.wiki` =
-**0 hits** verified THIS pass). The owed trio = status row
-(ip/cd_gre.cc, 366 L ground -> 668 L Rust + 723 L replay test; THE
-gate-change row: TRACKED gate.txt md5 `6751d1a8...`, runner tail 'All
-tests passed (1 assertion in 1 test case)', two-lineage census 9
-holders / 25 gate.txt / 17 distinct md5s, suite 541) + the row-18g
-deviations section (copy from KNOWN DEVIATIONS.md :2901-:3013) + stats
-line ("104 commits / 399 tracked files / 45,902 src lines / 541 tests"
-— LIVE values at the docs commit, re-measure at the wiki pass before
-typing).
+Current state (measured at this 18h verify-mode docs pass): plan rows
+1–18h DONE. **105 commits at HEAD 47654b3** (`git rev-list --count
+HEAD` THIS pass; this docs commit lands as the **106th**). **549 tests
+green / 0 FAILED** (full `cargo test` re-run AT THIS docs pass: summed
+`test result` lines = 549 passed / 0 failed over 66 result lines; 549 =
+541 at 18g + 8 `tests/small4_parity_test.rs` (`grep -c '#\[test\]'` = 8
+re-measured THIS pass); `FAILED|panicked` grep 0; the four new TUs
+`src/codecs/{cd_esp,cd_frag,cd_pgm,cd_auth}.rs` carry ZERO in-crate
+`#[test]` (grep 0/0/0/0 re-run THIS pass); `cargo clippy
+--all-targets` **0 warnings** (forced relint THIS pass: touched every
+.rs, `Finished` line x1, `grep -c '^warning'` = 0), 46,916 lines Rust
+across 145 `src/*.rs` files (`find src -name '*.rs' -exec wc -l {} +`
+THIS pass), 39 `tests/*_parity_test.rs` whole-transcript replay tests,
+410 tracked files (`git ls-files | wc -l`), 46 `tools/*_harness` dirs.
+GitHub wiki https://github.com/dhoelzer/RustyPig/wiki is the public
+status doc (clone at `/tmp/RustyPig.wiki`, remote `RustyPig.wiki.git`,
+HEAD **313aab6 = row 18g wiki trio LANDED** — verified read-only at
+this docs pass: `git -C /tmp/RustyPig.wiki log -1` prints `313aab6 row
+18g: status + deviations + stats (103 commits / 399 files / 45,902 src
+lines / 541 tests ...)` and the 18g trio greps PRESENT
+(`Porting-status.md:97` status row + `:105` chapter note +
+`Deviations-from-Snort-3.md:1742` deviations header — the EARLIER NEXT
+edition's "wiki stops at 18f / d13ccca, the 18g trio OWED" line is
+SUPERSEDED by this measurement: the trio LANDED as measured; this docs
+pass touched the wiki ZERO times). **The 18h wiki trio is OWED** and is
+owed at the NEXT WIKI phase, not by this docs pass (`grep -rn 'row 18h'
+--include='*.md' /tmp/RustyPig.wiki` — also `small four` / `cd_esp`
+variants — = **0 hits** verified THIS pass). The owed trio = status row
+(ip/cd_esp+cd_frag+cd_pgm+cd_auth, 800 L ground -> 1,002 L Rust + 802 L
+replay test; THE ZERO-gate 16th-straight face: no gate.txt added,
+two-lineage census 9/25/17 UNDISTURBED, THE cd_ah name-drift headline
+IN the transcript) + the row-18h deviations section (copy from KNOWN
+DEVIATIONS.md :3015-:3186) + stats line ("106 commits / 410 tracked
+files / 46,916 src lines / 549 tests" — LIVE values at THIS docs pass,
+re-measure at the wiki pass before typing).
 
-## 18g close-out — VERIFY MODE (plan row + deviations shipped WITH code commit e6901f5; this pass greps-verify + re-ground rather than append)
-Like 18b-18f, 18g's plan row and deviations section shipped inside the
+## 18h close-out — VERIFY MODE (plan row + deviations shipped WITH code commit 47654b3; this pass greps-verify + re-ground rather than append)
+Like 18b-18g, 18h's plan row and deviations section shipped inside the
 CODE commit, so this docs pass is a verification pass. Everything below
 was re-measured/re-opened THIS pass:
 
-- **Plan row**: `grep -c '^| 18g |' PORTING_PLAN.md` = **1** (at
-  PORTING_PLAN.md:86) — insert guard satisfied, NO append needed; row
-  text stands as committed and matches what e6901f5 shipped (`git show
-  --stat e6901f5`: 14 files, +2,202 — harness 8 tracked files + docs
-  row + deviations + cd_gre.rs + mod.rs wiring +
-  tests/gre_parity_test.rs 723 L in one commit).
-- **Deviations section**: `grep -c '^## codecs ip cd_gre (row 18g'` =
-  **1** at :2901, running to EOF at :3013 = 113 lines / **9** bullets
+- **Plan row**: `grep -c '^| 18h |' PORTING_PLAN.md` = **1** (at
+  PORTING_PLAN.md:87) — insert guard satisfied, NO append needed; row
+  text stands as committed and matches what 47654b3 shipped (`git show
+  --stat 47654b3`: **15 files changed, +2,804 / -1** — EXACTLY 15
+  staged paths: 6 harness files + 4 src TUs + mod.rs + parity test +
+  .gitignore + plan + deviations — plan-first staging face).
+- **Deviations section**: `grep -c '^## codecs ip small four (row 18h'`
+  = **1** at **:3015**, running to EOF at **:3186** = **11** bullets
   (`grep '^- \*\*'` count THIS pass). **Verdict:
-  ADEQUATE-READ-LEAVE** — the gate-change disclosure (shim route, E7
-  orphan-`#endif` cut-to-EOF face, E9 dup face, UB SEQ-arm bounded
-  substitution, assert no-twin, ZERO-new-witness, ROW-SCOPED VOCAB) all
-  re-grounded. **TWO honest count drifts recorded this pass** (land
-  rule: rows/sections/messages NEVER rewritten, no force-push): (1)
-  the e6901f5 message copy "stageables EXACTLY the 7 harness files + 5
-  src/tests" — live faces: harness stageables are **8** tracked files
-  (`git ls-files tools/gre_harness` = PLAN.md build.sh catch_main.cc
-  gate.txt probe.cc probe_dec.cc vectors.txt vectors_faceA.txt) and
-  the non-harness staged paths are **3** (cd_gre.rs, mod.rs,
-  gre_parity_test.rs); the TOTAL "EXACTLY 14 staged paths" matches the
-  --stat face exactly. (2) Deviations :2951 "the copy tree 86+1+2 = 89
-  find-counted" — live face: `find tools/gre_harness/copy -type f !
-  -name '*.o'` = **92** (= tun donor 86 + gate shim `catch/catch.hpp`
-  + `catch/snort_catch.h` + probe-side `cd_gre_probe.cc` + row
-  `cd_gre.cc` + 2 fresh cps gre.h/checksum.h; the copy tree is
-  .gitignore'd so it never enters the stageable face). Both are
-  count-coverage drifts of the scoping arithmetic, NOT behavioral
-  claims — every behavioral claim below re-verified independent of
-  them.
-- **Harness FRESH x2 THIS pass, rc 0 both runs**: `GRE_HARNESS_OK
-  vectors=26 faceA=5 gate_lines=3` tail verbatim; anchors live-asserted
-  by build.sh :43-:49 EVERY build (`grep -c '#ifdef UNIT_TEST'` == 2;
-  sed :34 `#ifdef UNIT_TEST` / :35 `#include "catch/snort_catch.h"` /
-  :351 reopen / :352 the ONE TEST_CASE / whole-file `CHECK` grep == 1
-  (inside the block, line :364) / :366 `#endif`); ground cd_gre.cc wc
-  366 re-run THIS pass; table arms :337-:341 re-sed — REAL
-  `BUILDING_SO`/`SO_PUBLIC`/`#else const BaseApi* cd_gre[] =` at
-  **:340**. md5 pins ALL re-summed byte-exact THIS pass: vectors.txt 26
-  L `41bd7d1bdac01694eeda1f3e56869e77`, vectors_faceA.txt 5 L
-  `783649440def7ec3b032970d223a8a6a`, gate.txt 3 L
-  `6751d1a8c21da0fdfed87ddfd4d37c5f` (TRACKED — the FIRST tracked
-  gate.txt in the lineage; build.sh :378-:382 pins md5+wc+the RUNNER's
-  own wording `1 assertion in 1 test case`), probe.cc 22 L
-  `66cfb942...`, probe_dec.cc 93 L `e01eb950...`, catch_main.cc 2 L
-  `a4d3d600...` (heredoc-regenerated, CATCH_CONFIG_MAIN grep-assert 1
-  at :143), catch/catch.hpp `74ef54e848cf843c99e3acdb94ce2b1a`
-  byte-ident to the rules_harness vendored face, shim
-  copy/catch/snort_catch.h `177e1852...` (passthrough `#pragma once +
-  #include "catch/catch.hpp"` — TEST_CASE macro NEVER remapped, the
-  ground block compiles verbatim; the TestCaseInstaller route stays
-  REJECTED, deviation cited at :2928-:2939). Receipts
-  `/opt/data/cache/scratch/row18gdocs/{gre,fmod,vocab}_rebuild_18gdocs*.log`.
-- **TWO-LINEAGE CENSUS — LIVE FACE MOVED INSIDE gre build.sh (rules
-  forward)**: THIS pass measured 25 `tools/*/gate.txt` on disk,
-  **9** of md5 `4826fc22...` (fcap/fcapi/fconf/fcshare/finspect/flog/
-  fmod/fpolicy/fsvc — all byte-frozen) + **17 distinct md5s** total
-  (the 9 holder face + gre's `6751d1a8` + 15 other-own-md5 gates);
-  gre build.sh :401-:404 asserts `-eq 9` and `-eq 25` and writes the
-  17-face receipt `gate_md5_lineages.txt` — the census loop MEASURES,
-  never a typed forecast (17p). **Drift face RE-MEASURED THIS pass**:
-  the frozen tun/eth/ext build.sh point-in-time `ls gate.txt -eq 24`
-  asserts now FAIL (tun :334, eth :598, ext :320 — rebuild rc 1 at
-  `test 25 -eq 24`; the `-eq 9` holder half passes, all 9 byte-frozen).
-  This is the deviation recorded AT the row (:2921-:2927): frozen donor
-  rows are historical artifacts, NEVER rewritten/force-pushed; do NOT
-  "fix" their build.sh. Their frozen face is instead verified by
-  direct md5 re-sums: tun vectors `2a792479` + faceA `81602890`, ext
-  `da218429`/`0fa79b53`, eth `1bd98dbb`, all ZERO drift THIS pass —
-  and each build dies only AFTER its per-row asserts pass (vectors md5
-  pins at tun :203-:204 / ext :141 / eth :339 run live before the
-  census line even fails).
-- **Gate chain FROZEN side — MEASURED not asserted**: fmod rebuilt
-  FRESH THIS pass rc 0 (`FMOD_HARNESS_OK vectors=61`): gate
-  `4826fc2233044a2d5429413faf0ae1af` + gate.txt tail VERBATIM re-grepped
-  `All tests passed (114 assertions in 22 test cases)` (count 1) +
-  vectors `f0fdbab06fe1681af1c654531b917c55`; vocab donor FRESH rc 0
-  (`VOCAB_HARNESS_OK vectors=29`, vectors `5da70e82...` stable — the
-  cd_gre anchors moved from tun/ext echo asserts to the gre harness
-  owning them). 5-fingerprint frozen census all re-md5'd BYTE-EXACT
-  THIS pass: vocab witness_stubs.cc `9fad7e9d...` (4 cd_ipv4/ipv6/tcp/
-  hopopts stub tables :11-:14 intact; cd_gre/cd_udp/cd_icmp4/cd_icmp6/
-  esp/frag/pgm/auth stub grep **0/0** across vocab witness_stubs +
-  codec stubs re-run THIS pass — landmine ZERO for the whole 18h
-  queue) / codec stubs.cc `be9bdd0b...` / eth stubs_18d.cc `f4afd35f`
-  (gre build.sh carries the E6 arm) / tun witness_18f.cc `ea1f79f3...`
-  (CARRIED by gre — the ONLY witness, `tunnel_bypass_enabled`; TUNNEL_
-  GRE 0x40 rides the SAME table, snort_config.h:125) / tun
-  witness_conf.cc `4dd91018...` re-md5'd at the gre tree face.
-- **Rust-side anchors re-grounded THIS pass**: `src/codecs/cd_gre.rs`
-  668 L + `tests/gre_parity_test.rs` 723 L / 11 `#[test]` (26/26
-  ORDERED DEC replay + 5/5 ORDERED FACE-A + `gre_gate_contract` pins
-  the tracked runner tail Rust-side + `up_gate_gre_*` — the FIRST
-  codec row whose Rust twin mirrors a gate that ACTUALLY RAN); sids
-  DECODE_GRE_* 160-165 confirmed resident at codec_module.rs:107-:112
-  (sed THIS pass — the row adds ZERO new constants); ladder names ALL
-  resident in codec_api.rs STATIC_CODEC_EXTERN_NAMES (sed THIS pass:
-  cd_ah :98, cd_esp :105, cd_frag :108, **cd_gre :110**, cd_icmp4
-  :112, cd_icmp4_ip :113, cd_icmp6 :114, cd_icmp6_ip :115, cd_pgm
-  :121, cd_udp :128 — tripwire pins cc order cd_geneve < cd_gre <
-  cd_gtp; NEVER re-touch, the row pattern); framework/codec.rs +
-  parse_conf.rs + codec_api.rs BYTE-UNTOUCHED. THE 18b two-way parity
-  pin re-read at vectors:25-:26 (`ENC ok -> 1 cksum-bytes 103 255`,
-  `UPD chksum-bytes 127 255`) — the FIRST C-consumer cross-check of
-  Rust `checksum::cksum_add`, both pairs byte-exact.
-- **Test math**: 541 = 530 + 11; plain `cargo test` 65 result lines,
-  FAILED/panicked grep 0, at THIS pass; 38 parity files (37 + gre).
-- **commit census + gitignore**: 103 at HEAD e6901f5; .gitignore gre
-  block at :392-:419 re-verified by `git check-ignore` THIS pass (copy/
-  :394, o2/, probe binaries, gate binaries, `gate*/E4*/E8*/E9*/nm_U_*/
-  *_O0/O2 receipts, gate_md5_lineages.txt, witness_conf.cc, cp_audit_
-  ok.txt, *.log all ignored rc 0; vectors.txt + vectors_faceA.txt +
-  gate.txt + build.sh + PLAN.md + probe.cc + probe_dec.cc +
-  catch_main.cc NOT ignored, rc 1 — stageables exactly 8, do NOT
-  re-add). `git status --short` EMPTY after the docs-pass rebuilds —
-  artifacts fully absorbed.
-- **Scoping-claim correction (the method proving itself)**: the 18f-
-  pass NEXT line "**cd_auth has NO codec_api extern at all**" was HALF
-  WRONG — re-measured THIS pass: no extern is NAMED `cd_auth` anywhere
-  in ground (grep whole src: zero hits outside its own TU) BUT
-  cd_auth.cc's real table is `const BaseApi* cd_ah[] =` at
-  ip/cd_auth.cc:166 (the SAME BUILDING_SO/#else arms :163-:167 as
-  gre :337-:341) and the extern `extern const BaseApi* cd_ah[];`
-  rides codec_api.cc:**40** + load_plugins(cd_ah) at :85 — a TRUE-
-  NAME DRIFT face (file base `cd_auth` vs table `cd_ah`), the
-  cd_hop_opts drift family reappearing, ladder name `cd_ah` ALREADY
-  resident codec_api.rs:98. Lesson: file-based greps miss name-drift
-  tables — at the cd_auth row grep by TABLE name, and the tripwire
-  test must pin the file-vs-extern name pair (the 18e cd_hop_opts
-  tripwire precedent).
+  ADEQUATE-READ-LEAVE** — the ZERO-gate census disclosure, the INVERTED
+  E4 residency arms, the cd_ah name-drift tripwire family, the
+  row-scoped DecodeData seams, the const_cast fold, the pgm offset-read
+  posture, the sids ZERO-new census and the clippy face all re-grounded.
+  **TWO honest count/anchor drifts recorded this pass** (land rule:
+  rows/sections/messages NEVER rewritten, no force-push): (1) the
+  47654b3 message says deviations at "KNOWN DEVIATIONS.md:3014-:3186,
+  173 L" — live face: header at **:3015** (blank separator :3014),
+  :3015-:3186 = **172 L**; the "11 bullets" face MATCHES exactly. (2)
+  A block of internal line-cites inside the deviations section was
+  drafted against an earlier build.sh revision and runs ~13-31 lines
+  stale vs the FINAL committed 453-L build.sh: the census loop cited
+  ":455-:459" is LIVE at **:442-:452**; `test ! -e gate.txt` cited
+  ":203-:205" at **:233**; the nm one-table-symbol-per-.o census cited
+  ":211-:216" at **:240-:241**; tunnel_bypass 0/0/0/0 cited
+  ":225-:229" at **:247**; wc 46/17 pins cited ":438-:443" at
+  **:407-:408**; enable_esp grep ":369" at **:373**; RuleMap census
+  ":357-:360" at **:362-:366**; decimal hygiene ":303-:304" at
+  ":302-:303**; the "grep 0 x14" landmine loop cited ":86-:90" is
+  LIVE at **:91-:94** (7 names x 2 donors = 14 grep arms). The cites
+  that HOLD exactly: ground
+  md5+wc x4 :38-:45, ground md5 declares :39-:40 + wc face :41,
+  table-arms x4 :54-:61, cd_ah sed-pin :61, cd_ah extern-pin :65,
+  drift tripwire :74-:77, ah_api :79 + CD_AUTH_NAME :80, frag rider
+  :83, ladder pins :85-:88, 39-extern census :89, copy-count 96 :125,
+  E4_nochecksum_pgm
+  :146-:150, E4_notextlog_frag :156-:159, restored rc0-x4 :161-:165,
+  witness_conf md5 pin :213, O0==O2 + drift-then-refuse :294-:297.
+  Both drifts are cite-arithmetic of the scoping passes, NOT behavioral
+  claims — every behavioral claim below re-verified independent.
+- **Harness FRESH x2 THIS pass, rc 0 both runs**: `SMALL4_HARNESS_OK
+  vectors=46 faceA=17 gates=0` tail verbatim, LOGS byte-ident run A vs
+  B (`cmp` rc 0, receipts `/opt/data/cache/scratch/row18hdocs/small4_{A,B}.log`).
+  md5 pins ALL re-summed byte-exact THIS pass: vectors.txt 46 L
+  `462f0ff6ed44220564c5ef0c8538ad80`, vectors_faceA.txt 17 L
+  `4755d48c54cc057b3c3c9eafec01c7cf`; the 6 tracked faces re-md5'd:
+  build.sh 453 L `2e69808067c40238de7413cb471c7db0`, PLAN.md 73 L
+  `660231495c583253f03fd3989b809b13`, probe.cc 37 L `25790ae9...`,
+  probe_dec.cc 163 L `00ce81c1...`. Ground identity re-measured:
+  esp/frag/pgm/auth wc **227/190/211/172 = 800** + tables
+  `cd_esp[]` :221 / `cd_frag[]` :184 / `cd_pgm[]` :206 / **`cd_ah[]`
+  :166** (`grep 'const BaseApi\* cd_'` re-sed ALL FOUR THIS pass);
+  ladder cd_ah :98 / cd_esp :105 / cd_frag :108 / cd_pgm :121 resident
+  codec_api.rs (`grep -n` THIS pass); `grep -rn 'extern const BaseApi\*
+  cd_auth\b' /opt/data/snort3-src/src` = **0 hits** THIS pass — the
+  drift tripwire's inverted arm still stands; the transcripts STILL
+  CARRY the drift: vectors_faceA:2 `LOAD ipv6_frag`, :4 `LOAD auth`,
+  :15 `API ah type=0 size=112 ver=1900547 name=auth` (grep THIS pass).
+- **ZERO-GATE ARTIFACTS — face ENFORCED, not assumed, and census
+  UNDISTURBED**: small4 carries NO gate.txt / catch_main / -DUNIT_TEST
+  face (`test ! -e "$H/gate.txt"` LIVE at build.sh :233; the 6 tracked
+  files re-confirmed by `git ls-files` THIS pass = PLAN.md build.sh
+  probe.cc probe_dec.cc vectors.txt vectors_faceA.txt). Two-lineage
+  census MEASURED at this docs pass OUTSIDE the harness too:
+  `ls tools/*/gate.txt | wc -l` = **25**, md5 holders of
+  `4826fc22...` = **9**, distinct md5s = **17**
+  (md5sum|sort -u|wc -l THIS pass — SAME face the row's own loop prints
+  at :442-:452: "frozen census: 9/25 holders of 4826fc22, 17 distinct
+  md5s ... tracked gate.txt = 1, ls-files"); `git ls-files
+  'tools/*/gate.txt'` = **1** (gre's — still the only tracked gate).
+  small4 added ZERO gate files: 18h = the 15th straight honest
+  zero-gate face. **Frozen lineage re-verified the sanctioned way** —
+  direct md5 re-sums, frozen donors NOT chased to rc 0: tun vectors
+  `2a792479` + faceA `81602890`, ext `da218429`/`0fa79b53`, eth
+  `1bd98dbb`, all ZERO drift THIS pass; 5-fingerprint witness census
+  re-md5'd byte-exact: vocab witness_stubs.cc `9fad7e9d...`, codec
+  stubs.cc `be9bdd0b...`, eth stubs_18d.cc `f4afd35f...`, tun
+  witness_18f.cc `ea1f79f3...`, witness_conf `4dd91018...` (build.sh
+  :213 pins the heredoc regen byte-ident).
+- **Gate chain frozen side — MEASURED not asserted**: gre rebuilt
+  FRESH x2 THIS pass rc 0 BOTH (`GRE_HARNESS_OK vectors=26 faceA=5
+  gate_lines=3`, logs byte-ident, gate `6751d1a8` + vectors
+  `41bd7d1b`/`783649440d` all re-md5'd byte-exact, runner tail VERBATIM
+  re-grepped `All tests passed (1 assertion in 1 test case)`); fmod
+  FRESH rc 0 (`FMOD_HARNESS_OK vectors=61`: gate `4826fc22...` +
+  vectors `f0fdbab...`, gate.txt tail re-read VERBATIM `All tests
+  passed (114 assertions in 22 test cases)`); vocab FRESH rc 0
+  (`VOCAB_HARNESS_OK vectors=29`, vectors `5da70e82...` stable). csum
+  vectors `e4baf781` re-md5'd face. Receipts
+  `/opt/data/cache/scratch/row18hdocs/{gre_A,gre_B,small4_A,small4_B,fmod,vocab}.log`.
+- **Rust-side anchors re-grounded THIS pass**: `src/codecs/cd_esp.rs`
+  292 + cd_frag.rs 269 + cd_pgm.rs 213 + cd_auth.rs 228 = **1,002 L**
+  (wc THIS pass); `tests/small4_parity_test.rs` **802 L / 8 `#[test]`**
+  (wc + grep THIS pass — 46/46 + 17/17 ORDERED replays +
+  `small4_static_names_tripwire` pinning names[0]=="cd_ah" +
+  `!contains("cd_auth")` + file-vs-NAME pairs; NO `up_gate_*` — honest
+  zero-suite absence); sids 272/294/454/456/458/459/465/466 ALL
+  resident codec_module.rs (`grep -n` THIS pass :133-:224 — ZERO new
+  constants); framework/codec.rs + parse_conf.rs + codec_api.rs
+  BYTE-UNTOUCHED; the 39-extern cc census pinned AGAIN by the row
+  build (`grep -c 'extern const BaseApi\* cd_'` == 39, build.sh :89).
+- **Test math**: 549 = 541 + 8; plain `cargo test` 66 result lines,
+  FAILED/panicked grep 0, at THIS pass; 39 parity files (38 + small4).
+- **Landmine face for the 18h names — substring honesty recorded**:
+  bare-substring greps hit noise (`esp` 1/2, `frag` 0/3) — the hits are
+  `layer::get_inner_ip6_frag` FUNCTION stubs (codec stubs.cc :20-:21)
+  and `using namespace snort` lines, NOT tables; the TABLE-name grep
+  `cd_esp\b|cd_frag\b|cd_pgm\b|cd_ah\b` across vocab witness_stubs.cc +
+  codec stubs.cc = **0** THIS pass (and `cd_udp|cd_icmp4|cd_icmp6` =
+  0/0 each, substring-covering the *_ip variants). Landmine ZERO
+  stands for the whole 18i candidate set.
+- **commit census + gitignore**: 105 at HEAD 47654b3; .gitignore small4
+  block :420-:441 re-verified by `git check-ignore` THIS pass
+  (`tools/small4_harness/copy/` hits at :423; binaries .o witness_conf.cc
+  vectors_O0/O2 nm_U_* E4_* drift_cd_auth_extern md5_pinned
+  gate_md5_lineages cp_audit_ok .e4_hold_*.log all ignored rc 0; the 6
+  stageables NOT ignored). `git status --short` **EMPTY** (wc 0) after
+  the docs-pass rebuilds — artifacts fully absorbed.
+- **Scoping-claim correction (the method proving itself AGAIN)**: the
+  18g-pass NEXT line "**cd_udp/cd_icmp* decode paths ride the same
+  tunnel_bypass seam**" is HALF WRONG — re-measured THIS pass:
+  `grep -c tunnel_bypass` over cd_udp/cd_icmp4/cd_icmp6 = **0/0/0**
+  (contrast gre x1). What the trio actually carry: a per-TU
+  `checksum_bypassed` PEG + `stats.cksum_bypassed++` (udp :49/:57/:274,
+  icmp4 :45/:52/:143, icmp6 :47/:54/:136) and udp :501's tunnel
+  COMMENT — the tunnel_bypass HOOK face does NOT extend to the trio.
+  Consequence measured: at 18i the trio expect **ZERO new witnesses**
+  on the bypass axis (the WIN trio rides), and the cksum-bypass pegs
+  are row-local stats material. Lesson: peg-name vs hook-name greps are
+  different faces — pin the symbol, not the substring.
 
 ## The method (non-negotiable, used by every row)
 1. **C++ harness** under `tools/<name>_harness/` that compiles the
@@ -194,326 +191,314 @@ was re-measured/re-opened THIS pass:
    labeled, deterministic `vectors.txt`. The transcript is truth:
    never fabricate behavior from memory; if a run flakes, fix
    determinism, never lock a flaky transcript. vectors.txt is a tracked
-   INPUT the build re-verifies but NEVER fabricates (18d: when a
-   verification pass deleted it, build.sh correctly refused; restored
-   VERBATIM from its own vectors_O0.txt receipt).
+   INPUT the build re-verifies but NEVER fabricates (18d lesson; small4
+   adds the FIRST-RUN-SEED then drift-then-refuse face at :296-:297).
 2. **Catch gate** whenever upstream ships an embedded
    `#ifdef UNIT_TEST` block or a `test/` suite: compile it verbatim
-   (`catch/snort_catch.h` -> plain-catch shim; codec/jsnorm/fid/fcache
-   recipe — the FRESHEST working shape is NOW AT GRE ITSELF:
-   `tools/gre_harness/build.sh` :132 catch.hpp cp + :139 catch_main.cc
-   heredoc + :143 CATCH_CONFIG_MAIN pin, plus fmod :249/:270 and fctx
-   :60-:63/:403-:407 for the older carries; TestCaseInstaller route
-   REJECTED at 18g, deviation :2928-:2939). Run it; record cases/
-   assertions in `gate.txt`; at 18g+ an embedded-Catch codec row's
-   gate.txt is TRACKED with pinned md5 + wc + the runner's own tail
-   wording (the gre pattern). NEVER gate on grep-estimated assertion
-   counts — pin case names/counts from grep, measure assertions from
-   the runner (17p: grep said 36, the runner said 42). When gate and
-   probe link the same TU, use the **duplicate-symbol rule**: every
-   UT-compiled TU's plain `.o` is EXCLUDED from the gate link — at gre
-   this is QUANTIFIED (nm defined census {cd_gre} x1 per .o,
-   intersection 1; E9 flipped-assert: plain+UT co-link MUST die at
-   'multiple definition of `cd_gre''). When a TU has BOTH early
-   `#ifdef UNIT_TEST` fragments AND a trailing suite block, excise the
-   LAST block only, via `rfind` + **cut-to-EOF** + brace-balance guard
-   + head-count assert (17r file_lib + the gre E7 face: cutting to the
-   block's `}` leaves orphan `#endif without #if` — cut-to-EOF
-   MANDATORY). The 17y INVERSION lesson (witness-block retirement at
-   real-TU landing; fsvc :706-:707/:778/:827), the 18a PER-LINK
-   corollary (retirement applies to the CURRENT donor's stubs ONLY;
-   frozen donors keep blocks + vectors/gate byte-frozen; census test
-   pins both faces) and the 18b PROBE-ONLY corollary (ZERO .o to
-   every donor link + unbuildable suite dialect -> probe-only harness,
-   nm-proved zero contribution, chain re-censused every build) all
-   stand. 18b-18f exercised probe-only five times; 18g BANKED the
-   gate-change detour: from this row on there are TWO gate md5
-   lineages (frozen 9/4826fc22 + gre's own), and the point-in-time
-   holder counts baked into FROZEN donors' build.sh scripts FAIL BY
-   DESIGN on later rows — census loops belong in the NEWEST harness,
-   frozen rows are never rewritten (deviation :2921-:2927). The 18d
-   INVERTED-DUP face (new real cp retires an OLD frozen donor stub —
-   E6 MUST-fail `multiple definition .* snort_str`, receipt re-printed
-   every build, own stubs_18d.cc `RETIRED at 18d:` marker :30) and the
-   18e FACE-RULE (flip rehearsals = BUILD RECEIPTS only, never pins)
-   carry unchanged. A fake Catch gate over a suite-zero row = the 17p
-   anti-pattern.
+   (`catch/snort_catch.h` -> plain-catch shim; the FRESHEST working
+   shape stays at GRE: `tools/gre_harness/build.sh` :132 catch.hpp cp +
+   :139 catch_main.cc heredoc + :143 CATCH_CONFIG_MAIN pin, plus fmod
+   :249/:270 and fctx :60-:63/:403-:407 for the older carries;
+   TestCaseInstaller route REJECTED at 18g, deviation :2928-:2939). Run
+   it; record cases/assertions in `gate.txt`; an embedded-Catch codec
+   row's gate.txt is TRACKED with pinned md5 + wc + the runner's own
+   tail wording (the gre pattern). NEVER gate on grep-estimated
+   assertion counts — pin case names/counts from grep, measure
+   assertions from the runner (17p). When gate and probe link the same
+   TU, use the **duplicate-symbol rule** (E9 face at gre). Zero-suite
+   rows run the **small4 ZERO-gate face**: `test ! -e gate.txt` + NO
+   Catch symbols asserted IN the build — the absence is enforced, not
+   assumed — and the two-lineage census loop (9/25/17-style, :442-:452)
+   lives in the NEWEST harness and MEASURES (18h = 15th straight). The
+   17y INVERSION lesson, the 18a PER-LINK corollary, the 18b PROBE-ONLY
+   corollary, the 18d INVERTED-DUP face, the 18e FACE-RULE and the 18g
+   TWO-LINEAGE codification (frozen donor rows are historical
+   artifacts, NEVER rewritten; their point-in-time `-eq 24` ls-asserts
+   fail BY DESIGN — deviation :2921-:2927) all stand. A fake Catch gate
+   over a suite-zero row = the 17p anti-pattern.
 3. **Rust port** in `src/...`: literal transcription. Deviations are
-   allowed only when structurally forced (trait objects, Vec<u8> for
-   byte-carrying std::string, Rc<RefCell> arenas...) and every one
-   gets a section in `KNOWN DEVIATIONS.md`. The 18g UB ruling
-   reinforces: a C out-of-window write (the SEQ-arm, cc:149/cc:151)
-   gets a DEFINED bounded substitution with the zero-contribution
-   measured on the vectors arm + an IN-window unit face — never
-   replicate the overrun.
+   allowed only when structurally forced and every one gets a section
+   in `KNOWN DEVIATIONS.md`. 18h reinforcements: name-drift folds keep
+   the FILE base true while the Rust table constant mirrors the C TABLE
+   (`CD_AH`/`AH_API`), and dead ground code (`#if 0` DECODE_RF, the
+   cc:167 >0xFF arm) stays dead-but-cited, NOT excised.
 4. **Whole-transcript replay test** in `tests/<x>_parity_test.rs`:
    replays `vectors.txt` line-for-line against the Rust port
-   (`include_str!` + per-line assert), donor pattern:
-   `tests/gre_parity_test.rs` (723 L, 26L DEC + 5L FACE-A ORDERED
-   replays + `gre_gate_contract` runner-tail pin + `up_gate_gre_*`
-   statement-for-statement mirror of a gate that ACTUALLY RAN — the
-   pattern for gate rows), then `tests/tun_parity_test.rs` (860 L, 9
-   tests, DUAL-face + translations for multi-face zero-suite rows),
+   (`include_str!` + per-index assert, ORDERED, never set-membership),
+   donor pattern: `tests/small4_parity_test.rs` (802 L, 8 tests, the
+   name-drift-IN-transcript + tripwire face, honest zero-suite absence),
+   `tests/gre_parity_test.rs` (723 L, 11 tests — the pattern for GATE
+   rows: runner-tail pin + `up_gate_*`), `tests/tun_parity_test.rs`
+   (860 L, 9 tests, DUAL-face for multi-face zero-suite rows),
    `tests/eth_parity_test.rs` (608 L), `tests/vocab_parity_test.rs`
-   (442 L), `tests/csum_parity_test.rs` (414 L),
-   `tests/flog_parity_test.rs`, `tests/fsvc_parity_test.rs`.
-5. **Gates at EVERY commit**: `cargo test` all green (>= 541; never
-   trust a summed total from a run containing FAILED; cite one
-   plain-vs-all-targets face per pass), clippy --all-targets ZERO
-   warnings (force relint by touching all .rs), `vectors.txt` md5
-   stable across >= 2 clean rebuilds (gre's FRESH x2 both byte-ident
-   THIS pass; gate.txt md5 likewise — legacy rows' gate.txt stay
-   .gitignore'd md5-pinned in docs, the GRE gate.txt is the tracked
-   exception, md5-pinned in build.sh), harness `.gitignore` block
-   added (mirror siblings) and verified with `git check-ignore` BEFORE
-   staging (the gre block is .gitignore:392-:419, landed inside code
-   commit e6901f5). Then commit + push, insert the plan row (grep-
-   guard: count must be 0 before insert — the numa double-append
-   incident cost a force-push), append deviations (one grep-guarded
-   append) — the 18b-18g variant: BOTH ship inside the code commit,
-   then the docs pass VERIFY-greps them (count == 1 each) instead of
-   inserting, and still re-measures every load-bearing claim. Refresh
-   NEXT.md (FRESH rewrite), commit+push docs, update the wiki (status
-   row + deviations section + stats line), push wiki.
+   (442 L), `tests/csum_parity_test.rs` (414 L).
+5. **Gates at EVERY commit**: `cargo test` all green (>= 549; never
+   trust a summed total from a run containing FAILED; cite one face per
+   pass), clippy --all-targets ZERO warnings (force relint by touching
+   all .rs), `vectors.txt` md5 stable across >= 2 clean rebuilds
+   (small4's FRESH x2 logs byte-ident THIS pass), harness `.gitignore`
+   block added (mirror siblings) and verified with `git check-ignore`
+   BEFORE staging (the small4 block is .gitignore:420-:441, landed
+   inside code commit 47654b3). Then commit + push, insert the plan row
+   (grep-guard: count must be 0 before insert), append deviations (one
+   grep-guarded append) — the 18b-18h variant: BOTH ship inside the
+   code commit, then the docs pass VERIFY-greps them (count == 1 each)
+   and still re-measures every load-bearing claim. Refresh NEXT.md
+   (FRESH rewrite), commit+push docs. Wiki: status row + deviations
+   section + stats line at the WIKI phase — queue status measured at
+   THIS pass: 18g trio is LANDED (313aab6), the ONLY owed trio is 18h.
 
 ## Hard-won environment facts (do not rediscover these)
 - **Push recipe**: `git -c credential.helper=/opt/data/cache/scratch/git_cred.sh push origin master`. The token is the LAST `GITHUB_TOKEN` line in `/opt/data/.env` — NEVER echo it. Same helper works for the wiki remote.
-- **OpenSSL without dev packages** (apt locked, no root): compile the C harness with `-I/opt/hermes/tools/node-26.12.1-linux-x64/include/node` and link `/usr/lib/x86_64-linux-gnu/libcrypto.so.3` directly. The 17r probe/gate links ran REAL EVP (the M-block hashes are libcrypto ground truth); the Rust side stands on the dependency-free `src/helpers/sha256.rs` whose known answers were cross-checked against it. 17s/18b-18g do NOT need EVP.
-- **LuaJIT 2.1** built at `/opt/data/tools/luajit-src` (chunk row 17k). fmod 18a proves the LINK recipe (static BY PATH — `-lluajit` hits the .so and the gate probe dies at load, no rpath; `-lm -ldl` tail; nm pin fmod build.sh:961). 18d-18h-queue row TUs carry ZERO lua refs (grep -ci lua asserted every build; re-assert at gre too via the carried tree).
-- **CppUTest is NOT installed on this host** (RE-PROVEN every csum + vocab + eth + ext + tun build: E4_cpputest_fatal `CppUTest/CommandLineTestRunner.h: No such file` flipped-assert EVERY build, plus the checksum_test.cc:36 precedent). Upstream **CppUTest** suites (misc/test/{teredo,gtp,geneve}_codec_test.cc — landed-and-translated at 18f as `up_tun_*` — plus the STILL-LIVE 16g/16h lru ones) can ONLY be translated Rust-side, NEVER run natively. Only the vendored Catch (rules_harness copy/catch/catch.hpp + shim) runs natively — banked at 18g: the cd_gre gate ran REAL. **ip/checksum.h is NOW DONOR-RESIDENT** (gre cp, `b43628f3` ground face; the 18b row was Rust-inline; cd_pgm's same-dir `#include "checksum.h"` (cc:28) rides it — no fresh cp needed).
-- **`#include <daq.h>` does NOT exist in ground** (find THIS pass: only `daqs/daq_user.h` + `src/pub_sub/daq_message_event.h` — never confuse them): the udp/icmp4/icmp6 trio's `#include <daq.h>` at cc:25 each is the EXTERNAL DAQ header, row-20 pressure; the fmod `daq_common.h` + vocab `daq_dlt.h` graft precedents are the only stand-in pattern. esp/frag/pgm/auth carry NO daq.h include (measured THIS pass) — the small four are DAQ-FREE.
-- **daq_dlt.h graft IS a committed fact**: `tools/vocab_harness/copy/daq_dlt.h` + the eth/gre copy carry `DLT_RAW 12` / `DLT_EN10MB 1` / `DLT_PPP_ETHER 51` (libpcap master cites). Later rows cp/extend THAT graft; row 20 cites the real DAQ include chain.
+- **OpenSSL without dev packages** (apt locked, no root): compile the C harness with `-I/opt/hermes/tools/node-26.12.1-linux-x64/include/node` and link `/usr/lib/x86_64-linux-gnu/libcrypto.so.3` directly. 17s/18b-18h do NOT need EVP.
+- **LuaJIT 2.1** built at `/opt/data/tools/luajit-src` (chunk row 17k). fmod 18a proves the LINK recipe (static BY PATH; nm pin fmod build.sh:961). Row-TU lua-seam assert carried every build since 18d.
+- **CppUTest is NOT installed on this host** (RE-PROVEN every csum/vocab/eth/ext/tun/gre build: E4_cpputest_fatal flipped-assert EVERY build, plus the checksum_test.cc:36 precedent — `ip/test/` is CppUTest dialect ONLY). Upstream CppUTest suites can ONLY be translated Rust-side, NEVER run natively. Only the vendored Catch (rules_harness copy/catch/catch.hpp `74ef54e8` + shim) runs natively — banked at 18g: the cd_gre gate ran REAL. **ip/checksum.h DONOR-RESIDENT** (`b43628f3` ground face): pgm rode it at 18h as the SECOND rider (18g was the first). `log/text_log.h` `3e827113` resident via the tun lineage — frag the first rider at 18h.
+- **`#include <daq.h>` does NOT exist in ground — find PROVEN WIDER THIS pass** (whole-repo `find /opt/data/snort3-src -name 'daq.h'` = 0 hits; NEVER confuse: `daqs/daq_user.h` 54 L lives OUTSIDE src/, `src/pub_sub/daq_message_event.h`, and the `src/packet_io/sfdaq*.h` family are ALL different faces; `find tools -name 'daq.h'` = 0 — no graft has ever been landed). The 18i trio's `#include <daq.h>` at cc:25 x3 is THE open question — see the 18i scoping below. The fmod `daq_common.h` (16 L graft face — it rides INSIDE the copy trees: `find tools -name daq_common.h` hits) + vocab `daq_dlt.h` (5 L) graft precedents are the only stand-in pattern. esp/frag/pgm/auth carried NO daq include (18h face, re-pinned by the SMALL4 build compiling the four with ZERO fresh cps).
+- **daq_dlt.h graft IS a committed fact**: `tools/vocab_harness/copy/daq_dlt.h` + the eth/gre/small4 copy carry `DLT_RAW 12` / `DLT_EN10MB 1` / `DLT_PPP_ETHER 51` (libpcap master cites). Later rows cp/extend THAT graft; row 20 cites the real DAQ include chain.
 - Host cgroup caps at **2 CPUs** (`nproc` lies: says 16). Keep builds/serial; >4 parallel workers degrade. Toolchain: rustc/cargo 1.100.0.
 - Tool constraints: `write_file`/`read_file` tools are jailed to `/opt/data` — wiki files (`/tmp/RustyPig.wiki`) must be edited via python scripts kept in `/opt/data/cache/scratch/` and run through the terminal, with `git -C /tmp/RustyPig.wiki ...`. Scratch dir is `/opt/data/cache/scratch` (TMPDIR points there); put probe/debug programs there, never the system temp dir.
-- Probe printf hygiene: hoist mutating calls into locals before any printf (C++ arg evaluation order bit codec H-block + fid T2/T3; 18c R6 var-first arms + 18d-18g replay mirrored Rust-side — gre carries the gre build.sh :311-:312 pins: `bool [a-z][a-z0-9]*=.*->decode` count -ge 8 AND `printf.*->decode` count == 0 on probe_dec.cc, asserted every build; Rust side stores every bool before field reads).
+- Probe printf hygiene: hoist mutating calls into locals before any printf (C++ arg evaluation order bit codec H-block + fid T2/T3; 18c R6 + 18d-18h replay mirrored Rust-side; small4 probe_dec keeps the same shape — Rust side stores every bool before field reads).
 - No gdb. Diagnose segfaults via stdout tail + source inspection; THREAD_LOCAL statics must be armed or you get rc 139: `file_stats` via `file_stats_init()`, `packet_time`'s `s_recent_packet` via `packet_time_update()` ONLY. Since 18a `file_trace` has its REAL def on BOTH sides.
-- Frozen-donor build.sh rc-1 face (the 18g drift codified above): when a docs pass rebuilds tun/eth/ext and sees rc 1 at an `-eq 24` gate.txt ls-assert, that is the BY-DESIGN drift face (25 files since gre's gate) — NEVER edit frozen scripts; verify their frozen face by direct vectors md5 re-sums instead.
+- Frozen-donor build.sh rc-1 face (the 18g drift codified): tun/eth/ext die at their point-in-time `-eq 24` gate.txt ls-asserts (tun :334, eth :598, ext :320) since gre added the 25th gate — BY DESIGN, NEVER edit frozen scripts; verify their frozen face by DIRECT vectors md5 re-sums (re-done THIS pass: tun `2a792479`/`81602890`, ext `da218429`/`0fa79b53`, eth `1bd98dbb` — all byte-exact).
 
 ## Donor harnesses (copy their build.sh recipes wholesale)
-- `tools/gre_harness/` — **THE donor for row 18h+ (lineage head)**: the 18g gate-change pattern — exactly **8** tracked files (build.sh 412L md5 `de698f473815cd83a84f7b0cff57a19b`, probe.cc 22L md5 `66cfb942...`, probe_dec.cc 93L md5 `e01eb950...`, PLAN.md 104L md5 `efaa88e134d4bbdae9f1b2c3d9eb651b`, catch_main.cc 2L md5 `a4d3d600...` heredoc-regenerated, **gate.txt 3L md5 `6751d1a8...` TRACKED** — the runner tail is the new chain anchor, vectors.txt 26L md5 `41bd7d1b...` tracked, vectors_faceA.txt 5L md5 `783649440d...` tracked; NO witness file — the carried `witness_18f.cc` `ea1f79f3` resolves the single `tunnel_bypass_enabled` U-line); `copy/` tree = the tun donor VERBATIM + shim pair (catch/catch.hpp `74ef54e8` + gate-side snort_catch.h passthrough `177e1852`) + probe-side excised `cd_gre_probe.cc` + row `cd_gre.cc` + EXACTLY 2 fresh header cps (protocols/gre.h 50 L `7b07af8e` + codecs/ip/checksum.h 284 L `b43628f3` — first donor entry of the 18b lib; E4 walls flipped x2, post-cp rc 0; utils/endian.h MEASURED NOT in closure, E13) = 86+6 = 92 sources find-counted `! -name '*.o'` (the row's 89 face recorded as drift; copy/ is .gitignore'd); witness_conf.cc heredoc byte-ident `4dd91018`. Self-checks re-run THIS pass at BOTH fresh rebuilds (rc 0 `GRE_HARNESS_OK vectors=26 faceA=5 gate_lines=3`): gate md5 + wc + tail-wording pins :378-:382; O0==O2 cmp arms THREE streams (DEC + FACE-A + GATE); E9 flipped-assert x1 build; E4 flipped x2; anchors :43-:49; sids census x4 (:62-:67); event-site sed pins :69-:72; two-lineage census loop :401-:404 (9/25/17). FRESH x2 reproducibility = the md5 pins survive a clean re-clone rebuild — the harness is the contract.
-- `tools/tun_harness/` — the 18f donor (superseded at 18g as head; kept for lineage; its `-eq 24` census line rc-1 fails by design NOW — see drift face): exactly 7 tracked files, DUAL-face vectors 40L `2a792479...` + 7L `81602890...` both re-md5'd ZERO drift THIS pass (direct md5s, not the build), witness_18f.cc `ea1f79f3` THE witness everyone since 18f carries, nm U-census arms 10/24/42. NO tracked gate.
-- `tools/ext_harness/` — the 18e donor (kept): 7 tracked files, DUAL faces 27L `da218429...` + 9L `0fa79b53...` re-md5'd zero drift THIS pass; cd_gre echo asserts :50-:53 (the pre-18g anchor face, historical — gre now owns those anchors). `-eq 24` face dead by design. NO tracked gate.
-- `tools/eth_harness/` — the 18d donor (kept): exactly 5 tracked files (build.sh 608L, probe.cc 41L, PLAN.md 83L, stubs_18d.cc 35L `RETIRED at 18d` marker md5 `f4afd35f...` — carried by every later row, vectors.txt 15L `1bd98dbb...` re-md5'd zero drift), the EXTENDED `daq_dlt.h` graft, EOFLOW/EOFTRH/EOFDAQ heredoc carries, thread_config.h hwloc excision carry, lua-seam assert (:60-:62). NO tracked gate.
-- `tools/vocab_harness/` — the 18c donor (kept; rebuilt FRESH THIS pass rc 0 `VOCAB_HARNESS_OK vectors=29`): 9 committed files, witness_stubs.cc 14L `9fad7e9d...` — **the 4 cd_*[] stub tables (cd_ipv4/cd_ipv6/cd_tcp/cd_hopopts) at :11-:14 frozen by vectors:25-:28; cd_gre/cd_udp/cd_icmp4/cd_icmp6/esp/frag/pgm/auth stub counts 0 — re-grepped THIS pass**, vectors.txt 29L `5da70e82...` stable; the `daq_dlt.h` GRAFT originated here.
-- `tools/fmod_harness/` — the 18a donor & **FROZEN gate-lineage source** (rebuilt fresh at every docs pass for the byte-ident echo — done THIS pass, frozen 9-holder chain intact): cp braces + objs loop carry the FULL file_api closure; first third-party link (`libluajit.a` BY PATH, nm pin :961); stubs.cc 984L; build.sh 1164L; vectors.txt 61L md5 `f0fdbab06fe1681af1c654531b917c55`; gate md5 `4826fc2233044a2d5429413faf0ae1af` + tail VERBATIM re-grepped THIS pass `All tests passed (114 assertions in 22 test cases)`; catch-recipe carry :249/:270 (fctx :60-:63/:403-:407 the older full shape — the grep-gate clone target was gre, and 18h+ cite GRE's own :132/:139 now).
-- `tools/csum_harness/` — row 18b, **the probe-only pattern for ZERO-.o rows**: no gate shipped; build.sh self-checks = ground-header md5 pin (:37), E4 CppUTest wall receipt (:67-:70), dialect proof (:72-:73), nm ZERO-text-symbols proof (:79-:80), O0==O2 (:116), 9-holder census (:154). vectors 16L md5 `e4baf7816440e18917d3249597f60b88`. `ip/checksum.h` NOW enters donor trees via gre's cp — the udp/icmp/pgm rows inherit residency; the 18b face stays Rust-side.
-- `tools/flog_harness/` — the 17z donor: vectors 50L md5 `b260ec6a...`.
-- `tools/fsvc_harness/` — the 17y donor: the landmine inversion (23 collisions); vectors 64L md5 `54864705...`.
-- `tools/fpolicy_harness/` — the 17x donor: vectors 27L md5 `b989a8d5...`.
-- `tools/finspect_harness/` — the 17w donor: vectors 103L md5 `3cbd009e...`.
-- `tools/fcapi_harness/` — the 17v donor: vectors 21L md5 `a953a501...`. NB dir name `fcapi_harness` (pinned, do not "fix").
-- `tools/fconf_harness/` — the 17u donor: vectors 20L md5 `65968e1c...`.
-- `tools/fcshare_harness/` — the 17t donor: vectors 25L md5 `03d43c14...`.
-- `tools/fcap_harness/` — the 17s donor: vectors 27L md5 `0208a691...`; gate md5 `4826fc22...` — the 114/22 frozen chain STARTS here.
-- `tools/fctx_harness/` — FileContext + capture/mempool/segment closure donor: vectors 610L md5 `839b5566...`; gate md5 `42349372...` (its OWN 18/91 link, distinct lineage md5, never joined the 4826fc22 chain). `PLAN.md` = the RECON→HARNESS→PORT contract example; :60-:63/:403-:407/:413 = the older CATCH SHIM + catch_main + gate-link-line shape (the 17r dup-symbol precedent lives in this tree; gre carries the quantified E9 face).
-- `tools/fflows_harness/` — flowz graft donor: vectors 146L md5 `bd8c00af...` (DO NOT touch); gate md5 `e14626fc...`.
-- `tools/fcache_harness/` — file_api hash/clock closure donor: vectors 278L md5 `b69db310...` (DO NOT touch); gate md5 `6b3c041e...`.
-- `tools/filib_harness/` — file_api header closure + interposed SnortClock fake clock. vectors 273L md5 `77ffd8e4...` (DO NOT touch); gate 19/334 — 17o's [file_info] suite stays HERE.
-- `tools/fstats_harness/` — carries the ONLY file_api test/ suite (upstream `file_api/test/file_stats_test.cc` via the catch shim).
-- `tools/textlog_harness/` — row 16r: time() interposition precedent.
-- `tools/rules_harness/` — SnortConfig EOFCFG shim; hosts `copy/catch/catch.hpp` `74ef54e8...` — byte-ident at gre THIS pass (the vendored Catch every shimmed gate pulls).
-- `tools/fid_harness/` — ghash closure, private->public header graft, dead-branch witness pattern.
-- `tools/codec_harness/`, `tools/jsnorm_harness` — plain-catch shim recipe. **`tools/codec_harness` is row 17d's harness (framework/codec base; its stubs.cc md5 `be9bdd0b437d1f6c56c841e8155d9e70` re-md5'd THIS pass is the FROZEN donor the E6-YES arms re-collide against every build; grep cd_gre/udp/icmp/esp/frag/pgm/auth counts 0 — no landmine) — the RawData/daq_msg deferral closed partially at 18c (codec.rs:9/:171 + deviations :2341-:2344); the FULL plugin-loading deferral (PluginManager::load_plugins REAL body, plugin_manager.cc 1015 L) still defers to row 20.**
+- `tools/small4_harness/` — **THE donor for row 18i+ (lineage head, ZERO-gate shape)**: exactly **6** tracked files (build.sh 453 L md5 `2e698080...`, PLAN.md 73 L `6602314...`, probe.cc 37 L `25790ae9...`, probe_dec.cc 163 L `00ce81c1...`, vectors.txt 46 L `462f0ff6...` tracked, vectors_faceA.txt 17 L `4755d48c...` tracked; NO gate.txt, NO catch_main — the gre-8 face MINUS the two gate faces; NO witness FILE — the WIN trio INHERITED: witness_18f `ea1f79f3` + witness_conf heredoc `4dd91018` (pin :213) + stubs_18d `f4afd35f`, md5 pins NEVER re-derived); copy tree = gre DONOR VERBATIM (`find copy -type f ! -name '*.o'` = 92 pre-row, gre face re-counted THIS pass) + EXACTLY 4 row TUs + ZERO fresh headers = **96** post-cp find-count asserted at :125. Self-checks re-run THIS pass at BOTH fresh rebuilds (rc 0 logs byte-ident): ground md5 x4 + wc x4 :39-:45; table sed census x4 :54-:61; cd_ah :61 / extern :65 / drift-tripwire DIES-IF-HIT :74-:77; ladder sed pins :85-:88; landmine grep 0 x donors :91-:94; 39-extern census :89; E4 INVERTED residency arms (strip checksum.h -> ONLY pgm dies cc:28 :146-:150; strip text_log.h -> ONLY frag dies cc:26 :156-:159; restored rc0 x4 :161-:166); NO-gate face :233; nm one-table-symbol-per-.o :240-:241; tunnel_bypass 0/0/0/0 :247; O0==O2 x2 streams + FIRST-RUN-SEED drift-refuse :294-:297; decimal hygiene :302-:303; sids x8 tie :92-:107; RuleMap census :362+; enable_esp NSDMI :373; wc 46/17 :407-:408; TWO-LINEAGE census loop :442-:452 (9/25/17 + tracked-1 FACE). Probe loads pull NO codec_api object (nm union grep load_codecs 0 THIS pass).
+- `tools/gre_harness/` — **THE gate-shape donor (18g; kept for ANY row with real Catch/Catch-suite material)**: exactly 8 tracked files, gate.txt 3 L md5 `6751d1a8` TRACKED (tail `All tests passed (1 assertion in 1 test case)`, pins :378-:382), vectors `41bd7d1b` 26 L + faceA `783649440d` 5 L, build.sh 412 L md5 `de698f47...`, anchors :43-:49, catch shape :132/:139/:143, E9 dup flipped-assert, rfind+cut-to-EOF excision, census loop :401-:404 (9/25/17). Rebuilt FRESH x2 THIS pass, rc 0, logs byte-ident.
+- `tools/tun_harness/` — the 18f ancestor (7 tracked files; its `-eq 24` census line rc-1 fails by design — see drift face): DUAL-face vectors 40L `2a792479` + 7L `81602890` re-md5'd ZERO drift THIS pass (direct md5s), witness_18f.cc `ea1f79f3`, nm U-census arms 10/24/42. NO tracked gate.
+- `tools/ext_harness/` — the 18e ancestor (7 tracked files): DUAL faces 27L `da218429` + 9L `0fa79b53` re-md5'd zero drift THIS pass. `-eq 24` face dead by design. NO tracked gate.
+- `tools/eth_harness/` — the 18d ancestor (5 tracked files): stubs_18d.cc `RETIRED at 18d` marker md5 `f4afd35f` — carried by every later row; vectors 15L `1bd98dbb` re-md5'd zero drift; EXTENDED `daq_dlt.h` graft; lua-seam assert. NO tracked gate.
+- `tools/vocab_harness/` — the 18c ancestor (rebuilt FRESH THIS pass rc 0, `VOCAB_HARNESS_OK vectors=29`): witness_stubs.cc 14L `9fad7e9d` — the 4 cd_ipv4/ipv6/tcp/hopopts stub tables :11-:14 frozen by vectors:25-:28; ZERO 18h/18i table stubs (re-grepped THIS pass); vectors 29L `5da70e82` stable; the `daq_dlt.h` GRAFT originated here.
+- `tools/fmod_harness/` — the 18a donor & **FROZEN gate-lineage source** (rebuilt FRESH THIS pass rc 0 `FMOD_HARNESS_OK vectors=61`, gate `4826fc22` tail VERBATIM `All tests passed (114 assertions in 22 test cases)`, vectors `f0fdbab`): cp braces + objs loop carry the FULL file_api closure; first third-party link (`libluajit.a` BY PATH, nm pin :961); catch-recipe carry :249/:270 (fctx :60-:63/:403-:407 the older full shape); daq_common.h 16 L graft home.
+- `tools/csum_harness/` — row 18b, the probe-only origin: build.sh ground-header md5 pin :37, E4 wall receipt :67-:70, dialect proof :72-:73, nm ZERO-text-symbols :79-:80, O0==O2 :116, census :154, vectors 16L md5 `e4baf781`. `ip/checksum.h` enters DONOR trees via gre's cp — pgm rode it at 18h; udp/icmp4/icmp6 inherit the residency.
+- `tools/flog_harness/` (17z): vectors 50L `b260ec6a`. `tools/fsvc_harness/` (17y, landmine inversion): 64L `54864705`. `tools/fpolicy_harness/` (17x): 27L `b989a8d5`. `tools/finspect_harness/` (17w): 103L `3cbd009e`. `tools/fcapi_harness/` (17v; dir name pinned): 21L `a953a501`. `tools/fconf_harness/` (17u): 20L `65968e1c`. `tools/fcshare_harness/` (17t): 25L `03d43c14`. `tools/fcap_harness/` (17s): 27L `0208a691`; gate `4826fc22` — the frozen chain STARTS here.
+- `tools/fctx_harness/` — FileContext + capture/mempool/segment closure donor: vectors 610L `839b5566`; gate `42349372` (own lineage, never joined). `tools/fflows_harness/` vectors 146L `bd8c00af` (DO NOT touch), gate `e14626fc`. `tools/fcache_harness/` vectors 278L `b69db310` (DO NOT touch), gate `6b3c041e`. `tools/filib_harness/` vectors 273L `77ffd8e4` (DO NOT touch), gate 19/334. `tools/fstats_harness/` — the only file_api/ test/ suite. `tools/textlog_harness/` — time() interposition precedent. `tools/rules_harness/` — EOFCFG shim; hosts `copy/catch/catch.hpp` `74ef54e8` (byte-ident gre THIS pass). `tools/fid_harness/` — ghash closure. **`tools/codec_harness/` is row 17d's harness** (framework/codec base; stubs.cc md5 `be9bdd0b...` re-confirmed THIS pass is the FROZEN donor the E6-YES arms re-collide against; ZERO 18h-name table stubs) — the RawData/daq_msg deferral closed partially at 18c (codec.rs:9/:171 + deviations :2341-:2344); the FULL plugin-loading deferral (PluginManager::load_plugins REAL body, plugin_manager.cc 1015 L) still defers to row 20.
 
-## Next milestone — row 18h: the ip queue FRESH-measured at the 18g docs pass (udp heavyweight + ICMP pair; the small four scoped with the cd_ah name-drift correction)
+## Next milestone — row 18i: the ip DAQ trio FRESH-measured at the 18h docs pass (udp + ICMP pair; THE daq.h head-on decision; the misc-pair tie-ins)
 
 ### The queue face, measured THIS pass (ground `/opt/data/snort3-src/src/codecs` @ fe29cbe7403a READ-ONLY)
 - **Gate material: ZERO everywhere**: combined grep
   `TEST_CASE\|TEST_GROUP\|^TEST(\|UNIT_TEST` over `ip/cd_udp.cc`,
-  `cd_icmp4.cc`, `cd_icmp6.cc`, `cd_esp.cc`, `cd_frag.cc`, `cd_pgm.cc`,
-  `cd_auth.cc` = **0/0/0/0/0/0/0** (loop re-run THIS pass) — honest
-  probe-only rows per the 18b-18f corollary; NO frozen-donor census
-  numbers to break; the 25/9/17 two-lineage face stands untouched.
+  `cd_icmp4.cc`, `cd_icmp6.cc`, `misc/cd_icmp4_ip.cc`,
+  `misc/cd_icmp6_ip.cc` = **0/0/0/0/0** (loop re-run THIS pass — 18h's
+  four files also re-grepped 0 x4) — honest probe-only rows; small4's
+  ZERO-gate face (test ! -e gate.txt + census loop) is the clone
+  pattern; two-lineage face stands untouched at 25/9/17.
+- **THE daq.h face — head-on at 18i** (all cites THIS pass):
+  `#include <daq.h>` at cd_udp.cc:**:25**, cd_icmp4.cc:**:25**,
+  cd_icmp6.cc:**:25**; the DAQ usage is THIN and MEASURED: **13 lines**
+  total across the trio touching EXACTLY 7 distinct symbols —
+  `DAQ_PktDecodeData_t`, `DAQ_NAPTInfo_t`, `DAQ_PKT_META_DECODE_DATA`,
+  `DAQ_PKT_META_NAPT_INFO`, `DAQ_PKT_DECODE_OFFSET_INVALID`,
+  `daq_msg_get_data`, `daq_msg_get_meta` — at udp :263-:270/:420,
+  icmp4 :132-:139, icmp6 :125-:132 (+ the same shapes). Absence PROVEN
+  this pass WIDER than src: `find /opt/data/snort3-src -name 'daq.h'`
+  = **0 hits whole-repo** (only `daqs/daq_user.h` 54 L outside src +
+  `src/pub_sub/daq_message_event.h` + `src/packet_io/sfdaq*.h` — NEVER
+  confuse); the donor trees carry NO daq.h either (`find tools -name
+  'daq.h'` = 0). The seam is HALF-RESIDENT already: `framework/codec.h`
+  (inside the copy tree, :38/:59/:63-:64) carries `struct _daq_msg;`
+  fwd-decl + the `RawData.daq_msg` member (the 17d deferral face) — the
+  trio deref `raw.daq_msg`, so the PLUMBING exists, the TYPES/
+  FUNCTIONS do not.
 - **UDP heavyweight** `ip/cd_udp.cc` **660 L** (wc THIS pass; path pin
-  holds — ip/ NOT misc/): table `const BaseApi* cd_udp[] =` at
-  **:655**; externs codec_api.cc **cd_udp :70**, load_plugins :115;
-  ladder `cd_udp` resident codec_api.rs:128. Includes (grep THIS pass
-  cc:22-:36): the resident base (config.h, codecs/codec_module.h,
-  framework/codec.h, log/messages.h, log/text_log.h,
-  main/snort_config.h, utils/util.h, **checksum.h — now DONOR-RESIDENT
-  since gre**) + `#include <daq.h>` at **:25** (EXTERNAL, not in
-  ground — find THIS pass: zero daq.h; ONLY daqs/daq_user.h +
-  pub_sub/daq_message_event.h) + `protocols/teredo.h` :32 (**RESIDENT**
-  — b7adb3d8 carried since 18f) + `protocols/udp.h` :33 (ground **68
-  L**, find vs gre copy tree = 0 hits -> **fresh cp**).
-- **ICMP pair** `ip/cd_icmp4.cc` **645 L** (table cd_icmp4[] :640,
-  externs **cd_icmp4 :54 + cd_icmp4_ip :55**, load :99-:100) and
-  `ip/cd_icmp6.cc` **518 L** (table cd_icmp6[] :513, externs **cd_icmp6
-  :56 + cd_icmp6_ip :57**, load :101-:102); ladder `cd_icmp4/4_ip/6/
-  6_ip` ALL resident codec_api.rs:112-:115. BOTH carry
-  `#include <daq.h>` :25 + `checksum.h` (same-dir, resident) :33/
-  :35; icmp4 includes `protocols/icmp4.h` :31 (ground **259 L**, 0 hits
-  in gre copy -> **fresh cp**); icmp6 includes `protocols/icmp6.h` :31
-  (ground **196 L**, 0 hits -> **fresh cp**) AND `protocols/icmp4.h`
-  :32 (cross-rider — one fresh cp feeds both rows). The four extern
-  names (icmp4/icmp4_ip/icmp6/icmp6_ip) = the pair's completeness
-  bar; there is NO cd_icmp4_ip/cd_icmp6_ip FILE in ip/ — those tables
-  live in `misc/cd_icmp4_ip.cc` 345 L + `misc/cd_icmp6_ip.cc` 162 L
-  (misc tail), the row-18 extern census ties the pair together.
-- **The small four** (wc THIS pass): `ip/cd_esp.cc` **227 L** (table
-  cd_esp[] :221, extern **cd_esp :47** load :92, ladder cd_esp
-  codec_api.rs:105 — includes ONLY the four resident headers, NO
-  protocol header, NO daq.h -> **zero-fresh-cp candidate**);
-  `ip/cd_frag.cc` **190 L** (table cd_frag[] :184, extern **cd_frag
-  :50** load :95, ladder :108 — adds log/text_log.h, resident ->
-  **zero-fresh-cp candidate**); `ip/cd_pgm.cc` **211 L** (table
-  cd_pgm[] :206, extern **cd_pgm :63** load :108, ladder :121 — adds
-  same-dir `checksum.h` :28 = RESIDENT since gre's first-ever cp ->
-  **zero-fresh-cp candidate, first row to RIDE the checksum residency
-  it paid for**); `ip/cd_auth.cc` **172 L** — **THE NAME-DRIFT ROW**:
-  table `const BaseApi* cd_ah[] =` at **:166** (BUILDING_SO arms
-  :163-:167, gre-family), extern `cd_ah` codec_api.cc **:40** load
-  :85, ladder `cd_ah` codec_api.rs:98 — there is NO extern named
-  `cd_auth` anywhere in ground (grep THIS pass); the 18f-pass NEXT
-  "auth has NO extern" line corrected above; includes ONLY the four
-  resident headers -> **zero-fresh-cp candidate**; the row's tripwire
-  MUST pin file-base-vs-table-name drift (cd_hop_opts 18e face
-  precedent).
-- **Bypass seam**: cd_udp/cd_icmp* decode paths ride the same
-  tunnel_bypass seam (TUNNEL_GRE face homed at gre; masks TUNNEL_*
-  snort_config.h:119-:128 sed-pinned since 18f; witness_18f carried).
-  Landmine posture **ZERO for every 18h name** (cd_udp/cd_icmp*/
-  cd_esp/cd_frag/cd_pgm/cd_ah stub grep 0/0 THIS pass in vocab
-  witness_stubs + codec stubs, both donors).
-- **STATIC_CODECS extern census**: 39 `extern const BaseApi* cd_[]`
-  lines re-counted THIS pass (cc face); by end of row 18 every extern
-  links real or stays pinned dormant. ip-region hit-list: cd_ah :40,
-  cd_esp :47, cd_frag :50, cd_gre :52 (**LANDED 18g**), cd_icmp4 :54,
-  cd_icmp4_ip :55, cd_icmp6 :56, cd_icmp6_ip :57, cd_pgm :63, cd_udp
-  :70 + the ipv4/ipv6/tcp trio.
+  holds — ip/ NOT misc/): table `const BaseApi* cd_udp[] =` at **:655**;
+  extern cd_udp codec_api.cc **:70** + load_plugins **:115**; ladder
+  cd_udp resident codec_api.rs:128. Includes cc:22-:36 (sed THIS pass):
+  config.h + `#include <daq.h>` :25 + the resident base
+  (codec_module.h / framework/codec.h / log/messages.h / log/text_log.h
+  / main/snort_config.h / utils/util.h / checksum.h — ALL present in
+  the small4 copy tree, find 1 x7 THIS pass) + `protocols/teredo.h` :32
+  (**RESIDENT** — find 1 in small4 copy) + `protocols/udp.h` :33
+  (ground **68 L**, find vs small4 copy = **0 hits -> fresh cp**).
+  Stats face: cksum_bypassed peg :49/:57/:274 (NOT the tunnel hook —
+  the 18g correction above) + the :501 tunnel comment.
+- **ICMP pair** `ip/cd_icmp4.cc` **645 L** (table cd_icmp4[] **:640**,
+  externs **cd_icmp4 :54 + cd_icmp4_ip :55**, load **:99-:100**;
+  includes :22-:33: daq.h :25, ALL-FIVE resident base headers,
+  `protocols/icmp4.h` :31 (ground **259 L**, small4 copy 0 hits ->
+  **fresh cp**), checksum.h :33 RESIDENT) and `ip/cd_icmp6.cc` **518 L**
+  (table cd_icmp6[] **:513**, externs **cd_icmp6 :56 + cd_icmp6_ip
+  :57**, load **:101-:102**; includes :22-:35: daq.h :25, resident
+  base, `protocols/icmp6.h` :31 (ground **196 L**, 0 hits -> **fresh
+  cp**) AND `protocols/icmp4.h` :32 (**cross-rider — the ONE icmp4.h
+  fresh cp feeds BOTH rows**), utils/util.h resident, checksum.h :35);
+  ladder cd_icmp4/4_ip/6/6_ip ALL resident codec_api.rs:112-:115.
+  cksum_bypassed pegs per TU as udp (icmp4 :45/:52/:143, icmp6
+  :47/:54/:136). Pair completeness bar = the FOUR externs
+  (:54-:57): there is NO cd_icmp4_ip/cd_icmp6_ip FILE in ip/ — those
+  tables live in `misc/cd_icmp4_ip.cc` **345 L** (table :339) +
+  `misc/cd_icmp6_ip.cc` **162 L** (table :157), wc THIS pass; their
+  include closures ride the SAME fresh cps (icmp4_ip includes
+  protocols/icmp4.h :28 + protocols/udp.h :31 + packet_manager.h :29
+  RESIDENT + **protocols/tcp.h :30 — 0 hits -> the pair's ONLY extra
+  fresh cp**) — measure at that row whether the misc pair rides INTO
+  18i or tails after (a PLAN-0 call, NEVER pre-decided; the extern
+  census stays complete only when all 4 names link real).
+- **Bypass seam RE-SCOPED (18h correction stands)**: trio tunnel_bypass
+  grep **0/0/0** THIS pass -> ZERO new witness expected; the WIN trio
+  (ea1f79f3/4dd91018/f4afd35f) rides inherited. The tunnel_mask seam
+  (snort_config.h:119-:128 TUNNEL_* table) stays a gre-face cite only.
+  Landmine posture **ZERO for every 18i name**: cd_udp / cd_icmp4 /
+  cd_icmp6 greps 0/0 in vocab witness_stubs + codec stubs THIS pass
+  (substring-covers the *_ip forms); table-name greps 0.
+- **STATIC_CODECS extern census**: 39 lines re-counted THIS pass cc
+  face (pinned -eq 39 by small4 build.sh :89); ip-region hit-list:
+  cd_ah :40 (**LANDED 18h**), cd_esp :47 (**LANDED 18h**), cd_frag :50
+  (**LANDED 18h**), cd_gre :52 (**LANDED 18g**), cd_icmp4 :54,
+  cd_icmp4_ip :55, cd_icmp6 :56, cd_icmp6_ip :57, cd_pgm :63
+  (**LANDED 18h**), cd_udp :70 + the ipv4/ipv6/tcp trio (the last three
+  witness-stub owners, retirement rows).
 
-### 18h alternatives — honest comparison (measured THIS pass)
+### 18i alternatives — honest comparison (measured THIS pass)
 | option | size | fresh-cp / risk face | verdict |
 |---|---|---|---|
-| **(a) plan order: 18h = udp + icmp4 + icmp6 (the DAQ trio)** | 660+645+518 = 1,823 L | fresh cps: udp.h 68 + icmp4.h 259 + icmp6.h 196 (teredo.h + checksum.h RESIDENT); the FIRST `#include <daq.h>` (cc:25 x3) — external header NOT in ground (find THIS pass); two PLAN-0 options, NEVER pre-decided: minimal `daq.h` graft w/ fmod daq_common.h + vocab daq_dlt.h precedent, or the row-20 deferral posture (grep-assert the wall like the E4 faces); 2 probe rows likely (pair + udp) | **HIGHEST plan fidelity**; the DAQ head-on moment arrives with the 3 heavyweight rows anyway — bank it once. |
-| **(b) small four first: esp + frag + pgm + auth** | 227+190+211+172 = 800 L | ZERO fresh cps (ALL four closures measured resident THIS pass — the cheapest tree delta in the lineage); DAQ-FREE; the cd_ah name-drift row early w/ tripwire; pgm rides the checksum residency 18g paid | Honest tail-order options — PLAN-0 at 18h calls (a) vs (b); the 18f "no pre-ordering" face stands; if (b) lands first, 18i-18k absorb the DAQ trio unchanged. |
-| (c) detour `src/main/thread_config.cc` | 920 L | 14 `[ThreadConfig]` Catch TEST_CASEs (18f-pass count; re-grep at that row if ever); needs the hwloc witness ladder (17l; eth excision carry); breaks codec continuity + donor chain | Fallback ONLY if row 18 stalls (18a/18c/18d/18f ruling — re-affirmed, still the only nearby fresh-gate option OUTSIDE codecs). |
+| **(a) plan order: 18i = udp + icmp4 + icmp6 (the DAQ trio)** | 660+645+518 = **1,823 L** (wc cites above) | fresh cps EXACTLY 3 headers = udp.h 68 + icmp4.h 259 (x1, cross-rides icmp6) + icmp6.h 196 = **523 L** (teredo.h + checksum.h + the whole base RESIDENT, find 1 x7 + 0 x3 above); THE daq.h graft-vs-defer call (table below); trio add 3 externs + 3 ladder names ALREADY resident; 2 probe rows likely (pair + udp) or ONE harness like small4's FOUR-in-ONE (all three closures share the graft — decide at PLAN 0) | **HIGHEST plan fidelity**; the DAQ head-on arrives with the trio anyway AND `link/cd_vlan.cc` + ipv4/ipv6/tcp ALL `#include <daq.h>` too (grep -l THIS pass) — pay the graft ONCE and 4 later rows ride it. |
+| **(b) trio + misc pair in one sweep** | 1,823 + 345 + 162 = **2,330 L** | same 3 cp + tcp.h (pair's only extra, 0-hit face above); closes the FOUR-extern pair face (:54-:57) in one commit; gate 0 x2 on the pair; pair closures ride the copy face (codec_module.h/framework/codec.h/... resident per includes :21-:31) | Honest scope-UP option — PLAN-0 at 18i calls size vs one-commit-cleanliness; if (a) lands trio-only, the pair tails as its own row with tcp.h + one cp. |
+| (c) detour `src/main/thread_config.cc` | **920 L** | **14** `TEST_CASE` grep-counted THIS pass (needs the GRE gate shape + hwloc witness ladder, 17l; eth excision carry); breaks codec continuity + donor chain | Fallback ONLY if row 18 stalls (18a/18c/18d/18f/18h ruling — re-affirmed). |
 
-### Rules forward from 18g (the gate-change carried into 18h+)
-- The two-lineage census (9 x 4826fc22 frozen + gre's own) is the
-  LIVE face — run its loop INSIDE the newest harness (build.sh carries
-  the -eq pair), NEVER re-pin 24/9/17 arithmetic into a new row's
-  docs without measuring THAT pass (17p: every typed count before its
-  row is a dead forecast).
-- 18h rows are ZERO-gate material (combined grep 0 x7 THIS pass) ->
-  probe-only harnesses clone the TUN pattern (lineage 18f) on the GRE
-  copy tree (now incl. checksum.h + gre.h + the catch pair — trim
-  unused cp faces at PLAN 0, NEVER pre-type the count).
-- A codec row that ever DOES ship a suite (thread_config fallback, or
-  row-19 detection material) clones the GRE gate shape: shim passthrough
-  + catch_main heredoc + TRACKED gate.txt md5/wc/tail-wording pin +
+**daq.h graft-vs-defer decision table (the row-18i PLAN-0 call, NEVER pre-decided; costs MEASURED THIS pass):**
+| face | cost measured | precedent / note |
+|---|---|---|
+| **graft (minimal `daq.h` in the copy tree)** | 7 symbols above: 2 type names + 3 constants + 2 FUNCTIONS (`daq_msg_get_data` / `daq_msg_get_meta` — these need WITNESS stubs for the link, a NEW cost vs header-only precedents); synthetic `DAQ_PktDecodeData_t` bodies feed the vectors arms (l4_offset face) | fmod `daq_common.h` 16 L + vocab `daq_dlt.h` 5 L are the ONLY graft precedents (both committed facts); reuse banked: vlan + ipv4/ipv6/tcp rows ride it free (`grep -l 'include <daq.h>'` face THIS pass) |
+| **defer (row-20 posture)** | CANNOT satisfy compilation: the include is INSIDE the ground TUs and ground C is NEVER trimmed — a minimal header MUST land; what CAN defer is DAQ SEMANTICS: `raw.daq_msg` provenance stays the 17d left-open seam (codec.rs:9/:171 face), meta pointers synthetic in the probe ONLY, real DAQ at row 20 | "defer" therefore = graft-anyway-minimally + defer-semantics; the honest framing for the deviations row — there is no NO-graft option once the trio compiles verbatim |
+| **hybrid: reuse `daqs/daq_user.h` (54 L)** | real-ground header, but lives OUTSIDE src/ (include-path + CMake-context faces untested on host; pulls its own deps — UNVERIFIED cost, flag for the PLAN-0 recon) | daqs/ also carries daq_file.c/daq_hext.c impl faces — the most faithful stand-in if it compiles clean; NEVER assume, compile-rehearse in scratch first (the 18h PLAN.md seed pattern) |
+
+### Rules forward from 18h
+- The two-lineage census (9 x 4826fc22 frozen + gre's own = 25/17) is
+  the LIVE face — re-measured DIRECT this pass (17 distinct md5s,
+  md5sum|sort -u). 18i clones the small4 ZERO-gate face and its census
+  loop; NEVER re-pin 25/9/17 arithmetic without measuring THAT pass
+  (17p).
+- 18i rows are ZERO-gate material (0 x5 above) -> probe-only harnesses
+  clone the SMALL4 pattern (lineage head) on the small4 copy tree (96
+  find-count; add ONLY what PLAN-0 measures fresh — NEVER pre-type the
+  count).
+- A row that DOES ship real Catch material (thread_config fallback,
+  row-19 detection) clones the GRE gate shape: shim passthrough +
+  catch_main heredoc + TRACKED gate.txt md5/wc/tail-wording pin +
   rfind/cut-to-EOF excision + E9 dup flipped-assert.
-- TRUE-NAME DRIFT (the cd_ah face): every landing row greps the TABLE
-  name (`const BaseApi\* \w+\[\]` sed) not just file base; the ladder
-  tripwire test pins file-vs-extern pairs; table sites: udp :655 /
-  icmp4 :640 / icmp6 :513 / esp :221 / frag :184 / pgm :206 /
-  auth(cd_ah) :166 — sed THIS pass.
+- TRUE-NAME DRIFT rule RE-ARMED (the cd_ah face, now a LANDED tripwire
+  face): every landing row sed's the TABLE (`const BaseApi\* \w+\[\]`)
+  not just the file base; the Rust ladder/file pair gets a tripwire
+  test. 18i table sites sed-cited THIS pass: udp **:655** / icmp4
+  **:640** / icmp6 **:513** / icmp4_ip **:339** / icmp6_ip **:157** —
+  no name drift found in the trio/pair so far (file base == table base
+  for all five; the `_ip` pair's FILE faces already drift from the
+  extern region ip/ -> misc/ — cite the paths at the row).
+- Scoping greps pin SYMBOLS not substrings (this pass's correction):
+  peg-family names (`checksum_bypassed`) are NOT hook faces
+  (`tunnel_bypass_enabled`) — grep the exact callee.
 
-## Thereafter — remaining row-18 order (totals RE-VERIFIED THIS pass: codecs/ tree = **11,914 L / 48 files**, non-test **11,289 L / 44 files** — both find+wc sweeps re-run THIS docs pass, zero drift)
-- After the queue above: the 3 heavyweight stub-table owners ipv4 **790**
-  / ipv6 **733** / tcp **839** (18f-pass wc, re-verify at their rows);
-  cd_ipv4/cd_ipv6/cd_tcp witness_stubs.cc :11-:13 get REAL retirement
-  at those rows, PER-LINK (18a corollary), via the E6 inverted
-  mechanics + 3-face census discipline.
-- Then the link tail (18f-pass wc, re-measure at that pass: mpls 390 /
-  vlan 236 / pppoe 243 / erspan2 145 / erspan3 147 / ciscometadata
-  235 / fabricpath 187 / trans_bridge 158 / ppp_encap 174), then the
-  misc tail (llc 198 / vxlan 133 / user 167 / **icmp4_ip 345 /
-  icmp6_ip 162** — the pair's two remaining extern tables, :55/:57 +
-  :113/:115 ladder — and cd_default 83 LANDED 18c).
+## Thereafter — remaining row-18 order (totals RE-VERIFIED THIS pass: codecs/ tree = **11,914 L / 48 files**, non-test **11,289 L / 44 files** — find+wc sweeps re-run THIS docs pass, zero drift vs the 18g face)
+- After the DAQ queue: the 3 heavyweight stub-table owners ipv4 **790**
+  / ipv6 **733** / tcp **839** (wc re-run THIS pass); cd_ipv4/cd_ipv6/
+  cd_tcp witness_stubs.cc :11-:13 get REAL retirement at those rows,
+  PER-LINK (18a corollary), via the E6 inverted mechanics + 3-face
+  census discipline. NB: all THREE also carry `#include <daq.h>` (grep
+  -l THIS pass) — the 18i graft/defer decision propagates.
+- Then the link tail (wc ALL RE-RUN THIS pass: mpls 390 / vlan 236 /
+  pppoe 243 / erspan2 145 / erspan3 147 / ciscometadata 235 /
+  fabricpath 187 / trans_bridge 158 / ppp_encap 174; **cd_vlan.cc ALSO
+  `#include <daq.h>`** — grep THIS pass), then the misc tail (llc 198 /
+  vxlan 133 / user 167 / **icmp4_ip 345 / icmp6_ip 162** — the pair's
+  two remaining extern tables, externs :55/:57 + ladder :113/:115 — and
+  cd_default 83 LANDED 18c). misc trio faces THIS pass: llc/vxlan/user
+  carry NO <daq.h> — the resident-half face measured at the small4
+  copy tree: daq_common.h RESIDENT (the fmod graft rides) +
+  packet_io/active.h RESIDENT (the 18g-era tun carry), but
+  daqs/daq_user.h + packet_io/sfdaq.h + sfdaq_instance.h = 0 hits
+  (user.cc's includes :24/:26/:28/:29) — re-measure at that row.
 - The 39-extern census + the STATIC_CODEC_EXTERN_NAMES tripwire give
-  every row its completeness checklist (ladder faces sed-cited in the
-  18h scoping above; ALL queue names already resident — rows only
-  ADD real TUs, NEVER touch codec_api.rs).
+  every row its completeness checklist (ALL 18i/queue names ALREADY
+  resident codec_api.rs :98-:128 — rows only ADD real TUs, NEVER touch
+  codec_api.rs).
 
 ## Backlog (plan rows)
-- 17z: DONE (ef9bf83) — wiki trio LANDED (f91be60).
-- 18a: DONE (74bcc23) — wiki trio LANDED (9792858).
-- 18b: DONE (7e1744c) — wiki trio LANDED (aa22a11).
-- 18c: DONE (9ed8a8f) — wiki trio LANDED (72d39cd).
-- 18d: DONE (5c8e31e) — wiki trio LANDED (63a6170).
-- 18e: DONE (c30a30e) — wiki trio LANDED (1cacca1).
-- 18f: DONE (3ece5c6) — wiki trio **LANDED (d13ccca)** verified THIS
-  docs pass (greps PRESENT: Porting-status.md:96 status row + :103
-  chapter note + Deviations-from-Snort-3.md:1573 deviations header;
-  wiki stats at that commit: 101 commits / 389 files / 45,233 src
-  lines / 530 tests).
-- 18g: **DONE (e6901f5)** — codecs ip cd_gre, THE gate-change row:
-  `ip/cd_gre.cc` 366 L literal -> `src/codecs/cd_gre.rs` 668 L FLAT +
-  mod.rs wiring ONLY (framework/codec.rs + parse_conf.rs +
-  codec_api.rs BYTE-UNTOUCHED; ladder name resident codec_api.rs:110;
-  sids 160-165 resident codec_module.rs:107-:112); `tools/gre_harness`
-  NOW LINEAGE HEAD (exactly 8 tracked files; **FIRST REAL CODEC CATCH
-  GATE**: ground embedded block runs VERBATIM under the shim route,
-  gate.txt TRACKED md5 `6751d1a8...` wc 3, RUNNER tail `All tests
-  passed (1 assertion in 1 test case)` pinned at build.sh :378-:382,
-  NEVER typed); **TWO-LINEAGE CHAIN**: sanctioned break after 14
-  straight — frozen 9 x `4826fc22` stay byte-frozen, gre adds ONE
-  own-md5 gate; census loop gre build.sh :401-:404 MEASURED 9/25/17
-  THIS pass; tun/eth/ext -eq 24 ls-asserts drift-fail BY DESIGN
-  (deviation :2921-:2927; holders -eq 9 PASS; frozen vectors re-md5'd
-  zero drift direct THIS pass; rows NEVER rewritten); probe side =
-  rfind + cut-to-EOF + brace-balance (E7 face MANDATORY) + E9 dup
-  flipped-assert EVERY build + E4 header-wall x2 + ZERO new witness
-  (witness_18f carried, `ea1f79f3`); fresh cps = gre.h 50 L `7b07af8e`
-  + checksum.h 284 L `b43628f3` (first-ever donor entry of the 18b
-  lib), endian MEASURED not in closure (the '~3' forecast face died —
-  2 measured); vectors DEC 26 L `41bd7d1b...` + FACE-A 5 L
-  `783649440d...` IMMUTABLE, THREE O0==O2 streams (DEC+FACE-A+GATE)
-  byte-ident at the FRESH x2 rebuilds rc 0; the UPD/ENC vectors lines
-  `103 255`/`127 255` = FIRST C-consumer cross-check of Rust
-  checksum::cksum_add, byte-exact (two-way parity pin); UB SEQ-arm
-  bounded substitution, zero-contribution measured; `tests/
-  gre_parity_test.rs` 723 L 11 tests = 26/26 + 5/5 ORDERED replays +
-  `gre_gate_contract` runner-tail pin + `up_gate_gre_*` — FIRST codec
-  row mirroring a gate that ACTUALLY RAN; suite **541 passed / 0
-  FAILED** THIS pass (65 result lines plain; 64 lines --all-targets,
-  same sum); clippy forced relint 0; .gitignore gre block :392-:419
-  check-ignore re-verified (stageables exactly 8 — the "7 harness
-  files + 5 src/tests" breakdown drift in the e6901f5 message
-  recorded honestly, total-14 face stands, NO rewrite); plan row +
-  deviations VERIFY-GREPED (count 1 each: PORTING_PLAN.md:86 /
-  KNOWN DEVIATIONS.md:2901-:3013, 113 L / 9 bullets, verdict
-  ADEQUATE-READ-LEAVE with every anchor re-grounded — copy-tree 89-vs-
-  92 find-count drift recorded, rows NOT rewritten). **Wiki trio for
-  18g OWED** (next WIKI phase; wiki HEAD d13ccca stops at 18f; `grep
-  -rn 'row 18g' --include='*.md' /tmp/RustyPig.wiki` = 0 hits verified
-  THIS pass).
-- 18: codecs — 18b/18c/18d/18e/18f/18g DONE; 18h = the ip queue
-  (udp/icmp DAQ trio vs small four, PLAN-0 options MEASURED above);
+- 17z/18a/18b/18c/18d/18e/18f: DONE — wiki trios ALL LANDED (verified
+  across passes; 18f = d13ccca, 18e = 1cacca1, earlier in prior rows'
+  commits).
+- 18g: **DONE (e6901f5)** — wiki trio **LANDED (313aab6)** verified THIS
+  docs pass (greps PRESENT: Porting-status.md:97 status row + :105
+  chapter note + Deviations-from-Snort-3.md:1742 deviations header;
+  wiki stats at that commit: 103 commits / 399 files / 45,902 src lines
+  / 541 tests — point-in-time faces, UNTOUCHED; the 18g-pass NEXT
+  "18g trio OWED at d13ccca" line is SUPERSEDED by this measurement —
+  the trio landed BETWEEN the two passes; wiki touched ZERO times by
+  us, READ-ONLY rule held).
+- 18h: **DONE (47654b3)** — codecs ip small four, THE ZERO-gate +
+  cd_ah NAME-DRIFT row: `ip/cd_{esp,frag,pgm,auth}.cc` 227+190+211+172
+  = **800 L** literal -> `src/codecs/{cd_esp,cd_frag,cd_pgm,cd_auth}.rs`
+  292+269+213+228 = **1,002 L FLAT** + mod.rs wiring ONLY
+  (framework/codec.rs + parse_conf.rs + codec_api.rs BYTE-UNTOUCHED;
+  ladder cd_ah :98 / cd_esp :105 / cd_frag :108 / cd_pgm :121 resident,
+  re-sed THIS pass; sids 272/294/454/456/458/459/465/466 resident
+  codec_module.rs, ZERO new constants); `tools/small4_harness` NOW
+  LINEAGE HEAD (exactly 6 tracked files, ZERO-gate face ENFORCED at
+  build.sh :233; NO gate.txt added ANYWHERE — tracked gate face still
+  ls-files-1 (gre); two-lineage census **UNDISTURBED MEASURED THIS
+  pass: 25 gate.txt on disk / 9 x `4826fc22` holders / **17 distinct
+  md5s** — direct md5sum|sort -u THIS pass, same face the row loop
+  prints :442-:452); copy tree = gre 92 VERBATIM + 4 row cps + ZERO
+  fresh cps, residency PROVEN by INVERTED E4 arms IN the build
+  (checksum.h-only-pgm-dies :146-:150 / text_log.h-only-frag-dies
+  :156-:159 / restored rc0 x4 :161-:166; pgm 2nd rider of checksum.h
+  `b43628f3`, frag 1st rider of text_log.h `3e827113`; post-cp find 96
+  asserted :125); NAME DRIFT: table cd_ah cc:166 + extern cd_ah
+  codec_api.cc :40/:85 + ladder cd_ah, whole-src extern-cd_auth grep
+  **0 THIS pass**, transcripts CARRY it (faceA :2/:4/:15 `LOAD auth` /
+  `API ah ... name=auth` / `LOAD ipv6_frag`); Rust FILE base TRUE
+  (cd_auth.rs) + table const mirrors the C TABLE (CD_AH/AH_API) +
+  tripwire test pins names[0]=="cd_ah" !contains("cd_auth"); witness
+  posture ZERO new (tunnel_bypass 0/0/0/0 measured :247; WIN trio
+  inherited `ea1f79f3`/`4dd91018`/`f4afd35f` — 15th straight); vectors
+  DEC 46 L `462f0ff6` + FACE-A 17 L `4755d48c` IMMUTABLE, FRESH x2 rc 0
+  logs **byte-ident THIS pass**, O0==O2 BOTH faces; `tests/
+  small4_parity_test.rs` 802 L 8 tests, 46/46 + 17/17 ORDERED replays,
+  ZERO up_gate_* (honest zero-suite census cite); suite **549 passed /
+  0 FAILED** THIS pass (66 result lines); clippy forced relint 0;
+  .gitignore small4 block :420-:441 check-ignore re-verified THIS pass
+  (stageables EXACTLY 6 harness files; status EMPTY after rebuilds);
+  plan row + deviations VERIFY-GREPED (count 1 each: PORTING_PLAN.md:87
+  / KNOWN DEVIATIONS.md:3015-:3186 = 172 L / 11 bullets — the
+  message's ":3014 / 173 L" + the build.sh internal-cite staleness
+  recorded honestly above, rows/sections NOT rewritten). **Wiki trio
+  for 18h OWED** (next WIKI phase; `grep -rn 'row 18h|small four|
+  cd_esp' /tmp/RustyPig.wiki` = 0 hits THIS pass; wiki HEAD 313aab6
+  stops at 18g).
+- 18: codecs — 18b-18h DONE; 18i = the DAQ trio (graft-vs-defer vs the
+  hybrid daq_user.h face — MEASURED options table above, PLAN-0);
   queue continues per order above.
-- 19: detection option engines (tree face RE-MEASURED THIS pass: **52**
-  .h+.cc files, **14,533** L total — matches the prior claim; the ~47
-  embedded Catch TEST_CASE face stands from the 18f-pass grep —
-  fp_utils.cc 21, detection_options.cc 6, ips_context.cc 5, extract.cc
-  5, ips_context_chain.cc 3, context_switcher.cc 3, rules.cc 2,
-  sfrim.cc 1, ips_context_data.cc 1 — real Catch material carried with
-  the GRE gate shape now banked; re-grep at that row's scoping pass);
-  20: packet_io / DAQ (AF_PACKET via libc; the 17d RawData/daq_msg
-  deferral + the daq_dlt.h graft close HERE — and note the 18h pair
-  may have ALREADY paid a minimal `daq.h` graft decision, PLAN-0
-  face, see options table); 21: main CLI + `snort -q -c` end-to-end
+- 19: detection option engines (tree face re-stands from prior passes:
+  52 .h+.cc files, 14,533 L; ~47 real Catch TEST_CASE faces — the GRE
+  gate shape banked); 20: packet_io / DAQ (AF_PACKET via libc; the 17d
+  RawData/daq_msg deferral + the daq_dlt.h graft close HERE — and note
+  **18i may have ALREADY paid a minimal daq.h graft**, PLAN-0 face; the
+  heavyweights + vlan all carry <daq.h> so the graft cost is banked
+  across rows either way); 21: main CLI + `snort -q -c` end-to-end
   PCAP parity.
 
 ## Session ritual (verbatim order)
 1. `git -C /opt/data/snort3-rust status --short; git log --oneline -3`
-2. `cd tools/gre_harness && bash build.sh` **x2** -> `GRE_HARNESS_OK
-   vectors=26 faceA=5 gate_lines=3` + vectors `41bd7d1b` / FACE-A
-   `783649440d` / gate `6751d1a8` md5 pins ALL byte-ident across BOTH
-   fresh runs (E4/E9 flipped-assert arms + two-lineage census echo
-   `frozen 9/25 holders 17 distinct md5s`). Rebuild `tools/fmod_harness`
-   for the FROZEN-chain byte-ident echo (rc 0, gate `4826fc22` + tail
-   VERBATIM `All tests passed (114 assertions in 22 test cases)` +
-   vectors `f0fdbab`) AND `tools/vocab_harness` (rc 0, `VOCAB_HARNESS_OK
-   vectors=29`, 9-holder echo). Do NOT chase tun/eth/ext full-build rc
-   1 — they die at the by-design `-eq 24` drift face (holder -eq 9
-   half passes); verify their frozen face by direct md5s instead
+2. `cd tools/small4_harness && bash build.sh` **x2** -> `SMALL4_HARNESS_OK
+   vectors=46 faceA=17 gates=0` + vectors `462f0ff6` / FACE-A
+   `4755d48c` md5 pins byte-ident across BOTH fresh runs (LOGS cmp
+   byte-ident) + the E4-inverted residency arms + two-lineage census
+   echo `9/25 holders 17 distinct`. `cd tools/gre_harness && bash
+   build.sh` x2 for the GATE anchor (`GRE_HARNESS_OK vectors=26
+   faceA=5 gate_lines=3`, gate `6751d1a8`, tail `1 assertion in 1 test
+   case`). Rebuild `tools/fmod_harness` for the FROZEN-chain byte-ident
+   echo (rc 0, gate `4826fc22` + tail VERBATIM `All tests passed (114
+   assertions in 22 test cases)` + vectors `f0fdbab`) AND
+   `tools/vocab_harness` (rc 0, `VOCAB_HARNESS_OK vectors=29`). Do NOT
+   chase tun/eth/ext full-build rc 1 — they die at the by-design
+   `-eq 24` drift face; verify their frozen face by direct md5s
    (tun `2a792479`/`81602890`, ext `da218429`/`0fa79b53`, eth
    `1bd98dbb`, witness census `9fad7e9d`/`be9bdd0b`/`f4afd35f`/
    `ea1f79f3`/`4dd91018`).
 3. Port -> `cargo test --test <x>_parity_test` -> full `cargo test`
-   (zero FAILED; >= 541) + clippy 0 -> `.gitignore` block +
+   (zero FAILED; >= 549) + clippy 0 -> `.gitignore` block +
    `git check-ignore` -> commit+push -> plan row (grep-guard) ->
-   deviations append (grep-guard; 18b-18g variant: verify-grep if
+   deviations append (grep-guard; 18b-18h variant: verify-grep if
    shipped with the code commit) -> refresh THIS file -> commit+push
-   docs -> wiki (status row + deviations + stats line) -> push wiki.
+   docs -> wiki (status row + deviations + stats line — queue: 18h
+   trio) -> push wiki.
