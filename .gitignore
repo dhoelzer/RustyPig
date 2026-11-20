@@ -368,3 +368,24 @@ tools/ext_harness/cp_audit_ok.txt
 tools/ext_harness/gate
 tools/ext_harness/gate.txt
 tools/ext_harness/*.log
+
+# row 18f tun_harness (probe-only; vectors.txt + vectors_faceA.txt STAY tracked)
+tools/tun_harness/copy/
+tools/tun_harness/o2/
+tools/tun_harness/probe
+tools/tun_harness/probe_O2
+tools/tun_harness/probe_dec
+tools/tun_harness/probe_dec_O2
+tools/tun_harness/*.o
+tools/tun_harness/witness_conf.cc
+tools/tun_harness/vectors_O0.txt
+tools/tun_harness/vectors_O2.txt
+tools/tun_harness/vectors_faceA_O0.txt
+tools/tun_harness/vectors_faceA_O2.txt
+tools/tun_harness/nm_U_*.txt
+tools/tun_harness/E4_*.txt
+tools/tun_harness/E4b_*.txt
+tools/tun_harness/cp_audit_ok.txt
+tools/tun_harness/gate
+tools/tun_harness/gate.txt
+tools/tun_harness/*.log

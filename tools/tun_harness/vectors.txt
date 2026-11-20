@@ -1,0 +1,40 @@
+API geneve type=0 size=112 ver=1900547 name=geneve
+HELP geneve support for Geneve: Generic Network Virtualization Encapsulation
+API gtp type=0 size=112 ver=1900547 name=gtp
+HELP gtp support for general-packet-radio-service tunneling protocol
+API teredo type=0 size=112 ver=1900547 name=teredo
+HELP teredo support for teredo
+TER short1 -> 0
+TER auth-shord -> 0
+TER mask0000 -> 1 bypass=1
+TER mask0002 -> 1 bypass=0 lyr=8 next=41 bits=128 flags=646
+TER ports-off -> 1 flags=646
+TERPID 257 n=1
+GTP short7 -> 0
+GTP type1 -> 0
+GTP gtpprime -> 0
+EV 116 298
+GTP v0-shord -> 0
+GTP v1-ok mask0001 -> 1 bypass=0 lyr=8 bits=256
+EV 116 297
+GTP v1-twice -> 1
+EV 116 298
+GTP v1-badlen -> 0
+GTP v1-encap -> 1 next=4 lyr=8 flags=518
+GTPPID 258 n=1
+EV 116 180
+GEN short7 -> 0
+EV 116 181
+GEN ver1 -> 0
+EV 116 182
+GEN hdr-long -> 0
+EV 116 183
+GEN C-no-copt -> 0
+GEN mask0200 -> 1 bypass=0 lyr=8 next=0 bits=2097152
+GEN mask0000 -> 1 bypass=1
+EV 116 184
+GEN badopt -> 0
+GENPID 265 n=1
+GEN rules=5 sid0=180 name=geneve
+GTP rules=2 sid0=297 name=gtp
+TER mod_ctor=0 mod_dtor=0
