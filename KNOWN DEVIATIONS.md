@@ -2012,3 +2012,108 @@ Structural deviations (behavior preserved):
   &FileServiceLite — file_inspect.rs:424, the getters read the Cells
   through &self). FileEnvLite grew mime/proto_ref slots (all frozen
   drivers build env with ..FileEnvLite::default() — additive).
+
+
+## file_api/file_log.cc (row 17z — NO file_log.h; single-TU row)
+
+- The C TU has NO header (existence pin re-measured: `find src -name
+  'file_log*'` = the .cc only; CMakeLists.txt:30 no .h twin): every
+  class is TU-local and the harness reaches ALL of it through the ONE
+  data export `sin_file[]` (cc:324). The Rust landing mirrors that
+  surface as `src/file_api/file_log.rs` CONSTS + records (MODULE_NAME/
+  LOG_FILE_NAME/MODULE_HELP cc:38-:40, FL_PARAMS cc:230-:239, FL_PEGS
+  cc:55-:59, FL_API record cc:294-:320) and the sin_file list stays a
+  DOC-SEAM readback (flog PLAN §3 row 6; the file_inspect.rs:511-:512
+  comment already names the consumer — no new BaseApi record forked).
+- `class FileLog : public Inspector` / `class FileLogModule : public
+  Module`: the Rust side has NO landed Inspector/Module base yet
+  (framework/ carries no module.rs; the manager layer is a later row
+  — NEXT.md 17+ queue). The base-class PLUMBING (Module ctor, the 8
+  stats-method ladder, the vtable pair) is closed harness-side by the
+  REAL framework/module.o cp (flog PLAN §0 residue proof: module.o's
+  app residue is exactly the W2 show_stats pair). The Rust twin pins
+  the (name, help, params) triple + the usage VALUE (C_USAGE_INSPECT=2
+  == vectors `usage=2`) as consts — deviation: no Rust Module base is
+  forked to hold them.
+- THREAD_LOCAL pair (fl_stats cc:53, tlog cc:65): Rust models the
+  TLS as ONE shared Rc cell per module for the stats (handler's++
+  and get_counts read the same cell — the V7 alias, vectors.txt:37/
+  :41-:42; the C reinterpret_cast `(PegCount*)&fl_stats` == handing
+  the cell) and one Option<TextLog> slot for the log (dl_tinit fills,
+  dl_tterm drains; C's dl_tterm leaves the raw tlog pointer STALE —
+  the Rust Option take models fclose+free, the stale posture has no
+  Rust meaning). Single-thread posture (PLAN R2).
+- `LogHandler::handle(DataEvent&, Flow*)`: the `DataEvent&` receiver
+  is INERT in C (unnamed arg) -> dropped from the Rust signature.
+  The TWO clock reads (wall gettimeofday cc:145, packet_gettimeofday
+  cc:155) are injected `Option<(i64,u32)>` inputs (PLAN R1 "Time
+  source PIN decision mirrors the landed Rust pattern" — text_log.
+  rs:40 Clock precedent); packet_time stays a SEAM (file_cache.rs:
+  648-:686 comment "packet_time_update semantics stay"). The two
+  null-return lookups (get_file_flows cc:166 / get_current_file_
+  context cc:171) hand their resolved Option pair to the seam
+  (landed file_flows.rs drives them for real); BOTH early arms still
+  render timestamp+ip pair (cc:142-:164 run FIRST) — the partial-
+  line merge quirk frozen at vectors.txt:21 and asserted by the v4
+  test. `env` threads what C resolves through the get_file_config()
+  singleton chain (the free file_type_name's resolution, PLAN R6).
+- The C `SfIpString ip_str` single reuse across the pair (cc:162-:164,
+  R3) normalises to owned Strings in FlowLite — byte-ident output (a
+  print consumes each ntop result before the next call). The
+  client_/server_port u16 fields mirror the NEW17z flowz witness
+  graft (real flow.h:586-:587).
+- `DataBus::subscribe` (cc:212): registration-ONLY (R4 "the bus never
+  runs"): the Rust seam = the landed MpBusSeam pattern (name-based,
+  file_inspect.rs:183) — DataBusSeam::subscribe(publisher="snort",
+  evt=23, handler_name="file_log"); the PubKey's TU-local copy
+  (intrinsic_event_ids.h:69, internal linkage; scratch pubkey_sz=16)
+  becomes the publisher NAME string (the instance half has no Rust
+  consumer). The real handler object is built over the module's
+  config + SHARED stats cell by FileLogModule::subscribe (the C
+  `new LogHandler(config)` hand-off at cc:212). The file_log_event
+  TRAIT-SEAM cluster (file_cache.rs:532 noop, file_lib.rs:2314
+  forwarder, 3 frozen test stubs) stays UNTOUCHED no-op — 17z wires
+  nothing into the bus.
+- `TextLog_Puts` (text_log.h:74 inline -> TextLog_Write(txt,str,
+  strlen) — the 5-residue count proof, flog PLAN §0) is spelled as
+  the module-local `text_log_puts` lowering over the landed
+  `write(s, s.len())` — no pub churn on the landed text_log twin
+  (REAL-in-17z witness, ZERO edits there). `TextLog_Print(log, " ")`
+  / `"\n"`/ conversion-free format arms ride the landed cfmt `print`
+  with empty arg arrays (cfmt copies conversion-free formats
+  byte-ident; format STRINGS stay verbatim from C at every arm).
+- The sanitizer (`log_file_name`, cc:94-:138) lands HERE (PLAN §3
+  row 2: the quirk "must be frozen somewhere"; the file_lib side
+  keeps its own `escape_unprintable` for the file_events path —
+  UNTOUCHED). The run quirk freezes verbatim: first byte of an
+  unprintable run `%02X` NO leading space, every later byte ` %02X`
+  (add_space, cc:119-:128), `|` fences, empty name -> NO field at
+  all. The landed private `get_utf8_fname` (file_lib.rs:1790) got
+  ONE visibility widening `fn` -> `pub(crate) fn` for the cc:102
+  arm (body byte-UNCHANGED — deviation row 17z: the ONLY landed-file
+  edit this row outside mod.rs; NOT a test, NOT a vector).
+  isprint: the row carries its OWN 3-line copy of the C-locale rule
+  (the landed file_lib copy is private; promoting it churns a pub
+  surface for one call).
+- Parameter::help strings ("log the packet time when event generated"
+  cc:233 / "log the system time when event generated" cc:237): the
+  landed Parameter struct (parameter.rs:36-:40) has no help slot
+  (deferred with the option-parsing layer) — the strings are pinned
+  in the FL_PARAMS doc comment only. `set`'s inert name/conf
+  receivers drop from the Rust signature; the UNCONDITIONAL `return
+  true` (cc:270 — bogus names answer TRUE, V2b `ret=111`) lands
+  verbatim.
+- fl_api record: the landed InspectApiRecord shape (file_inspect.
+  rs:486, 17w precedent) forces the cc:312 `nullptr // service` slot
+  to the empty string (the slot is `&'static str`; Option<()> would
+  fork the record shape the finspect vectors freeze) — deviation row
+  17z; every OTHER slot maps 1:1 (presence bools == the V1_statics
+  0/1 arms).
+- `sin_file_flow` extern (cc:322) resolves the landed SIN_FILE_FLOW
+  (file_inspect.rs:515) — cite-only; `sin_file[]` length/names freeze
+  in the sin_file::names() readback (V1 `n=2 second=file_inspect
+  third_null=1`).
+- VerdictName: NOT re-ported (the landed VERDICT_NAME at file_lib.
+  rs:62 answers cc:178 including the index-7 INVALID row — grep-
+  verified the vectors' walk tail); a verdict > 7 would panic (C
+  reads the table unguarded; unreachable for any defined FileVerdict).

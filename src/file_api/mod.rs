@@ -27,6 +27,16 @@ pub mod file_identifier;
 // file_inspect < file_lib in the C underscore sort).
 pub mod file_inspect;
 pub mod file_lib;
+// row 17z: the file_log.cc Inspector TU (329 L, NO file_log.h exists —
+// the single-TU row: every class TU-local, reached through the sin_file[]
+// export pin). The LogHandler FILE_VERDICT -> file.log renderer + the
+// sanitizer %02X-run quirk land per flog PLAN §3; the TextLog/show/ts_-
+// print/sha/VerdictName/get_UTF8_fname/file_type_name arms ride the
+// landed twins (REAL-in-17z parity witnesses, zero twin edits); the
+// DataBus subscribe + clocks + file_log_event consumers stay seams
+// (W1/C counter witness mirrors below). Alphabetical slot holds
+// (file_lib < file_log < file_mempool in the C underscore sort).
+pub mod file_log;
 pub mod file_mempool;
 // row 17x: the file_policy.{h,cc} FilePolicy TU (FileRule table + the
 // enable-flag pairs + the type/signature lookup ladder) — the real

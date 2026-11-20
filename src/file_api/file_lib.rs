@@ -1786,8 +1786,10 @@ fn escape_unprintable(name: &[u8], out: &mut Vec<u8>) {
 /// linking iconv — documented deviation, identical output for every
 /// pinned transcript input (the 17o fffe-prefixed UTF-16 name bytes,
 /// BMP-only). C's `size_t* converted_len` out-param == the returned
-/// Vec length.
-fn get_utf8_fname(file_name: &[u8]) -> Option<Vec<u8>> {
+/// Vec length. Row 17z visibility note: `fn` -> `pub(crate) fn` (the
+/// file_log::LogHandler::log_file_name arm, cc:102, is the second
+/// TU-scope caller — body UNTOUCHED, deviation row 17z).
+pub(crate) fn get_utf8_fname(file_name: &[u8]) -> Option<Vec<u8>> {
     if get_character_encoding(file_name, file_name.len()) != SNORT_CHAR_ENCODING_UTF_16LE {
         return None;
     }

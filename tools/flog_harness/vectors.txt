@@ -1,0 +1,50 @@
+FIM load_config stole=1
+V1_registry n=2 name=file_log help=log file event to file.log size=152 apiver=1900549 plugtype=1 itype=0 pbits=0 second=file_inspect third_null=1
+V1_statics tb=27 api_sz_ge=1 pc8=1 pegsz=1 pubkey_sz=16 mfpf=128 tinit=1 tterm=1 ctor=1 dtor=1 pinit=0 pterm=0 ssn=0 reset=0 buf=65536 file=1048576
+V2_params p0=log_pkt_time d0=true pt0=3 p1=log_sys_time d1=false pt1=3 last_null=1 ptmax=21 name=file_log peg0=total_events help0=total file events type0=1 end1=1 usage=2 counts=1
+CFGLOG              log_pkt_time: enabled
+CFGLOG              log_sys_time: disabled
+V2b_set non=1 ret=111 show_flip
+CFGLOG              log_pkt_time: disabled
+CFGLOG              log_sys_time: enabled
+V2b_back
+CFGLOG              log_pkt_time: enabled
+CFGLOG              log_sys_time: disabled
+W1 subscribe name=snort eid=23 handler=file_log
+V3_sub ret=1 calls=0->1 stashed=1 tag=file_log
+WITNESS get_network_policy
+POLICY base_file_policy -> stub
+DE get_current_packet have=0
+IMGR acquire -> inspector
+DE get_current_packet have=0
+V4c_ctx isnew=1 name=hello.txt sv=1700000000.500000
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, 11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, 11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: Unknown] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: Log] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: Stop] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: Block] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: Reset] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: Pending] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: Stop Capture] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: INVALID] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: Unknown] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "hello.txt"] [Verdict: Unknown] [Type: Unknown file type, done] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Verdict: Unknown] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "aZ~ "] [Verdict: Unknown] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "A|01 02 7F|B|E9|C"] [Verdict: Unknown] [Type: Undecided file type, continue...] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "tail:|80|"] [Verdict: Unknown] [Type: Undecided file type, continue...] 
+W1_file bytes=1918 lines=14 noeol=0
+WITNESS ThreadConfig::get_instance_max=1
+V7_counts pre=17 post=0
+W2 show_stats n=1 name=file_log peg0=total_events c0=0
+W2 show_stats_vec n=1 name=file_log peg0=total_events c0=0
+V7_ggc g=0
+V7_again now=1
+V7_reset now=0
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "sha.bin"] [Verdict: Unknown] [Type: Undecided file type, continue...] [SHA: ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "sha.bin"] [Verdict: Unknown] [Type: Undecided file type, continue...] [SHA: ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB] [Size: 4096] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "sha.bin"] [Verdict: Unknown] [Type: Undecided file type, continue...] [SHA: ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB] [Size: 4096] 
+11/14-22:13:20.500000  1.2.3.4:1234 -> 5.6.7.8:80, [Name: "sha.bin"] [Verdict: Unknown] [Type: Undecided file type, continue...] [SHA: ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB] [Size: 4096] 
+W2_file bytes=847 lines=4 noeol=0
+IMGR release
+V8_sweep lines=18 total_bytes=2765 removed=1
+FLOG_PROBE_DONE
