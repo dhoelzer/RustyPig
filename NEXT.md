@@ -1,4 +1,4 @@
-# NEXT.md — takeover context & plan (2026-11-19, post-17y)
+# NEXT.md — takeover context & plan (2026-11-20, post-17z)
 
 This file is the single resume point for a fresh agent. It carries only
 what is not cheaply re-derivable. `PORTING_PLAN.md` (row table, per-row
@@ -14,24 +14,45 @@ prior probe; NEVER `git add` anything under snort3-src). Port repo:
 `/opt/data/snort3-rust` (branch `master`, remote
 `github.com/dhoelzer/RustyPig`).
 
-Current state (measured at this 17y docs pass): plan rows 1–17y DONE (87
-commits counting the 17y code commit 3093f5e — this docs commit lands as
-the 88th, **450 tests green / 0 FAILED**, `cargo clippy --all-targets`
-**0 warnings**, 38,617 lines Rust across 120 `src/*.rs` files, 30
-`tests/*_parity_test.rs` whole-transcript replay tests among 55 test
-files, 324 tracked files, 37 `tools/*_harness` dirs). GitHub wiki
-https://github.com/dhoelzer/RustyPig/wiki is the public status doc
-(clone at `/tmp/RustyPig.wiki`, remote `RustyPig.wiki.git`, HEAD
-`8d74e32` = row 17x trio LANDED: status row + deviations section +
-stats line; verified read-only at this docs pass —
+Current state (measured at this 17z docs pass): plan rows 1–17z DONE (89
+commits counting the 17z code commit ef9bf83 — this docs commit lands as
+the 90th, **459 tests green / 0 FAILED** (full `cargo test --all-targets`
+re-run AT THIS docs pass: summed `test result` lines = 459 passed / 0
+failed), `cargo clippy --all-targets` **0 warnings**, 39,743 lines Rust
+across 121 `src/*.rs` files, 31 `tests/*_parity_test.rs` whole-transcript
+replay tests among 56 test files, 331 tracked files, 38
+`tools/*_harness` dirs). GitHub wiki https://github.com/dhoelzer/RustyPig/wiki
+is the public status doc (clone at `/tmp/RustyPig.wiki`, remote
+`RustyPig.wiki.git`, HEAD `b71494a` = row 17y trio LANDED: status row +
+deviations section + stats line; verified read-only at this docs pass —
 `git -C /tmp/RustyPig.wiki log --oneline -3` prints
-`8d74e32 row 17x: status + deviations + stats` atop `576f8f2 row 17w`,
-and `grep -rnE '17y|17z' /tmp/RustyPig.wiki --include='*.md'` is EMPTY —
-the wiki is NEVER touched by code or plan rows). **The 17y wiki trio is
-OWED** and is owed at the NEXT WIKI phase, not by this docs pass
-(status row + deviations section + stats line "324 tracked files /
-~38,600 src lines / 87+ commits / 450 tests"); the 17x trio is no
-longer debt — landed at 8d74e32.
+`b71494a row 17y: status + deviations + stats (88 commits / 324 files /
+38,617 src lines / 450 tests)` atop `8d74e32 row 17x`, and `grep -rnE
+'17z' /tmp/RustyPig.wiki --include='*.md'` is EMPTY — the wiki is NEVER
+touched by code or plan rows). **The 17z wiki trio is OWED** and is owed
+at the NEXT WIKI phase, not by this docs pass (status row + deviations
+section + stats line "331 tracked files / ~39,700 src lines / 89+
+commits / 459 tests"); the 17y trio is no longer debt — landed at
+b71494a.
+
+Deviations verdict for row 17z (KNOWN DEVIATIONS.md section landed WITH
+the code commit ef9bf83, 105 lines; audited by re-grounding claims THIS
+pass): **adequate — leave as-is, no follow-up edits.** Spot-verification:
+the ONLY landed-file edit outside mod.rs is the `get_utf8_fname`
+visibility widening (`fn` -> `pub(crate) fn`, file_lib.rs:1792, body
+BYTE-untouched — matches the ef9bf83 diff hunk);
+`InspectApiRecord.service` is `&'static str` (file_inspect.rs:498) so
+the cc:312 nullptr slot's empty-string collapse is structurally forced,
+not invention; the landed `Parameter` struct (parameter.rs:36-:42) has
+no `help` slot — the cc:233/:237 help strings pinned only in the
+FL_PARAMS doc comment matches the code; VERDICT_NAME reuse (file_lib.rs
+-:62, 8 rows incl. index-7 INVALID) greps real. The base-class-skipping
+(Inspector/Module plumbing closed harness-side by the REAL module.o) +
+THREE-cells (Rc stats / Option<TextLog> / clock injection) +
+registration-only bus + free-signature drops (DataEvent&/Flow*) cluster
+matches the vectors' observable semantics (V7 alias lines, V3_sub
+stashed-only, V4c partial-line arms). No deviation in the section lacks
+an anchor cite verified this pass.
 
 ## The method (non-negotiable, used by every row)
 1. **C++ harness** under `tools/<name>_harness/` that compiles the
@@ -88,7 +109,8 @@ longer debt — landed at 8d74e32.
 - No gdb. Diagnose segfaults via stdout tail + source inspection; THREAD_LOCAL statics must be armed or you get rc 139: `file_stats` via `file_stats_init()`, `packet_time`'s `s_recent_packet` via `packet_time_update()` ONLY (it clamps backwards calls — never backstep by construction).
 
 ## Donor harnesses (copy their build.sh recipes wholesale)
-- `tools/fsvc_harness/` — **the NEW donor for the remaining file_api rows (17z+)**: fresh from the fpolicy donor; **cp delta TWO entries** (`file_service.cc` appended to the cp braces :96 + the objs loop :464, AND `target_based/snort_protocols.cc` appended to the same loop — real-cp parity for `ProtocolReference::find`, snort_protocols.cc:92, residue zero app-NEW after it); FIXACC python block at :311 (file_service.h was already in the donor graft list); stubs.cc 879L = fpolicy lineage + the 17y RETIREMENT comment :591 (whole donor FileService witness block gone — the landmine inversion, 23 hard collisions) + the get_file_processed_size retire :726 + 4 NEW witness bodies (pause int :611, MimeSession::init/exit :626, InspectorManager::get_inspector :631; include `mime/file_mime_process.h` :29); build.sh self-checks :773-:775 pin the row TU TEST_CASE/UNIT_TEST = 0, :706-:707 pin the row .o's own T defs, :827 echoes nm retire evidence; vectors.txt 64 lines md5 `54864705dd654a18585960a13a853baf` (committed, NEVER edit); gate UNCHANGED = "All tests passed (114 assertions in 22 test cases)", gate.txt md5 `4826fc2233044a2d5429413faf0ae1af` byte-ident (SEVENTH straight zero-regression row). Its cp braces (:96) + objs loop (:464) ALREADY carry the FULL file_api closure incl. file_service.cc + file_module.h + the real snort_protocols.cc — see the per-candidate table below: 17z's file_log.cc and the queued file_module.cc are the only file_api TUs still absent.
+- `tools/flog_harness/` — **the NEW donor for the remaining file_api rows (18a+)**: fresh from the fsvc donor; **cp deltas** = `file_log.cc` appended to the file_api braces :153 (+ `text_log.{h,cc}` + `log.h` appended to the log braces :185 — `text_log.cc:45` includes `log.h`; `messages.cc` STAYS OUT, R6 resident-trio guard) + REAL cp `framework/module.cc` :192 (+ compile-only header cps `utils/stats.h`, `main/stats_output_format.h` — the header-only `module.cc:28 -> stats.h:31` chain, zero link contribution); THREE dirs join the objs loop (`file_log`, `text_log` = the NEW `d=log` case, `module`); the ONE flowz graft delta since 17q (witness Flow + uint16 `client_port`/`server_port`, real flow.h:586-:587) + the ONE shim delta (`main/snort_config.h` + `#include "framework/inspector.h"`, real snort_config.h:35 — the `class FileLog : public Inspector` chain); stubs.cc 938L = fsvc lineage + the NEW17z block, **ZERO retirements** (W1 plain `DataBus::subscribe` :908 + W2 `show_stats` pair :924/:931 = exactly the two app residues of the two link-added .o's, scratch residue_final.txt); build.sh self-checks :853-:854 pin file_log.cc TEST_CASE/UNIT_TEST = 0 and :857 the same for the newly-added module.cc; vectors.txt 50 lines md5 `b260ec6ae0be7ebbf4e0e60338b8cee3` (committed, NEVER edit); gate UNCHANGED = gate.txt md5 `4826fc2233044a2d5429413faf0ae1af` byte-ident (EIGHTH straight). Its cp braces (:153) + objs loop now carry the FULL file_api closure EXCEPT `file_module.cc` (the `.h` is already cp'd in the same braces — the only file_api TU still absent; see the 18a scoping below).
+- `tools/fsvc_harness/` — the 17y donor (**superseded by flog; kept for lineage**): fresh from the fpolicy donor; **cp delta TWO entries** (`file_service.cc` appended to the cp braces :96 + the objs loop :464, AND `target_based/snort_protocols.cc` appended to the same loop — real-cp parity for `ProtocolReference::find`, snort_protocols.cc:92, residue zero app-NEW after it); FIXACC python block at :311 (file_service.h was already in the donor graft list); stubs.cc 879L = fpolicy lineage + the 17y RETIREMENT comment :591 (whole donor FileService witness block gone — the landmine inversion, 23 hard collisions) + the get_file_processed_size retire :726 + 4 NEW witness bodies (pause int :611, MimeSession::init/exit :626, InspectorManager::get_inspector :631; include `mime/file_mime_process.h` :29); build.sh self-checks :773-:775 pin the row TU TEST_CASE/UNIT_TEST = 0, :706-:707 pin the row .o's own T defs, :827 echoes nm retire evidence; vectors.txt 64 lines md5 `54864705dd654a18585960a13a853baf` (committed, NEVER edit); gate UNCHANGED = "All tests passed (114 assertions in 22 test cases)", gate.txt md5 `4826fc2233044a2d5429413faf0ae1af` byte-ident (SEVENTH straight zero-regression row). Its cp braces (:96) + objs loop (:464) ALREADY carry the FULL file_api closure incl. file_service.cc + file_module.h + the real snort_protocols.cc — see the 18a scoping below (file_log.cc landed 17z; file_module.cc is the only file_api TU still absent).
 - `tools/fpolicy_harness/` — the 17x donor (superseded by fsvc; kept for lineage): fresh from the finspect donor; **cp delta EXACTLY TWO FILES** (`file_policy.{h,cc}` appended to the cp braces :87 + the objs loop :426; FIXACC :291 gains `file_api/file_policy.h` — n=1 private at h:82, access-only); stubs.cc 877L with the ONE 17x witness edit (enable_file_capture real cascade :598-:602); vectors.txt 27 lines md5 `b989a8d5cddaf0a2289f5528121ddf35` (committed, NEVER edit); gate md5 `4826fc2233044a2d5429413faf0ae1af` (sixth straight).
 - `tools/finspect_harness/` — the 17w donor (kept for lineage): cp delta ONE file (`file_inspect.cc`, braces :63 + loop :396); stubs.cc 873L = fconf-lineage + 4 NEW witness bodies (DataBus::get_id, the MPDataBus reg_helpers/subscribe pair, the ConfigLogger log_flag/log_value pair, the FileIdModule::load_config steal witness) + 2 retirement comments (:347 get_file_adv_pub_id, :507 FileInspect body block); vectors.txt 103 lines md5 `3cbd009e9bb4228ee427ed3fadc64fb4` (committed, NEVER edit).
 - `tools/fcapi_harness/` — the 17v donor (kept for lineage): ZERO cp delta for the row TU — file_api.{h,cc} sat in the donor (cp :54, loop :386); gate md5 `4826fc2233044a2d5429413faf0ae1af`; vectors.txt 21 lines md5 `a953a5017b74f5d44dbba14df48ac5ea` (committed, NEVER edit); probe arms C_sz/E_enums/M_flags/P_/S_enc/R_. NB the harness dir is `fcapi_harness` (the 17u NEXT.md said `fapi_harness` — pinned name, do not "fix" the code).
@@ -105,80 +127,82 @@ longer debt — landed at 8d74e32.
 - `tools/fstats_harness/` — file_api header closure, stats snapshot witnesses.
 - `tools/codec_harness/`, `tools/jsnorm_harness` — plain-catch shim recipe.
 
-## Next milestone — row 17z: file_log.cc (the file-log Inspector: FILE_VERDICT LogHandler -> TextLog lines into file.log + the FileLogModule/InspectApi record; probe-vectors-only)
+## Next milestone — row 18a: file_module.{h,cc} (the file_inspect Module TU, FileIdModule: the parameter ladder + the load_config STEAL close; probe-vectors-only)
 
-Freshly measured this pass (ground `wc -l` + greps in
-`/opt/data/snort3-src`; donor presence re-grepped in
-`tools/fsvc_harness/build.sh` — cp braces :96, objs loop :464, FIXACC
-:311; witness greps in `tools/fsvc_harness/stubs.cc`):
+Freshly measured this pass (ground greps in `/opt/data/snort3-src` READ-
+ONLY; donor copy-tree greps in `tools/flog_harness/copy/` — flog is the
+freshest donor; the fsvc-era scoping for this TU is superseded):
 
-**EXISTENCE FIRST: file_log has NO .h.** `find src -name 'file_log*'`
-returns ONLY `src/file_api/file_log.cc` (git ls-files agrees; the donor
-cp braces :96 carry NO file_log entry either way); `wc -l src/file_api/
-file_log.cc` = **329**. It is a single-TU module (s_name "file_log"
-:38, f_name "file.log" :39). Wiki coverage check: `grep -rn
-'file_log\|FileLog' /tmp/RustyPig.wiki` = **0** — unmentioned upstream
-too (wiki greps are only row statuses; nothing pre-scopes this row).
+- **Size/gate facts (re-measured):** `wc -l` = 86 + 379 = **465**;
+  `grep -c 'TEST_CASE'` file_module.cc = **0**; `grep -c 'ifdef
+  UNIT_TEST'` = **0** on BOTH .cc and .h (measured at this pass) ->
+  probe-vectors-only, gate must stay byte-ident
+  `4826fc2233044a2d5429413faf0ae1af` = **NINTH straight**
+  zero-regression row; `file_module.h` is ALREADY cp'd in the flog donor
+  cp braces (build.sh :153) — `file_module.cc` is the ONLY file_api TU
+  still absent from the cp braces + objs loop (same brace pattern, so
+  the .cc delta is one append + one objs entry).
+- **THE load_config CLOSE (with cites): 17w's REPLACE-ME witness dies
+  THIS row.** The REAL `FileIdModule::load_config(FileConfig*&)` body
+  is file_module.**cc:263-:266** (`dst = fc; fc = nullptr;` — re-read
+  this pass; decl file_module.h:61, plain member fn, NOT virtual).
+  Landing the real TU RETIRES the flog-donor 17w witness trio under the
+  dup-symbol rule (17y landmine-inversion precedent — retire-evidence
+  nm echo, not a silent link): `tools/flog_harness/stubs.cc` **:419**
+  (the `extern "C" void _ZN12FileIdModuleC1Ev()` empty ctor shim — the
+  real FileIdModule ctor at file_module.cc turf defines it),
+  **:423-:424** (`g_wit_mod_storage`/`g_wit_mod` pinned raw storage),
+  **:425-:441** (witness #7 `FileIdModule::load_config` replicating the
+  steal over the heap-only slot + `finspect_arm_mod_fc` :432) and the
+  **:439-:447** `fcache_set_file_inspector` ctor-wiring comment (the
+  toggle that arms the witness FileIdModule for the finspect/flog
+  replays — it must keep working after the trio retires, exactly the
+  17y extern-C-arm VERBATIM rule). The flog vectors.txt stays
+  byte-frozen; the trio retire is harness-side ONLY.
+- **Drags RE-VERIFIED in the copy tree (`tools/flog_harness/copy/`),
+  this pass** (include cites from ground file_module.cc:35-:48):
+  `control/control.h` :35 **PRESENT** (copy/control/control.h — the
+  LogRespond macro, control.h:99); `log/messages.h` :36 PRESENT
+  (resident); `main/snort_config.h`, file_api/file_{cache,service,
+  stats}.h :44-:46 PRESENT-REAL; `packet_io/active.h` :41 +
+  `trace/trace.h` :42 PRESENT (both joined the 17z cp). ABSENT, as the
+  17y pass said, re-verified: **`lua/lua.h` :37 — NO copy/lua dir at
+  all** (LuaJIT 2.1 LIVE at /opt/data/tools/luajit-src since 17k, but
+  lua.{h,cc} has never entered a file_api donor; the two lua_State*
+  command bodies at cc:281-:352 are the only real consumers — decide
+  cp-vs-witness by file_module.o residue FIRST, flog PLAN 2 style);
+  **`main/snort.h` :38 — copy/main carries ONLY
+  policy.h/snort_config.h/snort_types.h/stats_output_format.h/thread.h/
+  thread_config.h** (NEVER cp main.cc — the 17y R6 monolith rule);
+  **`managers/module_manager.h` :40 — copy/managers carries ONLY
+  inspector_manager.h** (one body needed: `ModuleManager::get_includer`
+  at cc:258 inside `end()`); **`parser/parser.h` :48 — copy/parser
+  carries ONLY parse_utils.h** (one body needed:
+  `parser_append_rules_special` at cc:259). Consumption of the 17u
+  consts: FILE_ID_NAME/FILE_ID_HELP land file_config.rs:91-:92 this
+  row (their own note says the file_module row consumes them);
+  `grep -rn 'FileIdModule' src/` = comment-only hits (file_inspect.rs
+  :302-:303 steal-ctor doc, :477 vtable-hole note — the REAL Rust steal
+  already rides the 17w FileConfigLite h:36 slot).
 
-| candidate | lines | TEST_CASEs / UNIT_TEST | in fsvc donor? | blockers |
-|---|---|---|---|---|
-| **file_log** (17z PICK) | 329 (NO .h — existence verified above) | **0 / 0** (`grep -c TEST_CASE` 0 + `grep -c UNIT_TEST` 0, measured this pass) | **NOT cp'd at all** — `grep -n 'file_log' tools/fsvc_harness/build.sh` = 0 hits (cp braces :96, objs loop :464) | drags `log/text_log.h` (include **cc:27**; copy/log carries ONLY log_errors.h/log_stats.h/messages.h — text_log.{h,cc} grep-0 cp'd) + `framework/module.h` (cp'd :106 but the Module/PegInfo BODIES not; stubs.cc `grep Peg` = 0 hits) + plain `DataBus::subscribe` (DataHandler registration at cc:212 — stubs.cc has DataBus::publish :268 + get_id :306 + MPDataBus::subscribe :345 but grep-0 plain DataBus::subscribe); data_bus.h/packet_time/file_config/file_flows/file_lib/intrinsic_event_ids all REAL or cp'd already |
-| file_module (queued) | 86+379 = 465 | **0 / 0** (measured `grep -c 'TEST_CASE\|ifdef UNIT_TEST'` both files) | `.h` cp'd (:96); `.cc` NOT cp'd / NOT in objs loop | drags main/snort.h (cc:38 — copy/main has NO snort.h: only policy.h/snort_config.h/snort_types.h/thread.h/thread_config.h) + managers/module_manager.h (cc:40 — copy/managers has ONLY inspector_manager.h) + parser/parser.h (cc:48 — ONLY parse_utils.h cp'd :123) + lua/lua.h (cc:37 — NO copy/lua dir at all; LuaJIT LIVE at /opt/data/tools/luajit-src since 17k but lua.{h,cc} never in any file_api donor); **17w-WITNESS-CLOSE home: `FileIdModule::load_config` body at file_module.cc:263-:266 (`dst = fc; fc = nullptr;`, re-read this pass) — landing the real TU RETIRES the fsvc witness trio (stubs.cc:419 empty extern-C ctor shim `_ZN12FileIdModuleC1Ev`, :423-:424 pinned raw storage, :433 witness load_config + the :443-:445 ctor wiring comment) under the dup-symbol rule — closes the 17w REPLACE-ME witness**; consumes the 17u FILE_ID_NAME/FILE_ID_HELP consts |
+Queue-row-18 scale note (re-grepped THIS pass; do NOT restate it in the
+18a PLAN.md): the codecs tree measures **11,914** lines over 48
+.c+.h files and the old "verified NO upstream TEST_CASEs in codecs/"
+note is **STALE** — exactly **1** TEST_CASE exists (cd_gre.cc:352
+[cd_gre], inside `#ifdef UNIT_TEST` :351, whole file 366 L). The
+DETECTION tree (queue row 19, ~30k+ subset claim) measures **14,533**
+.h+.cc lines with **~47** embedded TEST_CASEs (fp_utils.cc 21,
+detection_options.cc 6, ips_context.cc 5, extract.cc 5,
+ips_context_chain.cc 3, context_switcher.cc 3, rules.cc 2, sfrim.cc 1,
+ips_context_data.cc 1) — transcripts remain the primary ground truth,
+but row 19 has real Catch material to carry like 17f/17r did.
 
-file_log witness/landmark map (grep-measured in `src/file_api/file_log.cc`
-this pass — the probe must pin these): `static const char* s_name =
-"file_log"` :38 / `f_name = "file.log"` :39; `struct FileLogConfig` :42;
-`struct FileLogStats` :48 with `PegCount total_events` :50;
-`THREAD_LOCAL FileLogStats fl_stats` :53; `static const PegInfo
-fl_pegs[]` :55 (peg table — Module::get_pegs :247-:248 + get_counts
-reinterpret-cast :250-:251); `THREAD_LOCAL TextLog* tlog` :65;
-`dl_tinit` :67 / `dl_tterm` :72 (the TextLog open/roll/flush lifecycle);
-`class LogHandler : public DataHandler` :81 with `handle(DataEvent&,
-Flow*) override` :87/:140 + static `log_file_name(TextLog*,
-FileContext*)` :91 — `sys_time` :144 vs `pkt_time` :154 (BOTH clocks:
-util `get_time` vs packet_time — the filib two-clock lesson applies);
-`class FileLog : public Inspector` :202 subscribing
-`DataBus::subscribe(intrinsic_pub_key, IntrinsicEventIds::FILE_VERDICT,
-new LogHandler(config))` :212; `FileLog::show` :220; `Parameter
-fl_params[]` :230; `class FileLogModule : public Module` :241 +
-`mod_ctor` :277 / `mod_dtor` :280 / `fl_ctor` :283 / `fl_dtor` :289 +
-`static const InspectApi fl_api` :294 (the sin record — 17w's
-InspectApi-as-DATA precedent applies).
-
-Rust-side seam audit (measured this pass): `grep -rn 'FileLog' src/`
-= **ZERO hits** — no Rust seam, stub, or placeholder exists anywhere;
-17z lands the port FRESH. The TextLog twin IS landed: row 16r landed
-`src/log/text_log.rs` **422L** (`wc -l` verified; PLAN row 16r =
-log/text_log.{h,cc} + main/thread.cc naming, DONE, with
-`tests/textlog_parity_test.rs` landed) — TextLog grep hits are ONLY
-src/log/text_log.rs (+ mod.rs + src/parser/parse_stream.rs using it).
-The Rust FileLog therefore ports over the LANDED text_log.rs + the
-landed log/messages.rs; the FILE_VERDICT publication side (FileCache
-apply_verdict -> MPDataBus/DataBus publish) is already REAL from 17p/
-17y — 17z is the SUBSCRIBE + format + peg-count half.
-
-17z plan (file_log.cc, 329, probe-vectors-only): new `tools/flog_harness`
-from the **fsvc** donor (freshest/smallest; cp delta: `file_log.cc` to
-braces :96 + objs loop :464, and `log/text_log.{h,cc}` + `log/log.h`
-cp'd per the textlog_harness recipe :16/:138 OR witness-only if the
-probe formats through witness TextLog_* bodies — measure the file_log.o
-residue FIRST, fsvc PLAN §0.4 style); expected NEW witnesses: plain
-`DataBus::subscribe` (armable handler capture, mirroring the MPDataBus
-witness at stubs.cc:345), the PegInfo/peg-count plumbing (stubs Peg
-grep-0), possibly the TextLog bodies vs the real-text_log.cc compile
-(textlog clock shim precedent — decide by residue nm). ZERO retirements
-expected (stub grep-0 FileLog/TextLog). Gate must stay byte-ident
-`4826fc2233044a2d5429413faf0ae1af` = **EIGHTH straight zero-regression
-row**. Rust lands src/file_api/file_log.rs fresh over src/log/
-text_log.rs + a DataHandler-shaped seam; the FILE_VERDICT event source
-is the landed FileCache publish path.
-
-## Alternative quick-win rows (re-measured at this 17y docs pass; ZERO TEST_CASEs + ZERO `#ifdef UNIT_TEST` across ALL remaining file_api TUs)
+## Alternative quick-win rows (re-measured at this 17z docs pass; ZERO TEST_CASEs + ZERO `#ifdef UNIT_TEST` across ALL remaining file_api TUs)
 | target | lines | TEST_CASEs (measured) | notes |
 |---|---|---|---|
 | main/thread_config.cc | 920 | **14** `[ThreadConfig]` at :615–:903 | cpuset parse/affinity/NUMA failure ladders; hwloc witness ladder needed (17l numa precedent); bigger alt |
-| **file_log.cc** | 329 (NO .h — `find src -name 'file_log*'` = the .cc ONLY) | 0 | **17z PICK**; NEW witnesses: DataBus::subscribe (stubs grep-0), PegInfo bodies (stubs `grep Peg` 0); text_log.h drag cc:27 (Rust twin src/log/text_log.rs 422L LANDED row 16r; harness recipe = tools/textlog_harness) |
-| file_module.{h,cc} | 465 (86+379) | 0 | QUEUED after 17z; drags main/snort.h + module_manager + parser/parser.h + lua (all grep-0 absent from the fsvc donor); **closes the 17w load_config witness trio (stubs.cc:419/:423/:433) when the real TU lands — body file_module.cc:263-:266** |
+| **file_log.cc** | 329 (NO .h) | 0 | **DONE 17z** (ef9bf83; tools/flog_harness = NEW donor, vectors 50L md5 b260ec6ae0be7ebbf4e0e60338b8cee3, gate 8th straight byte-ident; zero-retirement row) |
+| **file_module.{h,cc}** | 465 (86+379) | **0** (re-measured this pass, .cc and .h) | **18a PICK**; drags re-verified in the FLOG copy tree (lua/lua.h + main/snort.h + managers/module_manager.h + parser/parser.h grep-0 PRESENT; everything else resident); **closes the 17w load_config witness trio (flog stubs.cc:419/:423/:433, real body file_module.cc:263-:266) — scoping above** |
 | **file_service.{h,cc}** | 382 (112+270) | 0 | **DONE 17y** (fsvc harness = freshest donor; gate 7th straight byte-ident; vectors md5 54864705dd654a18585960a13a853baf) |
 | **file_policy.{h,cc}** | 310 (216+94) | 0 | DONE 17x |
 | **file_inspect.{h,cc}** | 217 (42+175) | 0 | DONE 17w |
@@ -192,8 +216,9 @@ is the landed FileCache publish path.
 - 17v: **DONE (254b690)** — file_api umbrella; wiki trio LANDED (29e05a3).
 - 17w: **DONE (5bebf3b)** — file_inspect; wiki trio LANDED (576f8f2).
 - 17x: **DONE (693b61c)** — file_policy; wiki trio LANDED (8d74e32).
-- 17y: **DONE (3093f5e)** — file_service: FileServiceLite real statics+ladder arms in file_lib.rs (+556L; shadows/Cells per deviations row 17y — NO new src/file_api/file_service.rs, the FileServiceLite home stays file_lib.rs), real snort_protocols cp (ProtocolReference::find parity), MimeApi trait seam + FileEnvLite.proto_ref, FileCaptureFactory init_capture/exit_capture defaulted arm, decode_conf STAYS SEAM (no DecodeConfig in src/, grep-0), file_processing_initiated NOT ported (dead upstream); tools/fsvc_harness vectors 64L md5 54864705dd654a18585960a13a853baf tracked, gate UNCHANGED (md5 4826fc2233044a2d5429413faf0ae1af, SEVENTH straight), the donor FileService witness block FULLY retired (23-symbol landmine inversion, build.sh :706/:778/:827 pins) + get_file_processed_size witness retired (Rust keeps its 17q home in file_flows.rs), tests/fsvc_parity_test.rs 890L 64/64 replay, **450 total green**, clippy 0. **Wiki trio for 17y OWED** (owed at the next WIKI phase: status row + deviations section + stats line; wiki HEAD 8d74e32 carries through 17x).
-- 17z+: file_log (PICK), file_module (table above).
+- 17y: **DONE (3093f5e)** — file_service: FileServiceLite real statics+ladder arms in file_lib.rs (+556L; shadows/Cells per deviations row 17y — NO new src/file_api/file_service.rs, the FileServiceLite home stays file_lib.rs), real snort_protocols cp (ProtocolReference::find parity), MimeApi trait seam + FileEnvLite.proto_ref, FileCaptureFactory init_capture/exit_capture defaulted arm, decode_conf STAYS SEAM (no DecodeConfig in src/, grep-0), file_processing_initiated NOT ported (dead upstream); tools/fsvc_harness vectors 64L md5 54864705dd654a18585960a13a853baf tracked, gate UNCHANGED (md5 4826fc2233044a2d5429413faf0ae1af, SEVENTH straight), the donor FileService witness block FULLY retired (23-symbol landmine inversion, build.sh :706/:778/:827 pins) + get_file_processed_size witness retired (Rust keeps its 17q home in file_flows.rs), tests/fsvc_parity_test.rs 890L 64/64 replay, **450 total green**, clippy 0. **Wiki trio for 17y LANDED (b71494a)** — wiki HEAD now covers through 17y.
+- 17z: **DONE (ef9bf83, code)** — file_log.cc 329L single TU, NO .h (existence pin): src/file_api/file_log.rs 1114L FRESH over the landed text_log.rs (row 16r; ZERO Rust-side edits there) + log/messages.rs; sin_file[] doc-seam readback, FL_PARAMS/FL_PEGS/FL_API const records (17w InspectApiRecord shape; service slot -> "" empty, deviations 17z), sanitizer log_file_name (first-run-byte %02X no-space quirk), one Rc cell = the V7 get_counts alias, DataBusSeam subscribe(snort, 23, file_log) registration-only; the ONLY landed-file edit = file_lib.rs get_utf8_fname fn -> pub(crate) fn (body byte-untouched); tools/flog_harness ZERO retirements + NEW witnesses DataBus::subscribe + show_stats pair; vectors 50L md5 b260ec6ae0be7ebbf4e0e60338b8cee3 tracked, gate UNCHANGED (md5 4826fc2233044a2d5429413faf0ae1af, EIGHTH straight), tests/flog_parity_test.rs 746L 50/50 one-ordered-session replay + 8 lib unit tests (459 total green), clippy 0. **Wiki trio for 17z OWED** (owed at the next WIKI phase: status row + deviations section + stats line; wiki HEAD b71494a carries through 17y — `grep -rnE '17z' /tmp/RustyPig.wiki --include='*.md'` EMPTY verified this pass).
+- 18a: file_module (PICK, scoping above). Row 18 (codecs) scale re-measured above: 11,914 L / 48 files, 1 [cd_gre] TEST_CASE at cd_gre.cc:352 (stale no-TEST_CASEs note corrected).
 - 18: codecs IP/TCP/UDP normalization (~15k lines) — verified NO upstream TEST_CASEs in
   codecs/; transcripts are the only ground truth there.
 - 19: detection option engines (~30k+ subset); 20: packet_io/DAQ (AF_PACKET via libc);
