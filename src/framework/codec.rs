@@ -18,9 +18,17 @@
 //    discriminants, so these are NEWTYPES (u8/u16 + consts) to preserve
 //    the aliases and the cast exactly.
 
-// ---- codecs/codec_module.h (values pinned verbatim; full enum ships with
-// the codecs row) ----
+// ---- codecs/codec_module.h (values pinned verbatim; enum walk started
+// at row 4, row 18c adds the sids its TUs raise) ----
 pub const GID_DECODE: u32 = 116;
+// codec_module.h:203 `DECODE_IP_BAD_PROTO, // = 450` — the trailing
+// comment pins the ordinal; the vocab_harness probes it: vector 9
+// `EV 116 450` (tools/vocab_harness/vectors.txt:9).
+pub const DECODE_IP_BAD_PROTO: u32 = 450;
+// codec_module.h:209 (enum walk 450..: 451 PATH_MTU_DOS, 452 DOS_ATTEMPT,
+// 453 ISATAP_SPOOF, 454 PGM_NAK_OVERFLOW, 455 IGMP_OPTIONS_DOS, 456
+// EXCESS) — double-pinned: the walk AND the frozen vector 16 `EV 116 456`.
+pub const DECODE_IP6_EXCESS_EXT_HDR: u32 = 456;
 pub const DECODE_IPV6_TRUNCATED_EXT: u32 = 272;
 pub const DECODE_IPV6_BAD_OPT_TYPE: u32 = 279;
 pub const DECODE_IPV6_BAD_OPT_LEN: u32 = 295;
@@ -143,6 +151,14 @@ pub mod protocol_id {
     pub const MPLS_IP: ProtocolId = 137;
     pub const PROTO_NOT_SET: ProtocolId = 255;
     pub const ETHERTYPE_MAX: ProtocolId = 0xFFFF; // full enum later row
+    // ---- protocol_ids.h additions (row 18c, values re-measured at
+    // fe29cbe) ----
+    /// protocol_ids.h:127 `FINISHED_DECODE = 0x0100` (vectors:2 `PID 256`)
+    pub const FINISHED_DECODE: ProtocolId = 0x0100;
+    /// protocol_ids.h:144 `ETHERTYPE_IPV4 = 0x0800` (vectors:21 next=2048)
+    pub const ETHERTYPE_IPV4: ProtocolId = 0x0800;
+    /// protocol_ids.h:151 `ETHERTYPE_IPV6 = 0x86DD` (vectors:22 next=34525)
+    pub const ETHERTYPE_IPV6: ProtocolId = 0x86DD;
 }
 
 pub use ip_protocol::IpProtocol;
@@ -362,13 +378,87 @@ impl<'a> Buffer<'a> {
 // ---- the two protected Codec check methods (free functions; the probe
 // reaches them via 'using', so they carry the exact same code) ----
 
-// C: DetectionEngine::queue_event(GID_DECODE, sid) — the harness witness
-// prints 'EV gid sid'; the Rust port takes a sink callback so the replay
-// observes the identical ordering, and production wires queue_event later.
+// ---- framework/base_api.h + framework/codec.h plugin-API face
+// (row 18c: the vocabulary shared by codec_api.cc and the cd_* TUs) ----
+/// base_api.h:41 `#define BASE_API_VERSION 29`
+pub const BASE_API_VERSION: u32 = 29;
+/// codec.h:379 `#define CDAPI_VERSION ((BASE_API_VERSION << 16) | 3)` —
+/// vectors line 1 pins `ver=1900547` across all four records.
+pub const CDAPI_VERSION: u32 = (BASE_API_VERSION << 16) | 3;
+/// base_api.h:48 `#define API_RESERVED 0` (features slot; the ONE cd_*
+/// using it is cd_default — vectors line 1 `features=0`).
+pub const API_RESERVED: u64 = 0;
+/// base_api.h:44 `#define PLUGIN_SO_RELOAD 0x1` (the other three row
+/// TUs set it: vectors lines 5/:11/:18 `features=1`).
+pub const PLUGIN_SO_RELOAD: u64 = 0x1;
+/// base_api.h:31-:33 `#ifndef API_OPTIONS #include
+/// "framework/api_options.h"` — the harness-written graft
+/// `#define API_OPTIONS 0` (vocab/csum PLAN donor recipe; the real
+/// tree carries the option bits; 17-series precedent).
+pub const API_OPTIONS: u32 = 0;
+/// base_api.h:52-:61 enum PlugType — PT_CODEC = 0 (enum head; the
+/// probe printf `%d` renders `type=0` on all four vectors API lines).
+pub const PT_CODEC: u32 = 0;
+/// sizeof(CodecApi) == 112 as the probe printed (`size=112` on all
+/// four vectors API lines; == sizeof(BaseApi) head). C++-layout fact,
+/// pinned, NEVER Rust size_of (PROBE_SIZEOF precedent, finspect).
+pub const CDAPI_SIZEOF_CODEC_API: u32 = 112;
+
+/// The CodecApi record (codec.h:385-:404 over BaseApi base_api.h:74-:87).
+/// fn-pointer slots (mod_ctor/mod_dtor/pinit/pterm/tinit/tterm/ctor/
+/// dtor) ride the landed 17w/17z posture: PRESENCE bools (the vectors
+/// read nullptr vs set; nothing calls through a null slot). `size` is
+/// the probe pin, never size_of. Deviations row 18c.
+#[derive(Debug)]
+pub struct CodecApiRecord {
+    pub ptype: u32,       // PlugType (base_api.h:76)
+    pub size: u32,        // sizeof(plugin-api) (:77)
+    pub api_version: u32, // (BASE_API_VERSION << 16) | plugin-api (:78)
+    pub version: u32,     // (:79)
+    pub features: u64,    // any PLUGIN_* (:80)
+    pub options: u32,     // API_OPTIONS (:81)
+    pub name: &'static str,   // (:82)
+    pub help: &'static str,   // (:83)
+    pub mod_ctor: bool,   // ModNewFunc (:84) nullptr in all six row records
+    pub mod_dtor: bool,   // ModDelFunc (:85)
+    pub pinit: bool,      // codec.h:390 CdAuxFunc
+    pub pterm: bool,      // :391
+    pub tinit: bool,      // :393
+    pub tterm: bool,      // :394
+    pub ctor: bool,       // :396 CdNewFunc — set in all six
+    pub dtor: bool,       // :397 CdDelFunc — set in all six
+}
+
+/// The exported null-terminated `const BaseApi* cd_x[]` shape folded
+/// to a static slice (deviation row 18c: the nullptr terminator rides
+/// the slice length; load sinks read the head).
+pub type CodecTable = &'static [&'static CodecApiRecord];
+
+// ---- protocol_ids.h extension (row 18c arms) rides the same block ----
+
+// C: base of decode_data.h PROTO_BIT__* (lines 86-106). The landed
+// detection/rtn_checks.rs mirror stops at 0x0200 (decode_data.h:86-:96);
+// the cd_no_next arm needs the :103 entry — home here next to the
+// proto_bits field it muts (cross-TU mirror precedent, 17-series note).
+pub const PROTO_BIT__IP6_EXT: u32 = 0x010000;
+
+// C: base of protocols/ipv6.h `namespace snort { namespace ip {`
+// constants the codecs touch.
+pub mod ip {
+    /// ipv6.h:32 `constexpr uint32_t MIN_EXT_LEN = 8;`
+    pub const MIN_EXT_LEN: u32 = 8;
+}
+
+// C: base of DetectionEngine::queue_event (queue_event.h) — row 17d
+// kept codec_event file-private; row 18c opens it for the cd_bad_proto /
+// cd_no_next event arms (vectors `EV 116 450` / `EV 116 456`). The
+// harness witness prints 'EV gid sid'; the Rust port takes a sink
+// callback so the replay observes the identical ordering, and
+// production wires queue_event later.
 pub type QueueSink<'a> = &'a mut dyn FnMut(u32, u32);
 
 #[allow(non_snake_case)]
-fn codec_event(_codec: &CodecData, sid: u32, sink: QueueSink) {
+pub fn codec_event(_codec: &CodecData, sid: u32, sink: QueueSink) {
     sink(GID_DECODE, sid);
 }
 

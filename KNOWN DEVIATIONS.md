@@ -2319,3 +2319,100 @@ Structural deviations (behavior preserved):
   flat-vs-dir convention call is deferred to 18c when dirs multiply,
   csum PLAN §7); lib.rs gains `pub mod codecs;` in the existing
   group ordering (dir-name sort slot before file_api).
+## codecs vocabulary (row 18c — codec_api.{h,cc} + the 4 no-op cd_* TUs, 549 L)
+
+- Plugin-API record modeled as PRESENCE bools, not fn pointers (rides
+  the landed 17w/17z InspectApiRecord posture): the 10 fn slots
+  (BaseApi mod_ctor/mod_dtor + CodecApi pinit/pterm/tinit/tterm +
+  ctor/dtor) land as bools — the frozen vectors read nullptr-vs-set
+  only (the API lines print size/ver/features/name; nothing calls
+  through a null slot at the pinned posture). The REAL ctor/dtor
+  factories (cc:50-:54 etc.) land as Rust inherent ctors on the codec
+  structs + the record's ctor/dtor=true pins; `api->dtor(c)` at
+  probe.cc:85 maps to Rust Drop of the (unit) codec — no witness output
+  either side, so the replay stays byte-exact.
+- `size: 112` is the PROBE PIN, never size_of: CDAPI_SIZEOF_CODEC_API =
+  112 == the C++ sizeof(CodecApi) the printf read (vectors:1/:5/:11/:18
+  `size=112` x4). The Rust CodecApiRecord has its own (different)
+  layout — the constant is carried, computed by nothing (PROBE_SIZEOF
+  precedent, finspect 17w).
+- The null-terminated `const BaseApi* cd_x[]` export folds to a static
+  slice (&[&API] — the trailing nullptr rides the slice length). C
+  code that walks to nullptr (the real PluginManager::load_plugins) is
+  NOT in this row; the load sink reads the head only (probe witness
+  prints plugins[0]->name). Row 20+/the real manager row re-check the
+  walk contract before consuming these tables.
+- `#ifdef BUILDING_SO { snort_plugins[] }` alternation (cd_bad_proto
+  cc:89-:93, cd_no_next cc:107-:111, cd_raw cc:97-:101) is the DSO face;
+  the ground/harness link is the static-execs face (cd_bad_proto[] etc.
+  named directly — codec_api.cc externs prove it). The port carries the
+  NON-BUILDING_SO name only; the DSO export name folds away with the
+  same posture as the STATIC_CODECS arm (dormant until a DSO row).
+- STATIC_CODECS (codec_api.cc:39-:74/:84-:119): compiled out at the
+  pinned face — vectors:29 pins `LOADS 5` = the always-loaded five
+  only. The 34 extern names land VERBATIM cc-order as
+  STATIC_CODEC_EXTERN_NAMES (dormant, tripwire-tested); the row that
+  flips it swaps REAL tables into the cc:85-:118 call ladder where the
+  names sit (R3, vocab PLAN §4 — later rows never link a second table
+  of the same name).
+- The 4 not-yet-ported tables (cd_ipv4/cd_ipv6/cd_tcp/cd_hopopts,
+  cc:32-:34/:36) stand as WITNESS stub records transcribed
+  slot-for-slot from tools/vocab_harness/witness_stubs.cc:7-:14 — the
+  stub NAMES (`cd_ipv4_stub` ...) are FROZEN by vectors:25-:28; a later
+  row renaming a stub forks the vectors. Stub `size/api_version/features
+  = 0`: the witness never reads those slots (NOT probe-pinned at 112/
+  1900547 like the real records).
+- const_cast mutation DROPPED at cd_no_next cc:65
+  (`const_cast<uint32_t&>(raw.len) = ip::MIN_EXT_LEN;`): the vectors
+  never print raw.len back — zero observable at the pinned posture.
+  The port models RawData as the 17d Copy struct (mutation via &mut is
+  not threaded to a Copy param) and records the dropped write rather
+  than faking a mutation the transcript cannot see. If a later row
+  vectorizes the post-decode raw.len face, re-arm it then, vectors-first.
+- conf-nullable posture: C cc:52 derefs codec.conf UNGUARDED; the port
+  keeps Option<&SnortConfig> (the 17d seam) and reads None as the
+  zeroed-default (hit_ip6_maxopts -> false). The probe always passes a
+  live conf, so the None arm is never exercised by the frozen vectors —
+  it exists so a future conf-less call cannot panic. Never model as a
+  panic to match the UB read (UB never replicated, standing rule).
+- maxopts getter wired onto the LANDED parser::parse_conf::SnortConfig
+  (max_ip6_extensions u8 field + hit_ip6_maxopts, snort_config.h:278/
+  :450-:451): the C truthy `max_ip6_extensions && ...` lands as
+  `!= 0 && ...` literal. snort_config.{h,cc} as a TU stays unported
+  (17z ruling); only these codec-read knobs attach to the ported
+  minimal surface.
+- DLT_RAW = 12 CITE (the one grafted-header constant the row carries):
+  daq_dlt.h exists nowhere on ground/host (find = 0, three searches at
+  the NEXT.md 18c scoping pass); the graft stands `#define DLT_RAW 12`
+  per real libpcap pcap/dlt.h lines 112-:114 (android.googlesource
+  mirror; DLT_RAW is 14 on BSD/OS, 12 on the libpcap/libdaq convention
+  Snort links). vectors pin it twice: HELP `support for raw IP
+  (DLT 12)` (ADD_DLT splice, cd_raw.cc:31-:32 + codec.h:52) and
+  get_data_link_type `DLT 12` (:62). The ADD_DLT compile-time string
+  splice lands as the literal + an `add_dlt()` recipe fn asserted equal
+  to it — the composition can never drift from the graft constant.
+- help-slot nullptr stand-in `""` (the witness stubs' help=nullptr and
+  the C records' options=nullptr slot): the 17z `service: ""` posture;
+  Option<()> would fork the record shape the row-18 records freeze.
+- Upstream vocabulary census kept honest: DECODE_IP6_EXCESS_EXT_HDR =
+  456 is DOUBLE-pinned — the enum walk from the `// = 450` comment at
+  codec_module.h:203 (451 PATH_MTU_DOS / 452 DOS_ATTEMPT / 453
+  ISATAP_SPOOF / 454 PGM_NAK_OVERFLOW / 455 IGMP_OPTIONS_DOS / 456
+  EXCESS at :209) AND the frozen vector:16 `EV 116 456` (the walk alone
+  was the 17-series pinning method; here the probe measures it).
+- CppUTest/Catch: ZERO upstream suite material on all six row files
+  (vocab PLAN §0 per-file census: 0 TEST_CASE / 0 TEST( / 0 UNIT_TEST);
+  the E4 double-wall receipt (geneve CppUTest -> `#include "../cd_geneve.cc"`
+  dies first on the row TU at cd_geneve.cc:26 log/text_log.h, then on
+  the ground tree itself at packet.h:27 daq_common.h) re-proven EVERY
+  vocab build. The PARITY artifact set therefore = the 29-line whole-
+  transcript replay (tests/vocab_parity_test.rs
+  vocab_transcript_replay, ordered per-index) + per-file arms, every
+  value citing its vectors line — no up_gate_* set possible (rule 10's
+  translated-suite artifact has no suite to translate; recorded here so
+  the absence is auditable, not folklore).
+- dir names kept FLAT (NEXT.md 18c note + csum PLAN §7 call landed):
+  src/codecs flat with C base names (cd_default/cd_bad_proto/cd_no_next
+  /cd_raw/codec_api); per-file module headers carry the ground subdir
+  misc/ip/root provenance (the NEXT.md path correction: cd_default =
+  misc/, cd_bad_proto + cd_no_next = ip/).

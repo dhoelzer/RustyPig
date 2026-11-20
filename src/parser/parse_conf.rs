@@ -70,9 +70,23 @@ pub struct SnortConfig {
     pub include_path: String,
     pub rule_lists: Option<Rc<RuleListNode>>,
     special_includer: String,
+    // ---- row 18c: the decode-module knobs the codec TUs read ----
+    // snort_config.h:278 `uint8_t max_ip6_extensions = 0;` (the C
+    // NSDMI zero == Rust Default zero).
+    pub max_ip6_extensions: u8,
 }
 
 impl SnortConfig {
+    /// snort_config.h:450-:451 inlined getter (row 18c wiring; read by
+    /// codecs/ip/cd_no_next decode): C
+    /// `return max_ip6_extensions && (curr_opt >= max_ip6_extensions);`
+    /// — the C truthy test is literal `!= 0` (0 first short-circuits).
+    #[inline]
+    #[allow(non_snake_case)]
+    pub fn hit_ip6_maxopts(&self, curr_opt: u8) -> bool {
+        self.max_ip6_extensions != 0 && (curr_opt >= self.max_ip6_extensions)
+    }
+
     pub fn show_file_codes(&self) -> bool {
         self.show_file_codes
     }

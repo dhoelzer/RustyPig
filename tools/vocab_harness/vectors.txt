@@ -1,0 +1,29 @@
+API unknown type=0 size=112 ver=1900547 features=0 name=unknown
+PID 256
+HELP support for unknown protocols
+DECODE unknown -> 0
+API bad_proto type=0 size=112 ver=1900547 features=1 name=bad_proto
+PID 53
+PID 77
+HELP bad protocol id
+EV 116 450
+DECODE bad_proto -> 1
+API ipv6_no_next type=0 size=112 ver=1900547 features=1 name=ipv6_no_next
+PID 59
+HELP sentinel codec
+NN short -> 0
+NN ok -> 1 lyr=8 bits=10000 cnt=1
+EV 116 456
+NN maxopts -> 0
+API raw type=0 size=112 ver=1900547 features=1 name=raw
+DLT 12
+HELP support for raw IP (DLT 12)
+DECODE raw v4 -> 1 next=2048
+DECODE raw v6 -> 1 next=34525
+DECODE raw bad -> 0
+LOAD unknown
+LOAD cd_ipv4_stub
+LOAD cd_ipv6_stub
+LOAD cd_tcp_stub
+LOAD cd_hopopts_stub
+LOADS 5

@@ -304,3 +304,20 @@ tools/csum_harness/donor_defs.txt
 tools/csum_harness/cpputest_fatal.txt
 tools/csum_harness/gate
 tools/csum_harness/gate.txt
+
+# row 18c vocab_harness (probe-only; vectors.txt STAYS tracked)
+tools/vocab_harness/copy/
+tools/vocab_harness/o2/
+tools/vocab_harness/.wallseed/
+tools/vocab_harness/probe
+tools/vocab_harness/probe_O2
+tools/vocab_harness/*.o
+tools/vocab_harness/witness_conf.cc
+tools/vocab_harness/vectors_O0.txt
+tools/vocab_harness/vectors_O2.txt
+tools/vocab_harness/nm_U_*.txt
+tools/vocab_harness/E4_*.txt
+tools/vocab_harness/cp_audit_ok.txt
+tools/vocab_harness/gate
+tools/vocab_harness/gate.txt
+tools/vocab_harness/*.log
