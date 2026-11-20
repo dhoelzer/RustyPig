@@ -1,0 +1,26 @@
+API gre type=0 size=112 ver=1900547 name=gre
+HELP gre support for generic routing encapsulation
+EV 116 160
+GRE short3 -> 0
+EV 116 163
+GRE v0-badflags -> 0
+EV 116 160
+GRE chksum-long -> 0
+EV 116 160
+GRE seq-long -> 0
+EV 116 164
+GRE v1-flags -> 0
+EV 116 164
+GRE v1-badetype -> 0
+EV 116 164
+GRE v1-nokey -> 0
+EV 116 162
+GRE badver2 -> 0
+GRE mask0040 -> 1 bypass=0 lyr=8 next=34827 bits=0 flags=4608
+GRE mask0000 -> 1 bypass=1
+GREPID 47 n=1
+GRE rules=6 sid0=160 name=gre
+GRE api mod_ctor=1 mod_dtor=1
+ENC lt-grehdr -> 0
+ENC ok -> 1 cksum-bytes 103 255 nproto=47 netype=2048
+UPD chksum-bytes 127 255 ul=8

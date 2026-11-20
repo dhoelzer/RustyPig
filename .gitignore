@@ -389,3 +389,31 @@ tools/tun_harness/cp_audit_ok.txt
 tools/tun_harness/gate
 tools/tun_harness/gate.txt
 tools/tun_harness/*.log
+# row 18g gre_harness (THE gate-change row: gate.txt + vectors.txt +
+# vectors_faceA.txt STAY tracked -- the runner tail is the new chain anchor)
+tools/gre_harness/copy/
+tools/gre_harness/o2/
+tools/gre_harness/probe
+tools/gre_harness/probe_O2
+tools/gre_harness/probe_dec
+tools/gre_harness/probe_dec_O2
+tools/gre_harness/gate
+tools/gre_harness/gate_O2
+tools/gre_harness/gate_l.txt
+tools/gre_harness/E9_dup_first.txt
+tools/gre_harness/*.o
+tools/gre_harness/witness_conf.cc
+tools/gre_harness/vectors_O0.txt
+tools/gre_harness/vectors_O2.txt
+tools/gre_harness/vectors_faceA_O0.txt
+tools/gre_harness/vectors_faceA_O2.txt
+tools/gre_harness/gate_O0.txt
+tools/gre_harness/gate_O2.txt
+tools/gre_harness/nm_U_*.txt
+tools/gre_harness/E4_*.txt
+tools/gre_harness/E4b_*.txt
+tools/gre_harness/E4c_*.txt
+tools/gre_harness/E8_*.txt
+tools/gre_harness/gate_md5_lineages.txt
+tools/gre_harness/cp_audit_ok.txt
+tools/gre_harness/*.log

@@ -1,0 +1,5 @@
+LOAD gre
+LOADS 1
+API gre type=0 size=112 ver=1900547 name=gre
+HELP support for generic routing encapsulation
+GRE mod_ctor=1 mod_dtor=1

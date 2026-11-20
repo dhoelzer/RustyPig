@@ -41,6 +41,7 @@ pub mod cd_default;
 pub mod cd_dst_opts;
 pub mod cd_eth;
 pub mod cd_geneve;
+pub mod cd_gre;
 pub mod cd_gtp;
 pub mod cd_hop_opts;
 pub mod cd_igmp;

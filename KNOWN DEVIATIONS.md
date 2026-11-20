@@ -2897,3 +2897,117 @@ Structural deviations (behavior preserved):
   fixes, no semantic fold — every literal shape kept). Forced
   relint 0 across all targets THIS pass (62 -> 0 warnings after the
   three doc-comment/first()/loop fixes).
+
+## codecs ip cd_gre (row 18g — ip/cd_gre.cc, 366 L, THE gate-change row)
+
+- **THE GATE CHANGE — first sanctioned chain break after 14 straight
+  byte-ident rows, MEASURED not asserted**: the ground TU carries the
+  codec tree's ONLY embedded Catch suite (DUAL `#ifdef UNIT_TEST` face:
+  early include-only fragment :34-:36 + trailing block :351-:366;
+  grep -c == 2, ONE TEST_CASE :352, ONE CHECK :364 — build.sh :43-:49
+  sed-asserts every anchor every build). The harness gate RUNS the
+  ground block VERBATIM (never translated-not-run: the fixture link
+  closure was proven at scratch E10): runner tail “All tests passed
+  (1 assertion in 1 test case)” is the tail line of the TRACKED
+  gate.txt (md5 6751d1a8c21da0fdfed87ddfd4d37c5f, wc 3, pinned at
+  build.sh :378-:382, O0==O2 byte-ident cmp arm — the gate is the
+  third O0==O2 stream new at this row). **TWO md5 LINEAGES from this
+  row on** (the §4 rule, executed at the row): the FROZEN lineage
+  keeps EXACTLY 9 holders of 4826fc22 (fmod FRESH-rebuilt at this pass
+  rc 0, gate md5 + tail 'All tests passed (114 assertions in 22 test
+  cases)' re-read VERBATIM; vocab FRESH VOCAB_HARNESS_OK vectors=29);
+  gre adds ONE gate of its OWN md5 — the census loop at gre build.sh
+  :401-:403 MEASURES 9 holders / 25 gate.txt files / 17 distinct md5s,
+  NEVER a typed arithmetic forecast (17p). COROLLARY FACE (recorded
+  honestly, rows NEVER rewritten): the frozen tun/ext/eth build.sh
+  census lines encode the point-in-time ‘24’ face and their
+  `-eq 24` gate.txt ls-asserts FAIL-then-drift from 18g on (rc 1 re-
+  measured THIS pass; the `-eq 9` holder half stays PASS — all nine
+  byte-frozen) — frozen-donor rows are historical artifacts, the
+  live-face census moved to 25 INSIDE gre build.sh only.
+- **Shim-route disclosure (R3 of the PLAN, dual precedent fmod
+  :249/:270 + fctx :60-:63/:403-:407)**: the ground catch/snort_catch.h
+  wraps catch.hpp under a visibility pragma and remaps TEST_CASE to a
+  snort::TestCaseInstaller ctor instance that only the main binary’s
+  plugin plumbing provides — a single-TU harness links no such
+  world. The harness stands in a passthrough shim (copy/catch/
+  snort_catch.h = `#pragma once / #include "catch/catch.hpp"`) + the
+  vendored rules_harness catch.hpp (74ef54e8 re-md5’d at the row) +
+  catch_main.cc CATCH_CONFIG_MAIN: the TEST_CASE macro is NEVER
+  remapped, so the ground block compiles VERBATIM on the gate side.
+  The gate is a harness stand-in for ground’s plugin-catch — same
+  disclosure family as the fmod/fctx shims.
+- **Excision + one-face link (17r recipe ADAPTED, both failure faces
+  flipped-assert EVERY build)**: the PROBE side carries the rfind +
+  cut-to-EOF + brace-balance excision (head-count assert == 2; E7
+  scratch face: cutting to the block’s `}` leaves the orphan `#endif
+  without #if` — cut-to-EOF MANDATORY for the gre shape); the GATE
+  side carries the -DUNIT_TEST UNEXCISED .o. E9 dup face flipped every
+  build: plain .o + UT .o in one link MUST die at ‘multiple
+  definition of `cd_gre’’ (nm defined-symbol census = {cd_gre} x1
+  per .o, intersection 1 — the ONE-FACE rule quantified).
+- **Fresh-cp census MEASURED = 2, NOT the NEXT ‘~3’ forecast**
+  (honest scoping drift, recorded not smoothed): protocols/gre.h 50 L
+  7b07af8e + codecs/ip/checksum.h 284 L b43628f3 are the two walls
+  (E4 pre-cp MUST-fail x2 flipped, post-cp rc 0); utils/endian.h is
+  NOT in the cd_gre transitive closure (E13 face: gre.h+checksum.h
+  ONLY, rc 0 syntax-clean; grep ‘endian’ in the ground checksum.h =
+  0 hits) — the copy tree 86+1+2 = 89 find-counted. checksum.h enters
+  a donor tree for the FIRST time ever (the csum 18b row was Rust-
+  inline; find census 0 before): the UPD/ENC vectors lines are the
+  FIRST C-side consumption of that lib, cross-checked against the
+  landed Rust checksum::cksum_add (both write-back pairs 103 255 /
+  127 255 re-produced EXACTLY — the 18b port verified by a row-18g
+  vectors face, a genuine two-way parity pin).
+- **Encode SEQ-arm out-of-window C UB → defined bounded
+  substitution** (skill UB rule — never replicate the overrun): on
+  the pinned ENC ok arm (flags 0x90 CHKSUM|SEQ, Buffer(p, 32) at p =
+  back+32) the cc:149/cc:151 sequence read/write sits at
+  buf.data()+8 = 4 bytes PAST the 8-byte window — and the probe’s
+  own backing back[64] ENDS exactly there, so real C reads/writes
+  stack slack (-O0 survives; real UB). The port fires the +1 write
+  ONLY window-inclusive (unit-armed with an IN-window fixture: flags
+  0xB0 → slot 12 < win 16, seq 1→2 net round trip + cksum re-sum
+  over the MUTATED bytes checked against the 18b primitive). On the
+  vectors arm the skip is MEASURED zero-contribution: summed window,
+  write-back pair and every printed field byte-match the C run at
+  both -O0 and -O2; the backing-zeros assert in the replay pins it.
+- **assert() sites stay OUT of the port** (cc:118/cc:156
+  checksum-length asserts): the -O0 harness build compiles them
+  away (NDEBUG by harness default posture? measured: they never fire
+  — all pinned lyrs >= 6); no Rust twin, per the 16-series asserts
+  ruling. The decode SRE cursor arithmetic was re-verified IN-BOUNDS
+  (NOT an unchecked-read substitution): len moves 4+l vs cursor 3+l,
+  so every sre_ptr read sits at <= len-1 <= raw.len-1 — the loop is
+  literal Rust, .get-or-0 only for non-pinned short inputs (same
+  posture as check_ipv6_hop_options). NO probe/replay arm sets ROUTE
+  at all (the gre probe carries no ROUTE face).
+- **ZERO new witnesses + table-only rule-map rows**: cd_gre’s single
+  SnortConfig::tunnel_bypass_enabled U-line resolves on the CARRIED
+  tun witness_18f.cc (md5 ea1f79f3 re-verified; TUNNEL_GRE 0x40 rides
+  the SAME observable table, ground snort_config.h:125); landmine
+  posture ZERO (grep cd_gre in vocab witness_stubs + codec stubs =
+  0/0, asserted). gre_rules rows 161 (MULTIPLE_ENCAPSULATION) + 165
+  (TRANS_DGRAM_LT_TRANSHDR) are TABLE-ONLY — no codec_event call
+  site touches them (measured ground fact: event sites ONLY
+  :171/:189/:241/:248/:255/:270/:276 — four sed-pinned at build.sh
+  :69-:72). gre has NO PROTO_BIT__GRE ground-side (build.sh :337-:339
+  greps decode_data.h 0 hits) → the vectors bits=0 face is BY
+  CONSTRUCTION, never a special-case.
+- **ROW-SCOPED VOCAB (14-path staging)**: PROTOCOL_ID_ETHERTYPE_PPP
+  0x880B (protocol_ids.h:152 — the vectors:19 next=34827 both-
+  ends decomposed pin at build.sh :344-:353) + the TUNNEL_GRE/TUNNEL-mask face +
+  the gre.h accessor pair (raw_proto kept as a doc-pinned never-
+  vector arm) + the six GRE_*_LEN + the cc:90-:98 flag macros land
+  INSIDE the row TU with ground cites; framework/codec.rs,
+  parse_conf.rs and codec_api.rs BYTE-UNTOUCHED (the ladder name
+  cd_gre ALREADY resident codec_api.rs:110, tripwire test pins cc
+  order cd_geneve < cd_gre < cd_gtp; sids 160-165 already resident
+  codec_module.rs:107-:112, grep census x4 at build.sh :62-:67 — the
+  row adds ZERO new constants).
+- **Literal-flow clippy allowances (this row)**: needless_return on
+  encode (literal C flow) + collapsible_if on the SEQ-arm bounded
+  substitution shape; decode carries the codec.rs:610 precedent
+  collapsible_if allow. Forced relint 0 across all targets THIS pass
+  (2 -> 0 after the fn-level allow above; 11 tests, ZERO in-crate
+  #[test] in cd_gre.rs — suite face stays tests/gre_parity_test.rs).
