@@ -1,4 +1,4 @@
-# NEXT.md — takeover context & plan (2026-11-21, post-18n: link vlan TRIO cd_vlan+cd_ciscometadata+cd_fabricpath landed at ade9331; link tail = cd_mpls.cc 390 ALONE remains; donor = link4_harness, the NEW lineage head: 7 stageables = the daq3 7-face law + the graft-v3 ladder + BACKBONE STAYS 10)
+# NEXT.md — takeover context & plan (2026-11-21, post-19a: the chapter-19 OPENER landed at 6698f01 — framework/module.cc 403 + main/reload_tracker.cc 89 = 492, THE Module-base debt CLOSE + THE zero-cp donor-VERBATIM half; link tail = cd_mpls.cc 390 ALONE = row 18o the q4 banked own-row; donor = link4_harness THE lineage head; tools/misc9_harness is NOW TRACKED (8 stageables, nested .gitignore instrument) and the NEW ?? tools/mpls_harness/ RECON dir stands TOLERATED, NEVER touched/staged/built)
 
 This file is the single resume point for a fresh agent. It carries only
 what is not cheaply re-derivable. `PORTING_PLAN.md` (row table, per-row
@@ -7,9 +7,12 @@ source-cited) are the deep references — consult, never re-invent.
 
 **PINNED-STRING CARRY BLOCK — harnesses assert strings from THIS file;
 NEVER drop these literals (the 18l docs hazard codified as the hard
-rule; re-verified by the FULL tools-wide grep THIS 18o docs pass —
-every read-assert site: erspan :580, link6 :198 + :597, link4 :185 +
-:186 + :750 — everything else in tools/ is prose citation)**:
+rule; re-verified by the FULL tools-wide grep THIS 19a docs pass — every
+read-assert site enumerated: erspan :580 python; link6 :198 grep + :597
+python; link4 :185 + :750 grep/python pair; link4 :186 grep; and the NEW
+landed-misc9 sites :462 python `.count(LITERAL) == 3` + :607 grep-count
+`-eq 3` — an EXACT-COUNT pin: EXACTLY three occurrences of the 597 face,
+NOT >= 3 — everything else in tools/ is prose citation)**:
 - `573 tests green` — asserted VERBATIM by `tools/erspan_harness/build.sh`
   (`assert "573 tests green" in open("/opt/data/snort3-rust/NEXT.md").read()`
   — at :580 at this pass; the docs lineage cites it as ":577", the line
@@ -21,181 +24,180 @@ every read-assert site: erspan :580, link6 :198 + :597, link4 :185 +
   pass summed exactly that over 70 result lines.
 - `588 tests green / 0 FAILED` — asserted by `tools/link4_harness/build.sh:186`
   (grep). Historical face: the 18m docs-pass header read exactly that.
-This docs commit carries `573 tests green` x4, `580 passed / 0 failed`
-x3, `588 tests green / 0 FAILED` x1 VERBATIM + adds the new
-current-pass face **597 tests green / 0 FAILED** for the future mpls
-harness to grep, exactly as 18m carried the 588 face for link4. A FRESH
-NEXT.md rewrite MUST grep `tools/` for NEXT.md read-asserts FIRST and
-carry EVERY pinned prior-pass literal VERBATIM, then re-grep the pins
+- `597 tests green / 0 FAILED` — the 18o-docs-pass seeded face, NOW hard-
+  asserted by the LANDED 19a harness at TWO sites: `tools/misc9_harness/build.sh:462`
+  (`read().count(...) == 3` — python EXACT occurrences) + `:607`
+  (`grep -c ... -eq 3` — EXACT matching LINES). Every future rewrite must
+  keep EXACTLY three occurrences on three separate lines — NEVER a fourth,
+  NEVER two occurrences sharing one line.
+This docs commit carries `573 tests green` x5, `580 passed / 0 failed`
+x3, `588 tests green / 0 FAILED` x4, `597 tests green / 0 FAILED` x3
+VERBATIM + adds the new current-pass face **605 tests green / 0 FAILED**
+for the future mpls harness to grep, exactly as 18m carried the 588 face
+for link4 and the 18o docs pass carried the seeded face for misc9. A
+FRESH NEXT.md rewrite MUST grep `tools/` for NEXT.md read-asserts FIRST
+and carry EVERY pinned prior-pass literal VERBATIM, then re-grep the pins
 AFTER the docs commit. Receipts of the hazard: the 18l rc1 pair at
 `/opt/data/cache/scratch/row18mdocs/erspan_{A,B}.log`.
 
 ## What this project is
 Port Snort 3 (C++) to Rust with byte-exact behavioral parity, milestone
 by milestone. Ground truth source: `/opt/data/snort3-src` @
-`fe29cbe7403a` (read-only reference; do not edit — it carries a local
+`fe29cbe7403a` (re-verified `git rev-parse --short HEAD` = fe29cbe THIS
+pass; read-only reference; do not edit — it carries a local
 `M src/managers/action_manager.h` plus an untracked `src/key` from a
 prior probe; NEVER `git add` anything under snort3-src). Port repo:
 `/opt/data/snort3-rust` (branch `master`, remote
 `github.com/dhoelzer/RustyPig`).
 
-Current state (measured at this 18o verify-mode docs pass): plan rows
-1–18n DONE. **118 commits at HEAD ade9331** (`git rev-list --count
-HEAD` THIS pass; origin/master == HEAD, `rev-list --count` both **118**
-+ `ls-remote origin refs/heads/master` = `ade933109378…` re-verified;
-this docs commit lands as the **119th**). **597 tests green / 0 FAILED**
+## Current state (measured at this 19a verify-mode docs pass)
+Plan rows 1–18n + 19a DONE (the ch19 parallel track OPENED before 18o:
+rows are plan-table ordered, the ch19 track runs parallel — next codec
+row = 18o mpls, next ch19 row = 19b+ per the misc9 PLAN P2/P3/P4 faces).
+**120 commits at HEAD 6698f01** (`git rev-list --count HEAD` THIS pass;
+origin/master == HEAD, `rev-list --count` both **120** +
+`ls-remote origin refs/heads/master` = `6698f0143e…` re-verified; this
+docs commit lands as the **121st**). **605 tests green / 0 FAILED**
 (full `cargo test` re-run AT THIS docs pass: summed `test result` lines
-programmatically = **597 passed / 0 failed**; FAILED/panicked grep 0;
-**72** result lines at THIS pass — the 18n commit-face citation said 71
-and the line count MOVES with the head, never pre-assume; the 18m
-lineage header face above stays readable for the harness greps:
-**588 tests green / 0 FAILED**). 597 = 588 at 18m + 9
-`tests/link4_parity_test.rs` (wc **934** L, `grep -c '#\[test\]'` =
-**9** re-measured THIS pass); the three new TUs
-`src/codecs/{cd_vlan,cd_ciscometadata,cd_fabricpath}.rs` 493 + 388 +
-310 = **1,191 L** carry ZERO in-crate `#[test]`; `cargo clippy
---all-targets` **0 warnings** (re-run THIS pass, warning/error grep =
-0, receipt `next18o_clippy.txt` under the scratch dir), **54,865**
-lines Rust across **161** `src/*.rs` files (`find src -name '*.rs'
--exec wc -l {} +` THIS pass), **45** `tests/*_parity_test.rs` replay
-tests, **472** tracked files (`git ls-files | wc -l`), **53**
-`tools/*_harness` dirs ON DISK — the 53rd is `tools/misc9_harness/`
-which rides **UNTRACKED (?? tools/misc9_harness/)** as the sibling
-chapter-19 RECON dir: NEVER touch, NEVER stage, NEVER build it (see
-the ch19 track note). GitHub wiki https://github.com/dhoelzer/RustyPig/wiki
-is the public status doc (clone at `/tmp/RustyPig.wiki`, remote
-`RustyPig.wiki.git`): HEAD + remote = **b6889a2 = row 18n wiki trio
-LANDED AND PUSHED** (verified THIS pass: `git -C /tmp/RustyPig.wiki
-log --oneline -1` = b6889a2, `ls-remote` sha match b6889a2accb3…,
-worktree porcelain EMPTY, `git grep 'row 18n' HEAD -- '*.md'` =
-Deviations-from-Snort-3.md **2** + Porting-status.md **2**). The 13:12Z
-briefing face "ONLY 18n owed there" is **STALE at my pass — DISK WON**
-(the 18n trio landed between the briefing and this pass); the owed
-queue is now **ZERO** — the wiki phase re-measures stats LIVE and
-applies any newer landed row when it runs, and this docs pass touched
+programmatically = **605 passed / 0 failed**; FAILED/panicked grep 0;
+**73** result lines at THIS pass — the 19a commit-face citation said 73
+and it MATCHED this pass, but the line count MOVES with the head, never
+pre-assume; the lineage header faces stay readable for the harness
+greps: **597 tests green / 0 FAILED** and further back
+**588 tests green / 0 FAILED**). 605 = 597 at 18n + 8
+`tests/misc9_parity_test.rs` (wc **889** L, `grep -c '#\[test\]'` =
+**8** re-measured THIS pass); the two new TUs
+`src/framework/module.rs` **957** L + `src/main/reload_tracker.rs`
+**321** L = **1,278 L** carry ZERO in-crate `#[test]`; `framework/mod.rs`
++ `main/mod.rs` took +1 wiring line each; `cargo clippy --all-targets`
+**0 warnings** (re-run THIS pass, warning/error grep = 0, receipt
+`next19adocs_clippy_grep0.txt` face: ZERO warning lines from a forced
+full relint). Allow census src-side post-19a (honest measured face):
+`src/framework/module.rs` `allow(` grep = **0**; `src/main/reload_tracker.rs`
+= **1** — the `:72 #![allow(dead_code)] // the tracker accessors serve
+the later control/shell rows` face (the 19a commit face says ZERO NEW
+PIN-SITE allows + 12 own warnings fixed — that dead_code module allow is
+the row's own honest face, cited here so the tests-side-pin-site
+counseling stays intact). **56,145** lines Rust across **163**
+`src/*.rs` files (`find src -name '*.rs' -exec wc -l {} +` THIS pass),
+**46** `tests/*_parity_test.rs` replay files, **483** tracked files
+(`git ls-files | wc -l`), tools = **54** `tools/*_harness` dirs ON DISK
+/ **53 TRACKED** — `tools/misc9_harness/` went TRACKED with row 19a (8
+stageables incl THE nested `.gitignore` 31 L instrument; the root
+.gitignore NEVER touched) and the **54th**, `tools/mpls_harness/`,
+rides **UNTRACKED (?? tools/mpls_harness/)** as the sibling mpls-row
+RECON dir: NEVER touch, NEVER stage, NEVER build it (see the 18o note —
+its PLAN.md is CITE-ONLY). GitHub wiki
+https://github.com/dhoelzer/RustyPig/wiki is the public status doc
+(clone at `/tmp/RustyPig.wiki`, remote `RustyPig.wiki.git`): HEAD +
+remote = **b6889a2 = thru 18n** (verified THIS pass: wiki log -1 =
+b6889a2, `ls-remote` sha match b6889a2accb3…, worktree porcelain EMPTY);
+wiki `git grep 'row 19a'` = **0 hits (rc 1)** — the 19a row is **OWED**
+at the wiki phase (ONE row behind; the queue re-measures stats LIVE and
+applies any newer landed row when it runs — the 13:12Z-style briefing
+"queue ZERO" faces keep going stale, DISK WINS). This docs pass touched
 the wiki ZERO times — NEVER edit `/tmp/RustyPig.wiki` outside the WIKI
 phase.
 
-## 18n close-out — VERIFY MODE (plan row + deviations shipped WITH code commit ade9331; this pass greps-verify + re-ground rather than append)
-18n's plan row and deviations section shipped inside the CODE commit,
+## 19a close-out — VERIFY MODE (plan row + deviations shipped WITH code commit 6698f01; this pass greps-verify + re-ground rather than append)
+19a's plan row and deviations section shipped inside the CODE commit,
 so this docs pass is a verification pass. Everything below was
 re-measured/re-opened THIS pass:
 
-- **Plan row**: `grep -c '^| 18n |' PORTING_PLAN.md` = **1** (at
-  PORTING_PLAN.md:94) — insert guard satisfied, NO append needed.
-  `git show --stat ade9331`: **15 files changed, +3,555 / -0** — the
-  expected 15-path face (7 harness stageables + 3 src TUs + mod.rs +
-  parity test + .gitignore + plan + deviations).
-- **Deviations section**: `grep -c '^## codecs link vlan trio (row 18n'`
-  = **1** at **:3827**, running to EOF **:3945** = **119 L**, **10**
-  bullets (`sed -n '3827,$p' | wc -l` + `grep -c '^- \*\*'` THIS pass).
+- **Plan row**: `grep -c '^| 19a |' PORTING_PLAN.md` = **1** (at
+  PORTING_PLAN.md:96) — insert guard satisfied, NO append needed.
+  `git show --stat 6698f01`: **15 files changed, +3,455 / -0** — the
+  expected 15-path face (8 misc9 stageables incl the nested .gitignore +
+  2 src TUs + 2 mod wirings + parity test + plan + deviations).
+- **Deviations section**: `grep -c '^## framework misc9 module + reload_tracker (row 19a'`
+  = **1** at **:3946**, running to EOF **:4051** = **106 L**, **11**
+  bullets (`sed -n '3946,4051p' | wc -l` + `grep -c '^- \*\*'` THIS pass).
   **Verdict: ADEQUATE-READ-LEAVE** — NO in-repo cite drift found at the
-  18n artifacts face; spot-checks re-sed'd THIS pass ALL byte-true: the
-  table TRUE-NAME face `#ifdef BUILDING_SO` :228 / `const BaseApi*
-  cd_vlan[] =` :231; the use-site pair cd_vlan.cc **:141**
-  `const DAQ_PktHdr_t* pkth = daq_msg_get_pkthdr(raw.daq_msg);` +
-  **:142** `if (pkth->flags & DAQ_PKT_FLAG_IGNORE_VLAN)` (the graft-v3
-  arm ground); the order face vid==0||4095 event :145-:148 BEFORE the
-  :150 `codec.proto_bits |= PROTO_BIT__VLAN;` set (the :143
-  short-circuit skips BOTH — the dual-face pin stands); cisco pegs
-  CountType grep 5 over :49-:59; protocol_ids.h **:160**
-  `ETHERTYPE_FPATH = 0x8903` (35075) + **:161** `ETHERTYPE_CISCO_META =
-  0x8909` (35081); decode_data.h **:97** `PROTO_BIT__VLAN 0x000400` +
-  **:104** `PROTO_BIT__CISCO_META_DATA 0x020000` (== vectors pb prints
-  1024/131072); `id_set` cd_vlan.cc :103; `default_tpids` :49
-  `"0x9100 0x9200"`; sids 130 + 467-471 EXACTLY-1 each in
-  codec_module.rs :96/:225-:229; ground externs codec_api.cc :43/:49/:72
-  + loads :88/:94/:117. The 18j "half-wrong briefing" lesson KEEPS its
-  teeth; rows NEVER rewritten.
-- **Harness FRESH x2 rc0 THIS pass**: receipts
-  `/opt/data/cache/scratch/row18odocs/{link4_A,link4_B}.log` tail
-  `LINK4_VLAN_OK vectors=28 faceA=24 gates=0` both; pinned vectors md5s
-  re-summed byte-stable AFTER the fresh rebuilds (DEC 28 L
-  `c7f5808fa326b7831603813c16a3b01e` + FACE-A 24 L
-  `9fdfc50da8fee22b473028f1f9b29c12`); frozen contracts direct-md5
-  diff-0 ALL SIX: link6 `e59f7a8a`/`d2fc5591`, erspan
-  `7d7d3500`/`3ec325d7`, misc3 `e75f7385`/`fe1189c6` re-verified after
-  the erspan/link6 fresh runs THIS pass.
-- **NEW LESSON-#6 FACE AT THIS PASS (logged, NEVER hidden)**: the fresh
-  run order link4 x2 -> erspan -> link6 produced `erspan_C rc=0` then
-  **`link6_C rc=1` with an EMPTY log** — the link6 :404-style drift
-  census (`grep -rl cd_pppoepkt tools … == 0`, exemptions vocab + own
-  dir ONLY) now trips on the **CHILD harness's** gitignored
-  `link4_harness/copy/codecs/link/cd_pppoe.cc` (the donor chain
-  link4<-link6 permanently carries the PARENT row's TUs — the carry
-  direction INVERTED from 18m's face). Artifact-clear `rm -rf
-  tools/link4_harness/copy` -> **link6_D rc0** (`LINK6_PPP_OK
-  vectors=20 faceA=20 gates=0`) + **erspan_D rc0** (`MISC_L_ERSPAN_OK
-  vectors=18 faceA=19 gates=0`). NEVER edit the frozen censuses; clear
-  the gitignored child copy BEFORE the census-guarded run. Receipts in
-  `row18odocs/manifest.txt`. The gre gate anchor ran FRESH rc0 THIS
-  pass too (`GRE_HARNESS_OK vectors=26 faceA=5 gate_lines=3`, gate
-  `6751d1a8c21da0fdfed87ddfd4d37c5f` re-md5'd). fmod/vocab were NOT
-  rebuilt this pass (ritual face, below — direct-md5 sanctions for the
-  frozen set).
-- **Git-face VERIFY (the 18i law)**: ade9331 reflog `HEAD@{0}` reads
-  plain **`commit:`** (re-read THIS pass — the post-push no-amend
-  lesson HELD its SIXTH straight landing per the 18n/wiki face), NO
-  amend, single push: origin/master == HEAD (`rev-list --count` HEAD
-  **118** == origin **118**; `ls-remote` = `ade933109378…`). The 18i
-  orphan **69c8b6f NOT an ancestor of origin/master RE-PROVED THIS
-  pass** (`merge-base --is-ancestor 69c8b6f origin/master` rc **1**).
-- **ZERO-GATE census UNDISTURBED (out-of-harness, direct)**:
-  `ls tools/*/gate.txt | wc -l` = **25**, holders of `4826fc22…` =
-  **9**, distinct md5s = **17**, `git ls-files 'tools/*/gate.txt'` =
-  **1** (gre's — the only tracked gate; anchor `6751d1a8…` re-md5'd
-  byte-exact THIS pass) — link4 added ZERO gate files = the **21st
-  straight honest zero-gate row** (link/test find-0 + add_cpputest 0);
-  the census at THIS docs pass = **22nd** consecutive undisturbed
-  measurement.
-- **graft family direct-md5 UNDISTURBED THIS pass**: daq3 masters
-  `tools/daq3_harness/copy/daq.h` 33 L `73fdbc3983ca…` +
-  `copy/daq_common.h` `f683749cda1d…`; link4 heredoc-regen copy
-  daq.h 39 L `0f7016a6…` + daq_common.h graft-v2 `fead0027…` all
-  byte-exact; `tools/link4_harness/backbone10.txt` = **EXACTLY 10**
-  lines (the witness adds a SYMBOL face, NEVER an ARRAY entry);
-  `tools/link4_harness/witness_pkthdr.cc` 21 L TRACKED (the 7th
-  stageable).
-- **clippy**: re-run `--all-targets` THIS pass = **0** warning/error
-  lines grep (receipt `next18o_clippy.txt`). The ade9331 message
-  records EXACTLY 1 allow this row (`assertions_on_constants` at the
-  REAL-x3 mod-arms pin) — cited precedent lives at its TRUE tests-side
-  homes (`ext :589`, `small4 :594`, `vocab :254`, misc3 :486, erspan
-  :378), NEVER src/.
-- **Ladder post-18n face (NEVER re-touched)**: `src/codecs/codec_api.rs`
-  the name table still at **:97**; the vlan trio TURNED loaded at
-  :101/:107/:130; the **18o hand-off name ALREADY resident**: cd_mpls
-  at **:119** (re-sed THIS pass); ground externs at the GROUND
-  `src/codecs/codec_api.cc` (the port keeps NO copy of that .cc — a
-  fresh-agent trap): mpls extern **:61** + load **:106** (re-grepped);
-  39-extern census STILL = **39** extern lines in codec_api.cc
-  (`grep -c 'extern const BaseApi\*'` = **39** THIS pass); ZERO of the
-  landed/queued codec names in ANY `tools/*/witness*.cc` +
-  `tools/*/stubs*.cc` EXCEPT the link4 OWN witness (re-run THIS pass:
-  cd_mpls grep **0** across all witnesses/stubs => ZERO stub
-  retirements pending; the vocab :11-:13 trio cd_ipv4/cd_ipv6/cd_tcp
-  stays the ONLY landmine, re-read :11-:13).
-- **Sids residency for the 18o set — re-measured**: MPLS 7
-  (`DECODE_BAD_MPLS` 170 + LABEL0-3 171-174 + RESERVED_LABEL 175 +
-  LABEL_STACK 176) grep EXACTLY-**7** in `src/codecs/codec_module.rs`
-  **:113-:119** => the mpls row ships ZERO new DECODE_* constants
-  (ground `src/codecs/link/cd_mpls.cc` RuleMap :59, sids :60-:66
-  re-sed'd; ground header codec_module.h :100-:106).
-- **Test math**: 597 = 588 + 9; cargo re-run THIS pass **72** result
-  lines (the 18n commit-face said 71 — the line count drifts with the
-  head, the SUM 597/0 matched), FAILED grep 0; 45 parity files (44 +
-  link4); the new TUs carry ZERO in-crate `#[test]`.
-- **commit census + gitignore**: 118 at HEAD ade9331 (origin 118);
-  `git status --porcelain` = clean tree + the single
-  **`?? tools/misc9_harness/`** sibling-recon line (NEVER stage it,
-  NEVER build it, NEVER delete it — NOT mine); the link4 .gitignore
-  block check-ignore-proven landed inside the code commit.
+  19a artifacts face; spot-checks re-sed'd THIS pass ALL byte-true: the
+  debt-cite pair at `src/file_api/file_module.rs` **:75** ("the 17z
+  ruling — the REAL framework/module.o") + **:232-:234** ("no Rust
+  Module base forked — real framework/module.o closes") — cited
+  VERBATIM NEVER edited, the CLOSE face holds; ground `framework/module.cc`
+  **403 L** md5 `9608434c…` (re-md5'd ground-side THIS pass),
+  `:32` `static const Parameter null_params[]`, `:372` `assert(false);
+  // wrong name = programmer error` -> `:373` `return 0;` (the
+  -DNDEBUG OBSERVABLE arm face), `:398-:401` `const PegInfo
+  simple_pegs[]` SUM/END pair; `main/reload_tracker.cc` **89 L**.
+- **Harness FRESH x2 rc0 THIS pass (pre-rewrite baseline)**: receipts
+  `/opt/data/cache/scratch/row19adocs/{misc9_A,misc9_B}.log` +
+  `manifest.txt`, tail `MISC9_FRAMEWORK_OK vectors=41 faceA=11 gates=0`
+  both runs; pinned vectors md5s re-summed byte-stable: DEC 41 L
+  `e6328da1f3188df9754b9e45d74897db` + FACE-A 11 L
+  `dfe738fb8b4200368332ba73b81a4e96`; `witness_misc9.cc` 27 L
+  `ada2b1e8…` (the +1 row face, backbone untouched); misc9 tracked files
+  = **8** (`git ls-files tools/misc9_harness | wc -l`).
+  **HONEST rc1 FACE LOGGED (never hidden)**: a third run BETWEEN the
+  NEXT.md rewrite and its docs commit died rc1 with an EMPTY log at the
+  harness's OWN row-face guard (`build.sh:589`: the dirty-face whitelist
+  has no `M NEXT.md` slot — misc9 shipped DURING a docs pass and never
+  needed the link4 `:881-:884` sibling-DOCS-child TOLERANCE face that
+  link4 carries: "NEXT.md rides MODIFIED by the sibling DOCS child —
+  tolerated, NEVER touched/staged"). Guard-adjacent pins PASSED against
+  the REWRITTEN file first (:462 python count == 3 + :607 grep -c == 3
+  run mid-build BEFORE the guard), so the carry is stakeholder-proven;
+  the post-commit re-runs (clean tree) closed rc0 — the 18o
+  link6_C-style empty-log receipt face, receipts
+  `row19adocs/{misc9_C,misc9_C2}.log` + `manifest.txt`. FORWARD COUNSEL
+  (NOT an edit — 19a build.sh is TRACKED, row-frozen since its own
+  landing): a future 19b+ harness clones the link4 NEXT.md-tolerance
+  line in its rowface guard from day one.
 
-## PROCESS LESSONS — the 18i amend-after-push incident (rule section) + the 18j/18k/18l/18m/18n HELD faces (positive lesson)
+- **Git-face VERIFY (the 18i law)**: 6698f01 reflog `HEAD@{0}` reads
+  plain **`commit:`** (re-read THIS pass — the post-push no-amend
+  lesson HELD its SEVENTH straight landing), NO amend, single push:
+  origin/master == HEAD (`rev-list --count` HEAD **120** == origin
+  **120**; `ls-remote` = `6698f0143e…`). The 18i orphan **69c8b6f NOT an
+  ancestor of origin/master RE-PROVED THIS pass** (`merge-base
+  --is-ancestor 69c8b6f origin/master` rc **1**). `git status
+  --porcelain` = clean + the single **`?? tools/mpls_harness/`**
+  sibling-recon line (misc9 NO LONGER a dirty face — it is TRACKED now).
+- **ZERO-GATE census UNDISTURBED (out-of-harness, direct)**:
+  `find tools -name gate.txt -not -path '*/copy/*'` = **25**, holders of
+  `4826fc22…` = **9**, distinct md5s = **17**, `git ls-files
+  'tools/*/gate.txt'` = **1** (gre's — anchor `6751d1a8…` re-md5'd
+  byte-exact THIS pass) — 19a added ZERO gate files = the **23rd**
+  straight honest zero-gate row (framework/main row, no upstream suite
+  run: CppUTest dialect-blocked); the census at THIS docs pass =
+  **24th** consecutive undisturbed measurement.
+- **graft family + backbone direct-md5 UNDISTURBED THIS pass**: daq3
+  masters `tools/daq3_harness/copy/daq.h` `73fdbc39…` +
+  `copy/daq_common.h` `f683749c…`; link4 regen copies `0f7016a6…` +
+  `fead0027…` all byte-exact; `tools/link4_harness/backbone10.txt` =
+  **EXACTLY 10** lines (the 19a witness_misc9 rides ROW-face, the
+  symbol-vs-array law from 18n — 19a's tracker face rode the CARRIED
+  `LogEngine::log_message_stdout` seam, the +2-witness recon GUESS died
+  on the multiple-definition law); `witness_18f.cc` master `ea1f79f3…`
+  re-md5'd UNDISTURBED (the 18o hook carrier).
+- **Ladder post-19a face (NEVER re-touched)**: `src/codecs/codec_api.rs`
+  the name table at **:97** `[&str; 34]` tripwire UNDISTURBED; the
+  **18o hand-off name ALREADY resident**: cd_mpls at **:119** (re-sed
+  THIS pass); ground externs at the GROUND `src/codecs/codec_api.cc`
+  (the port keeps NO copy of that .cc — a fresh-agent trap): mpls extern
+  **:61** + load **:106** (re-sed THIS pass); 39-extern census STILL =
+  **39**; cd_mpls grep **0** across all `tools/*/witness*.cc` +
+  `tools/*/stubs*.cc` re-run at the mpls recon (§4) => ZERO stub
+  retirements pending; the vocab `witness_stubs.cc :11-:13`
+  extern-stub trio cd_ipv4/cd_ipv6/cd_tcp stays the ONLY landmine
+  (re-read :11-:13 THIS pass byte-true).
+- **clippy**: re-run `--all-targets` THIS pass = **0** warning/error
+  lines grep. The pin-site-allow counsel face (tests-side ONLY: ext
+  :589, small4 :594, vocab :254, misc3 :486, erspan :378, link4 EXACTLY
+  1) stands; the 19a src-side `#![allow(dead_code)]` at
+  reload_tracker.rs:72 is logged in Current state above.
+- **Test math**: 605 = 597 + 8; cargo re-run THIS pass **73** result
+  lines; FAILED grep 0; 46 parity files (45 + misc9); the two new TUs
+  carry ZERO in-crate `#[test]`.
+
+## PROCESS LESSONS — the 18i amend-after-push incident (rule section) + the 18j-19a HELD faces (positive lesson)
 
 THIS IS A RULE SECTION, NOT A FOOTNOTE. The 18i row committed a
 git-face violation of the lineage's own land rule, then corrected it
-in-ref; 18j, 18k, 18l, 18m AND 18n executed the rule CLEAN (single
+in-ref; 18j through 19a executed the rule CLEAN (SEVEN straight) (single
 `commit:` reflog entry, single push, no force); every future agent
 must read this before touching a pushed commit.
 
@@ -307,7 +309,7 @@ push helper returns success.
    `tests/miscip_parity_test.rs` (636 L, 8 tests),
    `tests/daq3_parity_test.rs` (1,269 L, 8 tests), plus small4/gre/
    tun/eth/vocab/csum.
-5. **Gates at EVERY commit**: `cargo test` all green (>= 597; never
+5. **Gates at EVERY commit**: `cargo test` all green (>= 605; never
    trust a summed total from a run containing FAILED; cite one face
    per pass), clippy --all-targets ZERO warnings (force relint by
    touching all .rs), `vectors.txt` md5 stable across >= 2 clean
@@ -315,7 +317,7 @@ push helper returns success.
    added (mirror siblings) and verified with `git check-ignore` BEFORE
    staging. Then commit + push, insert the plan row (grep-guard: count
    must be 0 before insert), append deviations (one grep-guarded
-   append) — the 18b-18n variant: BOTH ship inside the code commit,
+   append) — the 18b-19a variant: BOTH ship inside the code commit,
    then the docs pass VERIFY-greps them (count == 1 each) and still
    re-measures every load-bearing claim. Refresh NEXT.md (FRESH
    rewrite + PINNED-STRING carry FIRST), commit+push docs. ONE code
@@ -323,7 +325,8 @@ push helper returns success.
    force-pushed (18j + 18k + 18l + 18m + 18n = the cadence clean FIVE
    times). Wiki: status row + deviations section + stats line at the
    WIKI phase — queue measured THIS pass: **landed through 18n at
-   b6889a2; ZERO owed** (re-measure wiki HEAD + stats LIVE at any
+   b6889a2; 19a OWED** (`git grep 'row 19a'` = 0 hits rc1 in the wiki
+   HEAD THIS pass) (re-measure wiki HEAD + stats LIVE at any
    future wiki pass; NEVER trust this file's numbers for stats).
 
 ## Hard-won environment facts (do not rediscover these)
@@ -356,126 +359,198 @@ push helper returns success.
 - `tools/csum_harness/` — row 18b, the probe-only origin: ground-header md5 pin :37, E4 wall receipt :67-:70, nm ZERO-text-symbols :79-:80, O0==O2 :116, vectors 16L md5 `e4baf781`.
 - `tools/flog_harness/` (17z): 50L `b260ec6a`. `tools/fsvc_harness/` (17y): 64L `54864705`. `tools/fpolicy_harness/` (17x): 27L `b989a8d5`. `tools/finspect_harness/` (17w): 103L `3cbd009e`. `tools/fcapi_harness/` (17v): 21L `a953a501`. `tools/fconf_harness/` (17u): 20L `65968e1c`. `tools/fcshare_harness/` (17t): 25L `03d43c14`. `tools/fcap_harness/` (17s): 27L `0208a691`; gate `4826fc22` — frozen chain START.
 - `tools/fctx_harness/` — vectors 610L `839b5566`; gate `42349372`. `tools/fflows_harness/` 146L `bd8c00af` (DO NOT touch), gate `e14626fc`. `tools/fcache_harness/` 278L `b69db310` (DO NOT touch), gate `6b3c041e`. `tools/filib_harness/` 273L `77ffd8e4` (DO NOT touch). `tools/textlog_harness/` — time() interposition precedent. `tools/rules_harness/` — hosts `copy/catch/catch.hpp` `74ef54e8`. **`tools/codec_harness/` is row 17d's harness** (stubs.cc md5 `be9bdd0b` = the FROZEN donor the E6-YES arms re-collide against) — the RawData/daq_msg deferral closed partially at 18c (codec.rs:9/:171 + deviations :2341-:2344); the FULL plugin-loading deferral (plugin_manager.cc 1015 L) still defers to row 20.
-- `tools/misc9_harness/` — **UNTRACKED sibling RECON dir (?? in porcelain, NEVER tracked)**: NEVER touch, NEVER stage, NEVER build, NEVER delete (NOT part of the codec cadence; the chapter-19 track's own orchestrator owns it). Its PLAN.md face is cited in the ch19 note below — cite-ONLY.
 
-## Next milestone — row 18o: cd_mpls.cc ALONE (390 L, the q4 banked own-row; ALL faces re-measured THIS 18o docs pass vs the 122-file link4 head)
+- `tools/mpls_harness/` — **UNTRACKED sibling RECON dir (`??` in porcelain, NEVER track/stage/build/mine/delete)**: the 18o mpls recon (PLAN.md 73 L ONLY on disk) with OWN receipts under `/opt/data/cache/scratch/row18o/` (75 files). CITE-ONLY for this repo's docs (the correction faces are imported into the 18o cite table above); the mpls row's orchestrator owns the dir + the scratch.
 
-**The face is BANKED by the 18n NEVER-land census (the q4 law,
-verify-yourself re-runs THIS pass)**: link4 build.sh :5 "mpls 390
-(`e2911ad5`) DEFERS to its own future row, PLAN q4 law" + the per-build
-grep-0 arms (:140-:143 probes/witness, :180 Rust twin, :664 vector sid
-band, :508/:512/:514 tunnel-U trio): the deferred TU leaks NOTHING.
-`ls src/codecs/link/*.cc` = 10, 9 ported => **mpls is the LAST link
-file** (re-counted THIS pass). Gate material ZERO (no test/ in the link
-dir) => **22nd straight zero-gate shot**; link4_harness is the clone
-donor.
+## Next milestone — row 18o: cd_mpls.cc ALONE (390 L, the q4 banked own-row; the sibling mpls RECON LANDED at tools/mpls_harness/PLAN.md — CITE-ONLY, NEVER mine/build/stage the ?? dir; cite-table below re-grounded THIS pass where it touches ground/repo faces)
 
-### cd_mpls.cc ground cite table (EVERY row re-verified by sed/grep THIS pass @ `/opt/data/snort3-src/src/codecs/link/cd_mpls.cc`)
+**The face is BANKED by the 18n NEVER-land census (the q4 law)**: link4
+build.sh :5 "mpls 390 (`e2911ad5`) DEFERS to its own future row, PLAN
+q4 law" (re-read :5 THIS pass) + the per-build grep-0 arms (:140-:143
+probes/witness, :180 Rust twin, :664 vector sid band, :508/:512/:514
+tunnel-U trio): the deferred TU leaks NOTHING. `ls
+/opt/data/snort3-src/src/codecs/link/*.cc` = 10, 9 ported => **mpls is
+the LAST link file** (re-counted THIS pass). Pre-hit receipt per the
+recon PLAN head: `find src -name 'cd_mpls*'` = **0** THIS pass (Rust
+unlanded); `grep -c '^| 18o' PORTING_PLAN.md` = **0** (row-table guard
+clean). Gate material ZERO (no test/ in the link dir; recon §7: link/test
+find-0, add_cpputest 0, TEST_CASE/CppUTest grep 0 in cd_mpls.cc; the
+CMakeLists static-set :9 + `add_dynamic_module(cd_mpls …)` :21 arms are
+build-shape cites) => **24th straight zero-gate shot**; link4_harness is
+the clone donor.
+
+**RECON FACE (the ?? dir LANDED mid-19a; NEVER touched by this pass
+beyond reading PLAN.md): `tools/mpls_harness/PLAN.md` 73 L re-wc'd THIS
+pass.** It carries its OWN measured receipts under
+`/opt/data/cache/scratch/row18o/` (75 files, re-listed THIS pass). The
+correction faces it measured that OVERRIDE the older cite table below —
+cite them, do NOT re-mine the dir:
+- **clock_defs rider correction (§2): fresh-cp count = 7, NOT 6.** The
+  one-fatal-at-a-time closure loop (`row18o/closure_log.txt` +
+  E_step01..08) measures `time/clock_defs.h` (flow.h :51) find-**0** at
+  the reconstructed 122 head — step-6 fatal receipt. Riders = **5**
+  (ips_context_chain, deferred_trust, flowz-path decoy flow_data,
+  flow_stash, clock_defs), total find-0/cps = **7**. The docs face
+  below ("6 find-0 = 2 + 4 riders, rider count 4 STANDS") DISAGREES
+  with disk — the recon disk-won receipt supersedes; the mid-copy find
+  assert at the row RE-DERIVES (116 base + ... MEASURE, NEVER
+  pre-assume 122+1).
+- **graft-ext #2 status RESOLVED-CANDIDATE (recon §3): found + armed,
+  NEVER landed.** md5 `9b603f8f91e5003f907838415633b685` **34 L**
+  FOUND md5-EXACT at `/opt/data/cache/scratch/row18n/copy/daq_common.h`
+  (the row18n scratch face survived), cp'd to `row18o/daq_common.h.ext2`
+  → `-fsyntax-only` rc0 + standalone `static_assert(MAX_DAQ_VERDICT
+  == 6)` probe rc0 (`B10b_syntax_rc.txt`, `B11_assert_rc.txt`). The
+  ladder INHERITS the v3 head (graft-v3 `0f7016a6` 39 L rides the
+  reconstructed 122 tree already — mpls NEVER re-runs the vlan arms)
+  and arms ONLY ext#2 iff the flow.h cp demands it (it does: the
+  pre-ext residual face is EXACTLY-1 error `donor/flow/flow.h:541:32
+  'MAX_DAQ_VERDICT' was not declared`, `E_final_preext.txt`). Masters
+  `73fdbc39`/`f683749c`/`fead0027` stay frozen & md5-asserted; ext#2
+  stays COPY-LOCAL NEVER promoted. Path-trap cite re-grounded THIS
+  pass: `flow.h :541` + `src/packet_io/sfdaq_module.cc :179`
+  static_assert — NOT src/main/.
+- **safec decision face (recon §5 — CORRECTS the "(b) MINIMAL shim
+  route" row below): the STOCK 42-L `utils/safec.h` cp IS the shim.**
+  `HAVE_SAFEC` grep **0** in the donor config.h (`C15_havesafec.txt`) →
+  the header takes its OWN `#else` shim arm (`memcpy_s→memcpy`, safec.h
+  :23+); closure + syntax + -c `-O0`/`-O2` ALL rc0 with the plain
+  verbatim cp, ZERO safe_*_lib grafts. The strip-arm receipt KILLED the
+  predicted ":267 memcpy_s fatal without a shim" docs face — removing
+  the cp moves the wall to the `cd_mpls.cc:30` include itself
+  (`C15_strip_safec_fatal.txt`): DISK WON. Decision: VERBATIM cp, no
+  shim authoring; the Rust encode unit mirrors the memcpy face (the 18n
+  cited-never-called overlay posture).
+- **hook face CONFIRMED (recon §4, own-nm'd not inherited-assume):
+  witness_18f INHERITED T EXACTLY-1 + mpls U EXACTLY-1.** `nm_U` of
+  the recon's -c-built cd_mpls.o (71,544 B, `B12_o_size.txt`) = 28
+  demangled lines (27 U + 1 weak) with `SnortConfig::tunnel_bypass_enabled`
+  **EXACTLY-1 U** — and `witness_18f.o` (md5 `ea1f79f3` MATCH asserted,
+  the link4 :427 face) carries it **T EXACTLY-1** (`B12_witness_T_tunnel.txt`)
+  → the hook CLOSES against the CARRIED witness: ZERO new backbone,
+  ZERO new witness for the hook (clone the gre :298 exactly-ONE-U
+  census). Residue census honest-THIN (`B13_residue_census.txt`):
+  Module stats/ctor/vtable 10 (the 19a landed base helps nobody's LINK
+  — donor-side face), flow/1: `Flow::get_mpls_layer_per_dir(bool)` —
+  **the ONE unclosed non-backbone U** (find-0 across ALL harness .o —
+  declared ground `flow/flow.h :223`, re-sed'd THIS pass). Row decision
+  OPEN: the 18n "encode CITED-NEVER-CALLED" posture keeps **6**
+  stageables (small4/erspan/link6 law, receipt-only nm census like the
+  trio's 48/24/21) UNLESS the probe links encode() → a miscip-style
+  small own mirror arms **7** (daq3/link4 law). MEASURE at the row,
+  NEVER pre-pick.
+- **NAME/HELP off-by-one correction (recon §1): `CD_MPLS_NAME` :34 +
+  `CD_MPLS_HELP` :35 — pin :34/:35, NOT the docs :33/:34 face** (re-sed
+  ground THIS pass: the #defines literally sit at 34/35; use-sites
+  :80/:111/:369/:370).
+- **PROTO_BIT__MPLS resident-correction (recon §1): the row-scoped-NEW
+  const face MOVED.** ground `framework/decode_data.h :96`
+  `PROTO_BIT__MPLS 0x000200` (re-sed'd THIS pass) but Rust-side ALREADY
+  resident at `src/detection/rtn_checks.rs :34` `pub const
+  PROTO_BIT__MPLS: u32 = 0x000200;` (re-grepped THIS pass) — the old
+  "grep 0 across ALL src/*.rs => row-scoped const" face below is STALE;
+  the row REUSES the resident const w/ both cites (the strict-vs-ci rs
+  census: strict MPLS rs files = 3 — codec_module sids, framework/codec.rs
+  `MPLS_IP = 137`, rtn_checks :34).
+- **collision census (recon §4)**: compiled-surface cd_mpls `grep -rl`
+  in tools `*.cc/*.h` = **0**; 6 wider hits ALL build.sh/PLAN prose;
+  strong-T collisions cd_mpls.o vs stubs_18d+witness_18f = EXACTLY 0;
+  vocab :11-:13 landmine reserved for the ip heavies only — mpls retires
+  NOTHING. Sids 7/7 resident `codec_module.rs :113-:119` re-sed'd THIS
+  pass (170-176, ZERO new consts); `codec_event` call sites = 7
+  (:171/:198/:287/:294/:303/:308/:313) per the recon §1 grep.
+
+### cd_mpls.cc ground cite table (EVERY row re-verified by sed/grep at `/opt/data/snort3-src/src/codecs/link/cd_mpls.cc`; the recon-correction faces ABOVE supersede where they disagree — cite, don't re-mine)
 
 | face | value | cite / verify face |
 |---|---|---|
 | wc / md5 | **390** / `e2911ad515d5f416415acd1ee9967379` | re-wc + re-md5 THIS pass (MATCHES the 18m-era cite — ground NEVER moved) |
 | hidden table | `const BaseApi* cd_mpls[]` **:385** (`#ifdef BUILDING_SO` :382, SO arm :383, endif :386) | TRUE-NAME = file base (the 18n equality-pin law, NO drift refusal); nm D-EXACTLY-1 |
-| NAME/HELP macros | `CD_MPLS_NAME "mpls"` :33 + HELP :34 | sed enclosure face (the vocab transbridge NAME-in-ns enclosure contrast applies at the row) |
-| mod arms | mod_ctor **:341** / mod_dtor **:344** defs + table arms **:371/:372 REAL** | nullptr-FREE (mirrors the 18n trio REAL x6; NOTHING carried from 18m's 1,1/1,1/0,0) |
-| Parameters | `mpls_params` :48: `max_stack_depth` PT_INT `"-1:255"` def `"-1"` + `payload_type` PT_ENUM `"auto \| eth \| ip4 \| ip6"` def `"auto"`; `MplsPayloadType` enum :41-:45 "Entries must align with payload_type enum parameter" | the link tail's LAST Parameter face — TWO params (the 18n single-param VLAN_PARAMS precedent lands first); the PT_INT range/def slots land (the 18n Parameter deviation face); the enum-alignment comment transcribes into the Rust enum |
-| RuleMap / sids | mpls_rules :59, **7 sids** :60-:66; codec_event call sites :171/:198/:287/:294/:303/:308/:313 (x7) | ALL 7 RESIDENT `src/codecs/codec_module.rs` **:113-:119** grep EXACTLY-7 THIS pass => ZERO new DECODE_* consts; ground header codec_module.h :100-:106 |
-| includes :22-:30 | codec_module.h(f1) + **flow/flow.h :26 (637 L find-0)** + framework/codec.h(f1) + text_log.h(f1) + snort_config.h(f1; ground 798 L, f1) + **utils/safec.h :30 (42 L find-0)** | re-sed'd THIS pass (7 includes) |
-| **find-0 SET vs the 122-file link4 copy head (the fresh-cp census)** | **6**: `flow/flow.h` **637** + `utils/safec.h` **42** + 4 riders `detection/ips_context_chain.h` + `flow/deferred_trust.h` + `flow/flow_stash.h` + `time/clock_defs.h` | flow.h :41-:51 project-include walk RE-WALKED at the 122 head THIS pass: data_bus/decode_data/inspector/layer/sf_ip/snort_protocols + flow_data ALL find-1 (the 18m 116-head face MOVED to 122 and HELD — rider count 4 STANDS, the link6 "5 riders" prose stays corrected — disk wins) |
-| **flow_data DECOY (verify-own face re-measured)** | `flow/flow_data.h` = find-**0**: the copy's `flow/` dir holds ONLY flow_key.h; the donor graft rides at **`copy/flowz/flow_data.h`** find-1 — the include TEXT demands `flow/flow_data.h` so the graft does NOT satisfy it free-ridden. **NEVER re-derive the graft md5; NEVER silently cp the flowz face into flow/** | `find copy -path "*flow*" -name '*.h'` THIS pass = flow/flow_key.h + flowz/flow_data.h + flowz/flow_fwd.h (the misc9 recon §5 names the same path face — cite) |
-| flowip | grep **0** in cd_mpls.cc AND in flow.h (forward-decl only) | flowip-NEVER-pull face re-proved THIS pass |
-| **MAX_DAQ_VERDICT / graft-ext #2** | grep **0** in ALL FOUR landed daq faces (masters `73fdbc39`/`f683749c`, v2 `fead0027`, v3 `0f7016a6`) AND in cd_mpls.cc ITSELF (re-grepped THIS pass) | the REAL sites ONLY: `flow/flow.h :541` `DAQ_Verdict last_verdict = MAX_DAQ_VERDICT;` + `src/packet_io/sfdaq_module.cc :179` `static_assert(MAX_DAQ_VERDICT == 6, "Verdict peg counts must align with MAX_DAQ_VERDICT")` (both re-sed'd THIS pass; NOT `src/main/…` — path trap); v2 typedef = 2 values ONLY :25; candidate **`9b603f8f` 34 L BANKED NEVER LANDED** (link4 PLAN :40 scratch-measured rc0 + build.sh :279/:902 never-here asserts) => arm ONLY if the flow.h compile demands it, use-site-census law, graft-v3 COPY-LOCAL discipline (masters frozen) |
-| safe_*_lib wall | safec.h pulls `<safe_mem_lib.h>` + `<safe_str_lib.h>` — host find-0 (rc 2, re-proved THIS pass); **safec use-site in cd_mpls = EXACTLY-1**: `memcpy_s(buf.data(), hdr_len, hdr_start, hdr_len)` at **:267** (encode path — the 18l "memcpy_s :267 ONE face" law VERIFIED to the line) | a MINIMAL measured shim/graft arm off the :267 census (ONE call face) beats carrying 2 host-absent headers; decide AT the row off the use-site census; the Rust encode unit mirrors the memcpy face |
-| **bypass hook (the ONLY one left in the tail)** | **:205** `if (codec.conf->tunnel_bypass_enabled(TUNNEL_MPLS))` + **:206** `codec.tunnel_bypass = true;` byte-true (re-sed'd); `TUNNEL_MPLS = 0x80` at `src/main/snort_config.h :126` (re-grepped) | carrier face OWN-nm'd THIS pass: **witness_18f.o carries tunnel_bypass_enabled T EXACTLY-1 (`ea1f79f3` master md5 asserted by link4 :427)** riding INHERITED in the 122-tree (link4 :485 compiles it; the trio tunnel-U 0/0/0 = the built-in contrast) => the mpls .o's U-face CLOSES against the carried witness — arm the gre :298 exactly-ONE-U census; NEVER a new backbone pin (BACKBONE STAYS 10) |
-| row-scoped proto-bit | `PROTO_BIT__MPLS 0x000200` at `framework/decode_data.h :96` (re-grepped; the 18n cites :97/:104 are its NEIGHBORS — distinct line); cc use-sites :191 set / :200 clear; Rust-side `PROTO_BIT__MPLS` grep **0** across ALL src/*.rs (re-run THIS pass) | NOT framework-landed => row-scoped const w/ the :96 cite (the exact 18n pb precedent; vectors print the decoded pb face) |
-| ladder (NEVER re-touched) | `codec_api.rs` name table `cd_mpls` at **:119** RESIDENT (re-sed'd); ground extern `codec_api.cc :61` + load **:106** (re-grepped); 39-extern census = **39** | the name TURNs loaded at landing; `[&str; 34]` tripwire UNDISTURBED; NEVER move the table |
-| landmine posture | cd_mpls grep **0** across ALL `tools/*/witness*.cc` + `tools/*/stubs*.cc` (re-run THIS pass) | ZERO witness-stub retirements for 18o; vocab :11-:13 (ipv4/ipv6/tcp) remains the ONLY landmine, reserved for the ip heavies |
+| NAME/HELP macros | `CD_MPLS_NAME "mpls"` **:34** + HELP **:35** (the recon :34/:35 disk-wins correction; the old :33/:34 face is DEAD) | re-sed THIS pass; vocab transbridge NAME-in-ns enclosure contrast applies at the row |
+| mod arms | mod_ctor **:341** / mod_dtor **:344** defs + table arms **:371/:372 REAL**; `ctor(Module* m)` :347 config-carry face | nullptr-FREE (mirrors the 18n trio REAL x6); the `if (m)` config thread-through = the load-pair probe face (recon §8) |
+| Parameters | `mpls_params` :48-57: `max_stack_depth` PT_INT `"-1:255"` def `"-1"` + `payload_type` PT_ENUM `"auto \| eth \| ip4 \| ip6"` def `"auto"`; `MplsPayloadType` enum :39-46 w/ the align-comment :41 | the link tail's LAST Parameter face — TWO params (the 18n single-param VLAN_PARAMS precedent); the enum-transcription comment rides the Rust enum |
+| RuleMap / sids | mpls_rules **:59-:69** (7 sids :61-:67 + term :68 — the recon :61-:67 face; the old ":60-:66" cite is OFF-BY-ONE vs the disk block, recon disk-won); codec_event call sites x7 | ALL 7 RESIDENT `src/codecs/codec_module.rs` **:113-:119** grep EXACTLY-7 THIS pass => ZERO new DECODE_* consts; ground header codec_module.h :100-:106 |
+| includes :22-:30 | codec_module.h(f1) + **flow/flow.h :26 (637 L find-0)** + framework/codec.h(f1) + text_log.h(f1) + snort_config.h(f1) + **utils/safec.h :30 (42 L find-0)** | re-sed'd (7 includes; recon §2) |
+| **find-0 SET (the fresh-cp census)** | **7 RECON-MEASURED**: `flow/flow.h` **637** + `utils/safec.h` **42** + 5 riders `detection/ips_context_chain.h` + `flow/deferred_trust.h` + `flow/flow_data.h` + `flow/flow_stash.h` + **`time/clock_defs.h`** | the closure-loop receipts rule: the older 122-head walk said "6 = 2 + 4 riders (clock_defs find-1)"; the row18o loop got a clock_defs **fatal at flow.h:51** — step-6 receipt `row18o/E_step06` family; the row's mid-find assert RE-DERIVES anyway (NEVER import either count) |
+| **flow_data DECOY** | `flow/flow_data.h` = find-**0**: the donor `flow/` holds ONLY flow_key.h; the graft rides **`flowz/flow_data.h`** — the include TEXT demands `flow/flow_data.h`, the graft does NOT satisfy it free-ridden. **NEVER re-derive a graft md5; NEVER silently cp the flowz face into flow/** | recon §2 `row18o/B8_detail.txt` face (the miscip trio hit the SAME path wall per misc9 PLAN §5) |
+| MAX_DAQ_VERDICT / graft-ext #2 | grep **0** in ALL landed daq faces AND in cd_mpls.cc ITSELF; candidate `9b603f8f` 34 L FOUND + scratch-armed rc0 (recon §3 face above), **NEVER LANDED** in tracked surfaces | REAL sites ONLY: `src/flow/flow.h :541` + `src/packet_io/sfdaq_module.cc :179` `static_assert(MAX_DAQ_VERDICT == 6, …)` (path trap: NOT src/main/); graft-v3 COPY-LOCAL discipline, masters frozen |
+| safe_*_lib wall | safec.h pulls the safe libs ONLY under `#ifdef HAVE_SAFEC`; donor config.h HAVE_SAFEC grep-0 → the **#else shim** arms live WITHOUT host libs (recon §5 decision face: VERBATIM 42-L cp, no shim authoring); use-site census EXACTLY-1: `memcpy_s(buf.data(), hdr_len, hdr_start, hdr_len)` **:267** (encode path) | host safe_*.h find-0 (rc 2, era law); the strip-arm receipt `C15_strip_safec_fatal.txt` killed the predicted :267-fatal docs face — disk won |
+| **bypass hook (the ONLY one left in the tail)** | **:205** `if (codec.conf->tunnel_bypass_enabled(TUNNEL_MPLS))` + **:206** `codec.tunnel_bypass = true;` — re-sed byte-true THIS pass; `TUNNEL_MPLS = 0x80` at `src/main/snort_config.h :126` (re-grepped THIS pass) | carrier INHERITED not re-cloned: witness_18f.o T EXACTLY-1 `ea1f79f3`, own-nm'd by the recon (`B12_witness_T_tunnel`); mpls U EXACTLY-1 in 28-L nm face; arm the gre :298 exactly-ONE-U census; BACKBONE STAYS 10 |
+| proto-bit | ground `framework/decode_data.h :96` `0x000200`; cc set :191 / clear :200; **Rust side ALREADY RESIDENT `src/detection/rtn_checks.rs :34`** (the recon correction — the old row-scoped-NEW const face is DEAD) | REUSE + cite BOTH; vectors print the decoded pb face |
+| Flow encode face | `pflow->get_mpls_layer_per_dir(enc.forward())` **:253**; ground decl `flow/flow.h :223` (re-sed'd THIS pass); find-0 across ALL harness .o = the ONE unclosed non-backbone U | the 6-vs-7 stageable decision rides this U (recon §4): cited-never-CALLED posture keeps 6; a vector budget that wants the encode memcpy face arms a miscip-style own mirror = 7 — MEASURE at the row |
+| ladder (NEVER re-touched) | `codec_api.rs` `cd_mpls` at **:119** RESIDENT (re-sed'd THIS pass); ground extern `codec_api.cc :61` + load **`:106`** (re-sed'd THIS pass); 39-extern census = **39**; `[&str; 34]` at `codec_api.rs :97` UNDISTURBED | the name TURNs loaded at landing; NEVER move the table |
+| landmine posture | cd_mpls grep **0** across ALL `tools/*/witness*.cc` + `tools/*/stubs*.cc`; vocab **:11-:13** (ipv4/ipv6/tcp, re-read THIS pass) remains the ONLY landmine, reserved for the ip heavies | ZERO witness-stub retirements for 18o |
 
-### 18o DECISION TABLE — cost vs defer (ALL measured THIS pass, w/ cites)
+### 18o DECISION TABLE — cost vs defer (recon §9 cost face re-grounded THIS pass w/ cites)
 
 | option | content | decision weight |
 |---|---|---|
-| **(a) RECOMMENDED: mpls ALONE — land as 18o NOW** | 390 L | the q4 own-row law BANKED it (the 18n NEVER-land census cites above, verify-own re-runs THIS pass); 390 sits at the LOW edge of the proven 417-658 landing band; fully pre-scoped in the table; its TWO risk classes are each NARROW now: (1) the **flow.h 637-L closure drag** — 6 find-0 headers + the depth-1 carried floor (the 18l honest ~4.3k face) + the flowz/flow DECOY path wall NOW measured per-file; (2) the **safe_*_lib host-0 wall** — but the use-site census says EXACTLY-1 memcpy_s (:267 verified to the line THIS pass) => MINIMAL shim route, cheap; graft-ext #2 = CONDITIONAL ONLY (arm iff the flow.h cp compile demands it; candidate 9b603f8f banked, NEVER pre-typed); the bypass hook = **ZERO extra closure now** (witness_18f INHERITED in the donor tree, T-face nm'd THIS pass — the 18m-era "clone the witness" cost is GONE, the 122-tree carries it); TRUE-NAME clean = headline-poor BUT the equality-pin + LAST-link-file closure story; do **NOT pair it** (the (P5)/(d) rank-LAST pairing face stands; the tail CLOSES with it) |
-| (b) DEFER mpls behind the ch19 track | — | REFUSED on measurement: q4 owns mpls as a CODEC row (the misc9 recon §1 census proves chapter-19 = framework/+main/ ONLY — the recon's own mpls-GUESS census face came GROUND-DEAD, disk won); completing the link tail keeps one chapter per commit + the daq chain intact (vlan ext landed -> mpls consumes/arms it -> the ip heavies ride the de-risked riders); interleaving chapters breaks the plan-row table order |
-| (c) fallback ON STALL ONLY: `src/main/thread_config.cc` | 920 L (**14** TEST_CASE re-counted THIS pass) | real Catch material = NOT zero-gate (the gre gate-shape clone + the hwloc witness ladder 17l); ONLY if row 18 stalls (the 18a/18c/18d/18f/18h/18l rulings re-affirmed); path = `src/main/` ONLY — `src/daqs/` NEVER existed |
+| **(a) RECOMMENDED: mpls ALONE — land as 18o NOW** | 390 L | the q4 own-row law BANKED it (link4 :5 cite re-read THIS pass); 390 sits at the LOW edge of the proven 417-658 landing band BUT carries the chapter's HEAVIEST closure face for its size: **7 fresh cps + ext#2 CONDITIONAL + flow.h 637-L drag** (recon §2/§9); its risk classes are each NARROW now: (1) the flow.h closure drag — the riders are FULLY enumerated by the recon receipts (cite, don't re-walk) and 18o PRE-PAYS them for the ip heavies that follow (the fresh-HDR census re-derives vs whatever head mpls leaves); (2) safec CLOSED by the stock-#else decision (no shim authoring); graft-ext#2 candidate FOUND + rc0-armed, copy-local ONLY; the bypass hook = **ZERO extra closure** (witness_18f INHERITED, T nm'd — the old "clone the witness" cost GONE); TRUE-NAME clean = headline-poor BUT the equality-pin + LAST-link-file closure story; do **NOT pair it** |
+| (b) DEFER mpls behind the ch19 track | — | REFUSED on measurement: q4 owns mpls as a CODEC row AND the ch19 track already OPENED (19a landed without touching the link tail); completing the link tail keeps one chapter per commit + the daq chain intact (vlan ext landed -> mpls consumes/arms ext#2 -> the ip heavies ride the de-risked riders) |
+| (c) fallback ON STALL ONLY: `src/main/thread_config.cc` | **920** L re-wc'd THIS pass; **14** TEST_CASE re-counted THIS pass (ground file) | real Catch material = NOT zero-gate (the gre gate-shape clone + the hwloc witness ladder 17l); ONLY if row 18 stalls (the 18a/18c/18d/18f/18h/18l rulings re-affirmed); path = `src/main/` ONLY — `src/daqs/` NEVER existed |
 
 **Measured recommendation for 18o: (a) mpls ALONE.** Sequence forward:
-(a) NOW, THEN the ip heavies `ip/cd_ipv4.cc 790` / `ip/cd_ipv6.cc 733`
-/ `ip/cd_tcp.cc 839` (paths re-wc'd THIS pass, SUM **2,362**; cd_tcp
-lives in `codecs/ip/`, NOT a `codecs/tcp/` dir — the 18m re-ground
-holds), the ONLY stub-retirement landmine = vocab witness_stubs.cc
-**:11-:13** (re-read THIS pass — THREE extern stubs retire when the
-trio lands), `#include <daq.h>` :25 riders (the graft-v3 extension
-DE-risks the class; each ip row's use-site census decides whether it
-wants the v3 face or just the master — NEVER pre-assume), the fresh-HDR
+(a) NOW, THEN the ip heavies **`ip/cd_ipv4.cc` 790** L md5
+`def01f1d…`, **`ip/cd_ipv6.cc` 733** L md5 `89267b1d…`, **`ip/cd_tcp.cc`
+839** L md5 `144c4275…` (all three paths re-wc'd + re-md5'd ground-side
+THIS pass @ `src/codecs/ip/`, SUM **2,362** re-added; cd_tcp lives in
+`codecs/ip/`, NOT a `codecs/tcp/` dir), the ONLY stub-retirement
+landmine = vocab witness_stubs.cc **:11-:13** (re-read THIS pass —
+THREE extern stubs retire when the trio lands), `#include <daq.h>` :25
+riders (the graft-v3 + ext#2 faces de-risk the class; each ip row's
+use-site census decides which face, NEVER pre-assume), the fresh-HDR
 family {parse_ip, sf_ipvar, ipv4_options, tcp_options, stream} find-0
 census MUST re-derive vs whatever head mpls leaves (censuses MOVE with
-the head — proven THREE times now: 114->116->122); tcp.h BANKED
-`a7ac7b82`; likely a 2-3 commit split (the 18k b2 honest face). udp
-**660** / icmp6 **518** / igmp 138 / mobility 143 / pgm 211 / routing
-163 in ip/ + the misc queue icmp4_ip **345** / gtp **291** / geneve
-**282** / teredo **161** / icmp6_ip **162** (ip/misc tail re-wc'd THIS
-pass) ride AFTER. Rows NEVER pre-decided beyond measurement: fresh-cp
-counts re-measured at the row, mid-copy find assert re-derived (122 +
-N, MEASURE), E4 walls flipped, landmine grep re-run.
+the head — proven FOUR times now: 114->116->122->130-ish recon
+post-7-cps face, MEASURE at the row); tcp.h BANKED `a7ac7b82`; likely a
+2-3 commit split (the 18k b2 honest face). udp **660** / icmp6 **518** /
+igmp 138 / mobility 143 / pgm 211 / routing 163 in ip/ + the misc queue
+icmp4_ip **345** / gtp **291** / geneve **282** / teredo **161** /
+icmp6_ip **162** ride AFTER. Rows NEVER pre-decided beyond measurement:
+fresh-cp counts re-measured at the row, mid-copy find assert re-derived,
+E4 walls flipped, landmine grep re-run.
 
-### Chapter-19 parallel track — HONEST PLAN-face NOTE (sibling recon LANDED; cite-ONLY, NEVER mine)
-`tools/misc9_harness/PLAN.md` (**174 L** re-wc'd THIS pass; rides the
-**UNTRACKED ?? dir** — NEVER touch/stage/build/delete) = the sibling
-chapter-19 recon that landed mid-18n. Its measured pick, cited here
-where it touches MY repo face: **(P1) framework/module.cc 403 +
-main/reload_tracker.cc 89 = 492 L** — module.cc **ZERO fresh cps**
-(ALREADY a donor backbone TU since 18c: `copy/framework/module.cc`
-lives in every harness OBJS list) + reload_tracker ONE 49 L cp,
-witness +2 mirror-only (the miscip 27-L route), ZERO gate for the
-pair, ZERO hidden tables, ZERO graft participation; the pick **closes
-the BANKED Module-base debt cite at `src/file_api/file_module.rs :75 +
-:232`** ("no Rust Module base forked — real framework/module.o closes"
-— BOTH cite SITES re-verified THIS pass in the repo, my face). The
-CppUTest gate material it flags (data_bus 5 / rsubs 47 / thread 36 /
-distill 14 / mpdb 10 cases) is dialect-BLOCKED on this host — §0 flag
-RAISED, NEVER fake a gate over it. NEXT cites THIS as a QUEUED
-parallel track honest; the chapter-19 row decision belongs to ITS own
-orchestrator pass — a codec-row agent NEVER co-mines chapter 19 and
-NEVER builds the misc9 dir (the single-tenant rule extends to recon
-dirs).
-
-### Ground pins for 18o (sed-pin EVERY build, clone the link4 discipline)
-- TRUE-NAME equality pin x1 (`cd_mpls` table = file base) + the ifdef
-  arm enclosure :382-:386 + nm D-EXACTLY-1; the landed link-tail pin
-  1465 (:64-style) RE-ARMS from the built side + the own-row 390 pin
-  per build.
-- Hook census EXACTLY-1-U (gre :298 pattern) against the carried
-  witness_18f T-face; the 18n trio's tunnel-U 0/0/0 stays as the
-  built-in contrast.
-- flow.h: cp at the REAL `flow/` include path (NOT flowz), the graft
-  md5s NEVER re-derived, the flowz-decoy path face documented per-build
-  (receipt face); IF the compile demands MAX_DAQ_VERDICT, arm ext #2
-  per the link4 PLAN :40 candidate `9b603f8f` + the :541/:179 cites —
-  COPY-LOCAL ladder (graft-v3 discipline), masters frozen.
-- safe shim: built ONLY off the :267 memcpy_s use-site census; the
-  encode memcpy_s face mirrored into the Rust encode unit (the 18n
-  encode-cited-NEVER-called + honest-overlay posture).
-- The sid band 170-176 FIRES for the FIRST time in ITS OWN vectors
-  (the NEVER-land census flips to POSITIVE at the row; the q4
-  NEVER-land prose stays UNDISTURBED in the landed harnesses — they
-  NEVER build mpls; EV census 7 sites / 7 sids distinct).
-- params face: TWO Parameters w/ the PT_ENUM auto def + the
-  max_stack_depth -1 sentinel cited; the RuleMap ONE map 7 rows + term
-  lands byte-exact msgs.
+### Chapter-19 track — OPENED by 19a; next candidates per the misc9 PLAN (NOW TRACKED — cite-ONLY, the row decision stays with its own orchestrator pass)
+The P1 pick (module.cc 403 + reload_tracker.cc 89 = 492) LANDED as 19a;
+`tools/misc9_harness/` = 8 tracked stageables incl the nested `.gitignore`
+instrument (31 L; the root .gitignore NEVER touched — the
+check-ignore-proven face-by-face precedent rides for future nested-dir
+stageables). The PLAN's P2/P3/P4 queue (cite, don't mine): **(P2)
+framework/reload_survivor_subscriptions.cc SOLO 631 L** — 2 cps
+(impl.h 156 + flow/flow_data.h 122 at the REAL path; the flowz-graft
+path face again), nm_U 50 / residue EXACTLY-3, THE measured clock seam
+`rss_set_elapsed_for_test` :619-:624 + `forced_elapsed_ms` = the 17e
+interposed-clock probe arm; gate material REAL (47-case suite) but
+CppUTest dialect-BLOCKED — RECOMMEND keep for 19b/19c; **pairing
+P2+data_bus 233 = 864 > 800 band = honest NO**. **(P3) rss PAIR (+
+survivor_flow_data 88 L) = 719 L** — drags flow.h 637 +
+inspector_manager.h (3 find-0) ⇒ flow-chapter ordering, rank BEHIND-P2
+honest — 18o's flow.h cps DE-RISK this face (the rider set overlaps).
+**(P4) tracer.cc 73 L (+ tracer.h 125 L, re-wc'd ground THIS pass)** —
+rank-LAST for ch19: needs the DAQ-pkth graft EXTENSION (tenant_id/
+address_space_id sed-face absent x3 in the graft masters) — a ch19 row
+NEVER re-opens graft churn (the PLAN's graft-NON-PARTICIPATION ruling:
+rsubs/impl.h/survivor/tracker daq grep 0/0/0/0 measured; tracer daq
+grep 11 via `<daq.h>` :26 = the ONLY biter). CppUTest dialect flag
+STAYS RAISED (data_bus 5 / rsubs 47 / thread 36 / distill 14 / mpdb 10
+cases — dialect-BLOCKED, NEVER fake a gate over it). A codec-row agent
+NEVER co-mines chapter 19; the single-tenant rule extends to recon dirs
+(now the mpls ?? dir's own rule too).
 
 ## Rules forward from 18o
-- **Git-face rules (the 18i law, HELD FIVE straight clean landings
-  18j-18n + the 18n wiki push clean)**: ONE commit + ONE push each;
+- **Git-face rules (the 18i law, HELD SEVEN straight clean landings
+  18j-19a + the 18n wiki push clean)**: ONE commit + ONE push each;
   post-push fixups = follow-up commit; face-agnostic guard regex (the
   untracked ?? misc9 dir is part of the honest row-face); NO own-HEAD
-  pins. ade9331's plain `commit:` reflog re-read THIS pass.
+  pins. 6698f01's plain `commit:` reflog re-read THIS pass.
 - The two-lineage census (**25 / 9 x 4826fc22 / 17 distinct /
   tracked-1 — MEASURED direct AGAIN THIS pass**, gre anchor
-  `6751d1a8…` intact = 22nd straight) is the LIVE face; NEVER re-pin
+  `6751d1a8…` intact = 23rd straight (the 19a zero-gate row face)) is the LIVE face; NEVER re-pin
   the arithmetic without measuring THAT pass (17p). The BACKBONE-10
   receipt moves ONLY when a row ADDS backbone symbols — the mpls
-  witness is the INHERITED carried face = carried, NEVER new backbone.
+  witness is the INHERITED carried face = carried, NEVER new backbone;
+  19a's witness_misc9 rode the SAME symbol-vs-array law (backbone 10
+  re-wc'd THIS pass).
 - 18o is a probe-only harness cloning the **LINK4** pattern (lineage
   head) — **BUT the stageables count RE-DERIVES AT THE ROW**: the
   daq3/link4 7-face law applies ONLY when the row's OWN witness IS the
@@ -490,9 +565,9 @@ dirs).
   drift-then-refuse md5_pinned.txt + O0==O2 cmp; frozen census loop +
   backbone wc-10 assert; .gitignore block + check-ignore BEFORE
   staging; the fresh rc0 tail echo. Its own build.sh NEXT.md
-  read-asserts carry `597 tests green / 0 FAILED` (+ the older lineage
-  pins per the carry law — the 18n/18m precedent: NEXT.md NEVER edited
-  BY the harness).
+  read-asserts carry `605 tests green / 0 FAILED` (+ the older lineage
+  pins per the carry law — incl the misc9-style EXACT-COUNT arms iff the
+  row seeds one: NEVER edit NEXT.md BY the harness).
 - **Harness census single-tenancy + copy carry BOTH directions** (the
   18m parent-copy face + THIS pass's child-copy face): before running
   a census-guarded harness (erspan :404, link6 :404-style), `rm -rf`
@@ -506,120 +581,117 @@ dirs).
   small4 :594, vocab :254, misc3 :486, erspan :378; link6 rode 3,
   link4 rode EXACTLY 1 — keep counts precise).
 
-## Thereafter — remaining row-18 order (totals RE-VERIFIED THIS pass)
-- After 18o: the ip/ heavyweights ipv4 **790** / ipv6 **733** / tcp
-  **839** (x3 SUM **2,362** re-run THIS pass — cd_tcp at `ip/cd_tcp.cc`)
-  close row 18: `#include <daq.h>` :25 riders (graft-v3 de-risks; the
-  33 L master face may suffice per use-site census — measure), the
-  ONLY witness-stub retirements vocab witness_stubs.cc :11-:13
-  (re-read THIS pass), fresh-HDR family + tcp.h BANKED (`a7ac7b82`);
-  likely a 2-3 commit split. udp 660 / icmp6 518 + the misc queue
-  (icmp4_ip 345 / gtp 291 / geneve 282 / teredo 161 / icmp6_ip 162 —
-  all re-wc'd THIS pass) ride AFTER.
-- The 39-extern census + the `[&str; 34]` tripwire give every row its
-  completeness checklist (ALL queue names ALREADY resident in
-  codec_api.rs — rows only ADD real TUs, NEVER touch the table).
-- Row 19 (parallel sibling track queued, see the ch19 note): chapter-19
-  framework/+main/ (the misc9 recon P1 pick module.cc 403 +
-  reload_tracker.cc 89 cited); then the detection-option engines (52
-  .h+.cc files / 14,533 L, ~47 Catch faces — the GRE gate shape
-  banked); 20: packet_io / DAQ (the 17d deferral + the daq graft
-  families incl BOTH extensions + the real get_pkthdr/get_proto_name
-  providers ALL cite row 20's REAL SDK face); 21: main CLI +
-  `snort -q -c` end-to-end PCAP parity.
+## Thereafter — row-18 close order + beyond (totals RE-VERIFIED THIS pass)
+- After 18o: the ip/ heavyweights ipv4 **790** `def01f1d` / ipv6 **733**
+  `89267b1d` / tcp **839** `144c4275` (`src/codecs/ip/`, SUM
+  **2,362** re-run THIS pass incl the md5s) close row 18 — ONE
+  stub-retirement landmine vocab witness_stubs.cc :11-:13 (re-read
+  THIS pass), the daq.h :25 riders (each row's use-site census picks
+  the face — NEVER pre-assume), the fresh-HDR family
+  {parse_ip, sf_ipvar, ipv4_options, tcp_options, stream} + tcp.h
+  BANKED `a7ac7b82`; likely a 2-3 commit split. udp 660 / icmp6 518 +
+  the misc queue (icmp4_ip 345 / gtp 291 / geneve 282 / teredo 161 /
+  icmp6_ip 162 — ip/misc re-wc'd at 18o docs, re-verify at the rows)
+  ride AFTER.
+- The 39-extern census + the `[&str; 34]` tripwire give every codec row
+  its completeness checklist (ALL queue names ALREADY resident).
+- Ch19 track: P2/P3/P4 queue cited in the ch19 note above (19b+ = the
+  ch19 orchestrator's call); then the detection-option engines
+  (52 .h+.cc files / 14,533 L — the GRE gate shape banked); 20:
+  packet_io / DAQ (the 17d deferral + the daq graft families incl BOTH
+  extensions + the real get_pkthdr/get_proto_name providers cite row
+  20's REAL SDK face); 21: main CLI + `snort -q -c` end-to-end PCAP
+  parity.
 
 ## Backlog (plan rows)
-- Wiki: **ALL LANDED THROUGH 18n** — HEAD + remote = **b6889a2**
-  (`ls-remote` sha b6889a2accb3…, clean worktree, `row 18n`
-  commit-face greps = Deviations **2** + status **2**, verified THIS
-  pass; the 13:12Z "ONLY 18n owed" briefing face was **STALE — disk
-  won**: the trio landed between the briefing and this pass; queue
-  **ZERO**). The wiki phase re-measures stats LIVE + applies any newer
-  landed row + push ONCE. NEVER edit `/tmp/RustyPig.wiki` outside that
+- Wiki: **landed through 18n — HEAD + remote = b6889a2** (`ls-remote`
+  b6889a2accb3…, clean worktree THIS pass); **19a OWED** (this pass
+  grepped `row 19a` in the wiki HEAD = 0 hits rc1 — the ONE-row-behind
+  queue; the wiki phase re-measures stats LIVE + applies newer landed
+  rows + pushes ONCE; briefings screaming "queue ZERO" went STALE
+  twice — DISK WINS). NEVER edit `/tmp/RustyPig.wiki` outside that
   phase.
-- 18n: **DONE (ade9331 — 15 files +3,555/-0 THIS pass face; single
-  `commit:` reflog, single push, origin == HEAD = the no-amend rule
-  HELD its SIXTH straight landing)** — link vlan TRIO cd_vlan 236
-  (`fe9747e8`) + cd_ciscometadata 235 (`8cd594aa`) + cd_fabricpath 187
-  (`f3fee8d9`) = **658** SUM build-asserted (re-added THIS pass): THE
-  graft-v3 FIRST-EXTENSION headline (masters 73fdbc39/f683749c CITED
-  NEVER edited; the heredoc re-rides the 33 L master BYTE-EXACT +
-  appends ONLY 2 DECL rows -> 39 L `0f7016a6` COPY-LOCAL only; witness
-  delta MEASURED EXACTLY +1 ON the graft seam; witness_pkthdr.cc 21 L
-  TRACKED = the 7th stageable; BACKBONE STAYS 10); THE vectors' ORDER
-  pin proves the ext is NOT decorative (NO-EV ignore arm vs flag-OFF
-  EV-then-pb=1024, DUAL-face rides x3); TRUE-NAME TRIPLE nm-equality
-  pins + REAL-x6 mod arms nullptr-FREE; EXACTLY 1 fresh cp
-  cisco_meta_data.h 43 L `f5f66631` + ZERO-cp fabricpath free-ride
-  (E_pre EMPTY) + vlan.h 50 L `e68dcca9` SOURCE-cite-ONLY; MPLS
-  NEVER-land negative census q4 arm x4 EVERY build; sids 130/467/468-
-  471 RESIDENT ZERO new consts; EV census 8/6; vectors DEC 28 L
-  `c7f5808f…` + FACE-A 24 L `9fdfc50d…` drift-then-refuse O0==O2
-  all-decimal; vlan GETIDS UNORDERED-SET {33024,34984,37120,37376}
-  (bucket walk NEVER pinned, PLAN §8; default_tpids :49 =
-  37120/37376); Rust FLAT 493+388+310 = 1,191 L, framework
-  BYTE-UNTOUCHED, pb consts row-scoped w/ decode_data.h :97/:104 cites
-  == pb=1024/131072; VLAN_PARAMS the trio's ONLY Parameter face;
-  link4_parity_test.rs 934 L 9 tests (28/28 + 24/24 ORDERED + MPLS-
-  NEGATIVE census); suite **597 / 0** (**71** result lines at the
-  commit face, **72** at THIS pass — the SUM matched); clippy **0**;
-  plan row (PORTING_PLAN.md:94) + deviations (**:3827-:3945 = 119 L /
-  10 bullets**) VERIFY-GREPED count 1 each THIS pass; census
-  UNDISTURBED **25/9/17 + tracked-1** (gre `6751d1a8`); graft family
-  direct-md5 UNDISTURBED; `git status` = clean + `??
-  tools/misc9_harness/` ONLY. Wiki trio LANDED b6889a2.
-- 18: codecs — 18b-18n DONE; **18o = mpls ALONE, scoping MEASURED THIS
-  pass (the cite table + decision table above; PLAN-0 finalizes at the
-  row)**.
+- 19a: **DONE (6698f01 — 15 files +3,455/-0; plain `commit:` reflog,
+  single push, origin == HEAD = the no-amend rule HELD its SEVENTH
+  straight)** — ch19 OPENER module.cc 403 `9608434c` (donor-VERBATIM
+  ZERO-cp half, md5 equality EVERY build) + reload_tracker.cc 89 =
+  **492**; THE Module-base debt CLOSE (file_module.rs :75/:232-:234
+  cited-never-edited — the CLOSE face re-verified THIS pass); Rust
+  module.rs 957 + reload_tracker.rs 321 = 1,278 L; the cc :32
+  NULL_PARAMS ptr-identity pin + SIMPLE_PEGS :398-:401 + the FULL
+  stats ladder :72-:403; the -DNDEBUG :372->:373 observable arm
+  (`MS ggc hit=13 miss=0` vectors-pinned; the port models the arm,
+  the parity replay runs DEBUG-armed assert-clean); the CARRIED
+  log_message_stdout seam (the +2-witness GUESS died on the
+  multiple-definition law); show_prompt PULL-SITE left-OPEN
+  (witness_misc9 ada2b1e8 provider face); nested .gitignore
+  instrument (root NEVER touched); misc9_parity_test.rs 889 L 8 tests
+  41/41 + 11/11 ORDERED replays; suite **605 / 0** (73 result lines,
+  MATCHED the commit face THIS pass); clippy 0 ZERO new pin-site
+  allows (12 own warnings fixed + honest tracker dead_code module
+  allow, :72); plan row PORTING_PLAN.md:96 + deviations
+  **:3946-:4051 = 106 L / 11 bullets** VERIFY-GREPed count-1 THIS
+  pass; census UNDISTURBED **25/9/17 + tracked-1** (gre 6751d1a8,
+  23rd); graft family UNDISTURBED re-md5'd (73fdbc39/f683749c/
+  0f7016a6/fead0027); backbone10 10 L; wiki 19a OWED.
+- 18: codecs — 18b-18n DONE, **18o = mpls ALONE, scoping RE-GROUNDED
+  THIS pass on the landed recon (the cite table + correction faces
+  above; PLAN-0 finalizes at the row)**.
 
 ## Session ritual (verbatim order)
 1. `git -C /opt/data/snort3-rust status --short; git log --oneline -3`
-   (status: clean EXCEPT the **`?? tools/misc9_harness/`** sibling line
-   — NEVER stage/touch/build/delete it; NEVER amend/force anything —
-   the 69c8b6f orphan face must stay merge-base rc 1 against
-   origin/master — re-proved rc 1 at every docs pass 18j-18n).
-2. `cd tools/link4_harness && bash build.sh` **x2** -> tail
-   `LINK4_VLAN_OK vectors=28 faceA=24 gates=0` + vectors `c7f5808f…` /
-   FACE-A `9fdfc50d…` md5 pins byte-ident across BOTH fresh runs + the
-   copy-122 find echo + the E4 stripped-tree arms + the stageables-7 +
-   the frozen census echo + the BACKBONE-STAYS-10 echo + the graft-v3
-   ladder echo (:902) + the 1465 sum pin. THEN `rm -rf
-   tools/link4_harness/copy tools/link6_harness/copy` FIRST, `cd
-   tools/erspan_harness && bash build.sh` (the pinned-string
-   stakeholder; tail `MISC_L_ERSPAN_OK vectors=18 faceA=19 gates=0`;
-   vectors `7d7d3500…`/`3ec325d7…`) and `cd tools/link6_harness &&
-   bash build.sh` (`LINK6_PPP_OK vectors=20 faceA=20 gates=0`;
-   `e59f7a8a…`/`d2fc5591…`) — the clear-first face now runs BOTH
-   directions per PROCESS LESSONS #6 (receipt `row18odocs/`). `cd
-   tools/gre_harness && bash build.sh` for the GATE anchor
+   (status: clean EXCEPT the **`?? tools/mpls_harness/`** sibling-recon
+   line — NEVER stage/touch/build/delete it; NEVER amend/force
+   anything — the 69c8b6f orphan face must stay merge-base rc 1
+   against origin/master — re-proved rc 1 at every docs pass 18j-19a).
+2. `cd tools/misc9_harness && bash build.sh` **x2** -> tail
+   `MISC9_FRAMEWORK_OK vectors=41 faceA=11 gates=0` + vectors
+   `e6328da1…` / FACE-A `dfe738fb…` md5 pins byte-ident across BOTH
+   fresh runs + the PYPIN/collision-greps + stageables-8 + the nested
+   .gitignore check-ignore face + the donor md5-equality (copy==ground
+   module.cc). THEN `rm -rf tools/link4_harness/copy
+   tools/link6_harness/copy` FIRST, `cd tools/link4_harness && bash
+   build.sh` x2 (`LINK4_VLAN_OK vectors=28 faceA=24 gates=0`, vectors
+   `c7f5808f…`/`9fdfc50d…`, copy-122 find, graft ladder :902, backbone
+   wc-10, the 1465 sum pin), `cd tools/erspan_harness && bash
+   build.sh` (the pinned-string stakeholder; `MISC_L_ERSPAN_OK
+   vectors=18 faceA=19 gates=0`; `7d7d3500…`/`3ec325d7…`) and `cd
+   tools/link6_harness && bash build.sh` (`LINK6_PPP_OK vectors=20
+   faceA=20 gates=0`; `e59f7a8a…`/`d2fc5591…`) — clear-first runs
+   BOTH directions per PROCESS LESSONS #6 (`row18odocs/` receipts).
+   `cd tools/gre_harness && bash build.sh` for the GATE anchor
    (`GRE_HARNESS_OK vectors=26 faceA=5 gate_lines=3`, gate
-   `6751d1a8`). Rebuild `tools/fmod_harness` (rc 0, gate `4826fc22`,
-   vectors `f0fdbab`, `FMOD_HARNESS_OK vectors=61`) AND
-   `tools/vocab_harness` (rc 0, `VOCAB_HARNESS_OK vectors=29`).
-   Verify the frozen lineage by DIRECT md5s (link4 `c7f5808fa3…`/
-   `9fdfc50da8…`, link6 `e59f7a8a`/`d2fc5591`, erspan `7d7d3500`/
-   `3ec325d7`, misc3 `e75f7385`/`fe1189c6`, miscip `43b259ac`/
-   `e4c47bac`, daq3 `fd1855e1`/`2fb9dc45`, small4 `462f0ff6`/
-   `4755d48c`, gre `41bd7d1b`/`783649440d` + gate `6751d1a8`, tun
-   `2a792479`/`81602890`, ext `da218429`/`0fa79b53`, eth `1bd98dbb`,
-   csum `e4baf781`, vocab `5da70e82`, fmod `f0fdbab`, witness census
+   `6751d1a8`). Rebuild `tools/fmod_harness` (gate `4826fc22`, vectors
+   `f0fdbab`, `FMOD_HARNESS_OK vectors=61`) AND `tools/vocab_harness`
+   (`VOCAB_HARNESS_OK vectors=29`). NEVER build the ?? mpls_harness
+   recon dir. Verify the frozen lineage by DIRECT md5s (link4
+   `c7f5808fa3…`/`9fdfc50da8…`, link6 `e59f7a8a`/`d2fc5591`, erspan
+   `7d7d3500`/`3ec325d7`, misc3 `e75f7385`/`fe1189c6`, miscip
+   `43b259ac`/`e4c47bac`, daq3 `fd1855e1`/`2fb9dc45`, small4
+   `462f0ff6`/`4755d48c`, gre `41bd7d1b`/`783649440d` + gate
+   `6751d1a8`, tun `2a792479`/`81602890`, ext `da218429`/`0fa79b53`,
+   eth `1bd98dbb`, csum `e4baf781`, vocab `5da70e82`, fmod `f0fdbab`,
+   misc9 `e6328da1…`/`dfe738fb…` + witness `ada2b1e8`, witness census
    `9fad7e9d`/`be9bdd0b`/`f4afd35f`/`ea1f79f3` + regen `4dd91018` +
    `ef50cd2f` + `c5b498ff`, graft masters `73fdbc39`/`f683749c` +
    link4 regen `0f7016a6`/`fead0027`, backbone `5339c7ee`; frozen
    donors NOT chased to rc 0 — NEVER edit frozen scripts; gre + fmod +
-   vocab + erspan + link6 + **link4** ARE the FRESH-build set now).
-   Harness sequences go in a scratch .sh, single-tenant; clear child
-   copies before census-guarded runs.
+   vocab + erspan + link6 + link4 + **misc9** ARE the FRESH-build set
+   now). Harness sequences go in a scratch .sh, single-tenant; clear
+   child copies before census-guarded runs.
 3. Port -> `cargo test --test <x>_parity_test` -> full `cargo test`
-   (zero FAILED; >= 597) + clippy 0 -> `.gitignore` block +
+   (zero FAILED; >= 605) + clippy 0 -> `.gitignore` (root NEVER moves;
+   the NESTED misc9 .gitignore is the dir-local instrument precedent) +
    `git check-ignore` -> stage ONLY the row's paths (NEVER the ??
-   misc9 dir) -> commit+push (**ONE push, then done — fixes ride
-   follow-up commits**; verify `git ls-remote` matches HEAD BEFORE any
-   further commit) -> plan row (grep-guard) -> deviations append
-   (grep-guard; verify-grep if shipped with the code commit) ->
+   mpls_harness dir) -> commit+push (**ONE push, then done — fixes
+   ride follow-up commits**; verify `git ls-remote` matches HEAD
+   BEFORE any further commit) -> plan row (grep-guard) -> deviations
+   append (grep-guard; verify-grep if shipped with the code commit) ->
    refresh THIS file (**carry the PINNED STRINGS FIRST — grep tools/
    for NEXT.md read-asserts BEFORE writing; carry EVERY pinned literal
-   VERBATIM + add the current-pass face for the next harness; re-grep
-   pins AFTER the commit**) -> commit+push docs -> wiki (queue EMPTY —
-   only newer landed rows when they arrive; re-measure HEAD + ALL
-   stats LIVE at that pass).
+   VERBATIM — incl the misc9 EXACT-COUNT arms (3/3 on 3 lines, NEVER
+   a 4th) + add the current-pass face for the next harness; re-grep
+   pins AFTER the commit**) -> commit+push docs -> wiki (**19a OWED
+   at b6889a2** — re-measure HEAD + ALL stats LIVE at that pass; push
+   ONCE).
+
