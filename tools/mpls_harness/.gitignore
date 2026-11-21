@@ -1,0 +1,40 @@
+# row 18o mpls_harness (q4 OWN-ROW: codecs/link/cd_mpls.cc 390 L e2911ad5, the
+# LAST link TU, ZERO-gate 22nd straight). THE NESTED-BLOCK FACE (misc9
+# precedent re-stated): the ROOT .gitignore is NEVER touched by this pass
+# (single-tenancy + the dir is UNTRACKED as a whole: git status face = ??
+# tools/mpls_harness/). A nested .gitignore INSIDE the harness dir is a
+# tools/mpls_harness/ FILE (the ONLY sanctioned edit next to the stageables)
+# and git ls-files --exclude-standard / check-ignore honor it. EVERY run this
+# block is check-ignore-proved face by face (a missing pattern = a blob in the
+# future add = loud). vectors.txt + vectors_faceA.txt + witness_flow.cc STAY
+# stageable -- the explicit NOT-proofs ride build.sh; 8 stageables (link4
+# 7-shape + this instrument). copy/ = the link4-18n 122-tree REUSE clone
+# (daq.h graft-v3 0f7016a6 + daq_common.h graft-v2 fead0027 ride INHERITED);
+# the ext2 enum face 9b603f8f is a copy-LOCAL heredoc in build.sh ONLY
+# (masters 73fdbc39/f683749c + link4 face fead0027 CITED, NEVER cp'd, NEVER
+# edited; NO commit this pass.)
+copy/
+o2/
+probe
+probe_O2
+probe_dec
+probe_dec_O2
+*.o
+witness_conf.cc
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+nm_U_*.txt
+E4_*.txt
+L1_*.txt
+.L1_probe
+.assert_ext2.cc
+.assert_ext2
+md5_pinned.txt
+gate_md5_lineages.txt
+stageables.txt
+backbone10.txt
+o_size_receipt.txt
+.e4_hold_*
+*.log

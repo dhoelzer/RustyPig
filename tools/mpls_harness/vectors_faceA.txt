@@ -1,0 +1,17 @@
+LOAD mpls
+LOADS 1
+API mpls type=0 size=112 ver=1900547 name=mpls
+HELP mpls support for multiprotocol label switching
+mpls mod_ctor=1 mod_dtor=1
+mpls ctor=1 dtor=1
+GETIDS mpls 34887
+GETIDS mpls 34888
+GETIDS mpls 137
+GETIDS_n 3
+NAME mpls mod=mpls help=support for multiprotocol label switching
+RULES mpls n=7 first=170 last=176
+PARAM max_stack_depth type=4 range=-1:255 def=-1
+PARAM payload_type type=11 range=auto | eth | ip4 | ip6 def=auto
+PARAMS mpls n=2
+SET mpls ret=111
+CTOR_M mpls ok=1

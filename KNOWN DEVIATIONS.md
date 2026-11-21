@@ -4049,3 +4049,97 @@ Structural deviations (behavior preserved):
   module.rs face, and the zero-tracked-churn guard became the 4-own-files
   tolerance (framework/mod.rs + main/mod.rs wiring lines + both docs);
   every flip cites PLAN §3/§9's own "rs rows a later pass" prediction.
+
+## codecs link cd_mpls (row 18o — link/cd_mpls.cc 390 L e2911ad5, THE link-chapter tail, the heaviest-closure row of the chapter + the config-carrying ctor(m) face)
+
+- **ext#2 copy-LOCAL daq_common.h face (the 18n masters law RE-ARMED)**: the
+  flow.h cp CONDITIONALLY demands the MAX_DAQ_VERDICT enum face (flow.h :541
+  -- the pre-ext residual EXACTLY-1 error, the CONDITIONAL trigger), so the
+  34 L enum face md5 9b603f8f rides tools/mpls_harness/copy/daq_common.h as
+  a build.sh heredoc COPY-LOCAL ONLY. The frozen daq3 masters daq.h
+  73fdbc39 + daq_common.h f683749c and the inherited link4 copy face
+  fead0027 are md5-asserted ladder HEAD AND TAIL EVERY build -- NEVER cp'd,
+  NEVER promoted, NEVER edited (SYNTHETIC enum face, NEVER ABI truth; row 20
+  re-cites the real SDK). The graft-v3 daq.h 0f7016a6 rides the donor tree
+  INHERITED and is NEVER consumed here (grep-ci daq over the TU = 0 -- the
+  daq.h-drop SURVIVES rc0, the honest inversion vs 18n's vlan).
+- **THE 7-cp closure row record (flow.h drags the world)**: flow/flow.h 637 L
+  765663d4 + utils/safec.h 42 L 4d366338 + FIVE riders (flow_data,
+  deferred_trust, flow_stash, ips_context_chain + THE clock_defs rider --
+  the 6-vs-7 docs correction lands MEASURED at the row build, step-6 fatal
+  flow.h:51; the flowz/flow_data.h graft DECOY NEVER satisfies the flow/-
+  path include). ALL of it is HARNESS-side: the Rust file ships NONE of that
+  world (the Flow ride lands as the left-open seam below; the safec face
+  lands as the shim semantics below).
+- **safec = the STOCK #else shim, ZERO authored shim**: config.h HAVE_SAFEC
+  grep-0 -> the verbatim 42-L safec.h cp defines memcpy_s -> memcpy (:23+
+  :33), so the EXACTLY-1 memcpy_s use-site :267 needs ZERO safe_*_lib
+  grafts and ZERO shim authoring (the strip arm moves the wall to the :30
+  include, NEVER :267 -- C15 receipt law). The Rust encode mirrors the shim
+  SEMANTICS as ONE plain copy_from_slice window copy (the 18n posture) with
+  the memcpy_s cite -- ported BY READING, no header rewrite.
+- **witness_flow.cc = the +1 face (MEASURED, not pre-picked)**: the OWN L1
+  census EXACTLY-1 distinct undefined snort::Flow::get_mpls_layer_per_dir
+  (bool) -> ONE own witness_flow.cc 27 L b76c809d (the miscip 27-L shape;
+  §11's 6-vs-7 stageable flip resolved by MEASURE). The bypass hook needs
+  ZERO clones: it closes against the INHERITED witness_18f T ea1f79f3 (the
+  mask pair rides the carried face). The backbone array STAYS EXACTLY 10
+  (the witness adds a SYMBOL face, NEVER an array entry -- the 18n law).
+- **the get_mpls_layer_per_dir seam stays LEFT-OPEN**: the only C observation
+  at the sole call site (:253) is the harness mirror returning nullptr (the
+  vectors NEVER carry a non-null Flow), so the Rust twin is the
+  Option<MplsLayer> param; None == the mirror face and the :249-:250 raw
+  defaults :249 ride. The REAL provider (flow.h :223 decl + the flow.cc
+  per-dir members) stays CITED-NEVER-INVENTED, queued with the flow rows
+  (the 18i R1 cheat-sheet / vlan get_pkthdr precedent). The Some-with-
+  length re-point arm (:255-:258) is unit-armed Rust-side ONLY because the
+  mirror type makes it REPRESENTABLE there -- no provider machinery ships.
+- **the bypass hook seam rides the landed LEFT-OPEN closure**: :205
+  `conf->tunnel_bypass_enabled(TUNNEL_MPLS)` lands as the `bypass: &mut dyn
+  FnMut(u16) -> bool` decode param (the cd_vxlan/cd_geneve/cd_gtp family);
+  the mask pair face (0x80 -> false / 0 -> true) is a TEST FIXTURE mirrored
+  from the carried witness_18f observable -- the port NEVER gets an
+  invented provider. TUNNEL_MPLS 0x80 is row-scoped w/ the sibling
+  precedent (snort_config.h :126 sed-pinned).
+- **q4 census FLIP honesty**: the sid band {170..176} + the MPLS symbol
+  census NEVER-land law (4 predecessor rows) FIRES POSITIVE at THIS row --
+  the own vectors carry 34 EV lines (170x2 171x2 172x1 173x1 174x1 175x26
+  176x1, the python census face re-derived in the parity test) and the
+  Rust-side greps run POSITIVE by design; the SAME band stays grep-0 in all
+  four landed predecessor vectors (both faces x8 assertions -- the flip
+  NEVER leaks). The harness guards FLIPPED on the ruling the same way the
+  misc9 rs-row did (rs-ABSENCE PYPIN -> rs-PRESENCE + OWN-files churn
+  tolerance), citing PLAN §9's own "rs rows a later pass" prediction --
+  NEVER silent drift.
+- **decimal-drift honesty (§11(c))**: the seeded spec drafts printed ip6 =
+  34781 + bridging = 25946; the GROUND hex walk (protocol_ids.h :151/:147
+  python-derived) says 34525/25944 and the vectors (the grep) WIN. The
+  parity test tripwires the drifted decimals NEVER-appearing. The decode-
+  arm census is EXACTLY-18 (the drafted 19 was drift, §11(e)). The depth-
+  clear arms ride FIVE entries (the draft six-entry face made the :200
+  clear VACUOUS -- §11(g) re-design; the parity M10 unit proves 512->0 was
+  a TRUE clear because the :191 capture rode first).
+- **landed-shape carries (unchanged law)**: Parameter keeps the 16c
+  { name, ptype, deflt } slots (the range/help slots unported -- 16c/
+  vlan/esp deviation re-cited; the faceA PARAM range VALUES re-land as
+  MPLS_PARAM_RANGES string twins WITH the :50/:53 cites so the walk lines
+  print honest, never re-derived). The RuleMap msg slot rides Option
+  (&'static str) and the codec_event sink rides the landed QueueSink type;
+  the CodecData conf rides Option<&SnortConfig> (the probe face is always
+  live); the DecodeData seam is the row-scoped MplsHdr struct twin (the
+  cd_frag FragDecodeData family; mpls.h :29-:35 four fields value-init).
+  MplsCodecConfig::default() is HAND-WRITTEN (the -1 NSDMI sentinel :73 --
+  a derived Default lands 0 and ARMS the :196 gate; the face the vectors'
+  default-cfg PASS arms own; caught by the parity at first run). The
+  C assert(hdr_start) :259 arm is the NDEBUG ELIDE face (the misc9 law;
+  the mirror type makes a null-start layer unrepresentable -- honest CITE,
+  no invented check). uint8_t depth keeps its wrap face via wrapping_add
+  (the -1 sentinel NEVER lets it free-run at sane depths).
+- **log seam cited-NEVER-called**: the harness closes the U against the
+  donor's REAL text_log.o; the port lands ported-by-reading with the
+  :332 format transcribed VERBATIM (%05X pads; the %hhX trio stays RAW
+  unpadded hex -- `tc:0x2` not `0x02`; the leading \n\t IN the literal)
+  and the parity unit drives it (the filler + bos two-line face).
+- **nested .gitignore instrument (the misc9 face re-stated)**: the 8th
+  stageable IS tools/mpls_harness/.gitignore; the ROOT .gitignore NEVER
+  moved (single-tenancy + the dir was UNTRACKED as a whole at seed).

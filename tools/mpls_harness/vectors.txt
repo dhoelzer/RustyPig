@@ -1,0 +1,54 @@
+EV 116 170
+M1 len3 -> 0 lyr=0 next=34887 pb=0
+EV 116 175
+M2 one15 -> 1 lyr=4 next=2048 pb=512 bo=1 lab=15 t=2 ttl=15
+M3 lab0-auto -> 1 lyr=4 next=2048 pb=512
+M4 lab0-n6 -> 1 lyr=4 next=2048 pb=512
+EV 116 175
+M5 lab1-mid -> 1 lyr=8 next=25944 pb=512
+EV 116 172
+M6 lab1-bos -> 0 lyr=0 next=34887 pb=0
+M7 lab2-auto -> 1 lyr=4 next=34525 pb=512
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 174
+M8 lab3-e8 -> 0 lyr=0 next=34887 pb=0 lab=0
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 175
+M9 five -> 1 lyr=20 next=2048 pb=512
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 176
+M10 five-d4 -> 0 lyr=0 next=34887 pb=0 lab=15 bo=1
+EV 116 175
+EV 116 175
+EV 116 175
+EV 116 175
+M11 four-d4-eth -> 1 lyr=16 next=25944 pb=512
+EV 116 175
+M12 lab15-ip4 -> 1 lyr=4 next=2048 pb=512
+EV 116 171
+M13 lab0-eth -> 1 lyr=4 next=2048 pb=512
+EV 116 171
+M14 lab0-ip6 -> 1 lyr=4 next=2048 pb=512
+EV 116 175
+EV 116 175
+EV 116 170
+M15 drain -> 0 lyr=0 next=34887 pb=0 lab=0
+M16 mask80 -> 1 lyr=4 next=2048 bypass=0
+M17 mask00 -> 1 lyr=4 next=2048 pb=512 bypass=1 bo=1
+EV 116 173
+M18 lab2-eth -> 1 lyr=4 next=34525 pb=512
+ENC b0 -> 0
+ENC ok -> 1 bytes 0 0 243 15 netype 0 npro 255

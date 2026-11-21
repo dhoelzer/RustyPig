@@ -60,6 +60,10 @@
 //!     468-471 ladder + the stats-only silent arms)    -> cd_ciscometadata.rs [18n]
 //!   src/codecs/link/cd_fabricpath.cc (187; the ZERO-cp
 //!     free-ride + the :84-before-:85 order clone)     -> cd_fabricpath.rs [18n]
+//!   src/codecs/link/cd_mpls.cc (390; THE link-chapter
+//!     tail: the heaviest-closure row (7 fresh cps + the
+//!     ext#2 copy-local harness face) + THE config-
+//!     carrying ctor(m) + the label-stack ladder)      -> cd_mpls.rs [18o]
 //! The `codec_module` umbrella landed AT 18d as planned (the FLAT
 //! call stands: the C base names collide nowhere — no cd_module.h
 //! exists, and this row's C-dir provenance (root/ root/ link/) rides
@@ -88,6 +92,7 @@ pub mod cd_icmp6_ip;
 pub mod cd_igmp;
 pub mod cd_llc;
 pub mod cd_mobility;
+pub mod cd_mpls;
 pub mod cd_no_next;
 pub mod cd_pgm;
 pub mod cd_ppp_encap;
