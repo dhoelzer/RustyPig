@@ -1,0 +1,24 @@
+LOAD vlan
+LOADS 1
+LOAD ciscometadata
+LOADS 1
+LOAD fabricpath
+LOADS 1
+API vlan type=0 size=112 ver=1900547 name=vlan
+HELP vlan support for local area network
+vlan mod_ctor=1 mod_dtor=1
+vlan ctor=1 dtor=1
+GETIDS vlan 37120
+GETIDS vlan 37376
+GETIDS vlan 34984
+GETIDS vlan 33024
+API ciscometadata type=0 size=112 ver=1900547 name=ciscometadata
+HELP ciscometadata support for cisco metadata
+ciscometadata mod_ctor=1 mod_dtor=1
+ciscometadata ctor=1 dtor=1
+GETIDS ciscometadata 35081
+API fabricpath type=0 size=112 ver=1900547 name=fabricpath
+HELP fabricpath support for fabricpath
+fabricpath mod_ctor=1 mod_dtor=1
+fabricpath ctor=1 dtor=1
+GETIDS fabricpath 35075

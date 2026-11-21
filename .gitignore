@@ -578,3 +578,40 @@ tools/link6_harness/stageables.txt
 tools/link6_harness/backbone10.txt
 tools/link6_harness/.e4_hold_*
 tools/link6_harness/*.log
+# row 18n link4_harness (ZERO-gate link TRIO row: cd_vlan.cc 236 +
+# cd_ciscometadata.cc 235 + cd_fabricpath.cc 187 = 658; vectors.txt +
+# vectors_faceA.txt STAY tracked -- probe-only, the SEVEN stageables per the
+# daq3 7-face PRECEDENT (NOT the small4/erspan/link6 6-face): EXACTLY ONE
+# own-witness file witness_pkthdr.cc -- the graft-v3 DECL rows put
+# daq_msg_get_pkthdr on the vlan .o UNDEF face (trial L1 census EXACTLY-1
+# undefined, nm_U vlan carries the U EXACTLY-1; the face that honestly FLIPS
+# the zero-witness expectation, §9). The copy/o2/E4/nm/L1/md5/gate/stageables/
+# backbone receipts live, ignored. copy/ = the link6-18m donor 116-tree REUSE
+# clone (daq_common.h fead0027 graft-v2 rides INHERITED NEVER re-authored;
+# daq.h = the graft-v3 39L heredoc face 0f7016a6, daq3 masters 73fdbc39/
+# f683749c CITED NEVER cp'd NEVER edited; vlan.h + cisco_meta_data.h fresh
+# cps find-0 PRE-cp). vectors NEVER ignored -- the explicit NOT-proof rides
+# build.sh; witness_pkthdr.cc NEVER ignored -- the tracked-witness NOT-proof.
+# NO commit this pass.)
+tools/link4_harness/copy/
+tools/link4_harness/o2/
+tools/link4_harness/probe
+tools/link4_harness/probe_O2
+tools/link4_harness/probe_dec
+tools/link4_harness/probe_dec_O2
+tools/link4_harness/*.o
+tools/link4_harness/witness_conf.cc
+tools/link4_harness/vectors_O0.txt
+tools/link4_harness/vectors_O2.txt
+tools/link4_harness/vectors_faceA_O0.txt
+tools/link4_harness/vectors_faceA_O2.txt
+tools/link4_harness/nm_U_*.txt
+tools/link4_harness/E4_*.txt
+tools/link4_harness/L1_*.txt
+tools/link4_harness/.L1_probe
+tools/link4_harness/md5_pinned.txt
+tools/link4_harness/gate_md5_lineages.txt
+tools/link4_harness/stageables.txt
+tools/link4_harness/backbone10.txt
+tools/link4_harness/.e4_hold_*
+tools/link4_harness/*.log

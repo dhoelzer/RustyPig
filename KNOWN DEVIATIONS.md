@@ -3823,3 +3823,123 @@ Structural deviations (behavior preserved):
   (byte-exact msgs), the disc decode's ZERO-write happy arm (cc:136)
   kept as the honest no-write face (next rides the CodecData init — the
   vectors' `PD len6 next=34915` print), NEVER invented writes.
+
+## codecs link vlan trio (row 18n — link/cd_vlan.cc 236 + cd_ciscometadata.cc 235 + cd_fabricpath.cc 187 = 658 L, THE graft-v3 first-extension headline + THE TRUE-NAME triple tail face)
+
+- **THE graft-v3 first-extension face (copy-local, masters FROZEN)**: the
+  daq3 lineage's frozen masters — copy/daq.h 33 L md5 73fdbc39 +
+  daq_common.h f683749c — are NEVER edited, NEVER cp'd by THIS harness.
+  The link4 build.sh graft ladder re-rides the 33 L master face
+  BYTE-EXACT (byte-for-byte heredoc) and appends EXACTLY the
+  graft-v3 DECL rows (`const DAQ_PktHdr_t* daq_msg_get_pkthdr(const
+  DAQ_Msg_t*);` + `#define DAQ_PKT_FLAG_IGNORE_VLAN 0x40`) — the result
+  39 L md5 0f7016a6fcf061c844897af44b9a7dc6 is THIS harness's LOCAL copy
+  face, NEVER a second authority. The master UNDISTURBED-ness is asserted
+  every build (sed-diff of the graft's first 33 L vs the daq3 master +
+  the direct md5 pins 73fdbc39/f683749c + the inherited link4 copy
+  daq_common.h fead0027). DAQ_PKT_FLAG_IGNORE_VLAN's 0x40 is the SYNTHETIC
+  graft's OWN value (no SDK header exists tree-side at fe29cbe): the Rust
+  row carries `DAQ_PKT_FLAG_IGNORE_VLAN: u64 = 0x40` row-SCOPED with the
+  graft-daq.h :38 cite — row 20 (the real packet_io/DAQ row) re-cites the
+  REAL SDK value; NEVER ABI truth pinned.
+
+- **the get_pkthdr seam is LEFT-OPEN (the daq3 witness-mirror law, cite-
+  never-invent)**: ground cd_vlan.cc :141-:142 reads the DAQ pkthdr
+  (`daq_msg_get_pkthdr(raw.daq_msg)` + `pkth->flags & DAQ_PKT_FLAG_
+  IGNORE_VLAN`). Rust `RawData` ships NO daq_msg — the port models the
+  OBSERVABLE: the decode takes a `pkthdr_flags: u64` PARAM (the harness
+  witness_pkthdr.cc face: the probe's witness TOGGLES flags 0x40 vs 0 for
+  the V5/V6 arms — the C-side provider's face). The provider home (the
+  real DAQ/DAQ_Msg_t) is QUEUED at row 20, NEVER invented. The param is
+  the cited left-open seam (the SFDAQ/get_proto_name witness-mirror
+  precedent lineage); the graft-v3 arm is NEVER decorative — the vectors'
+  pb=0-vs-1024 dual-face pin IS its observable.
+
+- **THE witness_pkthdr.cc face (the daq3 7-stageable law, MEASURED +1)**:
+  the trio's hidden tables are FALSE-PUBLIC (BUILDING_SO x3 — the
+  plugin_manager walk needs NO extern, the miscip/18j census) so the
+  ZERO-witness expectation would hold for the TABLES — the +1 witness
+  rides the DECODE seam instead: the graft-v3 DECL puts daq_msg_get_pkthdr
+  on the vlan .o's UNDEF face (staged L1 census undefined-DISTINCT
+  EXACTLY-1 -> +witness_pkthdr.cc GREEN, own-new T census EXACTLY-1).
+  link4 tracks SEVEN stageables (the daq3 7-face precedent, NOT the
+  small4/erspan/link6 6-face): the own-new witness IS tracked (its T-face
+  is the harness evidence). Backbone STAYS 10 (the witness adds a SYMBOL
+  face, NEVER an ARRAY entry — the B10 array rides link6 VERBATIM).
+
+- **THE fresh-cp face is EXACTLY ONE cp + inheritance, NOT two (disk
+  wins)**: the trio's include closures MEASURE: cd_ciscometadata.cc needs
+  protocols/cisco_meta_data.h (43 L f5f66631, one cp — vlan.h NOT needed
+  by the vlan TU: cd_vlan.cc includes NO protocols/header at all, the E4
+  text_log-strip + restored-tree arms prove the closure face every
+  build); cd_vlan.cc's only NON-resident head is the graft daq.h;
+  cd_fabricpath.cc is the ZERO-cp free-ride (PRE-CP -fsyntax-only rc0 on
+  the donor tree ALONE IS its closure face, the E_pre receipt EMPTY). The
+  ground vlan.h (50 L e68dcca9) rides the SOURCE cite ONLY (the
+  VlanTagHdr the :120/:139 code paths reference via the .cc's own
+  includes, the sizeof face = TWO u16 fields == VLAN_TAG_HDR_SIZE 4,
+  never cp'd). vlan.h + cisco_meta_data.h find-0 in the DONOR PRE-cp
+  (MEASURED, the §1 census the "1 cp not 2" pin hangs on).
+
+- **THE MPLS NEVER-land negative census (the q4 deferred-row law)**:
+  cd_mpls.cc 390 L rides the NEXT link row (its tunnel_bypass seam
+  cc:205-:206 is the hand-off cite). NO mpls token lands ANYWHERE in this
+  row: build.sh greps cd_mpls/MPLS 0 in probe.cc/probe_dec.cc/
+  witness_pkthdr.cc EVERY build AND grep -ci mpls 0 in ALL THREE codec
+  rs files (the Rust-side twin flipped in build.sh :174-:179; the parity
+  test's vector census carries the token ONLY inside its own guard
+  + flipped in build.sh); the sid band 170-176 NEVER appears in vectors;
+  the cite prose lives in build.sh/PLAN/docs ONLY.
+
+- **THE IGNORE_VLAN dual-face eval-order pin rides the vectors (the ext
+  is NOT decorative)**: the graft-v3 ext sits at cd_vlan.cc :141-:143 —
+  AFTER the :137 next-write and the :139 lyr-write, BEFORE the
+  :145-:148 bad-vid event and the :150 pb set. The pinned DEC face proves
+  it: `V vid0-ignore -> 1 lyr=4 next=2048 pb=0` (TRUE, NO preceding EV,
+  pb NEVER set, BUT lyr 4 + next 2048 DID land) vs the same bytes flag-OFF
+  `EV 116 130` + `V vid0 -> 1 lyr=4 pb=1024`. The port transcribes the
+  ORDER EXACTLY (the early return TRUE rides at :143 with the two writes
+  already visible); the PYPIN face + the parity DUAL-face unit + the
+  positional vectors asserts pin the interleave THREE ways.
+
+- **TRUE-NAME triple = the drift-CONTRAST face (nothing to refuse)**:
+  cd_vlan[] :231 / cd_ciscometadata[] :230 / cd_fabricpath[] :181 all
+  EQUAL their file bases (the nm D-face EQUALITY x3 — the 18l/18m drift
+  tripwires have NOTHING to refuse HERE); the Rust consts CD_VLAN/
+  CD_CISCOMETADATA/CD_FABRICPATH mirror the TABLE spellings which ARE
+  the file bases, ZERO no_mangle src-pattern carried. The 34-name ladder
+  (:101/:107/:130) + the 39-extern census UNDISTURBED — this row TURNS
+  those resident names loaded, NEVER re-walks them.
+
+- **the mod-arms face is the nullptr-FREE tail face (REAL x3, NEVER
+  carried)**: 1/1 x3 (vlan :217/:218, cisco :216/:217, fabricpath
+  :167/:168) CONTRAST-cited vs 18m's 0,0 explicit pair + 18l's 1/1/0 +
+  misc3's 1/0/0 — every trio member owns a REAL Module; the point-site
+  `#[allow(clippy::assertions_on_constants)]` at the compile-time record
+  pin rides the ext/small4/misc3/erspan lineage precedent (CITED allow,
+  the ONLY one this row: clippy --all-targets otherwise ZERO warnings).
+
+- **vlan GETIDS rides the UNORDERED-SET face (the bucket walk NEVER
+  pinned)**: cd_vlan.cc :103 folds the ids into a `std::unordered_set`
+  and the GETIDS stream order is the libc++/libstdc++ BUCKET order —
+  NEVER a port fact. The vectors' four `GETIDS vlan` lines (37120/
+  37376/34984/33024) pin as a SET (sorted-equal + each id EXACTLY once,
+  PLAN §8); the Rust port keeps the BTreeSet-ordered stream (the SET
+  equality is the parity face; a hash-order Rust mirror would be
+  porting the stdlib, not the codec). The dedup face (a dup inside
+  extra_tpid_ether_types collapses — the unit pins len 3 for
+  "0x8100 0x8100 0x1234") + the C stream-loop stop-on-reject face
+  ("0x9100 junk 0x9200" NEVER reaches 37376 — the while(ss>>val) face)
+  are transcribed EXACT.
+
+- **the encode/log/format/pegs families are cited-NEVER-called (the 18l
+  unit-mirror posture)**: vlan encode cc:173-:185 (the honest memcpy-
+  ONLY copy face — NO header rewrite), cisco encode cc:175-:187 + log
+  cc:165-:173, vlan log cc:154-:171, fabricpath encode cc:89-:125 +
+  format cc:127-:137, and the cisco CountType pegs cc:49-:59 (END :53,
+  the ground CountType::END grep-1, NEVER vectorized) ride the DEC-face
+  cite lines; the parity units mirror every move cc-cited. The
+  fabricpath encode's C overlay lands the FPathHdr at buf.data() START
+  (ho :109) — the earlier allocate(4) window gets OVERWRITTEN by the
+  header fields (the honest C aliasing face, pinned in the unit against
+  a naive after-window read).

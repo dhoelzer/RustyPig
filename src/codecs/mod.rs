@@ -54,6 +54,12 @@
 //!     the double-NAME drift face)                     -> cd_pppoe.rs    [18m]
 //!   src/codecs/link/cd_ppp_encap.cc (174; TABLE
 //!     cd_pppencap — the drift name)                   -> cd_ppp_encap.rs [18m]
+//!   src/codecs/link/cd_vlan.cc (236; THE graft-v3 first-
+//!     extension row + witness_pkthdr +1)              -> cd_vlan.rs [18n]
+//!   src/codecs/link/cd_ciscometadata.cc (235; the
+//!     468-471 ladder + the stats-only silent arms)    -> cd_ciscometadata.rs [18n]
+//!   src/codecs/link/cd_fabricpath.cc (187; the ZERO-cp
+//!     free-ride + the :84-before-:85 order clone)     -> cd_fabricpath.rs [18n]
 //! The `codec_module` umbrella landed AT 18d as planned (the FLAT
 //! call stands: the C base names collide nowhere — no cd_module.h
 //! exists, and this row's C-dir provenance (root/ root/ link/) rides
@@ -62,12 +68,14 @@
 pub mod cd_arp;
 pub mod cd_auth;
 pub mod cd_bad_proto;
+pub mod cd_ciscometadata;
 pub mod cd_default;
 pub mod cd_dst_opts;
 pub mod cd_erspan2;
 pub mod cd_erspan3;
 pub mod cd_esp;
 pub mod cd_eth;
+pub mod cd_fabricpath;
 pub mod cd_frag;
 pub mod cd_geneve;
 pub mod cd_gre;
@@ -90,6 +98,7 @@ pub mod cd_teredo;
 pub mod cd_trans_bridge;
 pub mod cd_udp;
 pub mod cd_user;
+pub mod cd_vlan;
 pub mod cd_vxlan;
 pub mod checksum;
 pub mod codec_api;
