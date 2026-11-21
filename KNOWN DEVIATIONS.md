@@ -3342,3 +3342,179 @@ Structural deviations (behavior preserved):
   precedent, the get_bits seam never armored) + UdpCodecConfig default
   ports as consts; config-None ctor arm rides the codec.rs:83-:85
   precedent (the probe always ctor(nullptr)).
+
+## codecs misc icmp ip pair (row 18j — misc/cd_icmp4_ip.cc 345 + cd_icmp6_ip.cc 162 = 507 L, the tcp.h-ONLY-fresh-cp pair + THE hidden-BUILDING_SO-table row + the witness delta MEASURED +1)
+
+- **The get_proto_name seam (THE row's headline, left-open modeled
+  face)**: cd_icmp4_ip.cc:179 + :297 call
+  `PacketManager::get_proto_name(ip4h->proto())`; `IpHdr::proto()`
+  returns **IpProtocol** (ip.h:116) so the pair objs reference EXACTLY
+  ONE new symbol — nm mangled census `-eq 1` on
+  `_ZN5snort13PacketManager14get_proto_nameE10IpProtocol` +
+  `get_proto_nameE10ProtocolId` 0/0; the staged L1 link
+  (pair+donor OBJS+WIN+probe.o, NO miscip witness) fails with
+  undefined-DISTINCT EXACTLY-1, +witness_miscip -> GREEN (the C++
+  PacketManager call is NEVER invented on the Rust side, NEVER linked
+  from ground: packet_manager.cc's 1,047 L TU was compiled into NO
+  donor EVER, find tools = 0, plan §6 R-H). Rust face:
+  `cd_icmp4_ip::get_proto_name` mirrors the HARNESS witness body (
+  witness_miscip.cc:25-:26 fixed "witness_proto") — the cited-minimal-
+  observable route: the R1 REAL-body attempt (walk the :1004-:1008 def:
+  CodecManager::get_instance -> s_proto_map -> get_codec -> get_name)
+  rc1'd at the landing: `managers/codec_manager.h` NEVER cp'd (the
+  probe-pulls-no-manager-object rule inherited, bodytest rc1 "'Codec-
+  Manager' was not declared"). The REAL provider home is QUEUED (row
+  20): the C++ name-lookup provider has no landed Rust face yet. Log
+  OUTPUT is cite-never-vectorize: ZERO probes call log(), ZERO log
+  lines in either pinned transcript (small4 pgm / gre posture).
+
+- **Hidden BUILDING_SO table arms (the FIRST such census row, PLAN §2/
+  §4)**: BOTH ground exports sit under `#ifdef BUILDING_SO`:
+  cd_icmp4_ip.cc :336 (SO arm :337 `snort_plugins[]`) / :339 static arm
+  `const BaseApi* cd_icmp4_ip[] =` feeding :342 `&icmp4_ip_api.base`;
+  cd_icmp6_ip.cc :154/:155/:157/:160. The string `cd_icmp4_ip[]` NEVER
+  exists in any .so face; `grep -c BUILDING_SO` == 1 + `snort_plugins`
+  == 1 + sed :336/:339/:342 + :154/:157/:160 VERBATIM pinned EVERY
+  build; nm table symbol EXACTLY-1 per .o (the STATIC arm IS the
+  harness face — the probe links the REAL tables, LOAD x2 + LOADS 2).
+  Rust face = the landed rows' extern-table pattern (cd_auth CD_AH /
+  cd_icmp4 CD_ICMP4 precedent): table consts `CD_ICMP4_IP`/`CD_ICMP6_IP`
+  as `CodecTable` records, ifdef arms doc-CITED, GREP-VERIFIED ZERO
+  `#[no_mangle]` in src (grep face of the whole landed tree — a Rust
+  extern-C table symbol would be a fake link edge against the never-
+  linked ladder; the ladder stays a record census). The daq3-pass
+  daq3_parity_test.rs :958-:964 pin (names contained, pair UNLOADED, pin
+  comment names THIS row's C-side unlinked state) stays TRUE and its
+  UNLOADED-face scope was C-side; this row turns it loaded Rust-side
+  (the tables + the miscip replay); the pin text was NEVER rewritten
+  (18f/18i land rule), the wording stays accurate as scoped.
+- **witness delta MEASURED +1 (NOT the typed +2)**: the pre-row NEXT
+  estimate "+2 fn witnesses (both get_proto_name overloads)" is HALF
+  WRONG, measured down at scratch AND again at the landing (PLAN R2):
+  BOTH call sites pass IpProtocol, the ProtocolId overload
+  (packet_manager.h:123) is NEVER referenced by either obj; the FACE-A
+  scratch stub (ProtocolId-only witness) left the symbol UNDEFINED —
+  the census discriminates overloads, so the ONE-overload stub is the
+  honest pin face (`-eq 1` + `-eq 0` census in build.sh). cd_icmp6_ip
+  carries ZERO get_proto_name U-lines (nm census) — the +1 rides the
+  mate ONLY.
+- **GROUND-DEAD second gate transcribed honest (cd_icmp6_ip cc:77-
+  :82)**: the `raw.len < IP6_HEADER_LEN` re-check is fixed-true given
+  the identical first gate cc:61 (the ground ships its OWN `//
+  cppcheck-suppress knownConditionTrueFalse` at :77 — grep-armed in
+  build.sh). The 252 arm can NEVER fire: the vectors line 21 is the
+  honest CITE line `IP6 252-unarmed cc:78-fixed-true` — NEVER a fake
+  `EV 116 252` (cite-never-guess). The Rust port keeps the dead gate
+  LITERAL (dead-code posture, cd_frag `#if 0` family — this one rides
+  LIVE-shaped to match the C exactly); unit-7 pins the zero-event face.
+- **switch-arm ground oddity (NEVER "fixed")**: cd_icmp6_ip.cc:108 is
+  `case IpProtocol::ICMPV4:` inside a v6 next-header switch (guarded
+  ONLY by the :107 "FIXIT-M do we need to handle ICMPV6 here?"
+  comment). Transcribed as-is incl the comment; vectors arm the next-
+  default face, never the oddity's own arm (a v6 ICMPV4 next-header is
+  the 16384 arm either way — the probe pins values, the bug-face rides
+  in docs only).
+- **ground-stale encode() comments in BOTH TUs**: cd_icmp4_ip.cc:127-
+  :128 "change the buffer and memcpy length in encode() below !!" and
+  cd_icmp6_ip.cc:116-:117 "you MUST change the encode()" — NEITHER TU
+  HAS an encode() (`::encode(` grep 0/0). Comments transcribed with a
+  ground-stale doc pin; NEVER "fixed", NEVER a fake encode port.
+- **unsigned-wrap arithmetic kept (log() frag line)**: cd_icmp4_ip.cc:
+  207 `mf && (frag_off & 0x1FFF) && ((len - hlen > 0))` — C's `uint16`
+  subtraction WRAPS when hlen > len making `> 0` TRUE; the Rust log
+  port keeps `len.wrapping_sub(hlen)` (same face, no silent "fix", no
+  panic posture on a C-UB-free wire face). log() is cite-never-
+  vectorized so the wrap NEVER surfaces in vectors; the transcription
+  honesty matters (the arm is reachable in C, dead-by-parsing in Rust
+  only if "fixed").
+- **obfuscate seam (left-open)**: log cc:154 `SnortConfig::get_conf()
+  ->obfuscate()` has NO landed SnortConfig face (grep 'obfuscate' src/
+  parser/parse_conf.rs = 0; the sfip Obfuscator face is a DIFFERENT
+  thing). The Rust log port takes an `obfuscate: bool` PARAM seam (the
+  18e IpApiLite extension family); the producing config layer stays
+  OPEN. The TextLog_* C calls land as one sink String per call (the
+  cd_icmp4.rs log precedent, ground call order, format strings
+  converted %u/%d/%X with the ground literal spacings kept incl
+  "Frag Offset: 0x%04X   Frag Size" THREE spaces; note the ground arg
+  PAIRING "IpLen" <- hlen / "DgmLen" <- len:cc:178-:181 transcribed
+  with operand identity — the ground's own labeling never corrected).
+- **dead-in-C #if 0 block NOT ported**: cd_icmp4_ip.cc:198-:205 the
+  `#if 0` LogIpOptions options block ("FIXIT-L more ip options
+  fixits") — dead ground code, NOT ported (cd_frag DECODE_RF
+  precedent). The ip4_addr union cc:133-:140 = the alias face (wire
+  octets == addr8[] order), no Rust struct.
+- **row-scoped vocab (framework BYTE-UNTOUCHED, 18e posture)**:
+  PROTO_BIT__{TCP,UDP}_EMBED_ICMP / _ICMP_EMBED_{ICMP,OTHER} 0x1000/
+  0x2000/0x4000/0x8000 (decode_data.h :99-:102) + IP4_HEADER_LEN 20
+  (ipv4.h:38) + IP6_HEADER_LEN 40 (ipv6.h:31) + the two embed ids
+  0x0103/0x0104 (protocol_ids.h :130-:131) land as per-TU consts — the
+  PAIR duplicates the embed id per TU (the cd_icmp6.rs:183 pre-banked
+  "row-scoped the same way" ruling PLAN §0 confirms against THAT cite,
+  not air; cd_gre PROTOCOL_ID_* precedent). The decode_data.h:116-:118
+  OR-group macro: cite-ONLY, ZERO consumers landed. sids: ZERO new —
+  all six ride the resident CodecSid family (codec_module.rs:125-:130;
+  the cd_icmp4.rs:55 doc pre-named this row) + the pair ships ZERO
+  RuleMap rows (grep RuleMap 0/0, PLAN §3 landmine-posture-adjacent:
+  vocab witness_stubs cd_.*_ip grep 0/0 re-measured, the trio landmine
+  does NOT ride).
+- **CppUTest translation face (the dialect census, PLAN §0/§4)**:
+  `src/codecs/misc/test/` = CppUTest ONLY (add_cpputest x3;
+  geneve TEST_GROUP 1 + TEST( 3, gtp 1+2, teredo 1+2 = EXACTLY 10
+  names; TEST_CASE 0 x3; ZERO includes of a pair TU,
+  grep 0 x3 every build) => NO real Catch material: NO STOP-flag, the
+  row stays probe-only/gate-census UNDISTURBED (row pair gate grep 0/0;
+  two-lineage census 25/9/17-distinct/1-tracked re-measured — 17th
+  straight). The 10 TEST( names were ALL ALREADY Rust-side translated
+  AT 18f (tests/tun_parity_test.rs up_tun_*, 18f discipline: NEVER run
+  C-side, CppUTest uninstalled E4 wall) — the miscip test's unit-5
+  pins the census constants + cross-file contains PROOF reading the
+  18f file; ZERO new up_gate/TEST translations at this row (the pair
+  owns NO suites; inventing CppUTest twins named for OTHER rows' suites
+  = double-translation = census lie; the honest deviation face).
+- **vector discipline**: DEC 23 L md5 `43b259ac8b77320ff9ddaa80dde1a36e`
+  + FACE-A 11 L md5 `e4c47bac93a15af4ecfdc9a0bd1abe62`, FIRST-RUN-
+  SEEDED at harness creation then drift-then-refuse (build.sh cmp arms
+  + wc 23/11 pins), O0==O2 BYTE-IDENT both faces EVERY run,
+  all-decimal 0x-hygiene 0; harness FRESH x2 rc0 BYTE-IDENT tail
+  'MISCIP_HARNESS_OK vectors=23 faceA=11 gates=0' (orchestrator-
+  verified); copy tree 103 donor -> 106 mid-build (tcp.h 211 L
+  a7ac7b82 the ONLY fresh cp) -> **105 post-strip** (the daq graft
+  NEVER stays — the honest addendum: end-of-build rm + the widened
+  no-second-landing tripwire; the pair grep-daq 0/0 + the E4 nodaq
+  survivor walls PROVE the DAQ-free split IN-TREE). E4 flipped walls:
+  tcp.h -> ONLY cd_icmp4_ip DIES; daq.h -> trio x3 DIE + BOTH pair
+  TUs SURVIVE (x1/0 face); udp.h -> cd_udp + cd_icmp4_ip die; icmp4.h
+  -> cd_icmp4/cd_icmp6/cd_icmp4_ip die; restored rc0 x5 every build.
+- **seam types (row-scoped, 18e lineage)**: Icmp4IpDecodeData{is_ip6,
+  dgram_len} — the is_ip6 rider PAIR cc:69 + the dgram_len face cc:97
+  reading the ip_api SET header (ip.cc:247-:251 IAT_4 IP4Hdr::len();
+  IAT_6 +40), NEVER the embedded window (probe set_ip4/set_ip6 faces);
+  cd_icmp6_ip's DecodeData& is UNNAMED cc:54 = never-read, NO seam
+  struct (the pgm precedent); the cc:63/cc:59 header overlays = alias
+  faces (the window IS the face, pointer stashes doc-pinned, no slot —
+  the cd_icmp4.rs posture). eval-order: the GT_576 arm FIRES-EVENT-
+  THEN-CONTINUES (cc:97-:100, no return, vectors:10 `gt576 -> 1
+  pb=8192 lyr=20` — the pair's only non-returning event arm, replayed
+  UN-sorted + unit-decomposed incl the 576 boundary NO-EVENT face).
+- **record census (the asymmetry pin)**: mod_ctor=0/mod_dtor=0 x2
+  (ground nullptr cc:325/:326 + cc:143/:144 — vectors_faceA 6th/10th
+  lines; the contrast face vs daq3 uniform 1/1 x3 + small4 1/0/1/1);
+  ctor/dtor SET (+g/t nullptr x4 false) both TUs; 112/1900547 x2.
+  TRUE NAMES x2: file base == table base == NAME (NO drift rider — the
+  #ifndef ICMP6_IP_NAME wrapper + the cc:29/:31-:32 ground comment are
+  a NAME-vs-MODULE DOC CITE, not drift, PLAN §2). tcp.h lands HERE as
+  the pair's ONLY fresh cp and banks the cp for the future cd_tcp row
+  (the additive-tree ruling, PLAN R4).
+- **clippy/#[test] face**: `cargo clippy --all-targets` rc 0 with ZERO
+  allowances at this row (no collapsible_if-shaped site in the pair);
+  in-crate #[test] 0/0 in the two TUs (grep). tests/miscip_parity_test
+  .rs 8 tests = 23/23 ORDERED whole-DEC replay (R6 var-first mirrored,
+  the cite-line face :21 NEVER fed any decode) + 11/11 ORDERED FACE-A
+  (the hidden-table walk face + GETIDS 259/260 DECIMAL) + hidden-table
+  tripwire (table-name source-face pins + ladder contains + the 34-
+  ladder census unchanged) + record census (the mod-pair-ZERO pin) +
+  the CppUTest dialect census unit + embed-switch pair unit (the ICMPV4
+  -arm oddity value face) + the gt576/rider unit + the row-vocab unit.
+  Suite 565 passed / 0 FAILED (557 + 8 miscip; 68 result lines, FAILED/
+  panicked grep 0); frozen contracts md5 diff-0 (daq3 fd1855e1/
+  2fb9dc45 + small4 462f0ff6/4755d48c re-verified at this commit pass).

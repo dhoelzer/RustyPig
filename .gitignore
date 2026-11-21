@@ -465,3 +465,29 @@ tools/daq3_harness/stageables.txt
 tools/daq3_harness/.e4_hold_*
 tools/daq3_harness/.L1_probe
 tools/daq3_harness/*.log
+# row 18j miscip_harness (ZERO-gate pair row: vectors.txt + vectors_faceA.txt
+# STAY tracked -- probe-only + THE new tracked witness face witness_miscip.cc
+# (the EXACTLY-+1 get_proto_name(IpProtocol) delta); the copy/o2/E4/nm/L1/
+# md5/gate/stageables/backbone receipts live, ignored. NO commit this pass.)
+tools/miscip_harness/copy/
+tools/miscip_harness/o2/
+tools/miscip_harness/probe
+tools/miscip_harness/probe_O2
+tools/miscip_harness/probe_dec
+tools/miscip_harness/probe_dec_O2
+tools/miscip_harness/*.o
+tools/miscip_harness/witness_conf.cc
+tools/miscip_harness/vectors_O0.txt
+tools/miscip_harness/vectors_O2.txt
+tools/miscip_harness/vectors_faceA_O0.txt
+tools/miscip_harness/vectors_faceA_O2.txt
+tools/miscip_harness/nm_U_*.txt
+tools/miscip_harness/E4_*.txt
+tools/miscip_harness/L1_*.txt
+tools/miscip_harness/md5_pinned.txt
+tools/miscip_harness/gate_md5_lineages.txt
+tools/miscip_harness/stageables.txt
+tools/miscip_harness/backbone8.txt
+tools/miscip_harness/.e4_hold_*
+tools/miscip_harness/.L1_probe
+tools/miscip_harness/*.log

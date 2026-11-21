@@ -1,0 +1,11 @@
+LOAD icmp4_ip
+LOAD icmp6_ip
+LOADS 2
+API icmp4_ip type=0 size=112 ver=1900547 name=icmp4_ip
+HELP icmp4_ip support for IP in ICMPv4
+icmp4_ip mod_ctor=0 mod_dtor=0
+GETIDS icmp4_ip 259
+API icmp6_ip type=0 size=112 ver=1900547 name=icmp6_ip
+HELP icmp6_ip support for IP in ICMPv6
+icmp6_ip mod_ctor=0 mod_dtor=0
+GETIDS icmp6_ip 260

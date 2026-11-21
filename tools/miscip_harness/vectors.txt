@@ -1,0 +1,23 @@
+EV 116 250
+IP4 short19 -> 0
+EV 116 251
+IP4 ver6-ip4api -> 0
+IP4 ver6-ip6rider -> 1 pb=16384 lyr=20
+EV 116 252
+IP4 hlen24-22 -> 0
+EV 116 253
+IP4 pay7 -> 0
+EV 116 254
+IP4 gt576 -> 1 pb=8192 lyr=20
+EV 116 255
+IP4 fragoff -> 0
+IP4 embed-tcp -> 1 pb=4096
+IP4 embed-icmp -> 1 pb=16384
+IP4 embed-other -> 1 pb=32768
+EV 116 250
+IP6 short39 -> 0
+EV 116 251
+IP6 ver4 -> 0
+IP6 252-unarmed cc:78-fixed-true
+IP6 next-tcp -> 1 pb=4096 lyr=40
+IP6 next-default -> 1 pb=32768 lyr=40
