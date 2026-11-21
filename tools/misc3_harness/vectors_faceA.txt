@@ -1,0 +1,19 @@
+LOAD llc
+LOAD vxlan
+LOAD user
+LOADS 3
+API llc type=0 size=112 ver=1900547 name=llc
+HELP llc support for logical link control
+llc mod_ctor=1 mod_dtor=1
+llc ctor=1 dtor=1
+GETIDS llc 263
+API vxlan type=0 size=112 ver=1900547 name=vxlan
+HELP vxlan support for Virtual Extensible LAN
+vxlan mod_ctor=0 mod_dtor=0
+vxlan ctor=1 dtor=1
+GETIDS vxlan 264
+API user type=0 size=112 ver=1900547 name=user
+HELP user support for user sessions (DLT 230)
+user mod_ctor=0 mod_dtor=0
+user ctor=1 dtor=1
+GETDLT user 230

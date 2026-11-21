@@ -3518,3 +3518,119 @@ Structural deviations (behavior preserved):
   Suite 565 passed / 0 FAILED (557 + 8 miscip; 68 result lines, FAILED/
   panicked grep 0); frozen contracts md5 diff-0 (daq3 fd1855e1/
   2fb9dc45 + small4 462f0ff6/4755d48c re-verified at this commit pass).
+
+## codecs misc leftover trio (row 18k — misc/cd_llc.cc 198 + cd_vxlan.cc 133 + cd_user.cc 167 = 498 L, the graft-v2 daq.h-REUSE row + the witness delta MEASURED +2 + THE mod_ctor 1/0/0 census row)
+
+- **THE graft-v2 daq.h face (the row's structural headline, C-side)**:
+  cd_user.cc:101 calls `sfdaq_query_usr_pci(...)` which hands a
+  `daq_msg_t*` to `SFDAQInstance::ioctl(DIOCTL_QUERY_USR_PCI, msg)` —
+  the fmod LINEAGE graft (tools/fmod_harness 16 L daq_common.h face,
+  REUSED VERBATIM through daq3's tracked copy/daq.h 33 L 73fdbc39)
+  COMPILED the 18i ip trio but FAILS here: v16 rehearsal rc1 at
+  cc:101 invalid-conversion (`const void*` member set against the
+  graft's non-const DAQ_Msg_h, E4_cd_user_v1.txt rides every build).
+  graft-v2 = the DAQ_Msg_h `const void* data()` FLIP + 6 SDK typedefs;
+  it rides ONLY as the misc3_harness heredoc (copy/ gitignored, re-
+  materialized every run) — the frozen daq3 harness is NEVER edited
+  (per-link isolation; the daq3 ip trio re-checked green-under-v2
+  rc0 x3 in THIS harness so the flip never breaks its consumers the
+  silent way); the daq.h REUSE cp stays find-1 tools-wide and is
+  STRIPPED at end-of-build (misc trio NEVER includes daq.h — cc:24 is
+  `<daq_common.h>`, the E4 daq-removal wall x3 proves the split IN-
+  TREE: ip trio DIE, misc trio SURVIVE). The mid-build 112 find-count
+  NEVER lands as a pin: the POST-STRIP 111 = 105+3+3 face owns the
+  assertion.
+
+- **The SFDAQ seam (the witness-mirror faces, get_proto_name precedent
+  x2, LEFT-OPEN provider)**: the trio objs reference EXACTLY 2 new
+  symbols — nm census `-eq 2` on `SFDAQ::get_local_instance` +
+  `SFDAQInstance::ioctl` (the staged L1 link, trio+OBJS+WIN+probe.o
+  NO witness_trio, fails with undefined-DISTINCT EXACTLY-2; +witness
+  -> BOTH probes rc0, own-new T census EXACTLY-2). The tracked witness
+  witness_trio.cc (35 L, md5 ef50cd2f) is SYNTHETIC per the 18j
+  precedent: the REAL sfdaq bodies (packet_io/sfdaq.cc +
+  sfdaq_instance.cc, the ioctl-vtable world) NEVER compile in ANY
+  donor (the real-body attempt greps the REJECT face every build,
+  build.sh :376-:380); the witness ioctl NEVER derefs `this` — which
+  keeps the ground's honest SEGV face probed-NEVER: cc:103 chain-calls
+  `get_local_instance()->ioctl()` with NO null check, so a bare ground
+  run SEGVs; vectors:13 is the CITE line saying exactly that (the
+  synthetic fixture survives, the ground behavior is NOT invented
+  fix). Rust face: `cd_user::sfdaq_query_usr_pci` mirrors the WITNESS
+  body (memcpy-if-non-null else memset face) — the REAL SFDAQ provider
+  has no landed Rust home yet (LEFT-OPEN, queued like the 18j name
+  provider); the ioctl-fail leg cc:103-:104 + the !pci leg cc:108 are
+  cited-NEVER-armed through the seam (vectors:18, the witness ALWAYS
+  returns DAQ_SUCCESS + ALWAYS fills pci — the legs NEVER fire = the
+  fixture face, honest not a coverage gap hidden). get_proto_name row
+  census 0: witness_miscip (c5b498ff) stays DONOR-INHERITED, cite
+  NEVER linked HERE.
+
+- **mod_ctor 1/0/0 (THE asymmetry the 18i hand-off warned about)**: the
+  trio records carry llc mod_ctor=1/mod_dtor=1 (the REAL `class
+  LlcModule : public BaseCodecModule` — 2-arg base ctor cc:45,
+  get_rules override cc:47-:48 feeding the cc:35-:39 2-row RuleMap,
+  static Module* mod_ctor() cc:156-:157 + mod_dtor cc:159-:160, BaseApi
+  slots :179/:180) vs vxlan cc:113/:114 plain nullptr pair + user cc:
+  147/:148 EXPLICIT-comment nullptr pair — faceA:7/:12/:17 pin the 1/
+  0/0 census (daq3 1/1/1 and miscip 0/0 faces BOTH NOT carried; the
+  18i hand-off text "do NOT carry the pair 0/0" honored through the
+  tables). Rust mirror: `LlcModule::new` lands (the trio's ONLY
+  BaseCodecModule subclass, 18i cd_udp.rs posture), sids 131/132 ride
+  the RESIDENT codec_module.rs :97-:98 family (ZERO new sids, 2 RuleMap
+  rows + terminator == the cc:39 `{ nullptr, 0, 0 }`); cd_vxlan.rs/
+  cd_user.rs carry NO module face at all.
+
+- **hidden-BUILDING_SO tables EXTENDED x3 (the 18j census keeps riding)**:
+  all THREE exports (cd_llc[] cc:190-:197 / cd_vxlan[] cc:124-:132 /
+  cd_user[] cc:158-:166) live ONLY under the SO ifdef; the sed census
+  pins the arms VERBATIM + nm table D symbol EXACTLY-1 x3 (the probe
+  walks the REAL static arm, the strings NEVER in a .so face). Rust:
+  `pub const CD_LLC/CD_VXLAN/CD_USER: CodecTable` (the 18j landed
+  pattern; grep-verified ZERO no_mangle attribute sites in src); the
+  ladder names were ALREADY resident (:117/:129/:131, externs
+  codec_api.cc :59/:71/:73 loads :104/:116/:118 sed-pinned) — the row
+  TURNS them loaded and the 34-name ladder census NEVER moves.
+
+- **the set_key PIN: address literals cite-NEVER-land, the port pair
+  lands as the observable**: ground cc:71-:76 — under the cc:70
+  `FIXIT-L make configurable` debt comment the SfIp pair hardcodes
+  "192.168.1.1"/"192.168.2.2" (cc:72, the dotted quads) feeding
+  `ip_api.set`, and cc:75/:76 hardcode `snort.sp = 12345` / `snort.dp =
+  54321`. Ruling (build.sh-side): the dotted quads ride ONLY as
+  sed-CITES (the cc:72 grep keeps them honest ground-side; the Rust
+  face + tests carry ZERO "192.168." token — tripwired in the parity
+  unit), while the sp/dp literal pair IS observable state (probe prints
+  `sp=12345 dp=54321`, vectors:14) and DOES land, the FIXIT-L debt
+  comment pinned above them. The else-legs stay honest: the ip_api SfIp
+  writes have NO landed Rust Snort-side home (the 18i UdpApiLite
+  LEFT-OPEN face — the PROVIDER queued) and print in NEITHER vectors
+  face, so they cite-never-vectorize; the landed observable = sp/dp/
+  proto-bits/pkt_type/decode_flags/lyr writes only.
+
+- **dup-vs-import ruling (the banked cd_icmp6.rs:179-:183 pre-ruling
+  applied)**: PROTOCOL_ID_VXLAN (0x0108) + VXLAN_U_PORT already live at
+  cd_udp.rs :147/:150 — row 18k DUPLICATES row-scoped in cd_vxlan.rs
+  WITH cites (same file-local-const family as :149/:151/:155/:156 + the
+  18j embed-bit dupes) rather than cross-import private consts (the 18i
+  ip_protocol::TCP import precedent covers the framework-owned family
+  ONLY — ETHERNET_LLC/ETHERNET_802_3/TCP/UDP ids IMPORT framework, the
+  codec-scoped dupes stay file-local); PROTO_BIT__TCP/UDP re-duped in
+  cd_user.rs per cd_udp.rs:155; PROTO_BIT__VXLAN 0x040000 NEW row-only
+  (decode_data.h:105, ZERO prior Rust face — harness grep-armed). The
+  cd_user DLT_USER/DAQ_USR_FLAG_*/DIOCTL faces are row-scoped NEW
+  (daqs/daq_user.h :29-:46 cites, ZERO prior Rust face per the harness
+  grep).
+
+- **dead defines + zero-event honesty**: ALL SIX cd_llc #defines are
+  DEAD names (DSAP/SSAP SNA 0x08/0x00 + STP 0x42 x2 cc:80-:83 +
+  ETH_ORG_CODE_ETHR/CDP cc:87/:88; ground grep-count 1 x6 every build,
+  the SNAP arms read LITERAL zero :117-:119): they transcribe
+  cite-NEVER-land in PROSE ONLY (both token faces NEVER land Rust-side,
+  the 18i forbidden-token discipline — the vectors:7 CDP fixture rides
+  the BYTE 0x0c, never the name; the two USED names ETH_DSAP_IP/
+  ETH_SSAP_IP land as consts). cd_vxlan/cd_user carry ZERO codec_event
+  surface (the ground hook has no sink — vectors:8/:9 NO-EVENT gates +
+  the ZERO-EV user lines; the trio's event face = llc 131/132 ONLY
+  (RESIDENT sids)) — mirrored as the zero-sink decode signatures, NOT a
+  dropped feature.

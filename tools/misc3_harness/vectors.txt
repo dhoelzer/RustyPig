@@ -1,0 +1,18 @@
+EV 116 131
+LLC short2 -> 0
+LLC dsap-aa-ssap-00 -> 1
+EV 116 132
+LLC snap7 -> 0
+LLC snap0-org -> 1 lyr=8 next=2048 flags=4096
+LLC snap-org-nonzero -> 1 lyr=0
+VX len7 -> 0
+VX flags-neq8 -> 0
+VX hook-before-sets cc:73-vs-:76-:79
+VX mask256 -> 1 lyr=8 pb=262144 next=261 flags=512 bypass=0
+VX mask0 -> 1 lyr=8 pb=262144 next=261 flags=512 bypass=1
+US no-instance ground-SEGV cc:103 chain-call, witness-ioctl survives
+US proto0-key -> 1 pb=2 sp=12345 dp=54321 type=6 lyr=0
+US tcp-c2s -> 1 pb=2 sp=12345 dp=0 type=5 df=512 lyr=0
+US udp-flags7 -> 1 pb=4 sp=20000 dp=30000 df=3584 lyr=4 type=5
+US arms-cc:95-:96-else-lyr0-face
+US ioctl-fail cc:103 + !pci cc:108 cited-never-armed witness-always-success/fills
