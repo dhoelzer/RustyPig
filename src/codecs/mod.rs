@@ -50,6 +50,10 @@
 //!   src/codecs/link/cd_erspan3.cc (147)             -> cd_erspan3.rs [18l]
 //!   src/codecs/link/cd_trans_bridge.cc (158; TABLE
 //!     cd_transbridge — the in-subrow drift name)     -> cd_trans_bridge.rs [18l]
+//!   src/codecs/link/cd_pppoe.cc (243; TABLE cd_pppoepkt —
+//!     the double-NAME drift face)                     -> cd_pppoe.rs    [18m]
+//!   src/codecs/link/cd_ppp_encap.cc (174; TABLE
+//!     cd_pppencap — the drift name)                   -> cd_ppp_encap.rs [18m]
 //! The `codec_module` umbrella landed AT 18d as planned (the FLAT
 //! call stands: the C base names collide nowhere — no cd_module.h
 //! exists, and this row's C-dir provenance (root/ root/ link/) rides
@@ -78,6 +82,8 @@ pub mod cd_llc;
 pub mod cd_mobility;
 pub mod cd_no_next;
 pub mod cd_pgm;
+pub mod cd_ppp_encap;
+pub mod cd_pppoe;
 pub mod cd_raw;
 pub mod cd_routing;
 pub mod cd_teredo;

@@ -548,3 +548,33 @@ tools/erspan_harness/stageables.txt
 tools/erspan_harness/backbone10.txt
 tools/erspan_harness/.e4_hold_*
 tools/erspan_harness/*.log
+# row 18m link6_harness (ZERO-gate link DRIFT-PAIR row: cd_pppoe.cc 243 +
+# cd_ppp_encap.cc 174 = 417; vectors.txt + vectors_faceA.txt STAY tracked --
+# probe-only, the SIX stageables per the small4/erspan 6-face PRECEDENT:
+# ZERO own-witness file (the nm_U tunnel census 22/8 U-lines carry ZERO
+# tunnel symbols; witness_18f clone NEVER forced; backbone STAYS 10; the WIN
+# trio rides INHERITED-carried). The copy/o2/E4/nm/md5/gate/stageables/
+# backbone receipts live, ignored. copy/ = the erspan-18l donor 114-tree
+# REUSE clone (ZERO fresh cps, the daq_common.h fead0027 graft face rides
+# INHERITED, NEVER re-authored; daq.h stays find-0). vectors NEVER ignored --
+# the explicit NOT-proof rides build.sh. NO commit this pass.)
+tools/link6_harness/copy/
+tools/link6_harness/o2/
+tools/link6_harness/probe
+tools/link6_harness/probe_O2
+tools/link6_harness/probe_dec
+tools/link6_harness/probe_dec_O2
+tools/link6_harness/*.o
+tools/link6_harness/witness_conf.cc
+tools/link6_harness/vectors_O0.txt
+tools/link6_harness/vectors_O2.txt
+tools/link6_harness/vectors_faceA_O0.txt
+tools/link6_harness/vectors_faceA_O2.txt
+tools/link6_harness/nm_U_*.txt
+tools/link6_harness/E4_*.txt
+tools/link6_harness/md5_pinned.txt
+tools/link6_harness/gate_md5_lineages.txt
+tools/link6_harness/stageables.txt
+tools/link6_harness/backbone10.txt
+tools/link6_harness/.e4_hold_*
+tools/link6_harness/*.log

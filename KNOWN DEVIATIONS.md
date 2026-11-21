@@ -3730,3 +3730,96 @@ Structural deviations (behavior preserved):
   cite lines + the parity test's vlan/spanId-varying arm decode IDENTICALLY
   pin the never-ported behavior honestly (the same face the 18k dead-
   define discipline carries: cite without inventing observables).
+
+## codecs link ppp drift pair (row 18m — link/cd_pppoe.cc 243 + cd_ppp_encap.cc 174 = 417 L, THE double-NAME headline row + THE ground decode-chain family + the PADT NEVER-pull ruling)
+
+- **THE double-NAME face is a C face the Rust landing MIRRORS, not
+  invents (the honest-shape note)**: cd_pppoe.cc carries TWO api structs
+  (`pppoepkt_disc_api` :189 + `pppoepkt_sess_api` :211) + TWO NAME
+  #defines (:115 "pppoe_disc" / :139 "pppoe_sess") INSIDE the second
+  anon namespace :113-:165, feeding ONE two-entry table `cd_pppoepkt[]`
+  :236 via :239/:240 — and ONE PPPoEModule class (:62-:73, the THREE-arg
+  rules-storing ctor) instantiated TWICE. The Rust face keeps that shape
+  honestly: `CD_PPPOEPKT: CodecTable = &[&PPPOEPKT_DISC_API,
+  &PPPOEPKT_SESS_API]` (the DOUBLE feed is the first 2-entry table in the
+  port) + `PPPoEModule::new_disc/new_sess` (one type, two ctor faces).
+  No semantic deviation — a shape census note (the FACE-A probe prints
+  the double-LOAD face every build: 2 LOAD lines, LOADS 2).
+
+- **THE TRUE-NAME drift spellings (both files)**: the landed FILE names
+  are the C file bases (cd_pppoe.rs / cd_ppp_encap.rs) while the hidden-
+  table consts ride the ground TABLE symbols: `CD_PPPOEPKT` (:236) and
+  `CD_PPPENCAP` (:169) — and the ladder/copy-tree extern names
+  "cd_pppoepkt"/"cd_pppencap" (codec_api.cc :64/:65, Rust ladder
+  codec_api.rs :122/:123) NEVER change (34-name ladder + 39-extern
+  census UNDISTURBED). The harness nm refusal `cd_pppoe$`/
+  `cd_ppp_encap$` EXACTLY-0 x2 mirrors the 18l cd_trans_bridge
+  precedent; the parity test refuses ANY file-base-named table const
+  landing (the §5 tripwire, grep-vs-file confusion dies LOUD).
+
+- **THE FIXIT-M const_cast deviation (the row's ONE folded C mutation)**:
+  cd_ppp_encap.cc :94-:99 the VJ_UCOMP arm does
+  `const_cast<ip::IP4Hdr*>(raw.data + codec.lyr_len)->set_proto
+  (IpProtocol::TCP)` — the ground's OWN admitted wart (the verbatim
+  :95-:96 comment "FIXIT-M X This is broken - it should not modify the
+  packet data (which should be const)"). Rust `RawData` ships an
+  IMMUTABLE window: the port reads the :97 overlay slot and NEVER
+  writes it; proto byte 9 STAYS whatever the caller brought (parity
+  unit pins p22[11] STAYS 0). The vectors' `proto9=6` face (vectors:19)
+  is the probe's OWN mutable fixture mutated by the C build + printed
+  post-decode (probe_dec.cc :87-:89) — the Rust DEC replay mirrors that
+  mutation AS A CITED FIXTURE WRITE, never as port behavior (the
+  cd_no_next.rs:65 / cd_esp.rs:142 const_cast-fold precedent; the
+  observables the port DOES carry — lyr 2, fall-through :100 -> next
+  IPV4, return true — replay EXACT).
+
+- **THE PADT NEVER-pull ruling (disk wins over the briefing)**: the
+  18m briefing spoke of "PADT/SESSION faces"; `PADT` greps 0 in BOTH
+  ground TUs (build.sh asserts 0 in source AND nm output every build) —
+  the SESSION token is TRUE (:41 field, :139/:145 NAMES) but no PADT
+  code/constant/arm exists at fe29cbe. Result: NO PADT arm is ported
+  (the decode pair gates on len ONLY, ALL code bytes IGNORED — pinned
+  by the garbage-bytes sweep unit: every len>=6 face decodes
+  identically), and the ONLY PADT TOKEN across the pinned vector set is
+  the vectors:9 ruling line ITSELF (parity census EXACTLY-1 VECTORS /
+  0 faceA / 0 arms).
+
+- **the encode pair is ported-by-reading, cited-NEVER-called**: the pppoe
+  shared final encode (:92-:105, incl the honest `htons(buf.size() -
+  raw_len)` == htons(0) length-slot rewrite face, copied EXACT, never
+  simplified) + the ppp_encap encode (:120-:132, memcpy ONLY, NO length
+  face). The EncState ctor's ip::IpApi pull keeps them OUT of the
+  harness vectors (the ZERO-encode-arms precedent eth/tun/erspan); the
+  parity units mirror every move cc-cited (the 18l TB-encode posture).
+
+- **the rfc1661 compression-collision face rides GROUND verbatim**: the
+  odd-first-octet branch :61-:67 masks NOTHING, so the compressed
+  half-octet 0x21 NUMERICALLY equals PPP_IP 0x0021 (:44) and the switch
+  (:80) fires the 16-bit cases off a 1-octet value — `PE comp21 -> 1
+  lyr=1 next=2048` + `PE comp2d -> 0 lyr=1` (VJ_COMP false, lyr STAYS).
+  The Rust match reproduces the comparison EXACTLY (octet widened to
+  u16); the collision is the ground's, NOT our invention (the vectors'
+  order-site cite `lyr:73-before-switch:80` + the R6 rule pin the
+  write-before-match sequence).
+
+- **the family link lands as file-local twin consts (the landed dup-not-
+  import family)**: ETHERTYPE_PPP (protocol_ids.h :152, 34827) carries
+  TWO row-scoped homes — cd_ppp_encap.rs (the GETIDS id :52, the ROW
+  home) + cd_pppoe.rs (the cc:161 next_prot_id twin) — parity-pinned
+  EQUAL, with the cross-file family assert (sess decode next == mate
+  GETIDS == 34827, BOTH vector faces pinned). ETHERTYPE_IPX 0x8137
+  (protocol_ids.h :150, 33079) lands row-scoped (ZERO prior landed Rust
+  face MEASURED); ETHERTYPE_IPV4/IPV6 ride the landed framework imports
+  (`protocol_id::ETHERTYPE_IPV4`/`_IPV6`) — NEVER re-authored. sids
+  120/479 stay RESIDENT (codec_module.rs :95/:237) and ppp_encap fires
+  NOTHING (the ground `codec_event` grep 0 census; ZERO new consts).
+
+- **the mod-arms face MEASURED per-TU, NEVER carried across the pair**:
+  1,1 (disc :200/:201) + 1,1 (sess :222/:223) + 0,0 (the pppencap
+  EXPLICIT `nullptr, nullptr` :155/:156 — the tail's ONLY nullptr mod
+  pair) — contrast-cited against 18l's 1/1/0, misc3's 1/0/0, miscip's
+  0/0; NO Module type lands for pppencap (honest absence, like
+  trans_bridge). The RuleMap pair transcribes as ONE row + terminator x2
+  (byte-exact msgs), the disc decode's ZERO-write happy arm (cc:136)
+  kept as the honest no-write face (next rides the CodecData init — the
+  vectors' `PD len6 next=34915` print), NEVER invented writes.

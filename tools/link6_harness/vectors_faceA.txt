@@ -1,0 +1,20 @@
+LOAD pppoe_disc
+LOAD pppoe_sess
+LOADS 2
+LOAD ppp_encap
+LOADS 1
+API pppoe_disc type=0 size=112 ver=1900547 name=pppoe_disc
+HELP pppoe_disc support for point-to-point discovery
+pppoe_disc mod_ctor=1 mod_dtor=1
+pppoe_disc ctor=1 dtor=1
+GETIDS pppoe_disc 34915
+API pppoe_sess type=0 size=112 ver=1900547 name=pppoe_sess
+HELP pppoe_sess support for point-to-point session
+pppoe_sess mod_ctor=1 mod_dtor=1
+pppoe_sess ctor=1 dtor=1
+GETIDS pppoe_sess 34916
+API ppp_encap type=0 size=112 ver=1900547 name=ppp_encap
+HELP ppp_encap support for point-to-point encapsulation
+ppp_encap mod_ctor=0 mod_dtor=0
+ppp_encap ctor=1 dtor=1
+GETIDS ppp_encap 34827
