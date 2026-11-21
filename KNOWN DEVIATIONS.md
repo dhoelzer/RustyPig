@@ -3943,3 +3943,109 @@ Structural deviations (behavior preserved):
   (ho :109) — the earlier allocate(4) window gets OVERWRITTEN by the
   header fields (the honest C aliasing face, pinned in the unit against
   a naive after-window read).
+## framework misc9 module + reload_tracker (row 19a -- framework/module.cc 403 + main/reload_tracker.cc 89 = 492 L, THE chapter-19 opener + THE Module-base debt close + THE donor-VERBATIM zero-cp headline)
+
+- **THE Module base lands -- the 17z/18a banked debt CLOSED (cite never
+  carry)**: file_module.rs :75 ("NO Rust Module base forked -- the REAL
+  framework/module.o closes it harness-side") and the :232-:234 ruling pair
+  stay VERBATIM in file_module.rs, NEVER edited; THIS row is the landing
+  half of that ruling pair: src/framework/module.rs forks the base (struct
+  Module state cc :32-:69 + the ModuleVirt trait). The debt cite's other
+  face: the earlier rows consumed real module.o harness-side, so the
+  FileIdModule/ResponseBufModule shapes NEVER derived from a fork -- the
+  fork lands NOW and the older rows stay EXACTLY as landed (NO retrofit;
+  the codec Module-shape traits in codec_module.rs/file_cache.rs stay the
+  row-scoped faces they were; module.rs NEVER re-authors RuleMap/Usage --
+  the residents import, the codec_module.rs :246/:273 homes cited).
+- **C++ virtual dispatch -> the ModuleVirt trait (the module.h :92-:222
+  default survey)**: EVERY h default lands as a trait default (begin/end
+  h :92-:96 TRUE pair, the nullptr getters as Option::None, the false arms
+  as false, get_usage -> CONTEXT via the 18d C_USAGE_* import); the FACE-A
+  ProbeModule overrides NOTHING so the DEFS census IS the trait-default
+  survey both ways. The h :107 matches lua-OUT-param face lands as
+  (pattern, &mut bool-ignored) -> false (the C out-param write never
+  fires at the default; the lua provider stays queued).
+- **THE -DNDEBUG production-arm modeling (the harness graph law, PLAN §9)**:
+  the harness compiles BOTH row TUs -DNDEBUG EVERY build, so the observable
+  vectors pin the ELIDED arms: module.cc :372 `assert(false); // wrong name
+  = programmer error` is GONE in the production build and :373 `return 0;`
+  is REACHABLE -- the port models that arm UNCONDITIONALLY (the vectors'
+  `MS ggc hit=13 miss=0`), NEVER a debug_assert!(false) twin (which would
+  abort the debug-armed replay THIS parity test runs under -- the
+  18d autotools-flag-!= cargo-cfg precedent re-pinned: the C NDEBUG state
+  is a build-axis fact, the Rust port carries the PRODUCTION arm as the
+  code + cites the assert site). Same face at the tracker's #ifdef
+  NDEBUG/#else pairs (cc :54-:57/:69-:72/:82-:85): the UNUSED(params) arm
+  is the modeled one; the assert(CONDITIONS) contracts land as citation +
+  the Rust debug_assert twins where observable is nil; the measured
+  harness face is on record: the tracker ladder is assert-clean BOTH ways.
+- **LogMessage via the CARRIED seam (the multiple-definition correction
+  face)**: the recon's witness +2 GUESS (LogMessage + show_prompt) DIED on
+  the dup-symbol law -- LogMessage's vprintf body rides the stubs_18d face
+  INHERITED in the donor tree (nm: LogMessage U x1 in the tracker, resolved
+  by WIN alone; witness_misc9 defines show_prompt ONLY, +1). The Rust twin
+  routes EVERY tracker message through the LANDED log::messages
+  LogEngine::log_message_stdout seam (the Rust-side carried seam, the
+  log_quiet gate cc log/messages.cc :215-:217 face) -- NO private
+  re-stub of the body anywhere; the cfmt Arg pair mirrors the C %s args,
+  the format literals stay VERBATIM (the harness PYPIN re-greps all five).
+- **show_prompt = the cited-never-landed provider seam (left-open
+  mirror)**: cc :63 `ctrl->show_prompt();` is the ONLY observable of the
+  C Reloading ControlConn tenant; the harness proves the seam with its own
+  27 L witness (the EXACTLY-+1 L1 face; provider-queued like the graft
+  faces), NEVER fabricating the prompt body. The Rust port lands the
+  PULL-SITE face honestly: the tracker's ctrl-tenant models the pull as a
+  prompt_pulls COUNT on ControlConnTracker (delta=1 vs the h :35
+  prompt=false delta=0 pair vectors-pinned) + cites witness_misc9 as the
+  ground-side provider; the REAL ControlConsole trait (file_cache.rs) and
+  its show_prompt stay the row-scoped face, unimported (control.h is a
+  tracker-ONLY wall -- the E4 face measures module SURVIVES its drop).
+- **thread-static faces -> explicit PARAMS (the 17l lesson)**:
+  ThreadConfig::get_instance_max (cc :327) and get_instance_id (used at
+  :250's stale-instance skip) land as explicit params/overrides
+  (init_stats_with_max's instance_max arg; ModuleVirt::get_instance_id
+  default 1 -- the C singleton default); NO hidden process/thread state
+  forks (the C++ thread-safety posture of dump_stats_initialized/
+  dump_stats_results stays single-instance per the cc, the Mutex-guarded
+  C accessors cited-never-landed for other tenants).
+- **Rust cannot alias &mut through &self -- the get_counts family**:
+  the C get_counts() returns the mutable count vector through a const
+  object (the const_casts at cc :74-:77/:169/:343 sites); the trait lands
+  `get_counts(&mut self) -> Option<&mut [PegCount]>` and
+  clear_global_active_counters/show_interval_stats_guard take `&mut V`,
+  verified_set takes `&mut Value` (the C set(v) by-ref). The stats
+  ladders ALSO take the live `&mut [PegCount]` param (the probe face) so
+  the parity units drive the cc :169 fetch-path explicitly; NO unsafe.
+- **Value/Parameter residents stay 16c-shaped**: the cc :34 sentinel rows
+  ride the landed Parameter { name, ptype, deflt } shape (the range/help
+  slots stay unported -- 16c's deviation re-cited, the harness walk only
+  ever reads name/ptype); `Value v(true)` = value.h :44 single-bool arm,
+  the C set(v) const-ref -> &mut Value (never reads it at the default,
+  cc :387).
+- **nullptr-vs-emptiness + the table identity**: C gates on raw pointers
+  (`!p`, `!q`, `!pegs`, the `while (p and p->name)` walk) -- Rust lands
+  Option::None faces (name: None IS the C nullptr row; a &str "" is NOT
+  the C nullptr test, pinned in the units); the module-static identity
+  (cc :32's `static const Parameter null_params[]` shared by init :59 +
+  h :136 and the cc :396-:401 extern/defined simple_pegs pair) lands as
+  ONE pub static each (NULL_PARAMS/SIMPLE_PEGS) with the ptr-equality
+  pinned BOTH in build.sh's walk and the parity census.
+- **the renderer families cited-never-called**: show_stats/print_statistics
+  keep C signatures cited (the formatter tenants live in stats/utils
+  rows) -- the port lands the GUARD pair (cc :299/:305 the num_counts
+  gates) + the clear arm cc :308 and the show_stats_and_clear seam, the
+  formatting itself NEVER re-invented (the dump_stats_results/
+  peg->help consumers keep their provider).
+- **NESTED .gitignore instrument face (the root .gitignore NEVER moves)**:
+  the harness keeps its build residue OUT via tools/misc9_harness/
+  .gitignore -- a dir-LOCAL file (one of the 8 stageables), the ROOT
+  .gitignore NEVER touched this row (the single-tenancy law; the dir was
+  UNTRACKED as a whole at seed time so the nested block is the ONLY
+  sanctioned edit -- the misc9 precedent for nested instruments); build.sh
+  check-ignore-proves EVERY pattern face-by-face + the vectors/witness/
+  .gitignore NOT-proofs every run. The rs-row twist (this commit):
+  build.sh's seed-face guards FLIPPED ON THE RULING, not by drift -- the
+  rs-ABSENCE PYPIN became the rs-PRESENCE + collision-homed-ONLY-on-
+  module.rs face, and the zero-tracked-churn guard became the 4-own-files
+  tolerance (framework/mod.rs + main/mod.rs wiring lines + both docs);
+  every flip cites PLAN §3/§9's own "rs rows a later pass" prediction.

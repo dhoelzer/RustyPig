@@ -1,0 +1,31 @@
+# row 19a misc9_harness (chapter-19 P1: framework/module.cc 403 + main/
+# reload_tracker.cc 89 = 492 L, ZERO-gate). THE NESTED-BLOCK FACE: the ROOT
+# .gitignore is NEVER touched by this pass (the single-tenancy law + the dir
+# is UNTRACKED as a whole: git status face = ?? tools/misc9_harness/). A
+# nested .gitignore INSIDE the harness dir is a tools/misc9_harness/ FILE
+# (the ONLY sanctioned edit) and git ls-files --exclude-standard /
+# check-ignore honor it. EVERY run this block is check-ignore-proved face by
+# face (a missing pattern = a blob in the future add = loud).
+copy/
+o2/
+probe
+probe_O2
+probe_dec
+probe_dec_O2
+*.o
+witness_conf.cc
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+nm_U_*.txt
+module_residue_dem.txt
+E4_*.txt
+L1_*.txt
+.L1_probe
+md5_pinned.txt
+gate_md5_lineages.txt
+stageables.txt
+backbone10.txt
+.e4_hold_*
+*.log

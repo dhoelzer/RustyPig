@@ -1,0 +1,11 @@
+NOLOAD framework-TU BUILDING_SO-grep0-x4 snort_plugins-grep0-x4
+REC a is_table=1 is_list=0 type=0
+REC b is_table=1 is_list=0 type=0
+REC c is_table=1 is_list=1 type=1
+NULLWALK entries=0 sentinel_type=21
+ARGS default ()
+ARGS two (one, two)
+DEFS gid=0 rules=0 pegs=0 cmds=0 prof=0 defaults=0 bind=0 agg=0 statagg=0 global=0 prep=0 matches=0 usage=1
+VERB table begin=1 set=1 end=1
+VERB list begin=1 set=0 end=1
+order nullwalk:table:32->init:59->get:136 | set-list-guard:384-before-end:390

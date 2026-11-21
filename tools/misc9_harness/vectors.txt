@@ -1,0 +1,41 @@
+Reload started. [signal]
+
+TRK start1 -> 1
+Reload in progress [signal], attempting command: [signal]
+
+TRK start2-during -> 0
+Reload update: st [signal]
+
+Reload failed! why [signal]
+
+Reload started. [signal]
+
+Reload ended. [signal]
+
+TRK end-prompt-true delta=1
+Reload started. [signal]
+
+Reload update: st2 [signal]
+
+Reload ended. [signal]
+
+TRK end-prompt-false delta=0
+Reload started. [signal]
+
+Reload failed! x [signal]
+
+Reload started. [signal]
+
+TRK start-after-failed -> 1
+TRK order gate:39-before-log:41 | log:60-before-guard:62->prompt:63 | drop ctrl:64-before-flag:65
+MS init-true num_counts=3 rows=1
+MS sum-false cell0=7 p0=0
+MS sum-true cell0=7 dcell0=10 p0=3
+MS max-arm dcell2=9
+MS ggc hit=13 miss=0
+MS reset cell0=0 dcell0=0 p0=0 p1=5 p2=0
+MS init-false rows=2 num_counts=3
+SP num_counts=1 rows=1
+SP sum cell0=12 p0=0
+SP ggc-hit=0
+MS order add:cc206-before-clear:cc208 | accumulate:cc96-before-ggc:cc362

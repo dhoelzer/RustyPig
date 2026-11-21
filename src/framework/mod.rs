@@ -2,6 +2,7 @@ pub mod codec;
 pub mod counts;
 pub mod ips_action;
 pub mod cursor;
+pub mod module;
 pub mod parameter;
 pub mod range;
 pub mod ips_option;
