@@ -1,0 +1,13 @@
+LOAD udp
+LOAD icmp4
+LOAD icmp6
+LOADS 3
+API udp type=0 size=112 ver=1900547 name=udp
+HELP udp support for user datagram protocol
+udp mod_ctor=1 mod_dtor=1
+API icmp4 type=0 size=112 ver=1900547 name=icmp4
+HELP icmp4 support for Internet control message protocol v4
+icmp4 mod_ctor=1 mod_dtor=1
+API icmp6 type=0 size=112 ver=1900547 name=icmp6
+HELP icmp6 support for Internet control message protocol v6
+icmp6 mod_ctor=1 mod_dtor=1

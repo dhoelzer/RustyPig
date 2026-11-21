@@ -3184,3 +3184,161 @@ Structural deviations (behavior preserved):
   the single BE read of bytes 2-3: C's `uint16 field + ntohs` == `
   u16::from_be_bytes` one face, no double-swap anywhere — logged here
   because the wire-order posture is a correctness pin).
+
+## codecs ip DAQ trio (row 18i — ip/cd_udp.cc 660 + cd_icmp4.cc 645 + cd_icmp6.cc 518 = 1,823 L, the daq.h head-on graft row + THE dual-face checksum headline + the ipv6_api struct-name rider)
+
+- **THE daq.h graft (the row's headline seam, PLAN 2a)**: the Snort DAQ SDK
+  header is ABSENT ground-tree AND host (find WHOLE snort3-src = 0 + no
+  /usr/include face — `daqs/daq_user.h` 54 L is a DIFFERENT header, NEVER
+  confuse; the absence + the no-second-graft-tools census + daq_user.h's
+  0-family-hits + wc 54 are flipped-asserted EVERY build). The lineage
+  cannot pure-defer: `#include <daq.h>` rides the THREE ground TUs
+  literally (cc:25 each) and ground C is NEVER trimmed — a 33 L minimal
+  graft `copy/daq.h` (md5 73fdbc3983ca45246b554c46efdf1ad1) LANDS, built
+  ONLY from the measured 13-line use-site / EXACTLY-7-symbol census
+  (DAQ_PktDecodeData_t/DAQ_NAPTInfo_t/DAQ_PKT_META_{DECODE_DATA,NAPT_INFO}/
+  DAQ_PKT_DECODE_OFFSET_INVALID/daq_msg_get_data/daq_msg_get_meta) — the
+  graft-fidelity cite audit sed-pins EVERY ground use-site line
+  (udp :25/:263/:264/:268/:270/:420/:421, icmp4 :132-:139, icmp6 :125-:133)
+  EVERY build. Raw.daq_msg PROVENANCE stays OPEN (the 17d ruling stands;
+  row 20 re-cites the real SDK). The graft is the lineage's FIRST
+  header-graft carrying FN witnesses (fmod daq_common.h 16 L / daq_dlt.h
+  5 L were header-ONLY zero-witness grafts).
+- **Witness delta EXACTLY 4, backbone-side** (witness_daq.cc TRACKED —
+  a ZERO-gate harness tracking its OWN witness for the first time, since
+  the daq legs ARE the row's evidence face): daq_msg_get_meta +
+  daq_msg_get_data (ZERO fn-witness precedent, bodies SYNTHETIC —
+  fake_pdd/fake_napt/fake_payload behind a meta-enabled switch);
+  snort::get_network_policy PINNED raw NetworkPolicy storage (fcap
+  stubs.cc precedent) with the NSDMI face hand-seeded from policy.h :233/
+  :234 — which the LANDED main/policy.rs NetworkPolicy::default
+  reproduces byte-for-byte (checksum_eval = ALL|DEF), so the DUAL-FACE
+  headline reads the same policy BOTH trees and vectors:9 `gate=1` prints
+  LIVE; Value::get_bits x3 overloads empty-reset (ZERO precedent anywhere
+  in tools, first codec caller cd_udp set() cc:209/:214/:219 — the R4
+  honest record: the params seam is NEVER vector-armed through it). The
+  staged-link census re-measures L1 undefined-EXACTLY-4 -> +witness_daq
+  GREEN every build. THE 18h NEXT 'ZERO new witnesses' scoping line was
+  HALF WRONG at this face (it keyed only on the bypass axis): recorded,
+  NEVER rewritten (land rule); the BYPASS axis STANDS — tunnel_bypass
+  U-census 0/0/0 re-armed.
+- **THE DUAL-FACE HEADLINE (PEG vs HOOK made visible)**: the SAME
+  12-byte 0xFFFF-checksum UDP packet reads `dflags=4` (DECODE_ERR_CKSUM_
+  UDP decode_data.h:133) with DAQ meta OFF vs decodes TRUE `dflags=0`
+  under the synthetic-valid pdd (valid_checksum_from_daq -> the whole
+  cc:367-:415 arm SKIPPED); the offset-mismatch arm (l4_offset 0 !=
+  payload delta) lands the SAME flag face as OFF. The checksum_bypassed
+  and bad_cksum_cnt PEG counters are CITE-NEVER-LAND (ZERO Rust counters;
+  the small4 pgm tri-state precedent) — the vectors pin the bypass
+  DECISION, never the counter. The 18h peg-vs-hook correction stands:
+  this row never touches codec.tunnel_bypass.
+- **The ipv6_api DRIFT RIDER (the row's second headline)**: cd_icmp6's
+  api STRUCT identifier is `ipv6_api` (cc:488 sed-pin) while the table is
+  cd_icmp6 (:513) and NAME is "icmp6" (cc:39) — a grep for the name the
+  FILE would suggest (`icmp6_api`, the file-base+api token) is a
+  FALSE-CLEAN 0-hit face on BOTH trees and build.sh arms that exact grep
+  on src/ EVERY build (drift_ipv6_api_face.txt MUST stay empty). The Rust
+  record const lands as `IPV6_API` carrying the C STRUCT name (the
+  cd_auth AH_API precedent, third drift face in the lineage after cd_ah/
+  auth and ipv6_frag); the FACE-A transcript NEVER prints the struct name
+  (probe prints NAME faces only). The trio itself is TRUE-NAME clean
+  (file base == table base x3, sed census :655/:640/:513). ONE honest
+  first-draft face recorded: the trio doc comments originally NAMED the
+  forbidden token in prose and tripped the row's OWN empty-drift grep
+  (rc1 receipt: the FIRST daq3 build run) — proof the tripwire is armed;
+  the prose was reworded to name-avoiding wording, no tripwire weakening.
+  The ladder trio names + the _ip pair (codec_api.cc :55/:57 externs)
+  were ALREADY resident codec_api.rs :112-:115/:128 — NEVER re-touched;
+  the _ip pair rides as EXISTENCE-but-UNLOADED (C-side unlinked until the
+  misc _ip row), test-pinned on both faces.
+- **DaqFace BUNDLE ruling (parent-integrated BEFORE landing)**: the C
+  decode faces fold pdd + the cc:271/:133/:133 pointer-difference (and
+  the udp-only cc:420 NAPT_INFO meta) into ONE Copy param so all three
+  decodes stay at 7 params inside the clippy too_many_arguments gate with
+  ZERO allowance — trio-consistent, the graft field order SYNTHETIC
+  (NEVER ABI). The per-TU DaqPdd/DaqNapt mirrors stay file-private copies
+  per TU (a second landed face: the udp mirror reads .udp, the icmp twins
+  carry-and-never-read it — ground guard shapes cc:265/:134/:127 kept
+  distinct, 'keep each distinct' honored).
+- **ip_api READS = row-scoped wire-window seams (the 18e IpApiLite
+  posture EXTENDED)**: UdpDecodeData carries is_ip4/is_ip6 + the 20/40-
+  byte wire windows + ip_data_udp_off (the cc:338 pointer-difference
+  folded to its observable quantity, NEVER armed — DECODE_FRAG never set
+  in the probe); Icmp4DecodeData.dst_ip4 IS the cc:264 get_dst()->
+  get_ip4_value() s_addr read (the smurf/bcast/mcast trio + the LE msn
+  arm — WORDS_BIGENDIAN cc:273 arm cited NOT ported, probe host LE);
+  Icmp6DecodeData.ip6h Option None IS the cc:189 NOT_IP6 474 gate (the
+  18h AuthDecodeData::is_ip6 face re-cut to the ground read). The cc:433/
+  cc:413 `snort.udph =` / `snort.icmph =` pointer STASHES are document
+  pins — the Rust alias IS the raw window, NO slot (probe never prints).
+  set_pkt_type lands per-TU as the u8 PKT_TYPE__ICMP pin (decode_data.h
+  :45-:48, no landed Rust PktType home — deviation stands from 18h).
+- **Row-scoped vocab homes**: the port files carry the TU-private
+  numerics with header cites — the udp port consts (GTP_U_PORT 2152 /
+  GTP_U_PORT_V0 3386 / VXLAN_U_PORT 4789 / GENEVE_U_PORT 6081 cc:92-:95)
+  + the embedded/tunnel protocol ids (0x0101 TEREDO/0x0102 GTP/0x0108
+  VXLAN/0x0109 GENEVE protocol_ids.h:128-:136; 0x0103/0x0104 IP_EMBEDDED_
+  IN_ICMP4/6 :130/:131 — the cd_gre.rs row-scoped precedent) + the
+  IcmpType(15)/IcmpCode/Icmp6Types(35)/Icmp6Code const-module families
+  (icmp4.h :37-:99 / icmp6.h :44-:92 — NOT Rust enums, the C :uint8_t
+  + discriminator-alias face) + ICMP6_HEADER_MIN/NORMAL_LEN and the
+  ICMPv6_{RS,RA,NS,NA,RD}_MIN_LEN #defines (h:29-:36; the rustc naming
+  face ICMPV6_* noted IN-PLACE — doc lines keep the C macro spelling) +
+  PROTO_BIT__UDP/_UDP_TUNNELED + DECODE_ERR_CKSUM_* row-scoped homes
+  (cd_gre.rs precedent). ZERO new sids: all events ride the resident
+  CodecSid enum; UDP_RULES [;8]/ICMP4 [;26]/ICMP6 [;14] = 7/25/13 rows +
+  terminators (the icmp4 25-row table is the lineage's biggest rules
+  face; multi-line C string concats land as ONE Rust string, the
+  cd_frag/cd_auth precedent).
+- **Big-TU discipline (18g precedent x3)**: 1,289+1,262+1,103 = 3,654 L —
+  the biggest row in the lineage (the 18g cd_gre.rs 668 L bar raised ~2x
+  per TU). Statement-for-statement decode walks, the icmp4 log switch
+  (cc:336-:577, the lineage's largest single block) ported FULL with the
+  snort_inet_ntop seam hand-formatted cited (NEVER libc), the NDP-walk
+  template cc:141-:176 folded to the option_start-offset arg (the
+  OptionType template face), ground asserts cc:149/:151/:158/:163 cited
+  without Rust twins (18g posture). Dead-in-C faces transcribed with
+  pins: icmp4 `uint16_t len = 0` dead initializer (only write before any
+  read is cc:216 — cited, binding starts LIVE; the rustc dead-init
+  warning forced the honest choice) and udp `uhlen` uninitialized decl ->
+  init-not-mutation shape. log/update/encode/format are CITE-NEVER-
+  VECTORIZED (the probes never call them) but the ports keep the full
+  bodies (encode/update ride the LEFT-OPEN UdpApiLite/Icmp6ApiFace gtp
+  face; the icmp6 update DOES read api.get_src/get_dst()->get_ip6_ptr()
+  — the trio's only live api read, pinned as raw 16-byte pairs).
+- **clippy face**: forced relint 0 --all-targets THIS pass. The trio's
+  ONLY allow = cd_udp.rs ONE collapsible_if (the 18g cd_gre.rs:420 +
+  codec.rs:610 lineage precedent; the cc:331-:346 ladder + cc:414-:419
+  ENCAP nesting kept literal); cd_icmp4/cd_icmp6/tests ZERO allows. The
+  DaqFace bundle is the arg-gate answer, NOT an allow. ZERO in-crate
+  #[test] x3 (grep 0/0/0).
+- **Vector discipline**: DEC 93 L md5 `fd1855e10e08eedcc6598de7ee034d0e`
+  + FACE-A 13 L md5 `2fb9dc4570a0160451f8399d22736a60`, FIRST-RUN-SEEDED
+  at harness creation then drift-then-refuse (build.sh cmp arms + wc 93/
+  13 pins), O0==O2 BYTE-IDENT both faces EVERY run, all-decimal 0x-hygiene
+  0; FRESH x2 rc0 logs BYTE-IDENT 'DAQ3_HARNESS_OK vectors=93 faceA=13
+  gates=0' (row18iport/build_{B,C}.log; build_A.log = the honest pre-port
+  rc0 baseline + the rc1 first-drift tripwire face recorded above. TWO honest POST-commit rc1 receipts build_{E,F,G}: (1) the pre-commit dirty-4 whitelist stranded the EMPTY post-commit ritual face -- guard re-ruled to a ROW-FACE regex (every dirty tracked file MUST be one of this row's 15 paths; passes pre-port/docs/EMPTY/follow-up faces, fires LOUD on any OTHER row's lineage file); (2) the harness shipped a NO-precedent OWN-repo HEAD self-pin at build.sh:157 (== 8d2712a, the creation-time seed) that strands the session-start ritual after EVERY landing -- DROpped with in-situ comment: the lineage pins the IMMUTABLE ground only (small4 build.sh:110 face pins fe29cbe only); the working HEAD moves by design at every row landing. FINAL fold: harness + docs ride the landed commit via --force-with-lease amend, SAME subject exact 15 paths (the ONE-commit goal outranks face-preservation AT THE GIT FACE; ground md5s/vectors/landed Rust NEVER touched -- receipts keep every rc1 face).
+  The arm-dense icmp4 face: 19 arms cover ALL 18 unique event names +
+  the shared-105 rider (the 11-label 8-byte guard rail serves type3-
+  grp4/pmtu/enum/default faces). The Rust replay asserts per-index
+  equality over BOTH whole transcripts (ordered, NEVER sorted — the
+  enum666 :29/:30, AddrTests-into-ECHOREPLY :34/:35, rs-bad :78/:79 and
+  ra-bad :81/:82 interleaves are the order faces); first FULL GREEN at
+  the third integration pass (two honest fixture-shape fixes recorded
+  HONESTLY: 4-byte probe arrays widened to the ground p[8]/p[12]
+  inits — the probe_dec arrays ARE 8/12 bytes, the first draft had
+  hand-truncated them; and the leaked-window binding cleanup), ZERO
+  vectors adjustment (the ground face NEVER touched).
+- **Record face trio-uniform**: mod_ctor=1/mod_dtor=1 x3 (faceA :7/:10/
+  :13 — the UDP_PARAMS-era codecs all ship the mod pair; the small4
+  1/0/1/1 asymmetry face contrasts — cd_frag's nullptr pair was the
+  outlier, the trio uniformity is census-pinned Rust-side too); ctor/
+  dtor pair SET x3, pinit/pterm/tinit/tterm nullptr x3 (cc:644-:647/
+  :629-:632/:502-:505). UDP is the trio's CONFIG codec: the 3-arg
+  BaseCodecModule + [Parameter;5] table (the PT_BIT_LIST "65535" range
+  arg is a DOC-CITE only, parameter.rs has no range slot, 17z/18a
+  ruling) + the EspModule::set name-match read-back face (cd_esp.rs
+  precedent, the get_bits seam never armored) + UdpCodecConfig default
+  ports as consts; config-None ctor arm rides the codec.rs:83-:85
+  precedent (the probe always ctor(nullptr)).

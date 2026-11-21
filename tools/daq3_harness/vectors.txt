@@ -1,0 +1,93 @@
+EV 116 95
+UDP short7 -> 0
+EV 116 96
+UDP badlen4 -> 0
+EV 116 97
+UDP uhlen20 -> 0
+EV 116 98
+UDP uhlen10 -> 0
+UDP cksumbad-daqoff -> 0 dflags=4 gate=1
+UDP cksumbad-daqvalid -> 1 dflags=0 next=17
+UDP daqoffsetmismatch -> 0 dflags=4
+EV 116 406
+UDP ip6zero -> 0 dflags=4
+UDP napt-hit -> 1 sp=3000 dp=6000
+EV 116 447
+UDP naptmiss-portzero -> 1 sp=0 dp=0
+EV 116 445
+UDP large4020 -> 1
+UDP teredo3544 -> 1 next=257
+UDPPID 17 n=1
+UDPRULES 7 sid0=95 name=udp
+EV 116 426
+ICMP4 short3 -> 0
+EV 116 105
+ICMP4 type3-grp4 -> 0
+ICMP4 cksumbad-daqoff -> 0 dflags=8
+EV 116 434
+ICMP4 cksumbad-daqvalid -> 1 dflags=0
+EV 116 434
+EV 116 435
+ICMP4 enum666 -> 1
+EV 116 440
+ICMP4 smurf -> 1
+EV 116 416
+EV 116 440
+ICMP4 bcast -> 1
+EV 116 415
+EV 116 440
+ICMP4 mcast -> 1
+EV 116 106
+ICMP4 tstamp8 -> 0
+EV 116 107
+ICMP4 addr8 -> 0
+EV 116 418
+ICMP4 type99 -> 1
+EV 116 439
+ICMP4 sq8 -> 1 next=259
+EV 116 436
+ICMP4 redirhost -> 1
+EV 116 437
+ICMP4 redirnet -> 1
+EV 116 438
+ICMP4 rr-echo -> 1
+EV 116 441
+ICMP4 unreach13 -> 1
+EV 116 442
+ICMP4 unreach10 -> 1
+EV 116 443
+ICMP4 unreach9 -> 1
+EV 116 451
+ICMP4 pmtu512 -> 1 next=259
+ICMP4PID 1 n=1
+ICMP4RULES 25 sid0=105 name=icmp4
+EV 116 427
+ICMP6 short3 -> 0
+EV 116 474
+ICMP6 noip6 -> 0
+ICMP6 cksumbad-daqoff -> 0 dflags=8
+ICMP6 cksumbad-daqvalid -> 1 dflags=0 lyr=8
+EV 116 432
+ICMP6 mcast -> 1
+EV 116 285
+ICMP6 toobig1024 -> 1 lyr=8 next=260
+EV 116 286
+ICMP6 unreach2 -> 1
+EV 116 457
+ICMP6 unreach7 -> 1
+EV 116 287
+EV 116 289
+ICMP6 rs-bad -> 1
+EV 116 288
+EV 116 290
+ICMP6 ra-bad -> 1
+EV 116 478
+ICMP6 ra-zerolen -> 1
+EV 116 460
+ICMP6 nodeinfo3 -> 1
+EV 116 105
+ICMP6 toobig6 -> 0
+EV 116 431
+ICMP6 type200 -> 1
+ICMP6PID 58 n=1
+ICMP6RULES 13 sid0=427 name=icmp6

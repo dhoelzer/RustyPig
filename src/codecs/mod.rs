@@ -38,6 +38,9 @@
 //!   src/codecs/ip/cd_frag.cc (190)                  -> cd_frag.rs    [18h]
 //!   src/codecs/ip/cd_pgm.cc (211)                   -> cd_pgm.rs     [18h]
 //!   src/codecs/ip/cd_auth.cc (172; TABLE cd_ah)     -> cd_auth.rs    [18h]
+//!   src/codecs/ip/cd_udp.cc (660)                   -> cd_udp.rs     [18i]
+//!   src/codecs/ip/cd_icmp4.cc (645)                 -> cd_icmp4.rs   [18i]
+//!   src/codecs/ip/cd_icmp6.cc (518; api STRUCT ipv6_api) -> cd_icmp6.rs [18i]
 //! The `codec_module` umbrella landed AT 18d as planned (the FLAT
 //! call stands: the C base names collide nowhere — no cd_module.h
 //! exists, and this row's C-dir provenance (root/ root/ link/) rides
@@ -55,6 +58,8 @@ pub mod cd_geneve;
 pub mod cd_gre;
 pub mod cd_gtp;
 pub mod cd_hop_opts;
+pub mod cd_icmp4;
+pub mod cd_icmp6;
 pub mod cd_igmp;
 pub mod cd_mobility;
 pub mod cd_no_next;
@@ -62,6 +67,7 @@ pub mod cd_pgm;
 pub mod cd_raw;
 pub mod cd_routing;
 pub mod cd_teredo;
+pub mod cd_udp;
 pub mod checksum;
 pub mod codec_api;
 pub mod codec_module;

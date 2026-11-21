@@ -440,3 +440,28 @@ tools/small4_harness/gate_md5_lineages.txt
 tools/small4_harness/cp_audit_ok.txt
 tools/small4_harness/.e4_hold_*
 tools/small4_harness/*.log
+# row 18i daq3_harness (ZERO-gate trio row: vectors.txt + vectors_faceA.txt
+# STAY tracked -- probe-only + THE new tracked witness face witness_daq.cc;
+# the drift/E4/nm/L1/stageables receipts live, ignored. NO commit this pass.)
+tools/daq3_harness/copy/
+tools/daq3_harness/o2/
+tools/daq3_harness/probe
+tools/daq3_harness/probe_O2
+tools/daq3_harness/probe_dec
+tools/daq3_harness/probe_dec_O2
+tools/daq3_harness/*.o
+tools/daq3_harness/witness_conf.cc
+tools/daq3_harness/vectors_O0.txt
+tools/daq3_harness/vectors_O2.txt
+tools/daq3_harness/vectors_faceA_O0.txt
+tools/daq3_harness/vectors_faceA_O2.txt
+tools/daq3_harness/nm_U_*.txt
+tools/daq3_harness/E4_*.txt
+tools/daq3_harness/L1_*.txt
+tools/daq3_harness/drift_ipv6_api_face.txt
+tools/daq3_harness/md5_pinned.txt
+tools/daq3_harness/gate_md5_lineages.txt
+tools/daq3_harness/stageables.txt
+tools/daq3_harness/.e4_hold_*
+tools/daq3_harness/.L1_probe
+tools/daq3_harness/*.log
