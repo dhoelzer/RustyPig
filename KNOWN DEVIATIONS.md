@@ -3634,3 +3634,99 @@ Structural deviations (behavior preserved):
   the ZERO-EV user lines; the trio's event face = llc 131/132 ONLY
   (RESIDENT sids)) — mirrored as the zero-sink decode signatures, NOT a
   dropped feature.
+
+## codecs link erspan trio (row 18l — link/cd_erspan2.cc 145 + cd_erspan3.cc 147 + cd_trans_bridge.cc 158 = 450 L, the (a1) sibling-pair pick + THE 1/1/0 census + THE in-row drift headline)
+
+- **GRE-codec adjacency = cite-NEVER-LAND (the measured ruling, PLAN §3)**:
+  the briefing's "cd_erspan3 GRE_HDR x7 / gre_api x2 / tunnel_bypass x1 /
+  TUNNEL_ERSPAN x1" face is WRONG on disk — ALL FOUR tokens grep EXACTLY-0
+  in ALL THREE trio TUs (receipt tunnel_census.txt, re-refused EVERY build)
+  and `grep -rn TUNNEL_ERSPAN src/` = 0 TREE-WIDE (enum TunnelFlags
+  snort_config.h:117-:130 carries NO ERSPAN member — the hook seam lives at
+  link/cd_mpls.cc:205-:206, a b3 hand-off cite). The ONE gre-family token
+  in the trio is the SID NAME `DECODE_GRE_TRANS_DGRAM_LT_TRANSHDR` at
+  cd_trans_bridge.cc:56 (sed-pinned). cd_gre.rs (landed 18g, GRE_HEADER_LEN
+  :71-:73 + grehdr :429-:437) is therefore a SHAPE cite ONLY — the trio
+  shares ZERO struct with it (the headers are the PRIVATE ERSpanType2Hdr
+  cc:59-:67 / ERSpanType3Hdr cc:58-:70), NO use-import, NO symbol reuse
+  (the parity test's tripwire checks the Rust trio for ZERO import/symbol
+  faces while the honest doc cites name it). The tunnel_bypass HOOK seam
+  NEVER re-enters this row (nm_U tunnel census 0/0/0): witness_18f NOT
+  cloned, the backbone STAYS 10.
+
+- **anon-namespace NAME/HELP enclosure (the §55 face NO earlier row ever
+  carried)**: trans_bridge's `#define CD_TRANSBRIDGE_NAME "trans_bridge"`
+  + `..._HELP "support for trans-bridging"` live INSIDE `namespace {` at
+  cc:33-:34 (enclosure :31-:32, close :47 — build.sh sed-pins :31/:32/:33/
+  :34/:47 EVERY build), while the erspan pair lives OUTSIDE at cc:29-:30.
+  The Rust mirror transcribes the FACE honestly: the consts land with the
+  enclosure cited, and the LOAD face vectors_faceA:3 `LOAD trans_bridge`
+  prints the NAME string THROUGH the drift table cd_transbridge (the NAME
+  macro carries the underscore, the macro NAME drifts without — both cited).
+
+- **the ground typo `0X22EB` verbatim-pinned (honesty, NEVER silently
+  fixed)**: protocol_ids.h:146 spells ETHERTYPE_ERSPAN_TYPE3's hex literal
+  with a CAPITAL X (`0X22EB` — valid C++, a real ground face). The harness
+  PYPIN asserts the typo string rides the ground header EVERY build; the
+  cd_erspan3.rs const cite mirrors `0X22EB` VERBATIM. The VALUE is 0x22EB
+  = 8939 decimal (the GETIDS faceA:14 python-derived face). A future
+  upstream fix trips the pin LOUDLY — the deviation stays honest either way.
+
+- **encode/log cited, NEVER called (the eth_harness NEVER-called-encode
+  precedent)**: trans_bridge carries the trio's ONLY encode surface
+  (cc:89-:115) + a log face (cc:74-:87); the probe NEVER calls either
+  (EncState's C ctor pulls ip::IpApi — the eth_harness NEVER called encode
+  either; the vectors NEVER vectorized log). They transcribe as port-by-
+  reading METHODS with cc-line cites (allocate :92 / ethertype-select :98 /
+  forward keep-vs-swap :100-:109 / NOT_SET resets :111-:112; the
+  len-vs-type log arms :83-:86) + the vectors:17/:18 CITE lines, mirrored
+  by real units in erspan_parity_test.rs — NOT dropped, NEVER fake-transcribed.
+
+- **mod-arms asymmetry 1/1/0 mirrored, NO prior face carried**: erspan2 +
+  erspan3 carry REAL Module subclasses + real mod_ctor/mod_dtor (slots
+  :125/:126, :127/:128 — mirrored as Erspan2Module/Erspan3Module::new, the
+  18i UdpModule posture); trans_bridge carries the EXPLICIT `nullptr,
+  nullptr` BaseApi pair :138/:139 with NO Module subclass AT ALL (record
+  mod_ctor/mod_dtor false — an honest ZERO, NOT misc3's commented pair,
+  NOT daq3's 1/1/1, NOT miscip's 0/0). The parity census asserts the
+  1/1/0 face at the point-sites (the ext/small4/misc3 assertions_on_
+  constants allow precedent, EXACTLY 1 allow this row).
+
+- **sizeof(ERSpanType3Hdr) = 20, the §9 correction face**: the seed-pass
+  PLAN label "16B" (cc:58-:70) was WRONG on disk — fields 2+2+4+2+2+4+4
+  sum to 20; the 16-B seed arms misfired EV 464 x3, CAUGHT by the vectors
+  (scratch build_run6/7), fixed to len19/20-B payload arms. The landed
+  ERSpan3Hdr_SIZE = 20 rides the vectors' lyr=20 + the harness PYPIN; the
+  correction receipt face stays honest in this file, the PLAN §8 face NEVER
+  rewritten (the §9 corrections section records it).
+
+- **TRUE-NAME drift discipline (the row's headline, §5 tripwire design)**:
+  the docs drift names (cd_transbridge[] :152 in-row; cd_pppoepkt[] :236 +
+  double-NAME arms :115/:139 + cd_pppencap[] :169 = cd_pppoe.cc/cd_ppp_
+  encap.cc, the 18m hand-off the briefing WRONGLY placed in the erspan TUs
+  — trio-absence grep-refused x3) pin the harness sed/table symbols, NEVER
+  derivable from a file base; the Rust landing files use the FILE base
+  names (cd_erspan2.rs/cd_erspan3.rs/cd_trans_bridge.rs) while the drift
+  TABLE spelling lands ONLY in the table const CD_TRANSBRIDGE (feed cites
+  cc:152/:155) — a future grep-vs-file confusion fires LOUD at the pins.
+
+- **row-scoped vocab dupes vs framework imports (the cd_icmp6.rs:179-:183
+  ruling applied)**: the three protocol_ids.h ethertypes (0x88BE :159 /
+  0X22EB :146 / 0x6558 :147) + ETH_HEADER_LEN (eth.h:37, the cd_eth.rs:51
+  twin) land as row-scoped file-local consts WITH cites (the parity test
+  pins every twin EQUAL); PROTO_BIT__ETH (decode_data.h:98),
+  CODEC_ETHER_NEXT (codec.h), ETHERTYPE_MINIMUM (:143) + the codec_event/
+  QueueSink / Buffer / EncState seams are framework IMPORT faces (NEVER
+  re-authored). The LogEthAddrs call cc:79 mirrors the FROZEN-WITNESS
+  stand-in reuse face (eth build.sh :454 + tun :179 precedents; the real
+  body log_text.cc:112 drags Packet/appid) — a silent documented step,
+  NEVER a new backbone symbol (backbone census stays EXACTLY 10).
+
+- **session-id face cited-never-ported beyond the mask**: ver_vlan's low-
+  12 vlan bits + the whole flags_spanId field (erspan2 cc:61-:62, erspan3
+  cc:60-:61) NEVER affect the decode — the ground itself extracts ONLY
+  `ntohs(ver_vlan) >> 12` (cc:65-:66 / :68-:69). The Rust trio mirrors
+  EXACTLY that (ZERO mask/vlan/spanId constants land); the vectors:6/:12
+  cite lines + the parity test's vlan/spanId-varying arm decode IDENTICALLY
+  pin the never-ported behavior honestly (the same face the 18k dead-
+  define discipline carries: cite without inventing observables).

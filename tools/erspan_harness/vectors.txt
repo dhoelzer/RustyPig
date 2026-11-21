@@ -1,0 +1,18 @@
+EV 116 463
+E2 len7 -> 0 lyr=0
+EV 116 462
+E2 v2-mismatch -> 0 lyr=0
+E2 happy -> 1 lyr=8 next=25944 flags=0
+E2 session-id cc:61-:62 ver_vlan+flags_spanId cited-never-ported face
+EV 116 464
+E3 len19 -> 0 lyr=0
+EV 116 462
+E3 v1-mismatch -> 0 lyr=0
+E3 happy -> 1 lyr=20 next=25944 flags=0
+E3 session-id cc:60-:61 same-fields face cited-never-ported
+E3 order-site next:95-before-lyr:96 vs E2 lyr:93-before-next:94 cite
+EV 116 165
+TB len13 -> 0
+TB happy -> 1 pb=2048 lyr=14 next=35006 flags=4096
+TB log cc:83-:86 len-vs-type face cited-never-vectorized
+TB encode cc:92/:98/:100-:109/:111-:112 cited-never-called EncState-IpApi face

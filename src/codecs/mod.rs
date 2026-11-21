@@ -46,6 +46,10 @@
 //!   src/codecs/misc/cd_llc.cc (198)                 -> cd_llc.rs   [18k]
 //!   src/codecs/misc/cd_vxlan.cc (133)               -> cd_vxlan.rs [18k]
 //!   src/codecs/misc/cd_user.cc (167)                -> cd_user.rs  [18k]
+//!   src/codecs/link/cd_erspan2.cc (145)             -> cd_erspan2.rs [18l]
+//!   src/codecs/link/cd_erspan3.cc (147)             -> cd_erspan3.rs [18l]
+//!   src/codecs/link/cd_trans_bridge.cc (158; TABLE
+//!     cd_transbridge — the in-subrow drift name)     -> cd_trans_bridge.rs [18l]
 //! The `codec_module` umbrella landed AT 18d as planned (the FLAT
 //! call stands: the C base names collide nowhere — no cd_module.h
 //! exists, and this row's C-dir provenance (root/ root/ link/) rides
@@ -56,6 +60,8 @@ pub mod cd_auth;
 pub mod cd_bad_proto;
 pub mod cd_default;
 pub mod cd_dst_opts;
+pub mod cd_erspan2;
+pub mod cd_erspan3;
 pub mod cd_esp;
 pub mod cd_eth;
 pub mod cd_frag;
@@ -75,6 +81,7 @@ pub mod cd_pgm;
 pub mod cd_raw;
 pub mod cd_routing;
 pub mod cd_teredo;
+pub mod cd_trans_bridge;
 pub mod cd_udp;
 pub mod cd_user;
 pub mod cd_vxlan;

@@ -1,0 +1,19 @@
+LOAD erspan2
+LOAD erspan3
+LOAD trans_bridge
+LOADS 3
+API erspan2 type=0 size=112 ver=1900547 name=erspan2
+HELP erspan2 support for encapsulated remote switched port analyzer - type 2
+erspan2 mod_ctor=1 mod_dtor=1
+erspan2 ctor=1 dtor=1
+GETIDS erspan2 35006
+API erspan3 type=0 size=112 ver=1900547 name=erspan3
+HELP erspan3 support for encapsulated remote switched port analyzer - type 3
+erspan3 mod_ctor=1 mod_dtor=1
+erspan3 ctor=1 dtor=1
+GETIDS erspan3 8939
+API trans_bridge type=0 size=112 ver=1900547 name=trans_bridge
+HELP trans_bridge support for trans-bridging
+trans_bridge mod_ctor=0 mod_dtor=0
+trans_bridge ctor=1 dtor=1
+GETIDS trans_bridge 25944
