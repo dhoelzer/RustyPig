@@ -401,7 +401,10 @@ for n in cd_erspan2 cd_erspan3 cd_transbridge; do
     # the ONE tools-wide home stays the legacy copy/codecs/codec_api.cc face
     # (the trio's own row files -- probes + the copy TU cp -- NEVER count:
     # they are THIS row's own arms, not a frozen witness donor)
-    test "$(grep -rl "$n" "$R/tools" --include='*.cc' --include='*.h' -I 2>/dev/null | grep -v 'vocab_harness/copy/codecs/codec_api.cc' | grep -v "$R/tools/erspan_harness/" | wc -l)" -eq 0
+    # the SAME rule generalized (row 18m landed face): ALL gitignored copy/
+    # donor trees + ALL sibling *_harness/probe arms are own-arms faces, NEVER
+    # frozen witness donors -- the census is a witness-donor freezing test.
+    test "$(grep -rl "$n" "$R/tools" --include='*.cc' --include='*.h' -I 2>/dev/null | grep -v 'vocab_harness/copy/codecs/codec_api.cc' | grep -v "$R/tools/erspan_harness/" | grep -v '/copy/' | grep -v '_harness/probe' | wc -l)" -eq 0
 done
 test "$(md5sum "$R/tools/vocab_harness/witness_stubs.cc" | awk '{print $1}')" = "9fad7e9d7a278fbc2ee82c233f86e774"
 test "$(sed -n '11,14p' "$R/tools/vocab_harness/witness_stubs.cc" | grep -c 'cd_ipv4\|cd_ipv6\|cd_tcp\|cd_hopopts')" -eq 4
