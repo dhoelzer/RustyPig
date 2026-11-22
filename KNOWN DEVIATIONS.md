@@ -4143,3 +4143,88 @@ Structural deviations (behavior preserved):
 - **nested .gitignore instrument (the misc9 face re-stated)**: the 8th
   stageable IS tools/mpls_harness/.gitignore; the ROOT .gitignore NEVER
   moved (single-tenancy + the dir was UNTRACKED as a whole at seed).
+
+
+## codecs ip cd_ipv4+cd_ipv6+cd_tcp (row 20a — ip/cd_ipv4.cc 790 def01f1d + cd_ipv6.cc 733 89267b1d + cd_tcp.cc 839 144c4275 = 2,362 L, THE CODECS CHAPTER CLOSE-OUT + THE LAST-STUB-LANDMINE RETIREMENT)
+
+- **graft-extension #4 = copy-LOCAL heredoc ONLY**: the trio DEMANDS the
+  ext#4 face — daq.h copy-LOCAL 51 L md5 97bca757 (pdd +l3_checksum/l3/
+  ipv4/ipv6/tcp bits + l3_offset + NAPTInfo_t src/dst_addr + the two
+  family accessors) + daq_dlt.h copy-LOCAL 14 L md5 e8a39bf3 (DLT_IPV4
+  228 / DLT_IPV6 229, the libpcap-master CITE, SYNTHETIC, NEVER ABI
+  truth) + packet.h RE-POINT 1be562b2 (flowz/flow_fwd.h -> flow/flow.h,
+  the decoy class Flow redefines). The FROZEN masters daq.h 73fdbc39 +
+  daq_common.h f683749c + INHERITED v2 fead0027 + v3 daq.h 0f7016a6 +
+  mpls-era ext2 9b603f8f are md5-asserted UNDISTURBED ladder HEAD AND
+  TAIL every build, NEVER promoted to the repo. THE SYNTHETIC FACE
+  PIN: `Ipv4NaptFace.src_addr/dst_addr` + the family fields +
+  get_data_link_type's DLT arms are ext#4 SYNTHETIC shapes — NEVER C-
+  SDK ABI truth; row 20 RE-CITES the real SDK (the row-20 PORTING_PLAN
+  row already carries the re-cite debt).
+- **stub-retirement inversion face**: the trio's vocab witness-stub
+  tables are retired ONLY inside the 20a harness's OWN stubs_20a copy
+  (frozen vocab minus :11-:13 plus the marker row citing the TRUE
+  tables cd_ipv4[] :785 / cd_ipv6[] :728 / cd_tcp[] :834). The FROZEN
+  donors stay byte-frozen (vocab witness_stubs.cc 9fad7e9d, ext
+  stubs_18e.cc a700f77e) and their vectors keep the *_stub LOAD faces
+  (vocab vectors.txt 5da70e82 :25-:27, ext vectors_faceII.txt
+  cdaa92df :2-:4) — the harness-side frozen vectors NEVER get renamed.
+- **Rust-side stub-record flip audit outcome (this row's landmine
+  echo)**: the flip decision was audited per the 17y/18e precedent.
+  The landed Rust tests DO pin the stub-record behavior —
+  vocab_parity_test.rs :236-:238 assert the CD_IPV4/CD_IPV6/CD_TCP
+  table records' `name` fields == "cd_ipv4_stub"/"cd_ipv6_stub"/
+  "cd_tcp_stub" (the 18c flat-vocab law). A landed test pins it -> NO
+  flip: codec_api.rs keeps `CD_IPV4/CD_IPV6/CD_TCP -> stub records`
+  untouched this row (grep census: the three names stay exactly
+  6 src + 3 test hits; the trio lands as REAL modules at their own
+  faces — CD_IPV4 real-name table face lives ONLY in the 20a harness
+  vectors). The honest carry, recorded per the row contract.
+- **cd_tcp BUILDING_SO grep-LIE face**: `grep -c BUILDING_SO` on
+  cd_tcp.cc returns 1 — but EVERY BUILDING_SO line in the table block
+  :831-:835 is COMMENTED OUT (`//#ifdef BUILDING_SO`, commented
+  `//SO_PUBLIC const BaseApi* snort_plugins[]`, `//#else`, `//#endif`)
+  while `const BaseApi* cd_tcp[] =` at :834 is UNCONDITIONAL. A naive
+  hidden-table reading (the 18j posture) FAILS at this row; the table
+  is ALWAYS visible and cd_tcp[] feeds LOAD tcp straight.
+- **#if 0 dead block cite-NEVER-LAND**: cd_ipv4.cc :210-:217 sits
+  inside `#if 0` (the banked FIXIT-M fragment) — transcribed as the
+  dead-code CITE in cd_ipv4.rs comments, ZERO compiled legs.
+- **WORDS_BIGENDIAN face**: cd_tcp.cc :45-:51 arms the naptha pair BOTH
+  ways; the vectors pin the LE consts (0x2a7b5c00 / 0x9d01) via the
+  IC14-POSITIVE / IC15-NEGATIVE pair = EXACTLY-1 total 402 — the
+  seed-drift tripwire. The BE arm stays a compile-time cite (the port
+  lands the LE face + cites the :45 gate shape; the cfg(target_endian)
+  fork is NOT modeled — a BE host build would need the cite re-read).
+- **left-open witness seams (row 20/21 close, NEVER invented)**: the
+  harness witnesses (witness_opts.cc) stand in for LogIpOptions /
+  LogTcpOptions / Stream::get_held_pkt_seq + the four IpOptionIterator
+  arms and prune/stats-adjacent symbols; the Rust port CITES those
+  call sites (cd_tcp decode_options' log legs, the stats peg census)
+  with ZERO providers — the seam stays honest, the vectors never drive
+  them.
+- **backbone-stays-10 face re-stated**: the own witness DUO is a
+  SYMBOL face; the backbone witness array stays EXACTLY 10 (receipt-
+  pinned by this harness build).
+- **26th straight zero-gate census**: TEST_CASE/TEST_GROUP/UNIT_TEST/
+  CppUTest grep EXACTLY 0 in all three TUs; the gate census 25/9/17/1
+  (gre anchor 6751d1a8) UNDISTURBED — this row adds ZERO gate files.
+- **point-site allows (EXACTLY 10, every one cited at its site)**:
+  MEASURED census — cd_ipv4.rs 3 (needless_late_init x3: the C
+  uninitialized-LOCAL decl-sites ip_len :194 + hlen :195 (twin, one
+  allow per let) + did_default :489, the decl ABOVE the switch is the
+  literal pin; the statement-verbatim law keeps each C LOCAL above
+  its gates), cd_ipv6.rs 5 (derivable_impls x1: the hand-written
+  Ipv6DecodeData Default CITES the SfIp()/value-init ground inits;
+  collapsible_if x2: the cc:166-:168 nested-equal vectors quirk + the
+  cc:211 getter-null AND-compare bind split; bool_comparison x1: the
+  `== false` written AS ground cc:224; needless_return x1: the SSM
+  hard-return ladder cc:487-:494, house precedent
+  framework/codec.rs:315), cd_tcp.rs 2 (derivable_impls x1 +
+  needless_late_init x1 for the `valid` :228 decl). ZERO blanket
+  allow(); the zero-allow posture stays the goal and every allow
+  above pins a vectors-observable or ground-shape face. The parity
+  TEST file carries ZERO allows.
+- **checksum E4 inversion face**: pre-18o links SURVIVED the daq.h drop
+  (mpls rc0); at THIS row all three TUs die at cc:25 without ext#4 —
+  the honest inversion receipt (E4_nodaq_* receipts every build).

@@ -1,0 +1,121 @@
+EV 116 425
+I41 trunc19 -> 0 lyr=0 next=2048
+EV 116 1
+I42 ver5 -> 0
+EV 116 2
+I43 hlen16 -> 0
+EV 116 6
+I44 len30gt20 -> 0
+EV 116 3
+I45 len10lt20 -> 0
+I46 cksum-off -> 0
+I47 cksum-bypass -> 1 lyr=20 next=6 pb=1
+EV 116 150
+I48 lb127 -> 1
+EV 116 151
+I49 srcdst -> 1
+EV 116 413
+I4A bcast -> 1
+EV 116 408
+I4B thisnet -> 1
+EV 116 410
+I4C mc239 -> 1
+I4D anom-wfalse -> 1
+EV 116 448
+EV 116 459
+I4E rbmf -> 1 lyr=20 next=2048
+EV 116 405
+I4F dfmf -> 1
+EV 116 430
+I4G dfoff -> 1
+EV 116 151
+EV 116 430
+EV 116 407
+EV 116 405
+I4H lenoff -> 1 lyr=20 next=2048
+EV 116 4
+I4I optbadlen -> 1 lyr=20
+EV 116 444
+I4J optset -> 1 lyr=24
+EV 116 449
+I4K unass143 -> 1 next=143
+EV 116 293
+I4L menc -> 1,0
+I4M byp4-0 -> 1 bypass=1
+I4N byp4-10 -> 1 bypass=0
+EV 116 273
+EV 116 291
+I61 trunc39 -> 0 lyr=0 next=34525
+EV 116 271
+I62 ver5 -> 0
+EV 116 275
+I63 gt-cap -> 0
+I64 teredo -> 0 lyr=0
+EV 116 281
+I65 badnext -> 1 next=255 lyr=40
+EV 116 277
+I66 srcmc -> 1
+EV 116 276
+I67 dstzero -> 1
+EV 116 151
+EV 116 150
+I68 lb6 -> 1
+EV 116 278
+I69 dstmc16 -> 1
+EV 116 280
+EV 116 278
+I6A scope3 -> 1
+EV 116 453
+I6B isatap -> 1
+I6C isatap-ok -> 1
+I6D byp64-04 -> 1 bypass=0
+I6E byp64-0 -> 1 bypass=1
+EV 116 45
+IC1 trunc19 -> 0 lyr=0
+EV 116 46
+IC2 off4 -> 0
+EV 116 47
+IC3 hlen24gt -> 0
+EV 116 400
+EV 116 421
+EV 116 420
+IC4 xmas -> 1
+EV 116 401
+EV 116 423
+EV 116 422
+IC5 nmapxmas -> 1
+IC6 ack -> 1 lyr=20 pb=2 sp=25001 dp=25002
+EV 116 423
+IC7 noflags -> 1
+EV 116 420
+EV 116 422
+IC8 synfin -> 1
+EV 116 421
+IC9 synrst -> 1
+EV 116 423
+EV 116 422
+IC10 fin22 -> 1
+IC11 syn -> 1
+IC12 synmc -> 1
+EV 116 433
+IC13 shaft -> 1
+EV 116 402
+IC14 naptha-LE -> 1
+IC15 naptha-faceBE -> 1
+IC16 urp -> 1 lyr=20
+EV 116 446
+IC17 portzero -> 1 sp=0 dp=0
+IC18 nanpt -> 1 sp=7 dp=9
+EV 116 59
+IC19 wscale -> 1 lyr=23
+IC20 wsok -> 1
+EV 116 57
+IC21 echo57 -> 1 lyr=26
+EV 116 54
+IC22 trailer58 -> 1 lyr=20
+EV 116 56
+IC23 ttcp56 -> 1 lyr=26
+EV 116 54
+IC24 optbadlen54 -> 1 lyr=20
+EV 116 55
+IC25 opttrunc55 -> 1 lyr=20

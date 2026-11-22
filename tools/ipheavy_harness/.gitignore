@@ -1,0 +1,47 @@
+# row 20a ipheavy_harness (q4 banked OWN-ROW: the codecs/ip HEAVIES TRIO
+# cd_ipv4 790 / cd_ipv6 733 / cd_tcp 839 = 2,362 L, ONE row -- the CODECS
+# CHAPTER closer, ZERO-gate 26th straight). THE NESTED-BLOCK FACE (mpls-18o
+# precedent re-stated): the ROOT .gitignore is NEVER touched by this pass
+# (single-tenancy + the dir is UNTRACKED as a whole: git status face = ??
+# tools/ipheavy_harness/). A nested .gitignore INSIDE the harness dir is a
+# tools/ipheavy_harness/ FILE (the ONLY sanctioned edit next to the
+# stageables) and git ls-files --exclude-standard / check-ignore honor it.
+# EVERY run this block is check-ignore-proved face by face (a missing
+# pattern = a blob in the future add = loud). vectors.txt +
+# vectors_faceA.txt + witness_ipvars.cc + witness_opts.cc STAY stageable --
+# the explicit NOT-proofs ride build.sh; 9 stageables (the mpls 8-face + the
+# SECOND own-new witness; the PLAN "8" prose under-count -- the duo-shape is
+# MEASURED, drift rides PLAN notes). copy/ = the mpls-18o 130-file tree
+# REUSE clone (graft-v3 daq.h 0f7016a6 + ext2 daq_common.h 9b603f8f ride
+# INHERITED); the ext#4 faces (daq.h 97bca757 + daq_dlt.h e8a39bf3 + the
+# packet.h re-point) are copy-LOCAL heredoc/sed in build.sh ONLY (masters
+# 73fdbc39/f683749c + v2 fead0027 + v3 0f7016a6 + mpls-era 9b603f8f md5-
+# asserted UNDISTURBED head AND tail; NEVER promoted, row 20 re-cites the
+# REAL SDK; NO commit this pass.)
+copy/
+o2/
+gen/
+probe
+probe_O2
+probe_dec
+probe_dec_O2
+*.o
+witness_conf.cc
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+nm_U_*.txt
+E4_*.txt
+syn_pre_*.txt
+L1_*.txt
+dup_*.txt
+.DUPMAIN
+.L1_probe
+md5_pinned.txt
+gate_md5_lineages.txt
+stageables.txt
+backbone10.txt
+o_size_receipt.txt
+.e4_hold_*
+*.log

@@ -64,6 +64,14 @@
 //!     tail: the heaviest-closure row (7 fresh cps + the
 //!     ext#2 copy-local harness face) + THE config-
 //!     carrying ctor(m) + the label-stack ladder)      -> cd_mpls.rs [18o]
+//!   src/codecs/ip/cd_ipv4.cc (790; TABLE cd_ipv4 — the
+//!     ip-heavies head, the ADD_DLT HELP + the t-arm     [20a]
+//!     trio census)                                      -> cd_ipv4.rs
+//!   src/codecs/ip/cd_ipv6.cc (733; TABLE cd_ipv6 — the
+//!     multicast-scope ladder + ISATAP/Teredo legs)      -> cd_ipv6.rs [20a]
+//!   src/codecs/ip/cd_tcp.cc (839; TABLE cd_tcp — the
+//!     COMMENTED-BUILDING_SO unconditional table + the
+//!     naptha seed-drift consts)                         -> cd_tcp.rs  [20a]
 //! The `codec_module` umbrella landed AT 18d as planned (the FLAT
 //! call stands: the C base names collide nowhere — no cd_module.h
 //! exists, and this row's C-dir provenance (root/ root/ link/) rides
@@ -90,6 +98,8 @@ pub mod cd_icmp4_ip;
 pub mod cd_icmp6;
 pub mod cd_icmp6_ip;
 pub mod cd_igmp;
+pub mod cd_ipv4;
+pub mod cd_ipv6;
 pub mod cd_llc;
 pub mod cd_mobility;
 pub mod cd_mpls;
@@ -99,6 +109,7 @@ pub mod cd_ppp_encap;
 pub mod cd_pppoe;
 pub mod cd_raw;
 pub mod cd_routing;
+pub mod cd_tcp;
 pub mod cd_teredo;
 pub mod cd_trans_bridge;
 pub mod cd_udp;

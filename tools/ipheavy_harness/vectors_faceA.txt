@@ -1,0 +1,44 @@
+LOAD ipv4
+LOAD ipv6
+LOAD tcp
+LOADS 3
+API ipv4 type=0 size=112 ver=1900547 features=1 name=ipv4
+HELP ipv4 support for Internet protocol v4 (DLT 228)
+ipv4 mod_ctor=1 mod_dtor=1
+ipv4 ctor=1 dtor=1
+TARM ipv4 tinit=1 tterm=1
+NAME ipv4 mod=ipv4 help=support for Internet protocol v4 (DLT 228)
+RULES ipv4 n=21 first=1 last=425
+PARAMS ipv4 n=0
+GETIDS ipv4 2048
+GETIDS ipv4 4
+GETIDS_n ipv4 2
+GETDLT ipv4 228
+GETDLT_n ipv4 1
+API ipv6 type=0 size=112 ver=1900547 features=1 name=ipv6
+HELP ipv6 support for Internet protocol v6 (DLT 229)
+ipv6 mod_ctor=1 mod_dtor=1
+ipv6 ctor=1 dtor=1
+TARM ipv6 tinit=0 tterm=0
+NAME ipv6 mod=ipv6 help=support for Internet protocol v6 (DLT 229)
+RULES ipv6 n=26 first=270 last=477
+PARAMS ipv6 n=0
+GETIDS ipv6 34525
+GETIDS ipv6 41
+GETIDS_n ipv6 2
+GETDLT ipv6 229
+GETDLT_n ipv6 1
+API tcp type=0 size=112 ver=1900547 features=1 name=tcp
+HELP tcp support for transmission control protocol
+tcp mod_ctor=1 mod_dtor=1
+tcp ctor=1 dtor=1
+TARM tcp tinit=0 tterm=0
+NAME tcp mod=tcp help=support for transmission control protocol
+RULES tcp n=20 first=45 last=403
+PARAMS tcp n=0
+GETIDS tcp 6
+GETIDS_n tcp 1
+GETDLT_n tcp 0
+NAPT4 rc=1 src=167837954 dst=184549121 fam4=1
+NAPT6 rc=1 src=167837954 dst=184549121 fam4=1
+NAPTTCP rc=1 sp=25001 dp=25002
