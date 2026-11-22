@@ -764,7 +764,17 @@ test "$(echo "$face" | grep -c 'witness_')" -eq 2      # the own-witness DUO fac
 for f in copy/cd_ipv4.o copy/codecs/ip/cd_ipv4.cc copy/codecs/ip/cd_ipv4.cc copy/daq.h copy/daq_dlt.h copy/daq_common.h copy/protocols/packet.h copy/stream/stream.h o2/cd_ipv4.o probe probe_O2 probe_dec probe_dec_O2 probe.o probe_dec.o witness_conf.cc witness_daq.o witness_18f.o witness_conf.o stubs_18d.o stubs_20a.o witness_ipvars.o witness_opts.o vectors_O0.txt vectors_faceA_O0.txt vectors_O2.txt vectors_faceA_O2.txt nm_U_cd_ipv4.txt nm_U_cd_ipv6.txt nm_U_cd_tcp.txt E4_preext_cd_ipv4.txt E4_preext_cd_ipv6.txt E4_preext_cd_tcp.txt E4_postext_cd_ipv4.txt E4_postext_cd_ipv6.txt E4_postext_cd_tcp.txt E4_donorsrc_cd_ipv4.txt E4_drop_cd_ipv4_parse_ip.h.txt E4_drop_cd_tcp_stream.h.txt E4_nodaq_cd_ipv4.txt E4_nodaq_cd_ipv6.txt E4_nodaq_cd_tcp.txt E4_nopacket_cd_tcp.txt E4_restored_cd_ipv4.txt E4_restored_cd_ipv6.txt E4_restored_cd_tcp.txt dup_naive.txt dup_retired.txt L1_link_face.txt L1_undefined.txt L1_face_cd_ipv4.txt L1_face_cd_tcp.txt md5_pinned.txt gate_md5_lineages.txt stageables.txt backbone10.txt o_size_receipt.txt; do
     git -C /opt/data/snort3-rust check-ignore -q "tools/ipheavy_harness/$f" || { echo "GITIGNORE FACE DEAD: tools/ipheavy_harness/$f NOT ignored"; exit 1; }
 done
-test "$(git -C /opt/data/snort3-rust ls-files --others --exclude-standard tools/ipheavy_harness | wc -l)" -eq 9   # gen/ + probe .o + vectors_O* NEVER leak INTO the face
+# ZERO-LEAK count, STATE-AWARE (the face law above ALREADY rides both
+# states; this count was pre-commit-form only and DIED post-commit --
+# row-20a defect, shipped as a FOLLOW-UP commit, NEVER an amend):
+# pre-commit = 9 UNTRACKED faces; post-commit = 9 TRACKED faces, the
+# untracked set EMPTY. gen/ + probe .o + vectors_O* NEVER leak INTO the
+# face either way (the nested .gitignore census above proves it).
+if git -C /opt/data/snort3-rust ls-files --error-unmatch "tools/ipheavy_harness/PLAN.md" >/dev/null 2>&1; then
+    test "$(git -C /opt/data/snort3-rust ls-files tools/ipheavy_harness | wc -l)" -eq 9
+else
+    test "$(git -C /opt/data/snort3-rust ls-files --others --exclude-standard tools/ipheavy_harness | wc -l)" -eq 9
+fi
 # the own witnesses + probes + vectors NEVER ignored (the stageable NOT-proofs):
 for f in witness_ipvars.cc witness_opts.cc probe.cc probe_dec.cc vectors.txt vectors_faceA.txt .gitignore; do
     git -C /opt/data/snort3-rust check-ignore -q "tools/ipheavy_harness/$f" && { echo "WRONGLY IGNORED: $f"; exit 1; } || true
