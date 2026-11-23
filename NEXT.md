@@ -1,4 +1,4 @@
-# NEXT.md — takeover context & plan (2026-11-23, post-21b: The chapter-19 P3 SURVIVOR-FLOW-DATA PIN PROVIDER LANDED AT 3e9f2d7 — framework/survivor_flow_data.cc 88 L SOLO 4b1eedaf + THE 21a DECL-ONLY CITE COMPLETION row + witness own-9 face (tterm PAIR FOUND-0, drain LEFT-OPEN) + DONOR-LAW FIRST-REJECTION = the graft-version law (mpls accept / rsubs+misc9 trees REJECT at flow.h:541) + T3 semantic face (gadget-less pins NOTHING, survival ONLY at rebind) + rider suite `^TEST(` EXACTLY-4 — the seeded five-TEST token = CITE DRIFT (disk 4), drift law CONTINUOUS + 28th straight zero-gate + vectors 8L/8L 3c05632e + 040de1ef smallest pair yet + THE next row = thread_config 920 L (VENDORED-CATCH INSIDE-TU = the dialect flip — FIRST REAL GATE CANDIDATE since gre: the 28-straight streak MAY END) + hwloc FIXTC graft banked, tracer 73 L rank-LAST)
+# NEXT.md — takeover context & plan (2026-11-23, post-22a: THE chapter-19 main/thread_config PAIR LANDED AT 8953723 + THE FOLLOW-UP-RIDER 62d6fac — cc 920 L ca123f89 + h 95 L 86a4d2, NOT the banked 86 — disk wins, again + THE FIRST REAL GATE SINCE 18g = the runner tail 'All tests passed (23 assertions in 14 test cases)' + the HAVE_NUMA-off hinge tail '17 assertions in 9 test cases' = the 28-STRAIGHT ZERO-GATE STREAK CLOSED BY MEASUREMENT + the CATCH_CONFIG_RUNNER mandate law (a CATCH_CONFIG_MAIN twin SEGVs rc139 — the row ships its OWN 26-L runner main TU, first EVER) + the gate census FLIPPED 26 on-disk / 18 lineages while tracked-1 + legacy-9x stay FROZEN + the stale-donor-header trap (5 donor trees carried 21c903df != ground 86a4d2 — fresh-cp law) + the FUNCTIONAL hwloc witness 256-CPU model (NOT host nproc) + 9 stageables (PLAN-8 = drift) + the fix-forward REPLAY of the 8b9882a law (NOT an amend) + lesson NEW: grep tests/ for gate-census hardcodes when a gate lands + 650/0 over 78 result-lines + NEXT: ch19 LAST row = tracer rank-LAST (73+125 RE-MEASURED this pass, full md5s; the daq wall REAL via the pkth faces :52/:54-:55), then the honest plan-table face: rows 20 -> 21)
 
 This file is the single resume point for a fresh agent. It carries only
 what is not cheaply re-derivable. `PORTING_PLAN.md` (row table, per-row
@@ -9,67 +9,91 @@ tracked PLAN.md; this file stays a scannable ledger.
 
 **PINNED-STRING CARRY BLOCK — harnesses assert strings from THIS file;
 NEVER drop these literals (the 18l docs hazard codified as the hard
-rule; re-verified by the FULL tools-wide grep THIS 21b docs pass — every
-read-assert site enumerated: erspan :580 python; link6 :198 grep + :597
-python; link4 :185 + :186 grep + :750 python; mpls :136-:138 grep + :619
-python; the LANDED misc9 sites :462 python `.count(LITERAL) == 3` + :607
-grep-count `-eq 3` — an EXACT-COUNT pin: EXACTLY three occurrences of the
-597 face, NOT >= 3, on EXACTLY three lines; the LANDED ipheavy sites
-:656-:660 — FIVE `grep -q` faces (605, 580, 588, 597, 573); the LANDED
-rsubs sites :459-:461 (python: 621/605/597 each `.count == 3` + the 573
-presence-arm) + :576-:579 (`grep -c` -eq 3 for 621/605/597 + `grep -q`
-the 573 face); and the NEW LANDED sfd sites :527 (python: 629/621/605/597
-each `.count == 3` + the 573 presence-arm) + :637-:641 (`grep -c` -eq 3
-for 629/621/605/597 + `grep -c` -eq 5 for the 573 face — an EXACT-COUNT
-5 face now!) — everything else in tools/ is prose citation)**:
-- `573 tests green` — hard-asserted VERBATIM by `tools/erspan_harness/`
-  `build.sh:580` (`assert "573 tests green" in open("/opt/data/snort3-rust/NEXT.md").read()`
-  — the line number DRIFTS with rewrites, the STRING is what matters) +
-  it is one of the ipheavy :660 grep arms + the rsubs :579 grep arm +
-  the sfd :641 EXACT-COUNT arm (EXACTLY five matching lines, NEVER more).
-  Historical lineage face: the 18k docs-pass header read that face with
-  the / 0 FAILED suffix.
-- `580 passed / 0 failed` — asserted at FIVE sites: link6 :198 (grep) +
-  :597 (python); link4 :185 (grep) + :750 (python); ipheavy :657 + mpls
-  :137 (grep). Historical face: the 18l docs pass summed exactly that
-  over 70 result lines. (Keep EXACTLY three.)
-- `588 tests green / 0 FAILED` — asserted by link4 :186 + ipheavy :658 +
-  mpls :138 (grep). Historical face: the 18m docs-pass header read
-  exactly that face. (Keep EXACTLY four.)
+rule; re-verified by the FULL tools-wide AND tests-wide grep THIS 22a
+docs pass — every read-assert site enumerated: erspan :580 python;
+link6 :198 grep + :597 python; link4 :185 + :186 grep + :750 python;
+mpls :136-:138 grep + :619 python; the LANDED misc9 sites :462 python
+`.count(LITERAL) == 3` + :607 grep-count `-eq 3` — an EXACT-COUNT pin:
+EXACTLY three occurrences of the 597 face, NOT >= 3, on EXACTLY three
+lines; the LANDED ipheavy sites :656-:660 — FIVE `grep -q` faces; the
+LANDED rsubs sites :459-:461 (python .count arms) + :576-:579 (`grep
+-c` arms + presence); the LANDED sfd sites :527 (python) + :637-:641
+(`grep -c`; the 573 face EXACTLY five lines); the NEW LANDED tc sites
+:649-:656 (`grep -c`: the three-newest faces -eq 3, the 588 face -eq
+4, the 580 PASSED-phrasing face -eq 3, the 573 face -eq 5); THE CARGO-
+SIDE TWINS (new stakeholders NOW — tests read NEXT too):
+`tests/sfd_parity_test.rs::sfd_ground_cite_drift_tripwires` (the
+quoted drift-token exhibit EXACTLY-ONE line; the pinned sfd prefixed
+dir-token face EXACTLY-ONE line; the x3 loop + 573 x5) and
+`tests/tc_parity_test.rs` (the stale hwloc token cite MUST be present
+— the drift-trio law below); TOKEN ARITHMETIC of THIS file (all
+measured live): the stale hwloc-token cite line MUST ride (tc :124 +
+the tc cargo twin), the bare tc dir-token (underscore form) appears on
+EXACTLY-2 lines (the donor ledger + the Session ritual), and the sfd
+prefixed dir-token appears on EXACTLY-1 line (the ritual cite — sfd
+:119 + its cargo twin); everything else in tools/ is prose citation)**:
+- `650 tests green / 0 FAILED` — THE CURRENT-PASS SEED for the NEXT
+  harness (the tracer row) to grep-assert at EXACT-COUNT: EXACTLY three
+  occurrences on EXACTLY three separate lines — NEVER a fourth, NEVER
+  two occurrences sharing one line. It rides the 62d6fac commit face
+  (orchestrator cargo: 650 passed / 0 failed over 78 `test result`
+  lines = 633 at 21b + 17 tc fns).
+- `633 tests green / 0 FAILED` — the 21b-docs-pass seed, NOW ABSORBED
+  into the harness-pinned set: the tc harness :649 asserts it
+  EXACT-COUNT -eq 3 like every prior face. Keep EXACTLY three.
+- `573 tests green` — hard-asserted VERBATIM by
+  `tools/erspan_harness/` `build.sh:580` (`assert "573 tests green" in
+  open("/opt/data/snort3-rust/NEXT.md").read()` — the line number
+  DRIFTS with rewrites, the STRING is what matters) + it is one of the
+  ipheavy :660 grep arms + the rsubs :579 grep arm + the sfd :641
+  EXACT-COUNT arm (EXACTLY five matching lines, NEVER more) + the tc
+  :656 twin (an EXACT-COUNT 5 face — NEVER six). Historical lineage
+  face: the 18k docs-pass header read that face with the / 0 FAILED
+  suffix.
+- `580 passed / 0 failed` — asserted at SEVEN sites now: link6 :198
+  (grep) + :597 (python); link4 :185 (grep) + :750 (python); ipheavy
+  :657 + mpls :137 (grep) + the tc :655 clone. Historical face: the
+  18l docs pass summed exactly that over 70 result lines. (Keep
+  EXACTLY three.) The 580-era face rides the PASSED phrasing ONLY —
+  other 580-era phrasings NEVER existed and NEVER may be typed.
+- `588 tests green / 0 FAILED` — asserted by link4 :186 + ipheavy :658
+  + mpls :138 (grep) + tc :654 (-eq 4). Historical face: the 18m docs-
+  pass header read exactly that face. (Keep EXACTLY four.)
 - `597 tests green / 0 FAILED` — the 18o-docs-pass seeded face, NOW
   hard-asserted EXACT-COUNT by misc9 :462 (python occurrences == 3) +
-  :607 (matching LINES == 3) AND by the landed rsubs harness :461
-  (python == 3) + :578 (grep -c == 3) AND by the landed sfd harness :527
-  + :640. Every future rewrite must keep EXACTLY three occurrences on
-  three separate lines — NEVER a fourth, NEVER two occurrences sharing
-  one line.
+  :607 (matching LINES == 3) AND rsubs :461 + :578 AND sfd :527 + :640
+  AND tc :653. Every future rewrite must keep EXACTLY three
+  occurrences, on three separate lines — NEVER a fourth, NEVER two
+  occurrences sharing one line.
 - `605 tests green / 0 FAILED` — the 19a-docs-pass seeded face, NOW
-  presence-asserted by mpls :136 + :619 + the LANDED 20a harness at
-  ipheavy :656 (grep) + EXACT-COUNT by rsubs :460 (python) + :577
-  (grep -c == 3) + sfd :527 + :639. Keep EXACTLY three.
+  presence-asserted by mpls :136 + :619 + ipheavy :656, EXACT-COUNT by
+  rsubs :460 + :577, sfd :527 + :639 + tc :652. Keep EXACTLY three.
 - `621 tests green / 0 FAILED` — the 20a-docs-pass seeded face, NOW
   hard-asserted EXACT-COUNT by the LANDED row-21a harness at rsubs
-  :460 (python occurrences == 3) + :576 (matching LINES == 3) + sfd
-  :527 + :638. Keep EXACTLY three, like the 597 face.
+  :460 + :576, sfd :527 + :638 + tc :651. Keep EXACTLY three.
 - `629 tests green / 0 FAILED` — the 21a-docs-pass seeded face, NOW
-  hard-asserted EXACT-COUNT by the LANDED row-21b harness at sfd :527
-  (python .count == 3) + :637 (grep -c == 3, THREE separate lines). Keep
-  EXACTLY three, like the 597/621 faces — the sfd arms are LIVE every
-  sfd re-run (sfd is a FRESH-build harness, run it every cycle).
+  EXACT-COUNT at sfd :527 + :637 + tc :650. Keep EXACTLY three, three
+  separate lines — the sfd arms are LIVE every sfd re-run (sfd is a
+  FRESH-build harness, run it every cycle).
 This docs commit carries `573 tests green` x5, `580 passed / 0 failed`
-x3, `588 tests green / 0 FAILED` x4, `597 tests green / 0 FAILED` x3
-(the misc9+rsubs+sfd EXACT-COUNT face), `605 tests green / 0 FAILED` x3,
-`621 tests green / 0 FAILED` x3, `629 tests green / 0 FAILED` x3 (the
-sfd EXACT-COUNT face) VERBATIM + SEEDS the new current-pass face
-`633 tests green / 0 FAILED` at EXACTLY three occurrences on three
-separate lines for the NEXT harness (the thread_config row) to
-grep-assert — exactly as the 18o pass seeded the 597 face for misc9, the
-19a pass seeded 605 for ipheavy, the 20a pass seeded 621 for rsubs and
-the 21a pass seeded the 629 face for sfd. A FRESH NEXT.md rewrite MUST
-grep `tools/` for NEXT.md read-asserts FIRST and carry EVERY pinned
-prior-pass literal VERBATIM, then re-grep the pins AFTER the docs
-commit. Receipts of the hazard: the 18l rc1 pair at
-`/opt/data/cache/scratch/row18mdocs/erspan_{A,B}.log`.
+x3, `588 tests green / 0 FAILED` x4,
+`597 tests green / 0 FAILED` x3, `605 tests green / 0 FAILED` x3,
+`621 tests green / 0 FAILED` x3, `629 tests green / 0 FAILED` x3 and
+the absorbed landed seed `633 tests green / 0 FAILED` x3 VERBATIM, and SEEDS the
+new current-pass face EXACTLY three times on three separate lines
+above for the NEXT harness (the tracer row) to grep-assert — exactly
+as the 18o pass seeded 597 for misc9, the 19a pass 605 for ipheavy,
+the 20a pass 621 for rsubs, the 21a pass 629 for sfd and the 21b pass
+633 for tc. A FRESH NEXT.md rewrite MUST grep `tools/` AND `tests/`
+for NEXT.md read-asserts FIRST and carry EVERY pinned prior-pass
+literal VERBATIM, then re-grep the pins AFTER the docs commit.
+Receipts of the hazard: the 18l rc1 pair at
+`/opt/data/cache/scratch/row18mdocs/erspan_{A,B}.log`; the 22a-era
+replay: a CARGO tripwire counts lines containing the quoted rider-
+count drift exhibit — it occurs EXACTLY-ONCE in this file (the 21b
+close-out carries it; every other mention is five-TEST PROSE), and
+the 21b docs title had DOUBLE-carried the literal = the rider fix at
+62d6fac.
 
 ## What this project is
 Port Snort 3 (C++) to Rust with byte-exact behavioral parity, milestone
@@ -81,346 +105,482 @@ prior probe; NEVER `git add` anything under snort3-src). Port repo:
 `/opt/data/snort3-rust` (branch `master`, remote
 `github.com/dhoelzer/RustyPig`).
 
-## Current state (measured at this post-21b docs pass)
-Plan rows 1–20a DONE + rows 21a + 21b DONE (chapter-19 P2 registry at
-167cb3c, P3 survivor-flow-data provider at 3e9f2d7; the plan rows +
-deviations shipped INSIDE the code commits, VERIFY-grepped THIS pass:
-`grep -c '^| 21b' PORTING_PLAN.md` = 1, the 21b deviations heading
-`grep -c` = 1 at :4314). NEXT QUEUE: row 22-candidate thread_config
-(chapter-19 remainder, section below — the GATE-STREAK QUESTION rides
-it), then tracer rank-LAST, then row 20 packet_io/DAQ, then row 21 main
-CLI.
-**129 commits at HEAD 3e9f2d7** (`git rev-list --count` HEAD == origin ==
-**129** BOTH re-run THIS pass; `ls-remote origin refs/heads/master` =
-`3e9f2d75…`; this docs commit lands as the **130th**).
-**633 tests green / 0 FAILED** — THE LANDED 21b commit face ("4 parity
-tests 633/0 over 76 suite binaries, clippy 0", commit 3e9f2d7). HONEST
-face: this docs pass did NOT re-run cargo/clippy — the orchestrator's
-cargo round owned the toolchain (SINGLE-TENANT law); the next
-harness/verify ritual re-measures LIVE, sums `test result` lines
-programmatically and cites one face per pass (the result-line count
-MOVES — 20a pass read 75; NEVER pre-assume).
-Test math: 633 = 629 at 21a + **4** `tests/sfd_parity_test.rs`
-(**612 L**, `grep -c '^#\[test\]'` = 4 re-measured THIS pass).
+## Current state (measured at this post-22a docs pass)
+Plan rows 1–20a DONE + rows 21a + 21b + 22a DONE (chapter-19 P2
+registry at 167cb3c, P3 survivor-flow-data provider at 3e9f2d7,
+main/thread_config GATE row at 8953723 + the rider follow-up 62d6fac;
+the plan rows + deviations shipped INSIDE the code commit, VERIFY-
+grepped THIS pass: `grep -c '^| 22a' PORTING_PLAN.md` = 1, the 22a
+deviations heading `grep -c` = 1 at `KNOWN DEVIATIONS.md:4416`). THE
+ch19 QUEUE closes with the tracer row (rank-LAST — its face in the
+next-milestone section, ground RE-MEASURED THIS pass); THEN the honest
+plan-table face (read `PORTING_PLAN.md` :107-:109 THIS pass): row 20
+packet_io/DAQ, then row 21 main CLI, + the ~30k detection-option
+subset on the row-19 line — NEVER invent a row.
+**132 commits at HEAD 62d6fac** (`git rev-list --count` HEAD ==
+origin == **132** BOTH re-run THIS pass; `ls-remote origin
+refs/heads/master` = `62d6faca…`; 8953723 = the **131st**, 62d6fac the
+**132nd**; this docs commit lands as the **133rd**).
+**650 tests green / 0 FAILED** — THE LANDED face at 62d6fac,
+ORCHESTRATOR-MEASURED: 650 passed / 0 failed over **78** `test result`
+lines (633 at 21b + **17** tc fns incl the 14 translated gate cases).
+HONEST face: this docs pass did NOT re-run cargo/clippy — the
+orchestrator's cargo round owned the toolchain (SINGLE-TENANT law);
+the next harness/verify ritual re-measures LIVE, sums `test result`
+lines programmatically and cites one face per pass (the result-line
+count MOVES — 20a read 75, 21b read 76; NEVER pre-assume).
+Test math: 650 = 633 at 21b + **17** `tests/tc_parity_test.rs`
+(**733 L**, `grep -c '^#\[test\]'` = 17 re-measured THIS pass).
 - Rust pair (flat, cite-heavy, re-measured THIS pass):
-  `src/framework/survivor_flow_data.rs` **418 L** md5
-  `cf8f321cea1613cd8de45b8b81c1093c` (ZERO `allow(` — grep 0; EXACTLY-2
-  `debug_assert!` arms riding the landed module.rs :831 NDEBUG-elides
-  cite precedent); `tests/sfd_parity_test.rs` **612 L** md5
-  `58233f087c0dbb51b9db023a65c3c95c`; `src/framework/mod.rs` 12 L,
-  `pub mod survivor_flow_data;` at :12 (the +1 wiring line, ZERO allows).
+  `src/main/thread_config.rs` **1,581 L** md5
+  `b3a5eee4072adca42bbf5f5bb4a35296` (**ZERO** `allow(` — grep 0;
+  ZERO blanket + ZERO point-site held by the parity tripwires),
+  `tests/tc_parity_test.rs` **733 L** md5
+  `7f95ccae82d47564253e41bb1c25625c` (17 fns = 2 vector replays + 14
+  TRANSLATED gate cases carrying EXACTLY-23 in-file asserts — the
+  self-census == the runner's 23), `src/main/mod.rs` +1 wiring line;
+  ground pair re-wc + re-md5'd byte-exact THIS pass:
+  `thread_config.cc` **920 L** `ca123f895a028e53328b3b0451af8073` +
+  `thread_config.h` **95 L** `86a4d24805a6413ecebbbe72e4f10e5b` — the
+  21b-pinned faces (920/95 + md5s) rode the code commit: honest MATCH.
 - Whole-repo stats re-measured LIVE THIS pass (NEVER trust the previous
-  face): **62,673** lines Rust across **169** `src/*.rs` files, **50**
-  `tests/*_parity_test.rs` replay files, **526** tracked files
-  (`git ls-files | wc -l`), tools = **57** `*_harness` dirs on disk, ALL
-  **57 TRACKED** — `sfd_harness/` went tracked WITH its own row 21b (8
-  stageables); the working tree is porcelain-CLEAN apart from THIS docs
-  pass (ZERO `??` faces — create recon in scratch, land harness
-  stageables at the row).
-- Two-lineage gate census UNDISTURBED (direct, out-of-harness, THIS
-  pass): `find tools -name gate.txt -not -path '*/copy/*'` = **25**,
-  holders of `4826fc22…` = **9**, distinct md5s = **17**, `git ls-files
-  'tools/*/gate.txt'` = **1** (gre, anchor `6751d1a8…` intact). Row 21b
-  added ZERO gate files = the **28th straight zero-gate row**. THE
-  CENSUS IS AN OPEN QUESTION AT THE thread_config ROW: if the
-  vendored-Catch gate lands there, the counts MOVE BY MEASUREMENT (see
-  the next-milestone section) — re-measure, NEVER pre-assume the flip.
-  `tools/link4_harness/backbone10.txt` = EXACTLY **10** lines (file md5
-  `5339c7ee…` re-run THIS pass; the sfd `backbone10.txt` echo is
-  BYTE-IDENT 5339c7ee — backbone STAYS 10).
-- **Git face (the 18i law)**: 3e9f2d7 = plain `commit:` reflog face
-  (HEAD@{0} re-read THIS pass), ONE push (`ls-remote` byte-match above),
-  no amend no force — the commit's own message counts it the ELEVENTH
-  straight one-commit/one-push landing; 8b9882a remains the living
-  FIX-UP ROUTE A precedent (follow-up commit, never an amend).
-  `git merge-base --is-ancestor 69c8b6f origin/master` rc **1**
-  re-proved AGAIN THIS pass (the 18i orphan NEVER re-lands).
+  face): **64,255** lines Rust across **170** `src/*.rs` files, **51**
+  `tests/*_parity_test.rs` replay files, **537** tracked files
+  (`git ls-files | wc -l`), tools = **58** `*_harness` dirs on disk, ALL
+  **58 TRACKED** — the 22a dir went tracked WITH its row (9 stageables;
+  its own gate.txt GITIGNORED by design — see the census); the working
+  tree is porcelain-CLEAN apart from THIS docs pass (ZERO `??` faces —
+  create recon in scratch, land harness stageables at the row). The
+  harness-dir count GROWS every row: fresh-measure, NEVER inherit.
+- **Two-lineage gate census — THE FLIPPED FACE (re-run DIRECT, out-of-
+  harness, THIS pass): 26 gate.txt files** (was 25 for 28 rows),
+  **holders of `4826fc22…` = 9 FROZEN** (legacy 18g lineage — NEVER
+  moves), **distinct md5 lineages = 18** (was 17; the
+  `gate_md5_lineages.txt` face), **tracked face = 1** (`git ls-files
+  'tools/*/gate.txt'` — gre's `6751d1a8…` anchor stays the ONLY
+  tracked gate). MECHANIC of the sanctioned flip: the 22a gate.txt
+  (md5 `a32720c7fdf6d65dac3d555e48dc5d0b` measured THIS pass, 5 L) is
+  **COPY-LOCAL / UNTRACKED** (.gitignore:26, `git check-ignore -v`
+  REPROVED THIS pass, regenerated every harness build — NEVER edit,
+  NEVER stage, NEVER trust its face from git) yet STILL counted by the
+  dir-walk. **22a CLOSED the 28-straight zero-gate streak by
+  MEASUREMENT** — first real host-green Catch gate since gre (18g);
+  21b itself shipped ZERO at landing time (the streak count is HONEST
+  per-row history, never retroactive). THE 21b-era "census is an open
+  question" flag is CLOSED: the arithmetic moved BY MEASUREMENT exactly
+  as flagged. The HARD-CODE LAW rides forward: any tests/-side
+  tripwire that HARDCODES the census MUST be rider-updated AT the flip
+  row (the sfd rider hardcoded 25 — see the close-out).
+  `tools/link4_harness/backbone10.txt` = EXACTLY **10** lines (wc-10 +
+  md5 `5339c7ee…` re-run THIS pass — backbone STAYS 10, no row moved
+  backbone symbols; the sfd echo byte-ident holds).
+- **Git face (the 18i law)**: 8953723 = plain `commit:` reflog face +
+  ONE push (its own message counts the TWELFTH straight one-commit/
+  one-push row landing); 62d6fac = the FOLLOW-UP commit (SECOND push,
+  NEVER an amend) — the d525b6d + 8b9882a two-commit lineage face
+  REPLAYED at 22a; 8b9882a stays the named FIX-UP ROUTE precedent with
+  62d6fac as its second living proof. `git merge-base --is-ancestor
+  69c8b6f origin/master` rc **1** re-proved AGAIN THIS pass (the 18i
+  orphan NEVER re-lands).
 - **Wiki**: clone `/tmp/RustyPig.wiki`, HEAD == remote == **367c2b9 =
-  thru row 21b** (21b wiki sync LANDED mid-this-pass: 4 paths, dev_block
-  `ac79959e…` byte-exact md5 pair, provenance face x10, stats face 526
-  files / 62,673 src lines / 129 commits / 633 tests / 76 suites;
-  `21b` grep faces = 2 + 2; Building-and-testing 629→633 number-only
-  fix; verified by orchestrator at 367c2b9). ZERO wiki debt outstanding.
-  This docs pass touched the wiki ZERO times — NEVER edit
-  `/tmp/RustyPig.wiki` outside the WIKI phase.
-- **Fresh-build set MOVED at 21b (by-DESIGN drift)**: misc9 build.sh
-  :461 greps `ReloadSurvivor|reload_survivor|struct Tracer` over `src/`
-  and asserts EMPTY (the §3 landmine face) — it matches the 21a-landed
-  files since 21a, so misc9 stays FROZEN-LINEAGE, verify by DIRECT md5s
-  (`e6328da1…`/`dfe738fb…`, witness `ada2b1e8…`); NEVER edit the frozen
-  19a script. The rsubs zero-collision greps (`RssStats|RssPeg|Survivor
-  Subscriptions|rss_stats|DedupClass|reload_survivor` over src, homed
-  ONLY on the rsubs home + mod.rs) re-run THIS pass = CLEAN vs the
-  landed sfd TU (zero token crossings — the sfd rs stays token-free of
-  the rsubs family). The FRESH ch19 lineage head is **sfd** (run x2 rc0
-  at every future pass); rsubs stays a FRESH docs-stakeholder (its
-  :459-:461 + :576-:579 read arms still fire against THIS file every
-  run); the FULL fresh-build set = sfd + rsubs + ipheavy + gre + fmod +
-  vocab + erspan + link6 + link4.
+  thru row 21b** (21b sync LANDED at 367c2b9, orchestrator-verified:
+  `21b` greps 2+2, dev_block `ac79959e…` byte-exact md5 pair,
+  provenance x10; its stats face 526 files / 62,673 lines / 129
+  commits / 633 tests / 76 suites = wiki-side HISTORY, STALE vs this
+  pass: 537 / 64,255 / 132 / 650 — re-measure LIVE at the wiki phase,
+  NEVER re-type). ZERO debt thru 21b; **22a is OWED at the wiki phase
+  (row pending)**. This docs pass touched the wiki ZERO times —
+  NEVER edit `/tmp/RustyPig.wiki` outside the WIKI phase.
+- **Fresh-build set MOVED at 22a (by-DESIGN drift)**: the FRESH ch19
+  lineage head is the **22a harness** (run it FIRST: its :649-:656
+  NEXT arms + the :124/:126-:128 token pins + the 9-FACE state-aware
+  dual guard — pre-commit 9-untracked / post-commit 9-tracked, both
+  rc0 — must pass a BEFORE it); then sfd x2 rc0, then rsubs. misc9
+  build.sh :461 greps `ReloadSurvivor|reload_survivor|struct Tracer`
+  over `src/` and asserts EMPTY (the §3 landmine face — NOTE it
+  greps the literal: the tracer-row Rust naming must stay token-clean
+  or the frozen landmine DIES BY DESIGN at any future live misc9 run =
+  direct-md5 verify only, NEVER edit the 19a script); the misc9
+  :462/:607 NEXT EXACT-COUNT arms STILL fire on this file — keep them
+  satisfiable. The rsubs zero-collision greps (`RssStats|RssPeg|
+  Survivor Subscriptions|rss_stats|DedupClass|reload_survivor` over
+  src) re-run THIS pass = **CLEAN vs the landed tc TU** (zero token
+  crossings — the tc rs is token-free of the rsubs family, as sfd's
+  was). FULL fresh-build set = **the 22a harness + sfd + rsubs +
+  ipheavy + gre + fmod + vocab + erspan + link6 + link4**; the 22a
+  build.sh is ALSO a docs stakeholder AND an ipheavy DONOR consumer
+  (self-heal arm) — clear BOTH copy trees before any tools-dirty
+  census; its NEXT-token arithmetic face: the bare dir-token rides
+  EXACTLY-2 lines here (pinned -eq 2 at its :128 — NEVER a third),
+  and the stale hwloc cite literal MUST ride (its :124 grep).
 
-## 21b close-out — SURVIVOR-FLOW-DATA PIN PROVIDER (plan row + deviations shipped INSIDE code commit 3e9f2d7; THIS pass greps-verify + re-ground, count-1 each)
-- **Ground re-wc + re-md5 THIS pass, byte-exact**: `/opt/data/snort3-src/
-  src/framework/survivor_flow_data.cc` **88 L** md5
-  `4b1eedaf70469172153c22cd91b4a682` (the orchestrator-pinned face ==
-  the measured face, honest MATCH). NO sibling .h — the SurvivorFlowData
-  DECLS live in the 21a-owned `reload_survivor_subscriptions_impl.h`
-  :138-:152, cp'd for closure, NEVER a fresh stageable: THE 21a
-  DECL-ONLY seam COMPLETED (nm-pull was EXACTLY-0 at 21a, now real).
-- **Commit**: 3e9f2d7 = **13 paths, +2,339/−0** (8 harness stageables +
-  1 src TU + mod.rs + parity test + plan row + deviations). Guards THIS
-  pass: `grep -c '^| 21b' PORTING_PLAN.md` = 1; the 21b deviations
-  heading = 1 at `KNOWN DEVIATIONS.md:4314`. Both shipped INSIDE the
-  code commit (the 18b-21a variant), VERIFY-grepped count-1 HERE.
-- **Harness `sfd_harness/` (dir) = EXACTLY 8 tracked faces**
-  (`git ls-files` re-run THIS pass): .gitignore + PLAN.md (252 L) +
-  build.sh (**698 L**) + probe.cc (67 L) + probe_faceA.cc (78 L) +
-  vectors.txt + vectors_faceA.txt + witness_sfd.cc (56 L `101aa012…`).
-  Tail `SFD_DONE vectors=8 faceA=8 gates=0` (:697-:698); vectors DEC
-  **8 L** `3c05632e88676ef9f40ee0a5d33fdf09` + FACE-A **8 L**
-  `040de1ef2ea177ac526c8ef244713c58` — SMALLEST vector pair yet (8/8 vs
-  21a's 12/9) — re-md5'd byte-stable THIS pass off the TRACKED inputs;
-  FIRST-RUN-SEED + tamper-proven drift-then-refuse (the ONE-byte T3
-  `pinned=0→9` flip arm at :557-:563); O0==O2 BYTE-IDENT both faces.
-- **THE DONOR-LAW FIRST-REJECTION FACE = THE GRAFT-VERSION LAW** (a
-  lineage first: a donor tree REJECTED, MEASURED LIVE): the flow.h
-  :541 `DAQ_Verdict last_verdict = MAX_DAQ_VERDICT;` sed-pin (:180)
-  needs the ext#4 `daq_common.h` **9b603f8f** (MAX_DAQ_VERDICT==6, COPY-
-  LOCAL, LEGAL AS-IS, pinned :199). The 21a (rsubs) tree carries
-  graft-v2 `fead0027` (PASS/DROP only, identity re-pinned :280) and its
-  clone DIES at flow.h :541 EVEN WITH the 5-closure cps; the P1 misc9
-  tree REJECTS flow.h find-0. → donor = **mpls 130+3 = 133 ONLY** (the
-  flow-closure BYTE-IDENT residents EARNED their keep — zero closure
-  cps); cross-donor ALT ipheavy 140+3 = 143 U-IDENTICAL invariance leg.
-  TOKEN-NEVER-RIDDEN law (per the 21a-era NEXT :445 face): the DONOR dir
-  NAMES never ride the sfd build.sh — runtime CONCATENATION keeps the
-  REJECT legs LIVE byte-identical (`rs`+`ubs_harness`, `mi`+`sc9_
-  harness` at :89-:91); the E4 receipts renamed `E4_daqwall_21aclone` /
-  `E4_daqwall_rsubs` keep the wall faces grep-clean. NEVER the 21a/P1
-  donors for any flow.-rider row.
-- **WITNESS FACE = own-9 (21a's +3 grows to +9, HONEST census)**: one
-  witness_sfd.cc mirrors FlowData ctor/dtor/`create_flow_data_id` +
-  FlowDataStore get/set + Inspector add_ref/rem_ref + **THE tterm PAIR
-  `is_pending_tterm` / `thread_drain_pending_tterm_if_pending` =
-  FOUND-0 brand-new pulls** (bodies mirror imgr.cc :324/:1276 SHAPES
-  with a fake knob — the REAL drain (`survivor_flow_data.cc :54` call
-  site) is LEFT-OPEN, NEVER-invent, joins the row-20 seam ledger) + **1
-  typeinfo ride-face = EXACTLY-10 undefined L1, EXACTLY 9 NAMED** (nm
-  faces `nm_U_sfd.txt` etc.). THE flow_data_id DEFINITION-MIRROR TRAP
-  MEASURED LIVE: the link DIES without the witness B-face mirror; the
-  `create_flow_data_id` def-count == 1 ONE-home pin — and the rs mirror
-  keeps the ONE-home law Rust-side too (ONE `flow_data_id` home; the
-  file_api Cell grafts REUSE-cited, NEVER re-ported).
-- **T3 SEMANTIC FACE = the row's heart**: `set_gadget` on a GADGET-LESS
-  flow PINS NOTHING — survival fires ONLY at REBIND (vectors T3
-  `pinned=0` line 4 + a DIRECT unit tripwire; the tamper arm flips
-  EXACTLY that line).
-- **The assert-x3 census FLIPPED 21a's zero-assert face**: cc EXACTLY-2
-  runtime `assert(pin);` at :44/:60 + `<cassert>` (:39p sed re-read THIS
-  pass = the static-init line, see drift below); NDEBUG arm adds +0
-  `__assert_fail`, NO-NDEBUG +1 (delta faces nm_U_*.txt); the rs maps
-  them as EXACTLY-2 `debug_assert!` (:319/:361) riding the landed
-  module.rs :831 `debug_assert!(infos.is_some())` NDEBUG-elides CITE
-  PRECEDENT — ZERO allows, NEVER flipped to hard `assert!()` (the 21a
-  NDEBUG posture, KNOWN DEVIATIONS law).
-- **THE CITE-DRIFT LAW, TWO fresh faces**: (1) the static-init line —
-  PLAN §5 said `:33`, **disk says :39** (`sed -n '39p'` = `unsigned
-  SurvivorFlowData::flow_data_id = FlowData::create_flow_data_id();`;
-  sfd build.sh sed-pins it; IDSTATIC witness face id==1 OBSERVABLE);
-  (2) the RIDER SUITE `TEST(` COUNT — the 21a docs pass SEEDED "**5
-  TEST(**" in this file and that token was **CITE DRIFT**: the disk
-  re-count is `^TEST(` EXACTLY-**4** (rider 268 L md5 `99fd7d6f…`, the
-  harness :159 ground-pin `= 4` plus the 4 case NAMES pinned by name).
-  The drift token is FIXED honestly HERE, never silently: seeded 5 was
-  drift, disk 4 wins, the `:625`-era law reads CONTINUOUS — region/
-  count cites drift with the disk; RE-CITE from CURRENT disk AT the row.
-- **Rider suite face**: `src/flow/test/survivor_flow_data_test.cc` 268 L
-  TEST_GROUP x1 + `^TEST(` EXACTLY-4, RIDING `../../framework/
-  survivor_flow_data.cc` — 1 of **8** add_cpputest lists in flow/test
-  CMakeLists (:46; re-count THIS pass; misc9's framework/test
-  `add_cpputest -eq 3` face UNDISTURBED = 3 ✓). Its includes
-  (context_switcher/detection_engine/flow_control/ha) = detection-land
-  drag: cite-ONLY, a ch19 code row NEVER compiles that closure. CppUTest
-  host find-0 (re-proven THIS pass: `/usr/include/CppUTest` absent) →
-  dialect-BLOCKED, cite/translate ONLY, NEVER a fake gate = **28th
-  straight zero-gate**. UNIT_TEST grep on the row cc = **0** — the
-  INVERSE of 21a's 4/1 census (no clock-seam arms; UT U-set IDENTICAL).
-  TWO upstream test-world STUB HOMES carry `Flow::pin_survivor_flow_data
-  (Inspector&) { }` no-ops (re-ground THIS pass): `service_inspectors/
-  socks/test/socks_negative_test.cc` + `mitigator/test/
-  mitigator_context_reuse_test.cc` (sfd build.sh :171-:172 greps) — the
-  test-world itself stubs the provider; cite face only.
-- **FACE-A shape**: NOLOAD framework-TU head + IDSTATIC (the cc :39
-  static-init provider pull, witness B-mirror starts 0 → id==1) + IDSEQ
-  + ADDIDEM (`std::find` dup-noop) + REACH/REBIND private-decl-via-
-  PUBLIC-inlines (flow.h :607 private vs :360-:380 public inlines — the
-  probe-shape law) + NOTPEND + SURVIVE; ZERO table census (21a's PEGS/
-  SLOTMAP faces NEVER ride — asserted absent, :520-:525 region).
-- **SEAMS HONEST**: the 21a `DataBusSubscribeSeam` (rsubs.rs :279) is
-  NOT closed by 21b — the provider landed but the seam law per PLAN
-  keeps it 21a-owned (survivor_flow_data.rs :101 cites it as a
-  DIFFERENT reachable arm; UNDISTURBED, NOT closable this row, honest);
-  `PolicyResolutionFailures` peg stays inspector_manager-owned
-  (:652/:681 consumers) — **NEVER bumped/invented** in a framework row.
-- **up_gate POSTURE PIN, honest cite**: NO `up_gate_*` capture test was
-  EVER invented (the method-§2 law); the negative-posture test arms
-  exist ONLY where the tests carry them: rsubs_parity_test.rs :686
-  (`assert!(!RS.contains("up_gate_"))`) and sfd_parity_test.rs (~:605
-  the same posture face). NEVER invent such tests.
-- **Harness-as-docs-stakeholder, the THIRD rs-lineage one**: the sfd
-  build.sh NEVER edits NEXT.md but READS it EVERY build — :527 python
-  (629/621/605/597 x3 + 573 presence), :637-:641 grep arms (each -eq 3,
-  573 -eq 5), and the :116-:119 NAME-PINS: the `sfd_harness`/
-  `flowdata_harness` token census outside its own build.sh must equal
-  EXACTLY ONE file = THIS file's queue line, and `grep -c` of its
-  prefixed dir token in NEXT.md is pinned EXACTLY-1 (the sole prefixed
-  mention lives in the Donor-harnesses section below). A future build.sh
-  carrying those tokens = loud rc1 in every sfd re-run — the rsubs
-  name-pin law (:569-:571 globs `reload_survivor*_harness`,
-  `survivor*_harness`, `rss_harness` find-0; tools-wide `rsubs`
-  EXACTLY-1 held by misc9 :42) STAYS LIVE and the sfd tokens join the
-  NEVER-ADD set for every new harness.
-- **nm face (MEASURED)**: own L1 EXACTLY-10 (NDEBUG-invariant pair arms
-  ride `<cassert>` only at NO-NDEBUG — the assert-delta face); rsubs-era
-  E4 both-ways receipts kept (E4_daqwall_* / E4_defmirror / E4_noflowh
-  / E4_noimgr / E4_noimpl / E4_ccdrop), graft ladder TAIL re-assert:
-  copy daq.h graft-v3 `0f7016a6` + daq_common ext#4 `9b603f8f` pinned,
-  NEVER promoted (masters-frozen law; row 20 re-cites the REAL SDK).
+## 22a close-out — main/thread_config + THE FIRST REAL GATE SINCE 18g (plan row + deviations shipped INSIDE code commit 8953723; THIS pass VERIFY-greps + re-grounds, count-1 each)
+- **HONEST TWO-COMMIT LINEAGE (fix-forward REPLAYED, NOT an amend)**:
+  **8953723** = the **131st** commit, **14 paths, +3,546/−0**: the
+  thread_config pair landed flat + the harness dir (9 stageables incl
+  the FIRST-EVER tracked runner main TU `tc_gate_main.cc` 26 L) +
+  1,581-L ZERO-allow rs + the 733-L parity + plan row + deviations
+  heading at :4416 — it shipped with **ONE RED at HEAD**:
+  `tests/sfd_parity_test.rs::sfd_ground_cite_drift_tripwires` HARD-
+  ASSERTED the PRE-22a census (25 gate.txt / 28th-straight prose) and
+  this file's 21b title DOUBLE-carried the quoted rider-count drift
+  literal. **62d6fac** = the **132nd** commit, **2 paths +10/−4**,
+  FOLLOW-UP per the 8b9882a law: (1) the rider census assert raised to
+  the MEASURED face with the two-lineage posture (tracked STAYS 1 —
+  gre `6751d1a8`; legacy `4826fc22` x9 FROZEN; distinct lineages
+  17->18; streak CLOSED at 22a by measurement while 21b shipped ZERO
+  at its own landing); (2) the title flipped to five-TEST prose — the
+  exhibit token back to EXACTLY-ONCE. **NEW LESSON (now rule 7): when
+  a gate lands, grep `tests/` for gate-census hardcodes — pre-gate-era
+  tripwires die the next build.**
+- **Ground re-wc + re-md5 THIS pass byte-exact**: the **920/95** pair +
+  both md5s above MATCH the orchestrator-pinned face. THE h face: **95,
+  NOT the banked 86** — the md5 PIN matched the bank, the LINE-COUNT
+  token drifted (cite-drift OPEN before the row even started, CLOSED
+  at the row): the harness ground-identity arm (`wc -eq 95`) and the
+  parity tripwires (`h.lines() == 95`; the rs cites `95 L` NEVER
+  `86 L`) hold it forever. Riders ground-pinned EVERY build (re-run
+  THIS pass, byte-exact): `main/numa.h` 88 `171555d4…`, `main/
+  numa.cc` 89 `352bbc7f…`, `main/analyzer_command.h` 267
+  `9e9ee843…`, `time/periodic.h` 41 `5eac2fe…`, `main/thread.h` 65
+  `272021f4…`, `utils/util.h` `bcf83e41…`. Path `src/main/` ONLY —
+  `src/daqs/` NEVER existed (the 19a-era trap face kept).
+- **THE GATE LANDED — RUNNER tails are the ONLY truth (17p seed-
+  measured then grep-pinned, NEVER typed)**: cc **EXACTLY-14**
+  `TEST_CASE(…"[ThreadConfig]")` — 9 direct under `#ifdef UNIT_TEST`
+  :613 (anchor :615 "Parse cpuset string negative test") + 5 nested
+  under the inner `#ifdef HAVE_NUMA` :797 (endifs :918/:920); the
+  gre-style WITH-SPACE `TEST_CASE (` shape grep-**0** (gre-ism, NOT
+  this row's — parity tripwire: 14 / 0). FULL arm `-DUNIT_TEST
+  -DHAVE_NUMA` tail: **All tests passed (23 assertions in 14 test
+  cases)** -> 5-L gate.txt md5 `a32720c7…` (COPY-LOCAL UNTRACKED,
+  regenerated every build). HAVE_NUMA-OFF hinge arm tail: **All tests
+  passed (17 assertions in 9 test cases)** — the 5 NUMA cases hinge
+  HONESTLY on the define (`gate_l` 14 names / `gate_off_l` 9 names
+  via `-l`). The 28-straight zero-gate streak CLOSED; the parity rs-
+  side self-census: the 9 direct translated fns carry EXACTLY-17 in-
+  file asserts = the hinge's 17-assertion face maps EXACTLY; all 14 =
+  23 asserts = the full runner count (the gate-translation parity
+  heart of the row).
+- **THE CATCH_CONFIG_RUNNER MANDATE LAW (E10, flipped-assert EVERY
+  build)**: the ground tests DEREF TU statics (`topology`,
+  `process_cpuset`, `topology_support`) filled ONLY by `ThreadConfig::
+  init()`, which upstream boots at **`snort.cc:109`** BEFORE Catch
+  (sed-pin re-armed); upstream's OWN test-world shape =
+  **`#define CATCH_CONFIG_RUNNER`** at `src/catch/unit_test.cc:26`. A
+  gre-style CATCH_CONFIG_MAIN twin **SEGVs (rc139 hard / Catch-
+  intercepted rc — both faces arm-tolerated)** inside the FIRST cpuset
+  case (`E10_main_segv.txt` carries `Parse cpuset string` — broke on
+  the statics-deref; a GREEN MAIN-shape run = the init-order law died,
+  rc1). The row ships its OWN `tc_gate_main.cc` (RUNNER + init()
+  before `session.run`): **FIRST row EVER with a tracked runner main
+  TU**; the gre CATCH_CONFIG_MAIN twin is NOT reusable for init-order
+  TUs.
+- **DONOR-SELECTION LAW (include-graph-MECHANICAL, measured)**: the cc
+  pulls `main/analyzer_command.h` :255 `std::vector<
+  DIOCTL_GetSnortLatencyData>` -> ONLY the **ext#4 `9b603f8f` family**
+  satisfies (the 21b graft-VERSION law applied PRE-build — graft-
+  version checks EARNED their keep this row); mpls satisfies via the
+  same md5 (banked ALT), **ipheavy copy tree wins by lineage-newest +
+  proven** — the FIRST fresh-lineage DONOR ride; donor self-heal arm
+  (cold copy -> build ipheavy first, single-tenant); mid-build face
+  **149 non-.o copy files** (140 base + 4 wit heredocs + 5 fresh cps
+  replacing stale faces). No flow/codec/packet deps: the cc NEVER
+  includes daq.h (DAQ residue = analyzer->daq_common only) — the
+  rsubs REJECT-class concern was MOOT here (measured).
+- **THE STALE-DONOR-HEADER TRAP (measured, flipped-assert EVERY
+  build)**: **5 donor copy trees carried `copy/main/thread_config.h`
+  at `21c903df9febbd9bfe08e1d3ad5d5f02`** — byte-DIFFERENT from ground
+  `86a4d2` (`NumaMemPolicy numa_mempolicy` / `set_numa_mempolicy` /
+  `implement_thread_mempolicy` members ABSENT — a pre-20s ground
+  face). NEVER re-ride a donor header: FRESH ground cp + graft sed
+  OVER whatever a tree carries, day one, every build (standing re-walk
+  THIS pass: the stale face infests every legacy copy/ tree —
+  28 trees deep: STANDING LAW for any future row re-compiling this h).
+- **THE FUNCTIONAL-HWLOC-WITNESS LAW**: gate CHECKs SEMANTIC
+  (`isequal`, `weight==1`, `isset`) -> the numa_harness decl-only
+  ladder (LINKS only) is INSUFFICIENT for a gate arm. The tc witness:
+  std::set-bitmap FUNCTIONAL model, **256 CPUs 0..255 — the WITNESS
+  MODEL, NOT host `nproc`** (cgroup 2, nproc lies 16 — NEITHER is a
+  face); `hwloc_set_cpubind` FAILS for bits >= 256 so the ground
+  9999-CPU graceful-fallback case REALLY falls back; FACE-A MAXLADDER
+  auto=256. FACE-A hearts: the pthread **ERANGE name-KEEP ladder**
+  (`s3.pkt-c0` SURVIVES the 513-char rewrite — rename ERANGEs, name
+  KEPT; `s3.pkt-c9999` FITS the 15-byte cap — cc :446-:455 REAL byte-
+  length math in the rs) + NUMAFALSE witness 0/0 early-out. The 5
+  NUMA cases install GROUND-authored in-TU mocks (`NumaWrapperMock`/
+  `HwlocWrapperMock` :839-:914 region, ship VERBATIM — no hwloc
+  runtime) but need a COMPLETE `hwloc_obj` BY VALUE (`os_index` +
+  `cpuset`) + `HWLOC_TYPE_DEPTH_UNKNOWN`. FIXTC #3 CONSUMED as the
+  **witness-REPPOINT variant** (`<hwloc.h>` -> `wit/hwloc_wit.h` +
+  numa trio reps; masters frozen, copy-LOCAL heredocs/seds) — the
+  flog EXCISION variant FAILS when ifdef'd cases ARE gate material
+  (the 21b "row NEEDS it" bank paid out, thrice-consumed route).
+- **Cite-drift faces, FOUR fresh at this row (disk wins; OPEN fixes)**:
+  (1) the **hwloc token trio: cc raw `hwloc_*` occurrences 142 / cc
+  grep-LINE face 126 / h raw 2** — the banked token `cc **133**`
+  (= a bare-token era count line) is the STALE trio member: the 22a
+  build.sh :124 hard-`grep -q` of `cc **133**` against THIS file makes
+  the literal a MANDATORY carry (drift recorded beside it — some drift
+  tokens must KEEP riding because a harness pins the stale form as the
+  exhibit); (2) the include-arm: PLAN banked :34, DISK
+  `#ifdef UNIT_TEST` :34 / `catch/snort_catch.h` :35 / `#endif` :36
+  (sed-pinned; parity `lines[33]/[34]` re-arms the pair); (3) the h
+  **95-NOT-86** face; (4) the **nm drift trio MEASURED 27/36/57
+  (+16 `Catch::` names, closed by the RUNNER TU at link)** vs PLAN-
+  banked 27/34/49 (+15) — recipe-measured wins (`nm_U_plain/
+  plain_numa/gateut.txt` receipts).
+- **Harness dir = EXACTLY 9 tracked faceS (measured `git ls-files`)**:
+  .gitignore 53 L + PLAN.md 91 L + build.sh **699 L** + probe.cc 76 L
+  + probe_faceA.cc 96 L + witness_tc.cc 41 L + tc_gate_main.cc 26 L +
+  vectors.txt **9 L** `3ef16a1e66a1590fb0303e514b6334b3` +
+  vectors_faceA.txt **9 L** `653103cb599ea6369949eeb35a8ed698` —
+  **DEC-9 + FACE-A-9 pinned**. THE 9-FACE face: **PLAN-SS1 banked 8 =
+  drift** (the rsubs shape + the runner main TU = the first-ever 9th —
+  the stageable face of any future harness is MEASURED, NEVER
+  inherited). TAIL **`TC_DONE vectors=9 faceA=9 gates=1`** (the
+  14-case gate; the NUMA-off arm = hinge RECEIPT, NOT a second
+  gate.txt; census = EXACTLY 1 new). FIRST-RUN-SEED + drift-refuse +
+  tamper-proven + O0==O2 BYTE-IDENT x3 streams (probes + gate third).
+  Nested-.gitignore instrument (root NEVER moves) + the copy-local
+  output check-ignore enumeration loop (gate*/nm*/E4*/E9/E10/
+  md5_pinned/stageables — every artifact named).
+- **Witness one-home law**: ONE own witness (messages x5 + get_error +
+  instance-id + thread-type + **the Periodic DECL bodies** + the numa
+  trio); **REAL `time/periodic.cc` stays the periodic_harness home —
+  DECL-home per row, NEVER-invent providers**; the watchdog rides the
+  cc :585/:604 timer-0 once-const guards (WD-NOOP). **witness_conf
+  CORE-SUBSET heredoc (ONE home for the link)**: the carried
+  rsubs-era `4dd91018` family DEFS `ThreadConfig::get_instance_max()`
+  = a **ONE-HOME CLASH** vs the ROW-OWNED symbol (the rs OWNS it;
+  `fn get_instance_max` count EXACTLY-1, REUSE-cited by the landed
+  file_cache ThreadApi seam h:44 — NEVER re-forked; the carried family
+  is UN-linkable here) -> the row writes a 14-L CORE-SUBSET heredoc.
+  Law grown: carried witnesses are CITE material; re-derive against
+  the row's OWNED symbols. **E9 ONE-FACE link rule**: plain+gateut
+  co-link MUST DIE at **EXACTLY-20** `multiple definition` lines
+  (recon face, MEASURED — `E9_dup.txt`; a clean face = the law died);
+  link = runner TU + the -DUNIT_TEST TU only, plain .o OUT.
+- **Rust face**: 1,581 L flat cite-heavy ZERO allows — hwloc/NUMA are
+  CITED PROVIDER SEAMS (no library port; bitmap semantics REAL as
+  `CpuBitmap`; 15-byte pthread cap as real byte math) + the init-
+  ORDER law faces + the REAL `time::periodic` registration ride +
+  EXACTLY-1 `gettid` extern face. Parity tripwires standing:
+  ground-920/95 reads, TEST_CASE 14 + space-variant 0, :612/:613/:614
+  anchors, :796/:797 hinge, six HAVE_NUMA arms, the :33/:34 include-
+  drift pair, the stale-`21c903df` md5 NEVER on the rs side, the
+  142/126/2 trio, the `cc 133`-stale cite-preserve (cargo twin), one-
+  home + file_cache-seam cites, ZERO allows, the gate-tail/`-l` faces
+  IF present. up_gate posture: NEVER invented (method-§2 law; posture
+  arms ONLY at rsubs :686 + the sfd twin).
+- **CMake / test-world census (ground-pinned EVERY build)**: `main/
+  test/CMakeLists.txt` EXACTLY 2 add_cpputest — thread_test.cc 442 L
+  / 36 `^TEST(` rides `main/thread.cc` 190 L (a NON-config rider —
+  future census, NOT this row) + distill_verdict_test.cc 381 L / 14 —
+  AND the row TU rides ONLY the OBJECT-library sources list (upstream
+  NEVER built a suite over its Catch block); `add_catch|UNIT_TEST` = 0
+  in main/CMakeLists (measured). CppUTest host find-0 stays E4-flipped
+  EVERY build (hardware/CppUTest landings = loud rc1 + RE-PLAN LOUDLY).
 
-## 21a close-out — FIRST FRAMEWORK-REGISTRY ROW (plan row + deviations shipped INSIDE code commit 167cb3c; VERIFY-greps-verified + re-grounded at 19a/20a/21a/21b passes, count-1 each)
-- **Ground pair re-wc + re-md5 byte-exact at 21a, RE-GROUNDED AGAIN at
-  the 21b pass**: `/opt/data/snort3-src/src/framework/
-  reload_survivor_subscriptions.cc` **631** `ff4b549236fce47b0ee899d6
-  b793f87a` + `…_impl.h` **156** `b437ba1cff967338b48b1b354743d64a` =
-  **787 L**. NAME-RESOLUTION FACE: the docs token is `rsubs`, the ground
-  TUs are `reload_survivor_subscriptions.*` — ground `find -iname
-  '*rss*'` = **find-0**; the PLAN's "rss" handle never mapped to a filed
-  name (20a flag, CLOSED honest).
-- **Commits**: 167cb3c = **13 paths, +3,307/−0** (8 harness stageables +
-  1 src TU + mod.rs + parity test + plan row + deviations). Guards: the
-  21a plan row and deviations heading each count-1 (heading :4232, 82 L
-  / 11 bullets). Both shipped in the code commit (the 18b-20a variant).
-- **Harness `tools/rsubs_harness/` = EXACTLY 8 tracked faces**:
-  .gitignore + PLAN.md + build.sh (632 L) + probe.cc (162 L) +
-  probe_faceA.cc (81 L) + vectors.txt + vectors_faceA.txt +
-  witness_rsubs.cc (30 L `c0142f9b…`). Tail `R_SUBS_DONE vectors=12
+## 21b close-out — SURVIVOR-FLOW-DATA PIN PROVIDER (LANDED at 3e9f2d7; face re-grounded at the 22a pass, count-1 each)
+- Ground SOLO provider `src/framework/survivor_flow_data.cc` **88 L**
+  md5 `4b1eedaf70469172153c22cd91b4a682` — NO sibling .h (the DECLS
+  ride the 21a-owned `reload_survivor_subscriptions_impl.h` :138-:152,
+  cp'd for closure, NEVER a fresh stageable): THE 21a DECL-ONLY seam
+  COMPLETED (nm-pull EXACTLY-0 -> real). Commit 3e9f2d7 = **13 paths,
+  +2,339/−0** (8 stageables + 1 src TU + mod.rs + parity + plan row +
+  deviations heading :4314).
+- Harness = EXACTLY 8 tracked faces; tail `SFD_DONE vectors=8 faceA=8
+  gates=0`; vectors DEC **8 L** `3c05632e88676ef9f40ee0a5d33fdf09` +
+  FACE-A **8 L** `040de1ef2ea177ac526c8ef244713c58` — SMALLEST pair
+  yet; FIRST-RUN-SEED + tamper-proven (the T3 `pinned=0->9` flip arm);
+  O0==O2 BYTE-IDENT; backbone10 echo 5339c7ee byte-ident. The pair is
+  NOW a chain-echo: **the 22a build.sh re-md5s both** its sfd-vectors
+  pins — a harness ECHOING an older harness's vectors = LEGAL; a
+  build.sh CARRYING the sfd dir token = loud rc1 in EVERY sfd re-run
+  — the 22a donor-echo arms pushed that file-census hardcode to its
+  measured 2-file face (sfd script EXCLUDED).
+- **THE GRAFT-VERSION LAW (DONOR-LAW FIRST-REJECTION, a lineage
+  first)**: flow.h :541 `DAQ_Verdict last_verdict = MAX_DAQ_VERDICT;`
+  needs ext#4 `daq_common.h` **9b603f8f** (==6, copy-LOCAL LEGAL,
+  pinned :199); donor graft CONTENT BEFORE cloning — the rsubs-tree's
+  graft-v2 `fead0027` clone DIES at :541 EVEN with the 5 closure cps
+  (the 21a tree = LEGIT ch19 NON-flow rider donor ONLY); the misc9
+  tree REJECTS flow.h find-0 -> donor = **mpls 130+3 = 133 ONLY**
+  (flow-closure BYTE-IDENT residents EARNED their keep; ipheavy ALT
+  140+3 = 143 U-IDENTICAL leg). TOKEN-NEVER-RIDDEN: donor dir NAMES
+  never ride a build.sh verbatim — runtime CONCATENATION keeps REJECT
+  legs byte-ident-live (`rs`+`ubs_harness`, :89-:91; E4_daqwall_*
+  receipts).
+- **WITNESS own-9 (honest census) + 1 typeinfo ride = EXACTLY-10
+  undefined L1, EXACTLY 9 NAMED**: FlowData ctor/dtor/
+  `create_flow_data_id` + FlowDataStore get/set + Inspector add_ref/
+  rem_ref + **THE tterm PAIR FOUND-0** (`is_pending_tterm` /
+  `thread_drain_pending_tterm_if_pending`; bodies mirror imgr.cc
+  :324/:1276 SHAPES, fake knob — the REAL drain, survivor_flow_data.
+  cc :54 call site, LEFT-OPEN NEVER-invent, joins the row-20 seam
+  ledger). **THE flow_data_id DEFINITION-MIRROR TRAP**: the link DIES
+  without the witness B-face mirror; def-count 1 ONE-home (the rs
+  keeps the ONE-home law — the file_api Cell grafts REUSE-cited,
+  NEVER re-ported). `survivor_flow_data.rs` 418 L ZERO allows /
+  EXACTLY-2 `debug_assert!` mapping the cc's EXACTLY-2 `assert(pin);`
+  :44/:60 + `<cassert>` — the module.rs :831 NDEBUG-elides cite,
+  NEVER hard `assert!()`; dtor = EXPLICIT release_pins; 'static pins
+  = the dangling-window-free deviation.
+- **T3 SEMANTIC FACE = the row's heart**: gadget-less `set_gadget`
+  PINS NOTHING — survival ONLY at REBIND (vectors T3 + a DIRECT unit
+  tripwire; tamper flips EXACTLY that line). FACE-A: NOLOAD + IDSTATIC
+  (the cc :39 static-init pull — PLAN banked :33, disk :39: cite-drift
+  CLOSED, cargo asserts index 38 IS / 32 NEVER; witness B-mirror id==1
+  OBSERVABLE) + IDSEQ + ADDIDEM + REACH/REBIND (private decl via
+  PUBLIC inlines: flow.h :607 vs :360-:380) + NOTPEND + SURVIVE; ZERO
+  table census (21a's PEGS/SLOTMAP faces asserted ABSENT).
+- **THE cite-drift LANDMARK (the exhibit rides EXACTLY-ONCE)**: the
+  21a docs pass SEEDED a rider-count token in this file — `5 TEST(` —
+  and DISK corrected it: rider 268 L, `^TEST(` EXACTLY-**4** (the
+  four case NAMES pinned by name; harness :159 ground-pin "NEVER 5";
+  CARGO twin asserts rider 268/4 + the quoted token's line-count
+  EXACTLY-1). The drift was FIXED OPENLY, never silently — the law
+  reads CONTINUOUS; copy the exhibit ONCE at most, five-TEST PROSE
+  everywhere else (the 21b title double-carry was the 62d6fac
+  dedup). Rider = 1 of **8** flow/test add_cpputest lists (:46;
+  framework/test = 3 UNDISTURBED — re-read ground THIS pass:
+  data_bus / mp_data_bus / rsubs rider; misc9's -eq 3 face intact).
+  CppUTest host find-0 -> dialect-BLOCKED, cite/translate ONLY = the
+  **28th straight zero-gate AT ITS LANDING** (the streak closed one
+  row later — per-row honesty). UNIT_TEST grep on the row cc = 0 (the
+  INVERSE of 21a's 4/1). Detection-land rider includes (context_
+  switcher/detection_engine/flow_control/ha) = cite-ONLY — NEVER
+  compile that closure for a ch19 row. TWO test-world STUB homes
+  carry the `Flow::pin_survivor_flow_data(Inspector&) { }` no-op
+  (socks_negative_test.cc, mitigator_context_reuse_test.cc; sfd
+  :171-:172 greps) — cite face.
+- **Harness-as-docs-stakeholder + THE CARGO TWIN**: build.sh :527
+  python + :637-:641 grep (573 -eq 5 — the FIRST exact-5 arm) + the
+  :116-:119 NAME-PINS (token census outside the sfd script ==
+  EXACTLY-ONE FILE; `grep -c` of the prefixed dir token == EXACTLY-1
+  line; find-1 self / `flowdata_harness` find-0 EVER). The SAME laws
+  now run in CARGO (rider reads NEXT: the exhibit once-face, the
+  prefixed-token once-face, the x3/x5 loop, the witness law censuses,
+  and the POST-62d6fac 26-census assert with the streak prose face).
+  A NEW build.sh touching those tokens = loud rc1 EVERY sfd build:
+  they join the NEVER-ADD set.
+- up_gate POSTURE PIN: NO `up_gate_*` capture EVER invented; posture
+  arms ONLY at rsubs_parity_test.rs :686 + the sfd twin. NEVER invent.
+
+## 21a close-out — FIRST FRAMEWORK-REGISTRY ROW (LANDED at 167cb3c; VERIFY-greps + re-ground at 19a/20a/21a/21b/22a passes, count-1 each)
+- Ground pair byte-exact: `src/framework/reload_survivor_
+  subscriptions.cc` **631** `ff4b549236fce47b0ee899d6b793f87a` +
+  `…_impl.h` **156** `b437ba1cff967338b48b1b354743d64a` = **787 L**.
+  NAME-RESOLUTION FACE: the docs token is rsubs, the ground TUs are
+  `reload_survivor_subscriptions.*` — ground `find -iname '*rss*'` =
+  find-0; the PLAN's "rss" handle NEVER mapped to a filed name (20a
+  flag, CLOSED honest).
+- Commit: 167cb3c = **13 paths, +3,307/−0** (8 stageables + 1 src TU +
+  mod.rs + parity + row + deviations, heading :4232). Both shipped in
+  the code commit (the 18b-21a variant).
+- Harness = EXACTLY 8 tracked faces; tail `R_SUBS_DONE vectors=12
   faceA=9 gates=0` (build.sh :632); vectors DEC 12 L
   `9e303761c021d00ea672a493544e07af` + FACE-A 9 L `42aa06fb4c55adfa50
-  e96d1f715d997e` (re-md5'd byte-stable at 21a AND cited byte-ident from
-  the sfd build.sh chain echo); FIRST-RUN-SEED + tamper-proven (the 12/9
-  pair is now a CHAIN-ECHO face pinned by the sfd harness — sfd's
-  frozen-census line echoes `9e303761/42aa06fb` byte-ident). DONOR face:
-  misc9 tree VERBATIM 124 cps + EXACTLY 3 fresh cps = 127 mid-build
-  asserted (the flowz decoy NEVER satisfies the `flow/` path — the
-  E4_nofld chained-wall receipt; the mpls/18o law re-proven — and the
-  sfd row LATER proved this very tree's graft-v2 DIES at flow.h :541:
-  the 21a tree is a LEGIT ch19 NON-flow rider donor ONLY).
-- **WITNESS FACE = L1 EXACTLY-3 own-new -> EXACTLY-ONE witness_rsubs.cc
-  (30 L `c0142f9b…)`**: `DataBus::_subscribe` (the friend-unlock PRIVATE
-  overload, data_bus.h :127/:130), `SnortConfig::get_reload_id`
-  (snort_config.h :775, NOT-const — the `7` the T8c warn face rides) and
-  `WarningMessage` (messages.h :58 capture). `get_conf` stays CLOSED on
-  the carried `witness_conf` heredoc `4dd91018`, NEVER doubled (the
-  NEVER-DOUBLE-DEFINE law re-learned). **backbone stays EXACTLY 10**
-  (symbol-vs-array law).
-- **THE DATA-BUS WALL FLAG FLIPPED HONEST**: the 20a-era bank raised a
-  data_bus concern around the P2 pairing (P2+data_bus 233 = 864 > the
-  proven 800 band — that SIZE argument stands) — but MEASURED AT THE
-  ROW the data_bus/pub_sub wall is **NOT REAL**: pub_sub pulls ZERO
-  symbols; the only closure ever needed was the ONE friend-unlock
-  mirror above. The banked `'47'` NEXT token is the **TEST( COUNT face**
-  — `src/framework/test/reload_survivor_subscriptions_test.cc` 2,028 L /
-  **47 `TEST(`** / 1 TEST_GROUP, pinned live by rsubs build.sh :114;
-  REAL CppUTest material RIDING TWO suite SOURCES lists, host dialect-
-  BLOCKED -> the `add_cpputest -eq 3` framework/test census (misc9 :77)
-  rode UNDISTURBED -> 27th straight ZERO-gate. NEVER fake a gate over
-  it; RE-PLAN LOUDLY if CppUTest ever lands.
-- **THE rsubs CITE-DRIFT face**: the clock seam `rss_set_elapsed_for_
-  test` — the 20a-era bank cited region ":619-:624" — **the def sits at
-  :625 on disk**; rsubs build.sh :142 sed-pins :625 (the rsubs rider
-  `TEST(`-47 + `:625` GROUND pins STILL re-read ground every build,
-  disk wins). `forced_elapsed_ms` = the 17e interposed-clock probe arm
-  (UNIT_TEST census cc4/impl1 — the OWN-assert face, NOT gate material).
-- **FACE-A shape**: NOLOAD framework-TU face + the registry table
-  `rss_pegs[13]` = 12 named pegs + END sentinel, `RssPeg` hidden enum
-  12 + Count (impl.h :43-:58), `static_assert` :340 COMPILE-proof, the
-  `rss_stats_to_pegcounts` TRIPLE coupling, PEGTYPE ordinals SUM=1/
-  NOW=2/END=0, DEDUP 3-arm, and the **reset()-CARVE-OUT**: impl.h
-  :76-:88 clears TEN fields, LEAVES `active` + `registry_tracked`
-  (rss_reset_for_test :616-:617 stores THOSE two) — Rust mirrors it all.
-- **SurvivorFlowData DECL-ONLY seam** (impl.h :138): the 21a row ports
-  the DECLS only, nm-pull EXACTLY-0 — the provider WAS **row 21b, NOW
-  LANDED at 3e9f2d7** (the seam-face completion above). `PolicyResoluti
-  onFailures` peg: NEVER bumped/invented here — inspector_manager-owned;
-  whoever lands that TU owns the peg arithmetic.
-- **nm face (MEASURED at 21a)**: nm_U = 50 NDEBUG-INVARIANT (ZERO
-  runtime-assert pulls — the honest NON-delta vs 19a's +1, and the
-  CONTRAST face the 21b census FLIPPED); rsubs.o defined = 12 T +
-  rss_stats B + rss_pegs D; link WITHOUT -pthread ALSO rc0 on this host.
+  e96d1f715d997e` — chain-echoed byte-ident by sfd AND by the 22a
+  harness; FIRST-RUN-SEED + tamper-proven. DONOR misc9 VERBATIM **124
+  + EXACTLY 3 fresh = 127** mid-build (the flowz decoy NEVER
+  satisfies the `flow/` path — E4_nofld chained wall; and 21b LATER
+  proved this tree's graft-v2 DIES at flow.h :541).
+- Witness EXACTLY-3 own-new: `DataBus::_subscribe` (the friend-unlock
+  PRIVATE overload, data_bus.h :127/:130), `SnortConfig::
+  get_reload_id` (snort_config.h :775, NOT-const — the `7` the T8c
+  warn face rides), `WarningMessage` (messages.h :58 capture).
+  `get_conf` stays CLOSED on the carried witness_conf heredoc
+  `4dd91018`, NEVER doubled — the NEVER-DOUBLE-DEFINE law, WHICH 22a
+  EXTENDED: a carried family turns UN-linkable when a row OWNS one of
+  its symbols (CORE-SUBSET law). backbone STAYS EXACTLY 10 (symbol-
+  vs-array law).
+- **Data-bus wall FLAG FLIPPED HONEST**: the 20a-era SIZE bank (233 =
+  864 > the proven 800 band) stands as history — MEASURED AT THE ROW
+  the data_bus/pub_sub wall is **NOT REAL**: ZERO pub_sub symbols; the
+  ONE friend-unlock mirror was the entire closure. The banked `'47'`
+  token = the rider `TEST(` COUNT: `src/framework/test/reload_
+  survivor_subscriptions_test.cc` 2,028 L / **47 `TEST(`** / 1
+  TEST_GROUP (harness :114 live pin); REAL CppUTest material on TWO
+  suite SOURCES lists, host dialect-BLOCKED -> the `add_cpputest -eq
+  3` framework/test census rode UNDISTURBED -> 27th straight zero-
+  gate; RE-PLAN LOUDLY if CppUTest lands.
+- Cite-drift: the clock seam `rss_set_elapsed_for_test` — the 20a bank
+  cited ":619-:624" — **the def sits at :625 on disk** (sed-pin :142;
+  disk wins; ground pins re-read EVERY build). `forced_elapsed_ms` =
+  the 17e interposed-clock arm (UNIT_TEST census cc4/impl1 — OWN-
+  assert, NOT gate material).
+- FACE-A: NOLOAD framework head + registry `rss_pegs[13]` = 12 named
+  pegs + END sentinel, `RssPeg` hidden enum 12+Count (impl.h
+  :43-:58), `static_assert` :340 COMPILE-proof, `rss_stats_to_
+  pegcounts` TRIPLE coupling, PEGTYPE ordinals SUM=1/NOW=2/END=0,
+  DEDUP 3-arm, the **reset()-CARVE-OUT** (impl.h :76-:88 clears TEN
+  fields, LEAVES `active` + `registry_tracked` — rss_reset_for_test
+  :616-:617) — Rust mirrors all. nm (MEASURED): nm_U = 50 NDEBUG-
+  INVARIANT (ZERO runtime-assert pulls — the CONTRAST the 21b census
+  flipped); rsubs.o defined 12 T + rss_stats B + rss_pegs D; link
+  WITHOUT -pthread rc0 on this host.
+- SurvivorFlowData DECL-ONLY seam (impl.h :138): nm EXACTLY-0 —
+  provider = row 21b, LANDED. `PolicyResolutionFailures` peg NEVER
+  bumped/invented (inspector_manager.cc :652/:681 consumer-owned);
+  the rs carries ONE cited point-site allow (the :340 record-shape
+  face).
 
-## 20a close-out — CODECS CHAPTER CLOSED (plan row + deviations shipped INSIDE code commit d525b6d; VERIFY-greps-verified + re-grounded at 19a/20a/21a/21b passes, count-1 each)
-- **Ground trio re-wc + re-md5 at the 20a pass, byte-exact** @
-  `/opt/data/snort3-src/src/codecs/ip/`: `cd_ipv4.cc` **790**
-  `def01f1df71ab250896da1764f6c0f92` + `cd_ipv6.cc` **733**
-  `89267b1d6d4f583434af207a14f90f56` + `cd_tcp.cc` **839**
-  `144c427504a13c58dc117bcf93f6a604` = **2,362 L** (cd_tcp lives in
-  `codecs/ip/`, NOT a `codecs/tcp/` dir — fresh-agent trap kept).
-- **Commits**: d525b6d = **16 paths, +7,136/−1** (9 harness stageables
-  incl the nested `.gitignore` instrument + 3 src TUs + mod.rs +
-  `tests/ipheavy_parity_test.rs` + plan row + deviations section);
-  8b9882a = **1 path, +11/−1** — the state-aware ZERO-LEAK count in
-  ipheavy build.sh (the naive count died post-commit = the row's own
-  defect, honest face, fixed by FOLLOW-UP commit, the 18i law).
-- **Harness `tools/ipheavy_harness/` = EXACTLY 9 tracked faces**:
-  .gitignore + PLAN.md + build.sh + probe.cc + probe_dec.cc +
-  vectors.txt + vectors_faceA.txt + witness_ipvars.cc + witness_opts.cc.
-  Tail `IPHEAVY_DONE vectors=121 faceA=44 gates=0` (build.sh :805);
-  vectors DEC 121 L `857b5a100480114085b45a392ab713bf` + FACE-A 44 L
-  `63df50bc57b7d15d95c21bdfcd492fce` (the sfd frozen-census line echoes
-  this tail pair byte-ident; direct-md5 verify unless the :656-:660
-  grep arms pass against the REWRITTEN file).
-- **THE LANDMINE, closed honest on BOTH faces**: the vocab
-  witness_stubs.cc **:11-:13** `extern const BaseApi* cd_ipv4/6/tcp[]`
-  trio retired **copy-LOCAL in the ipheavy harness ONLY (stubs_20a)** —
-  frozen vocab donor `witness_stubs.cc 9fad7e9d…` + `stubs_18e.cc
-  a700f77e…` byte-frozen. Rust-side: the vocab records **CARRY** —
-  `src/codecs/codec_api.rs` :51/:53/:57 still pin the `*_STUB` records
-  (vocab vectors `5da70e82` :25-:27 LOAD pins); the flip audit stays an
-  honest per-row decision. Name table `codec_api.rs :97 [&str; 34]`
-  tripwire UNDISTURBED; the 39-extern ground census = **39**.
-- **ext#4 graft family — COPY-LOCAL at the ipheavy copy tree ONLY**:
-  `daq.h` **51 L** `97bca757…` + `daq_dlt.h` **14 L** `e8a39bf3…`
-  (DLT_IPV4 **228** :13 / DLT_IPV6 **229** :14) + `packet.h` RE-POINT
-  `1be562b2…`. MASTERS stay md5-FROZEN, NEVER promoted: daq3 master
-  `daq.h` 33 L `73fdbc39…`, `daq_common.h` v16 16 L `f683749c…`,
-  graft-v2 `fead0027…`, graft-v3 `0f7016a6…`, ext#2 `9b603f8f…` 34 L —
-  **the 21b row PROMOTED ext#4-to-LEGAL-AS-IS status ONLY as a copy-
-  local face on the mpls-derived tree (flow.h :541 needs MAX_DAQ_VERDICT
-  == 6) — STILL NEVER a tracked cp, STILL synthetic, NEVER ABI truth.**
-  Real use-site pins: `src/flow/flow.h :541` + `src/packet_io/
-  sfdaq_module.cc :179` `static_assert(MAX_DAQ_VERDICT == 6, …)` (path
-  trap: NOT src/main/).
-- **Vectors/dec faces**: LOAD-TRIO FLIP; DLT 228/229 HELP face; sid
-  bands ipv4 {1-6, 404-448} / ipv6 {270-477} / tcp {45-59, 400-446} ALL
-  outside the 170-176 EV-34 face; `#if 0` dead block cd_ipv4 :210-:217
-  CITE-NEVER-LAND; WORDS_BIGENDIAN :379; naptha LE consts :49-:50
-  seed-drift tripwire. TRUE-NAME HOLDS: tables cd_ipv4[] :785 / cd_ipv6
-  [] :728 / cd_tcp[] :834. Own L1 EXACTLY-10 undefined -> witness DUO.
-- **clippy-allow src face**: trio 3/5/2 = **10** cited point-site allows
-  + rsubs.rs **1** (record-shape site riding the :340 static_assert
-  face) + **sfd.rs ZERO** (the 21b face — clean-before-commit paid off;
-  ZERO in every framework mod.rs). Tests-side pin-site counsel UNCHANGED
-  (ext :589, small4 :594, vocab :254, misc3 :486, erspan :378; link4
-  EXACTLY 1).
+## 20a close-out — CODECS CHAPTER CLOSED (LANDED at d525b6d + the follow-up 8b9882a; re-grounded EVERY pass since)
+- Ground trio `codecs/ip/`: `cd_ipv4.cc` **790** `def01f1df71ab250896d
+  a1764f6c0f92` + `cd_ipv6.cc` **733** `89267b1d6d4f583434af207a14f90
+  f56` + `cd_tcp.cc` **839** `144c427504a13c58dc117bcf93f6a604` =
+  **2,362 L** (cd_tcp lives in `codecs/ip/`, NOT `codecs/tcp/` — trap
+  kept). Commits: d525b6d = **16 paths +7,136/−1** (9 stageables incl
+  the nested `.gitignore` instrument + 3 src TUs + mod.rs + parity +
+  row + deviations); **8b9882a = 1 path +11/−1 — THE FOLLOW-UP-COMMIT
+  PRECEDENT itself** (the naive ZERO-LEAK count died post-commit =
+  the row's own defect, fixed FORWARD, the 18i law — REPLAYED at 22a
+  by 62d6fac; the named living pair).
+- Harness = EXACTLY 9 tracked faces; tail `IPHEAVY_DONE vectors=121
+  faceA=44 gates=0` (:805); vectors DEC 121 L `857b5a100480114085b45
+  a392ab713bf` + FACE-A 44 L `63df50bc57b7d15d95c21bdfcd492fce`
+  (sfd + 22a chain echoes cite the pair byte-ident; direct-md5 verify
+  unless the :656-:660 arms pass against the REWRITTEN file). **THE
+  COPY TREE = THE 22a DONOR** (the 150-era ext#4 tree; the 22a
+  script's self-heal runs THIS build.sh when cold — donor lineage
+  heads MOVE, masters NEVER).
+- **THE LANDMINE, closed honest on BOTH faces**: vocab witness_stubs.cc
+  :11-:13 `extern const BaseApi* cd_ipv4/6/tcp[]` retired **copy-LOCAL
+  here ONLY (stubs_20a)** — frozen vocab donor `9fad7e9d…` +
+  `stubs_18e.cc a700f77e…` byte-frozen. Rust-side the vocab records
+  CARRY (`codec_api.rs` :51/:53/:57 pin the `*_STUB` records; vocab
+  vectors `5da70e82` :25-:27 LOAD pins); flip audit = per-row honest
+  decision. `codec_api.rs :97 [&str; 34]` tripwire UNDISTURBED; the
+  39-extern ground census = 39.
+- ext#4 family — COPY-LOCAL here ONLY: daq.h **51 L**
+  `97bca757be2863c3c1e13f5a6fde951c` + daq_dlt.h **14 L** `e8a39bf
+  30226fd7bccc1e86317c730db` (DLT_IPV4 **228** :13 / DLT_IPV6 **229**
+  :14) + packet.h RE-POINT `1be562b2…`. MASTERS md5-FROZEN NEVER
+  promoted. Real use-site pins (22a face included): `src/flow/
+  flow.h :541` (sed-pinned by sfd :180) + `src/packet_io/
+  sfdaq_module.cc :179` static_assert + **`src/main/analyzer_
+  command.h :255`** (the DIOCTL-family donor selector — path traps:
+  :255 in src/main/, :179 NOT there).
+- Vectors/dec faces: LOAD-TRIO FLIP; DLT 228/229 HELP; sid bands ipv4
+  {1-6, 404-448} / ipv6 {270-477} / tcp {45-59, 400-446} ALL outside
+  the 170-176 EV-34 face (`#if 0` block cd_ipv4 :210-:217 CITE-NEVER-
+  LAND; WORDS_BIGENDIAN :379; naptha LE consts :49-:50 seed-drift
+  tripwire). TRUE-NAME HOLDS: cd_ipv4[] :785 / cd_ipv6[] :728 /
+  cd_tcp[] :834. Own L1 EXACTLY-10 -> witness DUO. clippy-allow src
+  face: trio 3/5/2 = **10** cited + rsubs.rs **1** + sfd.rs ZERO +
+  thread_config.rs ZERO (the two cleanest rows) — ZERO in every
+  framework mod.rs; tests-side counsel UNCHANGED.
 
 ## PROCESS LESSONS — the 18i amend-after-push incident (RULE SECTION) + the HELD faces (positive lesson)
 
 THIS IS A RULE SECTION, NOT A FOOTNOTE. The 18i row committed a
 git-face violation of the lineage's own land rule, then corrected it
-in-ref; 18j through the row-21b code commit executed the rule CLEAN —
-the 21b commit face counts **ELEVEN straight** one-commit/one-push
-landings — and 8b9882a DEMONSTRATED the fix-up route post-push (a
-follow-up commit, never an amend): every future agent must read this
-before touching a pushed commit.
+in-ref; 18j through the row-22a code commit executed the rule CLEAN —
+and **8b9882a (20a) + 62d6fac (22a) are the TWO living FOLLOW-UP-
+COMMIT precedents** (each shipped, pushed once, reflog clean): every
+future agent must read this before touching a pushed commit.
 
 **What happened at 18i (transcript timestamps, `git reflog` +
 receipt-file mtimes):** `02:10:27` commit **69c8b6f** = row 18i lands;
@@ -430,7 +590,7 @@ receipt-file mtimes):** `02:10:27` commit **69c8b6f** = row 18i lands;
 69c8b6f** (reflog reads `commit (amend)`); `02:20:56`
 `push --force-with-lease` REWROTE origin/master. 69c8b6f is NOT an
 ancestor of current origin/master — re-proved (merge-base rc 1) at
-EVERY docs pass 18j-21b.
+EVERY docs pass 18j-22a.
 
 **Why it was wrong (even though the payload was clean):**
 `--force-with-lease` makes a rewrite SAFE against clobbering others —
@@ -444,40 +604,52 @@ push helper returns success.
 1. Post-push fixes ship as a FOLLOW-UP COMMIT (own honest message,
    receipts kept), or ride the NEXT docs commit. NEVER a post-push
    amend, NEVER a force of any flavor (`--force-with-lease` included).
-   8b9882a is the living precedent: shipped, pushed once, reflog clean.
+   Living precedents: 8b9882a; 62d6fac.
 2. Harness git-state guards must be FACE-AGNOSTIC: the daq3 :660-:688
    row-face regex template — NEVER a fixed dirty-N whitelist, NEVER a
    harness that dies at its own row's post-commit face. The 20a
-   ZERO-LEAK state-aware arm is the newest face of the same law; rsubs
-   cloned it day one (the 8-face dual guard), sfd cloned it too (the
-   SAME 8-face dual arm). A new harness ALSO clones the link4
-   :881-:884 sibling-DOCS-child NEXT.md-tolerance line from day one
-   (the misc9 :589 rc1 lesson).
+   ZERO-LEAK state-aware arm is the newest face of that law; rsubs +
+   sfd cloned the 8-face dual guard, the 22a row cloned it at the
+   MEASURED 9-FACE count (its gate.txt gitignored OUT of the census
+   face day one — every copy-local artifact in a check-ignore loop). A
+   new harness ALSO clones the link4 :881-:884 sibling-DOCS-child
+   NEXT.md-tolerance line from day one (the misc9 :589 rc1 lesson).
 3. NEVER pin the working repo's own HEAD in a harness. Pin the
    IMMUTABLE ground only.
 4. The rc1 faces stay as receipts and in deviations — only the git
    MECHANISM was wrong at 18i.
-5. **The NEXT.md pinned-string rule (codified 18l, re-proved every pass
-   since — see the carry block at the TOP of this file)**: harnesses
-   read-assert PRIOR-pass literals (erspan :580 `573 tests green`;
-   link6 :198 + :597 + link4 :185/:750 + mpls :137 the 580 passed/0-
-   failed face; link4 :186 + ipheavy :658 + mpls :138 the
-   `588 tests green / 0 FAILED` face; misc9 :462+:607 + rsubs :461/:578
-   + sfd :527/:640 the 597
-   face EXACT-COUNT 3/3 on 3 lines; ipheavy :656-:660 + mpls :136 the
-   605 face; rsubs :460/:576-:577 + sfd :527/:638 the 621 + 605
-   EXACT-COUNT arms; sfd :527/:637 the 629 face EXACT-COUNT + :641 the
-   573 face EXACT-COUNT -eq 5). grep `tools/` for NEXT.md read-asserts
-   BEFORE any rewrite; carry EVERY hit VERBATIM; ADD the CURRENT pass
-   face at EXACTLY 3 for the next row's harness; re-grep pins AFTER the
-   docs commit.
+5. **The NEXT.md pinned-string rule (codified 18l, re-proved every
+   pass since — see the carry block at the TOP of this file)**:
+   harnesses read-assert PRIOR-pass literals (erspan :580 for the 573
+   face; link6 :198 + :597 + link4 :185/:750 + mpls :137 + tc :655
+   the PASSED-phrasing 580 face; link4 :186 + ipheavy :658 + mpls
+   :138 + the `588 tests green / 0 FAILED` face at tc :654; misc9
+   :462+:607 + rsubs :461/:578 + sfd :527/:640 + tc :653 the x3/3-
+   line arms; ipheavy :656-:660 + mpls :136 the 605 arms; rsubs + sfd
+   + tc the 621/605/629/633 count arms — and the CARGO twins re-count
+   x3 faces + exhibit-once + prefixed-token-once straight from cargo).
+   grep `tools/` AND `tests/` for NEXT.md read-asserts BEFORE any
+   rewrite; carry EVERY hit VERBATIM; ADD the CURRENT pass face at
+   EXACTLY 3 for the next row's harness; re-grep pins AFTER. Seeds
+   ABSORB and become harness-pinned floors (633 -> tc :649).
 6. **Harness census runs are SINGLE-TENANT, and the copy-carry runs
    BOTH directions**: before a census-guarded run (erspan :404, the
-   rsubs :620-:623 tools-dirty census, the sfd clone of it), `rm -rf`
-   the GITIGNORED `copy/` of any sibling/child harness that carries
-   that row's TUs. NEVER edit the frozen census. Same law covers cargo:
-   NEVER interleave a `cargo test` round with another agent's — one
-   tenant at a time, receipts to scratch.
+   rsubs :620-:623 tools-dirty census, the sfd + tc clones), `rm -rf`
+   the GITIGNORED `copy/` of any sibling/child harness carrying that
+   row's TUs — NOW incl. the donor (the 22a self-heal builds the
+   ipheavy copy when cold: clear BOTH). NEVER edit the frozen census.
+   Same law covers cargo: NEVER interleave a `cargo test` round with
+   another agent's — one tenant at a time, receipts to scratch.
+7. **NEW AT 22a — THE GATE-HARDCODE LAW (the expensive lesson)**:
+   when a GATE lands, the census MOVES — grep `tests/` (and
+   `tools/`) for scripts/tests that HARDCODE the old census
+   (`grep -rn 'gate.txt' tests/`), and rider-update them IN THE FLIP
+   ROW. The 21b-era cargo rider hardcoded 25 files + the 28th-
+   straight prose; 22a's honest flip (measured 26 / 18 with tracked-
+   1 + legacy-9 posture stated) made it rc1 — fixed by FOLLOW-UP
+   commit 62d6fac, NEVER an amend. A landing = row commit + rider
+   fixups together (ONE red at HEAD shipped = the honest face, the
+   follow-up = the named law).
 
 ## The method (non-negotiable, used by every row)
 1. **C++ harness** under `tools/<name>_harness/` that compiles the
@@ -487,318 +659,369 @@ push helper returns success.
    if a run flakes, fix determinism, never lock a flaky transcript.
    vectors.txt is a tracked INPUT the build re-verifies but NEVER
    fabricates (FIRST-RUN-SEED then drift-then-refuse: md5_pinned.txt +
-   wc pins + cmp arms + O0==O2 — the sfd harness rides this face fully,
-   tamper-arm included, on the SMALLEST pair yet 8/8).
-2. **Catch gate** whenever upstream ships an embedded `#ifdef UNIT_TEST`
-   block or a working `test/` suite: compile it verbatim (the FRESHEST
-   working shape stays at GRE: `tools/gre_harness/build.sh :132` catch
-   cp + `:139` catch_main heredoc + `:143` CATCH_CONFIG_MAIN pin — the
-   VENDORED-Catch rows are HOST-COMPILABLE, unlike CppUTest rows). Run
-   it; record cases/assertions in `gate.txt` (the gre pattern: TRACKED
-   md5 + wc + runner tail wording — **the runner tail is the ONLY truth
-   for gate counts**; gre tail "All tests passed (1 assertion in 1 test
-   case)"). NEVER gate on grep-estimated assertion counts (17p).
+   wc pins + cmp arms + O0==O2 — the 22a harness rides this face fully
+   with tamper arm over THREE streams, gates included; 21b's 8/8
+   stays the smallest pair).
+2. **Catch gate** when upstream ships an embedded `#ifdef UNIT_TEST`
+   Catch block: compile it verbatim — **the FRESHEST working shape is
+   now the 22a RUNNER recipe for init-order TUs** (CATCH_CONFIG_RUNNER
+   main + row-TU boot ORDER before session.run + a FUNCTIONAL witness
+   where cases CHECK semantics; gre's CATCH_CONFIG_MAIN :139-:143
+   twin remains correct ONLY for zero-static-init rows — the E10
+   law). Run it; record the RUNNER TAIL in `gate.txt` — **the runner
+   tail is the ONLY truth for gate counts** (22a: 23 assertions in 14
+   test cases; the hinge arm 17 in 9; gre: 1 assertion in 1 test
+   case). NEVER gate on grep-estimated counts (17p; the WITH-SPACE
+   gre spelling is a DIALect face to census, grep-0 here). A landed
+   gate moves the census BY MEASUREMENT and the tests/ hardcodes move
+   with it (rule 7) — the TRACKED posture is decided AT the row
+   (22a: COPY-LOCAL UNTRACKED, counted; tracked stays gre's).
    Zero-suite rows run the **zero-gate face** (`test ! -e gate.txt` +
-   NO Catch symbols asserted IN the build + the two-lineage census loop
-   + the stageables -eq N face). CppUTest is find-0 on this host —
+   NO Catch symbols IN the build + the two-lineage census loop +
+   stageables -eq MEASURED N). CppUTest is find-0 on this host —
    upstream CppUTest suites are cite/translate ONLY, NEVER a fake gate
-   over them (17p anti-pattern; the 21a row re-proved it over a 47-case
-   suite, the 21b row over the 4-`TEST(` rider). NEVER invent
-   `up_gate_*` capture tests — the posture pins live ONLY where the
-   tests carry them (rsubs_parity_test.rs :686, sfd_parity_test.rs).
-3. **Rust port** in `src/...`: literal transcription. Deviations allowed
-   only when structurally forced, each with a `KNOWN DEVIATIONS.md`
+   (17p anti-pattern; 21a's 47-case and 21b's 4-case riders re-
+   proved). NEVER invent `up_gate_*` capture tests — posture pins live
+   ONLY where the tests carry them.
+3. **Rust port** in `src/...`: literal transcription. Deviations only
+   when structurally forced, each with a `KNOWN DEVIATIONS.md`
    section. A missing external header is met by a MINIMAL measured
-   graft built ONLY off the use-site symbol census; a graft that FAILS
-   a later consumer is met by a NEW face IN THE CONSUMER'S harness
-   (copy-LOCAL ladder echo — the ext#4 face at 20a) — and the 21b row
-   ADDED the graft-VERSION law: check the donor tree's graft CONTENT
-   before cloning it (fead0027 graft-v2 DIES at flow.h :541). Masters
-   frozen md5-asserted. Dead-in-C gates/comments transcribe LITERAL
-   with pins.
+   graft built ONLY off the use-site symbol census — **decl-only IF
+   links suffice; FUNCTIONAL if the CHECKed semantics are gate
+   material (the 22a law)**; a graft that FAILS a later consumer is
+   met by a NEW face IN THE CONSUMER'S harness (copy-LOCAL ladder echo
+   — ext#4 at 20a; the witness repoint at 22a); check the donor's
+   graft CONTENT before cloning (fead0027 DIES at flow.h :541 — 21b)
+   AND the donor's header md5s against ground (the 21c903df trap —
+   22a: FRESH-cp day one, flipped-assert every build). Masters frozen
+   md5-asserted. Dead-in-C gates/comments transcribe LITERAL with
+   pins.
 4. **Whole-transcript replay test** in `tests/<x>_parity_test.rs`:
    replays `vectors.txt` line-for-line against the Rust port
    (`include_str!` + per-index assert, ORDERED, never set-membership —
    the ONE pinned exception: the 18n vlan GETIDS block). Donor shapes:
-   `tests/sfd_parity_test.rs` (612 L, 4 tests — the NEWEST: 8 DEC + 8
-   FACE-A ordered + the T3 semantic-unit tripwires + the ZERO-up_gate
-   posture arm), `tests/rsubs_parity_test.rs` (809 L, 8 tests — 12 DEC +
-   9 FACE-A + the rss_pegs ordinal/slot-map census units), ipheavy
-   (1,142 L, 8 tests — 121 DEC + 44 FACE-A), daq3 (1,269 L), link4
-   (934 L), misc9 (889 L), misc3 (781 L), erspan (646 L), link6 (708 L),
-   miscip (636 L).
-5. **Gates at EVERY commit**: `cargo test` all green (>= **633**; never
-   trust a summed total from a run containing FAILED; cite one face per
-   pass), `cargo clippy --all-targets` ZERO warnings (force relint by
-   touching all .rs), `vectors.txt` md5 stable across >= 2 clean
-   rebuilds, harness `.gitignore` block verified with `git check-ignore`
-   BEFORE staging (the NESTED-dir instrument precedent rides; the ROOT
-   .gitignore NEVER moves). Then commit + push, plan row (grep-guard:
-   count 0 before insert) + deviations (grep-guarded append) — the
-   current variant: BOTH ship INSIDE the code commit, the docs pass
-   VERIFY-greps them (count == 1 each) and re-measures every
+   `tests/tc_parity_test.rs` (733 L, 17 fns — the NEWEST: 2 replays +
+   14 TRANSLATED in-TU Catch cases with the 23-assert self-census ==
+   the runner count + ground-cite tripwire block: line reads, md5-
+   face cites, token censuses, NEXT-cites), sfd (612 L, 4 fns),
+   rsubs (809 L, 8 fns — 12 DEC + 9 FACE-A + the ordinal/slot-map
+   units), ipheavy (1,142 L), daq3 (1,269), link4 (934), misc9 (889),
+   misc3 (781), erspan (646), link6 (708), miscip (636). A parity
+   test that READS NEXT.md = a docs stakeholder (sfd/tc): rewrite-
+   arming = re-grep `tests/` too.
+5. **Gates at EVERY commit**: `cargo test` all green (floor = the
+   LANDED face, currently **>= 650**; never trust a summed total from
+   a run containing FAILED; cite one face per pass — after ANY
+   landing that moves a census, re-run cargo BEFORE commit: 8953723's
+   one-red is the cautionary face), `cargo clippy --all-targets` ZERO
+   warnings (force relint by touching all .rs), `vectors.txt` md5
+   stable across >= 2 clean rebuilds, harness `.gitignore` verified
+   with `git check-ignore` BEFORE staging (nested-dir instrument
+   rides; copy-local gate outputs IGNORED per 22a; ROOT never moves).
+   Commit + push, plan row (grep-guard: count 0 before insert) +
+   deviations (grep-guarded append) — BOTH inside the code commit
+   (docs pass verify-greps count == 1 each) + re-measure every
    load-bearing claim. Refresh NEXT.md (FRESH rewrite + PINNED-STRING
-   carry FIRST), commit+push docs. ONE code commit + ONE docs commit,
-   each pushed ONCE, NEVER amended, NEVER force-pushed. Wiki: status row
-   + deviations + stats line at the WIKI phase ONLY (re-measure LIVE;
-   NEVER trust this file's numbers for stats).
+   carry FIRST), commit+push docs. ONE code + ONE docs commit each
+   pushed ONCE (rider follow-ups allowed, rule 7), NEVER amended,
+   NEVER force-pushed. Wiki at the WIKI phase ONLY (re-measure LIVE).
 
 ## Hard-won environment facts (do not rediscover these)
 - **Push recipe**: `git -c credential.helper=/opt/data/cache/scratch/git_cred.sh push origin master`. The token is the LAST `GITHUB_TOKEN` line in `/opt/data/.env` — NEVER echo it. Same helper works for the wiki remote. A push is ONE-WAY (see PROCESS LESSONS): after it returns rc 0, fixes ride follow-up commits, never `--amend`/`--force-with-lease`.
 - **OpenSSL without dev packages** (apt locked, no root): compile the C harness with `-I/opt/hermes/tools/node-26.12.1-linux-x64/include/node` and link `/usr/lib/x86_64-linux-gnu/libcrypto.so.3` directly. The codec rows do NOT need EVP.
 - **LuaJIT 2.1** built at `/opt/data/tools/luajit-src` (chunk row 17k; fmod links it BY PATH, nm pin fmod build.sh:961). Row-TU lua-seam assert carried every build since 18d.
-- **CppUTest is NOT installed on this host** (RE-RE-PROVEN THIS 21b pass: `ls /usr/include/CppUTest` find-0; every csum/vocab/eth/ext/tun/gre + ch19 build re-proves it). CppUTest suites can ONLY be cited/translated Rust-side. **The vendored Catch DOES run natively**: `tools/rules_harness/copy/catch/catch.hpp` `74ef54e848cf843c99e3acdb94ce2b1a` (md5 re-read THIS pass) + the shims — the 8-L `tools/codec_harness/catch_shim_snort_catch.h` + the flog/eth/tun/numa/codec/f* `catch/snort_catch.h` passthrough+heredoc faces: the thread_config row's `#include "catch/snort_catch.h"` (:35, INSIDE `#ifdef UNIT_TEST` :34-:36) resolves HOST-side. **ip/checksum.h DONOR-RESIDENT** (`b43628f3`). `log/text_log.h` `3e827113` resident via the tun lineage. The ground protocol-ids header lives at **`src/protocols/protocol_ids.h`** (NOT `utils/`). **safe_mem_lib.h / safe_str_lib.h host find-0** — the `utils/safec.h` STOCK 42-L cp IS the shim (donor config.h HAVE_SAFEC grep-0; the 18o strip-arm receipt PROVED it — no shim authoring ever).
-- **hwloc.h host find-0** (RE-RE-PROVEN THIS 21b pass: no header under /usr/include, `ldconfig -p | grep -c hwloc` = 0) — the ground `main/thread_config.{h,cc}` carry hwloc faces (cc **133** tokens / h **2** re-measured THIS pass); the FLOG :364-:377 **FIXTC hwloc-excision graft** (excise `#include <hwloc.h>` + the HAVE_NUMA arm, keep decls, witness get_instance_max) is the banked, twice-consumed route (17z origin; eth + misc9 PLAN cite it). The thread_config row NEEDS it; NEVER pretend the header exists.
-- **`#include <daq.h>` is a landed-ONCE graft family (NEVER confuse the faces)**: (1) MASTER `daq.h` 33 L `73fdbc39…` — daq3 home, the ONLY tracked cp; NEVER re-authored. (2) `daq_common.h` v16 16 L `f683749c…` — fmod home, sed-pinned by misc3 :155-:156. (3) graft-v2 `daq_common.h` `fead0027…` — misc3 `EOFGRAFT` heredoc regen (link6/link4/rsubs inherit), DAQ_Verdict carries ONLY 2 values — **the 21b GRAFT-VERSION LAW: this face DIES at flow.h :541 (MAX_DAQ_VERDICT) for ANY flow.-rider row**. (4) graft-v3 `daq.h` 39 L `0f7016a6…` — link4 ladder arm, copy-local ONLY (the sfd copy tree rides it, pinned). (5) ext#2/ext#4 `9b603f8f…` 34 L MAX_DAQ_VERDICT=6 — NEVER landed tracked, but **the 21b row proved it the LEGAL face for flow.h riders (copy-local, pinned in sfd :199)**. (6) ext#4 trio at 20a: daq.h 51 L `9b603f8f`-pair home ipheavy `97bca757` + daq_dlt.h 14 L `e8a39bf3` (DLT_IPV4 228 / DLT_IPV6 229) + packet.h RE-POINT `1be562b2`. ALL synthetic faces: row 20 RE-CITES the REAL SDK; synthetic value NEVER ABI truth. Real use-site pins: `src/flow/flow.h :541` (`sed -n '541p'` sed-pinned by sfd :180) + `src/packet_io/sfdaq_module.cc :179` static_assert (path trap: NOT src/main/).
-- Host cgroup caps at **2 CPUs** (`nproc` lies: says 16). Keep builds serial; >4 parallel workers degrade. Toolchain: rustc/cargo 1.100.0.
-- Tool constraints: `write_file`/`read_file` are jailed to `/opt/data` — wiki files (`/tmp/RustyPig.wiki`) edited only via python scripts kept in `/opt/data/cache/scratch/` run through the terminal, with `git -C /tmp/RustyPig.wiki ...`. Scratch dir is `/opt/data/cache/scratch` (TMPDIR points there). Harness builds take MINUTES at 2 CPUs — write sequences to a scratch .sh and background them; single-tenant; `rm -rf` child `copy/` before census-guarded runs. The FULL `cargo test`+clippy pass runs ~several minutes — run it in the background and read the receipt, ONE TENANT at a time.
+- **CppUTest is NOT installed on this host** (RE-RE-PROVEN: `ls /usr/include/CppUTest` absent at every build incl the 22a E4 flip — if it LANDS, that script rc1s LOUD and every CppUTest-blocked row RE-PLANs). CppUTest suites can ONLY be cited/translated Rust-side. **The vendored Catch DOES run natively** (and 22a PROVED it host-GREEN): `tools/rules_harness/copy/catch/catch.hpp` `74ef54e848cf843c99e3acdb94ce2b1a` — the GROUND twin `src/catch/catch.hpp` 20,397 L carries the SAME md5 (22a PLAN confirmed) — + ground `src/catch/snort_catch.h` 72 L `9d4c41898691fc461b3f45240007803d` + the shims (codec_harness 8-L `catch_shim_snort_catch.h` + the flog/eth/tun/numa/f* passthrough faces); thread_config's `#include "catch/snort_catch.h"` resolves HOST-side (disk :35 inside the :34-:36 arm). **ip/checksum.h DONOR-RESIDENT** (`b43628f3`). `log/text_log.h` `3e827113` resident via the tun lineage. The ground protocol-ids header lives at **`src/protocols/protocol_ids.h`** (NOT `utils/`). **safe_mem_lib.h / safe_str_lib.h host find-0** — the `utils/safec.h` STOCK 42-L cp IS the shim (donor config.h HAVE_SAFEC grep-0; the 18o strip-arm receipt PROVED it — no shim authoring ever).
+- **hwloc.h host find-0** (RE-PROVEN 22a: no header under /usr/include, `pkg-config hwloc` NO, ldconfig 0 — AND the 22a harness rc1-flips EVERY build if host hwloc/numa EVER lands) — the ground `main/thread_config.{h,cc}` carry hwloc faces: **token census MEASURED at the row = cc raw `hwloc_*` 142 / cc grep-LINE 126 / h raw 2**; the banked face here — **cc 133** tokens — is the STALE trio member (a bare-token era count whose EXACT rendering `cc **133**` is HARDCODED as a grep into THIS file by the 22a build.sh + the tc cargo twin: keep the literal riding, cite-only); the h **2** face HELD (`hwloc_topology_t` + `hwloc_cpuset_t` in the get_numa_node decl, :22/:91). **The FLOG :364-:377 FIXTC route = the thrice-consumed banked hwloc/numa graft route — the 22a row CONSUMED it as the witness-REPPOINT variant (sed the includes to `wit/*` heredocs: hwloc + numa + numaif; the flog EXCISION variant does NOT work when the ifdef'd cases ARE gate material); masters stay md5-frozen, grafts copy-LOCAL; NEVER pretend the header exists.**
+- **`#include <daq.h>` is a landed-ONCE graft family (NEVER confuse the faces)**: (1) MASTER `daq.h` 33 L `73fdbc39…` — daq3 home, the ONLY tracked cp; NEVER re-authored. (2) `daq_common.h` v16 16 L `f683749c…` — fmod home, sed-pinned by misc3 :155-:156. (3) graft-v2 `daq_common.h` `fead0027…` — misc3 `EOFGRAFT` heredoc regen (link6/link4/rsubs inherit), DAQ_Verdict ONLY 2 values — **the GRAFT-VERSION LAW: this face DIES at flow.h :541 (MAX_DAQ_VERDICT) for ANY flow.-rider row (21b) and NEVER satisfies the analyzer_command.h :255 DIOCTL face (22a)**. (4) graft-v3 `daq.h` 39 L `0f7016a6…` — link4 ladder arm, copy-local ONLY (the sfd copy tree rides it, pinned). (5) ext#2/ext#4 `9b603f8f…` 34 L MAX_DAQ_VERDICT=6 — NEVER landed tracked, but the LEGAL face for flow.h riders AND for the analyzer-selector rows (copy-local, pinned sfd :199; the 22a donor rode it via the ipheavy tree). (6) ext#4 trio at 20a: daq.h 51 L `9b603f8f`-pair home ipheavy `97bca757` + daq_dlt.h 14 L `e8a39bf3…` (DLT_IPV4 228 / DLT_IPV6 229) + packet.h RE-POINT `1be562b2`. ALL synthetic faces: row 20 RE-CITES the REAL SDK; synthetic value NEVER ABI truth. Real use-site pins: `src/flow/flow.h :541` (`sed -n '541p'` sed-pinned by sfd :180) + `src/packet_io/sfdaq_module.cc :179` static_assert + `src/main/analyzer_command.h :255` (include-graph selector, 22a).
+- Host cgroup caps at **2 CPUs** (`nproc` lies: says 16). Keep builds serial; >4 parallel workers degrade. Toolchain: rustc/cargo 1.100.0. **NEITHER is a FACE-A face** — the 22a MAXLADDER-256 face is the WITNESS MODEL, not host topology.
+- Tool constraints: `write_file`/`read_file` are jailed to `/opt/data` — wiki files (`/tmp/RustyPig.wiki`) edited only via python scripts kept in `/opt/data/cache/scratch/` run through the terminal, with `git -C /tmp/RustyPig.wiki ...`. Scratch dir is `/opt/data/cache/scratch` (TMPDIR points there). Harness builds take MINUTES at 2 CPUs — write sequences to a scratch .sh and background them; single-tenant; `rm -rf` child `copy/` before census-guarded runs (the 22a donor self-heal runs this loop at EVERY cold tc build). The FULL `cargo test`+clippy pass runs ~several minutes — run it in the background and read the receipt, ONE TENANT at a time.
 - Probe printf hygiene: hoist mutating calls into locals before any printf (C++ arg evaluation order bit codec H-block + fid T2/T3; R6 var-first census at EVERY compound decode site).
-- No gdb. Diagnose segfaults via stdout tail + source inference; THREAD_LOCAL statics must be armed or you get rc 139: `file_stats` via `file_stats_init()`, `packet_time`'s `s_recent_packet` via `packet_time_update()` ONLY. Since 18a `file_trace` has its REAL def on BOTH sides.
-- Frozen-donor build.sh rc-1 face BY DESIGN (the 18g drift codified): tun/eth/ext/miscip-era scripts die at their point-in-time gate-count ls-asserts since gre added the 25th gate — NEVER edit frozen scripts; verify their face by DIRECT vectors md5 re-sums. The misc9 :461 landmine-drift face STAYS (since 21a). The FRESH-build set = **sfd + rsubs + ipheavy + gre + fmod + vocab + erspan + link6 + link4** (erasable copy/ trees); everything else frozen-lineage / direct-md5 ONLY.
-- **The rsubs + sfd NEXT.md + census arms are LIVE LAW for every later row** (NEITHER edits NEXT, BOTH read it EVERY build): rsubs `621/605/597` x3 + 573 presence (:459-:461, :576-:579) + the name-pin census (:569-:571) pins `tools/reload_survivor*_harness`, `tools/survivor*_harness`, `tools/rss_harness` find-0 EVERY rsubs build + tools-wide `rsubs`-in-build.sh EXACTLY-1 (misc9 :42 holds the slot, :573-:576); sfd `629/621/605/597` x3 + `573` x5-EXACT (:527, :637-:641) + the sfd name-pins (:116-:119): the `sfd_harness`/`flowdata_harness` token outside its own build.sh = EXACTLY-ONE FILE (this file's queue face) and the prefixed-token line-count in NEXT.md EXACTLY-1 + the rider GROUND pins `^TEST( -eq 4` :159 + flow.h `:541` sed-pin :180 + graft md5s :199/:280 re-read the GROUND every build (disk wins). A future harness dir MUST dodge ALL of: the rsubs globs, `*sfd*`/`*flowdata*`, and NEVER add `rsubs`/`sfd_harness`/`flowdata_harness` tokens to any build.sh. The ground rsubs `TEST(`-47 :114 + `:625` :142 ground pins likewise stay.
+- No gdb. Diagnose segfaults via stdout tail + source inference; THREAD_LOCAL statics must be armed or you get rc 139: `file_stats` via `file_stats_init()`, `packet_time`'s `s_recent_packet` via `packet_time_update()` ONLY. Since 18a `file_trace` has its REAL def on BOTH sides. NEW 22a face: rc139 has a GATE face — an init-order TU under a CATCH_CONFIG_MAIN runner SEGVs inside the FIRST statics-deref case (E10; the fix is the RUNNER shape + boot order, NEVER a sleep/retry).
+- Frozen-donor build.sh rc-1 face BY DESIGN (the 18g drift codified): the tun/eth/ext/miscip-era scripts die at their point-in-time gate-count ls-asserts since gre added the 25th gate — **the 22a flip moved the count AGAIN (26); those frozen scripts drifted for the SECOND time — NEVER edit them, verify by DIRECT md5 re-sums**. The misc9 :461 landmine-drift face STAYS (since 21a). FRESH-build set = **the 22a harness + sfd + rsubs + ipheavy + gre + fmod + vocab + erspan + link6 + link4** (erasable copy/ trees); everything else frozen-lineage / direct-md5 ONLY.
+- **The rsubs + sfd + 22a-harness NEXT.md + census + name arms are LIVE LAW for every later row** (NONE edits NEXT, ALL read it EVERY build): the rsubs arms (:459-:461, :576-:579) + name-pin census (:569-:571: the survivor/rss globs find-0 EVERY build + the tools-wide mention slot pin) are UNCHANGED; the sfd arms (:527, :637-:641) + :116-:119 name-pins: the token census outside the sfd script == EXACTLY-ONE FILE — POST-22a MEASURED face: that arm saw TWO tolerated script-faces (the sfd script is EXCLUDED by design; the 22a script carries the sfd dir in its VECTORS-ECHO arms which the 21b row itself banked; its :118 file-census arms are a pre-22a hardcode — rider-updated-or-re-measured by the sfd owners' harness phase, NOT by starving NEXT.md of the pinned faces the SAME script pins at :119); the 22a-script pins (:124: the stale hwloc token MUST ride; :126-:128: dir-name find-1 + the token in this file EXACTLY-2 — the two cites under Donor harnesses/environment, NEVER a third; :649-:656: the x3/x4/x5 count template — the NEWEST template every fresh harness clones). A future harness dir MUST dodge ALL of: the rsubs globs, `*sfd*`/`*flowdata*`, the 22a dir's find-arms (:126-:128), and NEVER add foreign dir tokens to a build.sh beyond banked echo faces. The ground pins (TEST(-47, `:625`, the sfd rider quartet, the 22a ground-identities) re-read ground EVERY build (disk wins).
 
 ## Donor harnesses (condensed — forensic per-row detail lives in the commit bodies + each tracked PLAN.md)
-- `sfd_harness/` (dir) — **THE NEW LINEAGE HEAD (row 21b)**: 8 tracked stageables (misc9/rsubs 8-face shape); the NEXT.md read arms :527 python + :637-:641 grep (573 -eq 5 = the FIRST exact-5 pin of that face — a docs stakeholder NOW); the state-aware ZERO-LEAK 8-face count; name-pins :116-:119 (the sole prefixed dir-token line in NEXT.md is pinned -eq 1; the token census -eq 1 file); the donor-law REJECT legs runtime-concatenated (:89-:91, E4_daqwall_* receipts) + graft-tail md5 pins :199 9b603f8f / :280 fead0027; the rider ground pins :159 (-eq 4, "NEVER 5") + the 4 named `TEST(`s + flow/test 8-total + framework/test 3-UNDISTURBED :164; FIRST-RUN-SEED + tamper arm (vectors 3c05632e 8L / FACE-A 040de1ef 8L — smallest pair yet); tail `SFD_DONE vectors=8 faceA=8 gates=0` :697-:698; backbone10 echo 5339c7ee byte-ident; the frozen-census chain echo of rsubs 12/9 + older pairs :697.
-- `tools/rsubs_harness/` (row 21a, the first-framework-registry head, NOW the SECOND ch19 harness): 8 tracked stageables; the FIVE NEXT.md read arms :459-:461 python + :576-:579 grep (a docs stakeholder — a rewrite must pass these BEFORE the commit); the state-aware ZERO-LEAK 8-face count; name-pin census :569-:571 + tools-wide rsubs-mention EXACTLY-1 :573-:576; the ground `TEST(` 47 + `:625` sed pins :114/:142; vectors 9e303761 12L / 42aa06fb 9L; donor misc9 124 + 3 EXACT cps = 127 (flowz-decoy path-trap E4 proven; graft-v2 wall proven BY THE 21b REJECT face); E4 both-ways (api_options chained wall / impl.h drop); tail `R_SUBS_DONE vectors=12 faceA=9 gates=0` :632.
-- `tools/ipheavy_harness/` (row 20a, the codecs closer): 9 tracked stageables; the FIVE NEXT.md grep arms :656-:660 (the pinned-string template every fresh clone copies); the state-aware ZERO-LEAK 9-face count (8b9882a); stubs_20a copy-LOCAL trio retirement; ext#4 heredoc family; backbone wc-10 assert; tail `IPHEAVY_DONE vectors=121 faceA=44 gates=0` :805.
-- `tools/misc9_harness/` (row 19a; NOW frozen-lineage — the :461 landmine-drift face since 21a): 8 stageables incl the nested .gitignore (31 L) — the instrument precedent; EXACT-COUNT pins :462/:607 (STILL LIVE against NEXT.md even at direct-md5 verify — keep them satisfiable); the `add_cpputest -eq 3` framework/test suite-count face :77 (ch19 rows reuse it); the :42 dialect-census token = THE tolerated tools-wide 'rsubs' mention; tail `MISC9_FRAMEWORK_OK vectors=41 faceA=11 gates=0`; vectors `e6328da1…`/FACE-A `dfe738fb…`; witness_misc9 27 L `ada2b1e8…`; the 18g-style drift face = verify by DIRECT md5s ONLY.
-- `tools/mpls_harness/` (row 18o, tracked: 8 stageables): the LINK chapter closer (6/6, the 1465-L sum pin); **THE 21b donor tree — 130+3=133 cps**; its PLAN.md carries the flowz/flow_data decoy-path law + the safec stock-shim decision; the NEXT.md read arms :136-:138 grep + :619 python (605/580/588 presence faces).
-- `tools/link4_harness/` (18n): graft-v3 ladder arm :902 (master RE-RIDE + 2 DECL rows); NEXT.md arms :185/:186 + :750; the 1465 link-tail sum pin :64; `backbone10.txt` = 10 L `5339c7ee…` (per-build wc-10 assert home); witness_18f CARRIED asserts; tail `LINK4_VLAN_OK vectors=28 faceA=24 gates=0`; the :881-:884 NEXT.md-tolerance line — clone day one in every new harness.
-- `tools/link6_harness/` (18m): :198/:597 read-asserts; E4-both-ways wall receipts; tail `LINK6_PPP_OK vectors=20 faceA=20 gates=0`; vectors `e59f7a8a…`/`d2fc5591…`.
-- `tools/erspan_harness/` (18l): **the :580 pinned-string stakeholder + the :404 tools-wide drift census — re-read BOTH before ANY docs rewrite or sibling landing**; tail `MISC_L_ERSPAN_OK vectors=18 faceA=19 gates=0`; vectors `7d7d3500…`/`3ec325d7…`.
-- `tools/gre_harness/` — **THE gate-shape donor THE thread_config ROW CLONES (the ONLY row with real Catch material to date; tail 1 assertion/1 test case)**: gate.txt 3 L `6751d1a8` the ONLY tracked gate; catch shape :132 (vendored catch.hpp cp, md5 pin `74ef54e8…` :131) / :139-:143 (catch_main heredoc + CATCH_CONFIG_MAIN -eq 1) ; E9 dup flip :232-:234 (ONE-face link rule: catch_main.o + the -DUNIT_TEST .o, plain .o EXCLUDED — flipped-assert EVERY build); :298 exactly-ONE-U nm census; tail `GRE_HARNESS_OK vectors=26 faceA=5 gate_lines=3`; gate `4826fc22` lineage anchor rides fmod.
-- Frozen-lineage donors (direct-md5 ONLY, NEVER chase to rc 0): misc3 (`e75f7385`/`fe1189c6`, graft-v2 heredoc :220-:244 — the fead0027 GENERATOR; row-face guard template :660-:688), miscip (`43b259ac`/`e4c47bac`; tcp.h 211 L `a7ac7b82` BANKED — CONSUMED at 20a), daq3 (`fd1855e1`/`2fb9dc45`; THE daq.h + daq_common v16 MASTER homes; the 7-face law), small4 (`462f0ff6`/`4755d48c`; 6-stageable head-shape), tun (vectors `2a792479`/`81602890`; witness_18f.cc `ea1f79f3` = the `tunnel_bypass_enabled` witness def :16 — carried by gre/misc3/link4/mpls/rsubs/sfd), ext (`da218429`/`0fa79b53`; stubs_18e.cc `a700f77e…`), eth (`1bd98dbb`, stubs_18d.cc `f4afd35f` retirement-marker precedent — stubs_18d also rides the sfd link), **vocab (witness_stubs.cc `9fad7e9d…` — its :11-:13 defs are the frozen face; its vectors LOAD-pin the `*_stub` names = the reason the Rust vocab records CARRY after 20a; daq_dlt.h graft home)**, fmod (gate `4826fc22`, vectors `f0fdbab`, daq_common v16 home), csum (`e4baf781` probe-only origin), the f* row-17 harnesses per PLAN rows (flog = the FIXTC hwloc-excavation home), `tools/codec_harness/` (17d; stubs.cc `be9bdd0b` frozen donor; the FULL plugin-loading deferral — plugin_manager.cc 1015 L — STILL defers to row 20).
+- tc harness dir (row 22a name, `tools/tc_harness`, 9-stageable face — **THE NEW LINEAGE HEAD + THE GATE DONOR**): 9 faces (the rsubs 8-shape + the RUNNER main TU = the first tracked main TU EVER, the CATCH_CONFIG_RUNNER/RUNNER-law home, 26 L); the NEXT read arms :649-:656 (the x3/x4/x5 pins of the current/absorbed seeds — the NEWEST harness template: 633/629/621/605/597 -eq 3, 588 -eq 4, the 580 PASSED -eq 3, 573 -eq 5) + :124 (the stale hwloc exhibit MUST ride) + :126-:128 (the token arithmetic faces); ground-identity block (:79-:91: pair + riders + numa/analyzer/periodic md5s); the 14-case ground-cite census (:96-:113 the arm-line faces: :613/:615/:797/:918/:920/:34/:35 + snort.cc:109 + unit_test.cc:26 RUNNER shape + add_cpputest -eq 2); the ext#4 ladder pins (:139+:151 the daq.h/daq_common identity, 149-file copy face, the stale-h trap arms :151-:152); the E4 ladder BOTH WAYS (pre-graft hwloc wall / analyzer / periodic / numa / post-plain / post-numa) + the witness trio heredocs + the COMPLETE hwloc_obj face; E10 MAIN-SEGV flipped-assert + the E9 exactly-20 flipped-assert (:446-:466 region); the functional-witness law + the NUMA-hinge 9-of-14 face (:489); gate seed-flow: seed-face file + runner-tail greps + the COPY-LOCAL check-ignore posture + gate.txt 5-L face; the 14-name -l census + the 9-name off census; the chain echo (:629-:632 re-md5s the rsubs + sfd vector faces — LEGAL echo); the 9-face state-aware ZERO-LEAK dual guard + the copy-local check-ignore enumeration (:671) + the single-tenant porcelain face; the frozen-census echo face (:26 holders / 18 lineages / tracked STAYS 1 / gre anchor byte-frozen — the honest flip echo); the ERANGE/MAXLADDER witness faces; tail `TC_DONE vectors=9 faceA=9 gates=1` + the STREAK-closure echo line (28-straight CLOSED — the first REAL gate since gre 18g).
+- sfd harness dir — the SECOND ch19 head (row 21b): 8 tracked faces; the read arms :527 + :637-:641 (573 -eq 5 = the first exact-5 pin) + the :116-:119 pins (the sfd prefixed dir-token cite lives on EXACTLY-1 line of THIS file — the Session-ritual cite; the token census face grew with the 22a echo arms — see the environment-facts flag); the donor REJECT legs runtime-concatenated (:89-:91) + :199/:280 graft pins; rider ground pins :159 (-eq 4) + flow.h :541 sed :180 + the flow/test 8-total; test-world stub greps :171-:172; FIRST-RUN-SEED + tamper; tail `SFD_DONE vectors=8 faceA=8 gates=0`; backbone echo byte-ident; the CARGO twin (26-census post-22a face, the exhibit once-face, the x3/x5 loop) — see the close-out.
+- rsubs harness — row 21a, the first-framework-registry head: 8 faces; the read arms :459-:461 + :576-:579; name-pin census :569-:576 (find-1 self + the misc9 slot face); ground `TEST(` 47 + `:625` pins :114/:142; vectors `9e303761` 12L / `42aa06fb` 9L (chain-echoed by sfd + 22a); donor misc9 124+3=127; tail `R_SUBS_DONE vectors=12 faceA=9 gates=0` :632.
+- ipheavy harness — row 20a, the codecs closer **and the 22a DONOR** (its copy/ = the 150-era ext#4 tree, `daq.h 97bca757` face; its build.sh = the self-heal target): 9 stageables; the read arms :656-:660 (the template every fresh clone copies); the ZERO-LEAK 9-face guard (8b9882a); stubs_20a; ext#4 heredoc family (:264- the EOFDLT arm — daq_dlt face); backbone wc-10 home; tail `IPHEAVY_DONE vectors=121 faceA=44 gates=0` :805.
+- misc9 harness — row 19a (NOW frozen-lineage — the :461 landmine-drift face since 21a; **the landmine greps `struct Tracer` — keep the ch19 tracer-row Rust naming CLEAN of that token**): 8 stageables incl the nested .gitignore (31 L) — the instrument precedent; the EXACT-COUNT arms :462/:607 (LIVE against THIS file even under direct-md5 verify — keep them satisfiable); the `add_cpputest -eq 3` framework/test face :77 (ch19 reuse); the :42 dialect slot = THE tolerated mention face; tail vectors `e6328da1…`/`dfe738fb…`; witness_misc9 `ada2b1e8…`; direct-md5 ONLY.
+- mpls harness (row 18o): the LINK closer (6/6); **the 21b donor tree 130+3=133** (the ext#4 face copy-local); flowz/flow_data decoy-path law + the safec stock-shim decision; NEXT arms :136-:138 + :619 (presence faces); ALSO satisfies the 22a analyzer selector (banked ALT donor).
+- link4 harness (18n): graft-v3 ladder arm :902 (master RE-RIDE + 2 DECL rows); NEXT arms :185/:186 + :750; the 1465 link-tail sum pin :64; `backbone10.txt` = 10 L `5339c7ee…` (per-build wc-10 assert home); witness_18f CARRIED asserts; tail `LINK4_VLAN_OK vectors=28 faceA=24 gates=0`; the :881-:884 NEXT.md-tolerance line — clone day one in every new harness.
+- link6 harness (18m): :198/:597 read-asserts; E4-both-ways wall receipts; tail `LINK6_PPP_OK vectors=20 faceA=20 gates=0`; vectors `e59f7a8a…`/`d2fc5591…`.
+- erspan harness (18l): **the :580 pinned-string stakeholder + the :404 tools-wide drift census — re-read BOTH before ANY docs rewrite or sibling landing**; tail `MISC_L_ERSPAN_OK vectors=18 faceA=19 gates=0`; vectors `7d7d3500…`/`3ec325d7…`.
+- gre harness — the 18g gate-shape donor, SUPERSEDED as freshest by the 22a RUNNER law for init-order rows (its CATCH_CONFIG_MAIN twin is legal ONLY for zero-init-order TUs — E10 proves the exception): gate 3 L `6751d1a8` **the ONLY tracked gate** (byte-frozen anchor); catch cp :132 + md5 pin 74ef54e8 :131 + catch_main heredoc :139 + CATCH_CONFIG_MAIN -eq 1 :143; E9 dup flip :232-:234 (ONE-face link rule — the same law the 22a exactly-20 face proves at scale); :298 exactly-ONE-U nm census; gate `4826fc22` lineage anchor rides fmod.
+- Frozen-lineage donors (direct-md5 ONLY, NEVER chase to rc 0): misc3 (`e75f7385`/`fe1189c6`, graft-v2 heredoc :220-:244 — the fead0027 GENERATOR; row-face guard template :660-:688), miscip (`43b259ac`/`e4c47bac`; tcp.h 211 L `a7ac7b82` — CONSUMED at 20a), daq3 (`fd1855e1`/`2fb9dc45`; THE daq.h + daq_common v16 MASTER homes; the 7-face law), small4 (`462f0ff6`/`4755d48c`), tun (vectors `2a792479`/`81602890`; witness_18f `ea1f79f3` = the `tunnel_bypass_enabled` def :16, carried by gre/misc3/link4/mpls/rsubs/sfd), ext (`da218429`/`0fa79b53`; stubs_18e `a700f77e…`), eth (`1bd98dbb`; stubs_18d `f4afd35f` retirement-marker precedent — also rides the sfd link), **vocab (witness_stubs `9fad7e9d…` :11-:13 = the frozen face; its vectors LOAD-pin the `*_stub` names = why the Rust vocab records CARRY after 20a; daq_dlt.h graft home)**, fmod (legacy `4826fc22` holder + vectors `f0fdbab`, daq_common v16 home), csum (`e4baf781` probe-only origin), numa (the decl-only hwloc/numa ladder — **INSUFFICIENT for a CHECK-semantic gate: the 22a functional-witness contrast law**; its copy tree is one of the stale-thread_config-h trap trees), ch19 option-era harnesses as banked, the f* row-17 harnesses per PLAN rows (flog = the FIXTC hwloc-excavation home), codec_harness (17d; stubs.cc `be9bdd0b` frozen donor; the FULL plugin-loading deferral — plugin_manager.cc 1015 L — STILL defers to row 20).
 
-## Next milestone — chapter-19 remainder: main/thread_config (the P-next row; THE DIALECT FLIP = THE FIRST REAL-GATE CANDIDATE SINCE gre)
-- **Ground re-measured THIS pass, byte-exact**: `/opt/data/snort3-src/
-  src/main/thread_config.cc` **920 L** md5
-  `ca123f895a028e53328b3b0451af8073` (orchestrator-pinned face ==
-  measured, MATCH) + `src/main/thread_config.h` **95 L** md5
-  `86a4d24805a6413ecebbbe72e4f10e5b`. **DICTATE AGAINST THE BANK**: the
-  orchestrator context token said the .h is **86 L** — DISK SAYS **95**
-  (wc re-run 2x THIS pass) — a fresh CITE-DRIFT face OPEN BEFORE the row
-  even starts: the md5 PIN MATCHES, the LINE COUNT drifts; re-cite from
-  disk at the row, NEVER re-type a banked count. Path `src/main/` ONLY —
-  `src/daqs/` NEVER existed (19a-era trap face kept).
-- **Harness-name law (MEASURED THIS pass)**: `find tools -maxdepth 1
-  -iname '*thread*' -o -iname 'tc_*'` = find-0 and the tokens
-  `tc_harness`/`thrconf`/`threadconfig` = 0 hits in tools build.sh
-  files + NEXT.md (the `ThreadConfig` token rides 231 BINARY
-  receipts/objects — irrelevant to name censuses). **Pin the name
-  `tc_harness`** per PLAN-0 re-verify at the row; it MUST dodge the
-  rsubs globs (`survivor*_harness`, `rss_harness`,
-  `reload_survivor*_harness`) AND the sfd :118-:119 token census (the tc
-  build.sh carries `sfd_harness`/`flowdata_harness` NEVER).
-- **THE DIALECT FLIP, FLAGGED HONEST — THIS ROW MAY END THE
-  28-STRAIGHT ZERO-GATE STREAK**: `thread_config.cc` carries **14
-  `TEST_CASE`** faces (re-counted THIS pass; first :615
-  `[ThreadConfig]`) INSIDE the TU under `#ifdef UNIT_TEST` with the
-  vendored `catch/snort_catch.h` include at :35 — UNLIKE the
-  CppUTest-BLOCKED rider rows (sfd's 4-`TEST(` suite, main/test's
-  CppUTest suites) the vendored-Catch material is **HOST-COMPILABLE**
-  (the gre precedent re-proved catch runs natively). If the gate lands:
-  clone the GRE gate shape EXACTLY (catch cp :132 + md5 pin 74ef54e8,
-  catch_main heredoc :139 + CATCH_CONFIG_MAIN -eq 1 :143, the snort_
-  catch.h shim heredoc precedent = codec_harness 8-L `catch_shim_
-  snort_catch.h` + the flog/eth/tun passthrough faces, the E9 ONE-FACE
-  link rule :232-:234 — catch_main.o + the -DUNIT_TEST TU .o, plain .o
-  EXCLUDED); **the RUNNER TAIL is the SOLE truth for the gate count**
-  (gre: "All tests passed (1 assertion in 1 test case)" -> gate.txt 3 L;
-  NEVER gate on grep-estimated 14-case arithmetic (17p law)). Census
-  re-pin question: a 26th gate file would move 25/9/17/1 BY MEASUREMENT
-  (the 9 holders of `4826fc22` stay FROZEN — the two-lineage law: the
-  18g legacy lineage is frozen at 9 holders, the gre anchor `6751d1a8`
-  is the tracked-1 law); decide the tc gate.txt TRACKED-vs-untracked
-  face per gre at the row, re-measure the WHOLE census, NEVER pre-
-  assume. If instead the build DIES (hwloc residue, closure walls), the
-  zero-gate face rides (29th straight) — BOTH outcomes honest, the
-  harness MEASURES, the transcript decides.
-- **The hwloc wall + the FIXTC graft**: hwloc host find-0 RE-RE-PROVEN
-  THIS pass; cc **133** / h **2** hwloc tokens measured; the FLOG
-  :364-:377 FIXTC excision graft is banked, twice-consumed — CONSUME IT
-  at the row (graft #3), NEVER pretend the header exists.
-- **The CMakeLists census face**: `src/main/test/CMakeLists.txt` carries
-  EXACTLY **-2-** add_cpputest faces (re-counted THIS pass):
-  thread_test.cc **442 L / 36 `^TEST(`** (rides `src/main/thread.cc`
-  190 L — NOT thread_config.cc) + distill_verdict_test.cc **381 L / 14
-  `^TEST(`** (the 19a-era 'thread 36'/'distill 14' dialect tokens now
-  ground-pinned). thread_config.cc itself rides ONLY the OBJECT-library
-  sources list (main/CMakeLists :57/:58) — upstream NEVER built a suite
-  over its Catch block, so the gate route = compile the ROW TU with
-  -DUNIT_TEST (the gre shape proves the one-face link works).
-- **Scale flag**: 920-L TU + hwloc excision + Catch gate question =
-  HEAVIER than 21b; fallback position per the 18a-18h rulings re-
-  affirmed if the orchestrator re-ranks.
-- **P-alt tracer rank-LAST UNCHANGED + RE-MEASURED**:
-  `src/framework/tracer.cc` **73 L** md5 `9ee6b2ee…` + `tracer.h`
-  **125 L** md5 `98d53205…` (byte-exact THIS pass). The daq wall flag:
-  direct `daq` grep on tracer.{cc,h} = 0 — the wall is REAL via the
-  packet face: tracer.cc :52/:54-:55 read `p->pkth->address_space_id` /
-  `p->pkth->tenant_id`, fields the SYNTHETIC graft masters (ext#4 trio
-  incl.) NEVER carry -> the DAQ-graft-EXTENSION wall UNCHANGED until
-  row 20 lands the REAL SDK; a ch19 row NEVER re-opens graft churn. The
-  `src/tracer/` logger family (file/stdout/syslog trace loggers +
-  trace_loader) is a SEPARATE future census, not the ch19 tracer row.
-- CppUTest dialect flag STAYS RAISED across chapter 19 (the misc9 §0
-  census cite: data_bus 5 / rsubs 47 — BOTH landed-face measured /
-  flow 8-suite / main 36 + 14). ALL dialect-BLOCKED, NEVER fake a gate
-  over one — the thread_config Catch face is NOT a CppUTest row: the
-  dialect flip means its gate question is LEGITIMATE (gre precedent).
-  Pairing P2+data_bus = HISTORIC; the size-band arithmetic (233 = 864 >
-  800) stands as history. A ch19 agent NEVER co-mines codec rows;
-  single-tenancy extends to scratch recon dirs.
+## Next milestone — chapter-19 P3 tracer: the ch19 LAST row (rank-LAST; then the honest plan face below)
+- **Ground RE-MEASURED BY THIS DOCS PASS (full md5s pinned; the
+  21b-era face was an 8-char bank — now re-grounded byte-exact)**:
+  `/opt/data/snort3-src/src/framework/tracer.cc` **73 L** md5
+  **`9ee6b2ee33c4c98144f6a575891d1679`** + `/opt/data/snort3-src/src/
+  framework/tracer.h` **125 L** md5
+  **`98d53205a5ddaff48ba5c304d0658931`** (pair = 198 L; the 21b
+  `9ee6b2ee…`/`98d53205…` prefixes CONFIRM byte-EXACT THIS pass — no
+  drift face so far; re-wc/re-md5 AT the row regardless, the law).
+- **THE DAQ WALL is REAL via the packet face (measured THIS pass)**:
+  direct `daq` grep on tracer.{cc,h} = **0** — but tracer.cc **:50-:55
+  region re-grounded**: **:52** `ss << " AS=" << p->pkth->address_
+  space_id`, **:54** `if (p->pkth->tenant_id)` + **:55** the `TN=`
+  emit — pkth fields the SYNTHETIC graft masters (v16/graft-v2/v3/
+  ext#2/ext#4 faces) NEVER carry (grep-0 for both fields across every
+  frozen daq face family). -> **the DAQ-graft-EXTENSION wall UNCHANGED
+  until row 20 lands the REAL daq3 SDK**; a ch19 row NEVER re-opens
+  graft churn. Honest row options PRE-BANKED: harness-heredoc
+  pkth-field EXTENSION arms (copy-LOCAL, never a tracked cp, NEVER
+  ABI truth — the row-20 re-cite ledger absorbs them) OR defer behind
+  row 20; BOTH honest, the harness MEASURES at the row, NEVER fake
+  values into vectors.
+- **Zero-suite face (measured)**: tracer.cc/h carry ZERO
+  UNIT_TEST/TEST_CASE faces; `src/framework/test/CMakeLists.txt` =
+  EXACTLY 3 add_cpputest (data_bus / mp_data_bus / the rsubs rider —
+  the misc9 face RE-CONFIRMED THIS pass, re-read live: NO tracer
+  suite EVER rode framework/test; the rsubs rider rides data_bus +
+  rsubs SOURCES lists) -> rider/dialect cites only, dialect-BLOCKED,
+  **ZERO-GATE row face** (the 22a streak-closure face does NOT
+  re-arm: gate material is per-row; census stays 26/9/18/1 UNLESS a
+  measured walk says otherwise — NEVER pre-assume either way).
+- **Harness-name PIN LAW (pre-hits MEASURED THIS pass)**:
+  `find tools -maxdepth 1 -iname '*tracer*'` = find-0; the token
+  `tracer_harness` = **0 hits** in every `tools/*/build.sh` (re-
+  measured; this file's ONLY hit is this law-line itself); the bare word `tracer` pre-hits **13 f*-family build.sh
+  cp lines** (the packet_io `packet_tracer.h` donor cargo — a name-
+  CENSUS hazard not a collision) and tracer.h has LONG-resident
+  header status in copy trees. PIN the final name per PLAN at the
+  row + measure its find-arms; MUST dodge: rsubs globs / sfd+
+  flowdata sets / tc's find-arms :126-:128 / the `packet_tracer`
+  token family. ALSO standing: the misc9 :461 landmine greps the
+  literal `struct Tracer` over `src/` and asserts EMPTY — a literal
+  `pub struct Tracer` in the Rust port DIES at the frozen misc9
+  landmine (direct-md5-verify face, NEVER edit the script); prefer a
+  naming that keeps it find-clean (the frozen script's design wins).
+- **SEPARATE census, NOT this row (measured + banked)**: the
+  packet_io logger family — `packet_tracer.h` 166 `0bc4bb52…` /
+  `packet_tracer.cc` 739 `9b9ba56c…` / `packet_tracer_module.h` 59
+  `ab0bbe5e…` / `packet_tracer_module.cc` 262 `f5b3507d…` — and the
+  `src/tracer/` trace-logger family (file/stdout/syslog loggers +
+  trace_loader) = future packet_io-era census, NOT ch19.
+- **What comes AFTER ch19 — the HONEST plan face (PORTING_PLAN.md
+  read THIS pass, NEVER invented)**: the table's ONLY unfinished rows
+  are **:107 row 19 detection option engines ~30k+ "TODO (subset);
+  the chapter-19 track opened at 19a above"** (the OPTION side — the
+  ch19 framework/misc side closes AT tracer; the option campaign is
+  banked rank-last-on-purpose, multi-row, the gre/22a gate shapes
+  banked for its Catch-carrying rows), **:108 row 20 packet_io/DAQ**
+  (platform: AF_PACKET via libc; RE-CITE the REAL SDK — the graft
+  faces masters+extensions are evidence NOT ABI truth; CLOSES the
+  left-open seam ledger: get_pkthdr + SFDAQ + get_mpls_layer_per_dir
+  + bypass-provider + the get_pkthdr-adjacent pkth fields this very
+  tracer row wall-flags) and **:109 row 21 main CLI + `snort -q -c`
+  end-to-end PCAP parity** (the integration proof; the 22a rs lands
+  the boot/ThreadConfig::init():109-order faces row 21 rides). BANK
+  ORDER (unchanged since 19a, honest): **tracer -> row 20 (the wall
+  falls; the ledger closes incl tterm drain + tenant/address_space)
+  -> row 21 (integration)**; the ~30k+ option subset re-enters per
+  the PLAN line after. CppUTest dialect flag STAYS raised chapter-
+  wide (misc9 0-census faces / rsubs 47 landed-face / flow 8-suite /
+  main 36+14 / data_bus 5 — ALL dialect-BLOCKED, NEVER fake a gate;
+  the 22a INVERSE re-proved: vendored Catch IS legit gate material —
+  pick by material, gre + now the tc runner shape banked). A ch19
+  agent NEVER co-mines codec rows; single-tenancy extends to scratch
+  recon dirs.
 
 ## Row 20 (DAQ / packet_io) — the re-cite law + the left-open seam ledger (closes at the row)
-- EVERY daq graft face is SYNTHETIC evidence: the ext#4 pdd/NAPT family
-  + DLT_IPV4 228 / DLT_IPV6 229 landed copy-LOCAL at 20a; the 21b row
-  proved the graft-VERSION law (fead0027 DIES at flow.h :541; 9b603f8f
-  carries MAX_DAQ_VERDICT==6) — row 20 RE-CITES the REAL daq3 SDK for
+- EVERY daq graft face is SYNTHETIC evidence: the ext#4 pdd/NAPT
+  family + DLT_IPV4 228 / DLT_IPV6 229 landed copy-LOCAL at 20a; 21b
+  proved the graft-VERSION law (fead0027 DIES at flow.h :541;
+  9b603f8f carries MAX_DAQ_VERDICT==6) and 22a applied it pre-build
+  (the analyzer :255 selector); row 20 RE-CITES the REAL daq3 SDK for
   pdd/NAPT/DLT/verdict families at THAT row; NEVER treat a graft face
-  as ABI truth. The tracer row's tenant_id/address_space_id face joins
-  this list (21a recon, re-grounded at tracer.cc :52/:54-:55).
+  as ABI truth. The tracer row's tenant_id/address_space_id face
+  joins this list (re-grounded at tracer.cc :52/:54-:55).
 - Left-open seam ledger (each audit-cited since the landing rows):
-  prune/stats provider; `Stream::get_held_pkt_seq`; the IpOptionIterator
-  x4 face; the `daq_msg_get_pkthdr` PROVIDER (witnesses TOGGLE the
-  0x40 IGNORE_VLAN flag, the real provider NEVER landed); SFDAQ module
-  (the synth-SFDAQ witnesses stop at 20a); `Flow::get_mpls_layer_per_dir`
-  (18o cited-never-called); the bypass-provider face (witness_18f is a
-  synthesized carrier); `show_prompt` PULL-SITE (misc9 :425 EXACTLY-1
-  cite); the FULL codec plugin-loading deferral (plugin_manager.cc
-  1015 L, open since 17d); the PolicyResolutionFailures peg face
-  (inspector_manager-owned, 21a/21b cited-never-bumped); the **tterm
-  REAL drain `thread_drain_pending_tterm_if_pending`** (21b: the call
-  site lands at survivor_flow_data.cc :54, the provider body FOUND-0,
-  witness mirrors the imgr :324/:1276 SHAPE with a fake knob — drain
-  NEVER-invented).
+  prune/stats provider; `Stream::get_held_pkt_seq`; the
+  IpOptionIterator x4 face; the `daq_msg_get_pkthdr` PROVIDER
+  (witnesses TOGGLE the 0x40 IGNORE_VLAN flag, the real provider NEVER
+  landed); SFDAQ module (the synth-SFDAQ witnesses stop at 20a);
+  `Flow::get_mpls_layer_per_dir` (18o cited-never-called); the
+  bypass-provider face (witness_18f is a synthesized carrier);
+  `show_prompt` PULL-SITE (misc9 EXACTLY-1 cite); the FULL codec
+  plugin-loading deferral (plugin_manager.cc 1015 L, open since 17d);
+  the PolicyResolutionFailures peg face (inspector_manager-owned,
+  21a/21b cited-never-bumped); the **tterm REAL drain
+  `thread_drain_pending_tterm_if_pending`** (21b: the call site at
+  survivor_flow_data.cc :54, the provider body FOUND-0, witness
+  mirrors the imgr :324/:1276 SHAPE, fake knob — drain NEVER-
+  invented); NEW at 22a: the **hwloc/numa provider faces** (the rs
+  models the bitmap semantics; the C providers stay harness-side
+  witnesses — no row-20 obligation beyond the ledger unless a Rust
+  seam is RULLED).
 - Then row 21: main CLI + `snort -q -c` end-to-end PCAP parity — the
   project's integration proof.
 
-## Rules forward from 21b
-- **Git-face rules (the 18i law, HELD ELEVEN straight clean landings
-  18j→21b, the follow-up COMMIT route proven by 8b9882a)**: ONE commit +
-  ONE push per row; post-push fixups = follow-up commit; face-agnostic
-  harness guards; NO own-HEAD pins. The 69c8b6f orphan must stay
-  merge-base rc **1** against origin/master — re-proved THIS pass.
-- The two-lineage census (**25 / 9 x `4826fc22` / 17 distinct /
-  tracked-1 — RE-MEASURED DIRECT AGAIN THIS pass**, gre anchor
-  `6751d1a8…` intact; row 21b landed the **28th** straight zero-gate
-  row) is the LIVE face; NEVER re-pin the arithmetic without measuring
-  THAT pass (17p) — and the thread_config gate question means the
-  arithmetic MAY legitimately MOVE at that row: measure, cite, never
-  pre-assume either way. The BACKBONE-10 array moves ONLY when a row
-  ADDS backbone symbols — witness DUOS/TRIOS/9-tuples ride symbol faces,
-  not array entries; the sfd backbone10.txt echo (5339c7ee byte-ident)
-  is the newest face of that law.
+## Rules forward from 22a
+- **Git-face rules (the 18i law; follow-up-COMMIT route now proven by
+  8b9882a (20a) and 62d6fac (22a))**: ONE commit + ONE push per row;
+  post-push fixups = follow-up commit; face-agnostic harness guards;
+  NO own-HEAD pins. The 69c8b6f orphan must stay merge-base rc **1** —
+  re-proved THIS pass. The row-landing face when a rider race is
+  possible (a landing MOVES a census another test hardcodes): grep
+  `tests/` for the hardcodes BEFORE the row commit, or ship the
+  honest two-commit form (8953723 + 62d6fac) — NEVER an amend.
+- The two-lineage census — **THE MEASURED FLIPPED FACE: 26 gate.txt /
+  9 x `4826fc22` FROZEN / 18 distinct lineages / tracked-1 (gre
+  `6751d1a8` intact)**, re-run DIRECT THIS pass — is the LIVE face;
+  NEVER re-pin the arithmetic without measuring THAT pass (17p). The
+  flip mechanics + rider duties: the close-out. Gate-landing hardcode
+  reform = rule 7. The BACKBONE-10 array moves ONLY when a row ADDS
+  backbone symbols — witness DUOS/TRIOS/9s ride symbol faces; the
+  tc witness is a one-home MULTI face (backbone untouched; `5339c7ee`
+  wc-10 re-proved THIS pass).
 - **SINGLE-TENANT is the top-cycle law**: one cargo/census round at a
-  time; a docs pass NEVER runs cargo while an orchestrator/row round is
-  in flight (THIS pass: the 633/0 + clippy-0 face rides the 21b commit
-  receipts, re-measured at the next harness phase); harness census runs
-  clear sibling `copy/` trees first, BOTH directions (sfd + rsubs each
-  own a live tools-dirty census every build — keep tools/ porcelain-
-  clean apart from the in-flight row's stageables).
-- New harness build.sh MUST clone, day one: the link4 NEXT.md-tolerance
-  line, the FRESH harness read-asserts the FULL pinned set (sfd :527 +
-  :637-:641 is the NEWEST template — include the NEW seeded face at
-  EXACT-COUNT 3 + carry every older x3 face + the 573 x5/-eq-5 law), the
-  state-aware stageables face-guard (8-face dual arm), the name-pin
-  census (tc: dodge the rsubs globs + the sfd token census — the sfd
-  :118-:119 arms stay find-0-clean of foreign build.sh tokens), the
-  `rm -rf`-copy-first census discipline, and the nested `.gitignore`
-  instrument for new dirs (root NEVER moves).
+  time; a docs pass NEVER runs cargo while an orchestrator/row round
+  is in flight (THIS pass: the 650/0 + clippy-0 face rides the
+  62d6fac commit receipts, re-measured at the next harness phase);
+  harness census runs clear sibling `copy/` trees BOTH directions
+  (the 22a donor self-heal = new edge: tc/copy <-> ipheavy/copy; the
+  tools-dirty censuses of sfd + rsubs + the 22a harness + erspan
+  :404 all keep firing; keep tools/ porcelain-clean apart from the
+  in-flight row's stageables + gitignored artifacts).
+- New harness build.sh MUST clone, day one: the link4 NEXT.md-
+  tolerance line; read-asserts the FULL pinned set (**the 22a-script
+  :649-:656 arms are the NEWEST template — include the NEW seeded
+  face at EXACT-COUNT 3 + carry every older x3/x4/x5 face + NEVER
+  re-case the 580**; plus the CARGO-twin precedent: if the row reads
+  NEXT from tests, remember rule 7 hardcode reform); a token plan —
+  the pinned-count faces (this file's sfd-prefixed face EXACTLY-1
+  line; the 22a-script-token face EXACTLY-2 lines; the stale-token
+  MUST-ride face) are HARNESS pins too: measure which tokens a
+  new name trips BEFORE choosing it; the state-aware stageables
+  face-guard at the MEASURED count (9 for the 22a row — NEVER
+  inherit the 8-shape bank); the name-pin census (the tracer row:
+  dodge rsubs globs / sfd / tc find-arms + measure the 13 `tracer`
+  cp-line pre-hits); the `rm -rf`-copy-first discipline (incl the
+  donor self-heal loop); the nested `.gitignore` instrument for new
+  dirs with explicit check-ignore arms for EVERY copy-local artifact
+  (root NEVER moves).
 - clippy-allow practice: CLEAN own warnings BEFORE the code commit;
   cited allows ONLY at genuine record/ABI point sites — the live src
   face: trio 3/5/2 = 10 cited (20a) + rsubs.rs EXACTLY 1 (21a) +
-  survivor_flow_data.rs ZERO (21b), ZERO in any framework mod.rs —
-  tests-side pin-site counsel unchanged.
-- NEXT.md rewrites: pin floors THIS face = `573 tests green` x5
-  (EXACT, lines), `580 passed / 0 failed` x3, `588 tests green / 0 FAILED` x4,
-  `597 tests green / 0 FAILED` EXACTLY x3 on EXACTLY 3 lines,
-  `605 tests green / 0 FAILED` x3, `621 tests green / 0 FAILED`
-  EXACTLY x3, `629 tests green / 0 FAILED` EXACTLY x3 (the sfd arms are
-  LIVE every sfd re-run), seeded `633 tests green / 0 FAILED` EXACTLY
-  x3 — re-grep BEFORE writing (tools/ read-assert sites above) and AFTER
-  the docs commit. KEEP `grep -c` of the sfd prefixed dir token in this
-  file at EXACTLY 1 line (sfd :119). CITE-DRIFT law — THREE landed faces
-  now: the rsubs `:625` face, the cc `:39` static-init face (PLAN said
-  :33), and the seeded "5 TEST(" rider count that DISK corrected to 4 —
-  the law reads CONTINUOUS because the drift token gets FIXED openly,
-  never silently; the thread_config.h `86-vs-95` bank token is the NEXT
-  live instance: DISK WINS, at the row.
-
+  survivor_flow_data.rs ZERO (21b) + **thread_config.rs ZERO (22a)**,
+  ZERO in any framework mod.rs — tests-side pin-site counsel
+  unchanged.
+- NEXT.md rewrites: pin floors THIS face = `573 tests green` EXACTLY x5 lines (sfd :641 + tc :656 ENFORCE it as a count, NEVER four or six), `580 passed / 0 failed` x3 (the PASSED phrasing ONLY), `588 tests green / 0 FAILED` EXACTLY x4, `597 tests green / 0 FAILED` EXACTLY x3 on EXACTLY 3 lines (misc9's arms stay LIVE even at direct-md5 verify), `605 tests green / 0 FAILED` x3, `621 tests green / 0 FAILED` EXACTLY x3, `629 tests green / 0 FAILED` EXACTLY x3, the absorbed landed seed `633 tests green / 0 FAILED` EXACTLY x3, and the NEW seed `650 tests green / 0 FAILED` EXACTLY x3 on three separate lines — re-grep BEFORE writing (`tools/` AND `tests/`) and AFTER the docs commit. TOKEN ARITHMETIC (all arms
+  live): keep the prefixed sfd dir-token on EXACTLY-1 line (sfd script
+  :119 + parity twin), the bare 22a dir token on EXACTLY-2 lines
+  (its :128), the stale hwloc-token exhibit VERBATIM riding (its
+  :124 + its parity twin), and the quoted rider-count drift exhibit
+  at EXACTLY-ONE line (sfd parity contains-count once-face — the
+  62d6fac dedup law; copy it ONCE max). CITE-DRIFT law — SIX landed
+  faces now, fixed OPENLY never silently: the rsubs `:625` face, the
+  cc `:39` static-init face (PLAN :33), the seeded five-TEST rider-count
+  seed -> disk 4, the h 86-vs-95 face (OPENED pre-row, CLOSED at the
+  row by ground pins), the :34-:35 include face, the hwloc 142/126
+  trio vs the banked 133 — and the NEW WRINKLE: **some drift tokens
+  MUST KEEP riding because the harness pins the STALE rendering as
+  the exhibit (the `cc **133**` face is the first of those)** — read
+  each harness's NEXT-read arms and carry what they grep.
 ## Backlog (plan rows)
 - Wiki: **landed through 21b at 367c2b9** (HEAD == remote == ls-remote,
-  clean worktree, orchestrator-verified: `21b` greps 2+2 faces, dev block
-  `ac79959e…` md5 pair byte-exact, provenance x10, stats face 526 files /
-  62,673 src lines / 129 commits / 633 tests / 76 suites) — ZERO wiki
-  debt; NEVER edit `/tmp/RustyPig.wiki` outside the wiki phase.
-- 21b: **DONE (3e9f2d7 13 paths +2,339/−0; plain reflog, ONE push, no
-  amend no force; the 11th straight one-commit/one-push face per the
-  commit's own count)** — the whole face is in the 21b close-out above +
-  the commit body.
+  clean, orchestrator-verified: greps 2+2, dev block byte-exact md5
+  pair, provenance x10; its stats face 526/62,673/129/633/76 is
+  THOROUGHLY stale vs this pass — 537 files / 64,255 lines / 170
+  src / 132 commits / 650 tests / 78 suites: the wiki pass re-measures
+  LIVE) — ZERO debt thru 21b, **22a row PENDING at the wiki phase**;
+  NEVER edit `/tmp/RustyPig.wiki` outside the wiki phase.
+- 22a: **DONE (8953723, 131st, **14 paths +3,546/−0**, plain reflog +
+  TWELFTH straight one-commit/one-push count; FIRST real Catch gate
+  since gre 18g; + follow-up **62d6fac**, 132nd, 2 paths +10/−4 — the
+  fix-forward law REPLAYED on the sfd census rider)** — the whole face
+  is in the close-out above + both commit bodies.
+- 21b: **DONE (3e9f2d7 13 paths +2,339/−0; the ELEVENTH straight
+  face — 28th-and-LAST straight zero-gate row at its landing)** — the
+  face is in the 21b close-out above + the commit body.
 - 21a: **DONE (167cb3c 13 paths +3,307/−0; the 10th straight face)** —
   the face is in the 21a close-out above + the commit body.
-- 20a: **DONE (d525b6d 16 paths +7,136/−1 + follow-up 8b9882a)** — the
-  face is in the 20a close-out above + the commit bodies.
+- 20a: **DONE (d525b6d 16 paths +7,136/−1 + follow-up 8b9882a — the
+  fix-forward PRECEDENT pair)** — the face is in the 20a close-out.
 - 18 (codecs): **CHAPTER CLOSED** — umbrella DONE at
   `PORTING_PLAN.md:87`; residual = per-row CppUTest test-side material
   ONLY (dialect-BLOCKED, cite/translate), NEVER re-open the code side
   without orchestrator ruling.
-- 19: opener 19a DONE; P2 rsubs DONE (21a); P3 survivor_flow_data DONE
-  (21b, 3e9f2d7); **thread_config = the next milestone (face above,
-  with the gate-streak question)**; then tracer rank-LAST; then the
-  detection-option engines (~30k+, the gre gate shape banked).
-- 20: packet_io/DAQ TODO — re-cite law + seam ledger above (the tterm
-  drain joins the ledger at 21b). 21: main CLI + end-to-end PCAP parity.
+- 19: opener 19a DONE; P2 rsubs DONE (21a); P3 survivor_flow_data
+  DONE (21b); P thread_config **DONE (22a — the GATE row)**; **the
+  ch19 LAST row = tracer (face above: rank-LAST, daq wall, ZERO-
+  gate material)**; then the row-19 plan line's OWN remainder = the
+  detection-option engines (~30k+, banked; the gre + 22a gate-shape
+  donors banked for it).
+- 20: packet_io/DAQ TODO — re-cite law + seam ledger (joined at 21b +
+  22a + the tracer-wall face). 21: main CLI + end-to-end PCAP parity.
 
 ## Session ritual (verbatim order)
 1. `git -C /opt/data/snort3-rust status --short; git log --oneline -3`
    (status CLEAN apart from the in-flight row; NEVER amend/force
    anything — the 69c8b6f orphan must stay merge-base rc 1 against
-   origin/master — re-proved at every docs pass 18j-21b).
-2. Verify-mode receipts (ONE tenant at a time): full `cargo test` (sum
-   `test result` lines programmatically; expect the **633** landed face
-   re-measured LIVE, 0 FAILED; the result-line count MOVES, re-measure)
-   + `cargo clippy --all-targets` grep-0. Harness receipts at a docs
-   pass: run the REWRITTEN-NEXT-armed harnesses LAST->FIRST as needed,
-   each ONLY AFTER the rewritten NEXT.md passes its read arms — `cd
-   tools/sfd_harness && bash build.sh` (its :637-:641 x3/x5 arms +
-   :116-:119 name-pins must pass the NEW file; state-aware 8-face
-   dual guard: pre-commit 8-untracked / post-commit 8-tracked, both
-   rc0); `cd tools/rsubs_harness && bash build.sh` (its :459-:461 +
-   :576-:579 arms + the `TEST(`-47 + `:625` GROUND pins); `cd
-   tools/ipheavy_harness && bash build.sh` ONLY AFTER its :656-:660
-   arms pass; gre FRESH (gate `6751d1a8`, `GRE_HARNESS_OK vectors=26
-   faceA=5 gate_lines=3`), fmod (`4826fc22`), vocab (`VOCAB_HARNESS_OK
-   vectors=29`), erspan (the pinned-string stakeholder :580 + :404
-   census; clear the child copies FIRST incl sfd + ipheavy + rsubs
-   copy/ for the :404 face), link6 (`LINK6_PPP_OK vectors=20 faceA=20
-   gates=0`) and `rm -rf tools/link4_harness/copy tools/link6_harness/
-   copy` FIRST (plus the sfd + rsubs `copy/` trees before any tools-
-   dirty census) then
-   link4 x2 (`LINK4_VLAN_OK vectors=28 faceA=24 gates=0`, copy-find
-   RE-DERIVES, backbone wc-10). Verify misc9 by DIRECT md5s ONLY now
-   (vectors `e6328da1…`/`dfe738fb…`, witness `ada2b1e8…` — the :461
-   landmine-drift face, NEVER chase to rc 0, NEVER edit it), same for
+   origin/master — re-proved at every docs pass 18j-22a).
+2. Verify-mode receipts (ONE tenant at a time): full `cargo test`
+   (sum `test result` lines programmatically; expect the **650**
+   landed face re-measured LIVE, 0 FAILED — remember 22a: a landing
+   that moves a census turns OLD tests red, so cargo BEFORE commit at
+   flip rows; the result-line count MOVES, re-measure) + `cargo
+   clippy --all-targets` grep-0. Harness receipts at a docs pass: run
+   the REWRITTEN-NEXT-armed harnesses LAST->FIRST as needed, each ONLY
+   AFTER the rewritten NEXT.md passes its read arms — `cd
+   tools/tc_harness && bash build.sh` (the NEWEST arming: its :649-
+   :656 face-counts + :124 stale-token ride face + :126-:128 token
+   census + the 9-FACE state-aware dual guard pre-commit-untracked /
+   post-commit-tracked both rc0 must pass the NEW file; it self-heals
+   its ipheavy donor); `cd tools/sfd_harness && bash build.sh` (the
+   :637-:641 x3/x5 arms + :116-:119 pins must pass; clear the 22a-
+   harness + rsubs + ipheavy `copy/` for its tools-dirty census;
+   the CARGO twin asserts the x3 faces + exhibit-once + the 26-
+   census face from cargo too); `cd tools/rsubs_harness && bash
+   build.sh` (its :459-:461 + :576-:579 arms + `TEST(`-47 + `:625`
+   GROUND pins); `cd tools/ipheavy_harness && bash build.sh` ONLY
+   AFTER its :656-:660 arms pass (and the self-heal loop: ipheavy's
+   census first if the 22a copy is cold); gre FRESH (the ONLY tracked
+   gate `6751d1a8`, vectors=26 faceA=5 gate_lines=3), fmod
+   (`4826fc22`), vocab (`VOCAB_HARNESS_OK vectors=29`), erspan (the
+   :580 stakeholder assert + the :404 census — clear the child copy
+   trees FIRST incl the 22a harness + sfd + rsubs + ipheavy for that
+   face), link6 (`LINK6_PPP_OK vectors=20 faceA=20 gates=0`) and
+   `rm -rf tools/link4_harness/copy tools/link6_harness/copy` FIRST
+   (plus every fresh-set `copy/` before any tools-dirty census) then
+   link4 x2 (copy-find RE-DERIVES, backbone wc-10). Verify misc9 by
+   DIRECT md5s ONLY (vectors `e6328da1…`/`dfe738fb…`, witness
+   `ada2b1e8…` — the landmine-drift face, NEVER chase to rc 0, NEVER
+   edit it; its :462/:607 face-counts still read this file), same for
    the frozen lineage (mpls/ipheavy/link4/link6/erspan/misc3/miscip/
-   daq3/small4/gre/tun/ext/eth/csum/fmod/vocab vector + witness + graft-
-   master faces as listed above; backbone `5339c7ee`; witness census
+   daq3/small4/gre/tun/ext/eth/csum/fmod/vocab/numa vector+witness+
+   graft-master faces above; backbone `5339c7ee`; witness census
    `9fad7e9d`/`be9bdd0b`/`f4afd35f`/`ea1f79f3`/`ef50cd2f`/`c5b498ff`;
    graft masters `73fdbc39`/`f683749c` + regen `0f7016a6`/`fead0027`;
    rsubs vectors `9e303761…`/`42aa06fb…`, witness `c0142f9b…`; sfd
-   vectors `3c05632e…`/`040de1ef…`, witness_sfd `101aa012…`). NEVER
-   edit frozen scripts; FRESH-build set = sfd + rsubs + ipheavy + gre +
-   fmod + vocab + erspan + link6 + link4. Harness sequences go in a
-   scratch .sh, single-tenant.
+   vectors `3c05632e…`/`040de1ef…`, witness_sfd `101aa012…`; the 22a
+   vectors `3ef16a1e66a1590fb0303e514b6334b3`/`653103cb599ea6369949e
+   eb35a8ed698` + gate.txt face `a32720c7…` COPY-LOCAL =
+   regenerate-trust not re-md5-trust). NEVER edit frozen scripts;
+   FRESH set = the 22a harness + sfd + rsubs + ipheavy + gre + fmod +
+   vocab + erspan + link6 + link4. Harness sequences go in a scratch
+   .sh, single-tenant.
 3. Port -> `cargo test --test <x>_parity_test` -> full `cargo test`
-   (zero FAILED; >= **633**) + clippy 0 -> harness `.gitignore` +
-   `git check-ignore` -> stage ONLY the row's paths -> commit+push
-   (**ONE push, then done — fixes ride FOLLOW-UP commits**; verify
-   `git ls-remote` matches HEAD BEFORE any further commit) -> plan row
-   + deviations (grep-guards; ship inside the code commit, verify-grep
-   at the docs pass) -> refresh THIS file (**carry the PINNED STRINGS
-   FIRST — grep tools/ for NEXT.md read-asserts BEFORE writing; carry
-   every floor VERBATIM — misc9 + rsubs + sfd EXACT-COUNT arms, the 573
-   face at EXACTLY 5 lines — + seed the current-pass face at EXACTLY 3
-   for the next harness; re-grep pins AFTER the commit**) -> commit+push
-   docs -> wiki (**ZERO debt at 367c2b9 thru 21b** — if a row lands, the
-   wiki pass re-measures HEAD + ALL stats LIVE; push ONCE).
+   (zero FAILED; >= **650**) + clippy 0 -> harness `.gitignore` +
+   `git check-ignore` (every artifact in an explicit arm — the 22a
+   :671 loop) -> stage ONLY the row's paths -> commit+push (**ONE
+   push, then done — fixes ride FOLLOW-UP commits; verify `git ls-
+   remote` matches HEAD BEFORE any further commit; at a flip row
+   grep `tests/` for the moved-census hardcodes BEFORE staging**) ->
+   plan row + deviations (grep-guards; inside the code commit; verify-
+   grep at the docs pass) -> refresh THIS file (**carry the PINNED
+   STRINGS FIRST — grep tools/ AND tests/ for NEXT.md read-asserts
+   BEFORE writing; carry every floor VERBATIM — misc9 + rsubs + sfd +
+   the 22a-script EXACT-COUNT arms, the `573 tests green` face at
+   EXACTLY 5 lines,
+   the token-arithmetic faces + the MUST-ride stale exhibits — seed
+   the current-pass face at EXACTLY 3 for the next harness; re-grep
+   pins AFTER the commit**) -> commit+push docs -> wiki (**ZERO debt
+   at 367c2b9 thru 21b; 22a PENDING — the wiki pass re-measures HEAD
+   + ALL stats LIVE incl the 78-suite/650-test face; push ONCE**).
