@@ -4598,3 +4598,79 @@ Structural deviations (behavior preserved):
   sizeof(TraceLogApi)=88 are vectors constants (PROBE_SIZEOF posture); the
   Rust record-fold (codec.rs:448 posture) needs NO matching layout and the
   port NEVER size_of()s to pretend it mirrors one.
+
+## packet_io sfdaq pair (row 23a — packet_io/sfdaq.cc 420 7ac13aa1 + sfdaq.h 72 2e272d2d + sfdaq_config.cc 131 881eb038 + sfdaq_config.h 85 df8f1875 = 708 L, THE chapter-20 OPENER — row 20's REAL-SDK RE-CITE law DISCHARGED with the MEASURED face-by-face ledger)
+
+- **THE RE-CITE LEDGER (the row's heart; EVERY synth graft face EVIDENCE
+  NEVER ABI truth)**: the harness (tools/daqio_harness) compiles the SAME
+  31-L ledger probe SIX ways. MEASURED faces: masters f683749c /
+  graft-v2 fead0027 / ext#4 9b603f8f ALL sizeof(DAQ_PktHdr_t)=16,
+  ts/AS/TN ABSENT; the 22b heredoc ext b99e44b9 pkthdr=24 with SYNTH
+  uint16 address_space_id + tenant_id; **REAL libdaq c8d4083 pkthdr=56,
+  ts PRESENT, address_space_id u32@44 + tenant_id u32@48** — THE 22b
+  PKTH WALL CLOSED BY THE SDK FACE (recite_ledger.txt, flipped-assert
+  x3 arms every build). Flag drifts MEASURED: SIGNIFICANT_GROUPS 0x20
+  (master) -> 0x8000 REAL; IGNORE_VLAN 0x40 (20a ext daq.h) -> 0x08
+  REAL (:117); NOT_FORWARDING 0x0002 CONFIRMED (the cc :328 read-face);
+  verdict names PAUSE/WAITING/COUNT SYNTH count 2, REAL 0 (the ext#4
+  MAX==6 was value-HONEST, name-WRONG); DAQ_COMMON_API_VERSION 0x30013
+  exists ONLY in the REAL face (grep-0 in ALL three synth daq_commons);
+  DLT raw=12/en10mb=1/ipv4=228/ipv6=229 RE-CONFIRMED REAL. The E4
+  PRE-RECITE arm: ground sfdaq.cc vs the ext#4 graft trio head =
+  EXACTLY-86 error lines ('DAQ_Mode' does not name a type ;2 +
+  daq_load_dynamic_modules NOT declared; 78 scope-faces) flipped-assert
+  EVERY build; the RE-CITED swap (REAL api/daq.h 178 35294a17 +
+  daq_common.h 728 28789a3d + daq_dlt.h 1413 + daq_module_api.h 165
+  1a617b3e + generated daq_version.h 3.0.29 from the configure.ac m4
+  face) = SILENT rc0 + RUNS against the REAL daq_base.c tables.
+- **THE verdict face (ground-truth correction OFTEN mis-cited)**: the
+  ground fe29cbe carries NO verdict-name table in sfdaq.cc at all (the
+  pre-recon "cc :56-:63 table" face was GRAFT-era lore): h :44 declares
+  verdict_to_string, cc :322 IS `return daq_verdict_string(verdict);` —
+  the NAMES live SDK-side in daq_base.c :56-:63 (pass/block/replace/
+  whitelist/blacklist/ignore, MAX -> NULL). The Rust vocabulary RE-
+  CITES the real SDK values; harness T8 rides the REAL table live.
+- **SFDAQInstance (sfdaq_instance.cc 436 + .h 105) = ROW 23b**: NEVER
+  invented here (the cd_user.rs provider law). The harness witness
+  mirrors the 11 public methods (own-11 + 3 message mirrors = own-14);
+  the Rust side carries the LEFT-OPEN `DaqInstanceSeam` trait (cite-
+  never-carry: the sfdaq.cc :345-:402 legs ONLY). The wrapper legs that
+  DEREF local_instance land as Option (None = the C nullptr deref that
+  NEVER fires on the landed legs — cited deviation; the vectors pin
+  BOTH sides of every short-circuit).
+- **the C file-statics -> facade fields**: daqcfg/default_daq_mode/
+  daq_module_names/loaded + THREAD_LOCAL local_instance (cc :52-:58)
+  ride SFDaq FIELDS (the messages.rs file-globals-on-engine posture);
+  NO static mut. The daqcfg OPAQUE handle rides a DaqConfigMirror
+  replay of the OBSERVABLE daq_config.c accessors (pool/snap/timeout/
+  total + the pushed modcfg stack) — the harness links the REAL
+  daq_config.c so the mirror is PINNED, not guessed; the SDK NEVER
+  rejects a variable set (daq_config.c:226) so the ONLY reject face is
+  the cc :203 empty-name nullptr -> ParseError arm.
+- **the two-arg get_input_spec (h :50) -> `get_input_spec_for_instance`**:
+  the house overload law (module.rs :457/:474 precedent, the
+  find_module precedent INSIDE this very file) — the suffixed unique
+  name, the C ladder untouched (empty -> None; 0<id<len -> [id]; else
+  [0]; the harness T3 id9=ethA face).
+- **init()'s FatalError arm surfaces as `false`/None-outcome, NEVER a
+  panic** (the C FatalError _exits — the driver layer owns it; the
+  cc :296-:301 DAQ_ValidateModule Fatal block is COMMENTED OUT in
+  ground (the :297-:302 comment face), the port mirrors the LIVE legs
+  only). The conf seam (get_conf adaptor_inline_mode/read_mode,
+  snort_config.h :702-:708) lands as two explicit bools at init (the
+  harness drives REAL set_run_flags — the vectors pin both faces).
+- **C ownership posture**: SFDAQConfig::module_configs is a vector of
+  RAW POINTERS with a dtor-delete loop (cc :72-:76) + overlay new-copy
+  (cc :113-:121) — lands plain `Vec<SFDAQModuleConfig>` (value records;
+  the pointer identity is NEVER read cross-record; the clear+extend
+  overlay replays the delete+transform-copy face) — the
+  survivor_flow_data SFD-delete law does NOT apply (these ARE owned,
+  the port takes ownership like the C unique-store).
+- **the FROZEN-era harness daq.h arms honestly annotated**: the daq3
+  :105 / misc3 :160/:164/:764 / miscip :133/:598 "ONE landing" find-arms
+  + the misc3 :378 sfdaq*.cc find-0 arm are FROZEN-ERA receipts — the
+  20a-era copy trees ALREADY ride foreign copy daq.h faces (never
+  tracked; the TRACKED face stays `git ls-files tools | grep -c
+  'daq\.h$'` == 0, re-asserted by the daqio build.sh). The daqio copy/
+  tree is COPY-LOCAL nested-gitignored (the NESTED-INSTRUMENT law; the
+  root .gitignore NEVER touched).

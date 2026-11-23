@@ -1,0 +1,18 @@
+T0 defaults batch=0 mru=-1 timeout=1000 bs=64 ms=1518
+T1 vars n=3 k0=input v0=/var/log/pcap.0 k1=strict v1= k2=k v2=3=4
+T2 overlay bs=32 ms=2000 to=0 in0=ethB inN=2 dirs=/lib/daq-over
+T2b overlay_empty keep=5,6,1000
+T3 inspec_null=0 id0=ethA id1=ethB id9=ethA
+T4 default_pcap init=0 perr=[Could not find requested DAQ module: pcap]
+T5 reg=2 block=[Available DAQ modules:alpha(v3): readback live inline multi unpriv Variables:  input [arg] - the input spec  strict <arg> - strictnesszeta(v5): readback unpriv wrapper]
+T6 init=1 iinit=1 pool=256 snap=1518 tmo=1000 tot=4 log=[alpha DAQ configured to passive.] bpf=bpf-echo hint=7
+T6b canrun_unpriv=1
+T7 unset mapped=1 log=[alpha:alpha DAQ configured to passive.] T7 passive mapped=1 log=[alpha:alpha:alpha DAQ configured to passive.] T7 inline mapped=2 log=[alpha:alpha:alpha:alpha DAQ configured to passive.] T7 readfile mapped=3 log=[alpha:alpha:alpha:alpha:alpha DAQ configured to passive.] 
+T7b inline log=[alpha:alpha:alpha:alpha:alpha:alpha DAQ configured to inline.]
+T7c wrapper init=0 perr=[Could not find requested DAQ module: pcap]
+T8 verdicts=pass|block|replace|whitelist|blacklist|ignore|max=null
+T8b fwd passive=0 inline=1 notfwd=0
+T9 nullwrap ci=0 cir=0 cr=0 tb=0 set ci=1 cir=0 cr=1 tb6=1 proto=6 spec=[eth9] base=101
+T9b stats=11 vblock=3 inject=7 calls=1
+T10 term unloaded alpha=1 zeta=1 ctor=6 dtor=6
+T11 nopriv_canrun=0

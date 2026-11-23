@@ -17,6 +17,7 @@ pub mod helpers;
 pub mod log;
 pub mod lua;
 pub mod parser;
+pub mod packet_io;
 pub mod ports;
 pub mod sfip;
 pub mod utils;

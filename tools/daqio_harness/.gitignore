@@ -1,0 +1,41 @@
+# row-23a daqio_harness copy-local instruments (NESTED-INSTRUMENT law; root
+# .gitignore NEVER touched). Stageables = exactly 9 (see build.sh census):
+# .gitignore PLAN.md build.sh probe.cc probe_faceA.cc ledger_probe.cc
+# witness_daqio.cc vectors.txt vectors_faceA.txt. EVERYTHING else (copy/,
+# o2/, *.o, binaries, receipts, ledger, E4/E9 outputs, the carried
+# witness_conf.cc EXTRACTION, pristine twins) NEVER lands.
+copy/
+o2/
+*.o
+probe
+probe_O2
+probe_faceA
+probe_faceA_O2
+witness_conf.cc
+e9_dup_twin.cc
+ledger_err.txt
+ledger_run
+run_*
+recite_ledger.txt
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+nm_U_sfdaq.txt
+nm_U_sfdaq_config.txt
+nm_api_defined.txt
+E4_graft.txt
+E4_real.txt
+E4_cfg.txt
+E9_dup.txt
+md5_pinned.txt
+gate.txt
+gate_*
+*.gate_*
+gate_md5_lineages.txt
+stageables.txt
+backbone10.txt
+faceA_stderr.txt
+probe_dec_stderr.txt
+.vectors_pristine
+.vectors_faceA_pristine

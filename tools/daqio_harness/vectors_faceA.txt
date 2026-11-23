@@ -1,0 +1,11 @@
+SIZES pkthdr=56 msg=112 stats=96 flowstats=288 napt=40 flowedsc=60 baseapi=104 modapi=216
+OFFSETS as=44 tn=48 flags=40 ts=0 pktlen=16
+ENUM verdict=6 rstat=8 mode=4 state=5 dio_max=1024 msgtype=1024
+VERSIONS common=0x30013 base=0x30002 module=0x30001 numeric=50339072 str=3.0.29.0
+MODESTRINGS none=none passive=passive inline=inline readfile=read-file max=null
+REG badver_absent=0 wrongsize_absent=0 missingfns_absent=0 walk4=2 okmod=1 dup_name_single=1
+VERDICTS pass|block|replace|whitelist|blacklist|ignore max=null
+DLT en10mb=1 ppp_ether=51 raw=12 ipv4=228 ipv6=229
+TYPES file=01 intf=02 inline=04 multi=08 nopriv=10 wrapper=20
+PKTFLAGS notfwd=0x2 significant=0x8000 ignore_vlan=0x8
+CONF get_conf_nonnull=1 inline=0 read=0
