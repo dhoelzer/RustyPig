@@ -1,4 +1,4 @@
-# NEXT.md — takeover context & plan (2026-11-23, post-22b: THE chapter-19 LAST row framework/tracer PAIR LANDED AT 7102e75 — cc 73 L 9ee6b2ee + h 125 L 98d53205 = 198 L, the ground RE-GROUNDED byte-exact pre-row — THE PT_TRACE TraceLoggerPlug/TraceLogApi API pair + THE DAQ/pkth WALL MEASURED LIVE (the ungrafted donor compile dies EXACTLY-3 no-member faces at cc :52/:54-:55 = the flipped-assert receipt) + the honest heredoc pkth EXTENSION arm COPY-LOCAL SYNTHETIC b99e44b9 (NEVER ABI truth, the row-20 ledger absorbs + GROWS) + witness OWN-3 (snort_strdup / layer::get_inner_ip6_frag nullptr mirror / the ts_print MIRROR at the fixed anchor) + FACE-A = THE C-ABI SIZES face (base=64 / api=88 probe pins, NEVER size_of) + version arithmetic 1900546 + NOLOAD framework-TU + THE glibc ntop(false) DRIFT caught by the trace v6 vectors and FIXED fix-forward on the SHARED home src/sfip/sf_ip.rs (ZERO landed callers rode that arm; a C byte-match tripwire now pins the face; one-home law = NO tracer-side fork) + ZERO-gate row face RE-MEASURED by walk (framework/test EXACTLY-3 add_cpputest no tracer EVER; the 22a closure NEVER re-arms; census STAYS 26/9/18/1) + vectors DEC 10L 94e4b02b + FACE-A 8L 31f510a1 FIRST-RUN-SEED + the misc9 landmine NAMING law HELD (src/ struct-Tracer grep face = 0) + 659/0 over 79 result-lines + THIRTEENTH straight one-commit/one-push + CHAPTER-19 framework/misc side CLOSED — NEXT = the honest plan face: row 20 (DAQ re-cite + seam ledger) then row 21 (CLI integration) + the row-19 option subset)
+# NEXT.md — takeover context & plan (2026-11-23, post-23a: THE chapter-20 OPENER LANDED AT 7eccfee — packet_io sfdaq pair 420+72 7ac13aa1/2e272d2d + sfdaq_config riders 131+85 881eb038/df8f1875 = 708 L, FIRST src/packet_io home (mod 16 + sfdaq 653 + sfdaq_config 217 ZERO allows) + THE REAL-SDK RE-CITE LAW DISCHARGED: /opt/data/libdaq @ c8d4083 is now GROUND (READ-ONLY) — daq.h 178 35294a17 / daq_common.h 728 28789a3d / daq_module_api.h 165 1a617b3e / daq_dlt.h 1413 — face-by-face MEASURED ledger vs every synthetic graft: pkthdr master/v2/ext4 = 16 L ts/AS/TN ABSENT vs REAL 56 L u32 address_space_id@44 + tenant_id@48 = THE 22b PKTH WALL CLOSED BY THE SDK FACE; SIGNIFICANT_GROUPS 0x20->0x8000 + IGNORE_VLAN 0x40->0x08 drift legs, NOT_FORWARDING 0x0002 CONFIRMED, verdict family REAL=6 (ext#4 MAX==6 value-HONEST name-WRONG), DAQ_COMMON_API_VERSION 0x30013 REAL-only, DLT 12/1/228/229 RE-CONFIRMED; E4 pre-recite flipped-assert EXACTLY-86 error faces (DAQ_Mode + daq_load_dynamic_modules named) vs RE-CITED swap SILENT rc0; 9 stageables incl ledger_probe.cc the drift-ledger compile leg; witness own-14 SFDAQ mirrors = the row-23b provider stand-in NOT bodies; DaqInstanceSeam LEFT-OPEN for 23b; vectors DEC 18L a16f916c + FACE-A 11L a12ba1d0; ZERO-gate by walk census STAYS 26/9/18/1; harness name daqio_harness token-censed find-0-clean; 684/0 over 80 result-lines + clippy 0 RE-MEASURED LIVE HERE; FOURTEENTH straight one-commit/one-push — NEXT: row-23b legs of the packet_io book (sfdaq_instance 436+105 / sfdaq_module 298+89 with its static_assert :179 REAL-SDK face + the tterm-adjacent family, trough 265+88 needs helpers/directory seam call, active 1074 heavy, packet_tracer 739+166 = the CATCH-carrier 12-case gate candidate with ips_context/stream_log walls UNMEASURED, packet_tracer_module + packet_constraints riders; sfdaq_static_modules.h.in dialect face) THEN row 21 integration; row-19 option subset per PLAN)
 
 This file is the single resume point for a fresh agent. It carries only
 what is not cheaply re-derivable. `PORTING_PLAN.md` (row table, per-row
@@ -32,12 +32,16 @@ the tc cargo twin), the bare tc dir-token (underscore form) appears on
 EXACTLY-2 lines (the donor ledger + the Session ritual), and the sfd
 prefixed dir-token appears on EXACTLY-1 line (the ritual cite — sfd
 :119 + its cargo twin); everything else in tools/ is prose citation)**:
-- `659 tests green / 0 FAILED` — THE CURRENT-PASS SEED for the NEXT
-  harness (row 20's, WHEN it lands) to grep-assert at EXACT-COUNT:
+- `684 tests green / 0 FAILED` — THE CURRENT-PASS SEED for the NEXT
+  harness (row-23b's, WHEN it lands) to grep-assert at EXACT-COUNT:
   EXACTLY three occurrences on EXACTLY three separate lines — NEVER a
-  fourth, NEVER two occurrences sharing one line. It rides the 7102e75
-  commit face (cargo re-run LIVE at THIS docs pass: 659 passed / 0
-  failed over 79 `test result` lines = 650 at 22a + 9 tracer fns).
+  fourth, NEVER two occurrences sharing one line. It rides the 7eccfee
+  commit face (cargo re-run LIVE at THIS docs pass: 684 passed / 0
+  failed over 80 `test result` lines = 659 at 22b + 25 daqio fns).
+- `659 tests green / 0 FAILED` — the 22b-docs-pass seed, NOW ABSORBED
+  into the harness-pinned set: the daqio harness :203 + the daqio cargo
+  twin :759 assert it EXACT-COUNT -eq 3 like every prior face. Keep
+  EXACTLY three.
 - `650 tests green / 0 FAILED` — the 22a-docs-pass seed, NOW ABSORBED
   into the harness-pinned set: the tracer harness :137 + the tracer
   cargo twin :385 assert it EXACT-COUNT -eq 3 like every prior face.
@@ -83,13 +87,13 @@ This docs commit carries `573 tests green` x5, `580 passed / 0 failed`
 x3, `588 tests green / 0 FAILED` x4,
 `597 tests green / 0 FAILED` x3, `605 tests green / 0 FAILED` x3,
 `621 tests green / 0 FAILED` x3, `629 tests green / 0 FAILED` x3,
-the landed seeds `633 tests green / 0 FAILED` x3 and `650 tests green / 0 FAILED` x3 VERBATIM, and SEEDS the
+the landed seeds `633 tests green / 0 FAILED` x3, `650 tests green / 0 FAILED` x3 and `659 tests green / 0 FAILED` x3 VERBATIM, and SEEDS the
 new current-pass face EXACTLY three times on three separate lines
-above for the NEXT harness (the row-20 pass) to grep-assert — exactly
+above for the NEXT harness (the row-23b pass) to grep-assert — exactly
 as the 18o pass seeded 597 for misc9, the 19a pass 605 for ipheavy,
 the 20a pass 621 for rsubs, the 21a pass 629 for sfd, the 21b pass
-633 for tc and the 22a pass 650 for the tracer (seed AND consumed —
-both faces stay pinned forever). A FRESH NEXT.md rewrite MUST grep `tools/` AND `tests/`
+633 for tc, the 22a pass 650 for the tracer and the 22b pass 659 for
+daqio (seed AND consumed — both faces stay pinned forever). A FRESH NEXT.md rewrite MUST grep `tools/` AND `tests/`
 for NEXT.md read-asserts FIRST and carry EVERY pinned prior-pass
 literal VERBATIM, then re-grep the pins AFTER the docs commit.
 Receipts of the hazard: the 18l rc1 pair at
@@ -110,7 +114,7 @@ prior probe; NEVER `git add` anything under snort3-src). Port repo:
 `/opt/data/snort3-rust` (branch `master`, remote
 `github.com/dhoelzer/RustyPig`).
 
-## Current state (measured at this post-22b docs pass)
+## Current state (measured at this post-23a docs pass)
 Plan rows 1–20a DONE + rows 21a + 21b + 22a + 22b DONE (chapter-19 P2
 registry at 167cb3c, P3 survivor-flow-data provider at 3e9f2d7,
 main/thread_config GATE row at 8953723 + the rider follow-up 62d6fac,
@@ -124,18 +128,18 @@ banked since 19a fully LANDED; the ONLY unfinished plan rows are
 OPTION subset (its OWN line: 'chapter-19 track opened at 19a' — the
 option campaign re-enters per the PLAN line, banked rank-last), row 20
 packet_io/DAQ, row 21 main CLI — NEVER invent a row.
-**134 commits at HEAD 7102e75** (`git rev-list --count` HEAD ==
-origin == **134** BOTH re-run THIS pass; `ls-remote origin
-refs/heads/master` = `7102e758…`; 7102e75 = the **134th**, THIRTEENTH
+**136 commits at HEAD 7eccfee** (`git rev-list --count` HEAD ==
+origin == **136** BOTH re-run THIS pass; `ls-remote origin
+refs/heads/master` = `7eccfeea…`; 7eccfee = the **136th**, FOURTEENTH
 straight one-commit/one-push row landing; this docs commit lands as
-the **135th**).
-**659 tests green / 0 FAILED** — THE LANDED face at 7102e75,
-RE-MEASURED LIVE at THIS docs pass: 659 passed / 0 failed over **79**
-`test result` lines (650 at 22a + **9** tracer fns). clippy
+the **137th**).
+**684 tests green / 0 FAILED** — THE LANDED face at 7eccfee,
+RE-MEASURED LIVE at THIS docs pass: 684 passed / 0 failed over **80**
+`test result` lines (659 at 22b + **25** daqio fns). clippy
 --all-targets 0 re-run LIVE here too. (The result-line count MOVES —
-20a read 75, 21b 76, 22a 78, 22b 79; NEVER pre-assume.)
-Test math: 659 = 650 at 22a + **9** `tests/tracer_parity_test.rs`
-(**399 L**, `grep -c '^#\[test\]'` = 9 re-measured THIS pass).
+21b 76, 22a 78, 22b 79, 23a 80; NEVER pre-assume.)
+Test math: 684 = 659 at 22b + **25** `tests/daqio_parity_test.rs`
+(**1,065 L**, `grep -c '^#\[test\]'` = 25 re-measured THIS pass).
 - Rust row-22b pair (flat, cite-heavy, re-measured THIS pass):
   `src/framework/tracer.rs` **323 L** md5 `3b14726eed7a5aa6751df0752514e4eb`
   (**ZERO** `allow(` — grep 0; REUSE cites NOT re-forks: IpApiLite rtn_checks:44 /
@@ -154,12 +158,16 @@ Test math: 659 = 650 at 22a + **9** `tests/tracer_parity_test.rs`
   the 920/95 ground md5s `ca123f89…`/`86a4d248…`) stays pinned by the tc
   cargo twin EVERY build — face-by-face, NEVER re-typed from here.
 - Whole-repo stats re-measured LIVE THIS pass (NEVER trust the previous
-  face): **64,583** lines Rust across **171** `src/*.rs` files, **52**
-  `tests/*_parity_test.rs` replay files, **547** tracked files
-  (`git ls-files | wc -l`), tools = **59** `*_harness` dirs on disk, ALL
-  **59 TRACKED** — the 22b dir went tracked WITH its row (8 stageables —
-  the sfd/rsubs 8-face shape, ZERO runner TU = ZERO gate material; its
-  own cold artifacts GITIGNORED by design); the working
+  face): **65,470** lines Rust across **174** `src/*.rs` files, **53**
+  `tests/*_parity_test.rs` replay files, **560** tracked files
+  (`git ls-files | wc -l`), tools = **60** `*_harness` dirs on disk, ALL
+  **60 TRACKED** — the 23a dir went tracked WITH its row (9 stageables —
+  the 22b 8-face shape + the NEW ledger_probe.cc drift-ledger compile
+  leg; ZERO runner TU = ZERO gate material; its cold artifacts
+  GITIGNORED by design); a 2nd ground clone joined the pair:
+  **/opt/data/libdaq** @ c8d4083 depth-1 READ-ONLY (the real daq3 SDK;
+  NEVER commit anything from it; the RE-CITE ledger cites its faces);
+  the working
   tree is porcelain-CLEAN apart from THIS docs pass (ZERO `??` faces —
   create recon in scratch, land harness stageables at the row). The
   harness-dir count GROWS every row: fresh-measure, NEVER inherit.
@@ -196,17 +204,24 @@ Test math: 659 = 650 at 22a + **9** `tests/tracer_parity_test.rs`
 - **Wiki**: clone `/tmp/RustyPig.wiki`, HEAD == remote == **367c2b9 =
   thru row 21b** (21b sync LANDED at 367c2b9, orchestrator-verified:
   `21b` greps 2+2, dev_block `ac79959e…` byte-exact md5 pair,
-  provenance x10; SUPERSEDED at the 22a WIKI pass — see the backlog
-  face below: wiki HEAD == remote == **1bae8fc = thru row 22a**, stats
-  face 537 files / 64,255 lines / 132 commits / 650 tests over 78
-  result-lines = wiki-side HISTORY, STALE vs this pass: 547 / 64,583 /
-  134 / 659 — re-measure LIVE at the wiki phase, NEVER re-type). ZERO
-  debt thru 22a; **22b is OWED at the wiki phase (row pending)**. This
-  docs pass touched the wiki ZERO times — NEVER edit
-  `/tmp/RustyPig.wiki` outside the WIKI phase.
-- **Fresh-build set MOVED at 22b (by-DESIGN drift)**: the FRESH ch19
-  lineage head is the **22b tracer harness** (the 21b-shape 8-stageable
-  dir; run it FIRST: its :114 harness-name-token NEXT-pin EXACT-1 + the :137-:145 x3/x4/x5
+  provenance x10; SUPERSEDED — wiki HEAD == remote == **a82e11f = thru
+  row 22b** (22a at 1bae8fc, 22b at a82e11f, dev_block_22b.txt md5
+  triple `3c8fad18…` byte-exact, provenance x12), wiki stats face 547
+  files / 64,583 lines / 135 commits / 659 tests over 79 result-lines =
+  wiki-side HISTORY, STALE vs this pass: 560 / 65,470 / 136 / 684 —
+  re-measure LIVE at the wiki phase, NEVER re-type). ZERO debt thru
+  22b; **23a is OWED at the wiki phase (row pending)**. This docs pass
+  touched the wiki ZERO times — NEVER edit `/tmp/RustyPig.wiki`
+  outside the WIKI phase.
+- **Fresh-build set MOVED at 23a (by-DESIGN drift)**: the FRESH lineage
+  head is the **23a daqio harness** (9-stageable dir; run it FIRST: the
+  :162-:166 STATE-AWARE token pin — 0 pre-land / EXACTLY-1 post — the
+  token cite rides ONCE in THIS file = the header line, NEVER write a
+  2nd; :203-:212 x3/x4/x5 face-counts + :213 `cc **133**` presence +
+  :214 the quoted five-TEST drift-token EXACT-1 + :215-:216 the two pkth-ledger presence
+  greps + the EXACTLY-86-error pre-recite flipped-assert + the
+  silent-recompile real-SDK leg + the 9-FACE state guard); then the
+  **22b tracer harness** (:114 token EXACT-1 + the :137-:145 x3/x4/x5
   face-counts + the :146 `cc **133**` presence arm + the :149-:150
   `address_space_id` / `get_pkthdr` presence greps + the :87-:88/:124-
   :129 ground + ZERO-suite faces + the 8-stageable state guard must
@@ -913,7 +928,7 @@ push helper returns success.
   survivor_flow_data.rs ZERO (21b) + **thread_config.rs ZERO (22a)**,
   ZERO in any framework mod.rs — tests-side pin-site counsel
   unchanged.
-- NEXT.md rewrites: pin floors THIS face = `573 tests green` EXACTLY x5 lines (sfd :641 + tc :656 ENFORCE it as a count, NEVER four or six), `580 passed / 0 failed` x3 (the PASSED phrasing ONLY), `588 tests green / 0 FAILED` EXACTLY x4, `597 tests green / 0 FAILED` EXACTLY x3 on EXACTLY 3 lines (misc9's arms stay LIVE even at direct-md5 verify), `605 tests green / 0 FAILED` x3, `621 tests green / 0 FAILED` EXACTLY x3, `629 tests green / 0 FAILED` EXACTLY x3, the absorbed landed seeds `633 tests green / 0 FAILED` x3 + `650 tests green / 0 FAILED` EXACTLY x3, and the NEW seed `659 tests green / 0 FAILED` EXACTLY x3 on three separate lines — re-grep BEFORE writing (`tools/` AND `tests/`) and AFTER the docs commit. TOKEN ARITHMETIC (all arms
+- NEXT.md rewrites: pin floors THIS face = `573 tests green` EXACTLY x5 lines (sfd :641 + tc :656 ENFORCE it as a count, NEVER four or six), `580 passed / 0 failed` x3 (the PASSED phrasing ONLY), `588 tests green / 0 FAILED` EXACTLY x4, `597 tests green / 0 FAILED` EXACTLY x3 on EXACTLY 3 lines (misc9's arms stay LIVE even at direct-md5 verify), `605 tests green / 0 FAILED` x3, `621 tests green / 0 FAILED` EXACTLY x3, `629 tests green / 0 FAILED` EXACTLY x3, the absorbed landed seeds `633 tests green / 0 FAILED` x3 + `650 tests green / 0 FAILED` x3 + `659 tests green / 0 FAILED` EXACTLY x3, and the NEW seed `684 tests green / 0 FAILED` EXACTLY x3 on three separate lines — re-grep BEFORE writing (`tools/` AND `tests/`) and AFTER the docs commit. TOKEN ARITHMETIC (all arms
   live): keep the prefixed sfd dir-token on EXACTLY-1 line (sfd script
   :119 + parity twin), the bare 22a dir token on EXACTLY-2 lines
   (its :128), the stale hwloc-token exhibit VERBATIM riding (its
