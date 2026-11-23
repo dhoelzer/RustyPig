@@ -1,0 +1,39 @@
+# row 21b sfd_harness (chapter-19 P3: framework/survivor_flow_data.cc 88 L
+# = the SURVIVOR-FLOW-DATA PIN PROVIDER, ZERO-gate -- the 268-L CppUTest
+# rider suite src/flow/test/survivor_flow_data_test.cc (TEST_GROUP x1 +
+# TEST( x4) rides the row TU via add_cpputest but CppUTest is find-0 on this
+# host). THE NESTED-BLOCK FACE: the ROOT .gitignore is NEVER touched
+# (single-tenancy law; the dir is UNTRACKED as a whole: git status face =
+# ?? tools/sfd_harness/). A nested .gitignore INSIDE this dir is a
+# tools/sfd_harness/ FILE (the ONLY sanctioned edit) and git
+# ls-files --exclude-standard / check-ignore honor it. EVERY run this
+# block is check-ignore-proved face by face (a missing pattern = a blob in
+# the future add = loud).
+copy/
+alt/
+o2/
+probe
+probe_O2
+probe_faceA
+probe_faceA_O2
+*.o
+witness_conf.cc
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+nm_U_*.txt
+sfd_residue_dem.txt
+L1_*.txt
+E4_*.txt
+tamper_*
+md5_pinned.txt
+gate_md5_lineages.txt
+stageables.txt
+backbone10.txt
+.e4_hold_*
+.l1_main.*
+.L1*
+.vectors_pristine
+.ndef_*
+*.log

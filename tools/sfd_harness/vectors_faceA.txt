@@ -1,0 +1,8 @@
+NOLOAD framework-TU BUILDING_SO-grep0-x2 snort_plugins-grep0-x2
+IDSTATIC load_allocated=1 id=1
+IDSEQ next=2 strictly_above=1
+ADDIDEM dup_noop=1 sum=2 distinct=2
+REACH gadgetless=0 refs_p=2
+REBIND pinned=1 roundtrip=1
+NOTPEND pending0_rebind=0
+SURVIVE released=1 refs_p=2

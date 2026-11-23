@@ -1,0 +1,8 @@
+T0 ctor_refs=1 id_nonzero=1
+T1 addpin_twice_sum=2 distinct=2
+T2 dtor_sum=0 drained=2
+T3 pinned=0 refs_a=1
+T4 rebind_sum=2 gadget=b
+T5 cleared_sum=1
+T6 chain_abc_sum=3 drained=5
+T7 sfd_delete_sum=1 drained=7

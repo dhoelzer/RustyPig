@@ -4310,3 +4310,104 @@ Structural deviations (behavior preserved):
   — the hand-written default keeps the cc :96-:105 NSDMI `= 0`/`= false`
   face statement-verbatim with per-field cites (the 20a derivable_impls
   precedent family). The parity test file carries ZERO allows.
+
+## framework survivor_flow_data (row 21b — framework/survivor_flow_data.cc 88 L 4b1eedaf, THE chapter-19 P3 survivor-flow-data pin provider + THE 21a DECL-CITE completion face)
+
+- **one-home flow_data_id law + the DEFINITION-mirror trap (C-side MEASURED,
+  Rust-side censused)**: the C row link carries EXACTLY-1
+  `FlowData::create_flow_data_id` definition + the `FlowData::flow_data_id =
+  0` B-definition mirror (witness_sfd.cc) — WITHOUT the definition line the
+  link DIES (`undefined reference to FlowData::flow_data_id`, the
+  E4_defmirror arm re-measured LIVE every build). Rust-side audit FIRST
+  (REUSE-never-re-port): the landed faces of the SAME C statics are the
+  file_api-era HARNESS grafts — `FileEnvLite.flow_data_id: Cell<u32>`
+  (file_lib.rs :1586-:1588) with the `++` INLINED inside `FileFlows::init`
+  (file_flows.rs :322-:331) — per-env row-scoped Cell arms, never a fn
+  home, never coexisting with this row's replay-world (the sfd C link set
+  carries NONE of the fcapi rigs). This row lands the ONE framework-side
+  provider home (`create_flow_data_id` + the `FLOW_DATA_ID` static, body
+  verbatim flow_data.cc :139-:140); the parity test censuses EXACTLY-1 fn
+  + EXACTLY-1 static + EXACTLY-1 `pin_survivor_flow_data` across src/. If
+  the flow_data.cc row EVER lands its Rust home, THAT home REPLACES this
+  cited def-mirror (cite-never-carry), never the reverse.
+- **the tterm PAIR = the FOUND-0 left-open seam, mirror-shape ONLY**:
+  `InspectorManager::is_pending_tterm` + `thread_drain_pending_tterm_if_
+  pending` carry ZERO providers (grep across all landed Rust + every tools/
+  */witness*.cc = 0 at row time — the finspect PLAN :166 IMGR-turf earmark
+  rides). The Rust seam trait + the test witness mirror bodies ONLY the
+  GROUND SHAPES (inspector_manager.cc :324-:332 pending-set scan /
+  :1276-:1282 `!pin or !is_pending_tterm(pin)` guard) with a fake-pending
+  knob; the REAL pending_tterm store + `thread_drain_pending_tterm()` NEVER
+  land (the rs-text tripwire asserts ZERO real-drain fn def sites in src/).
+  The unset-seam arm models `!pending_tterm -> false` (imgr.cc :326-:327) =
+  the honest NOTPEND default. The C-side honest twin note: the harness
+  witness keeps the pending knob GLOBAL-fake (witness_sfd.cc) instead of a
+  per-pin pending-tterm store — mirror deviation, NEVER ported into src/.
+- **the real store deviation (scratch-40-L vs landed-56-L witness)**: the
+  recon pilot witness (~40 L) merged the Flow-scaffold mirrors; the LANDED
+  witness_sfd.cc = 56 L md5 101aa012 (ONE-home law pinned: the +9 provider
+  mirrors live ONLY there; the probe carries the Inspector scaffold + zero
+  provider re-defs; `create_flow_data_id` def-count == 1 grep across the
+  link inputs). The real FlowDataStore is a PER-FLOW member (flow.h :497);
+  the witness single-slot id-indexed vector + the `sfd_witness_store_reset`
+  knob stand in between probe flows (the flow_data.cc teardown rows NOT
+  landed = the accounting-drop law). The Rust replay rides a REAL fresh
+  SfdFlow per flow (the per-flow store face) — strictly more faithful than
+  the C mirror knob; same probe intent, same vectors, recorded honestly.
+- **the assert-census flip face (21a zero -> 21b three)**: the ground cc
+  carries EXACTLY 2 runtime ` ^assert(pin);` (:44 ctor, :60 add_pin) + the
+  <cassert> include = 3 strings (build.sh pins BOTH; the production
+  -DNDEBUG arm = 0 __assert_fail pulls, the NO-NDEBUG arm measures the
+  EXACTLY +1 delta). Rust mapping per the landed cite precedent (module.rs
+  :831): EXACTLY 2 `debug_assert!` arms (test profile trips, release elides
+  = the NDEBUG face; NEVER hard assert! panics — the 21a NDEBUG posture);
+  the null-pin arm past NDEBUG is C UB and no harness arm reaches it, so
+  the `.expect` behind the debug_assert models the post-UB value honestly.
+- **the graft-version donor law (FIRST rejection face)**: donor choice is
+  DOUBLE-forced — flow-closure residency AND daq_common.h graft VERSION.
+  The mpls tree daq_common.h = ext#4 9b603f8f (MAX_DAQ_VERDICT==6) compiles
+  flow.h :541 AS-IS; the rsubs tree = fead0027 graft-v2 (PASS/DROP only)
+  DIES at `flow.h:541: MAX_DAQ_VERDICT was not declared` even WITH all 5
+  flow-closure cps re-measured live rc1 every build (127+7=134, strictly
+  dominated cp count too); misc9 = flow.h find-0. ipheavy ALT (140+3=143)
+  carries the SAME 9b603f8f = the U-IDENTICAL cross-donor invariance leg.
+  Graft masters cited NEVER re-authored (daq3 73fdbc39/f683749c; the
+  0f7016a6/9b603f8f ladder HEAD+TAIL md5-pinned, NEVER promoted).
+- **rider TEST( drift correction**: the seeded NEXT.md token says the 268-L
+  rider suite carries "5 TEST(" — the disk + harness ground re-count says
+  EXACTLY-4 (`^TEST(`; TEST_GROUP x1; four case names pinned by the
+  build.sh AND the parity tripwire); the seeded token rides NEXT.md
+  EXACTLY-1 = the drift face NEVER edited (disk wins law, the 21a :625
+  precedent family). The suite is REAL CppUTest material riding 1 of
+  src/flow/test/CMakeLists.txt's 8 add_cpputest lists — host-BLOCKED
+  (headers+libs find-0), dialect precedent 18j/18k/21a: ZERO up_gate_*
+  faces ship (the honest absence CITE rides the parity docs; census-cited
+  sfd PLAN §3), gate census 25/9/17/1 UNDISTURBED = the 28th straight.
+- **the 21a seam NOT-closed honest face + the :39/:33 drift**: this row
+  COMPLETES the 21a SurvivorFlowData DECL-ONLY CITE (provider now exists:
+  nm-proven definer, the rsubs.o EXACTLY-0 pull pin stays valid
+  definer-proven), but the 21a `DataBusSubscribeSeam` is a DIFFERENT seam —
+  NOT closable by this row (the sfd U-set carries ZERO data_bus symbols,
+  harness nm-proven; the parity rs-text asserts the port NEVER touches the
+  seam surface). The 21a rs (the DECL-CITE home) is NEVER edited back (one-
+  home + cite-only law). THE static-init cite drift: the harness PLAN §5
+  sed-prose named cc :33; DISK puts the `flow_data_id =
+  create_flow_data_id()` pull at :39 — disk wins, build.sh sed-pins :39 and
+  the parity tripwire asserts BOTH (:39 == pull, :33 != pull).
+- **Rust-shape deviations (NEVER vectors-observable)**: no Drop / no
+  manual `delete` in Rust — the SFD dtor BODY (cc :49-:56 rem_ref + drain
+  per pin) lands as the EXPLICIT `release_pins` method driven at the probe/
+  vectors delete sites (a Drop would re-run side effects at scopes the C
+  never runs them); pins ride `&'static` leaked replay objects (the C
+  dangling-pin window has no Rust analog = an honest safety face); the
+  per-side ref_count ARRAY (inspector.cc :126-:130, index 1+
+  get_instance_id()) models as single-cell counters (the probe reads only
+  index 1); the cc :81 mutate-through-alias getter splits to a `_mut` seam
+  method (no RefCell, ZERO unsafe); pin identity = the stable address
+  (the 21a survivor_id precedent) standing for the C POINTER-equality
+  std::find compare; the static-init load-pull (cc :39) rides a OnceLock
+  first-touch (no Rust load-order analog; the OBSERVABLE id==1 rides the
+  same counter-starts-0 law); the per-test session serialization (test-
+  binary Mutex) stands for the C separate-process isolation; the O0/O2 +
+  cross-donor BYTE-IDENT laws stay C-harness-side (the Rust replay has one
+  arm; the port carries no cfg split at all).
