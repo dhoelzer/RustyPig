@@ -1,0 +1,44 @@
+# row 22b tracer_harness (chapter-19 LAST row: framework/tracer.cc 73 L +
+# tracer.h 125 L = the PT_TRACE TraceLoggerPlug plugin-API pair, ZERO-gate
+# -- the framework/test CMakeLists carries EXACTLY-3 add_cpputest with NO
+# tracer suite EVER, dialect-BLOCKED, the ZERO-GATE row face; the 22a
+# streak-closure does NOT re-arm). THE NESTED-BLOCK FACE: the ROOT
+# .gitignore is NEVER touched (single-tenancy law; the dir is UNTRACKED as
+# a whole until the row commit: git status face = ?? tools/tracer_harness/).
+# A nested .gitignore INSIDE this dir is a tools/tracer_harness/ FILE (the
+# ONLY sanctioned edit) and git ls-files --exclude-standard / check-ignore
+# honor it. EVERY run this block is check-ignore-proved face by face (a
+# missing pattern = a blob in the future add = loud). 8-face stageable
+# shape (rsubs/sfd shape GROUND by the sfd/rsubs face -- tracer ships NO
+# runner-main TU, there is ZERO gate material; NOT inherited blindly:
+# MEASURED at the row by the state-aware stageables census).
+copy/
+o2/
+probe
+probe_O2
+probe_faceA
+probe_faceA_O2
+*.o
+witness_conf.cc
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+!vectors.txt
+!vectors_faceA.txt
+nm_U_*.txt
+E4_*.txt
+E9_*.txt
+E10_*.txt
+tamper_*
+gate.txt
+gate_*
+*.gate_*
+md5_pinned.txt
+gate_md5_lineages.txt
+stageables.txt
+backbone10.txt
+.e4_hold_*
+.L1*
+.vectors_*
+*.log

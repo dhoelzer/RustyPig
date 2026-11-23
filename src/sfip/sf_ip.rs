@@ -259,10 +259,14 @@ pub fn snort_inet_ntop_raw(fam: i16, ip_raw: &[u8], test_features: bool) -> Opti
         let mut p = 0usize;
         while p < 8 {
             if p == best_s {
-                s.push(':');
-                if best_s == 0 {
-                    s.push(':');
-                }
+                // row 22b alignment rider: the collapsed run emits "::" at
+                // its position EXACTLY like inet_ntop (leading `::`, mid
+                // `2001:db8::cafe`, trailing `fe80::`); the pre-rider face
+                // emitted a single ':' for non-leading runs (glibc-drift —
+                // ZERO landed caller exercises this arm: every prior ntop
+                // face rides ntop(true); the trace row's v6 ntuple strings
+                // require the C byte face).
+                s.push_str("::");
                 p += best_l;
                 if p == 8 {
                     break;

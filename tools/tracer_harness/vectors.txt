@@ -1,0 +1,10 @@
+T0 ntuple_off=[] ts_off=[]
+T1 v4tcp=[203.0.113.7 1234 -> 198.51.100.23 80 6 AS=7 TN=42 ]
+T2 udp=[203.0.113.7 5353 -> 198.51.100.23 53 17 AS=7 TN=42 ]
+T3 icmp_ports0=[203.0.113.7 0 -> 198.51.100.23 0 1 AS=7 TN=42 ]
+T4 tn0=[203.0.113.7 0 -> 198.51.100.23 0 6 AS=0 ]
+T5 api_none=[]
+T6 nullp=[]
+T7 v6_ceils=[2001:db8::cafe 1 -> 2001:db8::feed 2 17 AS=65535 TN=4294967295 ]
+T8 ts_on=[03/14-09:00:00.000123:]
+T9 map=PCO id=7 name=probe ntuple_backoff=[] api_null=1

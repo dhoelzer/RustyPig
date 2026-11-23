@@ -4541,3 +4541,60 @@ Structural deviations (behavior preserved):
 - **Watchdog arrays**: C `new std::atomic_bool[n]` value-initializes —
   resp[] false pre-kick too (not just the explicit thread_is_active
   clears :502-:503); Rust Vec<AtomicBool> seeded the same (false).
+
+## framework tracer (row 22b — framework/tracer.cc 73 9ee6b2ee + tracer.h 125 98d53205, THE ch19 LAST row — the PKTH seam rides a SYNTHETIC carrier + THE glibc ntop(false) rider lands on the SHARED home)
+
+- **THE pkth seam (the row's BIG honest face)**: tracer.cc :52/:54-:55 read
+  `p->pkth->address_space_id` + `p->pkth->tenant_id` — fields NO landed graft
+  daq face carries (frozen masters 73fdbc39/f683749c + all heredoc
+  extensions grep-0; the harness E4 arms re-prove the 3-error death EVERY
+  build). The port models them as the row-scoped `TracePkthLite` — a
+  DECL-WIDTH carrier pinned by the harness's COPY-LOCAL extension face
+  (uint16_t/uint32_t), SYNTHETIC, NEVER ABI truth. The REAL provider joins
+  the row-20 left-open seam ledger (get_pkthdr + SFDAQ + the tenant/
+  address_space pair — the ledger line the row grows, honestly cited).
+- **print_timestamp clock seam**: C `ts_print(nullptr, ts)` pulls the wall
+  clock + SnortConfig::get_conf() INSIDE util.cc:146-:154 (the null-conf
+  SEGV face at harness time). The Rust reuse of the landed ts_print_mmdd
+  (utils/util.rs:129, the file_log.rs:403 precedent) takes the
+  (TimeCfg, tv_sec, tv_usec) args EXPLICITLY — the C default-arg nullptr arm
+  has no Rust counterpart; the vectors pin the harness anchor face, NEVER an
+  invented now() call.
+- **THE glibc ntop(false) rider (fix-forward on a SHARED home, first
+  cross-row rider since the 62d6fac sfd census rider)**: the landed
+  `snort_inet_ntop_raw` (sfip/sf_ip.rs, the ONE ntop home, one-home law)
+  collapsed zero-runs with a SINGLE ':' for non-leading runs — drift vs
+  inet_ntop's `::` (glibc). ZERO landed caller rode the test_features=false
+  arm (every ntop face rode ntop(true)); the trace row's v6 ntuple strings
+  print THROUGH that arm and the DEC vectors (built against REAL inet_ntop)
+  proved the drift LIVE (2001:db8:cafe vs 2001:db8::cafe). The home is FIXED
+  in place (the whole shared tree + the 79-result cargo face re-verified
+  byte-green); a parity tripwire now pins C byte-match on the mid/end run.
+- **fn-pointer typedefs h :112-:113 / the typedef record slots h :119-:120
+  ride PRESENCE bools**, the landed no-fn-pointer posture (codec.rs:457 /
+  the module.rs no-`dyn Fn(` census face); NOTHING calls through them before
+  the loader face lands (honest: the vectors set NEVER call the stubs).
+- **SfIpString (char[46], h/cc :35-:36) lands as owned Strings** — the
+  file_log.rs:233-:236 row-17z face RE-RIDDEN (buffer-reuse semantics are
+  C's burden, the Rust port never doubles a buffer).
+- **`unsigned instance_id` (h :76/:109) lands u32** (C-unsigned pin, same
+  posture as main/thread.rs instance_id); the C switch h :79-:92 maps the
+  STHREAD enum -> char ('P'/'C'/default 'O'): the landed SThreadType
+  (main/thread.rs:19 — one-home) has NoOther value mapping EXACTLY to the
+  switch arms (Other == the h default arm); the C raw-enum 'X' probe face
+  rides Other->'O' (the map face, NOT a forked enum).
+- **the pure virtual log() h :49 -> the TraceLogPlugVirt trait** (the
+  module.rs:138 ModuleVirt posture); the PT_TRACE loader/consumer NEVER
+  lands before the row-20/21 plugin face — the trait consumer seam is cited
+  left-OPEN, NEVER invented.
+- **The naming law**: the frozen misc9 :461 landmine greps the (split in
+  this doc, tokened-out there) killer substring over src/ — the port rides
+  the C names VERBATIM (TraceLoggerPlug / TraceLogApi / TRACE_LOGAPI_VERSION
+  — none matches), NEVER `pub struct Tr*acer`-shaped. The harness dir name
+  `tracer_harness` rides the PIN face (find-0 measured + the ONE tolerated
+  NEXT.md cite line); the packet-io census token NEVER rides any row file
+  (the bare-`tracer` 13-file pre-hit census is packet-IO cargo, untouched).
+- **C-ABI layout is PROBE-pinned, never reconstructed**: sizeof(BaseApi)=64 /
+  sizeof(TraceLogApi)=88 are vectors constants (PROBE_SIZEOF posture); the
+  Rust record-fold (codec.rs:448 posture) needs NO matching layout and the
+  port NEVER size_of()s to pretend it mirrors one.

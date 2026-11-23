@@ -1,0 +1,8 @@
+NOLOAD framework-TU BUILDING_SO-grep0-x2 snort_plugins-grep0-x2
+APIV logapi=1900546 reserved=0 pt_trace=10
+SIZES base=64 tracelogapi=88
+DEFMAP cold='O' id=0 ntuple=0 ts=0 api_null=1
+NAME roundtrip=alt-plug=1
+APIStruct head=10 ver_ok=1 ctor_set=1 dtor_set=1 flags=0
+SETAPI roundtrip=1 flags0=1
+ISOLATE a_set=1 b_null=1
