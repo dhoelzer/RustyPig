@@ -519,15 +519,21 @@ fn sfd_ground_cite_drift_tripwires() {
     // deviation rides the docs (mirror home NEVER ported into src/):
     assert!(WITNESS_CC.contains("return fake_pending != 0;"), "the harness mirror-shape face (ground scan cite rides)");
 
-    // the gate census UNDISTURBED (25 gate.txt tree-wide, the gre 6751d1a8
-    // anchor row's census; THIS row ships ZERO = the 28th straight):
+    // the gate census on-disk face: 26 gate.txt tree-wide SINCE ROW 22a
+    // (the first REAL Catch gate row since 18g: tools/tc_harness/gate.txt
+    // md5 a32720c7 = COPY-LOCAL UNTRACKED, regenerated every tc build,
+    // still-counted by this dir-walk; tracked-gate face STAYS 1 = gre
+    // 6751d1a8; legacy 4826fc22 x9 FROZEN; distinct lineages 17->18).
+    // The 28-straight zero-gate streak CLOSED at 22a by MEASUREMENT; this
+    // row (21b) itself shipped ZERO gate artifacts (28th straight held
+    // at landing time — pre-22a face):
     let mut gates = 0;
     for e in std::fs::read_dir("/opt/data/snort3-rust/tools").expect("tools dir") {
         if e.expect("tools entry").path().join("gate.txt").is_file() {
             gates += 1;
         }
     }
-    assert_eq!(gates, 25, "gate census 25 UNDISTURBED (28th straight zero-gate row: ZERO new)");
+    assert_eq!(gates, 26, "gate census 26 = 25 + the row-22a sanctioned tc gate.txt (copy-local; tracked face 1)");
 }
 
 // ==========================================================================
