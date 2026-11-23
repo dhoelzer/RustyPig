@@ -1,0 +1,9 @@
+NOLOAD framework-TU BUILDING_SO-grep0-x2 snort_plugins-grep0-x2
+PEGS rows=12 sentinel=1 count=12
+PEGS walk named=12 end-at=12
+PEGN 0=rss_survivors_installed 7=rss_survivors_active 11=rss_reconcile_deferrals sent-name-null=1
+PEGTYPE first=1 active=2 tracked=2 last=1 end=0
+PEGTYPE live=1 2 2 1 0
+SLOTMAP installed@0=1 active@7=8 tracked@8=9 deferrals@11=12
+DEDUP same=0 pub-mismatch=1 eid-mismatch=1
+CARVE installed=0 slow=0 deferrals=0 active=3 tracked=2

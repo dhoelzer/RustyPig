@@ -4228,3 +4228,85 @@ Structural deviations (behavior preserved):
 - **checksum E4 inversion face**: pre-18o links SURVIVED the daq.h drop
   (mpls rc0); at THIS row all three TUs die at cc:25 without ext#4 —
   the honest inversion receipt (E4_nodaq_* receipts every build).
+
+## framework reload_survivor_subscriptions (row 21a — framework/reload_survivor_subscriptions.cc 631 ff4b5492 + _impl.h 156 b437ba1c = 787 L, THE chapter-19 P2 registry row + THE first-framework-registry face)
+
+- **DataBus::_subscribe mirror + provider-left-open audit outcome**: the
+  audit over landed src/ found NO DataBus type — only the file_api-era
+  name-level seams (file_log.rs:543 `DataBusSeam` PUBLIC subscribe-by-name
+  face / file_inspect.rs:129 `DataBusIdSeam` get_id face). Different arity,
+  NEVER reusable for the friend-unlock PRIVATE overload (data_bus.h :127
+  friend grant + :130; body cite data_bus.cc :210; the call site cc :420).
+  This row lands the cited `DataBusSubscribeSeam` trait mirror with the
+  SAME left-open discipline as the C witness trio (witness_rsubs.cc = the
+  harness mirror home, EXACTLY-3 own-new; provider queued with the
+  data_bus.cc row P3', NEVER invented). pub_sub (the 57-event-header
+  world) stays NON-participant: rsubs.o carries ZERO pub_sub symbols.
+- **SnortConfig seam rides the landed config-presenter faces**: no
+  SnortConfig type landed; `RssConfigSeam { conf_present, reload_id }`
+  models the cc :79-:80 ternary through the landed LogEngine::conf_present
+  posture (messages.rs :102 "Stands for SnortConfig::get_conf() !=
+  nullptr"); reload_id = the harness witness 7 (snort_config.h :775 face)
+  that the T8c `reload id 7` vectors substring rides. The WarningMessage
+  twin: the landed LogEngine::warning_message (messages.rs :370) over the
+  landed cfmt core is the Rust twin; the row's implicit-global call face
+  lands as the thin `warning_message` bridge + provider-queued default
+  sink (pull-site-count-only, the 19a show_prompt precedent) — NO re-
+  stubbing, NO engine threading through registry internals (the C global
+  face), the parity replay registers the witness capture sink.
+- **SurvivorFlowData = DECL-ONLY vs the 21b provider**: the class rides
+  impl.h :138-:152 as a header decl (provider survivor_flow_data.cc 88 L
+  md5 4b1eedaf... NOT landed; row harness nm-proves EXACTLY-0 link pulls
+  from the row .o). ZERO Rust type/stand-in lands: no reachable arm of
+  this row touches it (the never-invent law; the FlowData base is its own
+  unlanded flow row too).
+- **policy_resolution_failures = inspector_manager-owned, NEVER invented**:
+  the field + slot + reset store land (impl.h :66/:48/:81); this row's cc
+  NEVER bumps the atomics (harness grep-pin 0); the ONLY production bumps
+  = inspector_manager.cc :652/:681 (consumer row, cite-only). The parity
+  rs-text tripwire asserts ZERO `policy_resolution_failures.fetch_add` in
+  the port.
+- **rss_set_elapsed_for_test :625 cite-drift law**: the cc def rides disk
+  line :625 EXACTLY (build.sh sed-pin `void rss_set_elapsed_for_test`);
+  the banked NEXT ':619-:624 region' cite is DRIFTED — disk wins (the
+  parity tripwires assert BOTH the :625 hit AND the drifted region's
+  absence). UNIT_TEST census cc 4 / impl.h 1 OWN assert (NOT gate
+  material). cargo cfg != the autotools -DUNIT_TEST flag (the 18d
+  DEBUG_MSGS precedent): the seam lands unconditionally; production NEVER
+  calls it, forced_elapsed_ms stays 0 = the real-clock arm (cc :56).
+- **NDEBUG zero-assert face vs the 19a contrast**: the row cc carries ZERO
+  runtime assert() arms (grep `^\s*assert(` == 0; the 2 'assert' string
+  hits = the :340 static_assert + <cassert>), the 50-face nm census is
+  NDEBUG-INVARIANT; the Rust port models NOTHING special (ZERO assert!/
+  debug_assert! arms). The 19a module.cc :372 +1 observable arm has NO
+  counterpart here — honest NON-delta, harness-recorded.
+- **CppUTest host-BLOCKED: the 2,028-L / 47-TEST( / 1-TEST_GROUP rsubs
+  suite NEVER lands as an artifact**: real gate material THIS row
+  (headers+libs find-0 measured, dialect-BLOCKED, the 18j/18k precedent);
+  the row TU RIDES TWO CppUTest suite SOURCES lists (data_bus_test +
+  rsubs_test — the honest ride-x2 vs 19a's zero-ride). ZERO up_gate_*
+  faces ship; the gate census 25/9/17/1 stays UNDISTURBED (gre's
+  6751d1a8 the one tracked gate). RE-PLAN LOUDLY if CppUTest ever ships.
+- **the clock-seam warn arms replay with a timing-face deviation**: the
+  DEC T8b arm drives the 59999 ms forced tier-1 warn EXACTLY (>=5000,
+  <60000), but the C probe's 250 ms-sleep thread pairs with an OS-clock
+  40 ms window while the Rust replay joins over the same wall window; the
+  inflight>=1 spin + the forced-clock govern — counters/ warns land
+  identical, the spin-iteration count NEVER is a vectors face.
+- **name-resolution rsubs docs-token face**: the docs token 'rsubs' == the
+  ground pair reload_survivor_subscriptions.{cc,_impl.h}; ground find
+  '*rss*' == 0, '*rsub*' == only the time/timersub.h substring false-
+  positive (build.sh name-pin faces, NEVER a row file).
+- **identity/pointer deviations (NEVER vectors-observable)**: C raw
+  `Inspector*`/`InspectionPolicy*`/`DataBus*` map keys ride Rust
+  address-faces (the survivor id folds the fat-dyn data segment; the
+  `%p` cfmt arg rides the same face); the leased handler hand-off to the
+  bus seam rides Arc (the C raw-pointer non-owning bus + registry delete
+  ownership model deviates to shared ownership — the C borrow/retire/
+  drain pin protocol lands 1:1); PubKey::publisher `const char*` -> the
+  `&'static str` face (strcmp content-compare == &str equality).
+- **the ONE cited point-site allow (ZERO blanket)**:
+  `#[allow(clippy::derivable_impls)]` on `impl Default for SurvivorState`
+  — the hand-written default keeps the cc :96-:105 NSDMI `= 0`/`= false`
+  face statement-verbatim with per-field cites (the 20a derivable_impls
+  precedent family). The parity test file carries ZERO allows.

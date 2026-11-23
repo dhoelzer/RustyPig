@@ -1,0 +1,12 @@
+T0 sub=0 warn=0 inst=0 act=0 track=0
+T1 sub=1 inst=1 act=1 track=1 dedup=0
+T2 samedup sub=1 inst=1 conflicts=0
+T3 misdup conflicts=1 warn=1 sub=1
+T4 stripped=1 act=0 bus_destroyed=1
+T5 views=1 npid=1 ipid=1 list_returned=1
+T6 release-during-reconcile=0 deferrals=1
+T7 release-after=1 retired=1 track=0 warn=1
+T8a quiescent-idle=1 warn=0 slow=0
+T8b quiescent=1 slow=1 warn=1
+T8c label-unknown=1 key-k5=1 reloadid7=1
+T9 release=1 skips=1 tracked=0

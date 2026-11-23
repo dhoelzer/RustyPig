@@ -1,0 +1,36 @@
+# row 21a rsubs_harness (chapter-19 P2: framework/reload_survivor_
+# subscriptions.cc 631 + _impl.h 156 = 787 L, ZERO-gate -- the 47-TEST(
+# CppUTest suite RIDES the row TU x2 SOURCES lists but CppUTest is find-0
+# on this host). THE NESTED-BLOCK FACE: the ROOT .gitignore is NEVER
+# touched (single-tenancy law; the dir is UNTRACKED as a whole: git status
+# face = ?? tools/rsubs_harness/). A nested .gitignore INSIDE this dir is
+# a tools/rsubs_harness/ FILE (the ONLY sanctioned edit) and git
+# ls-files --exclude-standard / check-ignore honor it. EVERY run this
+# block is check-ignore-proved face by face (a missing pattern = a blob
+# in the future add = loud).
+copy/
+o2/
+o2ut/
+probe
+probe_O2
+probe_faceA
+probe_faceA_O2
+*.o
+witness_conf.cc
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+nm_U_*.txt
+rsubs_residue_dem.txt
+E4_*.txt
+L1_*.txt
+tamper_*
+md5_pinned.txt
+gate_md5_lineages.txt
+stageables.txt
+backbone10.txt
+.e4_hold_*
+.l1_main.*
+.vectors_pristine
+*.log
