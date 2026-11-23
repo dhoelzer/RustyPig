@@ -1,0 +1,53 @@
+# row 22a tc_harness (chapter-19 remainder: main/thread_config.{cc,h} =
+# 920+95 L -- THE GATE ROW: THE 28-straight zero-gate streak ENDS HERE;
+# the in-TU Catch block cc :615-:916 = 14 TEST_CASE [ThreadConfig] host-
+# green under -DUNIT_TEST -DHAVE_NUMA via the FUNCTIONAL hwloc witness +
+# the CATCH_CONFIG_RUNNER main TU). THE NESTED-BLOCK FACE: the ROOT
+# .gitignore is NEVER touched (single-tenancy law; the dir is UNTRACKED as
+# a whole: git status face = ?? tools/tc_harness/). A nested .gitignore
+# INSIDE this dir is a tools/tc_harness/ FILE (the ONLY sanctioned edit)
+# and git ls-files --exclude-standard / check-ignore honor it. EVERY run
+# this block is check-ignore-proved face by face (a missing pattern = a
+# blob in the future add = loud).
+# THE gate census posture (PLAN SS0): gate.txt (+ gate_O0/O2/off variants +
+# the -l rosters) is COPY-LOCAL UNTRACKED at tc -- the TRACKED gate.txt
+# face stays gre's ONLY (tracked count 1). vectors + vectors_faceA +
+# witness_tc.cc + tc_gate_main.cc STAY TRACKED (the row's 9 stageables).
+copy/
+o2/
+probe
+probe_O2
+probe_faceA
+probe_faceA_O2
+gate
+gate_O2
+gate_off
+gate_main_shape_probe
+gate.txt
+gate_O0.txt
+gate_O2.txt
+gate_off.txt
+gate_l.txt
+gate_off_l.txt
+gate.md5
+gate_pinned.txt
+gate_*
+.gate_*
+*.seed_face
+*.o
+witness_conf.cc
+vectors_*
+!vectors.txt
+!vectors_faceA.txt
+nm_U_*.txt
+E4_*.txt
+E9_*.txt
+E10_*.txt
+.*_probe.*
+.vectors_*
+md5_pinned.txt
+gate_md5_lineages.txt
+stageables.txt
+tamper_*
+*.log
+.*_face_expect

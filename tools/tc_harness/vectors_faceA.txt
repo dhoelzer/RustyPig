@@ -1,0 +1,9 @@
+NOLOAD main-TU SO_PUBLIC-h-only (BUILDING_SO/NDEBUG/sids grep-0 pinned by build.sh greps)
+MAXLADDER 1=1 7=7 auto=256=256
+TIDLADDER cold=-1=1 hit-is-own-tid=1 tid>0=1
+NAME1 main=snort3
+NAME2 pkt-c0=s3.pkt-c0
+NAME3 erange-name-kept=s3.pkt-c0
+NAME4 pkt-c9999-survives=s3.pkt-c9999
+NUMAFALSE implemented=0=1
+WD-NOOP timer0-guard-false all-arms-live=1

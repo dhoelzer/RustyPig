@@ -4411,3 +4411,133 @@ Structural deviations (behavior preserved):
   binary Mutex) stands for the C separate-process isolation; the O0/O2 +
   cross-donor BYTE-IDENT laws stay C-harness-side (the Rust replay has one
   arm; the port carries no cfg split at all).
+
+
+## main thread_config (row 22a — main/thread_config.cc 920 ca123f895a + thread_config.h 95 86a4d24805, THE GATE ROW + THE FIRST REAL GATE SINCE 18g — the 28-straight zero-gate streak ENDS)
+
+- **THE gate-row posture (honest census, never a claim copied)**: this row
+  ships REAL host-green gate material for the first time since gre (18g):
+  the in-TU Catch block cc :613-:920 (EXACTLY-14 `TEST_CASE(...,
+  "[ThreadConfig]")`) compiled + linked + RUN via the harness's own
+  CATCH_CONFIG_RUNNER main TU (tc_gate_main.cc — the FIRST tracked runner
+  main TU in the port's history) and the FUNCTIONAL hwloc witness. The
+  tail "All tests passed (23 assertions in 14 test cases)" is RUNNER-
+  MEASURED at the build (the 17p never-typed law), the HAVE_NUMA-off arm
+  measured 17/9 = the honest hinge. The gate.txt CENSUS POSTURE: tc's
+  gate.txt rides COPY-LOCAL UNTRACKED (`.gitignore` inside the harness
+  dir, check-ignore-proved EVERY build; same posture as periodic/numa):
+  on-disk face 26 gate.txt files / 18 distinct md5 lineages, while the
+  TRACKED gate.txt face STAYS gre's ONLY (git ls-files count 1). The
+  commit body states the posture, never a stale "25/9/17/1".
+- **init() order modeled honestly (NEVER reordered)**: the ground fills
+  the TU statics topology → (support, process_cpuset) inside init()
+  (cc :74-:88) and upstream boots `ThreadConfig::init()` at snort.cc:109
+  BEFORE Catch ever runs (the E10 arm SEGVs rc=139 when a CATCH_CONFIG_-
+  MAIN shape skips the ordering — measured every build). The Rust port
+  keeps the FILL ORDER and pins the two cite faces (snort.cc :109,
+  unit_test.cc CATCH_CONFIG_RUNNER) in the parity tripwires. The two
+  `static const bool watchdog_is_enabled` guards (:585/:604 — read ONCE
+  from the init-time conf) ride OnceLock (the C++ magic-static == the
+  OnceLock face); the conf itself is the STOCK witness face
+  (watchdog_timer = 0 / watchdog_min_thread_count = 1, snort_config.h
+  :264-:265) — a live SnortConfig stays a provider seam (one-home law).
+- **The hwloc/numa seam, left-open, with the FUNCTIONAL semantics
+  translated**: the host carries ZERO hwloc/numa (harness E4 walls), so
+  the hwloc C API NEVER appears as Rust linkage — it is the harness
+  witness's home. The bitmap SEMANTICS the 23 gate CHECKs read
+  (alloc/dup/free/and/isequal/isincluded/iszero/weight/singlify/set/
+  isset/first + the list_sscanf/list_asprintf round-trip, model CPUs
+  0..255, set_cpubind FAILS for bits >= 256) translate as REAL Rust
+  logic (`CpuBitmap`). The 21 distinct C functions / 6 types ride as
+  cites only; token drift trio recorded honest (raw 142 / grep-LINE 126
+  / banked NEXT 133 STALE — disk wins, NEXT NEVER edited). The numa
+  trio + the NumaWrapper/HwlocWrapper virtuals model as trait seams
+  (witness 0-arms; the 5 NUMA gate cases' GROUND mocks ride as the
+  mock types with every knob kept).
+- **NUMA modeling is a RUNTIME face, NEVER a cfg** (the main::numa
+  precedent law): the C class grows 2 members/2 methods under
+  `#ifdef HAVE_NUMA` (h :60-:63/:87-:92) and the gate census HINGES on
+  the define (14 vs 9 cases, both measured); the Rust port carries the
+  same surface unconditionally with witness/mock arms live — the
+  NUMAFALSE early-out (cc :314-:318) is the honest no-NUMA face.
+- **one-home law (the witness_conf core-subset drift face)**:
+  `ThreadConfig::get_instance_max` is ROW-OWNED — the carried
+  4dd91018-family witness_conf DEFS that symbol and multiple-DEFINITIONS
+  the row .o (build.sh heredoc ships the CORE-SUBSET without it, grep-
+  proved); Rust mirrors the one-home law: exactly-ONE home here, REUSE-
+  cited by the landed `file_cache.rs` ThreadApi seam (:494-:504) +
+  module.rs :735-:751 + thread.rs :59-:63 (NEVER re-forked). The
+  numa convert/stringify pair REUSE-cites the landed main::numa home;
+  the watchdog handler registers with the landed REAL time::periodic
+  home (the decl-home law: periodic.cc symbols NEVER invented; the
+  harness DECL-witnesses Periodic because timer 0 keeps the handler dark).
+- **the pthread 15-byte name cap translated as byte-length math**:
+  util.h :41-:53 `SET_THREAD_NAME` = pthread_setname_np (ERANGE for
+  names > 15 chars — the old name SURVIVES). All the C ladder names are
+  ASCII so bytes == chars; the port models the cap AS REAL LOGIC and
+  the harness NAME3/NAME4 vectors (s3.pkt-c0 kept through a 513-char
+  rewrite; s3.pkt-c9999 surviving the fallback-rename ERANGE) replay
+  over it. The pthread call itself is a cited seam; the port-side cell
+  is thread_local (the C per-thread names).
+- **the gate translation law (18g precedent, exercised for REAL this
+  row)**: the 14 ground TEST_CASEs map 1:1 to 14 Rust test fns carrying
+  EXACTLY-23 assertions — the count MEASURED in-file (self-census
+  tripwire; the window splits 17/6 exactly where the ground CASES split
+  at :797, matching the runner's 23 and the NUMA-off arm's 17). The C
+  tail stays the harness's RUNNER-MEASURED face; the Rust numbers come
+  from translation, NEVER from cloning the tail string.
+- **h = 95 L ground, NOT the banked 86** (the NEXT "86 L" token = cite
+  drift, disk wins, law continuous); the include arm :34-:35 drift face
+  (PLAN banked :34 — disk wins) re-pinned by both the harness and the
+  parity tripwires. The ground h md5 (86a4d2…) is CITED in the rs and
+  the stale-21c903df donor-header md5 is guarded OUT of it.
+- **get_instance_id()/get_thread_type() threaded, NEVER re-forked**:
+  cc :590/:606 (`get_instance_id()`, thread.h :48) and cc :492
+  (`get_thread_type()`, thread.h :49) read C thread-locals; the port
+  threads them as explicit params (the main/thread.rs precedent; the
+  harness witness answers get_thread_type with MAIN — witness_tc.cc),
+  keeping the ONE- homes (the landed thread.rs face).
+- **the C leak face at :228-229** (set_named_thread_affinity's
+  unsupported arm does NOT delete its cpuset — the C leaks): the Rust
+  port cannot leak; Drop replaces the leak, cited, behavior otherwise
+  identical (the map never stores and ParseWarning fires at :229).
+- **set_instance_max(0) PRE-init**: C reads a null process_cpuset into
+  hwloc_bitmap_weight (UB / witness crash); the port reads 0 — the face
+  NO vector ever walks, recorded honest.
+- **cross-case instance-max face**: the gate runs 14 cases in ONE
+  process; case 3 LEAVES instance_max = 256 in the C run (the harness
+  order: 14/23 — case 9 reads the static at :500… the ctor NEVER runs,
+  timer 0) and Rust re-inits fresh per translated case — the C chained
+  face never leaned on (each case's own CHECKs pass on a fresh image).
+- **thread-bind model face**: the witness thread-bind cell is
+  process-wide under a mutex (the C gate mutates ONE main test thread;
+  Rust per-thread cells would split the chain the gate relies on — the
+  same-single-thread face kept, recorded as the Rust no-shared-thread
+  deviation).
+- **abort arm left-open**: Watchdog::kick's `abort()` (:547, gated by
+  watchdog_min_thread_count) is ported faithfully but NEVER exercised
+  (the enabled-guards + never-active resp[] cells keep the handler
+  unresponsive-loop dark — same posture as the harness WD-NOOP arm).
+- **nm recipe drift (honest, never PLAN-carried)**: the PLAN banked
+  plain=27 / numa=34 / gate=49 app-undefined; THIS build.sh's filter
+  measures 27 / 36 / 57 (+ Catch 16 inside the 57) — the filter's
+  exclusion set differs (free/mem*/strlen/syscall/pthread_* legs); the
+  receipts land in nm_U_*.txt every build; the delta is census-silent (a
+  link-closure law, not a semantic face).
+- **'580 tests green' face**: the seeded NEXT pin keeps the
+  '580 passed / 0 failed' phrasing face; this row measured 632 -> 649
+  passed / 1 PRE-EXISTING failure at origin HEAD 8056efc: the sfd
+  tripwire pinning the NEXT '5 TEST(' drift token at x1 — the 21b
+  docs-title line (landed AT 8056efc) carries the token A SECOND time
+  (:1 + :723), so `cargo test` at HEAD is RED on exactly that one test
+  (sfd_ground_cite_drift_tripwires). NEVER touched this row (NEXT NEVER
+  edited by law); the failure + its exact cause recorded honest here;
+  NOT '580' anywhere near the face.
+- **the C gate binds ONE thread through all 14 cases; cases 4-6 chain
+  through it** (the port mirrors the single-thread face; cases 7/8
+  restore process_cpuset after mutating it — the harness's
+  `hwloc_bitmap_free(process_cpuset); process_cpuset = restricted;`
+  faces ride honestly, no shared_ptr, no Rust refcount games).
+- **Watchdog arrays**: C `new std::atomic_bool[n]` value-initializes —
+  resp[] false pre-kick too (not just the explicit thread_is_active
+  clears :502-:503); Rust Vec<AtomicBool> seeded the same (false).

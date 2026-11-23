@@ -1,0 +1,9 @@
+WIT_PARSE_ERR Invalid CPU set string 'totally a bad cpuset string'
+D1 bad-null=1=1
+D2 ok=1 w=3 isset7=1
+D3 part=1 w=1 isset5=1 isset300=0
+D4 fb=1 w=256
+D5 empty=1 w=0
+D6 model-ceil=1 w=256 isset255=1 isset256=0
+D7 range=1 w=4 isset12=1
+D8 numa cnv-bind=bind cnv-nope=unknown dflt2str=default
