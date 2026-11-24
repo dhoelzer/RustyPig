@@ -144,10 +144,10 @@ banked since 19a fully LANDED; the ONLY unfinished plan rows are
 OPTION subset (its OWN line: 'chapter-19 track opened at 19a' — the
 option campaign re-enters per the PLAN line, banked rank-last), row 20
 packet_io/DAQ, row 21 main CLI — NEVER invent a row.
-**140 commits at HEAD 6c7601c** (`git rev-list --count` HEAD == origin
-== 140 re-run at THIS docs pass; 6c7601c = the row-23c landing, the
-**140th**, SIXTEENTH straight one-commit/one-push row landing; THIS
-docs+rider sync rides as the **141st**).
+**143 commits at HEAD c77c5af** (`git rev-list --count` HEAD == origin
+== 143 re-run at THIS docs pass; c77c5af = the row-23d landing, the
+**143rd**, SEVENTEENTH straight one-commit/one-push row landing; THIS
+docs sync rides as the **144th**).
 **752 tests green / 0 FAILED** — THE LANDED face at the 23d row pass,
 RE-MEASURED LIVE: 752 passed / 0 failed over **83** `test result` lines
 (724 at 23c + **28** new two-pair replay fns). clippy --all-targets 0
@@ -173,10 +173,10 @@ Test math: 752 = 724 at 23c + **28** replay fns in the 23d parity rs
   the 920/95 ground md5s `ca123f89…`/`86a4d248…`) stays pinned by the tc
   cargo twin EVERY build — face-by-face, NEVER re-typed from here.
 - Whole-repo stats re-measured LIVE THIS pass (NEVER trust the previous
-  face): **67,500** lines Rust across **177** `src/*.rs` files, **55**
-  `tests/*_parity_test.rs` replay files, **581** tracked files
-  (`git ls-files | wc -l`, post-23c), tools = **62** `*_harness` dirs on disk, ALL
-  **62 TRACKED** — the 23c dir went tracked WITH its row (8 stageables —
+  face): **68,275** lines Rust across **179** `src/*.rs` files, **56**
+  `tests/*_parity_test.rs` replay files, **592** tracked files
+  (`git ls-files | wc -l`, post-23d), tools = **63** `*_harness` dirs on disk, ALL
+  **63 TRACKED** — the 23d dir went tracked WITH its row (8 stageables —
   the 22b/23b 8-face shape; build.sh, PLAN.md, probe.cc, probe_faceA.cc,
   witness .cc, vectors.txt, vectors_faceA.txt, .gitignore; ZERO
   runner TU = ZERO gate material; witness_conf.cc NEVER re-rides — the
@@ -228,13 +228,35 @@ Test math: 752 = 724 at 23c + **28** replay fns in the 23d parity rs
   row 22b** (22a at 1bae8fc, 22b at a82e11f, dev_block_22b.txt md5
   triple `3c8fad18…` byte-exact, provenance x12), wiki stats face 547
   files / 64,583 lines / 135 commits / 659 tests over 79 result-lines =
-  wiki-side HISTORY at WIKI-23b (9893090): 571 / 66,892 / 139 / 702 —
-  re-measure LIVE at the wiki-23c phase, NEVER re-type). ZERO debt thru
-  23b; **23c is OWED at the wiki phase**. This docs pass
+  wiki-side HISTORY at WIKI-23c (c531b47): 581 / 67,500 / 142 / 724 —
+  re-measure LIVE at the wiki-23d phase, NEVER re-type). ZERO debt thru
+  23c; **23d is OWED at the wiki phase**. This docs pass
   touched the wiki ZERO times — NEVER edit `/tmp/RustyPig.wiki`
   outside the WIKI phase.
-- **Fresh-build set MOVED at 23c (by-DESIGN drift)**: the FRESH lineage
-  head is the row-23c harness (its name-token cite rides ONCE in THIS
+- **Fresh-build set MOVED at 23d (by-DESIGN drift)**: the FRESH lineage
+  head is the row-23d harness (post-state arms: the state-aware block —
+  dir-token pin EXACTLY-1 + bare short-token face, the whole-name
+  NEVER-typed concat law `MN="dir""stor`; + carried pinned faces
+  724/702/684/659 x3 + 588 x4 + 573 x5 + `cc **133**` + the quoted
+  five-TEST drift-token EXACT-1 + the donor-eraser re-arm pair legs
+  (trough-only cp DIES exactly-1 `:32` include fatal flipped-assert +
+  fresh-cp quad SILENT rc0) + the ONE-HOME nm B-def exactly-1
+  file_count face + the E9 dup twin flipped-reject + helpers/test CMake
+  EXACTLY-4 no-suite face + packet_io/test EXACTLY-2). Run it FIRST
+  (cold fresh rc0 x3 at the row), then the **23c harness** (its frozen
+  twin's bank-token assertion rode a latent-red the row's header
+  rewrite tripped and RE-RESTORED in-commit — all three `_harness`
+  cites ride again, sfmod parity 22 fns green), then the **23b
+  harness**, then the **23a daqio harness**, then tracer (rc0 clean-face
+  re-proven at the 23c rider commit; sanctioned 0->2 + 13->16 faces
+  riding), tc, sfd (rc0 clean-face; sanctioned 26/18 census faces
+  riding), rsubs. NOTE the ARM_RED family fifth face (FROZEN-era,
+  NOT in the fresh chain per the daqio :195 precedent — daq3/misc3
+  find-daq.h==0 pins vs 11 legitimate post-SDK copy-local daq.h faces;
+  recorded row-23d deviations NEVER chased NEVER edited): if a FUTURE
+  row ever puts daq3/misc3 in scope, the 23c rider-commit sanction
+  precedent applies. The pre-23d head was the row-23c harness (arms unchanged, its cold
+  run stays in the chain directly behind the 23d row's harness): that head was (its name-token cite rides ONCE in THIS
   file = the header line — NEVER write a 2nd anywhere; post-state arms:
   the state-aware block — the dir-token pin EXACTLY-1 + the bare
   short-token FOREIGN face 0 (own twin token-FREE, the hub+concat law)
