@@ -167,7 +167,7 @@ test "$(grep -rl "${MN}_harness" "$R"/tools/*/build.sh 2>/dev/null | grep -v "^$
 # the bare self-token foreign face (own harness dir EXCLUDED, the
 # self-name law): the token rides NO foreign tools/tests file EVER:
 test "$(grep -rl "$MN" "$R"/tools "$R"/tests --include='*.sh' --include='*.rs' --exclude-dir="${MN}_harness" 2>/dev/null | grep -v "^$R/tests/${MN}_parity_test.rs$" | wc -l)" -eq 1   # SANCTIONED at row 23e: 0 -> 1 own-token family face (own dir + own twin EXCLUDED; the tr-acer chain build.sh's concat-bare sf-mod mention arm — MEASURED 1 at HEAD too, the pin never re-ran since 23c = stale latent-red twin; the 62d6fac flip-forward law; the 23e row itself adds ZERO own-token holders (its file NEVER count-pins foreign tokens and its comments ride hyphen-split forms))
-test "$(grep -rl "$MN" "$R"/src --include=*.rs 2>/dev/null | wc -l)" -eq 0   # the landing rs NEVER names the harness token (the plan cite rides the PLAN.md home)
+test "$(grep -rl "$MN" "$R"/src --include=*.rs | wc -l)" -eq 1   # SANCTIONED at the row-23e docs rider: 0 -> 1 (the dir-stor row-23d landing legitimately cites the 23c seam in TWO trough.rs comments — grep-rl ONE file — MEASURED red since c77c5af, surfaced cold at 23e; the landing cites C-row shorthand NEVER the _harness token itself: the _harness-face arms above STAY 0; the 62d6fac flip-forward law, foreign landing NEVER edited)
 # the 23b-kin 'the 23b harness' substring NEVER rides THIS harness family (the
 # foreign-row face; own files honest-clean):
 test "$(grep -rl "sf""inst" "$H" --exclude-dir=copy --binary-files=without-match 2>/dev/null | wc -l)" -eq 0
@@ -183,7 +183,7 @@ elif [ "$pre" = post ]; then
 fi
 # the bare s-d token face STAYS EXACTLY-3 (the seam-hub + concat law; the
 # own twin token-FREE: THIS harness' ground-path tripwires runtime-JOIN):
-test "$(grep -rl 'sf'"daq" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "sf""inst" | grep -v "^$R/tools/daq""io_harness/build.sh$" | grep -v "^$R/tools/misc3_harness/build.sh$" | grep -v "^$R/tools/mpls_harness/build.sh$" | grep -v "^$R/tests/daq""io_parity_test.rs$" | grep -v "^$R/tests/misc3_parity_test.rs$" | wc -l)" -eq 0   # ZERO NEW holders beyond the frozen set (the arms' exclusion face EXPLICIT, the drift NEVER silent)
+test "$(grep -rl 'sf'"daq" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "sf""inst" | grep -v "^$R/tools/daq""io_harness/build.sh$" | grep -v "^$R/tools/misc3_harness/build.sh$" | grep -v "^$R/tools/mpls_harness/build.sh$" | grep -v "^$R/tests/daq""io_parity_test.rs$" | grep -v "^$R/tests/misc3_parity_test.rs$" | wc -l)" -eq 1   # SANCTIONED at the row-23e docs rider: 0 -> 1 — the dir""stor row-23d landing added ONE legit ground-path MENTION holder (its own build.sh tripwire face; MEASURED red since c77c5af, surfaced COLD at this row — the same face the sfin-st :224 + da-qio :171 arms already count at 5; the 62d6fac flip-forward law, the foreign landing NEVER edited; exclusion face STAYS EXPLICIT, the drift NEVER silent)
 # the misc9 :460 landmine NAMING law (the the 23a harness :173-:181 shape re-cloned):
 test "$(grep -rl 'struct Tracer' "$R"/src --include=*.rs | wc -l)" -eq 0
 test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src --include=*.rs | sed "s|$R/||" | paste -sd,)" = "src/framework/mod.rs,src/framework/reload_survivor_subscriptions.rs"

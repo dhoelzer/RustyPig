@@ -151,10 +151,13 @@ banked since 19a fully LANDED; the ONLY unfinished plan rows are
 OPTION subset (its OWN line: 'chapter-19 track opened at 19a' — the
 option campaign re-enters per the PLAN line, banked rank-last), row 20
 packet_io/DAQ, row 21 main CLI — NEVER invent a row.
-**143 commits at HEAD c77c5af** (`git rev-list --count` HEAD == origin
-== 143 re-run at THIS docs pass; c77c5af = the row-23d landing, the
-**143rd**, SEVENTEENTH straight one-commit/one-push row landing; THIS
-docs sync rides as the **144th**).
+**145 commits at HEAD ff43d83** (`git rev-list --count` HEAD == origin
+== 145 re-run at THIS docs pass; ff43d83 = the row-23e landing, the
+**145th**, EIGHTEENTH straight one-commit/one-push row landing; THIS
+docs sync rides as the **146th**; the 23e child died at its call budget
+PRE-commit — the orchestrator takeover completed the fix-forward pass
+(the token-arm latent-red family sweep, 5th entry of the frozen-era
+family) and landed the row as ONE commit).
 **763 tests green / 0 FAILED** — THE LANDED face at the 23e row pass,
 RE-MEASURED LIVE: 763 passed / 0 failed over **84** `test result` lines
 (752 at 23d + **11** new gate-pair replay fns). clippy --all-targets 0
@@ -185,10 +188,10 @@ rewrites ledger + the header exhibit, NEVER a 4th face added here.)
   the 920/95 ground md5s `ca123f89…`/`86a4d248…`) stays pinned by the tc
   cargo twin EVERY build — face-by-face, NEVER re-typed from here.
 - Whole-repo stats re-measured LIVE THIS pass (NEVER trust the previous
-  face): **68,275** lines Rust across **179** `src/*.rs` files, **56**
-  `tests/*_parity_test.rs` replay files, **592** tracked files
-  (`git ls-files | wc -l`, post-23d), tools = **63** `*_harness` dirs on disk, ALL
-  **63 TRACKED** — the 23d dir went tracked WITH its row (8 stageables —
+  face): **68,620** lines Rust across **180** `src/*.rs` files, **57**
+  `tests/*_parity_test.rs` replay files, **603** tracked files
+  (`git ls-files | wc -l`, post-23e), tools = **64** `*_harness` dirs on disk, ALL
+  **64 TRACKED** — the 23d dir went tracked WITH its row (8 stageables —
   the 22b/23b 8-face shape; build.sh, PLAN.md, probe.cc, probe_faceA.cc,
   witness .cc, vectors.txt, vectors_faceA.txt, .gitignore; ZERO
   runner TU = ZERO gate material; witness_conf.cc NEVER re-rides — the
@@ -240,13 +243,24 @@ rewrites ledger + the header exhibit, NEVER a 4th face added here.)
   row 22b** (22a at 1bae8fc, 22b at a82e11f, dev_block_22b.txt md5
   triple `3c8fad18…` byte-exact, provenance x12), wiki stats face 547
   files / 64,583 lines / 135 commits / 659 tests over 79 result-lines =
-  wiki-side HISTORY at WIKI-23c (c531b47): 581 / 67,500 / 142 / 724 —
-  re-measure LIVE at the wiki-23d phase, NEVER re-type). ZERO debt thru
-  23c; **23d is OWED at the wiki phase**. This docs pass
+  wiki-side HISTORY at WIKI-23d (ffcaed0): 592 / 68,275 / 144 / 752 —
+  re-measure LIVE at the wiki-23e phase, NEVER re-type). ZERO debt thru
+  23d; **23e is OWED at the wiki phase** (the FIRST census-FLIP wiki
+  face: the walked gate face moves 26->27 / 18->19 there too). This docs pass
   touched the wiki ZERO times — NEVER edit `/tmp/RustyPig.wiki`
   outside the WIKI phase.
-- **Fresh-build set MOVED at 23d (by-DESIGN drift)**: the FRESH lineage
-  head is the row-23d harness (post-state arms: the state-aware block —
+- **Fresh-build set MOVED at 23e (by-DESIGN drift)**: the FRESH lineage
+  head is the row-23e GATE harness (the 9-stageable p-c-gate tree: the state-aware block —
+  the ONE-token NEXT-line pin law EXACTLY-1 (the header rewrite is the ONLY carrier), the
+  whole-name NEVER-typed law, the gate.txt COPY-LOCAL face + the RUNNER tail ride
+  "All tests passed (13 assertions in 3 test cases)" + the CATCH_CONFIG_MAIN twin rc0
+  HONESTY arm + census legs 27/9/19/1 + the 13-file packet_constraint foreign cp face;
+  cold rc0 receipts THIS pass at the clean ff43d83 face: the p-c-gate leg then tc then sfd then
+  rs-subs then da-qio then sfin-st then dir-stor then tr-acer ALL rc0 — the full fresh chain
+  re-proven post-census-flip, the SFMOD leg re-run pending its own cold receipt).
+  Run it FIRST, then the **23d harness** (post-state arms: the state-aware block —
+  dir-token pin EXACTLY-1 + bare short-token face, the whole-name
+  NEVER-typed concat law `MN="dir""stor`; + carried pinned faces (post-state arms: the state-aware block —
   dir-token pin EXACTLY-1 + bare short-token face, the whole-name
   NEVER-typed concat law `MN="dir""stor`; + carried pinned faces
   724/702/684/659 x3 + 588 x4 + 573 x5 + `cc **133**` + the quoted
