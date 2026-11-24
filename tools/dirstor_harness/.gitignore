@@ -1,0 +1,48 @@
+# dirstor_harness artifacts — COPY-LOCAL / regenerated EVERY build (the
+# nested-.gitignore instrument; ROOT .gitignore NEVER moves). Stageable face
+# = the 8 tracked files; EVERYTHING else here is a receipt and IGNORED.
+copy/
+o2/
+# binaries + objects
+probe
+probe_O2
+probe_faceA
+probe_faceA_O2
+probe.o
+probe_faceA.o
+witness_dirstor.o
+witness_conf.cc
+witness_conf.o
+e9_dup_twin.cc
+e9_dup_twin.o
+E9_dup_probe
+# compile-receipt faces
+E4_dir.txt
+E4_trough.txt
+E4_pre_trough.txt
+E4_real_trough.txt
+E4_real_dir.txt
+E9_dup.txt
+# run faces (the tracked vectors are the FIRST-RUN-SEEDs; these are per-run)
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+faceA_stderr.txt
+probe_dec_stderr.txt
+# nm / ledger receipts
+nm_U_dir.txt
+nm_U_tro.txt
+nm_U_probe.txt
+nm_defined.txt
+nm_file_count.txt
+stageables.txt
+backbone10.txt
+gate_md5_lineages.txt
+md5_pinned.txt
+.vectors_pristine
+.vectors_faceA_pristine
+# the probe's walk tree (rebuilt EVERY run from argv; NEVER tracked)
+walk
+# gate posture: this row ships ZERO gate artifacts
+gate.txt

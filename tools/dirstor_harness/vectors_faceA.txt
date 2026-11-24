@@ -1,0 +1,5 @@
+FNM star-span=1,star-miss=0,default-on-pcap-TRUE=1,qmark=0,qmark-hit=1,class-hit=1,class-miss=0,class-neg-hit=1,class-range=1,class-range-miss=0,escape-star=1,escape-star-miss=0,unterminated-literal=1,star-spans-slash=1,qmark-slash=1,case-sensitive=0, nomatch=1
+MODES ifmt=61440 ifdir=16384 ifreg=32768 ififo=4096 mask_expr=0
+ERRS enoent=2 enotdir=20
+LIMITS pathmax=4096 guard=4095
+THEHOME rowbody=1 fc=0,0 zero=1

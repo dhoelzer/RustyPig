@@ -4789,3 +4789,80 @@ Structural deviations (behavior preserved):
 - **the packet_tracer docs CORRECTION (measured truth)**: the gate candidate packet_tracer.cc 739 carries EXACTLY-10 in-TU `TEST_CASE [PacketTracer]` faces ( :510 :533 :555 :589 :610 :631 :666 :694 :715 :725 — re-measured at the row by grep). The NEXT.md/wiki '12-case' prose was WRONG; the 23c harness PLAN.md + this ledger pin the MEASURED-10 face. The row was NOT picked (4 heavy walls: detection/ips_context.h, log/batched_logger.h, stream/stream_log.h ENTIRELY absent, active.h) — rank-LATER gate candidate.
 - **the token-census face, honest post-state**: harness name sfmod_harness chosen AFTER measurement: the 16-char dir token + short bare token pre-hits 0 in tools/tests/src; the pre-existing 5-char fmod-family token owns ZERO frozen find/grep census arms and the '*fmod*' iname family = the pre-existing fmod dir + this dir = 2 (HEAD face 1) with NO arm riding the family — the super-substring collision census-inert, RECORDED not renamed away. The harness + the OWN parity twin ride TOKEN-FREE (concat-built SD/TRC literals — the own-twin law): the FROZEN 23a :171 bare-sd face STAYS EXACTLY-3 (misc3 build.sh + mpls build.sh + misc3 parity); the sfinst :210/:211 state-aware pins STAY (sfinst_harness EXACT-1 + bare sfinst EXACT-1 in NEXT.md); the 22b tracer_harness :115 cross-file 'tracer'-in-build.sh pin was ALREADY red at HEAD (measured 15/13 — the 23b harness line rode it; NEVER chased by this row, drift RE-RECORDED), and MY files ship token-FREE so the face NEVER moved (15 stays 15). The bare `sfmod` foreign face 0 (own dir + own twin law); the header banks the dir-token EXACTLY-1 line (the 23b banking pattern — the state-aware twin arms read EXACTLY-1 line, occurrences on the SAME line allowed, the grep -c face).
 - **the 702 seed absorption**: the docs pass moves the CURRENT seed to 724 (702 + 22 pair fns over 82 result-lines, cargo + clippy RE-MEASURED LIVE at the landing) and absorbs the old seed into the harness-pinned x3 set — every carried face line-counted EXACT post-edit (621/605/597 stay OCCURRENCES == 3, NEVER a 4th); the fresh-build lineage head MOVES to the 23c harness (by-design drift prose), the 23b/23a harness prose stays CITE-ONLY, and the sfinst_harness carrier token stays EXACT-1 on ONE line via the header (the prose NEVER adds a 2nd sfinst line — the frozen :211 arm).
+## helpers/directory + packet_io/trough TWO-PAIR (row 23d — helpers/directory.cc 113 e0e4af65 + directory.h 49 f7eac140 + packet_io/trough.cc 265 c9aa106b + trough.h 88 7931b6ef @ fe29cbe, THE chapter-20 FOURTH row — the CHEAP B-face the 23c row ranked; the directory + source-queue pair)
+
+- **THE DONOR-ERASER HEADLINE (the row's honest history)**: the 23b row recorded
+  "the trough sibling 265+88 dies the helpers/directory.h wall" and the 23c row
+  DISARMED that receipt: at a FRESH copy face BOTH pairs compile SILENT rc0 —
+  the wall was a DONOR-ERASER face (a stale copy/ tree masking as a provider
+  wall), NOT an SDK wall. THIS row re-proves BOTH faces EVERY build: (1) the
+  fresh trough-only copy DIES EXACTLY the :32 include fatal (the 23b receipt
+  RE-ARMED at its own face — the flipped-assert arm) and (2) the fresh-cp
+  4-file quad compiles SILENT rc0 x2. The law the guard: the copy tree is
+  re-cloned and the row quads re-cped from ground EVERY build (the 23c :580
+  lesson re-cloned verbatim); the parity twin re-reads BOTH historical arms
+  LIVE from the 23c-era build.sh faces, NEVER edited.
+- **get_error TEXT-face split (the get_error leg NEVER witness-mirrored)**: the
+  donor config.h carries NO HAVE_GNU_STRERROR_R, so the REAL utils/util.cc
+  :104 branch runs `(void)strerror_r(...)` and returns the UNWRITTEN buffer —
+  glibc's GNU strerror_r writes the POINTER form for ENOENT, the buffer stays
+  empty: the C row error lines print an EMPTY error text (the vectors pin
+  `Error getting stat on pcap file: …missing.pcap: ]` — the trailing ': ]'
+  face MEASURED: `stat rc=-1 errno=2 get_error=[] direct=[]`). The landed
+  `utils::get_error` Rust home returns the strerror TEXT ("No such file or
+  directory"); the parity replay MAPS the C face to the Rust face leg-by-leg
+  (the map asserted, NEVER silent). This is the FIRST row where the REAL
+  get_error body rides the link — no graft face exists to re-cite.
+- **FatalError -> Err(()) + the PARTIAL-queue survival**: the C fatal legs
+  long-jumped out of setup with the get_pcaps side-effects SURVIVING (the
+  :221 path NEVER rolls the queue back); the port surfaces Err(()) with the
+  same surviving queue state — the fork-isolated 7 fatal legs pin the
+  post-jump q=8/0/0/1 faces and the twin asserts the post-Err queue EQUALS
+  them (the queue NEVER rolled back). The C message went through the
+  ErrorMessage witness capture; the Rust messages ride the landed engine
+  home (`log::messages` — NO re-fork).
+- **the C pure-static class -> per-object fields**: Trough's EVERYTHING-static
+  face (trough.h :39-:84) lands as per-object fields on `Trough` (the
+  file-statics->fields law; NO unsafe/static-mut). `file_count` (trough.h :84
+  `static std::atomic<unsigned>`) honestly reads a CLASS-static, NOT a
+  file-static: it lands as ONE counter field per object = THE one home; the
+  cc :257 bump lives in get_next ONLY (the vectors fc=6/1/1 legs pin it). The
+  23c-row scripted `trough_file_count` seam params (prep_counts/reset_stats)
+  are caller-threaded PegCount faces — the same-commit code-rider question
+  MEASURED NEGATIVE: the scripted fc=0 cargo faces stay UNMOVED, ZERO frozen
+  tests touched (the 62d6fac rider law); the cites now ride a REAL provider
+  home WITHOUT semantic drift, and the E9 dup-symbol twin flipped-asserts the
+  one-home law on the link leg.
+- **the readdir stream -> snapshot Vec (cited)**: the C `DIR*` + readdir
+  cursor lands as a per-directory name snapshot (rewind re-opens + clears the
+  cursor like rewinddir + the sub delete :58-:65). Observable order: the probe
+  and the parity twin BOTH sort the walk output (the readdir order itself is
+  fs-order, NEVER asserted); the path rebuild rides the literal
+  `path.erase(len)` face via truncate(self.len).
+- **THE FIFTH frozen-era latent-red face (the orchestrator ruling recorded)**:
+  the daq3_harness :105 + misc3_harness :160 `find tools -name daq.h ! -path
+  daq3 -> 0` arms read 11-12 at the clean face TODAY because EVERY 23a-era+
+  re-clone harness copy-LOCALs the REAL-SDK daq.h into its own RETAINED copy/
+  tree — legitimate re-cite-law artifacts, nested-gitignored, NEVER tracked.
+  Per the daqio build.sh :195-:198 precedent ("...ONE-landing arms are
+  FROZEN-era receipts — those harnesses NEVER re-run in the FRESH chain"),
+  daq3 and misc3 are NOT in the fresh-build set, so nothing blocks. Treatment
+  per the ruling: the frozen arms NEVER edited, foreign copy/ trees NEVER
+  rm'd, and this row's arms scoped to own tree + the tracked face only
+  (the own daq.h find-arm excludes copy//o2/: tracked face EXACTLY-0 asserted
+  EVERY build). The 23c rider-commit precedent will decide any sanction at
+  the docs phase; recorded honestly as the family's FIFTH.
+- **the harness-name token law**: the dir name was picked AFTER measurement —
+  ANY trough-named dir would ride the frozen trough-token arms family-wide
+  (the 54-hit scan: the sfinst :309-:310 wc -eq 265 / -eq 88 arms etc.); the
+  chosen dir family measured ZERO pre-hit. The whole name NEVER typed in-file
+  — the runtime concat law (the 23c template); NEXT.md gains EXACTLY-1
+  own-token line and ZERO new bare-trough-token lines (the NEXT trough-token
+  count STAYS at its pre-existing face); the own twin asserts the faces
+  through concat-built runtime paths.
+- **the add_cpputest prose CORRECTION (measure, never copy lore)**: the 23c
+  NEXT prose cited the packet_io test dir as an "add_cpputest-5" face; the
+  MEASURED faces at this row: packet_io/test EXACTLY-2 (active_packet_trace +
+  the 23c pair — trough ABSENT) and helpers/test EXACTLY-4 (NO directory
+  suite). Both counted by the harness AND the parity twin EVERY build; the
+  correction open, never silent.

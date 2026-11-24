@@ -1,0 +1,19 @@
+D0 noent=2 notdir=20
+D1 n=6 set=walk/root/a.pcap,walk/root/b.cap,walk/root/sub1/d1.pcap,walk/root/sub1/d2.txt,walk/root/sub1/deeper/e1.cap,walk/root/zz.txt
+D2 n=2 set=walk/root/b.cap,walk/root/sub1/deeper/e1.cap
+D3 n=1 set=walk/root/sub1/d1.pcap
+D4 n=6 same=1
+D5 reported=15 maxlen=3856 over=0
+T0 q=4 walk=/a.pcap,/b.cap,/sub1/d1.pcap,/sub1/deeper/e1.cap
+T1 n=6 fc=6 loop=1 seq=fileA.pcap,fileB.cap,-,fileA.pcap,fileB.cap,-
+T2 got=1 fc=1,1 has_next=0 cleared=0
+T3 q=6 walk=/a.pcap,/b.cap,/sub1/d1.pcap,/sub1/d2.txt,/sub1/deeper/e1.cap,/zz.txt
+F T4 jumped=1 msgs=1 q=8 last=[Error getting stat on pcap file: walk/missing.pcap: ]
+F T5 jumped=1 msgs=1 q=0 last=[Specified entry in 'walk/listF' is not a regular file or directory: walk/root/fifo1]
+F T6 jumped=1 msgs=1 q=0 last=[Error getting pcaps under dir: walk/nosuchdir: ]
+F T7 jumped=1 msgs=1 q=0 last=[No pcaps specified in pcap list]
+F T8 jumped=1 msgs=1 q=0 last=[Specified pcap is not a regular file: walk/root]
+T8b fifo_queued=1 fc=1
+T9 q=6
+F T10 jumped=1 msgs=0 q=0 last=[]
+F T11 jumped=1 msgs=1 q=1 last=[Error getting stat on pcap file: walk/missing.pcap: ]

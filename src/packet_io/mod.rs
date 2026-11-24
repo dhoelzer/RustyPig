@@ -31,6 +31,10 @@ pub mod sfdaq;
 pub mod sfdaq_config;
 pub mod sfdaq_instance;
 pub mod sfdaq_module;
+// row 23d: the Trough pcap-source expander — THE file_count ONE home that
+// the 23c sfdaq_module seam params (trough_file_count) producer-side
+// closes; it rides the SAME flat dir (the Trough C home is packet_io).
+pub mod trough;
 // the 23b seam-close re-export hub (the token-free wiring path — the
 // frozen sd-token census law, cited at seam.rs):
 pub mod seam;

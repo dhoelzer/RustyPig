@@ -9,6 +9,7 @@ pub mod lockless_ring;
 pub mod memcap_allocator;
 pub mod json_stream;
 pub mod ring2;
+pub mod directory;   // row 23d (the Directory traversal home incl the glibc fnmatch flags-0 subset)
 pub mod sha256;
 pub mod streambuf;
 pub mod ring;
