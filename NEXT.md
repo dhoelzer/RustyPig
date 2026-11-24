@@ -135,10 +135,10 @@ banked since 19a fully LANDED; the ONLY unfinished plan rows are
 OPTION subset (its OWN line: 'chapter-19 track opened at 19a' — the
 option campaign re-enters per the PLAN line, banked rank-last), row 20
 packet_io/DAQ, row 21 main CLI — NEVER invent a row.
-**137 commits at HEAD a42a0d8** (`git rev-list --count` HEAD == origin
-== **137** re-run at the 23b row pass; a42a0d8 = the post-23a docs
-pass; THE ROW-23b LANDING lands as the **138th**, FIFTEENTH straight
-one-commit/one-push row landing).
+**138 commits at HEAD 79378b5** (`git rev-list --count` HEAD == origin
+== 138 re-run at THIS docs pass; 79378b5 = the row-23b landing, the
+**138th**, FIFTEENTH straight one-commit/one-push row landing; THIS
+docs sync rides as the **139th**).
 **702 tests green / 0 FAILED** — THE LANDED face at the 23b row pass,
 RE-MEASURED LIVE: 702 passed / 0 failed over **81** `test result` lines
 (684 at 23a + **18** new pair-replay fns). clippy --all-targets 0
@@ -220,13 +220,21 @@ the row).
   row 22b** (22a at 1bae8fc, 22b at a82e11f, dev_block_22b.txt md5
   triple `3c8fad18…` byte-exact, provenance x12), wiki stats face 547
   files / 64,583 lines / 135 commits / 659 tests over 79 result-lines =
-  wiki-side HISTORY, STALE vs this pass: 560 / 65,470 / 136 / 684 —
-  re-measure LIVE at the wiki phase, NEVER re-type). ZERO debt thru
-  22b; **23a is OWED at the wiki phase (row pending)**. This docs pass
+  wiki-side HISTORY at WIKI-23a (7fd1ee0): 560 / 65,470 / 137 / 684 —
+  re-measure LIVE at the wiki-23b phase, NEVER re-type). ZERO debt thru
+  23a; **23b is OWED at the wiki phase**. This docs pass
   touched the wiki ZERO times — NEVER edit `/tmp/RustyPig.wiki`
   outside the WIKI phase.
-- **Fresh-build set MOVED at 23a (by-DESIGN drift)**: the FRESH lineage
-  head is the **23a daqio harness** (9-stageable dir; run it FIRST: the
+- **Fresh-build set MOVED at 23b (by-DESIGN drift)**: the FRESH lineage
+  head is the row-23b harness (its name-token cite rides ONCE in THIS
+  file = the header line — NEVER write a 2nd anywhere; post-state arms:
+  the :207-:212 STATE-AWARE block — the dir-token pin EXACTLY-1 + the
+  bare short-token pin EXACTLY-1 + tracked-8 stageable guard — + carried pinned faces
+  684/659/650 x3 + 588 x4 + 573 x5 + `cc **133**` + the quoted
+  five-TEST drift-token EXACT-1 + the EXACTLY-85 not-declared graft
+  leg + trough sibling death + the 32 app-undef/zero-SFDAQInstance
+  seam-close nm legs); run it FIRST, then the **23a daqio harness**
+  (9-stageable dir; rc0 at 79378b5 re-verified at the row; the
   :162-:166 STATE-AWARE token pin — 0 pre-land / EXACTLY-1 post — the
   token cite rides ONCE in THIS file = the header line, NEVER write a
   2nd; :203-:212 x3/x4/x5 face-counts + :213 `cc **133**` presence +
