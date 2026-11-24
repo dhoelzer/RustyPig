@@ -1,0 +1,20 @@
+P0 def match=1 setbits=0 ipproto=255 tenants=0 sp=0 dp=0
+P1 allunset eq=1
+P2 dstunset mask=251 eq=1
+P3 neq allset=255 eq=0
+P4 tenants eq1=1 eq2=1 self=1
+P5 nomatch=0
+P6 noopkg tenantonly=1
+P7 noopkg protoset=0
+P8 fwd match=1
+P9 swap two-order=1
+P10 tenant-miss=0
+P11 tenant-anon-skip=1
+P12 tenant-hit=1
+F0 flow keyfallback=1
+F1 flow keyfallback-miss=0
+F2 flow session-wins=1
+F3 flow nomatch=0
+F4 flow same-dir=1
+F5 flow swapped=0
+Z terminator=0

@@ -126,7 +126,7 @@ grep -q 'cc \*\*133\*\*' "$R/NEXT.md"        # the STALE token rides NEXT (cite-
 # the 2 tolerated tc_harness cite faces; NO other build.sh carries the token.
 test "$(find "$R"/tools -maxdepth 1 -iname '*tc_harness*' | wc -l)" -eq 1
 test "$(grep -c 'tc_harness' "$R/NEXT.md")" -eq 2
-test "$(grep -rl 'tc_harness' "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 0
+test "$(grep -rl 'tc_harness' "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 1   # SANCTIONED at row 23e: 0 -> 1 (self-EXCLUDED file; the s-f-d chain harness's gate-lineage cite rides the token — a pre-23e rider mention MEASURED 1 by walk at THIS face; this pin was the stale latent-red twin never re-run since the 23c sfd rider; the 62d6fac flip-forward law; NEVER edit the cited rider)
 
 # ---- copy tree = ipheavy DONOR clone (.o's purged); ext#4 ladder HEAD pins ----
 if [ ! -e "$IP/copy/cd_ipv4.o" ]; then bash "$IP/build.sh"; fi   # donor self-heal
@@ -616,9 +616,9 @@ PYPIN
 # byte-frozen + its 14-name-free 3-L face, tracked gate.txt face STAYS 1 ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 26                        # THE FLIP: 25 -> 26 (tc's NEW on-disk gate)
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 27   # SANCTIONED row-23e flip-forward: 26 -> 27 (the pc-gate copy-local face landed THIS row; the 22a face rode above; the 62d6fac law)                        # THE FLIP: 25 -> 26 (tc's NEW on-disk gate)
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H/gate_md5_lineages.txt"
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 18                          # THE FLIP: 17 -> 18 distinct tails
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 19                          # SANCTIONED row-23e flip-forward: 18 -> 19 distinct tails (the pc-gate fresh md5 lineage; THE FLIP at 22a rode 17->18; the 62d6fac law)
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(wc -l < "$R"/tools/gre_harness/gate.txt)" -eq 3
 grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/gate.txt
@@ -694,6 +694,6 @@ echo "RUNNER law: CATCH_CONFIG_MAIN twin SEGV rc=139 face PROVEN (E10); upstream
 echo "gate tail (RUNNER-MEASURED, never typed): $GATE_TAIL"
 echo "gate arms: full -DUNIT_TEST -DHAVE_NUMA (14 names in -l) + HAVE_NUMA-off hinge arm (9 names) BOTH green"
 echo "O0==O2: DEC $(cmp -s "$H"/vectors_O0.txt "$H"/vectors_O2.txt && echo BYTE-IDENT), FACE-A $(cmp -s "$H"/vectors_faceA_O0.txt "$H"/vectors_faceA_O2.txt && echo BYTE-IDENT), GATE $(cmp -s "$H"/gate_O0.txt "$H"/gate_O2.txt && echo BYTE-IDENT)"
-echo "frozen census: $frozen/26 holders of 4826fc22 FROZEN, $(cat "$H"/gate_md5_lineages.txt) distinct md5 lineages (CENSUS FLIPPED 25->26 files / 17->18 tails, tracked face STAYS 1); gre 6751d1a8 anchor byte-frozen"
+echo "frozen census: $frozen/27 holders of 4826fc22 FROZEN, $(cat "$H"/gate_md5_lineages.txt) distinct md5 lineages (CENSUS FLIPPED 25->26 at 22a, 26->27 files / 18->19 tails at 23e — the second real gate row; tracked face STAYS 1); gre 6751d1a8 anchor byte-frozen"
 echo "stale-h trap: donor 21c903df face != ground 86a4d2 PROVEN + fresh-cp over it EVERY build; E9 dup face = exactly-20 multiple-defs; nm app-undef faces: plain=$(wc -l < "$H"/nm_U_plain.txt) numa=$(wc -l < "$H"/nm_U_plain_numa.txt) gateut=$(wc -l < "$H"/nm_U_gateut.txt) (Catch +$(grep -c 'Catch::' "$H"/nm_U_gateut.txt) closed by the RUNNER TU)"
 echo "TC_DONE vectors=$( [ -e "$H"/vectors.txt ] && wc -l < "$H"/vectors.txt || wc -l < "$H"/vectors_O0.txt) faceA=$( [ -e "$H"/vectors_faceA.txt ] && wc -l < "$H"/vectors_faceA.txt || wc -l < "$H"/vectors_faceA_O0.txt) gates=1 (the 14-case row gate; the HAVE_NUMA-off 9-case arm = hinge receipt, gate.txt census face = 1 new)"

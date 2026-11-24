@@ -4866,3 +4866,91 @@ Structural deviations (behavior preserved):
   the 23c pair — trough ABSENT) and helpers/test EXACTLY-4 (NO directory
   suite). Both counted by the harness AND the parity twin EVERY build; the
   correction open, never silent.
+
+## packet_io packet_constraints pair (row 23e — packet_constraints.cc 331 cb7b3584 + packet_constraints.h 76 447e814a @ fe29cbe, THE chapter-20 SECOND REAL GATE ROW — the first in-TU Catch gate since 22a; the CENSUS-FLIP row: walked 26->27 / 18->19)
+
+- **THE GATE HEADLINE**: the cc carries its OWN `#ifdef UNIT_TEST` Catch block
+  (:143; EXACTLY-1 catch include :145; the real flow.h :147) with EXACTLY-3
+  TEST_CASE "[framework]" faces (:149 comparison / :205 matching / :297 flow
+  matching) over EXACTLY-13 CHECK legs. The 22a gate template is re-cloned
+  EXACTLY: CATCH_CONFIG_RUNNER + the TRACKED runner TU (pcgate_gate_main.cc;
+  the plain-main shape SEGV law of 22a is a POSTURE law, tracked-posture stays
+  RUNNER) + the gate.txt COPY-LOCAL UNTRACKED posture (the tracked gate face
+  STAYS gre's ONLY; the nested .gitignore asserts it). RUNNER tail
+  RUNNER-MEASURED every build: `All tests passed (13 assertions in 3 test
+  cases)`. The -l roster face = the 3 ground TEST_CASE names, grep-extracted
+  (NOT line-number sed — the Catch -l face is name-form, MEASURED).
+- **THE E10 MAIN-TWIN HONESTY (MEASURED BOTH WAYS, never lore)**: the 22a law
+  "plain CATCH_CONFIG_MAIN SEGVs rc139" binds the tc TU because snort.cc:109
+  init()-filled file-statics back the gate. THIS TU carries ZERO init()-fed
+  statics (pure-value class): the MAIN twin link MEASURED GREEN (rc0, 13/3)
+  — the law does NOT bind here and was NEVER cargo-culted; the tracked posture
+  STILL stays RUNNER per the clone law.
+- **THE CENSUS FLIP LEDGER (the row-22a lesson RE-ARMED and applied COMPLETE)**:
+  landing the copy-local gate flips the WALKED face 26->27 on-disk + md5
+  lineages 18->19 (legacy 9 x 4826fc22 + tracked 1 gre 6751d1a8 UNCHANGED,
+  the 26 existing gate.txt artifacts byte-untouched, backbone10 NEVER moved).
+  EVERY fresh-chain holder rider-flipped IN-COMMIT with sanctioned comments:
+  dirstor/sfmod/sfinst/daqio/tracer/tc/sfd build.sh disk+lineages arms +
+  tests/sfd_parity_test.rs walker (26/18->27/19) + tests/daqio_parity_test.rs
+  prose. THE rs-subs-lineage harness carried a STALE 20a-era 25/17 face —
+  latent-red since the 22a flip (never cold-run since); corrected 25->27 /
+  17->19 FORWARD here per the 62d6fac law. THE SAME row fix-forwarded ITS
+  own-token foreign-scan arm 1->5 (stale 20a twin of the 23d-chain :128
+  MEASURED-5 face). NEVER edit the citations; flip-forward only.
+- **E4 wall ladder BOTH ways (flipped-assert legs EVERY build)**: the fresh
+  pair vs the donor ext#4 daq heads DIES EXACTLY-1 at cc :115
+  (`pkth->tenant_id` — THE 22b PKTH wall re-proven at this row's OWN consumer
+  line, gcc UTF-8 curly-quote face pinned) vs the REAL libdaq SDK re-cite
+  (c8d4083; daq_common.h 28789a3d; MAX_DAQ_VERDICT==6 EXACTLY-pinned; pkthdr
+  56B AS@44) compiles SILENT rc0. The flow.h :541 static_assert stays INERT
+  on the real head (the re-cite law).
+- **MIRROR LAW EXTENSION (flow side)**: the gate TU pulls Flow ctor/dtor,
+  FlowDataStore dtor, FlowStash::reset + layer::get_inner_ip6_frag — ALL
+  DECL-body mirrors (OWN-9 witness), real bodies NEVER landed (the 22b
+  Packet-MIRROR law extended; noreturn-return UB law respected). util.cc
+  snort_strdup + the SnortSnprintf family ride the REAL fresh-cp donor
+  bodies (sf_ip.o/util.o/util_cstring.o/ip.o homes); the carried witness_conf
+  4dd91018 family rides, NEVER doubled (E9); the row-body co-link E9 twin
+  MEASURED exactly-3 duplicate-definition errors — the gate link NEVER
+  co-links plain pc.o with pc_gateut.o; the DEC/FACE-A probes link the plain
+  pc.o ONLY (the E9 split-face law, cited at both links).
+- **SHAPE: the C 8-arg default-arg ctor -> `new()` 7-arg + `with_tenants`
+  builder** (clippy-shape deviation; the C default `tenants{}` == empty Vec
+  preserved EXACTLY, the P0 NSDMI byte-face pinned). NO derived PartialEq/Eq:
+  `eq_masked` rides the ground operator== mask law (mask compares FIRST and
+  short-circuits the gated members, cc :36-58 face-pinned); SfIp legs ride
+  the landed `fast_equals_raw` = the C `operator==` body (16-byte raw memcmp
+  family), NEVER the structural derive (v4-mapped/family drift over-match).
+  `ConstraintPacketFace` / `ConstraintFlowFace` = row-scoped read faces under
+  the mirror law (the real Packet/Flow never land; the get_src/get_dst
+  non-null precondition under has_ip() lets the packet legs read the
+  IpApiLite fields directly, cc :100 :102 faces cited).
+- **TWO-ORDER vs SINGLE-ORDER asymmetry (probe-pinned, cited)**: packet_match
+  gets the swapped SECOND chance (cc :117 || :118) — P9=1; flow_match is
+  SINGLE-order on the key/session face (:133 ONE call, F5=0). The
+  `!p.has_ip()` early-true + the TENANT-EXCLUDED :102 five-bit set (the
+  NO-IP tenant-only PASS leg) + the tenant miss/anon-skip/hit ladder (the
+  `key->tenant_id` live arm — DISABLE_TENANT_ID NEVER defined, the dead
+  :136-140 ifdef cited NEVER ported) ALL DEC-probed.
+- **VECTORS**: DEC 20L md5 0a6e17ca5532f68c59d1c4c5e174d3fd (the
+  operator== ladder + match_false + no-IP-pass + tenant legs) + FACE-A 7L md5
+  7b1974dcd85a5d3f1ce1f89ef8b093f8 (SetBits decimals + underlying u8 width +
+  the real pkthdr 56B / tenant_id@48 face); FIRST-RUN-SEED drift-refuse +
+  tamper-proven + O0==O2 BYTE-IDENT every build; the parity twin re-drives
+  the 20-L ladder BYTE-EQUAL + rebuilds the 7-L FACE-A in Rust.
+- **harness-name token law (measured, never lore)**: `pcgate` measured ZERO
+  pre-hit tools/tests/docs-wide (same for the pconstraint/pconstraints
+  candidates, and the bare `constraint` family is dirty — 33 hits; picked
+  AFTER measurement); the whole name NEVER typed where scans run — runtime
+  concat law; foreign `packet_constraint` face = EXACTLY-13 fc*/f*-era
+  build.sh fresh-cp header path lines (copy-path faces, NOT count arms),
+  pinned 13; the runner grep uses CONCAT-BUILT tokens (the tc :129 foreign
+  scan stays EXACTLY-0).
+- **docs token ledger at the flip**: `5 TEST(` EXACTLY-1 drift token UNTOUCHED;
+  `cc **133**` rides (presence); the carried 752 seed x3 + the new 763 seed x3
+  (over 84 result-lines, re-measured LIVE: 11 parity fns = the leanest ladder,
+  the 48-L vector family collapsed to 20 DEC + 7 FACE-A); tracer_harness EXACTLY-1
+  / tc_harness EXACTLY-2 NEXT faces NEVER disturbed; the sfmod bare-token state-
+  arms + the header harness-token census (pcgate/dirstor/sfmod/sfinst/daqio
+  once each, NEVER tracer/tc) all MEASURED post-bank.

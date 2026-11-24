@@ -13,7 +13,8 @@
 //! on this host (CppUTest host-BLOCKED: /usr/include/CppUTest ls-0, ldconfig
 //! grep-0; the 18j/18k/21a dialect precedent — honest ABSENCE cited here,
 //! NEVER faked, NEVER compiled; census-cited sfd PLAN §3). The gate census
-//! 25/9/17/1 stays UNDISTURBED (asserted below + harness EVERY build).
+//! 25/9/17/1 stayed UNDISTURBED until row 23e SANCTIONED-FLIPPED it forward to 27/9/19/1
+//! (the second real gate row; asserted at the walked face below + harness EVERY build).
 //!
 //! Ground truth #1: `tools/sfd_harness/vectors.txt` — the DEC face, 8 L md5
 //! 3c05632e88676ef9f40ee0a5d33fdf09 NEVER edited: the probe.cc T0-T7 ladder
@@ -533,7 +534,7 @@ fn sfd_ground_cite_drift_tripwires() {
             gates += 1;
         }
     }
-    assert_eq!(gates, 26, "gate census 26 = 25 + the row-22a sanctioned tc gate.txt (copy-local; tracked face 1)");
+    assert_eq!(gates, 27, "gate census 27 = 26 + the row-23e sanctioned pc-gate gate.txt (THE SECOND real gate row; copy-local untracked; tracked face stays 1) -- the SANCTIONED flip per the 62d6fac complete-flip law");
 }
 
 // ==========================================================================

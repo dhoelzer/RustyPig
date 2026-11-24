@@ -557,19 +557,26 @@ grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/g
 grep -q "4826fc2233044a2d5429413faf0ae1af" "$R"/tools/fmod_harness/build.sh
 
 # ---- TWO-LINEAGE gate census (MEASURED; THIS row ships ZERO gate faces --
-# the 25/9/17/1 face UNDISTURBED, the 27th straight zero-gate row): ----
+# the census FLIPPED FORWARD row 23e to the walked 27/9/19/1 (the 20a-era 25/17 face
+# was STALE/latent-red since 22a's tc gate landed un-re-run here) -- the 62d6fac law): ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 25
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 27   # SANCTIONED row-23e flip-forward: the 20a-era 25 face STALE (latent-red since 22a tc gate.txt un-re-run here) — walked 27, the 62d6fac complete-flip law
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H/gate_md5_lineages.txt"
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 17
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 19   # SANCTIONED row-23e flip-forward: stale 17 latent-red since 22a/23a-era lineage growth; 19 by walk
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1                       # honest tracked face: gre's ONLY
 # name-pin census (collision fires LOUDLY):
 test "$(ls -d "$R"/tools/reload_survivor*_harness "$R"/tools/survivor*_harness "$R"/tools/rss_harness 2>/dev/null | wc -l)" -eq 0
 test "$(find "$R"/tools -maxdepth 1 -iname '*rsubs*' | wc -l)" -eq 1          # THIS dir only
-# the ONE tolerated tools-wide rsubs mention OUTSIDE this dir (the misc9:42
-# dialect-census cite face, NEVER edited; count pinned EXACTLY-1):
-test "$(grep -rl 'rsubs' "$R"/tools/*/build.sh | grep -v "$H/build.sh" | wc -l)" -eq 1
+# the tolerated tools-wide rsubs mentions OUTSIDE this dir (SANCTIONED 1->5
+# fix-forward at row 23e: the legacy ONE (misc9 :42 dialect-census cite) plus
+# the 23a/23b/23c re-clone era mention arms in the four chain-harness
+# build.sh files (the same face the 23d-chain concat-built arm MEASURED-5
+# at 23d — this
+# own pin was the stale latent-red twin, never re-run since the 23a era;
+# corrected honestly per the 62d6fac law; NEVER edit those citations;
+# flip-forward only if ANOTHER re-clone lands):
+test "$(grep -rl 'rsubs' "$R"/tools/*/build.sh | grep -v "$H/build.sh" | wc -l)" -eq 5
 grep -q 'mp_data_bus/rsubs/thread/distill' "$M9/build.sh"
 test "$(grep -c 'rsubs' "$M9/build.sh")" -eq 1
 # NEXT.md cargo CITE faces ONLY (NEVER edit; the pinned x3 faces + presence):
@@ -628,5 +635,5 @@ echo "cp face: misc9 donor VERBATIM 124 + 3 EXACT cps = 127 mid-build asserted (
 echo "FACE-A: NOLOAD head (BUILDING_SO/snort_plugins grep-0 x2 x2 asserted) + rss_pegs 12+END census + PEGTYPE ordinals (SUM=1 NOW=2 END=0 counts.h walk) + SLOTMAP triple-coupling walk + DEDUP 3-arm + reset()-CARVE-OUT (active+registry_tracked SURVIVE); static_assert :340 ships as COMPILE-proof (the .o EXISTS); UNIT_TEST census EXACTLY cc4/impl1 (clock-seam arms, NOT gate material)"
 echo "E4 both ways: -I src ONLY rc1 framework/api_options.h CHAINED cc:24->impl.h:32->flow_data.h:30->base_api.h:32 (generated-header wall, donor shim 830633a1 load-bearing) / impl.h drop rc1 DIRECT / flow/flow_data.h drop rc1 CHAINED (decoy fails, mplS law) / cc drop = donor members SURVIVE rc0 (leaf face) / restored rc0 EVERY build"
 echo "O0==O2: DEC $(cmp -s "$H"/vectors_O0.txt "$H"/vectors_O2.txt && echo BYTE-IDENT), FACE-A $(cmp -s "$H"/vectors_faceA_O0.txt "$H"/vectors_faceA_O2.txt && echo BYTE-IDENT); DEC ladder BYTE-IDENT to the recon cross-donor pilot face 9e303761 (12-line T0-T9, cross-pass invariance receipt)"
-echo "frozen census: $frozen/25 holders of 4826fc22, $(cat "$H"/gate_md5_lineages.txt) distinct md5s (loop MEASURED; tracked gate.txt = 1); 27th-straight ZERO-gate face (the row RIDES TWO CppUTest SOURCES lists + rides a 2028-L 47-TEST( suite REAL material -- dialect-BLOCKED is the ONLY reason for zero-gate, RE-PLAN LOUDLY if CppUTest ever lands); BACKBONE STAYS 10; chain echoes misc9 e6328da1/dfe738fb + link4 c7f5808f/9fdfc50d + link6 e59f7a8a/d2fc5591 + erspan 7d7d3500/3ec325d7 + mpls tail b4b660e4/3066fc33 (MPLS_LINK_DONE 54/17) + ipheavy tail 857b5a10/63df50bc (IPHEAVY_DONE 121/44) BYTE-IDENT DIRECT; gre 6751d1a8 anchor live"
+echo "frozen census: $frozen/27 holders of 4826fc22, $(cat "$H"/gate_md5_lineages.txt) distinct md5s (loop MEASURED; tracked gate.txt = 1); 27th-straight ZERO-gate face (the row RIDES TWO CppUTest SOURCES lists + rides a 2028-L 47-TEST( suite REAL material -- dialect-BLOCKED is the ONLY reason for zero-gate, RE-PLAN LOUDLY if CppUTest ever lands); BACKBONE STAYS 10; chain echoes misc9 e6328da1/dfe738fb + link4 c7f5808f/9fdfc50d + link6 e59f7a8a/d2fc5591 + erspan 7d7d3500/3ec325d7 + mpls tail b4b660e4/3066fc33 (MPLS_LINK_DONE 54/17) + ipheavy tail 857b5a10/63df50bc (IPHEAVY_DONE 121/44) BYTE-IDENT DIRECT; gre 6751d1a8 anchor live"
 echo "R_SUBS_DONE vectors=$( [ -e "$H"/vectors.txt ] && wc -l < "$H"/vectors.txt || wc -l < "$H"/vectors_O0.txt) faceA=$( [ -e "$H"/vectors_faceA.txt ] && wc -l < "$H"/vectors_faceA.txt || wc -l < "$H"/vectors_faceA_O0.txt) gates=0"

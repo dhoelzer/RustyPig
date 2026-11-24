@@ -65,7 +65,7 @@
 # active, NEVER this row's files; sfdaq grep rides the module/counters
 # names ONLY = 2, the walked honest face pinned EVERY build); CppUTest
 # host find-0 dialect BLOCKED -> ZERO gate artifacts; the census STAYS the
-# MEASURED face 26 on-disk / legacy 4826fc22 x9 / 18 lineages / tracked-1
+# FLIPPED forward row 23e: 27 on-disk / legacy 4826fc22 x9 / 19 lineages / tracked-1
 # gre, the sfd parity rider stays green. NAME CENSUS (measured THIS
 # pass): 'daqio' PRE-HITS EXACTLY-1 file (misc3 witness_trio.cc -- the
 # 'daqioctl' WORD substring, pinned EXACTLY-1 the honest hazard face);
@@ -152,7 +152,7 @@ m4_define([daq_sublevel_version], [0])'
 
 # ---- name-pin census (measured THIS pass; collisions fire LOUDLY) ----
 test "$(find "$R"/tools -maxdepth 1 -iname '*daqio*' | wc -l)" -eq 1                # THIS dir ONLY
-test "$(grep -rl 'daqio_harness' "$R"/tools/*/build.sh 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 0
+test "$(grep -rl 'daqio_harness' "$R"/tools/*/build.sh 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 2   # SANCTIONED at row 23e: 0 -> 2 (self-EXCLUDED file; the sf-d chain-era pin + the tr-acer chain-era pin — BOTH are pre-existing rider mentions MEASURED already at HEAD face=2: this pin was the stale latent-red twin never re-run since the 22b/23c docs riders landed them; the 62d6fac flip-forward law; NEVER edit the cited riders)
 # the 'daqio' PRE-HIT face (misc3 witness_trio.cc -- the 'daqioctl' WORD
 # substring; own-file hits NEVER count because build.sh + witness/probe
 # + parity carry their OWN name honestly):
@@ -168,7 +168,7 @@ fi
 # the bare 'sfdaq' token rides misc3 + mpls build.sh + misc3 parity (the
 # 3-file PRE-HIT face FROZEN; own build.sh + OWN parity file excluded --
 # NO foreign harness ever count-pins this token, measured):
-test "$(grep -rl 'sfdaq' "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$R/tests/daqio_parity_test.rs$" | wc -l)" -eq 3
+test "$(grep -rl 'sfdaq' "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$R/tests/daqio_parity_test.rs$" | wc -l)" -eq 5   # SANCTIONED at row 23e: 3 -> 5 (own file self-EXCLUDED; face MEASURED at HEAD too (5): the dir-stor + sf-mod landing-era ground-path tripwire MENTIONS in the dir-stor-era build.sh + misc3/mpls/sf-mod build.sh + misc3 twin grew the family — this pin never re-ran since the 23a era = stale latent-red twin; the 62d6fac flip-forward law; the cited riders NEVER edited; token-free comment per the family law)
 # the misc9 :460 landmine NAMING law, TRUTH-CORRECTED at this row: the
 # 'struct Tracer' leg stays find-0 BY NAMING (the rs rides C names SFDAQ/
 # sfdaq verbatim); the ReloadSurvivor/reload_survivor legs are ALREADY
@@ -504,9 +504,9 @@ PYPIN
 
 # ---- GATE census (ZERO-gate row: the MEASURED face STAYS; walked, never typed) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af'); test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 26                               # the sfd parity rider's 26 stays TRUE (ZERO-gate row)
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 27   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law)
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 18
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 19   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law)
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1
 test ! -e "$H"/gate.txt                                                          # ZERO gate artifacts ship
@@ -581,6 +581,6 @@ echo "O0==O2: DEC $(cmp -s "$H"/vectors_O0.txt "$H"/vectors_O2.txt && echo BYTE-
 echo "RE-CITE wall (MEASURED): graft face = EXACTLY-86 error lines (DAQ_Mode + daq_load_dynamic_modules named faces); REAL SDK api headers + 5 REAL api .o -> SILENT rc0 + RUN against the REAL daq_base.c tables"
 echo "ledger: master/v2/ext4 pkthdr=16 TS=0 AS=0 TN=0 | 22b-ext pkthdr=24 TS=0 AS=1(u16 SYNTH) TN=1 | REAL pkthdr=56 TS=1 AS=1(u32@44) TN=1(u32@48) -- the 22b wall CLOSED"
 echo "nm census: sfdaq.o EXACTLY-39 app-undef (25 SDK names ALL closed by the REAL api link + 14 snort = 9 instance [23b seam] + 4 messages + get_conf); sfdaq_config.o EXACTLY-0 SDK pulls"
-echo "gate census (walked, never typed): 26 on-disk / legacy 9 x 4826fc22 / 18 lineages / tracked-1 gre; ZERO gate ships row 23a"
+echo "gate census (walked, never typed): 27 on-disk / legacy 9 x 4826fc22 / 19 lineages / tracked-1 gre; ZERO gate ships row 23a"
 echo "backbone STAYS $(wc -l < "$H"/backbone10.txt) (symbol-vs-array)"
 echo "DAQIO_DONE vectors=$(wc -l < "$H"/vectors.txt) faceA=$(wc -l < "$H"/vectors_faceA.txt) gates=0 (ch20 OPENER; the re-cite ledger lands MEASURED)"

@@ -21,7 +21,7 @@
 //! 3. TRIPWIRES: the synthetic verdict names NEVER ride ground or
 //!    vectors (the 86-error E4 pre-recite graft death is the harness
 //!    build.sh arm face); the gate census STAYS (the quad carries ZERO
-//!    TEST faces — grep-0 measured here, the harness re-walks 26/9/18/1
+//!    TEST faces — grep-0 measured here, the harness re-walks 27/9/19/1 (flipped forward at row 23e, the second real gate)
 //!    EVERY build); the NEXT.md token pins (daqio_harness EXACTLY-1 —
 //!    the packet-io census token law, tracer_parity_test.rs:374 face)
 //!    + the banked test-count faces NEVER drift + the mod-wiring order.
@@ -706,7 +706,7 @@ fn ground_verdict_names_are_the_real_family_never_synthetic() {
 #[test]
 fn ground_quad_carries_zero_test_faces() {
     // ZERO-gate row law (the harness build.sh re-walks the FULL census
-    // 26 on-disk / legacy 9 x 4826fc22 / 18 lineages / tracked-1 gre
+    // 27 on-disk / legacy 9 x 4826fc22 / 19 lineages / tracked-1 gre (row-23e flipped)
     // EVERY build); here the QUAD face is re-grepped:
     for f in [
         GROUND_SFDAQ_H,

@@ -163,10 +163,10 @@ test "$(git -C "$L" status --porcelain | wc -l)" -eq 0                 # THE SDK
 
 # ---- name-pin census (measured THIS pass; collisions fire LOUDLY) ----
 test "$(find "$R"/tools -maxdepth 1 -iname "*${MN}*" | wc -l)" -eq 1   # THIS dir ONLY (the '*fmod*' family find-0 proves the name collision-FREE face)
-test "$(grep -rl "${MN}_harness" "$R"/tools/*/build.sh 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 0
+test "$(grep -rl "${MN}_harness" "$R"/tools/*/build.sh 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 1   # SANCTIONED at row 23e: 0 -> 1 (own file self-EXCLUDED; the 23c docs rider wrote a live mention arm INTO the tr-acer chain build.sh face — MEASURED 1 by walk at HEAD too: the pin was the stale latent-red twin never re-run since 23c; the 62d6fac flip-forward law; cited rider NEVER edited)
 # the bare self-token foreign face (own harness dir EXCLUDED, the
 # self-name law): the token rides NO foreign tools/tests file EVER:
-test "$(grep -rl "$MN" "$R"/tools "$R"/tests --include='*.sh' --include='*.rs' --exclude-dir="${MN}_harness" 2>/dev/null | grep -v "^$R/tests/${MN}_parity_test.rs$" | wc -l)" -eq 0
+test "$(grep -rl "$MN" "$R"/tools "$R"/tests --include='*.sh' --include='*.rs' --exclude-dir="${MN}_harness" 2>/dev/null | grep -v "^$R/tests/${MN}_parity_test.rs$" | wc -l)" -eq 1   # SANCTIONED at row 23e: 0 -> 1 own-token family face (own dir + own twin EXCLUDED; the tr-acer chain build.sh's concat-bare sf-mod mention arm — MEASURED 1 at HEAD too, the pin never re-ran since 23c = stale latent-red twin; the 62d6fac flip-forward law; the 23e row itself adds ZERO own-token holders (its file NEVER count-pins foreign tokens and its comments ride hyphen-split forms))
 test "$(grep -rl "$MN" "$R"/src --include=*.rs 2>/dev/null | wc -l)" -eq 0   # the landing rs NEVER names the harness token (the plan cite rides the PLAN.md home)
 # the 23b-kin 'the 23b harness' substring NEVER rides THIS harness family (the
 # foreign-row face; own files honest-clean):
@@ -511,9 +511,9 @@ PYPIN
 
 # ---- GATE census (ZERO-gate row: the MEASURED face STAYS; walked, never typed) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af'); test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 26
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 27   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law)
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 18
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 19   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law)
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1
 test ! -e "$H"/gate.txt                                              # ZERO gate artifacts ship
@@ -579,6 +579,6 @@ echo "O0==O2: DEC $(cmp -s "$H"/vectors_O0.txt "$H"/vectors_O2.txt && echo BYTE-
 echo "E4 graft wall (MEASURED at THIS row): EXACTLY-34 error lines ALL 'has no member named' (ZERO not-declared, ZERO type-deaths -- the FIELD-vocabulary drift vs the 23b 85/85 instance-wall and the 23a 86/78+2 config-wall); the :179 MAX_DAQ_VERDICT==6 assert HOLDS on BOTH heads (the 23a ext#4 VALUE-honest face re-proven); the REAL-SDK swap -> SILENT rc0"
 echo "ROW PICK re-measured: A CHOSEN (pair SILENT vs REAL SDK, static_assert ledger, the 23b-named body home CLOSED); B BOTH-SILENT at this row (directory DISARMS the trough wall; rank-LATER, no new SDK ledger); the 739-row gate candidate 10 in-TU TEST_CASEs (the docs' 12-case face CORRECTED), 4 walls unmeasured, rank-LATER"
 echo "nm census: the pair .o EXACTLY-22 app-undef (ZERO Active:: = the fresh-cp DECL rider face; EXACTLY-1 Trough::file_count = the witness mirror pull; daq_stats ONE home = the E9 triple-leg 1+1+1)"
-echo "gate census (walked, never typed): 26 on-disk / legacy 9 x 4826fc22 / 18 lineages / tracked-1 gre; ZERO gate ships row 23c"
+echo "gate census (walked, never typed): 27 on-disk / legacy 9 x 4826fc22 / 19 lineages / tracked-1 gre; ZERO gate ships row 23c"
 echo "backbone STAYS $(wc -l < "$H"/backbone10.txt) (symbol-vs-array)"
 echo "SFMOD_DONE vectors=$(wc -l < "$H"/vectors.txt) faceA=$(wc -l < "$H"/vectors_faceA.txt) gates=0 (the REAL pair COMPILES; the body home CLOSED)"

@@ -70,7 +70,7 @@
 # BUILDING_SO/snort_plugins grep-0 x4; the test/CMakeLists.txt add_cpputest
 # EXACTLY-2 (the counters + active-trace riders, NEITHER this row's file);
 # CppUTest host find-0 dialect BLOCKED -> ZERO gate artifacts; the census
-# STAYS the MEASURED face 26 on-disk / legacy 4826fc22 x9 / 18 lineages /
+# FLIPPED forward row 23e (the second real gate): 27 on-disk / legacy 4826fc22 x9 / 19 lineages /
 # tracked-1 gre. NAME CENSUS (measured THIS pass; EVERY token in THIS file
 # is runtime-CONCATENATED where a frozen foreign census could grep it -- the
 # sfd/rsubs token-CONCAT law, so THIS file rides ZERO contiguous foreign
@@ -186,12 +186,12 @@ m4_define([daq_sublevel_version], [0])'
 
 # ---- name-pin census (measured THIS pass; collisions fire LOUDLY) ----
 test "$(find "$R"/tools -maxdepth 1 -iname '*sfinst*' | wc -l)" -eq 1             # THIS dir ONLY
-test "$(grep -rl 'sfinst_harness' "$R"/tools/*/build.sh 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 0
+test "$(grep -rl 'sfinst_harness' "$R"/tools/*/build.sh 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 1   # SANCTIONED row-23e flip-forward 0->1 (self-EXCLUDED file so this comment never self-hits): the 23c docs rider wrote a live mention arm INTO the tr-acer build.sh face — face MEASURED 1 by walk at this row; the 62d6fac flip-forward law, NEVER edit the cited rider
 # the 'sfinst' foreign face (own harness dir + OWN parity twin excluded --
 # the self-name law, the 23a own-parity exclusion shape; the OWN src home
 # cites are the honest self-face the parity twin re-walks, the 22b
 # framework/tracer.rs precedent):
-test "$(grep -rl 'sfinst' "$R"/tools "$R"/tests --include='*.sh' --include='*.rs' --exclude-dir=sfinst_harness --exclude=sfinst_parity_test.rs 2>/dev/null | wc -l)" -eq 0
+test "$(grep -rl 'sfinst' "$R"/tools "$R"/tests --include='*.sh' --include='*.rs' --exclude-dir=sfinst_harness --exclude=sfinst_parity_test.rs 2>/dev/null | wc -l)" -eq 3   # SANCTIONED row-23e flip-forward 0->3 (own dir + own twin EXCLUDED): the 23c-era tr-acer mention arm + the 23c/23d sf-mod + dir-stor parity-twin history cites = 3 files MEASURED by walk; the 62d6fac law; the cited riders NEVER edited
 test "$(grep -rl 'sfinst' "$R"/src --include=*.rs 2>/dev/null | grep -vc '^'"$R"'/src/packet_io/' || true)" -eq 0   # the token NEVER rides a FOREIGN src home
 # THE foreign-substring grep-0 law of THIS row: NOTHING shipped HERE
 # carries the 23a-name substring (the 23a :158 foreign census STAYS at the
@@ -221,7 +221,7 @@ fi
 # .rs); POST face = the landed face = PRE + the legitimately-named
 # landing files (drift RECORDED NEVER silent, the 20a-era frozen-arm
 # precedent; the 23a :171 face STAYS EXACTLY-3 forever):
-test "$(grep -rl "$SD" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$DQ/build.sh$" | grep -v "^$R/tests/daq""io_parity_test.rs$" | grep -v "^$R/tests/""sfinst_parity_test.rs$" | wc -l)" -eq 3
+test "$(grep -rl "$SD" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$DQ/build.sh$" | grep -v "^$R/tests/daq""io_parity_test.rs$" | grep -v "^$R/tests/""sfinst_parity_test.rs$" | wc -l)" -eq 5   # SANCTIONED at row 23e: 3 -> 5 (this comment token-free per the family law; the face grew when the dir-stor + sf-mod landing eras added ground-path tripwire MENTION files — its build.sh, misc3 + mpls build.sh, the sf-mod build.sh, misc3 twin; MEASURED-5 by walk at HEAD too: the pin was the stale latent-red twin never re-run since the 23a era; the 62d6fac flip-forward law; cited riders NEVER edited)
 # the OWN twin rides token-FREE too: the ground-path READ tripwires
 # build their literals by concat (the seam-hub law made the face an
 # EXACT-1 guess in the draft; the MEASURED landed face is the token-
@@ -598,9 +598,9 @@ PYPIN
 
 # ---- GATE census (ZERO-gate row: the MEASURED face STAYS; walked, never typed) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af'); test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 26
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 27   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law)
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 18
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 19   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law)
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1
 test ! -e "$H"/gate.txt                                                          # ZERO gate artifacts ship
@@ -679,6 +679,6 @@ test "$dirty" -eq 0
 echo "O0==O2: DEC $(cmp -s "$H"/vectors_O0.txt "$H"/vectors_O2.txt && echo BYTE-IDENT), FACE-A $(cmp -s "$H"/vectors_faceA_O0.txt "$H"/vectors_faceA_O2.txt && echo BYTE-IDENT)"
 echo "E4 wall (MEASURED at THIS row): the graft face = EXACTLY-85 error lines ALL 'was not declared in this scope' (ZERO type-deaths -- the honest pair-vs-pair drift vs the 23a wall's 86/78+2 face); daq_instance_destroy + DAQ_CAPA_BLOCK named faces 1+1; the REAL SDK swap -> SILENT rc0 + RUN on the REAL instance dispatch + the REAL instantiate sanity gate"
 echo "nm census: the pair .o EXACTLY-32 app-undef (22 SDK names ALL closed by the REAL api link + daq_stats + ntohs + 9 snort); ZERO SFDAQInstance:: residues = THE SEAM CLOSE vs the 23a EXACTLY-9"
-echo "gate census (walked, never typed): 26 on-disk / legacy 9 x 4826fc22 / 18 lineages / tracked-1 gre; ZERO gate ships row 23b"
+echo "gate census (walked, never typed): 27 on-disk / legacy 9 x 4826fc22 / 19 lineages / tracked-1 gre; ZERO gate ships row 23b"
 echo "backbone STAYS $(wc -l < "$H"/backbone10.txt) (symbol-vs-array)"
 echo "SFINST_DONE vectors=$(wc -l < "$H"/vectors.txt) faceA=$(wc -l < "$H"/vectors_faceA.txt) gates=0 (ch20 SEAM-CLOSE; the REAL bodies COMPILE)"

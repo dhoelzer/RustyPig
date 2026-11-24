@@ -1,0 +1,7 @@
+SETBITS proto=1 sip=2 dip=4 sport=8 dport=16 ten=32
+UNDER width=1 signed=0
+OPS notdst=251 allset=255 notten=223
+SIZES pc=72 sip=18 tenants_off_ge=1
+PKTH sz=56 tn_off=48
+SIPCOLD fam=0 isset=0
+PROTO tcp=6 udp=17 icmp=1 notset=255

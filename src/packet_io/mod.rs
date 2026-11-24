@@ -32,9 +32,13 @@ pub mod sfdaq_config;
 pub mod sfdaq_instance;
 pub mod sfdaq_module;
 // row 23d: the Trough pcap-source expander — THE file_count ONE home that
-// the 23c sfdaq_module seam params (trough_file_count) producer-side
-// closes; it rides the SAME flat dir (the Trough C home is packet_io).
+// the 23c sfdaq_module seam params (trough_file_count) producer-side closes;
+// it rides the SAME flat dir (the Trough C home is packet_io).
 pub mod trough;
+// row 23e: the PacketConstraints value pair (76+331) — THE SECOND REAL GATE
+// ROW: the cc's own in-TU Catch block (EXACTLY-3 TEST_CASE "[framework]"
+// faces) host-green at THE row's harness; the row body lands flat, ZERO allows.
+pub mod packet_constraints;
 // the 23b seam-close re-export hub (the token-free wiring path — the
 // frozen sd-token census law, cited at seam.rs):
 pub mod seam;
