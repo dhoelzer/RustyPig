@@ -909,7 +909,7 @@ fn run_bash_usize(pat: &str) -> usize {
 
 #[test]
 fn foreign_faces_landmines_and_token_hygiene() {
-    // the family scans RE-MIRROR the dirstor :127-:129 arms (the double-
+    // the family scans RE-MIRROR the [d]irstor :127-:129 arms (the double-
     // quote concat grep tokens); the self-exclusions ride the [x] bracket
     // law so THIS twin's text NEVER carries a joined family token:
     let q = "\"";

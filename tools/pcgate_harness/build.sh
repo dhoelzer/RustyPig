@@ -160,7 +160,7 @@ _pc=$(printf '%s%s' "pa" "cket_constraint")
 # BYTE-EXACT 447e814a since the 17-era). The face STAYS 13 (the 23-era
 # pre-hits re-read LIVE; the parity twin re-derives the SAME 13 face +
 # the byte-EXACT h pins); flip-forward LOUDLY only if another re-clone lands:
-test "$(grep -rl "$_pc" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$R/tests/${MN}_parity_test.rs$" | wc -l)" -eq 13
+test "$(grep -rl "$_pc" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$R/tests/${MN}_parity_test.rs$" | wc -l)" -eq 14   # SANCTIONED at the row-23f docs rider: 13 -> 14 — the pt-racer row-23f parity twin legitimately Reuses the 23e landing home in its Rust use-path (the one-home law MAKES the cite unavoidable; build.sh-ONLY face STAYS 13 — the twin + build.sh faces split, the twin arm NEVER moved); the 62d6fac flip-forward law; the pt landing NEVER edited; token-split in comments per the family law
 test "$(grep -rc "$_pc" "$R"/tools/filib_harness/build.sh | cut -d: -f2)" -eq 2   # the ONE 2-line face (the filament pair); the rest EXACTLY-1
 test "$(md5sum "$R"/tools/fcapi_harness/copy/packet_io/packet_constraints.h | awk '{print $1}')" = "447e814a551709a99ffa165e60bb7a41"   # the BYTE-EXACT donor ride (the h NEVER drifted since the 17-era)
 # the misc-9 landmine NAMING law (the 23c/23d shape re-cloned; the pair
