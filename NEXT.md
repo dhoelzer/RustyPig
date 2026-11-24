@@ -139,10 +139,10 @@ banked since 19a fully LANDED; the ONLY unfinished plan rows are
 OPTION subset (its OWN line: 'chapter-19 track opened at 19a' — the
 option campaign re-enters per the PLAN line, banked rank-last), row 20
 packet_io/DAQ, row 21 main CLI — NEVER invent a row.
-**139 commits at HEAD f72cf56** (`git rev-list --count` HEAD == origin
-== **139** re-run at THIS docs pass; f72cf56 = the post-23b docs pass;
-THE ROW-23c LANDING lands as the **140th**, SIXTEENTH straight
-one-commit/one-push row landing).
+**140 commits at HEAD 6c7601c** (`git rev-list --count` HEAD == origin
+== 140 re-run at THIS docs pass; 6c7601c = the row-23c landing, the
+**140th**, SIXTEENTH straight one-commit/one-push row landing; THIS
+docs+rider sync rides as the **141st**).
 **724 tests green / 0 FAILED** — THE LANDED face at the 23c row pass,
 RE-MEASURED LIVE: 724 passed / 0 failed over **82** `test result` lines
 (702 at 23b + **22** new pair-replay fns). clippy --all-targets 0
@@ -224,9 +224,9 @@ the row).
   row 22b** (22a at 1bae8fc, 22b at a82e11f, dev_block_22b.txt md5
   triple `3c8fad18…` byte-exact, provenance x12), wiki stats face 547
   files / 64,583 lines / 135 commits / 659 tests over 79 result-lines =
-  wiki-side HISTORY at WIKI-23a (7fd1ee0): 560 / 65,470 / 137 / 684 —
-  re-measure LIVE at the wiki-23b phase, NEVER re-type). ZERO debt thru
-  23a; **23b is OWED at the wiki phase**. This docs pass
+  wiki-side HISTORY at WIKI-23b (9893090): 571 / 66,892 / 139 / 702 —
+  re-measure LIVE at the wiki-23c phase, NEVER re-type). ZERO debt thru
+  23b; **23c is OWED at the wiki phase**. This docs pass
   touched the wiki ZERO times — NEVER edit `/tmp/RustyPig.wiki`
   outside the WIKI phase.
 - **Fresh-build set MOVED at 23c (by-DESIGN drift)**: the FRESH lineage

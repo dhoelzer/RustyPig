@@ -57,7 +57,9 @@
 # the api slots, NEVER called) + the NO-statics per-object ISOLATE law.
 # NAME CENSUS (measured at the row): `tracer_harness` = 0 hits in EVERY other
 # tools/*/build.sh; NEXT.md rides the token EXACTLY-1 (the name-PIN law line
-# ONLY); the bare `tracer` pre-hit = EXACTLY-13 f*-family build.sh FILES (the
+# ONLY); the bare `tracer` pre-hit = f*-family build.sh FILES (the 13 at the
+# 22b landing; SANCTIONED 13->16 now — the daqio/sfinst/sfmod re-clones ride
+# the template cite honestly; see the :115 flip-forward comment below): (the
 # packet tracer (packet-underscore tracer) donor cargo, pinned EXACTLY-13 as the honest census hazard
 # face, NEVER edited); the packet-underscore-tracer token NEVER rides THIS file (grep-0
 # arm); the misc9 :461 landmine (ReloadSurvivor|reload_survivor|struct
@@ -110,9 +112,9 @@ test "$( (echo PT_CODEC; echo PT_INSPECTOR; echo PT_IPS_ACTION; echo PT_IPS_OPTI
 
 # ---- name-pin census (measured THIS pass; collision fires LOUDLY) ----
 test "$(find "$R"/tools -maxdepth 1 -iname '*tracer*' | wc -l)" -eq 1          # THIS dir ONLY
-test "$(grep -rl 'tracer_harness' "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 0   # token rides NO other build.sh EVER
+test "$(grep -rl 'tracer_harness' "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 2   # SANCTIONED 0->2 at the 23c docs rider (the 62d6fac flip-forward law): the face = ONLY the two legitimate template re-clone TR= cite lines (daqio_harness :94 + sfinst_harness :117 'TR=$R/tools/tracer_harness the 22b pkth-EXT face cite'); NEVER edit those cites; flip-forward only if ANOTHER re-clone rides
 test "$(grep -c 'tracer_harness' "$R/NEXT.md")" -eq 1                         # the ONE tolerated law-cite line (:789)
-test "$(grep -rl 'tracer' "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 13          # the 13 f*-family cargo FILES (hazard face, FROZEN)
+test "$(grep -rl 'tracer' "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 16          # SANCTIONED 13->16 at the 23c docs rider (the 62d6fac flip-forward law): the 23a/23b/23c harness build.sh files (daqio + sfinst + sfmod) legitimately RE-CLONE this template shape and cite the tracer arms — the 3 new members are daqio_harness :73/:94/:201, sfinst_harness :53/:117, sfmod_harness comment faces; NEVER edit those citations; flip-forward only if ANOTHER template re-clone lands (hazard face, FROZEN)
 # the packet-underscore-tracer token NEVER rides this file (self-match-safe arm:
 # the ERE splits the token so THIS line is never a hit -- the sfd [ ]-split twin):
 test "$(grep -cE 'packet_(tr)acer' "$H/build.sh" || true)" -eq 0

@@ -115,7 +115,7 @@ test "$(find "$SRC/src/framework" -iname '*survivor*' | wc -l)" -eq 4   # the de
 test ! -e "$SRC/src/framework/survivor_flow_data.h"             # NO sibling header EVER (21a decl seam provider)
 # name-pin census: sfd PRE-HIT-0 OUTSIDE this dir (NEXT.md's queue line rides
 # its own EXACTLY-1 tolerated cite face below); flowdata_harness find-0 EVER.
-test "$(grep -rl 'sfd_harness\|flowdata_harness' "$R"/tools/*/build.sh "$R"/NEXT.md 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 1   # THE ONE tolerated mention = NEXT.md's queue line
+test "$(grep -rl 'sfd_harness\|flowdata_harness' "$R"/tools/*/build.sh "$R"/NEXT.md 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 3   # SANCTIONED 1->3 at the 23c docs rider (the 62d6fac flip-forward law): tolerated mention-face = NEXT.md's queue line + daqio_harness build.sh :630-:632 md5-pins of THIS dir's vectors (the 23a era re-clone carry, latent-red since 23a) + tc_harness build.sh template-shape cite; NEVER edit those citations; flip-forward only if another rides
 test "$(grep -c 'tools/sfd_harness' "$R/NEXT.md")" -eq 1                    # the 'is clear' cite face ONLY
 test "$(find "$R"/tools -maxdepth 1 -iname '*sfd*' | wc -l)" -eq 1          # THIS dir ONLY
 test "$(find "$R"/tools -maxdepth 1 \( -iname '*survivor*harness*' -o -name 'flowdata_harness' \) | wc -l)" -eq 0   # name-collision find-0
