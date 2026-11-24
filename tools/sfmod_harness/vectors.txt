@@ -1,0 +1,19 @@
+T0 usage=0 needprep=1 pegs=27 tsum=32
+T1 names=pcaps,received,analyzed,dropped,filtered,outstanding,outstanding_max,injected,allow,block,replace,whitelist,blacklist,ignore,internal_blacklist,internal_whitelist,skipped,idle,rx_bytes,expected_flows,retries_queued,retries_dropped,retries_processed,retries_discarded,sof_messages,eof_messages,other_messages, sparam-types=1,1,4,4,1,
+T2 path,path/8/-;rows=1;sent=21 input,input/8/-;rows=1;sent=21
+T3 dqmod,name/8/-,mode/11/passive,variables/1/-;rows=3;sent=21
+T4 dqvar,variable/8/-;rows=1;sent=21
+T5 peg-types=3,1,1,1,1,2,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+T6 b=1,1,1 mode=1 e=1,1,1 dirs0=/d1 dirs1=/d2 in0=eth0 bs=32 mru=1500 tmo=1000 mods=1 nm0=alpha md0=2
+T7 vars=foo=bar;
+T8 bad=0 ok=1 wpe_calls=1 msg=[daq.modules - No module name specified!]
+T9 bs=5 mru=2000 tmo=777 mods=0 dirs=0
+S0 gated=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+S1 dump=0,8,10,1,2,4,4,3,5,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+S2 never-carry=0,20,50,9,12,6,6,30,5,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+S3 zero-delta=0,20,50,9,12,6,6,30,5,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+S4 reset=0,7,0,3,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+S5 delta=0,4,18446744073709551581,3,18446744073709551604,2,6,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+S6 o=100 omax=100
+S7 rows=27 post=0,0,0,0,0,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+S8 ident=1 fc=0 pcaps=0

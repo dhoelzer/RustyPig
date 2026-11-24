@@ -17,3 +17,4 @@
 pub use super::sfdaq::*;
 pub use super::sfdaq_config::*;
 pub use super::sfdaq_instance::*;
+pub use super::sfdaq_module::*;   // the 23c row surface (the 23b hub law)

@@ -30,6 +30,7 @@
 pub mod sfdaq;
 pub mod sfdaq_config;
 pub mod sfdaq_instance;
+pub mod sfdaq_module;
 // the 23b seam-close re-export hub (the token-free wiring path — the
 // frozen sd-token census law, cited at seam.rs):
 pub mod seam;

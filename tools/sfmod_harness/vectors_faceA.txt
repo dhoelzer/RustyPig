@@ -1,0 +1,7 @@
+SIZES stats=96 pktmod=64 var=64 msg=112 modapi=216 key=56
+OFFS stats hw_rx=0 hw_drop=8 rx=16 filt=24 inj=32 out=40 verd=48 verd_stride=8
+ENUMS max_verdict=6 vpass=0 vblock=1 vreplace=2 vwhitelist=3 vblacklist=4 vignore=5
+PEGSTATS n=27 now_idx=5 max_idx=0,6 sum_rest=24 ct_end=0 ct_sum=1 ct_now=2 ct_max=3
+CFGFACES bs_unset=0 mru_unset=-1 bs_def=64 mru_def=1518 tmo_def=1000 name_off=0 mode_off=32 var_off=40
+STATSELF n=27 zero=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+THEHOME rowbody=1 mirrors=0
