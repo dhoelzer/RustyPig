@@ -4674,3 +4674,106 @@ Structural deviations (behavior preserved):
   'daq\.h$'` == 0, re-asserted by the daqio build.sh). The daqio copy/
   tree is COPY-LOCAL nested-gitignored (the NESTED-INSTRUMENT law; the
   root .gitignore NEVER touched).
+
+## packet_io sfdaq_instance pair (row 23b — packet_io/sfdaq_instance.cc 436 0b2a92f5 + sfdaq_instance.h 105 9497f394 @ fe29cbe, THE chapter-20 SEAM-CLOSE row — the 23a DaqInstanceSeam LEFT-OPEN face CLOSED by the REAL provider pair)
+
+- **THE provider seam replaces C dispatch**: the ground pair calls the
+  REAL libdaq `daq_instance_*`/`daq_config_*` C API; the Rust port
+  dispatches through the `DaqCfgProvider`/`DaqInstanceProvider` trait
+  pair (the cd_user.rs provider law). The SDK-INTERNAL faces (the
+  instantiate instance-ID sanity gate daq_mod_ops.c :181-:188, the
+  state machine, the resolve_instance_api default table) ride
+  provider-side in the twins — the port NEVER re-implements SDK
+  internals; it OBSERVES their measured faces through the legs. The
+  harness proves the C side real (the pair .cc COMPILES + RUNS against
+  the REAL api headers + 5 REAL api .o, the REAL config body riding the
+  link; the vectors pin the gate speech `Can't instantiate with an
+  invalid instance ID!` live).
+- **THE NEVER-returns law at BOTH levels**: ground messages.h :105
+  declares FatalError [[noreturn]]. The C harness rides that contract
+  honestly via the md5-pinned carried witness (4dd91018, NEVER edited)
+  + a cited build.sh rider swapping ONLY the FatalError body to a
+  jump-site/abort contract — a plain returning witness was CRASH-PROVED
+  UB at -O2 (5/5 rc139 SIGSEGV, witness-family isolated, bisect ledger
+  in tools/sfinst_harness/PLAN.md). The Rust port surfaces the landed
+  Fatal face (log fatal_error -> the Fatal face) and init CONTINUES to
+  the cc :100 true face (driver-owned exit; the FATALLEG `jumped=1
+  was=0` face + the test's continue-shape replay cite the honest
+  control-shape difference; the C longjmp SKIPS the dtor, the Rust
+  leg RUNS it — recorded at the leg).
+- **daq_stats global -> thread_local holder**: the ground global
+  `daq_stats` (sfdaq_module.h declares DAQStats + extern THREAD_LOCAL
+  OUTSIDE namespace snort — the bare `_daq_stats` symbol the .cc :433
+  read needs, NOT a namespace-mangled one; the harness witness rides
+  the SAME global scope) lands as `thread_local! DAQ_STATS:
+  DAQStatsHolder` + `Cell` (NO unsafe/static mut/allow). The
+  expected-flows bump ORDER law (the :433 bump BEFORE the :435 ioctl)
+  is pinned by the ef=1-before-cmd=1 vectors face + the bump-order
+  test. A fresh thread = the fresh-process face (the C processes ride
+  fresh globals per run).
+- **THE NATIVE-WORD s_addr law (the twin CAUGHT a real port bug)**:
+  the C `key->sa.src_ip4.s_addr = cliIP->get_ip4_value()` stores the
+  LE host-face word into the union head — what the union bytes + the
+  probe's ntohl/%s legs READ are the NET-order octets ([0a010203]).
+  The first Rust version used to_be_bytes (flipped = WRONG, ip4=
+  302010a); the parity twin vs the REAL probe face caught it at the
+  row. The landed sfip ip32_raw LE law + get_ip4_value ride UNCHANGED
+  (the 22b home NEVER moved).
+- **NULL-face collapses = the MEASURED SDK guard values**: the ground
+  pair NEVER null-checks `instance` at :213/:291/:266-legs (the raw
+  SDK guard mints the face); the Rust Option collapses return the
+  MEASURED guard values (DAQ_ERROR_NOCTX -6 for the deref-collapse
+  legs; the harness NULLFACE row fin=-6 inj=-6 intr=-6 pins them —
+  NEVER the NOTSUP guess). The raw check_status(nullptr)=UNKNOWN(4)
+  leg is SDK-internal (cited NEVER pair-observed; the pair face
+  already FALSEs on check_status != STARTED before any dispatch).
+- **seam-shortfall riders on the FROZEN 23a trait (NEVER re-shaped)**:
+  the trait signature stays 23a-frozen (init(cfg, bpf) etc.); the impl
+  for SFDAQInstance rides pair-local faces for the seams the trait
+  lacks — adaptor_inline_mode FALSE (the harness TRUE face rides the
+  PAIR-level explicit arg, vectors-pin-only-there), the pair's OWN
+  1-based instance_id (no thread seam leg), a per-call throwaway
+  LogEngine (the C++ rides C file-global log homes; the seam legs
+  NEVER pin log lines through local_instance — the 23a scripted twin
+  faces STAY), get_stats() = the snapshot tuple (the &-face NEVER
+  dispatches the provider leg here — cited), inject() = the
+  next_message() walk leg (the trait drops the DAQT msg arg per the
+  23a cite). The 23a parity twin moved its seam stand-ins NEVER (the
+  SAME-COMMIT rider proof = the frozen 9-leg trait census test).
+- **add_expected 8-arg signature -> DaqExpectedFlowRequest**: the C
+  signature (ctrlPkt, cliIP, cliPort, srvIP, srvPort, protocol,
+  timeout_ms, flags) + the TWO Packet legs the body READS (:372
+  daq_msg + :394/:406 proto_bits) pack into the request struct (the
+  RawData daq_msg-drop law); layer::get_vlan_layer(ct)->vid()
+  (:407, NOT-landed protocols/layer home) rides the pre-read
+  `vlan_vid` slot; the commented FIXIT-L OTHER-tunnel block + the
+  commented DC-legacy FLOAT/ALLOW_MULTIPLE arms ride ABSENT-landed
+  (cite-never-land tripwired both ways: the ground contains them, the
+  port NEVER contains the assignment leg).
+- **the reload single-free leg**: the C reload frees old-on-swap-OK /
+  new-on-swap-FAIL (:112/:114); the trait keeps ONE config_free leg
+  (the harness T9 face f=1 per path pins the observable; which config
+  pointer is freed = the SDK-internal allocation ledger, NOT a pair-
+  observable — cited deviation).
+- **the token-census drift, RECORDED not silent**: the draft arm
+  guessed the own parity twin would be an EXACT-1 sd-token carrier;
+  the MEASURED landed face = the token-FREE twin (the ground-path READ
+  tripwires build their literals by concat + the seam-hub import law)
+  — the own-twin arm rewrote -eq 1 -> -eq 0 in the same commit; the
+  FROZEN 23a bare-sd face STAYS EXACTLY-3; the foreign 23a-name
+  substring face STAYS 1 (misc3 witness daqioctl WORD ONLY).
+- **E4 graft drift vs the 23a wall, honest**: this row's graft face =
+  EXACTLY-85 'was not declared' error lines (ZERO type-deaths;
+  daq_instance_destroy + DAQ_CAPA_BLOCK named) vs the 23a sfdaq-pair
+  wall's banked 86 — pair-vs-pair ground drift, disk wins, cite-only.
+  The row's pre-recite flipped-assert leg rode the DEEPER receipt:
+  the pre-recite synthetic-graft compile was measured by the carry
+  child as UNFINISHED (the empty E4_inst_pre scratch honestly marks
+  it) — the row ships the BOTH-ways wall ladder that DID measure (the
+  graft-fail face + the REAL-SDK silent swap + the trough-sibling
+  helpers/directory wall re-proving the row pick); the E4_inst_pre
+  gap is recorded here NEVER papered.
+- **the daqio vectors face `as=44` re-rides through Rust OFFS cite
+  ONLY**: the Rust mirrors NEVER assert size_of as ABI truth (the
+  NEVER-size_of-as-the-pin law); the probe MEASURED the layout
+  (key=56 as=44), the Rust mirror struct CITES the offsets.

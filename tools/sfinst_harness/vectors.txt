@@ -1,0 +1,17 @@
+T0 reg=2
+T0b spec=[ethA] bs=64 avail=0 base=-1 ci=0 cir=0 cr=0 cu=0 cd=0 cw=0 errnull=1
+T1 init=1 input=[ethA] iid=2 fc=1 filt=[bpf-in] err=[] was=0
+T2 started=1 was=1 avail=8 bs=64 base=228 ci=1 cir=1 cr=1 cu=1 cd=1 cw=1
+T2b tb gtp=1 teredo=1 v6in4=1 v4in6=1 v4in4=1 v6in6=1 gre=1 mpls=1 vxlan=1 geneve=1 zero=0
+T4 rstat=0 m0=1 m1=1 m2=0 avail=6 recv_calls=1
+T5 fnul=-7 fok=0 avail=7 fin_calls=1 verdict=1
+T6 injnull=-7 inj=0 calls=1 rev=-1 len=3
+T7 sfo=0 val=beef spvr=0 reason=3 sptd=0 tlen=5 nulls=-7-7-7 lastcmd=6 ioctls=3
+T8 ae=0 ctrl=1 src_af=2 ip4=a010203 [0a010203] sp=111 dst_af=10 dp=222 proto=6 tun=1 vlan=ffa cnots=1 flags=6 tmo=5000 ef=1 cmd=11 cmsg=1
+T8b ae=0 src_af=10 dst_af=2 dst_ip4=c0000209 [c0000209] dstip6first4=20010db8 tun=2 vlan=ffff flags=8 proto=17 ef=2
+T9 reload l=2 s=1 f=1 first3=3
+T10 stats hw=7 rx=1 vblk=9 zero=0
+T1b init=0 werr=[Couldn't construct a DAQ instance (ethX): Can't instantiate with an invalid instance ID! (-7)] errnull=1 ctx_same=1
+T3b init=1 wpw=[inline mode configured but DAQ can't block packets.] wpw_calls=1 started=0
+T11 init=1 start=0 was=0 stop=1 ci=0 cw=0 base=-1 tb=0 intr=0 stats_ptr=1 statelog=[Couldn't query DAQ instance (ethS) stats:  (-4)] start_err=[] cfgl=0,0,0
+T12 destroy_inst=2 destroy_stub=1 filterA=1 pw_calls=1 err_calls=2 log_calls=1

@@ -1,0 +1,9 @@
+SIZES key=56 cef=88 sfo=16 spvr=16 sptd=24 pool=16 stats=96 msg=112 modapi=216 instapi=288
+OFFS key src_af=0 dst_af=2 sa=4 da=20 proto=36 sport=38 dport=40 as=44 tun=48 vlan=50 cnots=52
+CAPA block=1 inject=4 inject_raw=200 unpriv=20 whitelist=8 replace=2 inject_drop=100000 dsum=ffc00
+TUNNEL gtp=1 teredo=2 6in4=4 4in6=8 4in4=16 6in6=32 gre=64 mpls=128 vxlan=256 geneve=512 ceiling=1023
+DIO sfo=2 trace=6 reason=7 eflow=11 last=1024 eflag float=1 multi=2 persist=4 bidir=8 ttype non=0 gtp=1 mpls=2 other=3
+STATE rinc=0 s_init=1 start=0 s_started=2 state_started=2 stop=0 s_stopped=3 pool=-4 dlt=0
+NULLFACE caps=0 state=4 errnull=1 fin=-6 inj=-6 intr=-6
+FATALLEG jumped=1 was=0
+A2 reg=1
