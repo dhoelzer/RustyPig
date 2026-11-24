@@ -561,9 +561,9 @@ grep -q "4826fc2233044a2d5429413faf0ae1af" "$R"/tools/fmod_harness/build.sh
 # was STALE/latent-red since 22a's tc gate landed un-re-run here) -- the 62d6fac law): ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 27   # SANCTIONED row-23e flip-forward: the 20a-era 25 face STALE (latent-red since 22a tc gate.txt un-re-run here) — walked 27, the 62d6fac complete-flip law
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 28   # SANCTIONED row-23e flip-forward: the 20a-era 25 face STALE (latent-red since 22a tc gate.txt un-re-run here) — walked 27, the 62d6fac complete-flip law [ROW-2->28 rider: 62d6fac law]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H/gate_md5_lineages.txt"
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 19   # SANCTIONED row-23e flip-forward: stale 17 latent-red since 22a/23a-era lineage growth; 19 by walk
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 20   # SANCTIONED row-23e flip-forward: stale 17 latent-red since 22a/23a-era lineage growth; 19 by walk [23f rider ->20]
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1                       # honest tracked face: gre's ONLY
 # name-pin census (collision fires LOUDLY):
 test "$(ls -d "$R"/tools/reload_survivor*_harness "$R"/tools/survivor*_harness "$R"/tools/rss_harness 2>/dev/null | wc -l)" -eq 0

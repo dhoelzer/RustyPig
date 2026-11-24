@@ -706,7 +706,7 @@ fn ground_verdict_names_are_the_real_family_never_synthetic() {
 #[test]
 fn ground_quad_carries_zero_test_faces() {
     // ZERO-gate row law (the harness build.sh re-walks the FULL census
-    // 27 on-disk / legacy 9 x 4826fc22 / 19 lineages / tracked-1 gre (row-23e flipped)
+    // 28 on-disk / legacy 9 x 4826fc22 / 20 lineages / tracked-1 gre (row-23f flipped)
     // EVERY build); here the QUAD face is re-grepped:
     for f in [
         GROUND_SFDAQ_H,

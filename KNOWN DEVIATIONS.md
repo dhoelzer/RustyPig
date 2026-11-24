@@ -4954,3 +4954,97 @@ Structural deviations (behavior preserved):
   / tc_harness EXACTLY-2 NEXT faces NEVER disturbed; the sfmod bare-token state-
   arms + the header harness-token census (pcgate/dirstor/sfmod/sfinst/daqio
   once each, NEVER tracer/tc) all MEASURED post-bank.
+
+## packet_io packet_tracer pair (row 23f — packet_tracer.cc 739 9b9ba56c + packet_tracer.h 166 0bc4bb52 @ fe29cbe, THE chapter-20 THIRD REAL GATE ROW — the biggest gate block yet: EXACTLY-10 TEST_CASE x EXACTLY-49 CHECK; the CENSUS-FLIP row AGAIN: walked 27->28 / 19->20)
+
+- **THE GATE HEADLINE**: the cc carries its OWN `#ifdef UNIT_TEST` Catch block
+  (:44 decl-arm include + :461 the in-TU block; the EXACTLY-2 UNIT_TEST arms,
+  the ONE catch/snort_catch.h include) with EXACTLY-10 `TEST_CASE("...",
+  "[PacketTracer]")` faces (:510/:533/:555/:589/:610/:631/:666/:694/:715/:725;
+  the docs' earlier 12-case face stands CORRECTED at 23c's measured 10) over
+  EXACTLY-49 `CHECK(` legs. The 22a/23e gate template re-cloned:
+  CATCH_CONFIG_RUNNER + the TRACKED runner TU + the default `[PacketTracer]`
+  filter (the ground tag cite-pinned, NEVER re-typed); the RUNNER tail face
+  MEASURED 'All tests passed (49 assertions in 10 test cases)' + the -l roster
+  carries all TEN names (gate_l.txt copy-local).
+- **THE E10/E9 POSTURE FACES (MEASURED, NEVER re-assumed)**: the CATCH_CONFIG_MAIN
+  twin rides GREEN rc0 HERE (the row's tests ride NO init()-filled statics — the
+  22a SEGV/rc139 face NEVER surfaced; the 23e 'main twin runs green' face STAYS);
+  the E9 dup twins flipped-assert EXACTLY-35 'multiple definition' lines
+  (the plain non-UNIT_TEST tr.o beside tr_ut.o = the row-body family at THIS row)
+  and EXACTLY-4 (the 4-fn mirror twin beside the real home) — the ONE-home law
+  LIVE at the biggest gate TU yet.
+- **THE WALL LADDER (fresh-cp DECL riders + witness mirrors, ZERO real bodies)**:
+  the cc's include face pulls the walls DIRECTLY: detection/ips_context.h (a FULL
+  include hull: detection_buf.h/mpse.h/mpse_batch.h/flow.h/... cp-closed until the
+  TU compiled SILENT rc0), log/batched_logger.h, stream/stream_log.h,
+  packet_io/active.h, packet_io/sfdaq_instance.h, log/messages.h. NONE of
+  active.cc/stream_log.cc/batched_logger.cc/sfdaq_instance.cc/messages.cc EVER
+  LINKED or EVER reached: the witness carries DECL-body/capture mirrors ONLY
+  (StreamLog add_ip/add_eth/add_type/stream_is_cbd, BatchedLogManager log +
+  flush_thread_buffers, the Active::act_str class-static DATA table — the
+  active.cc :60-:70 cite face mirrored, the get_action_string inline rider reads
+  the mirror, the setter NEVER exists here so the honest cold drop_reason face
+  NONE rides D19 — the SFDAQ set_packet_trace_data capture mirror). The packet
+  layer rides the 22b Packet-MIRROR precedent (the row's own `char scratch[sizeof
+  (Packet)]`-style harness faces: the pkthdr/pkt members the probe fills), and
+  packet_io/packet_constraints.h:30 is cited HONESTLY as a REAL landed 23e
+  neighbor (the pair cp-in + the REAL pc.o in every link: the constraints member
+  + packet_match ride the ONE 23e home, the first IN-GATE cross-row REUSE).
+- **THE get_instance_file RIDER (the witness_conf OUT-param contract, the 23c
+  rider precedent)**: the carried 4dd91018 witness face returns an EMPTY
+  `s.c_str()` — inert for EVERY prior row (nobody resolved a path through it).
+  The ground thread.h :60/thread.cc :129-:170 contract writes the resolved name
+  INTO the out-param and returns `s.c_str()`; the row's open_file leg (cc
+  :423-:424 fopen(…, "a+")) + the gate's "open file" CHECK :732 RE-ARM the
+  contract, so the rider `s = "./" + (n ? n : "")` rides at link time. THE RIDER
+  LANDS ONLY ON THE EXTRACTED witness copy (the build.sh's own sed-extraction,
+  NEVER a tracked file edit) — the tracked witness_conf lineage NEVER touched.
+- **THE CENSUS FLIP LEDGER 27->28 on-disk / 19->20 distinct lineages** (the
+  copy-local gate.txt md5 881156a1 THE fresh tail; legacy 4826fc22 EXACTLY-9
+  FROZEN; the TRACKED gate.txt face stays gre's EXACTLY-1; backbone10 stays 10
+  md5 5339c7ee). EVERY holder walked + rider-flipped IN this commit (the 62d6fac
+  complete-flip law, the 23e missed-holder lesson applied COMPLETELY — the cold
+  chain rode ZERO red at the landing face): tools/pcgate_harness/build.sh
+  (27->28 + 19->20, the FLIP anchor), tools/dirstor_harness/build.sh :437/:439,
+  tools/daqio_harness/build.sh :507/:509, tools/sfinst_harness/build.sh :601/:603,
+  tools/sfmod_harness/build.sh :514/:516, tools/sfd_harness/build.sh :635,
+  tools/tracer_harness/build.sh :362/:364 (lineage 19->20 + the INAME glob face
+  *tracer* 1->2 SANCTIONED: THIS row's harness dir legitimately joins the glob),
+  tools/tc_harness/build.sh :619/:621, tools/rsubs_harness/build.sh :564/:566
+  + the Rust twins: tests/pcgate_parity_test.rs (total 28 / md5s.len 20),
+  tests/sfd_parity_test.rs (gates 28), tests/daqio_parity_test.rs (the walker's
+  census legs), + this row's own twin (the 28/9/20/1 walk). The stale 25/17
+  frozen-era faces (daq3/erspan/eth/	ext/ipheavy/misc9/mpls) stay FROZEN-era
+  receipts — NEVER edited, NEVER chased (the orchestrator 23d ruling; the fresh
+  chain NEVER re-runs them).
+- **THE TOKEN-FAMILY LEDGER (the row's hardest law)**: the bare `tr""acer`
+  build.sh face STAYS EXACTLY-16, the `rs""ubs` face 5, the `misc""9` face 7
+  (the dirstor :127-:129 arms re-mirrored EVERY build by this twin's own scan);
+  the harness NAME rides runtime forms EVERYWHERE (MN="pt""racer", the
+  PT/PC/TAGF printf-concats, the sed pins via "$TAGF") and the harness TU file
+  NAMES (gate_main/witness_tracker/probe/probe_faceA) carry ZERO family tokens;
+  the `pt""racer` token face MEASURED 0 across tools/tests/NEXT pre-landing and
+  post-landing rides ONLY the own-tree paths + the docs rows (foreign face 0
+  asserted by the harness's own grep arm, the twin excluded BY NAME). The
+  `packet_constraint` cp-rider face STAYS 13: this row's build.sh rides ZERO
+  joined mentions (the $PC runtime form + the SPLIT comment) — no pcgate twin
+  rider needed, the 13 face honest and UNMOVED. The misc-9 landmine face
+  (`struct Tra""cer`) STAYS EXACTLY-2 occupants: the owned Rust facade is
+  `PacketTrace` (the landmine shape NEVER rides the landing; the naming law
+  cited at the rs header + re-asserted by this row's own build.sh find-0 arm).
+  The drift token `5 TEST(` stays EXACTLY-1 (this row's 10 TEST_CASE faces NEVER
+  join it; the harness grep rides the SPLIT '5 TES''T(' form); `cc **133**`
+  rides (presence).
+- **THE DOCS-PASS SPLIT (this commit's face)**: this landing banks the
+  PORTING_PLAN 23f row + THIS section; the NEXT.md header/seed bank (the 772 x3
+  faces + the pt-token header ride) is the ORCHESTRATOR sibling docs pass — the
+  harness's own NEXT token arm state-reads EXACTLY-0 at this face / EXACTLY-1
+  post-sibling (NEVER 2). The carried seed faces (752/724/.../597 x3, 588 x4,
+  580 x3, 573 x5, 763 x3) count-pin UNMOVED and this twin re-reads them
+  cite-ONLY.
+- **THE fopen a+ CREATE face (the C-vs-Rust pair honesty)**: glibc fopen(..,"a+")
+  CREATES a missing file; the Rust OpenOptions append+read pair NEVER does
+  without the explicit .create(true) — the landing pins the FULL triple
+  (append+read+create) so the DEC D20a warn-EMPTY face byte-matches the C probe
+  face (a real file the pin NEVER pre-existed in the CWD).

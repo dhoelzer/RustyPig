@@ -45,7 +45,7 @@
 # row); NO rider suite EVER -> dialect cites only -> ZERO gate artifacts
 # (test ! -e gate.txt; the 22a streak-closure does NOT re-arm). THE gate
 # census FLIPPED forward row 23e, re-run EVERY build: 27 on-disk gate.txt /
-# legacy 4826fc22 x9 FROZEN / 19 distinct md5 lineages / tracked-1 (gre
+# legacy 4826fc22 x9 FROZEN / 20 distinct md5 lineages [23f rider] / tracked-1 (gre
 # 6751d1a8) -- the sfd parity rider (tests/sfd_parity_test.rs HARD-ASSERTS
 # 26, the 62d6fac lesson) STAYS green because this row ships ZERO gate.
 # FACE-A = NOLOAD framework-TU (the 19a/21a precedent): BUILDING_SO/
@@ -111,7 +111,7 @@ test "$(sed -n '41p' "$SRC/src/framework/base_api.h")" = '#define BASE_API_VERSI
 test "$( (echo PT_CODEC; echo PT_INSPECTOR; echo PT_IPS_ACTION; echo PT_IPS_OPTION; echo PT_SEARCH_ENGINE; echo PT_SO_RULE; echo PT_LOGGER; echo PT_CONNECTOR; echo PT_POLICY_SELECTOR; echo PT_MP_TRANSPORT; echo PT_TRACE; echo PT_MAX) | grep -n 'PT_TRACE' | cut -d: -f1 )" -eq 11   # 1-based face == 0-based ordinal 10
 
 # ---- name-pin census (measured THIS pass; collision fires LOUDLY) ----
-test "$(find "$R"/tools -maxdepth 1 -iname '*tracer*' | wc -l)" -eq 1          # THIS dir ONLY
+test "$(find "$R"/tools -maxdepth 1 -iname '*tracer*' | wc -l)" -eq 2          # SANCTIONED row-23f flip-forward 1->2: the row-23f harness dir (THE THIRD real gate row) legitimately JOINS this dir-name glob; NEVER a third without a new row
 test "$(grep -rl 'tracer_harness' "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 2   # SANCTIONED 0->2 at the 23c docs rider (the 62d6fac flip-forward law): the face = ONLY the two legitimate template re-clone TR= cite lines (daqio_harness :94 + sfinst_harness :117 'TR=$R/tools/tracer_harness the 22b pkth-EXT face cite'); NEVER edit those cites; flip-forward only if ANOTHER re-clone rides
 test "$(grep -c 'tracer_harness' "$R/NEXT.md")" -eq 1                         # the ONE tolerated law-cite line (:789)
 test "$(grep -rl 'tracer' "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 16          # SANCTIONED 13->16 at the 23c docs rider (the 62d6fac flip-forward law): the 23a/23b/23c harness build.sh files (daqio + sfinst + sfmod) legitimately RE-CLONE this template shape and cite the tracer arms — the 3 new members are daqio_harness :73/:94/:201, sfinst_harness :53/:117, sfmod_harness comment faces; NEVER edit those citations; flip-forward only if ANOTHER template re-clone lands (hazard face, FROZEN)
@@ -359,9 +359,9 @@ PYPIN
 
 # ---- GATE census (ZERO-gate row: the MEASURED face STAYS; run by walk, never typed) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af'); test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 27   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law)
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 28   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law) [ROW-2->28 rider: 62d6fac law]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H/gate_md5_lineages.txt"
-test "$(cat "$H/gate_md5_lineages.txt")" -eq 19   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law)
+test "$(cat "$H/gate_md5_lineages.txt")" -eq 20   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law) [ROW-23f rider 19->20: the THIRD real gate row fresh tail (the p-tracer gate); the 62d6fac complete-flip law, missed-holder repair before cold-chain]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"   # the ONLY tracked gate byte-frozen
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1
 test ! -e "$H/gate.txt"                                              # ZERO gate artifacts ship
@@ -434,6 +434,6 @@ test "$dirty" -eq 0                                       # single-tenant porcel
 echo "O0==O2: DEC $(cmp -s "$H"/vectors_O0.txt "$H"/vectors_O2.txt && echo BYTE-IDENT), FACE-A $(cmp -s "$H"/vectors_faceA_O0.txt "$H"/vectors_faceA_O2.txt && echo BYTE-IDENT)"
 echo "pkth wall: ungrafted EXACTLY-3 no-member faces; graft = COPY-LOCAL DECL arms b99e44b9, the row-20 ledger absorbs"
 echo "nm app-undef on tracer.o: EXACTLY-2 (ntop+ts_print); E9 dup co-link EXACTLY-2 multiple-defs receipt"
-echo "gate census (walked, never typed): 27 on-disk / legacy 9 x 4826fc22 / 19 lineages / tracked-1 gre; ZERO gate ships row 22b"
+echo "gate census (walked, never typed): 28 on-disk / legacy 9 x 4826fc22 / 20 lineages [23f rider] / tracked-1 gre; ZERO gate ships row 22b"
 echo "backbone STAYS $(wc -l < "$H/backbone10.txt") (symbol-vs-array)"
 echo "TRACER_DONE vectors=$(wc -l < "$H/vectors.txt") faceA=$(wc -l < "$H/vectors_faceA.txt") gates=0 (ch19 LAST row; the 22a streak face does NOT re-arm)"

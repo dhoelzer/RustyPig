@@ -136,6 +136,10 @@ pub const DAQ_PKT_FLAG_OPAQUE_IS_VALID: u32 = 0x0001;
 pub const DAQ_PKT_FLAG_NOT_FORWARDING: u32 = 0x0002; // sfdaq.cc:328 THE read-face
 pub const DAQ_PKT_FLAG_IGNORE_VLAN: u32 = 0x0008;
 pub const DAQ_PKT_FLAG_SIGNIFICANT_GROUPS: u32 = 0x8000;
+/// daq_common.h :124 `#define DAQ_PKT_FLAG_TRACE_ENABLED 0x0400` — THE flag
+/// face packet_tracer.cc :277 reads (row 23f consumer; the REAL-SDK width
+/// face pinned by the 23f harness FACE-A: == 0x0400 == 1024).
+pub const DAQ_PKT_FLAG_TRACE_ENABLED: u32 = 0x0400;
 
 /// api/daq_common.h:132-:133 (`UNKNOWN -1 / FLOOD -2`).
 pub const DAQ_PKTHDR_UNKNOWN: i32 = -1;

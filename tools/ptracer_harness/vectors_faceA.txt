@@ -1,0 +1,6 @@
+A1 mute-size=1 max-buff=2048 dbg-size=159
+A2 cold bl=0 dbl=0 pc=0 ue=0 sh=0 ac=0 stdout=1 mutes=0 timer=1
+A3 member-pc match=1 setbits=0 proto=255
+A4 trace-flag=1024
+A5 pkth=56 tn_off=48 sip=18 act=8 ast=4
+A6 timer-cold=0 active=0

@@ -39,6 +39,14 @@ pub mod trough;
 // ROW: the cc's own in-TU Catch block (EXACTLY-3 TEST_CASE "[framework]"
 // faces) host-green at THE row's harness; the row body lands flat, ZERO allows.
 pub mod packet_constraints;
+// row 23f: the PacketTracer per-thread tracing singleton (166+739) — THE
+// THIRD REAL GATE ROW: the cc's own in-TU Catch block (EXACTLY-10
+// TEST_CASE faces x 49 CHECK legs) host-green at THE row's harness; the
+// four NOT-landed walls (ips_context/batched_logger/stream_log/active)
+// ride the harness DECL-mirror riders + the Rust-side seam traits; THE
+// cross-row REUSE: h :115 types the member with the 23e Landed
+// PacketConstraints home (one home, NEVER re-forked).
+pub mod packet_tracer;
 // the 23b seam-close re-export hub (the token-free wiring path — the
 // frozen sd-token census law, cited at seam.rs):
 pub mod seam;

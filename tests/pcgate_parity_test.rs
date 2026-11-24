@@ -249,7 +249,7 @@ fn fast_equals_raw_rides_the_c_operator_eq_body() {
 
 #[test]
 fn census_flip_ledger_27_9_19_1_by_walk() {
-    // the on-disk walk: 27 gate.txt (26 + THIS harness's copy-local), legacy
+    // the on-disk walk: 28 gate.txt (27 + the row-23f copy-local), legacy
     // 4826fc22 x9 FROZEN, 19 distinct md5 lineages, tracked face STAYS 1:
     let mut legacy = 0;
     let mut total = 0;
@@ -273,9 +273,9 @@ fn census_flip_ledger_27_9_19_1_by_walk() {
         .stdout;
     let tracked = String::from_utf8(tracked).unwrap().lines().filter(|l| l.ends_with("gate.txt")).count();
     assert_eq!(tracked, 1, "the TRACKED gate.txt face stays gre's ONLY (the copy-local gate law, 22a re-cloned)");
-    assert_eq!(total, 27, "walked on-disk gate census FLIPPED 26 -> 27 (THE flip this row lands — the pc-gate copy-local)");
+    assert_eq!(total, 28, "walked gate census 26->27 by THIS row, rider-flipped 27->28 at row 23f (the THIRD real gate row; the 62d6fac complete-flip law)");
     assert_eq!(legacy, 9, "the legacy x9 face NEVER +1");
-    assert_eq!(md5s.len(), 19, "the md5-lineage face FLIPPED 18 -> 19 (this row's fresh gate tail)");
+    assert_eq!(md5s.len(), 20, "md5 lineages 18->19 by THIS row, flipped 19->20 at row 23f (the p-tracer fresh tail)");
     // the gre anchor face stays byte-frozen (the ONLY tracked gate):
     let gre = std::fs::read_to_string("/opt/data/snort3-rust/tools/gre_harness/gate.txt").unwrap();
     assert_eq!(gre.lines().count(), 3);

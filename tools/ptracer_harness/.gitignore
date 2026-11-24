@@ -1,0 +1,67 @@
+# row 23f ptracer_harness artifacts — COPY-LOCAL / regenerated EVERY build
+# (the nested-.gitignore instrument; ROOT .gitignore NEVER moves). Stageable
+# face = the 7 tracked files (build.sh + probe.cc + probe_faceA.cc +
+# gate_main.cc + witness_tracker.cc + vectors.txt + vectors_faceA.txt; the
+# .gitignore itself is the 8th ls-files face — NO PLAN.md this row, the
+# budget-law fold: the recon face rides the build.sh header). EVERYTHING
+# else here is a receipt and IGNORED. THE GATE POSTURE (the 22a tc law,
+# RE-ARMED at this row): gate.txt (+ the -l roster + the pinned md5 + the
+# seed face) is COPY-LOCAL UNTRACKED — the TRACKED gate.txt face STAYS
+# gre's ONLY (tracked count 1, asserted EVERY build).
+copy/
+o2/
+# binaries + objects
+probe
+probe_O2
+probe_faceA
+probe_faceA_O2
+gate
+gate_O2
+gate_l
+gate_main_shape_probe
+e9_dup_twin
+e9_dup_twin.cc
+E9_dup_probe
+E9_dup_probe2
+mainTwin
+main_twin_probe
+dbg
+dbg_link
+# .o faces
+*.o
+*.obj
+# witness_conf.cc is EXTRACTED from the link4 donor face EVERY build
+witness_conf.cc
+# receipts
+E4_*.txt
+E9_*.txt
+E10_*.txt
+nm_U_*.txt
+nm_defined.txt
+# run faces (tracked vectors are the FIRST-RUN-SEEDs; these are per-run)
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+probe_dec_stderr.txt
+faceA_stderr.txt
+# gate receipts (the posture face: gate.txt itself UNTRACKED)
+gate.txt
+gate_O2.txt
+gate_l.txt
+gate.md5
+gate_pinned.txt
+gate.txt.seed_face
+gate_*
+!gate_main.cc
+.gate_*
+.*_probe.*
+# ledgers
+md5_pinned.txt
+gate_md5_lineages.txt
+stageables.txt
+backbone10.txt
+.vectors_pristine
+.vectors_faceA_pristine
+*.seed_face
+.*_face_expect
