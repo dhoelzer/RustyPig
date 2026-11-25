@@ -287,14 +287,14 @@ test "$(grep -rl "$MN" "$R"/src --include=*.rs 2>/dev/null | wc -l)" -eq 0
 # 6 / dir-stor :139 1 / sf-mod :186 2 / sf-inst :224 6 / ac-t :171 8) — this
 # row NEVER moves them; the walked face re-echoed HERE with the union exclusion
 # set (the family arms stay NEVER edited):
-holders=$(grep -rl "$SD" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "sf""inst" | grep -v "tools/daq""io_harness/build.sh$" | grep -v "tools/misc3_harness/build.sh$" | grep -v "tools/mpls_harness/build.sh$" | grep -v "tools/sfmod_harness/build.sh$" | grep -v "tools/dir""stor_harness/build.sh$" | grep -v "tools/pc""gate_harness/build.sh$" | grep -v "tools/misc3_harness/witness_trio.cc$" | grep -v "tools/misc3_harness/gate.txt$" | grep -v "tools/pt""rmod_harness/build.sh$" | grep -v "tests/daq""io_parity_test.rs$" | grep -v "tests/misc3_parity_test.rs$" | grep -v "tests/act_parity_test.rs$" | grep -v "tests/pt""rmod_parity_test.rs$" | wc -l)
+holders=$(grep -rl "$SD" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "sf""inst" | grep -v "tools/daq""io_harness/build.sh$" | grep -v "tools/misc""3_harness/build.sh$" | grep -v "tools/mpls_harness/build.sh$" | grep -v "tools/sf""mod_harness/build.sh$" | grep -v "tools/dir""stor_harness/build.sh$" | grep -v "tools/pc""gate_harness/build.sh$" | grep -v "tools/misc""3_harness/witness_trio.cc$" | grep -v "tools/misc""3_harness/gate.txt$" | grep -v "tools/pt""rmod_harness/build.sh$" | grep -v "tests/daq""io_parity_test.rs$" | grep -v "tests/misc""3_parity_test.rs$" | grep -v "tests/ac""t_parity_test.rs$" | grep -v "tests/pt""rmod_parity_test.rs$" | wc -l || true)
 test "$holders" -eq 0   # BEYOND every frozen/ruled holder family THIS row adds ZERO new sf-daq joined holders (the union exclusion set = the five strict-pin arms' sets — da-qio/dir-stor/sf-mod/sf-inst/ac-t + the ruled cross-holder faces; MEASURED-0 at the row)
 
 # ---- STATE-AWARE stageables dual guard (9 faces: the 8-face shape + the
 # E4 undecl probe = the daqio 9-face precedent) ----
 face=$(git -C "$R" ls-files "tools/${MN}_harness" | sort | paste -sd' ')
 for f in .gitignore PLAN.md build.sh exp.cmake probe.cc probe_faceA.cc e4_undecl.cc vectors.txt vectors_faceA.txt; do
-    echo "$face" | grep -q "tools/${MN}_harness/$f\$" || { echo "STAGEABLE FACE DEAD: $f"; exit 1; }
+    echo "$face" | tr ' ' '\n' | grep -qx "tools/${MN}_harness/$f" || { echo "STAGEABLE FACE DEAD: $f"; exit 1; }
 done
 for f in copy/api/daq.h copy/api/daq_base.o copy/api/daq_base_api.o copy/api/daq_config.o copy/api/daq_instance_api_defaults.o copy/api/daq_mod_ops.o copy/daq.h copy/daq_common.h copy/daq_dlt.h copy/daq_module_api.h copy/daq_version.h "copy/packet_io/${G}_modules.h.in" "copy/${G}_modules.h" copy/replay2.h copy/replay_empty.h \
          o2/probe.o o2/probe_faceA.o probe probe_O2 probe_faceA probe_faceA_O2 probe.o probe_faceA.o \
