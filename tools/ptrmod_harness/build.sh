@@ -34,7 +34,7 @@
 # CLOSED include hull; EVERY cp cmp-proved vs ground; the stock config.h
 # face; the copy census MEASURED-162 (140 donor + the 2+2+2 pair cps + 15
 # DECL riders + daq_module_api.h NEW).
-# LINK SHAPE (the 23c sfmod kin = one-home law): probe/faceA link = tm.o
+# LINK SHAPE (the 23c sf-mod kin = one-home law): probe/faceA link = tm.o
 # (THE row .o, the ONLY home) + tr.o (the REUSE 23f pair FRESH-cp, cmp-
 # proved) + the carried witness_conf 4dd91018 EXTRACTION WITH the 23f
 # get_instance_file OUT-param + noreturn RIDERS (re-cloned VERBATIM, the
@@ -248,7 +248,7 @@ test "$(grep -c 'error:' "$H"/E4_walker.txt)" -eq 1
 test "$(grep -c 'managers/module_manager.h: No such file or directory' "$H"/E4_walker.txt)" -eq 1
 test ! -e "$C"/managers/module_manager.h                    # the NEVER-cp face (the hull stays CLOSED)
 
-# ---- the REAL-body link set (the 23c sfmod kin) ----
+# ---- the REAL-body link set (the 23c sf-mod kin) ----
 cp "$SRC"/src/utils/util.cc "$SRC"/src/utils/util_cstring.cc "$C"/utils/
 cp "$SRC"/src/protocols/ip.cc "$C"/protocols/
 cmp -s "$C"/utils/util.cc "$SRC"/src/utils/util.cc
