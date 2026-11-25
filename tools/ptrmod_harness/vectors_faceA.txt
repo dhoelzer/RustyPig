@@ -1,0 +1,7 @@
+A1 ptypes bool=3 int=4 string=8 enum=11 max=21
+A2 usage GLOBAL=0 pto console=0 file=1
+A3 pod sizeof=40 file@8 enabled@0
+A4 sizeof Parameter=40 Command=40 Value=112
+A5 cold-is=0 is_enable=1 is_other=0 gb=1 u8=7 vt=0/2
+A6 tr-cold active=0
+Z-A terminator=0

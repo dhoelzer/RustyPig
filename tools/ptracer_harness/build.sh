@@ -149,7 +149,7 @@ test "$(grep -rl "$MN" "$R"/src --include=*.rs 2>/dev/null | wc -l)" -eq 0
 # the foreign row-name face (the runtime PT concat form): EXACTLY-17 fc*/
 # f*/sf-mod-era build.sh+tests holders each ride fresh-cp PATH lines of the
 # ground header (the 17-era donor riders; NEVER a count-arm of THIS row):
-test "$(grep -rl "$PT" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$R/tests/${MN}_parity_test.rs$" | wc -l)" -eq 17
+test "$(grep -rl "$PT" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$R/tests/${MN}_parity_test.rs$" | wc -l)" -eq 18   # SANCTIONED rider: 17 -> 18 at the pt-rmod row-23g twin — the 23g landing's parity twin LEGITimately Reuses the 23f landing home in its Rust use-path (the one-home law MAKES the cite unavoidable, the row .cc's C-side includes RE-RIDE the same pair; build.sh-only faces NEVER moved, the twin arm split law); the 62d6fac flip-forward law; the 23g landing NEVER edited; token-split in comments per the family law
 # THE FAMILY FACES (the token law; re-walked EVERY build — this file's own
 # content rides ZERO bare tr-acer/rs-ubs/misc-9 hits, proven by its own
 # concat forms; an UNEXPLAINED move = a landmine, a LEGIT new holder =

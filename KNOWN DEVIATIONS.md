@@ -5048,3 +5048,65 @@ Structural deviations (behavior preserved):
   without the explicit .create(true) — the landing pins the FULL triple
   (append+read+create) so the DEC D20a warn-EMPTY face byte-matches the C probe
   face (a real file the pin NEVER pre-existed in the CWD).
+
+## packet_io packet_tracer MODULE pair (row 23g — packet_tracer_module.cc 262 f5b3507d + packet_tracer_module.h 59 ab0bbe5e @ fe29cbe, THE ZERO-gate control-shell row — the harness token pt + r + mod measured 0 pre-hit; the ONE-home cite faces 14->15 (pc) + 17->18 (pt family) sanctioned IN-COMMIT)
+
+- **THE ZERO-GATE MEASURED FACE**: `grep -c TEST_CASE` = EXACTLY-0 on BOTH row
+  files and the packet_io test CMakeLists carries EXACTLY-2 suites
+  (sfdaq.cc + the 23f tracer cc) — packet_tracer_module NEVER rides a suite.
+  The harness ships ZERO runner TU / ZERO gate.txt (the census STAYS 28/9/20/1,
+  the backbone10 5339c7ee UNMOVED); the ground add_cpputest cite rides the
+  runtime printf form so the harness text NEVER types the joined face.
+- **THE Lua C-API -> caller-fed data face (THE headline deviation)**: the C
+  enable/disable commands read argc/argv straight off a lua_State
+  (luaL_optint/lua_type/luaL_optlstring/lua_toboolean, cc :110-:123 + :181-:195).
+  The landing takes the SAME reads as the LuaEnableArgs INPUT struct (the
+  file_api LuaCFunctionToken precedent): the port NEVER re-implements the Lua
+  stack. The harness DEC closes the gap honestly — the command fn-ptrs from the
+  REAL row get_commands() are invoked against a REAL lua_State (nil + bool
+  legs C6/C7 pin the lua_type/lua_toboolean faces end-to-end through the row).
+- **int -> i32 + the PORT-STORE WRAP law**: luaL_optint hands the C an `int`;
+  the members are uint16_t — sport=70000 STORES 70000 & 0xFFFF = 5536 (the C
+  wrap, NEVER saturation; the landing wraps in wrapping_add form, vectors pin
+  `sport=5536` byte-equal). The (IpProtocol)proto cast = the gcc mod-256
+  low-byte read: proto=300 casts to 44 (C5 pins `0x002C/44`) — the Rust
+  `as u8` wrap IS the same face, cited NOT re-derived.
+- **the set() null-config contract (NEVER-invent-panic law)**: C :221/:223
+  derefs config UNGUARDED (the manager contract: begin() ran first — UB-if-not,
+  NEVER a C check). The Rust returns honest false on None — NO expect, NO
+  debug_assert, NO invented panic face.
+- **the null-tracer debug leg (tr.cc :234-:236)**: with s_pkt_trace null the C
+  PacketTracerDebug::execute prints NOTHING and changes NOTHING (the early
+  return). The Rust execute returns false with ZERO log legs — the silent face
+  replayed, NOT a "not initialized" invention.
+- **the LogMessage-vs-WarningMessage home face**: the regex/match_count/match
+  legs cc :175-:177/:187/:192 ride LogMessage (STDOUT, per-thread), NOT
+  WarningMessage — the landing rides log_message_stdout for those,
+  warning_message ONLY where C warns (the C8/C9 capture census pins the split).
+- **the broadcast wall (witness mirror, NEVER landed)**: main_broadcast_command
+  + AnalyzerCommand ride main/analyzer_command.h behind the
+  framework/sf_module_managers.h wall (the fresh-cp head DIES EXACTLY-1 at
+  cc :31 EVERY build; the DECL riders die EXACTLY-1 at :34/:36). The witness
+  captures the command TYPE + execute_count (the C9 leg pins executed=2
+  type=PACKET_TRACER_DEBUG through the REAL linkage);
+  ControlConn::query_from_lua + BatchedLogManager::set_filter are capture
+  mirrors ONLY (the C19/C20 legs pin the Y:-prefixed filter strings + the
+  nil-conn bypass). The Rust port maps broadcast -> the caller-threaded
+  execute face (the 23c scripted-seam law).
+- **the set_filter clamp face**: the C filter string = "Y:" + to_string(mcr)
+  + ":" + filter — clamp arms pin mcr<=1 -> Y:1: and mcr>=20 -> Y:20: (the
+  EXACTLY-3 arms cc :191-:195; NEVER a bare-Y invention).
+- **the one-home cite faces flipped IN-COMMIT by the 62d6fac law**: this
+  twin's use-paths of the LANDED 23e/23f homes are LEGIT strict-face cites —
+  the pc inclusive face 14->15 (pc""gate :161 arm, the 13->14 rider line
+  STAYS) + the pt family face 17->18 (pt-racer :151 arm). ALL THREE harnesses
+  (pc-gate / pt-racer / this one) re-ran rc0 AT the row — no foreign arm left
+  red. The 23e/23f landing files were NEVER edited.
+- **the stringify anchor face**: `PACKET_TRACER_DEBUG` rides cc :82 (the 59-L
+  h carries NO stringify — the harness python pin + the twin read the .cc).
+- **vectors**: DEC 16L md5 6a6ecc1ab4e0faa8e677dbf0ea2e9062 + FACE-A 7L md5
+  5cdf63c9e8f38c2fbdef0c6d94895cc1, FIRST-RUN-SEED drift-refuse + tamper-proven
+  + O0==O2 BYTE-IDENT on both streams; the LuaJIT version face rides the
+  digit-decomp identity (NEVER a frozen literal) — the vendored
+  /opt/data/tools/luajit-src face REAL EVERY build; tm.o nm census EXACTLY-5
+  lua-name undefs; the probe + FACE-A links UNRESOLVED-0.

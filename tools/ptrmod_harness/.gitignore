@@ -1,0 +1,36 @@
+# row 23g ptrmod_harness artifacts — COPY-LOCAL / regenerated EVERY build
+# (the nested-.gitignore instrument; ROOT .gitignore NEVER moves). Stageable
+# face = the 7 tracked files (build.sh + probe.cc + probe_faceA.cc +
+# witness_modtrace.cc + witness_modtrace.h + vectors.txt + vectors_faceA.txt;
+# the .gitignore itself is the 8th ls-files face — NO PLAN.md this row, the
+# budget-law fold: the recon face rides the build.sh header; ZERO gate
+# material — the ZERO-gate row, NO runner TU, NO gate.txt EVER).
+copy/
+o2/
+# binaries + objects
+probe
+probe_O2
+probe_faceA
+probe_faceA_O2
+*.o
+*.o2
+*.obj
+# witness_conf.cc is EXTRACTED from the link4 donor face EVERY build;
+# witness_tracker.cc is the REUSED 23f face cp'd EVERY build
+witness_conf.cc
+witness_tracker.cc
+# receipts
+E4_*.txt
+nm_U_*.txt
+# run faces (tracked vectors are the FIRST-RUN-SEEDs; these are per-run)
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+probe_dec_stderr.txt
+faceA_stderr.txt
+# ledgers
+md5_pinned.txt
+md5_lineages.txt
+.vectors_pristine
+.vectors_faceA_pristine

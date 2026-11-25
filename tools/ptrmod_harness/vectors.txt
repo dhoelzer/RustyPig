@@ -1,0 +1,16 @@
+T0 name=packet_tracer help=generate debug trace messages for packets usage=0
+T1 sp=sp|enable/3/-/false|output/11/console | file/console;rows=2;sent=21
+T2 cmds=enable|f1|p1|r0|disable|f1|p0|r0|sent=1 same2=1 en|proto/4/0:255/-|src_ip/8/-/-|src_port/4/0:65535/-|dst_ip/8/-/-|dst_port/4/0:65535/-|tenants/8/-/-|regex/8/-/-|stop_after_match/3/-/-|match_count/4/1:max32/1;rows=9;sent=21 tsum=51
+D0 rc=0 argc=0 bcast=[PACKET_TRACER_DEBUG] filt=[FILTER[]] msglen=0 exec=1
+D1 rc=0 argc=4 mslines=2 src=1 dst=1 filt=[FILTER[]] exec=1
+D2 rc=0 mslines=3 warnsz=0 trio=3 filt=[FILTER[]] exec=1
+D3 rc=0 banner=1 filt=[FILTER[]] exec=1
+D4 rc=0 wrap44=1 exec=1
+D5 rc=0 bcast=[PACKET_TRACER_DEBUG] disabled=1 exec=1
+D6 flush=1 msglen=0
+D7a b=1 s_en=1 s_file=1 s_bad=0 s_con=1 end=1 end2=1
+D7b s=1 end=1 file_created=1 removed=1 flush=1 warnsz=0 file_gone=0
+D7c s=1,1 end=1 warnsz=0 file=0
+D8 rc=0 mslines=3 filt=[FILTER[]] exec2=1,1
+D9 rc=0 bcast=[PACKET_TRACER_DEBUG] disabled=0 msglen=0 exec=1
+Z terminator=0

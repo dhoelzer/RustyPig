@@ -47,6 +47,12 @@ pub mod packet_constraints;
 // cross-row REUSE: h :115 types the member with the 23e Landed
 // PacketConstraints home (one home, NEVER re-forked).
 pub mod packet_tracer;
+// row 23g: the packet_tracer MODULE shell pair (59+262) — the ZERO-gate
+// row (the in-TU TEST census MEASURED 0 by the harness EVERY build) that
+// REUSES the landed 23e constraints + 23f PacketTrace/TraceThreadWorld
+// homes through the one-home use-paths (the 16->17 pc twin face + the
+// 17->18 pt twin face sanctioned AT the row, the strict-cp count law).
+pub mod packet_tracer_module;
 // the 23b seam-close re-export hub (the token-free wiring path — the
 // frozen sd-token census law, cited at seam.rs):
 pub mod seam;
