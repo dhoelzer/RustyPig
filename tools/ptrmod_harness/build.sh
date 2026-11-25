@@ -148,7 +148,7 @@ test "$(grep -rlE "ReloadSurv""ivor|struct Tra""cer" "$R"/src/packet_io --includ
 # the cites UNAVOIDABLE; the build.sh-ONLY pc face STAYS 13 — foreign 13-
 # arms NEVER move; THIS file rides ZERO joined pc/pt tokens itself):
 test "$(grep -rl "$PC" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 18   # MEASURED 23g->23h 17 -> 18 (the ac t row-23h landing twin tests/ac t-parity twin — THE LEGIT landed-home use-path cite of the 23e p-c-gate home the owner pair rides, the 62d6fac flip-forward law, the 23h landing NEVER edited; the build.sh-ONLY pc face STAYS 13 — the foreign 13-arms NEVER move; the twin arm split law re-rides; prior face 17 at the 23g walk)
-test "$(grep -rl "$PT" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$PT2/build.sh$" | grep -v "^$R/tests/pt""racer_parity_test.rs$" | wc -l)" -eq 18
+test "$(grep -rl "$PT" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$PT2/build.sh$" | grep -v "^$R/tests/pt""racer_parity_test.rs$" | wc -l)" -eq 19   # MEASURED 23g->23h 18 -> 19 at THIS row (the ac t row-23h landing twin tests/ac t-parity twin — THE LEGIT landed-home use-path cites of the 23f pt-r-acer home the owner pair rides, the 62d6fac flip-forward law, the 23h landing NEVER edited; the 23g 17 -> 18 rider face at the pt-rmod walk)
 
 # ---- NEXT.md token face, STATE-AWARE (the docs bank = the ORCHESTRATOR
 # sibling commit — this file NEVER edits NEXT.md): ----

@@ -160,7 +160,7 @@ else
     test "$(grep -c "$MN" "$R/NEXT.md")" -eq 1                       # the ONE dirstor-token line (NEVER a bare-trough NEXT line: the NEXT trough-token count STAYS pre-existing-only)
     test "$(grep -c "${MN}_harness" "$R/NEXT.md")" -eq 1
     test "$(grep -c '^| 23d' "$R/PORTING_PLAN.md")" -eq 1            # the plan-row grep-count-1 law
-    test "$(grep -c 'trough' "$R/PORTING_PLAN.md" || true)" -eq 4    # 3 pre-existing + THIS row's own plan row (MEASURED at the row; own arm, honest post-count; NEXT NEVER gained a bare-trough line)
+    test "$(grep -c 'trough' "$R/PORTING_PLAN.md" || true)" -eq 5    # MEASURED 23d->23h 4 -> 5 (the row-23h plan row LEGITimately cites the 23d trough-home Err law for the FatalError->Err map — the one-home law MAKES the cite unavoidable, the 62d6fac flip-forward law, the 23h landing NEVER edited; prior face: 3 pre-existing + THIS row's own plan row; NEXT NEVER gained a bare-trough line)
     test "$(grep -c 'row 23d' "${R}"/KNOWN\ DEVIATIONS.md)" -ge 1
 fi
 grep -q "^## .*row 23d" "${R}"/KNOWN\ DEVIATIONS.md || true          # the LAST-section law (the section MUST be the tail face)
