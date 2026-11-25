@@ -147,7 +147,7 @@ test "$(grep -rlE "ReloadSurv""ivor|struct Tra""cer" "$R"/src/packet_io --includ
 # faces, sanctioned IN-COMMIT (the 23f 13->14 law; the one-home law MAKES
 # the cites UNAVOIDABLE; the build.sh-ONLY pc face STAYS 13 — foreign 13-
 # arms NEVER move; THIS file rides ZERO joined pc/pt tokens itself):
-test "$(grep -rl "$PC" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 17
+test "$(grep -rl "$PC" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 18   # MEASURED 23g->23h 17 -> 18 (the ac t row-23h landing twin tests/ac t-parity twin — THE LEGIT landed-home use-path cite of the 23e p-c-gate home the owner pair rides, the 62d6fac flip-forward law, the 23h landing NEVER edited; the build.sh-ONLY pc face STAYS 13 — the foreign 13-arms NEVER move; the twin arm split law re-rides; prior face 17 at the 23g walk)
 test "$(grep -rl "$PT" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$PT2/build.sh$" | grep -v "^$R/tests/pt""racer_parity_test.rs$" | wc -l)" -eq 18
 
 # ---- NEXT.md token face, STATE-AWARE (the docs bank = the ORCHESTRATOR

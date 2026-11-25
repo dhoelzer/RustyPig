@@ -1,0 +1,44 @@
+Q0 packet_tracer_active=1 sl=[IP;]
+T0 cold st=4 whd=7 act=8 delay=8 bypass=0 dr=0
+T1 row0 trust|allow|hold|retry|would_rewrite|would_drop|block|reset
+T1 row1 error|error|error|error|would_rewrite|would_drop|would_block|would_reset
+T1 row2 error|error|error|error|would_rewrite|would_drop|would_block|would_reset
+T1 row3 error|error|error|error|force_rewrite|force_drop|force_block|force_reset
+T2 c7=0,0,0,0,0,0,1
+D0 clamp20=20 floor1=1
+D1r0 asr=0 susp=1 st=1 whd=0
+D1r1 asr=1 susp=1 st=1 whd=5
+D1r2 asr=2 susp=1 st=1 whd=4
+D1r3 asr=3 susp=1 st=1 whd=6
+D1r4 asr=4 susp=1 st=1 whd=7
+D1 after-resume susp=0 whd_none-after=0
+D1 raii in=1 out=0
+D2 st=1 cp=0,1,0,1 kp=0,1,0,1 kt=0,0,1,0
+D3 cant=1,7 stay=1 force=3 daq=0 act=5
+D4 test=2,2 passive=2,1 inlineNF=2,1 rewriteNR=2,1 forceStay=3
+D5 n=6 kinds=1,1,1,1,1,1
+D5f0=6400000000000000
+D5f1=6400000000000064
+D5f2=640000000000012c
+D5f3=64000000000001f4
+D5f4=6400000000000384
+D5f5=6400000000000c9e
+D5 inj=6 revs=1 len=7
+D6 d=6,6 trust1=0 drop=5 block=6 sfq=0
+D6 reset_act=7 drop_flow=0 init_ar=0 exec_inj=0 retry->drop=5 rd=1
+D6 trust de=1 act=1 delayed_after_apply=1
+D7 ig=1 di=1 denied=1 hold=1 ishold=1 can=1 trusted=0
+D8 fail_log=[send_reset failed to encode: failed injection of RST packet in forward direction
+]
+D8 ok_log=[send_reset: successful injection of RST packet in forward direction
+] inj=1
+D9 sent=1 kind=0 maxp=3 sent2=0 fdelta=1 sent3=8 enc=7
+D10 rc=1 pwc=1 pw=[active responses disabled since DAQ can't inject packets.] inj_calls=0 enc_calls=0 inj_d=0 fail_d=0
+D11 nulleg=0 first=[gen-reason] def5=5 map7=7 suspset=0
+D12 take=1 over=1 keep=1 drain=1 ftrust=1 clr=2
+D13 pre=1 post st=0 whd=0 act=1 delay=1 bypass=0 dr=0 str=[allow]
+D14 ip_open=1 ip_send=2 eth_open=0 close1=1,0
+D14h eth_open=1 eth_send=2
+D14f eth_fail jumped=1 eth_open=2 eth_close=1
+D14g ipfail jumped=1 ip_open=2 ip_close=1
+Z end=0

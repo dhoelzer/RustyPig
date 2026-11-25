@@ -531,12 +531,12 @@ fn foreign_faces_landmines_and_token_hygiene() {
     let pat_pc_b = "grep -l 'packet_constraint' /opt/data/snort3-rust/tools/*/build.sh | grep -vc '[p]cgate'".to_string();
     assert_eq!(run_bash_usize(&pat_pc_b), 13, "the pc build.sh-only face UNMOVED (the runtime-join harness law)");
     let pat_pc_all = format!("grep -rl \"packet_cons{q}{q}traints\" /opt/data/snort3-rust/tools/*/build.sh /opt/data/snort3-rust/tests/*.rs | wc -l");
-    assert_eq!(run_bash_usize(&pat_pc_all), 17, "THE sanctioned flip: pc inclusive 16->17 (+1 = THIS twin's LEGIT 23e import)");
+    assert_eq!(run_bash_usize(&pat_pc_all), 18, "THE sanctioned flip x2: pc inclusive 16->17->18 (+1 THIS twin's 23e import; +1 = the row-23h parity twin's LEGIT 23e home import, the one-home law, sanctioned IN the row-23h commit)");
     // the pt family face (the pt-racer pair's OWN bs+twin EXCLUDED by the
     // [x] bracket law) FLIPPED 17->18 by THIS twin's LEGIT 23f use-path
     // import (the harness :150 arm re-pins the SAME exclusion face):
     let pat_pt_all = format!("grep -rl \"packet_tra{q}{q}cer\" /opt/data/snort3-rust/tools/*/build.sh /opt/data/snort3-rust/tests/*.rs | grep -v '[p]tracer_harness/build.sh' | grep -v '[p]tracer_parity_test.rs' | wc -l");
-    assert_eq!(run_bash_usize(&pat_pt_all), 18, "THE sanctioned flip: pt family 17->18 (+1 = THIS twin's LEGIT 23f import)");
+    assert_eq!(run_bash_usize(&pat_pt_all), 19, "THE sanctioned flip x2: pt family 17->18->19 (+1 THIS twin's 23f import; +1 = the row-23h parity twin's LEGIT 23f home imports, the one-home law, sanctioned IN the row-23h commit)");
     // the misc-9 landmines EXACTLY-2 occupants NEVER +1 (the PacketTrace
     // NAMING law re-proven THROUGH the landing text; the needles ride the
     // adjacent-quote bash law so THIS file's text NEVER carries a join):

@@ -53,6 +53,7 @@ pub mod packet_tracer;
 // homes through the one-home use-paths (the 16->17 pc twin face + the
 // 17->18 pt twin face sanctioned AT the row, the strict-cp count law).
 pub mod packet_tracer_module;
+pub mod active;
 // the 23b seam-close re-export hub (the token-free wiring path — the
 // frozen sd-token census law, cited at seam.rs):
 pub mod seam;

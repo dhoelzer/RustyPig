@@ -5110,3 +5110,97 @@ Structural deviations (behavior preserved):
   digit-decomp identity (NEVER a frozen literal) — the vendored
   /opt/data/tools/luajit-src face REAL EVERY build; tm.o nm census EXACTLY-5
   lua-name undefs; the probe + FACE-A links UNRESOLVED-0.
+
+## packet_io ACTIVE owner pair (row 23h — active.cc 1,074 3a2a2380 + active.h 240 ce608579 @ fe29cbe = 1,314 L, THE chapter-20 GIANT — the ZERO-gate owner row; the harness token MEASURED 0 pre-hit; the in-TU TEST faces grep-0 + the test/CMake EXACTLY-2 add_cpputest face + the 375-L test riding the CppUTest DIALECT = host find-0 = dialect-BLOCKED NEVER landed — the census UNFLIPPED 28/9/20/1)
+
+- **THE ZERO-GATE MEASURED FACE**: `grep -c TEST_CASE` = EXACTLY-0 on BOTH row
+  files; `packet_io/test/CMakeLists.txt` carries EXACTLY-2 add_cpputest suites
+  (the sf-da-q counters test + the 23f pt-racer test — the ACTIVE pair NEVER
+  rides one there); `packet_io/test/active_packet_trace_test.cc` 375 L / 4
+  `^TEST` heads = the CppUTest DIALECT face — CppUTest host find-0 EVERY build
+  (the frozen arms prove it) => COMPILE-BLOCKED recorded CANDIDATE, honest
+  posture, NEVER landed. The harness ships ZERO runner TU / ZERO gate.txt; the
+  walked census STAYS 28 on-disk / 9 legacy 4826fc22 / 20 lineages / tracked-1
+  gre 6751d1a8, the backbone10 5339c7ee UNMOVED (NO census flip this row — the
+  ZERO-gate walk echoed EVERY build).
+- **THE thread_local -> fields law at its biggest**: the C TU rides 13 leading
+  `static ` decls MEASURED — the THREAD_LOCAL family s_attempts/s_suspend/
+  s_suspend_reason/active_counts/s_link/s_ipnet/s_send (cc :72-:83) + the
+  non-TL globals default_reset/default_drop_reason_id/drop_reason_id_map
+  (cc :85-:88). The port lands ONE caller-owned `ActiveWorld` (the
+  TraceThreadWorld shape law from the 23f home, DEV-006) + the `ActiveCtx`
+  face bundle; the send_t function-pointer seam (cc :78-:83, default
+  `SFDAQ::inject`) lands as the `SendKind` tag with the three-way dispatch in
+  send_via (DEV-007) — the typedef DECL rides the cite ONLY.
+- **the h :207 NO-definition face**: the private `block_session(const Packet*,
+  ActiveActionType, bool)` DECL — grep MEASURED: the owner TU carries EXACTLY
+  ONE definition (cc :867, the PUBLIC overload); the tagged private overload
+  has NO definition in the C tree at this revision (the C link-error face on
+  any call). Rust has no overloading: the port lands RENAMED
+  `block_session_tagged` + the h :207 DECL ported as a documented
+  `unreachable!` arm (DEV-014) — the compile-silent C face made honest.
+- **the landed-home REUSE (one-home law; every use-path is a LEGIT strict-face
+  cite)**: the 23a sf-da-q home (DAQ_SUCCESS :60, can_inject/can_inject_raw/
+  can_replace :608/:611/:614, forwarding_packet :557, inject :625 — the C
+  file-static call shape kept via the row-context handle leg); the 23b
+  sf-da-q-instance home (the DIOCTL ordinals :170-:173, set_packet_verdict_
+  reason :1147, pool/batch getters :743/:746, the retries_dropped bump cc :805
+  through the FROZEN DAQStats home :240-:264 NEVER re-opened — the bump rides
+  an explicit &mut leg, DEV-024); the 23f pt-racer home (is_active :298 +
+  log :545 — the C static-call shape lands as instance legs threaded via the
+  ctx, DEV-011); the landed cd_tcp TH_RST :248 + the cd_tcp.rs:130-:141
+  encode CITE-NEVER-LAND law re-ridden for the packet_manager encode trio
+  (DEV-010).
+- **THE HISTORY CITE left UNTOUCHED**: the earlier consumer at file_api/
+  file_cache.rs:191-:200 copied the h :64 ACT_* u8 consts BEFORE the owner
+  pair landed; the OWNER enum now lands HERE (h :64-:65 `: uint8_t`
+  discriminants) and that copy rides as history — NEVER re-forked, NEVER
+  edited there (grep-echoed, cite-only).
+- **the never-land walls (witness mirrors ONLY, NEVER landed per law)**: the
+  stream statics (block_flow stream.h :154, drop_flow :150, init_active_
+  response :192), the DetectionEngine statics (disable_all :105,
+  clear_replacement :90), the action_manager/profiler worlds, and the libdnet
+  face (eth_open/eth_send/eth_close/ip_open/ip_send/ip_close, utils/
+  dnet_header.h cc :37 — the ipheavy-donor dnet heads harvested, cited) all
+  ride row-scoped seam traits + capture witnesses. The E4 land arms re-prove
+  EVERY home DIES LOUD x1 (No-such-file) in THIS hull — the mirror keeps its
+  NEVER-land evidence; the sf-da-q-kin + p-c-gate + pt-racer-kin +
+  deferred_trust + layer REAL bodies compile rc0 compile-only (NEVER link).
+- **the enum-landing naming face**: the five `: uint8_t` families (Active-
+  Status/ActiveWouldReason/ActiveSuspendReason/ActiveActionType + the h :30
+  ActionPriority — DEV-001: active_action.h has NO landed home, the landed
+  IpsActionPriority is a DIFFERENT vocabulary never confused) land CamelCase
+  per the landed-enum naming precedent (parameter.rs `Type` law) with ZERO
+  new allows, and the u8 ordinal consts (ALL pub) pin the h discriminants as
+  the field homes the FACE-A records + the twin assert byte-equal.
+- **the printf-eval-order + unsigned-decref hygiene**: the C send_data walk
+  (buf bump :496 + `while (blen -= toSend)` :498) ports as a re-slice + a
+  mirrored u32 local EXACTLY as C — the min-clamp at :474 means the decref
+  NEVER wraps in either language (DEV-023 cited at the leg); the drop_reason
+  first-wins raw-`const char*` set (cc :1050-:1054) lands `Option<&'static
+  str>` (DEV-004).
+- **THE ONE-HOME strict faces flipped IN-COMMIT by the 62d6fac law**: the row
+  twin's use-paths of the LANDED 23a/23b/23e/23f homes are LEGIT cites — the
+  own sd holder face 7->8 (own build.sh, self-EXCLUDED), the pc inclusive
+  face 17->18 (the pt-rmod :150 arm), the pt family 18->19 (the pt-r-acer
+  :151 arm), the da-qio 5->6 / sf-mod 1->2 / sf-inst 5->6 / dir-stor 0->1
+  sd-holder faces, AND the row-23g twin's OWN pc (17->18) + pt (18->19) arms
+  re-pinned in the same commit. The pc build.sh-ONLY face STAYS 13 UNMOVED —
+  the foreign 13-arms NEVER move. ALL touched harnesses + twins re-ran rc0 AT
+  the row — no foreign arm left red; NO 23a-23g LANDING file was edited for
+  any reason.
+- **the config-face honesty**: the SnortConfig legs the pair reads
+  (snort_config.h :286/:291/:539/:542/:547/:555 — respond_attempts/
+  respond_device/read_mode/ips_*) have NO landed face (grep-verified at the
+  row: the landed parse_conf SnortConfig carries NEITHER) — the port lands a
+  MINIMAL CITED READ TRAIT LEFT-OPEN (DEV-006), NEVER a fake field on the
+  landed config type.
+- **vectors**: DEC 44L md5 5624bb43209b9931ab890f8ba4570e7d + FACE-A 10L md5
+  9e15e6c1233a85c2c8b15e5f87a29e00, FIRST-RUN-SEED drift-refuse + tamper-proven
+  + O0==O2 BYTE-IDENT on both streams; the probe drives the REAL compiled row
+  tm.o (SILENT rc0 vs the real SDK) through the capture witnesses — the Q0 +
+  D0..D14 + T ladder + the Z cold-NSDMI face; the FACE-A legs rebuild the
+  C-ABI record faces from sizeof/alignof/ordinals (NEVER frozen literals in
+  Rust — the twin re-derives NUMERICALLY); the row .o nm census pins the 6
+  SFDAQ:: undef wall faces (the mirrored-once honest hull); the E9 one-home
+  guard proves the row-owned homes NEVER double-land.
