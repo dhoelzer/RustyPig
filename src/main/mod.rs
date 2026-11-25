@@ -1,5 +1,6 @@
 pub mod numa;
 pub mod policy;
+pub mod processp;
 pub mod reload_tracker;
 pub mod snort_;
 pub mod thread;

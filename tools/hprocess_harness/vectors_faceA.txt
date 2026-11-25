@@ -1,0 +1,7 @@
+A1 PigSignal=4 sig_atomic=4 int=4
+A2 RingPig=24 RingLogic=12 RingInt=24
+A3 PIG_SIG_MAX=8 names8=1 none=1 max_ok=1
+A4 PATH_MAX=4096 PathBuf=4097
+A5 stack=14528
+A6 flock=32 stack_t=24 sigaction=152
+A7 no_lock_bit=0 run_flags_sz=4 log_quiet=0

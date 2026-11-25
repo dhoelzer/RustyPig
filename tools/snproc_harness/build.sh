@@ -255,7 +255,7 @@ test "$(grep -c 'pub fn set_instance_max' "$R"/src/main/thread_config.rs)" -eq 1
 test "$(grep -c 'pub fn get_instance_max' "$R"/src/main/thread_config.rs)" -eq 1
 test "$(grep -c 'pub fn set_instance_max' "$R"/src/main/snort_.rs || true)" -eq 0      # NEVER re-forked HERE
 test "$(grep -c 'ThreadConfig::' "$R"/src/main/snort_.rs)" -ge 3                        # REUSE legs (init/term/get_instance_max)
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 6                                            # ONE new wiring line: 5 -> 6
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 7                                            # rider-flip 6 -> 7 at row 24b: the sig-nal pair's ONE new wiring line (the 62d6fac complete-flip law, walked face)
 test "$(grep -c 'sn""ort_' "$R"/src/main/mod.rs || true)" -eq 0   # this file's own concat face guards
 
 # ---- landmine NAMING legs (the misc-9 family, STAYS 2 occupants NEVER +1;

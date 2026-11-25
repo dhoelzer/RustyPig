@@ -1,0 +1,38 @@
+D0 0 none
+D0 1 quit
+D0 2 term
+D0 3 int
+D0 4 reload-config
+D0 5 reload-attributes
+D0 6 dump-stats
+D0 7 rotate-stats
+D0 8 error
+D1 drained=1
+D2 initlegs=
+D3 int=1
+D3 term=1
+D4 quit= dirty=1 ring=1
+D5 raises=0000 drained=1,1,1,1 empty=1
+D6 unhandled-drained=1 trace_empty=1
+- term(15): shutdown normally
+- int(2): shutdown normally
+- quit(3): shutdown as if started with --dirty-pig
+- stats(10): dump stats to stdout
+- rotate(12): rotate stats files
+- reload(1): reload config file
+- hosts(23): reload hosts file
+D7 items=7
+D8 banner_rc=0 log_lines=14 legs=pcre2.ver|daq.ver|pcap.ver|ossl.ver|zlib.ver
+D9 pcre2_arm=undriven abort_face=find-0
+D10 gmt2local=-18000 got=-18000 match=1
+D11 read=10 content=1 unlink=1
+D11b miss_empty=1 recs=ErrorMessage
+D12 pidfile_content=1 unlink=1
+D13 noop_true=1 drop_legs=uid-boundary-faces-only
+D13 inval_got=0 false_face=1
+D14 empty_false=0 recs=ParseError
+D14 outside_false=0 recs=ParseError
+D15 daemon_once=undriven fork-arm=bound
+H1 pronto=1 exit0-line=1
+H2 oops-banner=1 segv-name=1 unreachable=1
+D17 term_clean=1

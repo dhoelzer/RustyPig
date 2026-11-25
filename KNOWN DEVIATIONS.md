@@ -5349,3 +5349,83 @@ Structural deviations (behavior preserved):
   UNTOUCHED; the small4 snort_config_h enable-esp pin rides a DIFFERENT
   header UNDISTURBED; the misc9 NAMING legs STAY 2 occupants (the
   hyphen-split comment law held ALL row files).
+
+## main signal/privilege owner pair (row 24b — main/process.cc 1055 7d3f6195 + main/process.h 77 7badd775 @ fe29cbe = 1,132 L — THE chapter-21 SECOND body, the sig-nal/privilege OWNER PAIR; the ZERO-gate CONTROL row right after the 24a gate row; the landing src/main/processp.rs 1,011 L; the THIRD ground face src/main.h 67 L 2b487dd0 rides CITES ONLY NEVER lands (exit_requested :25 / get_prompt :26); the walked census UNMOVED 29/9/21/1 (NO gate ships HERE); seed 825 x3 NEVER moved here — the docs sibling banks the new one)
+
+- 1. THE ZERO-GATE DIALECT FACE (measured, not asserted): the in-TU TEST faces
+  ride grep-0 BOTH files (TEST_CASE / bare TEST( / UNIT_TEST posts / CHECK(
+  ALL find-0 — the UNIT_TEST compile post itself NEVER appears in the TU);
+  the main/test/CMakeLists carries EXACTLY-2 add_cpputest dialect faces
+  (thread_test + the ENABLE_SHELL-conditional distill pair) and the bare
+  'process' ground name rides that list EXACTLY-0 — the row TU rides ONLY
+  main/CMakeLists (process.cc SOURCES x1 + process.h INCLUDES x1). NO gate
+  RUNNER ships; the walked census reads 29 on-disk / 9 legacy 4826fc22 /
+  21 lineages / tracked-1 gre EVERY build. The harness ships BOTH posts
+  (plain + -DUNIT_TEST) and measures the NM DELTA = 0 (70/70 undefs) as the
+  honest zero-gate compile face — the post arms VACUOUS, NOT assumed.
+
+- 2. THE BANNER EVALUATION-ORDER LAW (the takeover fix, banked honest): the
+  ground :659 pcre2_config QUERY fires BEFORE the first :664 ladder leg —
+  the child's first staged draft queried AFTER the ladder AND carried a
+  duplicated match arm (two hazards at once: the wrong ORDER and a dead
+  second leg). The landing hoists the query; the twin replays the
+  legs-ORDER census (pcre2.ver fires FIRST) and asserts the abort posture
+  fires ZERO ladder rows. Deviation face: the port models the pcre2 size
+  law (:661-:662 <=0 or >64 -> abort->Err) as Ok-with-length-check — the C
+  abort() NEVER surfaces; Err posture cited per the FatalError->Err law.
+
+- 3. THE names-table DEV face (the ground NEVER "fixed"): PIG_SIG_RELOAD_HOSTS
+  names as "reload-attributes" in the C table (cc :115-:120); the port
+  mirrors the face BYTE-EQUAL and the twin pins the honest mismatch. The
+  boundary leg (:316 s >= PIG_SIG_MAX -> "error") lands too. The exit_pronto
+  STATIC init face is TRUE (:164) — a bool the config layer flips; the
+  default-true seat lands as the caller-owned field init face.
+
+- 4. THE ring(4) WRAP face over the landed helpers-ring one-home (cite,
+  NEVER re-fork): the C RingLogic starts rx=0/wx=1 — the rx-cell is DEAD —
+  so the 4-slot ring carries capacity sz-2 = EXACTLY-2 usable. The D5 face
+  pushes 2 + DROPS 2 (the write -1 legs); the raises are signal() returns
+  (0 = ok), NEVER the ring result — a face a naive replay gets backwards.
+  The drains ride SEQUENCED legs; the unsequenced-printf face (four get()
+  legs in one call) would EAT the ring — the probe banked the law, the twin
+  replays it.
+
+- 5. THE boundary-NEVER-invented law (the mock-world faces): the driven legs
+  model the MEASURED host boundaries (non-root setres*id EPERM, chroot
+  refused, initgroups refused, fork held at the bound) — a success arm
+  PAST a boundary would fake a root run. The D13/D14/D15 seed lines ride
+  false-legs ONLY: the jail NEVER entered, the uid NEVER dropped, the
+  daemon once-guard NEVER fired. The chroot log_dir rebase arithmetic
+  (:1035-:1038 root_len >= strlen seat) lands but the driven face stays
+  undriven-past-boundary honest.
+
+- 6. THE pinned-TZ gmt2local face: the harness pins the TZ to
+  America/New_York over a WINTER stamp so the :709-:733 arithmetic is
+  deterministic — -18000 s (EST) with the year-diff dir leg FIRING (121 ->
+  120 across the year boundary) and the yday leg SKIPPED (dir != 0). The
+  twin rebuilds the arithmetic BY HAND (-5h face) and pins the seed pair.
+  Deviation note: the C gmtime_r/localtime_r static-buffer aliasing face
+  (same-date reuse) rides the Parts seam — the port NEVER aliases.
+
+- 7. THE takeover ledger (the child died at budget, staged face, NO report):
+  the harness was authored with set -uo pipefail — a silent-arm risk —
+  fixed forward to set -euo pipefail; THREE authoring pins rode honest
+  drifts and were cold-measured at the row: vectors wc 31 -> 38 (the 7
+  LIVE help stdout lines ride the DEC stream), the copy-tree closure 155
+  -> 154 (the config.h rider OVERWRITES a donor seat), the E4 graft face
+  daq_version_string 1 -> 2 (the error line + the echoed source line BOTH
+  carry the token). The snproc mod.rs holder flipped 6 -> 7 IN this commit
+  (the 62d6fac complete-flip law, walked face, token-safe comment). The
+  landing prose carried one 'allow(' MENTION that broke the row's own
+  ZERO-allows law face — repaired at source to the words, NEVER an
+  attribute added. The E4 bare wall face: cc :27 luajit.h (the host LuaJIT
+  headers absent; the proven -I re-cite rides, NEVER vendored) — the same
+  absent-head family the 24a E4 ladder measured for OpenSSL.
+
+- 8. THE system-lib DECL-rider wall (the 24a openssl precedent re-rides):
+  the host pcap/openssl/pcre2/luajit head faces are MEASURED ABSENT; the
+  copy-local SYNTHETIC DECL riders (config.h + the four heads) EVIDENCE the
+  handoff shape ONLY — NEVER an ABI truth, NEVER vendored; the re-cite law
+  holds: every synthetic face is cited against the real home (the luajit
+  -I re-cite rides the REAL /opt/data/tools/luajit-src for the :27 wall
+  leg) and the D8 banner strings ride SYNTHETIC seats honestly flagged.
