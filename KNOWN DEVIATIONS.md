@@ -5262,7 +5262,7 @@ Structural deviations (behavior preserved):
   UNMOVED (the union walk MEASURED-0 new holders: the row's files ride the
   runtime-concat ground forms ONLY).
 
-## main CLI-assembly pair (row 24a — main/snort.cc 642 35c362ec + main/snort.h 77 9121b522 @ fe29cbe = 719 L — THE chapter-21 OPENER, the CLI-assembly TU, THE FIRST REAL GATE ROW OF THE CHAPTER; the landing src/main/snort_.rs 830 L; the THIRD ground face src/main.h 67 L 2b487dd0 rides CITES ONLY NEVER lands; the harness token MEASURED 0 pre-hit (the sn-proc family; the joined own token rides tools/tests/docs EXACTLY-0 BY LAW); the CENSUS FLIPPED 28->29 on-disk gates / 20->21 lineages / the legacy 9 x 4826fc22 FROZEN / tracked STAYS gre's ONLY; seed 810 x3 NEVER moved here — the docs sibling banks the new one)
+## main CLI-assembly pair (row 24a — main/snort.cc 642 35c362ec + main/snort.h 77 9121b522 @ fe29cbe = 719 L — THE chapter-21 OPENER, the CLI-assembly TU, THE FIRST REAL GATE ROW OF THE CHAPTER; the landing src/main/snort_.rs 835 L (re-measured at the landing rider — the 830 in the a-body was an honest count drift, banked); the THIRD ground face src/main.h 67 L 2b487dd0 rides CITES ONLY NEVER lands; the harness token MEASURED 0 pre-hit (the sn-proc family; the joined own token rides tools/tests/docs EXACTLY-0 BY LAW); the CENSUS FLIPPED 28->29 on-disk gates / 20->21 lineages / the legacy 9 x 4826fc22 FROZEN / tracked STAYS gre's ONLY; seed 810 x3 NEVER moved here — the docs sibling banks the new one)
 
 - 1. THE GATE SHAPE (the honest dialect face): the in-TU Catch arms ship as
   EXACTLY-1 TEST_CASE at :608 over EXACTLY-4 CHECK legs under the :606

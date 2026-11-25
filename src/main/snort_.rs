@@ -806,7 +806,6 @@ impl Snort {
 
     // conf-slot legs folded into the world: sc->setup()/post_setup()/
     // verify() faces (the SnortConfig owner NEVER landed, DEV-001).
-    #[allow(non_snake_case)]
     pub fn set_conf_slot(conf: CliConf) {
         let mut s = statics().lock().unwrap_or_else(|e| e.into_inner());
         s.gen_counter += 1;
