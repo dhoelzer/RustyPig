@@ -1,4 +1,4 @@
-# NEXT.md — takeover context & plan (2026-11-24, post-23f: THE chapter-20 SIXTH row LANDED — the THIRD REAL GATE ROW: packet_io/packet_tracer.cc 739 (md5 9b9ba56c77980e0c3b03bc1de0996262) + packet_tracer.h 166 (md5 0bc4bb52a613fd32f4959af595caf78f) @ fe29cbe = 905 L — the cc carries the LARGEST in-TU Catch block of the port: EXACTLY-10 TEST_CASE "[PacketTracer]" faces (:510/:533/:555/:589/:610/:631/:666/:694/:715/:725) over EXACTLY-49 CHECK legs = THE gate: `tools/pt-racer_harness` (the 23e GATE template re-cloned: CATCH_CONFIG_RUNNER runner TU tracked + gate COPY-LOCAL UNTRACKED md5 881156a1; RUNNER-MEASURED tail "All tests passed (49 assertions in 10 test cases)"; the MAIN-twin honesty arm GREEN again — no SEGV face at this row, MEASURED both postures; E9 dup twins exactly-35 vs exactly-4 flipped-assert) — THE THIRD CENSUS FLIP LANDED IN-COMMIT BY THE ROW ITSELF this time (the 23e law APPLIED COMPLETELY by the child: walked 27->28 on-disk / 19->20 lineages, legacy x9 4826fc22 + gre 6751d1a8 byte-frozen, tracked face STAYS gre's ONLY; every holder harness arm (the p-c-gate, di-rst-or, da-qio, sfin-st and sf-mod build.sh faces + sfd/tracer/tc/rsubs) + the Rust twins + the _harness face forms tools/pcgate_harness, tools/dirstor_harness, daqio_harness, sfinst_harness & sfmod_harness (ONE line each, this header line: the gate-row token census law) rider-flipped sanctioned IN the code commit; ONLY two strict token-face legs needed the DOCS rider: the pc gate-row cp face 13->14, sanctioned for the legit 23f one-home REUSE use-path, + ONE bare-token join in the 23f twin comment fixed AT SOURCE the hyphen-bracket law, pin STAYED 0); wall ladder MEASURED: the fresh-cp DECL hull (ips_context + the detection_buf/mpse/mpse_batch closure, batched_logger, stream_log, active.h, stopwatch/clock, vendored catch) SILENT rc0; witness mirrors ONLY StreamLog-4/BatchedLogManager-2/Active act_str/SFDAQ-mirror residuals — the real active.cc/stream_log.cc/batched_logger.cc NEVER landed NEVER reached; the 23e pc.o rides EVERY link cross-row (the REUSE face); the .h REUSES the landed packet_constraints type + the landed homes; vectors DEC 37L md5 218ec5b6cde11566f9036e7e2f1f374d + FACE-A 6L md5 3a9b0a4b31ba291d98e3a980efc0c2de FIRST-RUN-SEED drift-refuse tamper-proven O0==O2 BYTE-IDENT; rs src/packet_io/packet_tracer.rs 746 L flat cite-heavy ZERO allows (the only unsafe token rides a law comment; the C owned-world thread_local NEVER copied -> the owned-split deviation cited; the landmine face STAYS EXACTLY-2 pre-existing occupants — the new Rust facade rides named PacketTrace, the struct PacketTracer face NEVER typed); the parity twin tests/pt-racer_parity_test.rs 998 L / 9 fns replays the FULL 37-line DEC ladder BYTE-EQUAL + the FACE-A rebuild + the 28/9/20/1 walk + the 16/5/7 family mirror arms + the 13-file pc build.sh face + landmine-2 + the pt token-face arms; 763 tests green / 0 FAILED seed ABSORBED x3 (the 23e face); 752 tests green / 0 FAILED stays pinned x3; 772 tests green / 0 FAILED over **85** result-lines re-run LIVE at the row (763 + 9 pt-racer replay fns) + clippy 0. Commit count: the row-23f landing = the 147th push face, NINETEENTH straight one-commit/one-push NO-amend NO-force (26 paths +2,992/-26 at a43fe41); THIS docs sync rides as the 148th. Remaining chapter-20 candidates per the PLAN NEXT line: packet_tracer_module 262+59 riding the LANDED tracer+constraints homes = the cheap next leg; the sfdaq_static_modules.h.in dialect; active 1,074+240 the heavy giant rank-LATER; THEN row 21 integration; row-19 option subset per PLAN — NEVER invent a row)
+# NEXT.md — takeover context & plan (2026-11-25, post-23g: THE chapter-20 SEVENTH row LANDED — the ZERO-gate control shell: packet_io/packet_tracer_module.cc 262 (md5 f5b3507d8868abda27f3ce94a2af99bd) + packet_tracer_module.h 59 (md5 ab0bbe5ebe247315ccf57ffeb65e6e06) @ fe29cbe = 321 L, in-TU TEST_CASE EXACTLY-0 (packet_io test CMake EXACTLY-2 add_cpputest, this TU ABSENT = ZERO-gate CONFIRMED; the census stays 28/9/20/1 UNMOVED, no rider flips needed) — RECON-MODULE row riding the LANDED homes (the pt-racer 23f facade + the tracer 22b home + the 23e constraints + the sfmod 23c SFDAQModule face + the REAL daq_module_api.h 165 1a617b3e): fresh-cp head DIES EXACTLY-1 at cc :31 sf_module_managers.h (flipped-assert), the two DECL riders die EXACTLY-1 each (control.h + batched_logger.h riders CLOSE to SILENT rc0), the real-closed hull BOTH legs SILENT rc0, 10 stageables; the analyzer-broadcast wall mirrored witness-ONLY NEVER landed; the REAL LuaJIT drive face (get_commands fn-ptrs vs real lua_State, tm.o EXACTLY-5 lua-name undefs); vectors DEC 16L md5 6a6ecc1ab4e0faa8e677dbf0ea2e9062 + FACE-A 7L md5 5cdf63c9e8f38c2fbdef0c6d94895cc1 FIRST-RUN-SEED tamper-proven O0==O2 BYTE-IDENT; rs src/packet_io/packet_tracer_module.rs 451 L flat cite-heavy ZERO allows (18 clippy legs fixed clean); twin tests/pt-mod_parity_test.rs 586 L / 12 fns; the row child itself RODE the 23f token law — split TWO joined p-c-gate mentions in its OWN files (the arm caught them, proven law); harness `tools/pt-mod_harness` (the pt joined own-token rides NEXT EXACTLY-0 BY LAW this row — its harness arms pin ZERO both branches; the name NEVER typed in this file); sanctioned in-commit face flips pc 14->15 + pt-family 17->18 (the twin's legit one-home use-path cites, 62d6fac law); 772 tests green / 0 FAILED seed ABSORBED x3 (the 23f face); 763 tests green / 0 FAILED stays x3; 752 tests green / 0 FAILED stays x3; 784 tests green / 0 FAILED over **86** result-lines re-run LIVE at the row (772 + 12 pt-mod replay fns) + clippy 0. Code commit = the 150th push face at 610b947, TWENTIETH straight one-commit/one-push (15 files +2,160/-2); THIS docs sync rides as the 151st. Remaining chapter-20 per the PLAN NEXT line: the sfdaq_static_modules.h.in dialect; active 1,074+240 the heavy giant rank-LATER; THEN row 21 integration; row-19 option subset per PLAN — NEVER invent a row) packet_io/packet_tracer.cc 739 (md5 9b9ba56c77980e0c3b03bc1de0996262) + packet_tracer.h 166 (md5 0bc4bb52a613fd32f4959af595caf78f) @ fe29cbe = 905 L — the cc carries the LARGEST in-TU Catch block of the port: EXACTLY-10 TEST_CASE "[PacketTracer]" faces (:510/:533/:555/:589/:610/:631/:666/:694/:715/:725) over EXACTLY-49 CHECK legs = THE gate: `tools/pt-racer_harness` (the 23e GATE template re-cloned: CATCH_CONFIG_RUNNER runner TU tracked + gate COPY-LOCAL UNTRACKED md5 881156a1; RUNNER-MEASURED tail "All tests passed (49 assertions in 10 test cases)"; the MAIN-twin honesty arm GREEN again — no SEGV face at this row, MEASURED both postures; E9 dup twins exactly-35 vs exactly-4 flipped-assert) — THE THIRD CENSUS FLIP LANDED IN-COMMIT BY THE ROW ITSELF this time (the 23e law APPLIED COMPLETELY by the child: walked 27->28 on-disk / 19->20 lineages, legacy x9 4826fc22 + gre 6751d1a8 byte-frozen, tracked face STAYS gre's ONLY; every holder harness arm (the p-c-gate, di-rst-or, da-qio, sfin-st and sf-mod build.sh faces + sfd/tracer/tc/rsubs) + the Rust twins + the _harness face forms tools/pcgate_harness, tools/dirstor_harness, daqio_harness, sfinst_harness & sfmod_harness (ONE line each, this header line: the gate-row token census law) rider-flipped sanctioned IN the code commit; ONLY two strict token-face legs needed the DOCS rider: the pc gate-row cp face 13->14, sanctioned for the legit 23f one-home REUSE use-path, + ONE bare-token join in the 23f twin comment fixed AT SOURCE the hyphen-bracket law, pin STAYED 0); wall ladder MEASURED: the fresh-cp DECL hull (ips_context + the detection_buf/mpse/mpse_batch closure, batched_logger, stream_log, active.h, stopwatch/clock, vendored catch) SILENT rc0; witness mirrors ONLY StreamLog-4/BatchedLogManager-2/Active act_str/SFDAQ-mirror residuals — the real active.cc/stream_log.cc/batched_logger.cc NEVER landed NEVER reached; the 23e pc.o rides EVERY link cross-row (the REUSE face); the .h REUSES the landed packet_constraints type + the landed homes; vectors DEC 37L md5 218ec5b6cde11566f9036e7e2f1f374d + FACE-A 6L md5 3a9b0a4b31ba291d98e3a980efc0c2de FIRST-RUN-SEED drift-refuse tamper-proven O0==O2 BYTE-IDENT; rs src/packet_io/packet_tracer.rs 746 L flat cite-heavy ZERO allows (the only unsafe token rides a law comment; the C owned-world thread_local NEVER copied -> the owned-split deviation cited; the landmine face STAYS EXACTLY-2 pre-existing occupants — the new Rust facade rides named PacketTrace, the struct PacketTracer face NEVER typed); the parity twin tests/pt-racer_parity_test.rs 998 L / 9 fns replays the FULL 37-line DEC ladder BYTE-EQUAL + the FACE-A rebuild + the 28/9/20/1 walk + the 16/5/7 family mirror arms + the 13-file pc build.sh face + landmine-2 + the pt token-face arms; 763 tests green / 0 FAILED seed ABSORBED x3 (the 23e face); 752 tests green / 0 FAILED stays pinned x3; 772 tests green / 0 FAILED over **85** result-lines re-run LIVE at the row (763 + 9 pt-racer replay fns) + clippy 0. Commit count: the row-23f landing = the 147th push face, NINETEENTH straight one-commit/one-push NO-amend NO-force (26 paths +2,992/-26 at a43fe41); THIS docs sync rides as the 148th. Remaining chapter-20 candidates per the PLAN NEXT line: packet_tracer_module 262+59 riding the LANDED tracer+constraints homes = the cheap next leg; the sfdaq_static_modules.h.in dialect; active 1,074+240 the heavy giant rank-LATER; THEN row 21 integration; row-19 option subset per PLAN — NEVER invent a row)
 
 This file is the single resume point for a fresh agent. It carries only
 what is not cheaply re-derivable. `PORTING_PLAN.md` (row table, per-row
@@ -32,7 +32,13 @@ the tc cargo twin), the bare tc dir-token (underscore form) appears on
 EXACTLY-2 lines (the donor ledger + the Session ritual), and the sfd
 prefixed dir-token appears on EXACTLY-1 line (the ritual cite — sfd
 :119 + its cargo twin); everything else in tools/ is prose citation)**:
-- `772 tests green / 0 FAILED` — THE CURRENT-PASS SEED for the NEXT
+- `784 tests green / 0 FAILED` — THE CURRENT-PASS SEED for the NEXT
+  harness (the static_modules dialect leg / the next ranked chapter-20 row)
+  to grep-assert at EXACT-COUNT: EXACTLY three occurrences on EXACTLY three separate
+  lines - NEVER a fourth, NEVER two occurrences sharing one line. It rides the 23g landing
+  face (cargo re-run LIVE at the row: 784 passed / 0 failed over **86** `test result`
+  lines = 772 at 23f + 12 pt-mod replay fns).
+- `772 tests green / 0 FAILED` — the 23f-pass seed, NOW ABSORBED into the pinned set for the NEXT
   harness (the packet_tracer_module dialect leg / the next ranked chapter-20 row)
   to grep-assert at EXACT-COUNT: EXACTLY three occurrences on EXACTLY three separate
   lines — NEVER a fourth, NEVER two occurrences sharing one line. It rides the 23f landing
@@ -157,25 +163,27 @@ banked since 19a fully LANDED; the ONLY unfinished plan rows are
 OPTION subset (its OWN line: 'chapter-19 track opened at 19a' — the
 option campaign re-enters per the PLAN line, banked rank-last), row 20
 packet_io/DAQ, row 21 main CLI — NEVER invent a row.
-**147 commits at HEAD a43fe41** (`git rev-list --count` HEAD == origin
-== 147 re-run at THIS docs pass; a43fe41 = the row-23f landing, the
-**147th**, NINETEENTH straight one-commit/one-push row landing — THIS
-gate-row child shipped its OWN complete census-flip ledger in-commit
-(the 23e law taken to heart) and committed BEFORE any budget scare;
-THIS docs sync rides as the **148th** carrying the two strict
-token-leg riders the cold chain surfaced (see the header ledger).
-**772 tests green / 0 FAILED** — THE LANDED face at the 23f row pass,
-RE-MEASURED LIVE: 772 passed / 0 failed over **85** `test result` lines
-(763 at 23e + **9** new pt-racer replay fns). clippy --all-targets 0
-re-run LIVE at the row too. (The result-line count MOVES — 23a 80,
-23b 81, 23c 82, 23d 83, 23e 84, 23f 85; NEVER pre-assume.)
-Test math: 772 = 763 at 23e + **9** replay fns in the 23f parity rs
-(`grep -c '^[#]\[test\]'` = 9 re-measured at the row — the 37-L DEC
-vector drives ONE byte-equal replay leg, the 10 gate TEST_CASEs + the
-49 CHECKs ride the ground-cite arms + the census/seed/token tripwires).
-The ABSORBED 23e seed face (763 over 84 result-lines) stays pinned x3
-verbatim — the seed bullet, the rewrites ledger + the header exhibit,
-NEVER a 4th face added here.)
+**150 commits at HEAD 610b947** (`git rev-list --count` HEAD == origin
+== 150 re-run at THIS docs pass; 610b947 = the row-23g landing, the
+**150th**, TWENTIETH straight one-commit/one-push row landing (15 files
++2,160/-2; the child rode the 23f token law itself - split TWO joined
+p-c-gate mentions in its own files BEFORE commit); THIS docs sync rides
+as the **151st**, carrying the four strict-sfdaq-face repair (the 23g
+harness comments joined the bare ground-name twice - fixed AT SOURCE
+bracket law, every pin UNMOVED, the whole cold chain green at the clean face).
+**784 tests green / 0 FAILED** — THE LANDED face at the 23g row pass,
+RE-MEASURED LIVE: 784 passed / 0 failed over **86** `test result` lines
+(772 at 23f + **12** new pt-mod replay fns). clippy --all-targets 0
+re-run LIVE at the row too (18 clippy legs in the landing file fixed
+clean: doc-list indent, collapsible-if to let-chain, derived Default).
+(The result-line count MOVES — 23c 82, 23d 83, 23e 84, 23f 85, 23g 86;
+NEVER pre-assume.) Test math: 784 = 772 + **12** replay fns in the 23g
+parity rs (`grep -c test-attrs` = 12 re-measured — the 16-L DEC
+module-ladder vector drives ONE byte-equal replay leg + the REAL-LuaJIT
+drive + the config-face + the census/token tripwires). The ABSORBED
+23f seed face (the 772-over-85-result-lines ladder)
+result-lines) stays pinned x3 verbatim — the seed bullet, the rewrites
+ledger + the header exhibit, NEVER a 4th face added here.)
 - Rust row-22b pair (flat, cite-heavy, re-measured THIS pass):
   `src/framework/tracer.rs` **323 L** md5 `3b14726eed7a5aa6751df0752514e4eb`
   (**ZERO** `allow(` — grep 0; REUSE cites NOT re-forks: IpApiLite rtn_checks:44 /
@@ -194,10 +202,10 @@ NEVER a 4th face added here.)
   the 920/95 ground md5s `ca123f89…`/`86a4d248…`) stays pinned by the tc
   cargo twin EVERY build — face-by-face, NEVER re-typed from here.
 - Whole-repo stats re-measured LIVE THIS pass (NEVER trust the previous
-  face): **69,378** lines Rust across **181** `src/*.rs` files, **58**
-  `tests/*_parity_test.rs` replay files, **613** tracked files
-  (`git ls-files | wc -l`, post-23f), tools = **65** `*_harness` dirs on disk, ALL
-  **65 TRACKED**
+  face): **69,835** lines Rust across **182** `src/*.rs` files, **59**
+  `tests/*_parity_test.rs` replay files, **623** tracked files
+  (`git ls-files | wc -l`, post-23g), tools = **66** `*_harness` dirs on disk, ALL
+  **66 TRACKED**
   the 22b/23b 8-face shape; build.sh, PLAN.md, probe.cc, probe_faceA.cc,
   witness .cc, vectors.txt, vectors_faceA.txt, .gitignore; ZERO
   runner TU = ZERO gate material; witness_conf.cc NEVER re-rides — the
@@ -249,13 +257,13 @@ NEVER a 4th face added here.)
   row 22b** (22a at 1bae8fc, 22b at a82e11f, dev_block_22b.txt md5
   triple `3c8fad18…` byte-exact, provenance x12), wiki stats face 547
   files / 64,583 lines / 135 commits / 659 tests over 79 result-lines =
-  wiki-side HISTORY at WIKI-23d (ffcaed0) then WIKI-23e (dec1c9f): 603 / 68,620 / 146 / 763 —
-  re-measure LIVE at the wiki-23f phase, NEVER re-type). ZERO debt thru
-ZERO debt thru 23e; **23f is OWED at the wiki phase** (the SECOND census-FLIP wiki face: the walked gate ladder moves 27->28 on-disk / 19->20 lineages there too). This docs pass
+  wiki-side HISTORY at WIKI-23d (ffcaed0) then WIKI-23e (dec1c9f) through WIKI-23f (e72482a + rider 4d113dd): 613 / 69,378 / 149 / 772 —
+  re-measure LIVE at the wiki-23g phase, NEVER re-type). ZERO debt thru
+ZERO debt thru 23f (the SECOND census-FLIP wiki face 28/9/20/1 rode WIKI-23f); **23g is OWED at the wiki phase** (the ZERO-gate control row: the walked census STAYS 28/9/20/1 there too — echo it honest).
   touched the wiki ZERO times — NEVER edit `/tmp/RustyPig.wiki`
   outside the WIKI phase.
-- **Fresh-build set MOVED at 23f (by-DESIGN drift)**: the FRESH lineage
-  head is NOW the row-23f gate harness (its pt-token ZERO law: its NAME NEVER rides THIS file — the ZERO arm holds, cited the 23f split law) — THIS ritual line is the ONLY carrier; the 23e p-c-gate template clone: 8 stageables, RUNNER tail "All tests passed (49 assertions in 10 test cases)", MAIN-twin rc0 honesty, census legs 28/9/20/1, E9 35-vs-4 faces, the 37-L DEC replays; cold rc0 at the clean rider face FIRST: census=28/9/20/1 walk) — THEN, still alive in the same set, the 23e GATE harness (its strict cp-face 13->14 sanctioned rider landed at THIS docs pass; the di-rst-or-leg pin stayed 0 — the 23f twin comment fixed AT SOURCE the bracket law):
+- **Fresh-build set MOVED at 23g (by-DESIGN drift)**: the FRESH lineage
+  head is NOW the row-23g harness `tools/pt-mod_harness` (its joined pt-token rides THIS file EXACTLY-0 BY LAW — the harness arms pin ZERO both branches, the 23f ZERO precedent re-ridden; 8 stageables, ZERO-gate, the REAL-LuaJIT-drive face, the 16-L DEC ladder; cold rc0 receipts incl the ground-name comment repair leg) — THEN the SAME set still holds: the 23f gate harness (49-assertion RUNNER tail; its strict pt-family face 17->18 rider landed at the 23g code commit), the 23e GATE harness (cp-face 14->15 rider), then:
   head is the row-23e GATE harness (the 9-stageable p-c-gate tree: the state-aware block —
   the ONE-token NEXT-line pin law EXACTLY-1 (the header rewrite is the ONLY carrier), the
   whole-name NEVER-typed law, the gate.txt COPY-LOCAL face + the RUNNER tail ride
@@ -1019,7 +1027,7 @@ push helper returns success.
   survivor_flow_data.rs ZERO (21b) + **thread_config.rs ZERO (22a)**,
   ZERO in any framework mod.rs — tests-side pin-site counsel
   unchanged.
-- NEXT.md rewrites: pin floors THIS face = `573 tests green` EXACTLY x5 lines (sfd :641 + tc :656 ENFORCE it as a count, NEVER four or six), `580 passed / 0 failed` x3 (the PASSED phrasing ONLY), `588 tests green / 0 FAILED` EXACTLY x4, `597 tests green / 0 FAILED` EXACTLY x3 on EXACTLY 3 lines (misc9's arms stay LIVE even at direct-md5 verify), `605 tests green / 0 FAILED` x3, `621 tests green / 0 FAILED` EXACTLY x3, `629 tests green / 0 FAILED` EXACTLY x3, the absorbed landed seeds `633 tests green / 0 FAILED` x3 + `650 tests green / 0 FAILED` x3 + `659 tests green / 0 FAILED` EXACTLY x3, the absorbed landed seeds `684 tests green / 0 FAILED` EXACTLY x3 + `702 tests green / 0 FAILED` EXACTLY x3, the absorbed 23c seed `724 tests green / 0 FAILED` EXACTLY x3 + the absorbed 23d seed `752 tests green / 0 FAILED` EXACTLY x3, the 23e-pass seed `763 tests green / 0 FAILED` NOW ABSORBED into the pinned faces EXACTLY x3, and the NEW current-pass seed face (772 over 85 result-lines) EXACTLY x3 on three separate lines — re-grep BEFORE writing (`tools/` AND `tests/`) and AFTER the docs commit. TOKEN ARITHMETIC (all arms
+- NEXT.md rewrites: pin floors THIS face = `573 tests green` EXACTLY x5 lines (sfd :641 + tc :656 ENFORCE it as a count, NEVER four or six), `580 passed / 0 failed` x3 (the PASSED phrasing ONLY), `588 tests green / 0 FAILED` EXACTLY x4, `597 tests green / 0 FAILED` EXACTLY x3 on EXACTLY 3 lines (misc9's arms stay LIVE even at direct-md5 verify), `605 tests green / 0 FAILED` x3, `621 tests green / 0 FAILED` EXACTLY x3, `629 tests green / 0 FAILED` EXACTLY x3, the absorbed landed seeds `633 tests green / 0 FAILED` x3 + `650 tests green / 0 FAILED` x3 + `659 tests green / 0 FAILED` EXACTLY x3, the absorbed landed seeds `684 tests green / 0 FAILED` EXACTLY x3 + `702 tests green / 0 FAILED` EXACTLY x3, the absorbed 23c seed `724 tests green / 0 FAILED` EXACTLY x3 + the absorbed 23d seed `752 tests green / 0 FAILED` EXACTLY x3, the carried `763 tests green / 0 FAILED` + `752 tests green / 0 FAILED` faces stay pinned EXACTLY x3, the 23f-pass seed `772 tests green / 0 FAILED` NOW ABSORBED into the pinned faces EXACTLY x3, and the NEW current-pass seed face (784 over 86 result-lines) EXACTLY x3 on three separate lines — re-grep BEFORE writing (`tools/` AND `tests/`) and AFTER the docs commit. TOKEN ARITHMETIC (all arms
   live): keep the prefixed sfd dir-token on EXACTLY-1 line (sfd script
   :119 + parity twin), the bare 22a dir token on EXACTLY-2 lines
   (its :128), the stale hwloc-token exhibit VERBATIM riding (its

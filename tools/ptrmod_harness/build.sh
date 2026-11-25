@@ -9,7 +9,7 @@
 # USE-PATHS, sanctioned at the :152/:163 riders).
 # THE GATE FACE: MEASURED ZERO in-TU TEST faces (grep -c TEST_C""ASE on
 # both row files EXACTLY-0 BOTH; the packet_io/test CMake add_cp""utest
-# face MEASURED-2: sfdaq_counters + active_packet_trace — NO module suite
+# face MEASURED-2: sf-daq_counters + active_packet_trace — NO module suite
 # EVER; the walked census STAYS 28/9/20/1 by walk — NO gate ships, NO
 # runner TU, NO gate.txt (this dir find-0 gate*)).
 # THE E4 WALL LADDER (MEASURED BOTH ways EVERY build at THIS row):
@@ -120,7 +120,7 @@ test "$(md5sum "$L"/api/daq_common.h | awk '{print $1}')" = "28789a3dc10b84c9741
 test "$(grep -c 'TEST_CASE' "$SRC"/src/packet_io/$PTM.cc || true)" -eq 0   # ZERO in-TU TEST face
 test "$(grep -c 'TEST_CASE' "$SRC"/src/packet_io/$PTM.h || true)" -eq 0    # ZERO in-TU TEST face (pair)
 test "$(grep -c 'UNIT_TEST\|TEST_GROUP\|^TEST(\|CppUTest' "$SRC"/src/packet_io/$PTM.cc "$SRC"/src/packet_io/$PTM.h | grep -vc ':0$' || true)" -eq 0
-test "$(grep -c 'add_cpputest' "$SRC"/src/packet_io/test/CMakeLists.txt)" -eq 2   # active_packet_trace + sfdaq_counters ONLY (the 23e/23f rider-suite faces re-ride)
+test "$(grep -c 'add_cpputest' "$SRC"/src/packet_io/test/CMakeLists.txt)" -eq 2   # active_packet_trace + sf-daq_counters ONLY (the 23e/23f rider-suite faces re-ride)
 test "$(grep -c "$PTM" "$SRC"/src/packet_io/test/CMakeLists.txt || true)" -eq 0   # NO module suite EVER rode the test CMake
 test "$(grep -c "$PTM.cc" "$SRC"/src/packet_io/CMakeLists.txt)" -eq 1    # :37 the object-list home
 test "$(grep -c "$PTM.h" "$SRC"/src/packet_io/CMakeLists.txt)" -eq 1     # :38
