@@ -616,9 +616,9 @@ PYPIN
 # byte-frozen + its 14-name-free 3-L face, tracked gate.txt face STAYS 1 ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 28   # SANCTIONED row-23e flip-forward: 26 -> 27 (the pc-gate copy-local face landed THIS row; the 22a face rode above; the 62d6fac law)                        # THE FLIP: 25 -> 26 (tc's NEW on-disk gate) [ROW-2->28 rider: 62d6fac law]
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 29   # SANCTIONED row-23e flip-forward: 26 -> 27 (the pc-gate copy-local face landed THIS row; the 22a face rode above; the 62d6fac law)                        # THE FLIP: 25 -> 26 (tc's NEW on-disk gate) [ROW-2->28 rider: 62d6fac law]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H/gate_md5_lineages.txt"
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 20                          # SANCTIONED row-23e flip-forward: 18 -> 19 distinct tails (the pc-gate fresh md5 lineage; THE FLIP at 22a rode 17->18; the 62d6fac law) [ROW-23f rider 19->20: the THIRD real gate row's fresh tail md5; the 62d6fac complete-flip law, missed-holder repair before cold-chain]
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 21                          # SANCTIONED row-23e flip-forward: 18 -> 19 distinct tails (the pc-gate fresh md5 lineage; THE FLIP at 22a rode 17->18; the 62d6fac law) [ROW-23f rider 19->20: the THIRD real gate row's fresh tail md5; the 62d6fac complete-flip law, missed-holder repair before cold-chain]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(wc -l < "$R"/tools/gre_harness/gate.txt)" -eq 3
 grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/gate.txt

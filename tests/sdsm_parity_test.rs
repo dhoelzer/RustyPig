@@ -252,7 +252,7 @@ fn t8_test_cmake_dialect_faces_and_zero_gate() {
         .unwrap();
     let outs = String::from_utf8_lossy(&out.stdout).to_string();
     let face: Vec<&str> = outs.lines().collect();
-    assert_eq!(face, vec!["28", "9", "20", "1"], "the census face moved: {face:?}");
+    assert_eq!(face, vec!["29", "9", "21", "1"], "the census face moved (the live face AFTER the 24a chapter-21 gate rider 28->29 / 20->21, the 62d6fac law; the sd-sm row itself shipped ZERO gate faces EVER — the no-gate-HERE arm below holds): {face:?}");
     assert!(!std::path::Path::new(concat!("/opt/data/snort3-rust/tools/sd", "sm_harness/gate.txt")).exists(), "ZERO-gate row: NO gate EVER");
 }
 

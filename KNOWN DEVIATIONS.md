@@ -5261,3 +5261,91 @@ Structural deviations (behavior preserved):
   the other dialect), backbone STAYS 10, the strict sf-daq holder faces
   UNMOVED (the union walk MEASURED-0 new holders: the row's files ride the
   runtime-concat ground forms ONLY).
+
+## main CLI-assembly pair (row 24a — main/snort.cc 642 35c362ec + main/snort.h 77 9121b522 @ fe29cbe = 719 L — THE chapter-21 OPENER, the CLI-assembly TU, THE FIRST REAL GATE ROW OF THE CHAPTER; the landing src/main/snort_.rs 830 L; the THIRD ground face src/main.h 67 L 2b487dd0 rides CITES ONLY NEVER lands; the harness token MEASURED 0 pre-hit (the sn-proc family; the joined own token rides tools/tests/docs EXACTLY-0 BY LAW); the CENSUS FLIPPED 28->29 on-disk gates / 20->21 lineages / the legacy 9 x 4826fc22 FROZEN / tracked STAYS gre's ONLY; seed 810 x3 NEVER moved here — the docs sibling banks the new one)
+
+- 1. THE GATE SHAPE (the honest dialect face): the in-TU Catch arms ship as
+  EXACTLY-1 TEST_CASE at :608 over EXACTLY-4 CHECK legs under the :606
+  UNIT_TEST guard (the :89 include post = the 2nd post; the tag rides the
+  harness runtime-built face, NEVER typed whole). The row TU rides the
+  main/CMakeLists :49 SOURCES list ONLY (the EXACTLY-1 cmake hit grep-walked
+  across EVERY ground cmake/cmake-list file); the main/test/CMakeLists
+  carries EXACTLY-2 CppUTest-dialect lists (thread_test +
+  distill_verdict_test — the OTHER dialect, host find-0, NEVER reached by
+  this row). The Catch arms ride INSIDE the TU, so the row lands the
+  PROVEN RUNNER template (the 22a tc / 23e pc-gate / 23f pt-racer lineage),
+  NEVER a test file; the gate.txt face is COPY-LOCAL UNTRACKED (the 22a tc
+  posture law) — the TRACKED gate.txt face STAYS gre's ONLY (6751d1a8).
+- 2. THE CENSUS-FLIP LEDGER (the 62d6fac complete-flip law, walk-measured
+  BEFORE authoring, flipped IN-COMMIT inline): the on-disk face
+  28 -> 29 (THIS row's NEW gate tail), the distinct-md5 lineages 20 -> 21
+  (the fresh tail face), legacy 9 x 4826fc22 UNMOVED, tracked STAYS 1.
+  EVERY hardcounted holder rider walked + flipped the same commit: the
+  gate-count -eq 28 arms across the chain harnesses (act, pt-racer, pc-gate,
+  pt-mod, sf-d, sd-sm, da-qio, dir-stor, sfin-st, rs-subs, sf-mod, tr-acer,
+  t-c — the 14-arm face RE-MEASURED 0 residual 28-pins) + the lineage -eq
+  20 riders + the twin census asserts (act/pc-gate/pt-racer/pt-mod/sf-d
+  total+lineage faces, the sd-sm triple-face walker raised to the live
+  29/9/21/1 with the row's own no-gate-HERE arm UNTOUCHED, the sf-mod
+  on-disk walk rides Path-walks and NEEDS no edit).
+- 3. THE E4 WALL LADDER (all three faces pinned EVERY build): (1) the fresh
+  donor + the bare row pair die EXACTLY-1 fatal
+  openssl/crypto-h (the .h header rides the row cc :27): the host OpenSSL
+  headers MEASURED ABSENT (/usr/include/openss-l find-0 at the row) — a
+  copy-local SYNTHETIC DECL rider ships (the init fn + the init flag ONLY),
+  NEVER a vendored lib, NEVER an ABI claim (the crypto init leg closes at
+  the link witness); (2) the DONOR daq heads grafted IN FORCE die
+  EXACTLY-1 'has no member named' ts face (detection_options.h :74, the
+  23a daq-drift law RE-RIDES); (3) the REAL libdaq @ c8d4083 head SWAP
+  lands SILENT rc0 BOTH posts (plain + the UNIT_TEST gate .o — the in-TU
+  Catch arms compile CLEAN). The closure = 78 fresh-cp DECL riders + the
+  copy-local config.h VERSION seat + the libdaq 4-head swap + the 2
+  STALE-DONOR ground-wins re-cps (detection/detection_engine.h +
+  trace/tr-acer face); the 227-file copy pin + nm app-undef census plain
+  129 / ut 144 (Catch 14 delta) pinned EVERY build — the deep NEVER-LAND
+  wall (managers/*, detection/*, flow/ha*, host_tracker/*, memory/*,
+  main/shell, main/process, parser/*, trace/*, tr-acer/*, profiler/*,
+  side_channel/*, target_based/*, filters/*, mp_transport/*) MIRRORED by
+  the shape-only witness, ZERO bodies landed, ZERO re-forks (the
+  ThreadConfig init/term/get-set_instance_max + log/messages + utils/util
+  LANDED homes REUSED one-home; the sf-d-a-q can_run_unprivileged CITE
+  rides the 23a home seam DEV-007).
+- 4. THE E9 dup face MEASURED EXACTLY-20 (the plain .o beside the ut .o:
+  the ground TEST face + the file-statics collide — the law RE-RIDES).
+  THE E10 BOTH-WAYS honest face: the tracked RUNNER rc0 GREEN (4 assertions
+  in 1 test case) AND the plain CATCH_CONFIG_MAIN twin rc0 GREEN — the 22a
+  SEGV twin NEVER surfaced at THIS row: the :608 case boots through the
+  witness boot-conf face (a static-local non-null boot slot), a DIFFERENT
+  posture from 22a's null-deref; the twin shipped GREEN honestly (the
+  CATCH_CONFIG_MAIN shape probe copy-local, NEVER tracked).
+- 5. THE witness_conf 4dd91018 family DOMINATED (the tc CORE-SUBSET
+  precedent): the carried family's FIXED-1 inert get_conf + get_instance_max
+  defs CONFLICT the row-24a boot-conf re-alloc ladder + the gate-case
+  set_instance_max legs the :608 CHECK arithmetic REACH (multiple-definition
+  at link). The carrier stays backbone-FROZEN UNTOUCHED (NEVER edited);
+  THIS row's witness ships its OWN conf/thread seats (the boot-conf
+  get_conf face + the storage-backed instance_max mirror). The Rust home
+  REUSES the landed thread_config home DIRECTLY (NEVER re-forks it); the
+  witness keeps the C-side thread seat so BOTH faces stay honest.
+- 6. THE statics/posture model faces: the EXACTLY-4 leading statics + the
+  h :67-:71 class-statics ledger -> ONE OnceLock<Mutex> row home
+  (statics->fields law); the gettid face (setup :439) NEVER landed — the
+  stored-0 posture (DEV-004); the umask file_mask leg rides the 22a
+  thread-home extern seat NEVER re-forked (DEV-016); NOCOREFILE / SHELL /
+  TSC compile arms = the absent-posture faces (DEV-018); the unlink seat
+  NEVER bumps harness-side inodes (DEV-014); the :355-:356 OPENSSL_cleanup
+  rides the ground COMMENT face NEVER called; the :186
+  IpsAction::get_default_priorities alert_before_pass arm rides the seam
+  (the default-posture ZERO-leg face); the :66 initializing bool NEVER
+  assigned in the TU (DEV-008 — the lib dead-field warning is the honest
+  face); the vectors D4 face rides the h :54 RUN_FLAG__CREATE_PID_FILE bit
+  (0x40) as the conf-face seat — the harness NEVER calls the
+  set-create-pid-file setter (NO witness leg; the :297 getter face pinned).
+- 7. THE seed + token faces: the NEXT 810 face EXACTLY-3 NEVER moved here
+  (the docs sibling banks the new one); the joined own token rides EVERY
+  tools/tests/src/docs face EXACTLY-0 (the self-scan + census arms pinned
+  EVERY build); the legacy 4826fc22 anchor UNMOVED; backbone STAYS 10
+  (5339c7ee VERBATIM); the pc-gate/p-t-c/pt-racer vectors echoes byte-pinned
+  UNTOUCHED; the small4 snort_config_h enable-esp pin rides a DIFFERENT
+  header UNDISTURBED; the misc9 NAMING legs STAY 2 occupants (the
+  hyphen-split comment law held ALL row files).

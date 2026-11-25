@@ -12,7 +12,8 @@
 //! ride the row seams). The ac t harness NEVER edits; the twin NEVER
 //! touches the vectors — the doubles follow the vectors, never the
 //! reverse.
-//! Zero-gate row: NO gate.txt; the census STAYS 28/9/20/1 (walked).
+//! The ac-t row itself rode ZERO gate faces (the census walked 28/9/20/1 AT that
+//! row); the row-24a sanctioned gate rider raised the live face 29/9/21/1.
 //! Token law: the harness own-name + the foreign harness names ride the
 //! concat include paths + hyphen prose ONLY; the landed sfdaq /
 //! sfdaq_instance / packet_tracer use-paths below are the sanctioned
@@ -1696,9 +1697,9 @@ fn census_walk_stays_28_9_20_1() {
         .stdout;
     let tracked = String::from_utf8(tracked_out).unwrap().lines().filter(|l| l.ends_with("gate.txt")).count();
     assert_eq!(tracked, 1, "the TRACKED gate.txt face stays gre's ONLY (the gre anchor md5 6751d1a8...)");
-    assert_eq!(total, 28, "the on-disk face by WALK 28 (the ZERO-gate row NEVER adds one)");
+    assert_eq!(total, 29, "the on-disk face by WALK 28 -> 29 at the row-24a sanctioned gate (the 62d6fac rider; the ac-t row itself added none)");
     assert_eq!(legacy, 9, "the legacy md5 4826fc22... x9 face NEVER +1");
-    assert_eq!(md5s.len(), 20, "THE distinct-lineage face STAYS 20 (no new gate tail)");
+    assert_eq!(md5s.len(), 21, "THE distinct-lineage face 20 -> 21 at the row-24a gate tail (the 62d6fac rider)");
     let gre = std::fs::read("/opt/data/snort3-rust/tools/gre_harness/gate.txt").unwrap();
     assert_eq!(md5(&gre), "6751d1a8c21da0fdfed87ddfd4d37c5f", "the gre anchor md5 byte-frozen (the tracked 1)");
     let bb = std::fs::read("/opt/data/snort3-rust/tools/link4_harness/backbone10.txt").unwrap();

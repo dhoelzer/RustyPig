@@ -451,9 +451,9 @@ PY
 # tracked 1 (gre's ONLY) — STAYS by walk (NO new gate EVER shipped) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 28                     # STAYS 28 (the ZERO-gate row NEVER adds one)
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 29                     # STAYS 28 (the ZERO-gate row NEVER adds one)
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/md5_lineages.txt
-test "$(cat "$H"/md5_lineages.txt)" -eq 20                            # STAYS 20 distinct tails
+test "$(cat "$H"/md5_lineages.txt)" -eq 21                            # STAYS 20 distinct tails
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(wc -l < "$R"/tools/gre_harness/gate.txt)" -eq 3
 grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/gate.txt

@@ -522,9 +522,9 @@ PY
 # STAYS 1 (gre 6751d1a8); the OTHER gate.txt ARTIFACTS NEVER touched ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 28                     # THE FLIP: 27 -> 28 (this row's NEW copy-local gate -- the THIRD real gate row)
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 29                     # THE FLIP: 27 -> 28 (this row's NEW copy-local gate -- the THIRD real gate row)
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 20                       # THE FLIP: 19 -> 20 distinct tails
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 21                       # THE FLIP: 19 -> 20 distinct tails
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(wc -l < "$R"/tools/gre_harness/gate.txt)" -eq 3
 grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/gate.txt

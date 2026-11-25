@@ -1,0 +1,7 @@
+A1 sizeof_Snort=1 id_off_size=2 maxprocs_size=1
+A2 ceil=2,3,4,3 idoff@720
+A3 filemask@352 dflt=63 maxprocs@760 umask_oct=63
+A4 flist_size=8 fnptr=8
+A5 gate_pid_face=0,2,3,4
+A6 gate_case=1 gate_checks=4 tag=sn-proc-tag
+Z-A terminator=0

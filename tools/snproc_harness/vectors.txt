@@ -1,0 +1,16 @@
+D0 pid=0 exiting=0 reloading=0 dropped=0 exit_req=0
+D1 n=52 mthread=0 sig=2 parse=10 sfinit=44 qfalse=46 getmod=49 daemon=-1
+D1L proc.set_main_thread|log.open_logger|proc.init_signals|tc.init|proc.store_info|utils.init_proto_names|databus.init|pl.init|de.init|ossl.init_crypto|parse_cmd_line|sc.set_conf|scm.pre_config_init|pl.load_plugins|script.load_scripts|insp.load_buffer_map|insp.new_map|mod.load_params|trace.global_init|fs.init|parser.init|ParseSnortConf|sc.set_conf|trace.capture_outputs|pmap.setup|insp.prepare_map|trace.thread_init|pl.capture_plugins|prof.setup|ha.configure|memcap.init|mod.init_stats|mod.reset_stats|sc.setup|ham.activate|insp.configure|ha.configured|insp.prepare_inspectors|fs.post_init|pkgmgr.global_init|sc.post_setup|dfilter.init|trough.setup|parser.term|sf-daq.init|proc.init_groups|proc.qexit-false|memcap.start|memcap-print-ft|pl.get_module|htm.init_data|time.start
+D1P exiting=0 reloading=0 dropped=0
+D2 m4=1,2,3,4 m4o12=3 restore=1
+D3 dp=1 dropped=1 legs=0
+D4 cold=0 created=1
+D5 nonnull=1 reloading=0 icd=0 setconf=-1
+D5L icd.clear_ips_id|insp.new_map|mod.load_params|trace.global_init|mod.reset_errors|reset_parse_errors|trim_heap|parser.init|ParseSnortConf|insp.prepare_map|trace.capture_outputs|sc.setup|ha.configure|sc.register_reload_handler|insp.configure|ha.configured|insp.reconcile_map|insp.prepare_inspectors|fs.verify_reload|trace.thread_reinit|sc.post_setup|ham.activate|parser.term
+D6 nonnull=0 reloading=0 abort=11 sdp=10
+D6L insp.new_map|mod.load_params|trace.global_init|mod.reset_errors|reset_parse_errors|trim_heap|parser.init|ParseSnortConf|sc.verify-fail|parser.term|set_default_policy|insp.abort_map
+D7 1
+D8 hookA=1 hookB=1 b_first=1 bidx=7 aidx=8 fs=6
+D8L time.stop|sf-daq.term|memcap.stop|stats.print|tc.term|mpt.term|fs.close|hookB|hookA|ham.term|trough.cleanup|proc.close_pidfile|periodic.unregister_all|trace.thread_term|ha.term|scm.term|host_cache_module_dump|dfilter.term|utils.cleanup_proto_names|pl.revert_plugins|insp.tear_down|sc.set_conf|insp.cleanup|memcap.term|pl.release_plugins|proc.term_signals|log.close_logger
+D9 legs=6 exiting=1 sfterm=1 close=5
+Z terminator=0

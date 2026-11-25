@@ -599,9 +599,9 @@ PYPIN
 
 # ---- GATE census (ZERO-gate row: the MEASURED face STAYS; walked, never typed) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af'); test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 28   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law) [ROW-2->28 rider: 62d6fac law]
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 29   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law) [ROW-2->28 rider: 62d6fac law]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 20   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law) [23f rider ->20]
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 21   # SANCTIONED row-23e gate flip (the SECOND real gate row: the row-23e new gate.txt md5 bc199753 COPY-LOCAL UNTRACKED, in-TU Catch EXACTLY-3 TEST_CASE x 13 CHECK; walked census 26->27 on-disk / 18->19 lineages; legacy x9 + gre anchor + tracked-1 UNTOUCHED; the 62d6fac complete-flip law) [23f rider ->20]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1
 test ! -e "$H"/gate.txt                                                          # ZERO gate artifacts ship

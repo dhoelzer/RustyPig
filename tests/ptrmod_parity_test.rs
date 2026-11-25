@@ -4,7 +4,8 @@
 //! rides THIS file's text ONLY through the concat! include paths + the
 //! hyphen-bracket prose — the own-token arms exclude THIS twin by name).
 //! THE ZERO-gate row: NO gate runner, NO gate.txt — the census STAYS
-//! 28/9/20/1 (test 6 re-walks on disk; this row NEVER adds a gate).
+//! 28/9/20/1 AT the row (test 6 re-walks on disk; this row NEVER adds a gate;
+//! the 24a rider raised the live face 29/9/21/1 AFTER).
 //! Token law at THIS twin (the 23f precedent): every counted foreign face
 //! rides a RUNTIME-built pattern; the 23e/23f landed-home imports below
 //! are the LEGIT strict-face cites sanctioned at THIS row (the one-home
@@ -485,9 +486,9 @@ fn census_walk_stays_28_9_20_1() {
         .filter(|l| l.ends_with("gate.txt"))
         .count();
     assert_eq!(tracked, 1, "the TRACKED gate.txt face stays gre's ONLY");
-    assert_eq!(total, 28, "the on-disk face by WALK (the ZERO-gate row NEVER adds one)");
+    assert_eq!(total, 29, "the on-disk face by WALK 28 -> 29 at the 24a sanctioned gate rider");
     assert_eq!(legacy, 9, "the legacy 4826fc22 x9 face NEVER +1");
-    assert_eq!(md5s.len(), 20, "THE lineage face STAYS 20 (no new gate tail)");
+    assert_eq!(md5s.len(), 21, "THE lineage face 20 -> 21 at the 24a gate tail (the 62d6fac rider)");
     let gre = std::fs::read_to_string("/opt/data/snort3-rust/tools/gre_harness/gate.txt").unwrap();
     assert!(gre.lines().any(|l| l == "All tests passed (1 assertion in 1 test case)"), "the gre anchor tail face byte-frozen");
     let bb = std::fs::read("/opt/data/snort3-rust/tools/link4_harness/backbone10.txt").unwrap();

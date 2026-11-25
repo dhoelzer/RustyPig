@@ -1,0 +1,51 @@
+# row 24a snproc-family harness artifacts — COPY-LOCAL / regenerated EVERY
+# build (the nested-.gitignore instrument; ROOT .gitignore NEVER moves).
+# Stageable face = the 7 tracked files (build.sh + gate_main.cc + probe.cc +
+# probe_faceA.cc + witness_sn.cc + vectors.txt + vectors_faceA.txt; the
+# .gitignore itself is the 8th ls-files face — NO PLAN.md this row, the
+# budget-law fold: the recon face rides the build.sh header). EVERYTHING
+# else here is a receipt and IGNORED. THE GATE POSTURE (the 22a tc law,
+# RE-ARMED at the chapter-21 opener): gate.txt is COPY-LOCAL UNTRACKED —
+# the TRACKED gate.txt face STAYS gre's ONLY (tracked count 1, pinned
+# EVERY build; the walked census flipped 28->29 / 20->21 at THIS row).
+copy/
+o2/
+graftcmp/
+# binaries
+gate_x
+gate_twin_x
+probe_x
+probe_x_O2
+probe_x_cross
+probe_faceA_x
+probe_faceA_x_O2
+# objects
+*.o
+*.obj
+# receipts (E-walls, nm, dup-twins, ledgers)
+E4_*.txt
+E9_*.txt
+gate_stderr.txt
+nm_U_*.txt
+gate_md5_lineages.txt
+backbone10.txt
+stageables.txt
+run.log
+# per-run vectors (the TRACKED vectors(_faceA).txt = FIRST-RUN-SEEDs)
+vectors_O0.txt
+vectors_O2.txt
+vectors_O2b.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+# gate receipts (the posture face: gate.txt itself UNTRACKED)
+gate.txt
+gate_*
+!gate_main.cc
+.gate_*
+.*_probe.*
+.twin.txt
+.tamper_v
+.vectors_pristine
+.vectors_faceA_pristine
+.*_face_expect
+.e9dup

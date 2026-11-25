@@ -236,9 +236,9 @@ test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src/packet_io --include=
 
 # ---- GATE census (ZERO-gate row: the MEASURED face STAYS; walked, never typed) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af'); test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 28
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 29
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 20
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 21
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1
 test ! -e "$H"/gate.txt

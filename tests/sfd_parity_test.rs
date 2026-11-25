@@ -534,7 +534,7 @@ fn sfd_ground_cite_drift_tripwires() {
             gates += 1;
         }
     }
-    assert_eq!(gates, 28, "gate census 28 = 27 (the row-23e pc-gate face) + the row-23f sanctioned gate.txt (THE THIRD real gate row; copy-local untracked; tracked face stays 1) -- the SANCTIONED flip per the 62d6fac complete-flip law");
+    assert_eq!(gates, 29, "gate census 29 (the 22a/23e/23f-era 26-28 lineage face + the row-24a chapter-21 gate rider) -- copy-local untracked; tracked face stays 1 -- the SANCTIONED 28->29 flip per the 62d6fac complete-flip law");
 }
 
 // ==========================================================================
