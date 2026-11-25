@@ -1,0 +1,4 @@
+SIZES modapi=216 baseapi=104 instapi=288 modh=8 instapi_slots=18
+OFFS modapi av=0 as=4 mv=8 name=16 type=24 load=32 unload=40
+VERSIONS module=0x30001 base=0x30002 common=0x30013 numeric=50339072 str=3.0.29.0
+EXTERNSHAPE name=shapemod api_version=0x30001 api_size=216 modver=7 type=0x2 size_eq=1

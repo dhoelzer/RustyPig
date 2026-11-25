@@ -1,0 +1,7 @@
+D0 names=pcap,nfq,dump, slots=4 tail=1
+D1 cold pcap=0 nfq=0 dump=0
+D2 walked=3 static_before_dynamic=1 dynamic_err=0
+D3 find pcap=1 nfq=1 dump=1 absent=0 walk=3
+D4 walk2=3 table_not_doubled=1
+D5 decay_handoff_walked=3 (DAQ_Module_h array <-> const DAQ_ModuleAPI_t** body, typedef face)
+D6 externs_hash=5779097974858428249 data_hash=2484321433189363103 bloblen=152,80

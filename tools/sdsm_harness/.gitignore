@@ -1,0 +1,31 @@
+# sdsm_harness artifacts — COPY-LOCAL / regenerated EVERY build (the
+# nested-.gitignore instrument; ROOT .gitignore NEVER moves). Stageable face
+# = the 9 tracked files; EVERYTHING else here is a receipt and IGNORED.
+copy/
+o2/
+# binaries + objects
+probe
+probe_O2
+probe_faceA
+probe_faceA_O2
+probe.o
+probe_faceA.o
+# compile/run receipts
+E4_undecl.txt
+E4_rider.txt
+# run faces (the tracked vectors are the FIRST-RUN-SEEDs; these are per-run)
+vectors_O0.txt
+vectors_O2.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+faceA_stderr.txt
+probe_dec_stderr.txt
+# ledger receipts
+md5_pinned.txt
+gate_md5_lineages.txt
+stageables.txt
+backbone10.txt
+.vectors_pristine
+.vectors_faceA_pristine
+# gate posture: this row ships ZERO gate artifacts
+gate.txt

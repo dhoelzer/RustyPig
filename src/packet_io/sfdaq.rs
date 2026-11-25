@@ -238,6 +238,68 @@ pub struct DaqModuleDesc {
     pub var_descs: Vec<DaqVariableDesc>, // :134-:135
 }
 
+// ---- row 23i: THE sf-daq_static_modules DIALECT face riding THIS landed
+// 23a home (the ONE-HOME law: the dialect is an EXTENSION here, NEVER a
+// re-fork; the generator MECHANISM is a cmake BUILD-SYSTEM face — the
+// GENERATED product NEVER exists on disk in the ground and is NEVER
+// invented; tools/sd-sm-harness replays the :18-:21 string(APPEND) foreach
+// with the ACTUAL cmake over a STATED synthetic name list and the vectors
+// pin the SYMBOLIC shape faces, the honesty face banked in KNOWN
+// DEVIATIONS row 23i) ----
+
+/// One entry of the cmake-expansion replay (the generated header's extern
+/// line shape: `extern const DAQ_ModuleAPI_t <name>_daq_module_data;`,
+/// CMakeLists :19, cited VERBATIM against the READ-ONLY CMakeLists — this
+/// is NOT a C type port; the record SHAPE rides the harness FACE-A ladder).
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct DaqStaticModuleExtern {
+    pub name: String,
+}
+
+/// The generated-shape provider face (the template body lines 6-10: `static
+/// DAQ_Module_h static_daq_modules[] = { <data entries> nullptr };`) — a
+/// SYMBOLIC replay, NEVER a claim of a real build's generated content (the
+/// DAQ_STATIC_MODULES cmake LIST is the build's choice; the harness states
+/// its list pcap;nfq;dump). The nullptr tail is the TYPE-system sentinel
+/// the Rust Vec models by structure (the C-array-termination cited
+/// deviation, the trough/dir queue law).
+#[derive(Debug, Default, Clone, PartialEq, Eq)]
+pub struct StaticDaqModules {
+    pub externs: Vec<DaqStaticModuleExtern>, // the @DAQ_STATIC_MODULE_EXTERNS@ token fill
+    pub data: Vec<String>,                   // the @DAQ_STATIC_MODULE_DATA_ARRAY@ token fill (entry ORDER = the LIST order, the cmake string(APPEND) law)
+    pub enabled: bool,                       // the ENABLE_STATIC_DAQ define face (the :26 per-source COMPILE_DEFINITIONS posture)
+}
+
+impl StaticDaqModules {
+    /// The byte-EXACT @DAQ_STATIC_MODULE_EXTERNS@ accumulator face (the
+    /// :19 string(APPEND) output as cmake builds it, trailing `;\n` per
+    /// entry) — the twin compares this against the harness-replayed
+    /// generated header's extern lines BYTE-EQUAL.
+    pub fn externs_blob(&self) -> String {
+        self.externs.iter()
+            .map(|e| format!("extern const DAQ_ModuleAPI_t {}_daq_module_data;\n", e.name))
+            .collect()
+    }
+
+    /// The byte-EXACT @DAQ_STATIC_MODULE_DATA_ARRAY@ accumulator face (the
+    /// :20 string(APPEND) output, four-space indent + `,\n` per entry).
+    pub fn data_blob(&self) -> String {
+        self.data.iter().map(|d| format!("    &{d},\n")).collect()
+    }
+}
+
+/// THE cmake-expansion replay (the :18-:21 foreach VERBATIM as a pure
+/// function over the name LIST — byte-deterministic like the `cmake -P`
+/// replay whose double-run cmp the harness proves EVERY build). The token
+/// line shapes ride the blob fns above (cmakelists :19/:20 cited faces).
+pub fn expand_daq_static_modules(names: &[&str]) -> StaticDaqModules {
+    StaticDaqModules {
+        externs: names.iter().map(|n| DaqStaticModuleExtern { name: (*n).to_string() }).collect(),
+        data: names.iter().map(|n| format!("{n}_daq_module_data")).collect(),
+        enabled: false, // the define rides a BUILD posture the mirror NEVER invents (measured grep-0 in the harness/donor config.h — the 23a load-doc face)
+    }
+}
+
 /// cc :189-:197 the SFDAQMode -> DAQ_Mode map EXACT (the else arm rides
 /// the caller-provided default_daq_mode — the facade field).
 pub fn map_mode(sfdq_mode: u32, default_daq_mode: u32) -> u32 {
@@ -312,6 +374,47 @@ impl SFDaq {
         self.modules = walked; // daq_load_dynamic_modules landed-table mirror
         self.loaded = true;
         Ok(())
+    }
+
+    /// cc :60-:79 THE ORDER replay with the row-23i dialect arm: the dirs[]
+    /// ctor legs ride FIRST (cc :62-:66, the nullptr-terminated array face),
+    /// then the `#ifdef ENABLE_STATIC_DAQ` post cc :69-:71 — THE ONLY
+    /// call-site of the static loader in the whole ground tree (grep-1,
+    /// harness-arm pinned) — sits AFTER those legs and BEFORE the :72
+    /// daq_load_dynamic_modules call: the harness DEC D2 face
+    /// `static_before_dynamic=1` proves the visible order. Rust mirror:
+    /// when the provider's `enabled` face is FALSE (the MEASURED posture —
+    /// ENABLE_STATIC_DAQ rides grep-0 in the harness/donor config.h, the
+    /// 23a face) the arm is INERT and this closes EXACTLY like `load()`;
+    /// when TRUE the static entries prepend the walked table (the
+    /// daq_base.c :237-:250 register-before-dynamic law, the WALKED-COUNT
+    /// return NEVER inspected — the ground post DISCARDS it, cc :70).
+    /// The provider table is the cmake-expansion replay shape (NEVER real
+    /// generated content, the row-23i honesty face cited in the header doc
+    /// block). The C symbol's DECL home face — absent from the shipped
+    /// module-API header, riding the top-level SDK head :42 with a
+    /// TYPE-DRIFT vs the body — is the cited dialect deviation (DEVIATIONS
+    /// row 23i); the Rust mirror NEVER needs it (the provider seam law).
+    pub fn load_ordered(&mut self, statics: &StaticDaqModules, cfg: &SFDAQConfig, mut walked: Vec<DaqModuleDesc>) -> Result<(), i32> {
+        if statics.enabled {
+            // cc :70 the static leg FIRST: entries land in the cmake LIST
+            // order (the harness D0 names=pcap,nfq,dump face); a dup name
+            // NEVER doubles the table (the daq_base.c register_module
+            // :152-:170 name-law face, the harness D4/D5 trio).
+            let mut fresh: Vec<DaqModuleDesc> = statics.data.iter()
+                .map(|d| DaqModuleDesc {
+                    name: d.trim_end_matches("_daq_module_data").to_string(),
+                    version: 0, type_flags: 0, var_descs: Vec::new(),
+                })
+                .filter(|m| !walked.iter().any(|w| w.name == m.name))
+                .collect();
+            // the LIST order rides FIRST, the dynamic table AFTER (spliced,
+            // NEVER reversed — the D0/D3 order law, the harness D2 face):
+            fresh.append(&mut walked);
+            walked = fresh;
+            // the walked-count face rides the harness D2; cc DISCARDS it.
+        }
+        self.load(cfg, walked)
     }
 
     /// cc :81-:85 unload: daq_unload_modules() (REAL daq_base.c:305-:319

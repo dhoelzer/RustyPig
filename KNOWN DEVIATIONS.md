@@ -5204,3 +5204,60 @@ Structural deviations (behavior preserved):
   Rust — the twin re-derives NUMERICALLY); the row .o nm census pins the 6
   SFDAQ:: undef wall faces (the mirrored-once honest hull); the E9 one-home
   guard proves the row-owned homes NEVER double-land.
+
+## packet_io sf-daq STATIC-MODULES DIALECT (row 23i — sf-daq_static_modules.h.in 11 L 3b8e3f07 @ fe29cbe; the cmake configure_file TEMPLATE, THE LAST chapter-20 item — a ZERO-gate dialect row: the generated product NEVER exists on disk and is NEVER invented; the landing EXTENDS the 23a owner home src/packet_io/sf-daq.rs by ONE home law; the harness token MEASURED 0 pre-hit (sd-sm family); own joined token rides tools/tests/docs files EXACTLY-0 BY LAW; seed 798 x3 NEVER moved here — the docs sibling banks the new one)
+
+- 1. THE DIALECT honesty face: the ground source-of-truth is the 11-L TEMPLATE
+  (md5 3b8e3f07… VERBATIM-pinned, cmp-proved cp) with the two @TOKEN@ fill
+  faces; the cmake-expansion mechanism (packet_io/CMakeLists :17-:27 — VERBATIM
+  sed-armed EVERY build) turns the build's DAQ_STATIC_MODULES LIST into
+  extern+array accumulators; the GENERATED header NEVER exists in the ground
+  (find-0 arm) and NEVER here — the harness leg (b) replays the ACTUAL cmake
+  (3.31.6, -P, the ground foreach VERBATIM in exp.cmake) over the STATED
+  synthetic list pcap;nfq;dump; the SYMBOLIC product (17 L, LIST-ORDER :4
+  face, nullptr tail :15) is a SHAPE face, NEVER a claim of a real build's
+  content; the replay is BYTE-deterministic (double-run cmp every build), the
+  EMPTY-list degenerate face = 11 L (the accumulator-never-created face).
+- 2. THE absent-SDK-decl dialect face (E4 both ways every build): the symbol
+  is DECLARED NOWHERE the shipped api/daq-module-api head 165 L 1a617b3e reads
+  (grep-0 arm); the decl home rides the top-level SDK head :42 over
+  DAQ_Module_h * while the REAL body (daq-base.c :237) takes const
+  DAQ-ModuleAPI-t ** — THE TYPE-DRIFT face the typedef closes (DEC D5: the
+  decay handoff compiles with ZERO cast); the generated-shape TU WITHOUT the
+  cited rider dies EXACTLY-1 'was not declared', the rider posture (the
+  cmake :27 include shape + the owner TU's own SDK head :28 sitting BEFORE
+  the ifdef post) closes rc0 SILENT.
+- 3. THE ORDER + count law faces (DEC ladder): the EXACTLY-2 ifdef posts
+  (owner cc :38 include post + :69-:71 THE ONLY call-site, AFTER the dirs[]
+  ctor legs :62-:66, BEFORE the :72 dynamic call — grep-1 the whole ground);
+  the static call's return is the WALKED-COUNT the ground post DISCARDS;
+  call-1 registers SILENT, RE-calls fail LOUDLY ('Failed to register static
+  DAQ module.' x3 per re-call = 6 marks pinned) and the table NEVER doubles
+  (the register name law :150-:170); the missing-dir leg prints EXACTLY-1
+  'Unable to open directory' and SUCCESS continues (dynamic_err=0).
+- 4. THE Rust mirror face (ONE-HOME extension of the 23a owner): the
+  StaticDaqModules provider + expand replay fn (the :19/:20 blob fns byte-equal
+  the cmake string(APPEND) faces) + the SFDaq load_ordered arm (enabled=false =
+  the MEASURED grep-0 define posture: the arm INERT, closes EXACTLY like load();
+  enabled=true: LIST order FIRST, dup-name NEVER doubles, the walked order
+  spliced NEVER reversed); ZERO new allows/unsafe, ZERO new mod.rs wiring.
+- 5. THE vectors faces: DEC 7 L (D0 expansion shape + nullptr tail, D1 cold
+  find-0, D2 the static-before-dynamic order face, D3 find-after + absent leg,
+  D4 never-doubled, D5 the typedef-closed handoff, D6 the RUNTIME-built blob
+  hashes FNV-1a-64 — NEVER frozen literals, the bloblens 152,80) + FACE-A 4 L
+  (the DAQ-ModuleAPI-t record SHAPE the generated externs TYPE, live
+  sizeof/offsetof/macros, the version sanity faces); FIRST-RUN-SEED, tamper-
+  proven (the D2 order + the A-size flips refused), O0==O2 BYTE-IDENT.
+- 6. THE honest landing ledger (banked OPENLY per the takeover law): the row
+  child measured the picks, authored the Rust leg + harness + vectors (the
+  seeded md5s survive VERBATIM) and died at its LAST step (the twin NEVER
+  authored); during the orchestrator cold-run diagnostic the UNTRACKED
+  probe/probe-face-A .cc pair was purged by a scratch-hygiene glob (the dir
+  was NOT yet tracked — the incident banked; the stageable face was LOST);
+  the probes were RE-AUTHORED faithful to the harness pin arms and reproduced
+  the seeded vectors BYTE-IDENT across 25+ measured faces (the drift-refuse
+  law did its job); the takeover law landed the row; census STAYS 28/9/20/1
+  walked (ZERO-gate: pair TEST faces 0, the test CMake EXACTLY-2 suites ride
+  the other dialect), backbone STAYS 10, the strict sf-daq holder faces
+  UNMOVED (the union walk MEASURED-0 new holders: the row's files ride the
+  runtime-concat ground forms ONLY).
