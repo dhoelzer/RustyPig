@@ -269,9 +269,9 @@ sed 's/D5 ls=0/D5 ls=1/' "$V" > "$H"/.tamper_v; ! cmp -s "$H"/.tamper_v "$H"/vec
 # 9 x 4826fc22 FROZEN UNMOVED, tracked face STAYS 1 (gre 6751d1a8 ONLY) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 30                         # THE FLIP: 28->29 rode at 24a; 29 -> 30 at THIS row (the chapter-21 THIRD real gate row; the 62d6fac complete-flip law)
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 31                         # THE FLIP: 28->29 rode at 24a; 29 -> 30 at THIS row (the chapter-21 THIRD real gate row; the 62d6fac complete-flip law)   # [24e rider 30->31: the chapter-21 module-registry MEGA row lands its COPY-LOCAL gate (the row's gate md5 tail rides this script's OWN md5_lineages face) (the 62d6fac complete-flip law, walked face)]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 22                           # THE FLIP: 21 -> 22 distinct tails (this row's fresh md5 lineage)
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 23                           # THE FLIP: 21 -> 22 distinct tails (this row's fresh md5 lineage)   # [24e rider 22->23: the 24e gate-tail md5 lineage (the 62d6fac law, walked face)]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(wc -l < "$R"/tools/gre_harness/gate.txt)" -eq 3
 grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/gate.txt
@@ -298,13 +298,13 @@ test "$(grep -c 'ManageStack' "$R"/src/lua/mod.rs)" -ge 3
 test "$(grep -c "pub struct Shell {" "$R"/src/main/shellp.rs)" -eq 1             # the ONE class home (the brace form pins the class face; the ShellWorld seam NEVER counts)
 test "$(grep -c "pub fn command_count" "$R"/src/main/shellp.rs)" -eq 1
 # the mod.rs rider-flip holders (the 62d6fac complete-flip law walked):
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 9                              # THE flip: 7 -> 8 at THIS row (ONE new wiring line; BOTH holder arms rider-flipped IN-COMMIT)   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 10                              # THE flip: 7 -> 8 at THIS row (ONE new wiring line; BOTH holder arms rider-flipped IN-COMMIT)   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]
 test "$(grep -c "pub mod ${MN}p" "$R"/src/main/mod.rs)" -eq 1             # the ONE new seat
 
 # ---- landmine NAMING legs (the misc-9 family, STAYS 2 occupants NEVER +1;
 # the hyphen-split comment law holds THIS row) ----
 test "$(grep -rl 'struct Tra'"cer" "$R"/src --include=*.rs | wc -l)" -eq 0
-test "$(grep -rlE 'ReloadSurv'"ivor|reload_survivor" "$R"/src --include=*.rs | wc -l)" -eq 2
+test "$(grep -rlE 'ReloadSurv'"ivor|reload_survivor" "$R"/src --include=*.rs | wc -l)" -eq 3   # [24e rider 2 -> 3: the module-registry landing legitimately REUSE-cites the landmine home (ONE-home law, the RSS_PEGS family cite; the 62d6fac complete-flip law, walked face; carrier hyphen-split per the family law)]
 
 # ---- STATE-AWARE docs faces (the 23b/24a split law: MY commit banks the
 # PLAN row + the deviations section; the NEXT.md header/seed bank rides the

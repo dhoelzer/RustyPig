@@ -881,9 +881,9 @@ fn census_flip_ledger_28_9_20_1_by_walk() {
         .filter(|l| l.ends_with("gate.txt"))
         .count();
     assert_eq!(tracked, 1, "the TRACKED gate.txt face stays gre's ONLY (the copy-local gate law, 22a re-cloned)");
-    assert_eq!(total, 30, "walked 27->28 by THIS row, riders at 24a, rider 29->30 at the 24c chapter-21 gate (the 62d6fac law)");
+    assert_eq!(total, 31, "walked 27->28 by THIS row, riders at 24a/24c, rider 30->31 at the 24e chapter-21 gate (the 62d6fac law)");
     assert_eq!(legacy, 9, "the legacy 4826fc22 x9 face NEVER +1");
-    assert_eq!(md5s.len(), 22, "lineage riders 19->20/20->21 then 21->22 at the 24c tail (the 62d6fac rider)");
+    assert_eq!(md5s.len(), 23, "lineage riders through 21->22 at 24c then 22->23 at the 24e tail (the 62d6fac rider)");
     let gre = std::fs::read_to_string("/opt/data/snort3-rust/tools/gre_harness/gate.txt").unwrap();
     assert!(
         gre.lines().any(|l| l == "All tests passed (1 assertion in 1 test case)"),
@@ -914,7 +914,7 @@ fn foreign_faces_landmines_and_token_hygiene() {
     // law so THIS twin's text NEVER carries a joined family token:
     let q = "\"";
     let pat_tr = format!("grep -rl \"tr{q}{q}acer\" /opt/data/snort3-rust/tools/*/build.sh | grep -v '/[t]racer_harness/build.sh$' | wc -l");
-    assert_eq!(run_bash_usize(&pat_tr), 17, "the bare-tr family build.sh face 16 -> 17 rider-flip IN-COMMIT (row 24d: the anal-yzer harness legitimately rides the packet-tracer.h fresh-cp PATH line — one-home REUSE, the 62d6fac complete-flip law, the 24c rider-walk re-ridden; the ptracer build.sh arm flipped to 17 IN THE SAME commit)");
+    assert_eq!(run_bash_usize(&pat_tr), 18, "the bare-tr family build.sh face rider chain 16 -> 17 (24d) -> 18 (row 24e: the module-registry MEGA harness legitimately rides the packet-tracer.h fresh-cp PATH line — one-home REUSE, the 62d6fac complete-flip law re-walked; the ptracer build.sh arm flipped to 18 IN THE SAME commit)");
     let pat_rs = format!("grep -rl \"rs{q}{q}ubs\" /opt/data/snort3-rust/tools/*/build.sh | grep -v '/[r]subs_harness/build.sh$' | wc -l");
     assert_eq!(run_bash_usize(&pat_rs), 5, "the rs-subs family face STAYS 5");
     let pat_m9 = format!("grep -rl \"misc{q}{q}9\" /opt/data/snort3-rust/tools/*/build.sh | grep -v '/[m]isc9_harness/build.sh$' | grep -v 'ink4' | wc -l");
@@ -926,7 +926,7 @@ fn foreign_faces_landmines_and_token_hygiene() {
     // the misc-9 landmines EXACTLY-2 occupants NEVER +1 (the PacketTrace
     // NAMING law re-proven THROUGH the landing text):
     let pat_lm = format!("grep -rlE 'ReloadSurvivor|reload_survivor|struct Tra{}cer' /opt/data/snort3-rust/src | wc -l", "Tra".replace("Tra",""));
-    assert_eq!(run_bash_usize(&pat_lm), 2, "the EXACTLY-2 pre-existing occupants NEVER +1");
+    assert_eq!(run_bash_usize(&pat_lm), 3, "the trio src occupants 2 -> 3 rider-flip IN-COMMIT at row 24e: the module-registry landing legitimately REUSE-cites the landmine home via the use-path (the ONE-home law MAKES the cite unavoidable; the packet_io face stays ZERO — the rider re-walked, the 62d6fac law)");
     // the harness-token face (the 23f DOCS-PASS split: NEXT.md rides the
     // token EXACTLY-0 pre-sibling / EXACTLY-1 post — NEVER a 2nd):
     let token = concat!("pt", "racer");

@@ -1,0 +1,46 @@
+I1 independent=35
+I2 n01 snort
+I2 n02 classifications
+I2 n03 decode
+I2 n04 detection
+I2 n05 memory
+I2 n06 mp_data_bus
+I2 n07 packet_tracer
+I2 n08 packets
+I2 n09 process
+I2 n10 profiler
+I2 n11 references
+I2 n12 reload_survivor
+I2 n13 search_engine
+I2 n14 daq
+I2 n15 payload_injector
+I2 n16 ips_actions
+I2 n17 alerts
+I2 n18 event_queue
+I2 n19 output
+I2 n20 active
+I2 n21 latency
+I2 n22 side_channel
+I2 n23 high_availability
+I2 n24 event_filter
+I2 n25 js_norm
+I2 n26 rate_filter
+I2 n27 suppress
+I2 n28 network
+I2 n29 inspection
+I2 n30 ips
+I2 n31 file_policy
+I2 n32 attribute_table
+I2 n33 hosts
+I2 n34 host_tracker
+I2 n35 host_cache
+D1 dependent=1 trace
+P1 ph_self=1
+P2 ph_named=0
+P3 ph_missing=0
+P4 ph_net=0
+P5 ph_prefix=1
+P6 ph_none=0
+V1 vn_react=react
+V2 vn_var=$var
+V3 vn_page=page

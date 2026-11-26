@@ -166,8 +166,8 @@ test "$(md5sum "$R"/tools/fcapi_harness/copy/packet_io/packet_constraints.h | aw
 # the misc-9 landmine NAMING law (the 23c/23d shape re-cloned; the pair
 # STAYS the EXACTLY-2 occupants, the landmine NEVER rides a 3rd):
 test "$(grep -rl 'struct Tracer' "$R"/src --include=*.rs | wc -l)" -eq 0
-test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src --include=*.rs | sed "s|$R/||" | paste -sd,)" = "src/framework/mod.rs,src/framework/reload_survivor_subscriptions.rs"
-test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src --include=*.rs | wc -l)" -eq 2
+test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src --include=*.rs | sed "s|$R/||" | paste -sd,)" = "src/framework/mod.rs,src/framework/reload_survivor_subscriptions.rs,src/main/modules.rs"   # [24e rider 2 -> 3: the module-registry landing legitimately REUSE-cites the landmine home (ONE-home law, the RSS_PEGS family cite; the 62d6fac complete-flip law, walked face; carrier hyphen-split per the family law)]
+test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src --include=*.rs | wc -l)" -eq 3   # [24e rider 2 -> 3: the module-registry landing legitimately REUSE-cites the landmine home (ONE-home law, the RSS_PEGS family cite; the 62d6fac complete-flip law, walked face; carrier hyphen-split per the family law)]
 test "$(grep -rlE "ReloadSurv""ivor|struct Tra""cer" "$R"/src/packet_io --include=*.rs | wc -l)" -eq 0   # THIS row ships ZERO landmine-name hits in ITS home (concat form = landmine tokens ONLY)
 
 # ---- NEXT.md token face, STATE-AWARE (pre-landing 0; POST the docs bank
@@ -520,9 +520,9 @@ PY
 # STAYS 1 (gre 6751d1a8); the 26 OTHER gate.txt artifacts NEVER touched ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 30                     # row-23f RIDER: 27 -> 28 by the THIRD real gate row's copy-local face (the 62d6fac complete-flip law; THIS row landed 26 -> 27)   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 31                     # row-23f RIDER: 27 -> 28 by the THIRD real gate row's copy-local face (the 62d6fac complete-flip law; THIS row landed 26 -> 27)   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]   # [24e rider 30->31: the chapter-21 module-registry MEGA row lands its COPY-LOCAL gate (the row's gate md5 tail rides this script's OWN md5_lineages face) (the 62d6fac complete-flip law, walked face)]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 22                       # row-23f RIDER: 19 -> 20 lineages (the row-23f fresh tail; the 62d6fac law; THIS row landed 18 -> 19)   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 23                       # row-23f RIDER: 19 -> 20 lineages (the row-23f fresh tail; the 62d6fac law; THIS row landed 18 -> 19)   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]   # [24e rider 22->23: the 24e gate-tail md5 lineage (the 62d6fac law, walked face)]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(wc -l < "$R"/tools/gre_harness/gate.txt)" -eq 3
 grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/gate.txt

@@ -1,0 +1,9 @@
+A1 ips n=11: action_map action_override default_rule_state enable_builtin_rules id include mode obfuscate_pii rules states variables
+A2 variables n=4: actions nets paths ports
+A3 action_vars n=1: $var
+A4 action_var n=1: react
+A5 action_var_react n=1: page
+A6 seat=10 child_is_variables=1
+A7 uuid_seat=0 (HAVE_UUID-off face)
+A8 dependent=1 trace
+A9 sizeof_Parameter=40

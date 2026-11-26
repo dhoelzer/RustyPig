@@ -1642,7 +1642,7 @@ fn landmine_naming_file_walk_zero() {
     assert!(io_hits.is_empty(), "the packet_io face (the landing's dir) stays find-ZERO: {io_hits:?}");
     let mut src_hits = Vec::new();
     walk(Path::new("/opt/data/snort3-rust/src"), &pats, &mut src_hits);
-    assert_eq!(src_hits.len(), 2, "the EXACTLY-2 src occupants NEVER +1 (this row NEVER adds one)");
+    assert_eq!(src_hits.len(), 3, "the src occupants: era EXACTLY-2 NEVER +1 by this row; the 24e module-registry landing legitimately REUSE-cites the landmine home via the use-path (ONE-home law, the 62d6fac walked face) — rider flipped at the 24e row");
     assert!(src_hits.iter().all(|p| !p.components().any(|c| c.as_os_str() == "packet_io")), "NEVER an occupant inside the landing's dir");
 }
 
@@ -1697,9 +1697,9 @@ fn census_walk_stays_28_9_20_1() {
         .stdout;
     let tracked = String::from_utf8(tracked_out).unwrap().lines().filter(|l| l.ends_with("gate.txt")).count();
     assert_eq!(tracked, 1, "the TRACKED gate.txt face stays gre's ONLY (the gre anchor md5 6751d1a8...)");
-    assert_eq!(total, 30, "rider 29 -> 30 at the row-24c THIRD chapter-21 real gate (the 62d6fac rider; this row itself added none)");
+    assert_eq!(total, 31, "rider 29 -> 30 at 24c, rider 30 -> 31 at the 24e MEGA module-registry gate (the 62d6fac rider; this row itself added none)");
     assert_eq!(legacy, 9, "the legacy md5 4826fc22... x9 face NEVER +1");
-    assert_eq!(md5s.len(), 22, "rider 21 -> 22 at the row-24c gate tail (the 62d6fac rider)");
+    assert_eq!(md5s.len(), 23, "rider 21 -> 22 at 24c, 22 -> 23 at the 24e gate tail (the 62d6fac rider)");
     let gre = std::fs::read("/opt/data/snort3-rust/tools/gre_harness/gate.txt").unwrap();
     assert_eq!(md5(&gre), "6751d1a8c21da0fdfed87ddfd4d37c5f", "the gre anchor md5 byte-frozen (the tracked 1)");
     let bb = std::fs::read("/opt/data/snort3-rust/tools/link4_harness/backbone10.txt").unwrap();

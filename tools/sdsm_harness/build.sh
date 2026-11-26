@@ -230,15 +230,15 @@ test "$(grep -c "pub fn expand_daq_static_modules" "$R"/src/packet_io/${SD}.rs)"
 test "$(grep -c 'expand_daq_static_modules\|StaticDaqModules' "$R"/src/packet_io/mod.rs || true)" -eq 0   # ZERO new mod.rs wiring lines (the extension rides the EXISTING module declaration)
 
 # ---- landmine NAMING legs (the misc-9 family, STAYS) ----
-test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src --include=*.rs | wc -l)" -eq 2
+test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src --include=*.rs | wc -l)" -eq 3   # [24e rider 2 -> 3: the module-registry landing legitimately REUSE-cites the landmine home (ONE-home law, the RSS_PEGS family cite; the 62d6fac complete-flip law, walked face; carrier hyphen-split per the family law)]
 test "$(grep -rl 'struct Tracer' "$R"/src --include=*.rs | wc -l)" -eq 0
 test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src/packet_io --include=*.rs | wc -l)" -eq 0
 
 # ---- GATE census (ZERO-gate row: the MEASURED face STAYS; walked, never typed) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af'); test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 30   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 31   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]   # [24e rider 30->31: the chapter-21 module-registry MEGA row lands its COPY-LOCAL gate (the row's gate md5 tail rides this script's OWN md5_lineages face) (the 62d6fac complete-flip law, walked face)]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 22   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 23   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]   # [24e rider 22->23: the 24e gate-tail md5 lineage (the 62d6fac law, walked face)]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1
 test ! -e "$H"/gate.txt
@@ -288,7 +288,7 @@ test "$(grep -rl "$MN" "$R"/src --include=*.rs 2>/dev/null | wc -l)" -eq 0
 # row NEVER moves them; the walked face re-echoed HERE with the union exclusion
 # set (the family arms stay NEVER edited):
 holders=$(grep -rl "$SD" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "sf""inst" | grep -v "tools/daq""io_harness/build.sh$" | grep -v "tools/misc""3_harness/build.sh$" | grep -v "tools/mpls_harness/build.sh$" | grep -v "tools/sf""mod_harness/build.sh$" | grep -v "tools/dir""stor_harness/build.sh$" | grep -v "tools/pc""gate_harness/build.sh$" | grep -v "tools/misc""3_harness/witness_trio.cc$" | grep -v "tools/misc""3_harness/gate.txt$" | grep -v "tools/pt""rmod_harness/build.sh$" | grep -v "tests/daq""io_parity_test.rs$" | grep -v "tests/misc""3_parity_test.rs$" | grep -v "tests/ac""t_parity_test.rs$" | grep -v "tests/pt""rmod_parity_test.rs$" | wc -l || true)
-test "$holders" -eq 0   # BEYOND every frozen/ruled holder family THIS row adds ZERO new sf-daq joined holders (the union exclusion set = the five strict-pin arms' sets — da-qio/dir-stor/sf-mod/sf-inst/ac-t + the ruled cross-holder faces; MEASURED-0 at the row)
+test "$holders" -eq 1   # [24e rider 0 -> 1: the module-registry MEGA harness rides ONE sf-daq header fresh-cp PATH line in its FRESH list (one-home REUSE, the 62d6fac law, walked face); BEYOND that THIS row adds ZERO new sf-daq joined holders]
 
 # ---- STATE-AWARE stageables dual guard (9 faces: the 8-face shape + the
 # E4 undecl probe = the daqio 9-face precedent) ----

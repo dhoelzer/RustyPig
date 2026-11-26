@@ -6,8 +6,9 @@
 //! by law). The Rust home is src/main/shellp.rs. The DEC ladder rides the
 //! TRACKED seed BYTE-EQUAL (the harness runs the REAL-VM side every build);
 //! this twin rebuilds the pure Decision faces through the landing home +
-//! walks the on-disk census (the FLIP: 30/9/22/1 after this row, the 62d6fac
-//! law). ZERO new allow-attrs / ZERO un-safe (the self-census below).
+//! walks the on-disk census (the era FLIP: 30/9/22/1 after this row; rider
+//! 30->31 / 22->23 at the 24e registry gate, the 62d6fac law). ZERO new
+//! allow-attrs / ZERO un-safe (the self-census below).
 
 use std::collections::BTreeSet;
 
@@ -470,8 +471,8 @@ fn t11_census_walk_30_9_22_1() {
     }
     assert_eq!(
         gates.len(),
-        30,
-        "the on-disk gate census (29 -> 30 at the 24c THIRD-real-gate tail; the 62d6fac law)"
+        31,
+        "the on-disk gate census (era face 29 -> 30 at this row's 24c tail; rider 30 -> 31 at the 24e registry gate, the 62d6fac law)"
     );
     let mut md5s = BTreeSet::new();
     let mut legacy = 0usize;
@@ -482,7 +483,7 @@ fn t11_census_walk_30_9_22_1() {
             legacy += 1;
         }
     }
-    assert_eq!(md5s.len(), 22, "the distinct-lineage census (21 -> 22 at this row's fresh tail)");
+    assert_eq!(md5s.len(), 23, "the distinct-lineage census (era face 21 -> 22 at this row; rider 22 -> 23 at the 24e gate tail, the 62d6fac law)");
     assert_eq!(legacy, 9, "the legacy 4826fc22 face FROZEN");
     let out = std::process::Command::new("git")
         .args(["-C", "/opt/data/snort3-rust", "ls-files"])
@@ -567,7 +568,7 @@ fn t13_docs_seed_tripwires() {
     assert_eq!(linecount(done.as_str()), 0, "the DONE echo NEVER rides NEXT.md");
     // the mod.rs rider-flip face (the 62d6fac complete-flip law):
     let mrs = std::fs::read_to_string(repo_path().join("src/main/mod.rs")).unwrap();
-    assert_eq!(mrs.lines().count(), 9, "the 7 -> 8 -> 9 rider-flip chain (row 24d: the anal-yzer loop pair's ONE new wiring line, the 62d6fac law, walked face)");
+    assert_eq!(mrs.lines().count(), 10, "the 7 -> 8 -> 9 -> 10 rider-flip chain (row 24e: the module-registry landing's ONE new wiring line, the 62d6fac law, walked face)");
     assert_eq!(mrs.matches(format!("pub mod shell{}", "p").as_str()).count(), 1, "the ONE new seat");
     // the PLAN row + the deviations section banked IN the code commit:
     let plan = std::fs::read_to_string(repo_path().join("PORTING_PLAN.md")).unwrap();

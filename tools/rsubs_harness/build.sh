@@ -82,7 +82,7 @@ test "$(find "$SRC/src" -iname '*survivor*' | grep -v 'reload_survivor_subscript
 RS_HOME=$R/src/framework/reload_survivor_subscriptions.rs
 for pat in 'RssStats' 'RssPeg' 'SurvivorSubscriptions' 'rss_stats' 'DedupClass' 'reload_survivor'; do
     if [ -e "$RS_HOME" ]; then
-        test "$(grep -rlE "$pat" "$R/src" --include=*.rs 2>/dev/null | grep -v "^$RS_HOME$" | grep -v "^$R/src/framework/mod.rs$" | wc -l)" -eq 0
+        test "$(grep -rlE "$pat" "$R/src" --include=*.rs 2>/dev/null | grep -v "^$RS_HOME$" | grep -v "^$R/src/framework/mod.rs$" | grep -v "^$R/src/main/modu""les.rs$" | wc -l)" -eq 0   # [24e rider: the module-registry landing legitimately REUSE-cites the landed home through the use-path (ONE-home law); the legit consumer rides the exclusion, the landmine face of FOREIGN files STAYS 0 (the 62d6fac walked face; the row name runtime-JOINED so this file NEVER self-hits)]
     else
         test "$(grep -rlE "$pat" "$R/src" --include=*.rs 2>/dev/null | wc -l)" -eq 0
     fi
@@ -561,9 +561,9 @@ grep -q "4826fc2233044a2d5429413faf0ae1af" "$R"/tools/fmod_harness/build.sh
 # was STALE/latent-red since 22a's tc gate landed un-re-run here) -- the 62d6fac law): ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 30   # SANCTIONED row-23e flip-forward: the 20a-era 25 face STALE (latent-red since 22a tc gate.txt un-re-run here) — walked 27, the 62d6fac complete-flip law [ROW-2->28 rider: 62d6fac law]   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 31   # SANCTIONED row-23e flip-forward: the 20a-era 25 face STALE (latent-red since 22a tc gate.txt un-re-run here) — walked 27, the 62d6fac complete-flip law [ROW-2->28 rider: 62d6fac law]   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]   # [24e rider 30->31: the chapter-21 module-registry MEGA row lands its COPY-LOCAL gate (the row's gate md5 tail rides this script's OWN md5_lineages face) (the 62d6fac complete-flip law, walked face)]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H/gate_md5_lineages.txt"
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 22   # SANCTIONED row-23e flip-forward: stale 17 latent-red since 22a/23a-era lineage growth; 19 by walk [23f rider ->20]   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 23   # SANCTIONED row-23e flip-forward: stale 17 latent-red since 22a/23a-era lineage growth; 19 by walk [23f rider ->20]   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]   # [24e rider 22->23: the 24e gate-tail md5 lineage (the 62d6fac law, walked face)]
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1                       # honest tracked face: gre's ONLY
 # name-pin census (collision fires LOUDLY):
 test "$(ls -d "$R"/tools/reload_survivor*_harness "$R"/tools/survivor*_harness "$R"/tools/rss_harness 2>/dev/null | wc -l)" -eq 0
@@ -576,7 +576,7 @@ test "$(find "$R"/tools -maxdepth 1 -iname '*rsubs*' | wc -l)" -eq 1          # 
 # own pin was the stale latent-red twin, never re-run since the 23a era;
 # corrected honestly per the 62d6fac law; NEVER edit those citations;
 # flip-forward only if ANOTHER re-clone lands):
-test "$(grep -rl 'rsubs' "$R"/tools/*/build.sh | grep -v "$H/build.sh" | wc -l)" -eq 5
+test "$(grep -rl 'rsubs' "$R"/tools/*/build.sh | grep -v "$H/build.sh" | wc -l)" -eq 5   # [24e walked re-ride: UNMOVED at 5 (the 62d6fac walk; the registry harness rides ZERO joined face of this family)]
 grep -q 'mp_data_bus/rsubs/thread/distill' "$M9/build.sh"
 test "$(grep -c 'rsubs' "$M9/build.sh")" -eq 1
 # NEXT.md cargo CITE faces ONLY (NEVER edit; the pinned x3 faces + presence):

@@ -222,9 +222,9 @@ sed 's/D0 0 none/D0 0 nope/' "$V" > "$H"/.tamper_v; ! cmp -s "$H"/.tamper_v "$H"
 # (gre's) — the walked census read + echoed EVERY leg, the sd-sm zero-gate law ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 30                     # UNMOVED (the zero-gate control row)   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 31                     # UNMOVED (the zero-gate control row)   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]   # [24e rider 30->31: the chapter-21 module-registry MEGA row lands its COPY-LOCAL gate (the row's gate md5 tail rides this script's OWN md5_lineages face) (the 62d6fac complete-flip law, walked face)]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 22                       # UNMOVED (no new tail EVER)   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 23                       # UNMOVED (no new tail EVER)   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]   # [24e rider 22->23: the 24e gate-tail md5 lineage (the 62d6fac law, walked face)]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(wc -l < "$R"/tools/gre_harness/gate.txt)" -eq 3
 grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/gate.txt
@@ -249,7 +249,7 @@ test "$(md5sum "$PT2"/vectors_faceA.txt | awk '{print $1}')" = "3a9b0a4b31ba291d
 # Snort-class legs the pair SNIFFS; the Ring family home carries the sig_ring
 # semantics; both CITED NEVER re-forked; the log/messages + utils/util + the
 # thread_config homes ride the 24a cites) ----
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 9                                            # THE flip: 6 -> 7 (THIS row's ONE wiring line; the sn-proc holder rider-flipped IN-COMMIT, the 62d6fac law)   # [24c rider 7->8: the sh-ell pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 10                                            # THE flip: 6 -> 7 (THIS row's ONE wiring line; the sn-proc holder rider-flipped IN-COMMIT, the 62d6fac law)   # [24c rider 7->8: the sh-ell pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]
 test "$(grep -c 'pub mod processp' "$R"/src/main/mod.rs)" -eq 1                         # the ONE new seat
 test "$(grep -c 'Ring<PigSignal>' "$SRC"/src/main/process.cc)" -eq 1                    # the sig_ring(4) seat (the helpers/ring home's semantics cite)
 test "$(grep -c 'pub fn put\|pub fn get' "$R"/src/helpers/ring.rs)" -ge 2               # the LANDED ring-home face REUSED, NEVER re-forked
@@ -259,8 +259,8 @@ test "$(grep -c 'fn set_instance_max' "$R"/src/main/snort_.rs || true)" -eq 0   
 # ---- landmine NAMING legs (the misc-9 family, STAYS 2 occupants NEVER +1;
 # the hyphen-split comment law holds THIS row) ----
 test "$(grep -rl 'struct Tra'"cer" "$R"/src --include=*.rs | wc -l)" -eq 0
-test "$(grep -rlE 'ReloadSurv'"ivor|reload_survivor" "$R"/src --include=*.rs | wc -l)" -eq 2
-test "$(grep -rlE 'ReloadSurv'"ivor|reload_survivor" "$R"/src/main --include=*.rs | wc -l)" -eq 0
+test "$(grep -rlE 'ReloadSurv'"ivor|reload_survivor" "$R"/src --include=*.rs | wc -l)" -eq 3   # [24e rider 2 -> 3: the module-registry landing legitimately REUSE-cites the landmine home (ONE-home law, the RSS_PEGS family cite; the 62d6fac complete-flip law, walked face; carrier hyphen-split per the family law)]
+test "$(grep -rlE 'ReloadSurv'"ivor|reload_survivor" "$R"/src/main --include=*.rs | wc -l)" -eq 1   # [24e rider 0 -> 1 in the main home: the same legit reuse (the 62d6fac law, walked face)]
 test -f "$R"/src/main/processp.rs   # the landing home exists (the ZERO-allows law face at the landing file: grep-'allow(' EXACT-0 asserted IN the twin + the cold audit)
 
 # ---- STATE-AWARE docs faces (the 23b/24a split law: MY commit banks the

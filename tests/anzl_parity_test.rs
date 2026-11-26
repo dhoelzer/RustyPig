@@ -11,8 +11,9 @@
 //! TEST faces + the main/test EXACTLY-2 CppUTest add_cpputest dialect faces
 //! (NEITHER names the row TU as a TEST host) + the row riding
 //! main/CMakeLists anal-yzer.cc x1 + anal-yzer.h x1 ONLY; the walked census
-//! 30/9/22/1 UNMOVED (the zero-gate law: NO gate ships HERE — t13 walks it;
-//! the 24c gate flip stays the LAST census move); the state-ladder
+//! 30/9/22/1 UNMOVED at this row's era face (the zero-gate law: NO gate ships
+//! HERE — t13 walks it; the 24e registry-gate rider moved the LIVE face to
+//! 31/9/23/1, the 62d6fac law); the state-ladder
 //! transitions + the set_state poke/watchdog face; the command-queue
 //! bookkeeping trio (pending pop-increments-unfinished / completed
 //! push+finish / the uncompleted erase-then-hold walk + the both-arms
@@ -676,9 +677,9 @@ fn t12_show_source_banner_face() {
 }
 
 // ======================================================================
-// T13: the census walk — the ZERO-gate UNMOVED face 30/9/22/1 + backbone
-// (the 24b control-row walk; the 24c flip stays the LAST census move; NO
-// gate ships HERE — this row NEVER adds one)
+// T13: the census walk — the era face 30/9/22/1 rider-flipped to the LIVE
+// 31/9/23/1 at the 24e registry gate (the 62d6fac law) + backbone
+// (the 24b control-row walk; NO gate ships HERE — this row NEVER adds one)
 // ======================================================================
 #[test]
 fn t13_census_walk_stays_30_9_22_1() {
@@ -697,9 +698,9 @@ fn t13_census_walk_stays_30_9_22_1() {
             md5s.insert(d);
         }
     }
-    assert_eq!(total, 30, "UNMOVED: the 24d ZERO-gate row NEVER adds a gate");
+    assert_eq!(total, 31, "the 24d ZERO-gate row NEVER added a gate (era face 30; rider 30 -> 31 at the 24e registry gate, the 62d6fac law)");
     assert_eq!(frozen, 9, "the legacy 4826fc22 family FROZEN");
-    assert_eq!(md5s.len(), 22, "UNMOVED: NO new lineage tail from THIS row EVER");
+    assert_eq!(md5s.len(), 23, "NO new lineage tail from THIS row (era face 22; rider 22 -> 23 at the 24e gate tail, the 62d6fac law)");
     let tracked = std::process::Command::new("git")
         .args(["-C", root, "ls-files"])
         .output()
@@ -765,7 +766,7 @@ fn t14_docs_seed_token_tripwires() {
     assert_eq!(this.matches(land.as_str()).count(), 0);
     // the mod.rs rider-flip face (the 62d6fac complete-flip law):
     let mrs = std::fs::read_to_string("/opt/data/snort3-rust/src/main/mod.rs").unwrap();
-    assert_eq!(mrs.lines().count(), 9); // [24c rider 7->8 + 24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]
+    assert_eq!(mrs.lines().count(), 10); // [24c rider 7->8 + 24d rider 8->9 + 24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]
     assert_eq!(mrs.matches("pub mod analyzer").count(), 1);
     // the row NEVER touches the seed faces (the pin faces UNMOVED):
     assert_eq!(NEXTMD.matches("5 TEST(").count(), 1);

@@ -135,20 +135,20 @@ test "$(grep -rl "$MN" "$R"/src --include=*.rs 2>/dev/null | wc -l)" -eq 0
 # the lowercase tr-acer FAMILY face over tools build.sh STAYS 16 (THIS file
 # carries ZERO joined lowercase occurrences — every row/trac""er mention rides
 # the concat forms; the 16 members NEVER move):
-test "$(grep -rl "tr""acer" "$R"/tools/*/build.sh | grep -v "^$R/tools/tr""acer_harness/build.sh$" | wc -l)" -eq 17   # COLD rider 16 -> 17 at row 24d IN-COMMIT (the 62d6fac law): the anal-yzer harness rides the packet-tra-cer.h fresh-cp PATH line
+test "$(grep -rl "tr""acer" "$R"/tools/*/build.sh | grep -v "^$R/tools/tr""acer_harness/build.sh$" | wc -l)" -eq 18   # COLD rider 16 -> 17 at row 24d IN-COMMIT (the 62d6fac law): the anal-yzer harness rides the packet-tra-cer.h fresh-cp PATH line   # [24e rider 17 -> 18: the module-registry MEGA harness legitimately rides the packet-tra-cer.h fresh-cp PATH line (one-home REUSE; the 62d6fac complete-flip law, walked face)]
 test "$(grep -rl "rs""ubs" "$R"/tools/*/build.sh | grep -v "^$R/tools/rs""ubs_harness/build.sh$" | wc -l)" -eq 5
 test "$(grep -rl "misc""9" "$R"/tools/*/build.sh | grep -v "^$R/tools/misc""9_harness/build.sh$" | grep -v ink4 | wc -l)" -eq 7
 # the misc-9 landmine NAMING law (struct Tra""cer find-0; the landmine
 # tokens ride CONCAT forms EXACTLY — no prose trips them):
 test "$(grep -rl 'struct Tracer' "$R"/src --include=*.rs | wc -l)" -eq 0
-test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src --include=*.rs | wc -l)" -eq 2
+test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src --include=*.rs | wc -l)" -eq 3   # [24e rider 2 -> 3: the module-registry landing legitimately REUSE-cites the landmine home via the use-path (ONE-home law; the 62d6fac walked face)]
 test "$(grep -rlE "ReloadSurv""ivor|struct Tra""cer" "$R"/src/packet_io --include=*.rs | wc -l)" -eq 0   # THIS row ships ZERO landmine-name hits in ITS home
 # the 23g twin's LEGIT landed-home use-paths move EXACTLY these TWO cp
 # faces, sanctioned IN-COMMIT (the 23f 13->14 law; the one-home law MAKES
 # the cites UNAVOIDABLE; the build.sh-ONLY pc face STAYS 13 — foreign 13-
 # arms NEVER move; THIS file rides ZERO joined pc/pt tokens itself):
 test "$(grep -rl "$PC" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | wc -l)" -eq 19   # COLD rider 18 -> 19 at row 24d IN-COMMIT (the 62d6fac law): the anal-yzer harness rides the packet-constraints.h fresh-cp PATH line. MEASURED 23g->23h 17 -> 18 (the ac t row-23h landing twin tests/ac t-parity twin — THE LEGIT landed-home use-path cite of the 23e p-c-gate home the owner pair rides, the 62d6fac flip-forward law, the 23h landing NEVER edited; the build.sh-ONLY pc face STAYS 13 — the foreign 13-arms NEVER move; the twin arm split law re-rides; prior face 17 at the 23g walk)
-test "$(grep -rl "$PT" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$PT2/build.sh$" | grep -v "^$R/tests/pt""racer_parity_test.rs$" | wc -l)" -eq 20   # COLD rider 19 -> 20 at row 24d IN-COMMIT (the 62d6fac law): the anal-yzer harness rides the pt-racer header fresh-cp PATH line   # MEASURED 23g->23h 18 -> 19 at THIS row (the ac t row-23h landing twin tests/ac t-parity twin — THE LEGIT landed-home use-path cites of the 23f pt-r-acer home the owner pair rides, the 62d6fac flip-forward law, the 23h landing NEVER edited; the 23g 17 -> 18 rider face at the pt-rmod walk)
+test "$(grep -rl "$PT" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "^$H/build.sh$" | grep -v "^$PT2/build.sh$" | grep -v "^$R/tests/pt""racer_parity_test.rs$" | wc -l)" -eq 21   # COLD rider 19 -> 20 at row 24d IN-COMMIT (the 62d6fac law): the anal-yzer harness rides the pt-racer header fresh-cp PATH line   # MEASURED 23g->23h 18 -> 19 at THIS row (the ac t row-23h landing twin tests/ac t-parity twin — THE LEGIT landed-home use-path cites of the 23f pt-r-acer home the owner pair rides, the 62d6fac flip-forward law, the 23h landing NEVER edited; the 23g 17 -> 18 rider face at the pt-rmod walk)   # [24e rider 20 -> 21: the module-registry MEGA harness rides the pt-racer header fresh-cp PATH line in its FRESH list (one-home REUSE; the 62d6fac law, walked face)]
 
 # ---- NEXT.md token face, STATE-AWARE (the docs bank = the ORCHESTRATOR
 # sibling commit — this file NEVER edits NEXT.md): ----
@@ -451,9 +451,9 @@ PY
 # tracked 1 (gre's ONLY) — STAYS by walk (NO new gate EVER shipped) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 30                     # STAYS 28 (the ZERO-gate row NEVER adds one)   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 31                     # STAYS 28 (the ZERO-gate row NEVER adds one)   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]   # [24e rider 30->31: the chapter-21 module-registry MEGA row lands its COPY-LOCAL gate (the row's gate md5 tail rides this script's OWN md5_lineages face) (the 62d6fac complete-flip law, walked face)]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/md5_lineages.txt
-test "$(cat "$H"/md5_lineages.txt)" -eq 22                            # STAYS 20 distinct tails   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]
+test "$(cat "$H"/md5_lineages.txt)" -eq 23                            # STAYS 20 distinct tails   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]   # [24e rider 22->23: the 24e gate-tail md5 lineage (the 62d6fac law, walked face)]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(wc -l < "$R"/tools/gre_harness/gate.txt)" -eq 3
 grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/gate.txt

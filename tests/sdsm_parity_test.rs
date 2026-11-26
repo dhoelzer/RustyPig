@@ -252,7 +252,7 @@ fn t8_test_cmake_dialect_faces_and_zero_gate() {
         .unwrap();
     let outs = String::from_utf8_lossy(&out.stdout).to_string();
     let face: Vec<&str> = outs.lines().collect();
-    assert_eq!(face, vec!["30", "9", "22", "1"], "the census face moved (the live face AFTER the 24a chapter-21 gate rider 28->29 / 20->21, the 62d6fac law; the sd-sm row itself shipped ZERO gate faces EVER — the no-gate-HERE arm below holds): {face:?}");
+    assert_eq!(face, vec!["31", "9", "23", "1"], "the live census face AFTER the 24c rider 29->30 / 21->22 and the 24e registry-gate rider 30->31 / 22->23 (the 62d6fac law; the sd-sm row itself shipped ZERO gate faces EVER — the no-gate-HERE arm below holds): {face:?}");
     assert!(!std::path::Path::new(concat!("/opt/data/snort3-rust/tools/sd", "sm_harness/gate.txt")).exists(), "ZERO-gate row: NO gate EVER");
 }
 
@@ -298,7 +298,7 @@ fn t11_landmine_naming_legs_stay() {
         .unwrap();
     let outs = String::from_utf8_lossy(&out.stdout).to_string();
     let face: Vec<&str> = outs.lines().collect();
-    assert_eq!(face, vec!["2", "0", "0"], "the landmine NAMING legs: {face:?}");
+    assert_eq!(face, vec!["3", "0", "0"], "the landmine NAMING legs 2 -> 3 at row 24e (the module-registry landing legitimately REUSE-cites the landmine home via the use-path — the ONE-home law, the 62d6fac walked rider; the packet_io legs STAY 0/0); face: {face:?}");
 }
 
 #[test]

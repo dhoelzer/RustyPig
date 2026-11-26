@@ -5557,3 +5557,52 @@ Structural deviations (behavior preserved):
   MEASURED). The snort_ignore mirror returns TRUE so the main-hook seat
   stays LIVE through the packet legs — an honest harness-scripted arm,
   NOT a ground-claim (BANKED).
+
+
+## main modules register-all MEGA pair (row 24e, modules.cc 2,491 + modules.h 30 @ fe29cbe)
+
+- THE statics law AGAIN: the cc ^static x43 + THREAD_LOCAL x2 face (the
+  config-cmd trio, the peg tables, the threshold scratch, the pmqs pair)
+  NEVER lands as Rust statics — caller-owned fields on the landing
+  records + the ModulesWorld provider seam (sc()/log()/thread_config()/
+  proto_ref_add() REQUIRED legs; everything else a defaulted CITE leg).
+- THE provider-world seam wall (all CITE DECL, NEVER landed bodies): the
+  PluginManager add_module wall, ModuleManager::get_includer, the
+  managers/action_manager instantiate wall, FileService, the
+  var_dependency resolve legs (REUSE the landed vars.rs faces through
+  the seam), the mp_data_bus object (NOT landed), BatchedLogManager,
+  AnalyzerCommand. The landing NEVER fakes a body past these walls.
+- The register-all ladders land as ORDERED consts (35 + 1) + the
+  ModuleRegistrar ledger seam; the CRASH_MITIGATOR dependent tail is a
+  MEASURED-OFF dialect face (cmake define face 0 — the leg NEVER runs,
+  the mitigation boot NEVER invented); the HAVE_UUID seat rides the
+  IPS_PARAMS table face 12 but the set arm NEVER runs (dialect OFF,
+  the harness A7 face pins 0).
+- The parameter tables: the C Parameter tables carry type-VALIDATION
+  callbacks (range/pair laws) that the landed Parameter record models
+  as DECL seats; the pair-laws ride the C comment cites at each table,
+  the LIVE validation legs stay the framework home's (parameter.rs,
+  NEVER re-forked).
+- p->include / p->rules / p->states: the C IpsPolicy string slots have
+  NO landed policy.rs counterpart (the parse_include family NOT
+  landed): the writes route to the ScWriteBag cite ledger, NEVER an
+  invented policy field (deviation cited at the legs).
+- The C p-end parse legs (ParseIpVar/ParsePathVar/ParsePortVar with the
+  ctx tables): seam legs ride the landed parser/vars.rs homes through
+  the seam (the ctx-arg threading deviation, cited).
+- The C (var, caller) two-arg parse faces -> the landed (var, ret)
+  single-name faces (the caller tag rides the cite, the 23c overload
+  law precedent).
+- The harness mirror replays policy.cc :164 commit_action_variable +
+  the parse-error counter on the witness (landed-home semantics
+  mirrored, NEVER re-ported); the log_errors.cpp :127 reset / :136
+  get pair links the REAL ground home (the landed messages.rs pair
+  cited).
+- gate body #4's set_ips_policy(&policy) posture lands as the
+  GateWorld seam override (the landed NullWorld posture NEVER
+  mutated); the C free-function set/read faces map to the seam borrow
+  (the record-threading deviation).
+- The 4 Catch TEST bodies NEVER replay in the landing (rule (5): the
+  cite-comment face ONLY); the harness runs the REAL ground bodies
+  over the REAL gate_main runner; the twin drives the 12 CHECK legs'
+  assertions through the Rust port.
