@@ -1,0 +1,10 @@
+AF-a type=1/1 pkthdr=1 len=16 pktlen=120 ts=1700000000.000555
+AF-b data=dead ref=1
+AF-c types=1,3,4,9 hdr_len=0 meta=1
+AF-f enum=1,2,3,4 0,5,4,3
+AF-g batch=64 mru=1518 timeout=1500
+AF-g2 set=7,99
+AF-h ac=1 names=PAUSE|RESUME|ROTATE|RUN|START|STOP
+AF-i ref=1,2,1
+AF-r idle=3 rx=120 analyzed=1
+AF-s legs-empty=1

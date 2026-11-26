@@ -1,3 +1,4 @@
+pub mod analyzer;
 pub mod numa;
 pub mod policy;
 pub mod processp;

@@ -5475,3 +5475,85 @@ Structural deviations (behavior preserved):
   FALSE -> bootstrap load -> installs -> userdata/setglobal -> bootstrapped-
   flip + pop) is pinned 11 legs; the pre-boot allowlist seat lands on the
   INTERNAL list because bootstrapped flips AFTER the ctor's own append legs.
+## main anal-yzer loop pair (row 24d — main/analyzer.cc 1164 b917d167 + main/analyzer.h 177 8f51a8a7 @ fe29cbe = 1,341 L — THE chapter-21 FOURTH body, the analysis-LOOP PAIR = the state ladder + the command facility + the file-local RetryQueue; THE SECOND ZERO-gate CONTROL row (the 24b pattern): the in-TU TEST faces EXACTLY-0 + the ONE UNIT_TEST_BUILD friend post whose dialect host is ABSENT find-0; the walked census STAYS 30/9/22/1 — NO gate ships HERE; the landing src/main/analyzer.rs 1193 L (MEASURED face; the authored 879 draft face re-pinned at source, the cite-integrity sweep added the back-half cite legs); the THIRD ground face src/main.h 67 L 2b487dd0 rides CITES ONLY (the exit sibling :25 — the row branches on the CLASS MEMBER seat); the harness token MEASURED 0 pre-hit (the anz-l family); the seed 855 x3 NEVER moved here — the docs sibling banks the new one)
+
+- 1. THE ZERO-GATE POSTURE MEASURED EVERY BUILD BY WALK (the 24b control
+  law re-ridden): the .cc TEST_CASE/CHECK/UNIT_TEST faces EXACTLY-0 x3;
+  the .h carries EXACTLY-1 UNIT_TEST_BUILD friend post (h :126) whose
+  dialect class (the AnalyzerTestAccess shape) lives ONLY in the ground
+  test dir — the host find-0 OUTSIDE it; the main/test CMake carries
+  EXACTLY-2 add_cpputest dialect faces and the row .cc rides the
+  ENABLE_SHELL-conditional distill seat ONLY (a SHELL-era CMake SEAT,
+  NOT a TEST host; the CppUTest dialect host ABSENT on the host
+  MEASURED); the row rides main/CMakeLists the .cc x1 + the .h x1 PLAIN
+  seats (the ENABLE_SHELL pair :20/:22 wraps the ac-sh-ell pair,
+  OUTSIDE the row seats — the walked CMake-context face); NO gate.txt
+  NO gate_main EVER ships — the walked census 30 on-disk / 9 legacy
+  4826fc22 FROZEN / 22 lineages / tracked-1 gre UNMOVED, the 24c flip
+  STAYS the LAST census move (BANKED).
+- 2. THE DAQ MSG-TYPE SEATS LAND ROW-SCOPED OVER THE REAL SDK face: the
+  landed 23a sf-daq home carries the rstat + verdict constants (the
+  REUSE one-home, pub-used through the landing, NEVER re-forked) but NO
+  DAQ_MSG_TYPE_* seat; the row adds four pub consts over the REAL
+  libdaq daq_common.h :82-:85 values (1,2,3,4) cited to the SDK head —
+  NEVER a synthetic graft, NEVER an ABI claim (the SDK-version seats
+  stay SYNTHETIC mirrors). The deny-seat name rides the LANDED home's
+  DAQ_VERDICT_BLACKLIST (the twin's first draft reached for a
+  DAQ_VERDICT_DENY the home NEVER names — caught at source, restored,
+  BANKED as an authoring self-breach).
+- 3. THE EXIT SEAT LANDS AS THE CLASS MEMBER (h :154 / cc :1097/:1114/
+  :1128 — THREE writer legs, the run() codec-fail leg NEVER skipped):
+  the main.h :25 GLOBAL sibling stays the 24b processp home's seat —
+  CITED NEVER merged (the honest C face has BOTH; the analyzer loop
+  branches on the member). The command facility lands as BOOKKEEPING
+  ONLY: the AnalyzerCommand + AC* wall (ACPause..ACStop, the REAL wall
+  names — the first draft's Reload*Command family was a FABRICATION
+  caught by grep-0 + fixed at source, BANKED) is a CITE: a copy-closure
+  DECL rider + a shape-only witness mirror; the harness probes serve
+  MOCK commands at that seam. The private show_source /
+  apply-instrument / clear-file-data seats are NEVER called by ANY
+  runner — the harness ships EXACTLY-0 -fno-access-control faces (the
+  FACE-A ladder stays record-face-only; the banner prints LIVE through
+  the operator() pass, the pcap_show TRUE + run_num 2 newline-leg face;
+  the early -fno-access-control authoring draft removed AT SOURCE,
+  BANKED).
+- 4. COUNTER + CLOCK SEATS RIDE THE SCRIPTED WORLD (the banked
+  scripted-clock law): the pair's 2 THREAD_LOCAL record legs (the
+  global-bare daq counters + the ns packet counters) live as harness
+  mirror seats with deterministic scripted arms (the probe's
+  rstat/msg-per-receive ladder: TIMEOUT idle x2, the INTERRUPTED
+  kick+command drains, the OK batches with skip x2 + SOF/EOF/OTHER +
+  the pause-after 3-3 zero-roll, the uncompleted FALSE-mock parked +
+  the second-pass STOP re-arm); the Rust landing models the SAME faces
+  as caller-owned caller-fed fields (the statics law). The real-time
+  packet-clock legs (gettimeofday/timeradd/timercmp) land as i64-pair
+  math VERBATIM (the usec-carry + the head-of-line strict-compare faces
+  pinned by the twin); the packet_gettimeofday seat rides the seam,
+  NEVER a wall-clock claim.
+- 5. LANDING CITE-INTEGRITY SWEEP (an honest authoring drift banked):
+  the back-half cc : cite map rode ~+13 lines off the ground map while
+  the first half rode exact — a systematic line-map drift, RE-PINNED to
+  the grep-measured ground map in a full-file sweep (the ladder consts
+  INIT 21 — the :666 policy-fetch leg rides, the first draft's 20-entry
+  const SKIPPED it — + TERM 22 + 9, the retry-drain legs NEVER folded);
+  the reap do-while landed the size-BEFORE-pop face (cc :798, the first
+  draft read the size AFTER the pop — caught against the ground body,
+  the N=3/1/0 arithmetic now pinned); the ctor tail set_state(NEW)
+  (cc :818) landed the poke + watchdog-off legs (the first draft missed
+  the LIVE ctor legs — the P0 vector pins them); the harness graft-face
+  pin rode an honest scratch-era 59 vs the tracked-cold 51 face —
+  corrected AT SOURCE at the cold run, BANKED.
+- 6. THE WITNESS WALL SET MIRRORS THE GROUND TEST STUB WALL WITHOUT
+  COPYING IT: the ground src/main/test/distill_verdict_stubs.h (277 L)
+  names the SAME wall the row drives; the harness witness ships its OWN
+  shape-only capture set (EVERY namespace placement rides the row .o's
+  OWN nm -C census face — the bare-name global seats
+  InitTag/CleanupTag/EventTrace_*/SFRF_Alloc/snort_ignore vs the
+  ns-scoped manager legs were compiler-ENFORCED, the first draft's
+  ns-placements fixed at source, BANKED); BODIES NEVER land, the rec()
+  legs feed the DEC order ladder ONLY; the row's OWN perf-stats seat
+  (the daqPerfStats definition) is NEVER mirrored (the E9 twin law);
+  the hwloc seat rides the proven excision (host head ABSENT
+  MEASURED). The snort_ignore mirror returns TRUE so the main-hook seat
+  stays LIVE through the packet legs — an honest harness-scripted arm,
+  NOT a ground-claim (BANKED).

@@ -249,7 +249,7 @@ test "$(md5sum "$PT2"/vectors_faceA.txt | awk '{print $1}')" = "3a9b0a4b31ba291d
 # Snort-class legs the pair SNIFFS; the Ring family home carries the sig_ring
 # semantics; both CITED NEVER re-forked; the log/messages + utils/util + the
 # thread_config homes ride the 24a cites) ----
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 8                                            # THE flip: 6 -> 7 (THIS row's ONE wiring line; the sn-proc holder rider-flipped IN-COMMIT, the 62d6fac law)   # [24c rider 7->8: the sh-ell pair's ONE new wiring line (the 62d6fac law, walked face)]
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 9                                            # THE flip: 6 -> 7 (THIS row's ONE wiring line; the sn-proc holder rider-flipped IN-COMMIT, the 62d6fac law)   # [24c rider 7->8: the sh-ell pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]
 test "$(grep -c 'pub mod processp' "$R"/src/main/mod.rs)" -eq 1                         # the ONE new seat
 test "$(grep -c 'Ring<PigSignal>' "$SRC"/src/main/process.cc)" -eq 1                    # the sig_ring(4) seat (the helpers/ring home's semantics cite)
 test "$(grep -c 'pub fn put\|pub fn get' "$R"/src/helpers/ring.rs)" -ge 2               # the LANDED ring-home face REUSED, NEVER re-forked

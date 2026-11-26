@@ -298,7 +298,7 @@ test "$(grep -c 'ManageStack' "$R"/src/lua/mod.rs)" -ge 3
 test "$(grep -c "pub struct Shell {" "$R"/src/main/shellp.rs)" -eq 1             # the ONE class home (the brace form pins the class face; the ShellWorld seam NEVER counts)
 test "$(grep -c "pub fn command_count" "$R"/src/main/shellp.rs)" -eq 1
 # the mod.rs rider-flip holders (the 62d6fac complete-flip law walked):
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 8                              # THE flip: 7 -> 8 at THIS row (ONE new wiring line; BOTH holder arms rider-flipped IN-COMMIT)
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 9                              # THE flip: 7 -> 8 at THIS row (ONE new wiring line; BOTH holder arms rider-flipped IN-COMMIT)   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]
 test "$(grep -c "pub mod ${MN}p" "$R"/src/main/mod.rs)" -eq 1             # the ONE new seat
 
 # ---- landmine NAMING legs (the misc-9 family, STAYS 2 occupants NEVER +1;

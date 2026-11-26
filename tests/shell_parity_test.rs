@@ -567,7 +567,7 @@ fn t13_docs_seed_tripwires() {
     assert_eq!(linecount(done.as_str()), 0, "the DONE echo NEVER rides NEXT.md");
     // the mod.rs rider-flip face (the 62d6fac complete-flip law):
     let mrs = std::fs::read_to_string(repo_path().join("src/main/mod.rs")).unwrap();
-    assert_eq!(mrs.lines().count(), 8, "the 7 -> 8 flip at this row's ONE new wiring line");
+    assert_eq!(mrs.lines().count(), 9, "the 7 -> 8 -> 9 rider-flip chain (row 24d: the anal-yzer loop pair's ONE new wiring line, the 62d6fac law, walked face)");
     assert_eq!(mrs.matches(format!("pub mod shell{}", "p").as_str()).count(), 1, "the ONE new seat");
     // the PLAN row + the deviations section banked IN the code commit:
     let plan = std::fs::read_to_string(repo_path().join("PORTING_PLAN.md")).unwrap();

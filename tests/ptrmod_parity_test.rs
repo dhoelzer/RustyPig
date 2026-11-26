@@ -517,7 +517,7 @@ fn foreign_faces_landmines_and_token_hygiene() {
     // the bare tr-acer family build.sh face STAYS 16 (this row's harness
     // rides ONLY concat forms — re-mirrored from THIS runtime arm):
     let pat_tr = format!("grep -rl \"tr{q}{q}acer\" /opt/data/snort3-rust/tools/*/build.sh | grep -v '/[t]racer_harness/build.sh$' | wc -l");
-    assert_eq!(run_bash_usize(&pat_tr), 16, "the bare-tr family face STAYS 16");
+    assert_eq!(run_bash_usize(&pat_tr), 17, "the bare-tr family build.sh face 16 -> 17 rider-flip IN-COMMIT (row 24d: the anal-yzer harness legitimately rides the packet-tracer.h fresh-cp PATH line — one-home REUSE, the 62d6fac complete-flip law, the pt-racer twin arm's flip re-mirrored here)");
     let pat_rs = format!("grep -rl \"rs{q}{q}ubs\" /opt/data/snort3-rust/tools/*/build.sh | grep -v '/[r]subs_harness/build.sh$' | wc -l");
     assert_eq!(run_bash_usize(&pat_rs), 5, "the rs-subs family face STAYS 5");
     let pat_m9 = format!("grep -rl \"misc{q}{q}9\" /opt/data/snort3-rust/tools/*/build.sh | grep -v '/[m]isc9_harness/build.sh$' | grep -v 'ink4' | wc -l");
@@ -530,14 +530,14 @@ fn foreign_faces_landmines_and_token_hygiene() {
     // sanctioned IN this commit, the one-home law MAKES the cite UNAVOID-
     // ABLE; the pc-gate twin's OWN face already rides):
     let pat_pc_b = "grep -l 'packet_constraint' /opt/data/snort3-rust/tools/*/build.sh | grep -vc '[p]cgate'".to_string();
-    assert_eq!(run_bash_usize(&pat_pc_b), 13, "the pc build.sh-only face UNMOVED (the runtime-join harness law)");
+    assert_eq!(run_bash_usize(&pat_pc_b), 14, "the pc build.sh-only face 13 -> 14 rider-flip IN-COMMIT (row 24d: the anal-yzer harness legitimately rides the packet-constraints.h fresh-cp PATH line — one-home REUSE, the 62d6fac complete-flip law; the pc-gate twin's pcflip 13->14 rider re-ridden here)");
     let pat_pc_all = format!("grep -rl \"packet_cons{q}{q}traints\" /opt/data/snort3-rust/tools/*/build.sh /opt/data/snort3-rust/tests/*.rs | wc -l");
-    assert_eq!(run_bash_usize(&pat_pc_all), 18, "THE sanctioned flip x2: pc inclusive 16->17->18 (+1 THIS twin's 23e import; +1 = the row-23h parity twin's LEGIT 23e home import, the one-home law, sanctioned IN the row-23h commit)");
+    assert_eq!(run_bash_usize(&pat_pc_all), 19, "THE sanctioned flips: pc inclusive 16->17->18->19 (row 24d: +1 = the anal-yzer harness's packet-constraints.h fresh-cp PATH line, the 62d6fac complete-flip law, (+1 THIS twin's 23e import; +1 = the row-23h parity twin's LEGIT 23e home import, the one-home law, sanctioned IN the row-23h commit)");
     // the pt family face (the pt-racer pair's OWN bs+twin EXCLUDED by the
     // [x] bracket law) FLIPPED 17->18 by THIS twin's LEGIT 23f use-path
     // import (the harness :150 arm re-pins the SAME exclusion face):
     let pat_pt_all = format!("grep -rl \"packet_tra{q}{q}cer\" /opt/data/snort3-rust/tools/*/build.sh /opt/data/snort3-rust/tests/*.rs | grep -v '[p]tracer_harness/build.sh' | grep -v '[p]tracer_parity_test.rs' | wc -l");
-    assert_eq!(run_bash_usize(&pat_pt_all), 19, "THE sanctioned flip x2: pt family 17->18->19 (+1 THIS twin's 23f import; +1 = the row-23h parity twin's LEGIT 23f home imports, the one-home law, sanctioned IN the row-23h commit)");
+    assert_eq!(run_bash_usize(&pat_pt_all), 20, "THE sanctioned flips: pt family 17->18->19->20 (row 24d: +1 = the anal-yzer harness's pt-racer header fresh-cp PATH line, the 62d6fac complete-flip law, (+1 THIS twin's 23f import; +1 = the row-23h parity twin's LEGIT 23f home imports, the one-home law, sanctioned IN the row-23h commit)");
     // the misc-9 landmines EXACTLY-2 occupants NEVER +1 (the PacketTrace
     // NAMING law re-proven THROUGH the landing text; the needles ride the
     // adjacent-quote bash law so THIS file's text NEVER carries a join):

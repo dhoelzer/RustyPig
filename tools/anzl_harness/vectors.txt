@@ -1,0 +1,10 @@
+P0 ctor legs=inst.ctor|log.msg|poke|tc.status-off
+P1 state0=NEW source=d-a idling=0
+D2 execute@NEW legs-empty=1
+
+Reading network traffic from "d-a" with snaplen = 1518
+L1 legs=sw.ctor|oops.tinit|set_type|set_inst|set_run_num|sw.apply|de.tinit|tc.tid|get_inst|tc.policy|sf.local|poke|tc.status-off|prof.start|cmd.z|cmd.start|inst.start|poke|tc.status-off|cmd.run|inst.interrupt|pol.net|cdmgr.tinit|act.tinit|tag.init|et.init|maps.pop|mem.tinit|plug.tinit|tr.tinit|sc.tinit|ha.tinit|evt.open|fs.tinit|insp.tinit|pt.tinit|ham.init|lat.pktforce|lat.ruleforce|ha.rec|pm.tinit|sf.thr-alloc|cdmgr.grind|poke|tc.status-on|inst.recv|de.onload|pkt.tv|pkt.timeupd|bus.pub-net|st.timeouts|ha.rec|tc.kick|inst.recv|de.onload|oops.set|mem.free|pkt.timeupd|de.waitctx|cs.start|cs.ctx|pol.sel-pkt|de.reset|sf.thr-reset|act.clearq|pm.decode|st.logstart|pt.actv|pol.insp|pol.ips|pol.net|de.filedata|ignore|act.exec|ha.upd|oops.set|inst.fin|cs.stop|st.timeouts|ha.rec|tc.kick|de.onload|oops.set|mem.free|pol.sel-flow|pkt.timeupd|bus.pub|oops.set|inst.fin|tc.kick|de.onload|oops.set|mem.free|pol.sel-flow|pkt.timeupd|bus.pub|oops.set|inst.fin|tc.kick|de.onload|pkt.tv|pkt.timeupd|bus.pub-net|st.timeouts|ha.rec|tc.kick|inst.recv|de.onload|tc.kick|cmd.skip|inst.interrupt|cmd.pause|inst.interrupt|poke|tc.status-off|log.msg|cmd.resume|inst.interrupt|poke|tc.status-on|cmd.reload|inst.interrupt|inst.reload|cmd.false|inst.recv|de.onload|inst.recv|de.onload|inst.fin|inst.fin|oops.set|mem.free|pol.sel-flow|pkt.timeupd|bus.pub|oops.set|inst.fin|tc.kick|de.onload|cmd.false|inst.interrupt|tc.kick|tc.kick|cmd.stop|bus.pub-pkt|poke|tc.status-on|prof.stop|ha.ttermb|st.purge|maps.inv|de.idle|insp.tterm|plug.tterm|mem.tterm|fc.flush|mod.accum|evt.close|ha.tterm|sc.tterm|pol.net|cdmgr.tterm|oops.set|inst.stop|sf.local|lat.pktterm|lat.ruleterm|prof.consol|de.tterm|et.term|tag.clean|fs.tterm|pt.tterm|pm.tterm|act.tterm|cs.dtor|sf.thr-free|plug.tterm|tr.tterm|poke|tc.status-off|oops.tterm
+L1b state=STOPPED switcher=1 local=1 fin=PASS
+L1c idle=2 skipped=2 sof=1 eof=2 other=0 rx=0 iwl=0 ibl=0 rq=0 rp=0 rdisc=0 analyzed=1
+L1d poke=8 log=2 err=0
+D4 dtor legs=inst.dtor

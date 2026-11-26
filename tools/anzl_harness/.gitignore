@@ -1,0 +1,38 @@
+# anzl_harness — row 24d (chapter-21 FOURTH body: the anal-yzer loop PAIR)
+# TRACKED faces EXACTLY-7: .gitignore + build.sh + probe.cc + probe_faceA.cc
+# + witness_analyzer.cc + vectors.txt + vectors_faceA.txt.
+# THE ZERO-GATE ROW LAW: NO gate.txt EVER ships HERE (the walked census
+# STAYS 30/9/22/1 — the 24b zero-gate control face re-ridden); NO
+# gate_main.cc; NO PLAN.md.
+copy/
+o2/
+copy/main/analyzer.cc
+copy/main/analyzer.h
+probe_x
+probe_x_O2
+probe_x_cross
+probe_faceA_x
+probe_faceA_x_O2
+probe.o
+probe_faceA.o
+witness.o
+vectors_O0.txt
+vectors_O2.txt
+vectors_O2b.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+E4_bare.txt
+E4_graft.txt
+E4_real.txt
+E4_ut.txt
+E9_dup.txt
+nm_U_plain.txt
+nm_U_ut.txt
+gate_md5_lineages.txt
+.e9dup
+.errA
+.errA_pristine
+.tamper_v
+stageables.txt
+*.o
+graftcmp/
