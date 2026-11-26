@@ -805,11 +805,11 @@ fn t15_census_walk_stays_29_9_21_1() {
         }
     }
     assert_eq!(
-        total, 29,
-        "the on-disk gate face UNMOVED at 24a's flip (the zero-gate control row NEVER adds a gate)"
+        total, 30,
+        "rider 29 -> 30 at the row-24c gate (the zero-gate control row NEVER adds a gate itself; the 62d6fac law)"
     );
     assert_eq!(frozen, 9, "the legacy 4826fc22 family FROZEN");
-    assert_eq!(md5s.len(), 21, "the distinct lineages UNMOVED (no new tail EVER)");
+    assert_eq!(md5s.len(), 22, "rider 21 -> 22 at the row-24c fresh gate tail (the 62d6fac law; no new tail from THIS row)");
     let tracked = std::process::Command::new("git")
         .args(["-C", root, "ls-files"])
         .output()
@@ -861,7 +861,7 @@ fn t16_docs_seed_token_tripwires() {
     assert_eq!(this.matches(land.as_str()).count(), 0);
     // the mod.rs rider-flip face (the 62d6fac complete-flip law):
     let mrs = std::fs::read_to_string("/opt/data/snort3-rust/src/main/mod.rs").unwrap();
-    assert_eq!(mrs.lines().count(), 7);
+    assert_eq!(mrs.lines().count(), 8);  // [24c rider 7->8: the sh-ell pair's ONE new wiring line (the 62d6fac law, walked face)]
     assert_eq!(mrs.matches("pub mod processp").count(), 1);
     // the row NEVER touches the seed faces (the pin faces UNMOVED):
     assert_eq!(NEXTMD.matches("5 TEST(").count(), 1);

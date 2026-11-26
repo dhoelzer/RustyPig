@@ -668,7 +668,7 @@ fn t12_census_on_disk_walk() {
         let p = e.unwrap().path().join("gate.txt");
         if p.is_file() { gates.push(p); }
     }
-    assert_eq!(gates.len(), 29, "the on-disk gate census (28 -> 29 at the 24a OPENER)");
+    assert_eq!(gates.len(), 30, "the on-disk gate census (rider 29 -> 30 at the 24c THIRD gate row; the 62d6fac law)");
     let mut md5s = BTreeSet::new();
     let mut legacy = 0usize;
     for g in &gates {
@@ -676,7 +676,7 @@ fn t12_census_on_disk_walk() {
         md5s.insert(m.clone());
         if m == "4826fc2233044a2d5429413faf0ae1af" { legacy += 1; }
     }
-    assert_eq!(md5s.len(), 21, "the distinct-lineage census");
+    assert_eq!(md5s.len(), 22, "the distinct-lineage census (rider 21 -> 22 at the 24c gate tail)");
     assert_eq!(legacy, 9, "the legacy 4826fc22 face FROZEN");
     // the TRACKED face: gre's ONLY (git ls-files walks the tracked face)
     let out = std::process::Command::new("git")

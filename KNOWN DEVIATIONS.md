@@ -5429,3 +5429,49 @@ Structural deviations (behavior preserved):
   holds: every synthetic face is cited against the real home (the luajit
   -I re-cite rides the REAL /opt/data/tools/luajit-src for the :27 wall
   leg) and the D8 banner strings ride SYNTHETIC seats honestly flagged.
+
+## main Lua-shell pair (row 24c — main/shell.cc 944 cb7f74e8 + main/shell.h 161 8b2de00a @ fe29cbe = 1,105 L — THE chapter-21 THIRD body, the Shell class = ONE REAL LuaJIT state per policy file; THE THIRD REAL GATE ROW: the EXACTLY-1 in-TU Catch TEST_CASE :928 (the tag NEVER typed joined) + ONE CHECK :938 over REAL libluajit.a; the landing src/main/shellp.rs 615 L; the THIRD ground face src/main.h 67 L 2b487dd0 rides CITES ONLY NEVER lands; the harness token MEASURED 0 pre-hit (the sh-ell family); the CENSUS FLIPPED 29->30 on-disk gates / 21->22 lineages / the legacy 9 x 4826fc22 FROZEN / tracked STAYS gre's ONLY; seed 841 x3 NEVER moved here — the docs sibling banks the new one)
+
+- 1. THE GATE POSTURE LANDED HONEST (the chapter-21 SECOND real gate face):
+  the gate runs OVER THE REAL vendored LuaJIT (libluajit.a BY PATH, the
+  headers -I the vendored tree ONLY, NEVER vendored fresh, NEVER a stub
+  pretending LuaJIT — the ctor boots a real VM; install() resolves the real
+  luaL_register T def). The gate's ONE CHECK pins the stack BALANCE law
+  (init_stack == stack after install); the harness DEC D4 face replays the
+  SAME arithmetic over the real stack (bal/bal2/noop_nil faces) BEFORE the
+  gate leg. Honest divergence vs 24a re-recorded: the 22a SEGV posture NEVER
+  surfaces here (the ctor owns its OWN state; the gate case NEVER derefs
+  get_conf — boot posture MEASURED both ways rc0 GREEN EVERY build).
+
+- 2. THE GENERATED-HEADS DIALFACE (the 23i law; REPLAY = the honest
+  mechanism): main/CMakeLists :65-:74 outputs lua_bootstrap.h + lua_finalize.h
+  via ../lua_wrap.sh; the products NEVER exist on disk and are NEVER invented
+  at fixed paths. The harness RE-RUNS the REAL ground script over the REAL
+  bootstrap.lua + finalize.lua INTO THE COPY TREE ONLY (5,084 B + 3,847 B
+  MEASURED pinned — 5,019 + 3,785 B of ground .lua + the raw-string wrapper
+  +65/+62). ZERO synthetic riders ride these faces; the ffi.cdef legs inside
+  (6 + 10 ffi.C call sites by WALK) get the shape-only witness mirror ONLY —
+  the bodies NEVER land.
+
+- 3. THE NEVER-LAND WALL (the nm census, MEASURED 58 plain / 72 ut app-undef):
+  the SnortConfig / PolicyMap / ModuleManager / dump-engine (BaseConfigNode
+  family) / parse-location / log / version-source bodies ride fresh-cp DECL
+  riders + the shape-only witness (witness_shellrow.cc NEVER claimed as the
+  real engine) + the SYNTHETIC copy-local DECL riders for the ABSENT host
+  openssl/pcap/pcre2 version-query seats ONLY (NEVER an ABI claim, find-0
+  MEASURED); ONE REAL ground body links — src/lua/lua.cc, the ManageStack
+  RAII owner TU the landed src/lua home cites. The config-dump walker lands
+  the WALKER legs over a minimal node shape (the descend-MISS face surfaces
+  the ground's UNCHECKED get_node deref as the honest miss — the assert seat
+  NEVER invents a descent).
+
+- 4. THE statics->fields law + the ctor ORDER face: every class-static
+  (fatal / current_shells / s_close_table / lua_sandbox + the sandbox_env
+  table face) lands as caller-owned ShellWorld fields — ZERO new statics,
+  ZERO new allow-attrs, ZERO un-safe (the twin's self-scan needles ride
+  runtime-built faces so the SELF-check NEVER joins the token it counts —
+  an authoring self-join caught + fixed at source, BANKED). The ctor order
+  ladder (newstate -> push -> atpanic -> openlibs -> file seats -> loaded-
+  FALSE -> bootstrap load -> installs -> userdata/setglobal -> bootstrapped-
+  flip + pop) is pinned 11 legs; the pre-boot allowlist seat lands on the
+  INTERNAL list because bootstrapped flips AFTER the ctor's own append legs.

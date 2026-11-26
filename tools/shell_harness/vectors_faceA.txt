@@ -1,0 +1,5 @@
+A1 shapeCmd_sz=40 name_off=32 par=0
+A2 n928=1 n3=3 n0=0
+A3 heads=5 deps=6
+A4 rsp_len=55 tail_nl=1
+A5 id_sz=9

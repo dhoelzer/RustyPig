@@ -630,9 +630,9 @@ grep -q "4826fc2233044a2d5429413faf0ae1af" "$R"/tools/fmod_harness/build.sh
 # was STALE/latent-red since 22a's tc gate landed un-re-run here) -- the 62d6fac law): ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 29   # SANCTIONED 25->26 at the 23c docs rider (the 62d6fac flip-forward law — the parity twin's 25->26 flip landed AT 62d6fac but this build.sh pin was missed THEN; latent-red since row 22a's sanctioned tc gate.txt; census 26/9/18/1 by walk; re-flipped FORWARD row 23e to the walked 27/9/19/1 — the second real gate row) [ROW-2->28 rider: 62d6fac law]
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 30   # SANCTIONED 25->26 at the 23c docs rider (the 62d6fac flip-forward law — the parity twin's 25->26 flip landed AT 62d6fac but this build.sh pin was missed THEN; latent-red since row 22a's sanctioned tc gate.txt; census 26/9/18/1 by walk; re-flipped FORWARD row 23e to the walked 27/9/19/1 — the second real gate row) [ROW-2->28 rider: 62d6fac law]   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H/gate_md5_lineages.txt"
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 21   # SANCTIONED 17->18 at the 23c docs rider (the 62d6fac flip-forward law — row 21b's daq3-era lineage face grew +1 when row 23a landed its own gate lineage; latent-red since 23a; 18 distinct md5 lineages by walk) [23f rider ->20]
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 22   # SANCTIONED 17->18 at the 23c docs rider (the 62d6fac flip-forward law — row 21b's daq3-era lineage face grew +1 when row 23a landed its own gate lineage; latent-red since 23a; 18 distinct md5 lineages by walk) [23f rider ->20]   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1                       # honest tracked face: gre's ONLY
 # NEXT.md cargo CITE faces ONLY (NEVER edit; the seeded + older pinned x3/x5):
 test "$(grep -c '629 tests green / 0 FAILED' "$R/NEXT.md")" -eq 3

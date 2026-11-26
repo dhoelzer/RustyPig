@@ -222,9 +222,9 @@ sed 's/D7 1/D7 2/' "$V" > "$H"/.tamper_v; ! cmp -s "$H"/.tamper_v "$H"/vectors_O
 # ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af')
 test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 29                     # THE FLIP: 27->28 rode at 23f; 28 -> 29 at THIS row (the chapter-21 FIRST real gate row; the 62d6fac complete-flip law)
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 30                     # THE FLIP: 27->28 rode at 23f; 28 -> 29 at THIS row (the chapter-21 FIRST real gate row; the 62d6fac complete-flip law)   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 21                       # THE FLIP: 20 -> 21 distinct tails (this row's fresh md5 lineage)
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 22                       # THE FLIP: 20 -> 21 distinct tails (this row's fresh md5 lineage)   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(wc -l < "$R"/tools/gre_harness/gate.txt)" -eq 3
 grep -q "All tests passed (1 assertion in 1 test case)" "$R"/tools/gre_harness/gate.txt
@@ -255,7 +255,7 @@ test "$(grep -c 'pub fn set_instance_max' "$R"/src/main/thread_config.rs)" -eq 1
 test "$(grep -c 'pub fn get_instance_max' "$R"/src/main/thread_config.rs)" -eq 1
 test "$(grep -c 'pub fn set_instance_max' "$R"/src/main/snort_.rs || true)" -eq 0      # NEVER re-forked HERE
 test "$(grep -c 'ThreadConfig::' "$R"/src/main/snort_.rs)" -ge 3                        # REUSE legs (init/term/get_instance_max)
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 7                                            # rider-flip 6 -> 7 at row 24b: the sig-nal pair's ONE new wiring line (the 62d6fac complete-flip law, walked face)
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 8                                            # rider-flip 6 -> 7 at row 24b: the sig-nal pair's ONE new wiring line (the 62d6fac complete-flip law, walked face)   # [24c rider 7->8: the sh-ell pair's ONE new wiring line (the 62d6fac law, walked face)]
 test "$(grep -c 'sn""ort_' "$R"/src/main/mod.rs || true)" -eq 0   # this file's own concat face guards
 
 # ---- landmine NAMING legs (the misc-9 family, STAYS 2 occupants NEVER +1;

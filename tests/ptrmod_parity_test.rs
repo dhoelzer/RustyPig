@@ -486,9 +486,9 @@ fn census_walk_stays_28_9_20_1() {
         .filter(|l| l.ends_with("gate.txt"))
         .count();
     assert_eq!(tracked, 1, "the TRACKED gate.txt face stays gre's ONLY");
-    assert_eq!(total, 29, "the on-disk face by WALK 28 -> 29 at the 24a sanctioned gate rider");
+    assert_eq!(total, 30, "the on-disk face by WALK, rider 29 -> 30 at the 24c sanctioned gate (the 62d6fac rider)");
     assert_eq!(legacy, 9, "the legacy 4826fc22 x9 face NEVER +1");
-    assert_eq!(md5s.len(), 21, "THE lineage face 20 -> 21 at the 24a gate tail (the 62d6fac rider)");
+    assert_eq!(md5s.len(), 22, "THE lineage face rider 21 -> 22 at the 24c gate tail (the 62d6fac rider)");
     let gre = std::fs::read_to_string("/opt/data/snort3-rust/tools/gre_harness/gate.txt").unwrap();
     assert!(gre.lines().any(|l| l == "All tests passed (1 assertion in 1 test case)"), "the gre anchor tail face byte-frozen");
     let bb = std::fs::read("/opt/data/snort3-rust/tools/link4_harness/backbone10.txt").unwrap();

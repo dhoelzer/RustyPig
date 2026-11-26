@@ -1,0 +1,14 @@
+D0 lua=1 top=0 loaded=0 file_empty=1 from_empty=1
+D0L cfgdata.ctor
+D1 sv=3.13.2.0 maj=3 min=13 pat=2 sub=0 build_nil=1 top=0
+D2 tab=1 all_str=1 daq=3.0.14-witness trusted_cold=0 top=0
+D3 ud=1 top=1
+D4 bal=1 tab=1 fn=1 bal2=1 noop_nil=1 top=0
+D5 ls=0 sbfail=1 bal=1 top=0
+D6 brk=1 nl=1 len20=1 empty=0
+D7 bal=1 ing=1 top=0
+D7L cfgdata.ctor|pol.set_default|pol.set_default
+D8 file=nominal_policy.lua loaded=0 top=0
+D8P net=5 nap=11 ips=13
+D8L cfgdata.ctor
+Z terminator=0
