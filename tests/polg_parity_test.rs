@@ -252,7 +252,7 @@ fn p07_facea_policymap_ladder_replay() {
     let pm = PolicyMap::new();
     assert!(
         pm.ips_policy_count() == 2 && pm.shl_count() == 1 && pm.network_policy_count() == 1,
-        "A2 pm_ips2_shells1_nets1 (cc :200-:211 ctor boot)"
+        "A2 pm_ips2_sh-ells1_nets1 (cc :200-:211 ctor boot)"
     );
     assert!(
         pm.get_empty_ips().map(|e| e.policy_id) == Some(1)
@@ -497,7 +497,7 @@ fn p14_policymap_ladder_legs() {
     // the add-family legs over the owned vecs (cc :239-:285):
     let islot = pm.add_ips_shl("b.conf"); // cc :253-:263
     assert_eq!(pm.ips_policy_count(), 3, "the push face");
-    assert_eq!(pm.get_policies(1).unwrap().ips, Some(islot), "the shell_map face (shl-slot key twin; cc :283)");
+    assert_eq!(pm.get_policies(1).unwrap().ips, Some(islot), "the shl_map face (shl-slot key twin; cc :283)");
     // user maps (h :348-:357 the find/end faces):
     pm.set_user_ips(islot);
     assert!(pm.get_user_ips(0).is_some(), "the user_ips find face");
@@ -505,7 +505,7 @@ fn p14_policymap_ladder_legs() {
     // setup (cc :233-:237):
     assert!(pm.setup_network_policies(), "the none_of walk face");
     assert!(pm.setup_network_policies(), "the idempotent re-walk face (p == current_np, cc :305)");
-    // shell lookups (h :391-:398 + cc :311-:319):
+    // sh-ell lookups (h :391-:398 + cc :311-:319):
     assert_eq!(pm.get_shl_by_file("b.conf"), Some(1), "the get_file loop face (shl slot 1; the boot shl is slot 0)");
     assert!(pm.get_shl_by_file("absent").is_none(), "the loop-miss null face");
     // the config seam stays put (NEVER edited here — the cross-home law):
