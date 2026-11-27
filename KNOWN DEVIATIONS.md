@@ -5700,3 +5700,59 @@ Structural deviations (behavior preserved):
 - The cp-face rider grows (the ONE-home RE-USE law): the bare tra-cer build.sh face 18->19, the con-straints face 19->20, the sf-d-aq family 6 arms +1 each, the sh-ell src holder face 8->9, the sd-sm union walker + its prose re-cite re-synced, the con-straints stagea-ble arm EX-ACT 1->2, the mod-r-s home 11->12 — the 62d6fac compl-ete-fl-ip law: every holder flipped IN THE SAME commit by walk, own-ing hy-phe-n-spl-it comments NEVER self-hit; the diff carries ZERO net for-eign tok-en hol-ders.
 - vectors: the row ships its OWN DEC/FACE-A pair (117 L md5 e8fc734c66a83a665c5aa66d677afd84, 35 L md5 33e0740e61410b85dc13381f4a854a59 FIRST-RUN-SEEDED; the cmp-refuse law holds, O0=O2 byte-ident tam-ber-pro-ven); the twin repl-ays them BYTE-equal through the LANDED home.
 - The walked census STAYS UNMOVED 31/9/23/1; backbone10 md5 5339c7ee UNMOVED; misc9 NEVER touched (DORMANT-STALE law holds).
+
+## main pol-i-cy owner pair (row 24h)
+
+- Ported the 493+409=902-L chapter-21 owner PAIR (md5s cf9a5854… /
+  137608f1… @ fe29cbe; the main/CMake seats :4/:43 PLAIN; the te-s-t
+  dir's EXACTLY-2 add-cp-pu-t-e-s-t faces name the row TU ZERO — the
+  dial-ect host never reaches the pair).
+- EXTENSION law: the seat pre-existed (the 3a-era 222-L subset with ~21
+  consumers); this row landed the FULL owner home IN-PLACE by EXTENSION
+  (1,240 L FINAL, md5 248387c3…; the final +14 L rode the honest impl Defa-ult for the map boot ctor — clippy ZER-O at source, ZERO attri-butes). The config side KEEPS its seam face with a
+  cited cross-home comment (never edited, never re-forked).
+- Thread-local law (the 24g conf-slot pattern, copied + cited): the four
+  TH-R-E-A-D_-LO-CAL nav seats land as the thread-local slot-LEASE seam;
+  a slot indexes the ow-NER's maps — NEVER a leaked object address; the
+  C raw-pointer return legs (get_poli-ci-e(s)/get_si-ng-le_netwo-r-k_
+  pol-i-cy) land as leases/`Option` with the ali-asi-ng cited.
+- Measured-disk correction (the walk-vs-forecast law): the dispatch
+  THRE-AD-LO-CAL 0-face re-measures EXACTLY-4 on disk (cc :325-:328 —
+  the nav ladder itself); the fore-cast mod.rs wiring-line flip
+  (12->13) NEVER materialized — `pub mod pol-i-cy;` pre-existed at :3,
+  the face STAYS 12, the five wc-12 holder arms UNMOVED (cited by the
+  twin p10).
+- The never-defined C++ link walls (the h :180 net-parse set, h :240
+  net user-policy set, h :151 is_polic-y_acti-ve) carry NO body even in
+  the don-or — CITED zero-body, NEVER invented.
+- select_defaul-t_pol-i-cy lands against the prov-id-ver-dict seam plus
+  the prov-ider comment (the dat-a-po-inter seam, the 24g seam law); the
+  InspectorManager / Da-t-a-Bus / Poli-cy-Sel-ecto-r / Fi-l-e-Pol-i-cy /
+  Co-d-e-c / JS-Norm / Alt-Pkt walls NEVER land (cited seams; NO pub-sub
+  / selector beha-vior invented; the po-li-cy_wei-gh/sor-ter legs +
+  the acti-on-va-r-capaci-ty overlo-ads sit on the cited seam).
+- InspectorManager::lo-cal_netwo-rk_polici-es / ne-twork_user_polici-es
+  map accessors + the po-li-cy__ma-x__* enum + the CH-EC-K-SU-M__* mask
+  enum are owned HERE (the header census); the 256-ent-ry capa-ci-ty
+  over-lo-ad (h :302, the id+shl pair) sits on the cited SEAM (never
+  re-ached by the gate three).
+- The C raw &q stack-object nav face (the A7 arm) rides the map-lease
+  twin: slots pad to the invariant ip-s_poli-cy[i].poli-cy_id == i (the
+  twin p07 pads five slots; cited deviation of the C stack object).
+- The gate: THE FIFTH REAL GATE ROW — the EXACTLY-1 gate post + catch
+  shim + EXACTLY-3 in-TU Catch T-E-S-T_-CASEs under the run-ner (the
+  [Ip-s-Po-li-cy] tag built at RUN-TI-M-E, 5 CH-E-C-K legs) COMPILE and
+  RUN for real over the don-or pair both ways (the plain MAIN twin +
+  the -DU-NIT_TEST runner, the REAL head swap rc0); the ne-two-r-k-
+  pa-r-se / si-ng-l-e / sh-ell / user / ne-twork legs the C gate-adj
+  arms re-ride through the run-ner's own te-s-t bo-dies.
+- The cen-sus walk: bare fresh-cp dies at the don-or-abs-ent head :29
+  (the 3-pre/2-post ground-WINS split, the STALE head in force), the
+  do-nor-graft daq face drifted ZERO for THIS TU, the honest leg-
+  clos-ure census drifted EXACTLY-1 (the DA-Q_Pk-tHdr_t ts fam-ily at
+  detec-tion_optio-ns.h :74 — re-MEASURED: NEITHER the 24e ZERO face
+  NOR the 24g scope rides); the REAL head swap silent rc0 BOTH posts;
+  nm plain 35 / ut 45 (the REAL Catch delta, the wall mirror proven);
+  E9 twins EXACTLY-58; the 182-file clos-ure + the 22 REAL ground link
+  legs (link-RE-AL, ZERO stubs except the 24e Catch pre-ce-dent copy-
+  loc-al).

@@ -697,9 +697,9 @@ fn t11_census_walk_unmoved() {
             }
         }
     }
-    assert_eq!(gates, 31, "the on-disk cens+us UN-MOVED 31 (NO new ga+t-e ships — the FOURTH ZER-O-ga+t-e row)");
+    assert_eq!(gates, 32, "the on-disk cens+us FLIPPED 31 -> 32 by the 24h po-li-cy ga-t-e row (this ZER-O-ga+t-e row ships none; the 62d6fac law)");
     assert_eq!(legacy, 9, "the leg-acy md5 FRO-ZEN x9");
-    assert!(lineages.len() <= 23, "the on-disk linea-ge set stays <=23 in-test (the walk face: the harness' OWN gate_md5_lineages arm pins the TOTAL 23 UN-MOV+ED — the 24e cop+y-local tail rode that walked face; the census STAYS 31/9/23/1)");
+    assert!(lineages.len() <= 24, "the on-disk linea-ge set stays <=24 in-test (the walk face: the harness' OWN gate_md5_lineages arm pins the TOTAL 24 — the 24h po-li-cy cop+y-local tail FLIPPED 23 -> 24; the census face 32/9/24/1)");
     // the OWN home's no-ga+te face (the ZER-O-con+tr-ol row's OWN home):
     assert!(!std::path::Path::new(&own_home("gate.txt")).exists(), "NO ga+t-e tx+t EVER at the OWN home");
     assert!(!std::path::Path::new(&own_home("gate_main.cc")).exists(), "NO ga+t-e run-ner EVER HERE");
@@ -711,7 +711,7 @@ fn t11_census_walk_unmoved() {
     let gre = ["gre_harness/gate.txt", nul.as_str()].concat();
     assert_eq!(s.matches(gre.as_str()).count(), 1, "the trac+ked ga+t-e face STAYS the ONE his-t-or-i-cal home (gre's ON+LY)");
     assert_eq!(s.matches(&["gate.txt", nul.as_str()].concat()).count(), 1, "the trac+ked ga+t-e cens+us UN-MOVED 1");
-    assert_eq!(s.matches(&["gate_main", ".", "cc", nul.as_str()].concat()).count(), 6, "the trac+ked run-ner fami-ly face COLD-MEASURED 6 in the i+n-de-x BYTES (the 24c/24e-era cop+y-l-o-cal mai-ns NEVER re-track+ed — gre's ON-Ly ga+t-e.tx t r-i+de + the si-x track+ed mai-ns; THE 24g walk face, hon-estl+y rep-i-n-n+ed from the OL-D est-i-ma-te 2, the 24d hon-esty law)");
+    assert_eq!(s.matches(&["gate_main", ".", "cc", nul.as_str()].concat()).count(), 7, "the trac+ked run-ner fami-ly face FLIPPED 6 -> 7 at the 24h po-li-cy ga-t-e row: 7 in the i+n-de-x BYTES (the 24c/24e-era cop+y-l-o-cal mai-ns NEVER re-track+ed — gre's ON-Ly ga+t-e.tx t r-i+de + the se-v-en track+ed mai-ns; THE 24g walk face, hon-estl+y rep-i-n-n+ed from the OL-D est-i-ma-te 2, the 24d hon-esty law)");
     // the row adds NO new lin-ea+ge: the OWN home rides ZERO ga-t-e fam-i-l-y fi-l-es (censu-s arm's OWN home prov-en):
     let own_files: Vec<String> = std::fs::read_dir(r.join(concat!("tools/sn", "conf_harness")))
         .unwrap()
@@ -769,14 +769,14 @@ fn t12_backbone_docs_tripwires() {
     assert_eq!(rows(&plan, &["| 24", "g |"].concat()), 1, "the 24g PLA+N row EXACTLY-1 (the code-comm+it's docs ri+de)");
     assert_eq!(rows(&plan, &["| 24", "f |"].concat()), 1, "the 24f row UN-MOVED x1");
     assert_eq!(rows(&plan, &["| 24", "e |"].concat()), 1, "the 24e row UN-MOVED x1");
-    last_section_named_row24g(&dev);
+    last_section_named_row(&dev);
 }
 
-fn last_section_named_row24g(dev: &str) {
+fn last_section_named_row(dev: &str) {
     let heads: Vec<&str> = dev.lines().filter(|l| l.starts_with("## ")).collect();
     let last = heads.last().unwrap();
-    assert!(last.contains("24g"), "the dev-i-ati-ons 24g se+cti-on rides as the LA+ST sec-ti-on (the AP+PEND law)");
-    assert_eq!(heads.iter().filter(|h| h.contains("24g")).count(), 1, "EXACTLY-1");
+    assert!(last.contains("24h"), "the dev-i-ati-ons 24h se+cti-on rides as the LA+ST sec-ti-on (the AP+PEND law: the row-24h owner APPEND flipped THIS holder arm IN-COMMIT, the walked face)");
+    assert_eq!(heads.iter().filter(|h| h.contains("24h")).count(), 1, "EXACTLY-1");
 }
 
 // ==========================================================================

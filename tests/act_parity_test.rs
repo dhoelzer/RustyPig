@@ -1697,9 +1697,9 @@ fn census_walk_stays_28_9_20_1() {
         .stdout;
     let tracked = String::from_utf8(tracked_out).unwrap().lines().filter(|l| l.ends_with("gate.txt")).count();
     assert_eq!(tracked, 1, "the TRACKED gate.txt face stays gre's ONLY (the gre anchor md5 6751d1a8...)");
-    assert_eq!(total, 31, "rider 29 -> 30 at 24c, rider 30 -> 31 at the 24e MEGA module-registry gate (the 62d6fac rider; this row itself added none)");
+    assert_eq!(total, 32, "rider 30 -> 31 at the 24e MEGA module-registry gate, rider 31 -> 32 at the 24h po-li-cy gate (the 62d6fac rider; this row itself added none)");
     assert_eq!(legacy, 9, "the legacy md5 4826fc22... x9 face NEVER +1");
-    assert_eq!(md5s.len(), 23, "rider 21 -> 22 at 24c, 22 -> 23 at the 24e gate tail (the 62d6fac rider)");
+    assert_eq!(md5s.len(), 24, "rider 22 -> 23 at the 24e gate tail, 23 -> 24 at the 24h po-li-cy tail (the 62d6fac rider)");
     let gre = std::fs::read("/opt/data/snort3-rust/tools/gre_harness/gate.txt").unwrap();
     assert_eq!(md5(&gre), "6751d1a8c21da0fdfed87ddfd4d37c5f", "the gre anchor md5 byte-frozen (the tracked 1)");
     let bb = std::fs::read("/opt/data/snort3-rust/tools/link4_harness/backbone10.txt").unwrap();

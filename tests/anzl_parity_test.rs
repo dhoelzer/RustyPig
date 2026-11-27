@@ -698,9 +698,9 @@ fn t13_census_walk_stays_30_9_22_1() {
             md5s.insert(d);
         }
     }
-    assert_eq!(total, 31, "the 24d ZERO-gate row NEVER added a gate (era face 30; rider 30 -> 31 at the 24e registry gate, the 62d6fac law)");
+    assert_eq!(total, 32, "rider 30 -> 31 at the 24e registry gate, rider 31 -> 32 at the 24h po-li-cy gate (the 62d6fac law)");
     assert_eq!(frozen, 9, "the legacy 4826fc22 family FROZEN");
-    assert_eq!(md5s.len(), 23, "NO new lineage tail from THIS row (era face 22; rider 22 -> 23 at the 24e gate tail, the 62d6fac law)");
+    assert_eq!(md5s.len(), 24, "rider 22 -> 23 at the 24e gate tail, 23 -> 24 at the 24h po-li-cy tail (the 62d6fac law)");
     let tracked = std::process::Command::new("git")
         .args(["-C", root, "ls-files"])
         .output()

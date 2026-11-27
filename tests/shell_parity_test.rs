@@ -471,8 +471,8 @@ fn t11_census_walk_30_9_22_1() {
     }
     assert_eq!(
         gates.len(),
-        31,
-        "the on-disk gate census (era face 29 -> 30 at this row's 24c tail; rider 30 -> 31 at the 24e registry gate, the 62d6fac law)"
+        32,
+        "the on-disk gate census (rider 30 -> 31 at the 24e registry gate; rider 31 -> 32 at the 24h po-li-cy gate, the 62d6fac law)"
     );
     let mut md5s = BTreeSet::new();
     let mut legacy = 0usize;
@@ -483,7 +483,7 @@ fn t11_census_walk_30_9_22_1() {
             legacy += 1;
         }
     }
-    assert_eq!(md5s.len(), 23, "the distinct-lineage census (era face 21 -> 22 at this row; rider 22 -> 23 at the 24e gate tail, the 62d6fac law)");
+    assert_eq!(md5s.len(), 24, "the distinct-lineage census (rider 22 -> 23 at the 24e gate tail; rider 23 -> 24 at the 24h po-li-cy tail, the 62d6fac law)");
     assert_eq!(legacy, 9, "the legacy 4826fc22 face FROZEN");
     let out = std::process::Command::new("git")
         .args(["-C", "/opt/data/snort3-rust", "ls-files"])

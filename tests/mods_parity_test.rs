@@ -382,9 +382,9 @@ fn t12_census_walk_live_31_9_23_1() {
             md5s.insert(d);
         }
     }
-    assert_eq!(total, 31, "THE FLIP face 30 -> 31 (the 62d6fac complete-flip law, walked live)");
+    assert_eq!(total, 32, "FLIPPED AGAIN 31 -> 32 at the 24h po-li-cy gate row (the 62d6fac complete-flip law, walked live)");
     assert_eq!(frozen, 9, "the legacy 4826fc22 family FROZEN UNMOVED");
-    assert_eq!(md5s.len(), 23, "THE lineage FLIP face 22 -> 23 (the 24e fresh tail)");
+    assert_eq!(md5s.len(), 24, "THE lineage FLIP face 23 -> 24 at the 24h po-li-cy gate tail (the 62d6fac law)");
     // the own tail (path-built; NEVER rides a prior lineage):
     let own = {
         let mut p = format!("{root}/tools/");

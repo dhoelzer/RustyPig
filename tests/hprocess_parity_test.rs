@@ -805,11 +805,11 @@ fn t15_census_walk_stays_29_9_21_1() {
         }
     }
     assert_eq!(
-        total, 31,
-        "riders 29 -> 30 at 24c + 30 -> 31 at the 24e gate (the zero-gate control row NEVER added a gate itself; the 62d6fac law)"
+        total, 32,
+        "riders 30 -> 31 at the 24e gate + 31 -> 32 at the 24h po-li-cy gate (the zero-gate control row NEVER added a gate itself; the 62d6fac law)"
     );
     assert_eq!(frozen, 9, "the legacy 4826fc22 family FROZEN");
-    assert_eq!(md5s.len(), 23, "rider 21 -> 22 at 24c, 22 -> 23 at the 24e gate tail (the 62d6fac law; no new tail from THIS row)");
+    assert_eq!(md5s.len(), 24, "rider 22 -> 23 at the 24e gate tail, 23 -> 24 at the 24h po-li-cy tail (the 62d6fac law; no new tail from THIS row)");
     let tracked = std::process::Command::new("git")
         .args(["-C", root, "ls-files"])
         .output()

@@ -252,7 +252,7 @@ fn t8_test_cmake_dialect_faces_and_zero_gate() {
         .unwrap();
     let outs = String::from_utf8_lossy(&out.stdout).to_string();
     let face: Vec<&str> = outs.lines().collect();
-    assert_eq!(face, vec!["31", "9", "23", "1"], "the live census face AFTER the 24c rider 29->30 / 21->22 and the 24e registry-gate rider 30->31 / 22->23 (the 62d6fac law; the sd-sm row itself shipped ZERO gate faces EVER — the no-gate-HERE arm below holds): {face:?}");
+    assert_eq!(face, vec!["32", "9", "24", "1"], "the live census face AFTER the 24e rider 30->31 / 22->23 (the 62d6fac law; the sd-sm row itself shipped ZERO gate faces EVER — the no-gate-HERE arm below holds): {face:?}");
     assert!(!std::path::Path::new(concat!("/opt/data/snort3-rust/tools/sd", "sm_harness/gate.txt")).exists(), "ZERO-gate row: NO gate EVER");
 }
 

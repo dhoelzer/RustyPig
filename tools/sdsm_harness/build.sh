@@ -236,9 +236,9 @@ test "$(grep -rlE 'ReloadSurvivor|reload_survivor' "$R"/src/packet_io --include=
 
 # ---- GATE census (ZERO-gate row: the MEASURED face STAYS; walked, never typed) ----
 frozen=$(md5sum "$R"/tools/*/gate.txt 2>/dev/null | grep -c '^4826fc2233044a2d5429413faf0ae1af'); test "$frozen" -eq 9
-test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 31   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]   # [24e rider 30->31: the chapter-21 module-registry MEGA row lands its COPY-LOCAL gate (the row's gate md5 tail rides this script's OWN md5_lineages face) (the 62d6fac complete-flip law, walked face)]
+test "$(ls "$R"/tools/*/gate.txt | wc -l)" -eq 32   # [24c rider 29->30: the chapter-21 THIRD real gate row lands a COPY-LOCAL gate (the 62d6fac complete-flip law)]   # [24e rider 30->31: the chapter-21 module-registry MEGA row lands its COPY-LOCAL gate (the row's gate md5 tail rides this script's OWN md5_lineages face) (the 62d6fac complete-flip law, walked face)]   # [24h rider 31->32: the chapter-21 po-li-cy gate row lands its COPY-LOCAL gate (the 62d6fac complete-flip law, walked face)]
 md5sum "$R"/tools/*/gate.txt | awk '{print $1}' | sort -u | wc -l > "$H"/gate_md5_lineages.txt
-test "$(cat "$H"/gate_md5_lineages.txt)" -eq 23   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]   # [24e rider 22->23: the 24e gate-tail md5 lineage (the 62d6fac law, walked face)]
+test "$(cat "$H"/gate_md5_lineages.txt)" -eq 24   # [24c rider 21->22: the same row's fresh gate-tail md5 lineage (the 62d6fac law)]   # [24e rider 22->23: the 24e gate-tail md5 lineage (the 62d6fac law, walked face)]   # [24h rider 23->24: the 24h gate-tail md5 lineage (the 62d6fac law, walked face)]
 test "$(md5sum "$R"/tools/gre_harness/gate.txt | awk '{print $1}')" = "6751d1a8c21da0fdfed87ddfd4d37c5f"
 test "$(git -C "$R" ls-files | grep -c gate.txt)" -eq 1
 test ! -e "$H"/gate.txt

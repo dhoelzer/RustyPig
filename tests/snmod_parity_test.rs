@@ -542,9 +542,9 @@ fn t13_census_walk_unmoved_31_9_23_1() {
             md5s.insert(d);
         }
     }
-    assert_eq!(total, 31, "the gate census STAYS UNMOVED 31 (the zero-gate row ships NO tail)");
+    assert_eq!(total, 32, "the gate census FLIPPED 31 -> 32 at the 24h po-li-cy row (this zero-gate row ships NO tail; the 62d6fac law)");
     assert_eq!(frozen, 9, "the legacy 4826fc22 family FROZEN UNMOVED");
-    assert_eq!(md5s.len(), 23, "the lineage census STAYS 23 (NO new tail at THIS row)");
+    assert_eq!(md5s.len(), 24, "the lineage census FLIPPED 23 -> 24 at the 24h po-li-cy tail (NO new tail at THIS row)");
     // the tracked face WITHOUT a git process: the index stores each
     // tracked path NUL-terminated after its stat block:
     let idx_bytes = std::fs::read(root.join(".git/index")).unwrap();

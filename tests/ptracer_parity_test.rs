@@ -881,9 +881,9 @@ fn census_flip_ledger_28_9_20_1_by_walk() {
         .filter(|l| l.ends_with("gate.txt"))
         .count();
     assert_eq!(tracked, 1, "the TRACKED gate.txt face stays gre's ONLY (the copy-local gate law, 22a re-cloned)");
-    assert_eq!(total, 31, "walked 27->28 by THIS row, riders at 24a/24c, rider 30->31 at the 24e chapter-21 gate (the 62d6fac law)");
+    assert_eq!(total, 32, "riders 30->31 at the 24e chapter-21 gate + 31->32 at the 24h po-li-cy gate (the 62d6fac law)");
     assert_eq!(legacy, 9, "the legacy 4826fc22 x9 face NEVER +1");
-    assert_eq!(md5s.len(), 23, "lineage riders through 21->22 at 24c then 22->23 at the 24e tail (the 62d6fac rider)");
+    assert_eq!(md5s.len(), 24, "lineage riders 22->23 at 24e then 23->24 at the 24h tail (the 62d6fac rider)");
     let gre = std::fs::read_to_string("/opt/data/snort3-rust/tools/gre_harness/gate.txt").unwrap();
     assert!(
         gre.lines().any(|l| l == "All tests passed (1 assertion in 1 test case)"),

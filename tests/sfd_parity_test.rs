@@ -534,7 +534,7 @@ fn sfd_ground_cite_drift_tripwires() {
             gates += 1;
         }
     }
-    assert_eq!(gates, 31, "gate census 31 (22a/23e/23f/24a/24c faces + the 24e module-registry gate rider) -- copy-local untracked; tracked face stays 1 -- the SANCTIONED 30->31 flip per the 62d6fac complete-flip law");
+    assert_eq!(gates, 32, "gate census 32 (22a/23e/23f/24a/24c/24e faces + the 24h po-li-cy gate rider) -- copy-local untracked; tracked face stays 1 -- the SANCTIONED 30->31 flip per the 62d6fac complete-flip law");
 }
 
 // ==========================================================================
