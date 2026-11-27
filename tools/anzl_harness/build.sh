@@ -366,7 +366,7 @@ test "$(md5sum "$PT2"/vectors_faceA.txt | awk '{print $1}')"   = "3a9b0a4b31ba29
 # the receive / finalize / verdict legs the row DRIVES — CITED + re-exported
 # by the landing, NEVER re-forked; the 23b thread home carries the identity
 # + watchdog legs; the log home carries the banner seats) ----
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 10                                 # THE flip: 8 -> 9 (THIS row's ONE wiring line; the trio + twin-pair rider-flipped IN-COMMIT, the 62d6fac law)   # [24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 11                                 # THE flip: 8 -> 9 (THIS row's ONE wiring line; the trio + twin-pair rider-flipped IN-COMMIT, the 62d6fac law)   # [24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]   # [24f rider 10->11: the snort-module config-owner pair's ONE new wiring line (the 62d6fac law, walked face)]
 test "$(grep -c "pub mod analyzer" "$R"/src/main/mod.rs)" -eq 1             # the ONE new seat
 test "$(grep -c 'pub const DAQ_VERDICT' "$R"/src/packet_io/${SD}.rs)" -ge 6  # the LANDED verdict-constant home REUSED through the landing re-export (the one-home law)
 test "$(grep -c 'fn kick_watchdog\|pub fn update_thread_status' "$R"/src/main/thread_config.rs)" -ge 2  # the 23b home faces (NEVER re-forked HERE)

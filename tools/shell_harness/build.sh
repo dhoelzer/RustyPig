@@ -298,7 +298,7 @@ test "$(grep -c 'ManageStack' "$R"/src/lua/mod.rs)" -ge 3
 test "$(grep -c "pub struct Shell {" "$R"/src/main/shellp.rs)" -eq 1             # the ONE class home (the brace form pins the class face; the ShellWorld seam NEVER counts)
 test "$(grep -c "pub fn command_count" "$R"/src/main/shellp.rs)" -eq 1
 # the mod.rs rider-flip holders (the 62d6fac complete-flip law walked):
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 10                              # THE flip: 7 -> 8 at THIS row (ONE new wiring line; BOTH holder arms rider-flipped IN-COMMIT)   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 11                              # THE flip: 7 -> 8 at THIS row (ONE new wiring line; BOTH holder arms rider-flipped IN-COMMIT)   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]   # [24f rider 10->11: the snort-module config-owner pair's ONE new wiring line (the 62d6fac law, walked face)]
 test "$(grep -c "pub mod ${MN}p" "$R"/src/main/mod.rs)" -eq 1             # the ONE new seat
 
 # ---- landmine NAMING legs (the misc-9 family, STAYS 2 occupants NEVER +1;
@@ -354,9 +354,9 @@ test "$(grep -c "${MN}_DONE" "$R"/tests/${MN}_parity_test.rs || true)" -eq 0
 # 24a NEVER-land rider — the pt-racer D14 vectors legs ride grep -q arms on
 # THEIR OWN vectors, NEVER count-arms), 1 twin holder (the pt-racer twin
 # prose); THIS row NEVER joins a strict face: the count stays PINNED):
-test "$(grep -rl "${MN}" "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 4    # COLD-MEASURED pre = post (my build.sh EXCLUDED; the 4 pre-hits = the pt-racer/pt-mod/rules/sn-proc era GROUND-NAME cites, UNDISTURBED — the own-census-token arms above ride ZERO)
-test "$(grep -rl "${MN}" "$R"/tests --include='*.rs' | grep -v "^$R/tests/${MN}_parity_test.rs$" | wc -l)" -eq 1     # the pt-racer twin prose holder UNMOVED (my OWN twin EXCLUDED)
-test "$(grep -rl "${MN}" "$R"/src --include=*.rs | grep -v "^$R/src/main/${MN}p.rs$" | grep -v "^$R/src/main/mod.rs$" | wc -l)" -eq 7   # + the mod.rs wiring-line rider exclusion (the ONE new seat, the 62d6fac flip face — legit one-home reuse)                   # the GROUND-name holders (the pt-racer-era shell_* family cites + snort_/policy cites) UNMOVED (my landing EXCLUDED — the 24a ground-name-path precedent — the hyphen-split carrier comment law)
+test "$(grep -rl "${MN}" "$R"/tools/*/build.sh | grep -v "^$H/build.sh$" | wc -l)" -eq 5    # [24f rider 4->5: the sn-mod config-owner row-24f closure CITES the GROUND head main/sh-ell.h (the pair include surface, cc :61 — a GROUND name path, the 24a carrier precedent; the 62d6fac walked face)] # COLD-MEASURED pre = post (my build.sh EXCLUDED; the 4 pre-hits = the pt-racer/pt-mod/rules/sn-proc era GROUND-NAME cites, UNDISTURBED — the own-census-token arms above ride ZERO)
+test "$(grep -rl "${MN}" "$R"/tests --include='*.rs' | grep -v "^$R/tests/${MN}_parity_test.rs$" | wc -l)" -eq 1     # the pt-racer twin prose holder UNMOVED (my OWN twin EXCLUDED; the 24f twin seat needles ride SPLIT-carrier forms — face UNMOVED)
+test "$(grep -rl "${MN}" "$R"/src --include=*.rs | grep -v "^$R/src/main/${MN}p.rs$" | grep -v "^$R/src/main/mod.rs$" | wc -l)" -eq 8   # [24f rider 7->8: the sn-mod row-24f landing legitimately REUSE-cites the landed sh-ell home (Shell lua-sandbox legs, ONE-home law; the 62d6fac walked face; carrier hyphen-split per the family law)]   # + the mod.rs wiring-line rider exclusion (the ONE new seat, the 62d6fac flip face — legit one-home reuse)                   # the GROUND-name holders (the pt-racer-era shell_* family cites + snort_/policy cites) UNMOVED (my landing EXCLUDED — the 24a ground-name-path precedent — the hyphen-split carrier comment law)
 
 # ---- STATE-AWARE stageables dual guard (9 faces: .gitignore + build.sh +
 # gate_main.cc + probe.cc + probe_faceA.cc + witness_shellrow.cc + vectors +

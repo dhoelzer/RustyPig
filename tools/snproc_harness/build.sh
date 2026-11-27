@@ -255,7 +255,7 @@ test "$(grep -c 'pub fn set_instance_max' "$R"/src/main/thread_config.rs)" -eq 1
 test "$(grep -c 'pub fn get_instance_max' "$R"/src/main/thread_config.rs)" -eq 1
 test "$(grep -c 'pub fn set_instance_max' "$R"/src/main/snort_.rs || true)" -eq 0      # NEVER re-forked HERE
 test "$(grep -c 'ThreadConfig::' "$R"/src/main/snort_.rs)" -ge 3                        # REUSE legs (init/term/get_instance_max)
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 10                                            # rider-flip 6 -> 7 at row 24b: the sig-nal pair's ONE new wiring line (the 62d6fac complete-flip law, walked face)   # [24c rider 7->8: the sh-ell pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 11                                            # rider-flip 6 -> 7 at row 24b: the sig-nal pair's ONE new wiring line (the 62d6fac complete-flip law, walked face)   # [24c rider 7->8: the sh-ell pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24d rider 8->9: the anal-yzer loop pair's ONE new wiring line (the 62d6fac law, walked face)]   # [24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]   # [24f rider 10->11: the snort-module config-owner pair's ONE new wiring line (the 62d6fac law, walked face)]
 test "$(grep -c 'sn""ort_' "$R"/src/main/mod.rs || true)" -eq 0   # this file's own concat face guards
 
 # ---- landmine NAMING legs (the misc-9 family, STAYS 2 occupants NEVER +1;

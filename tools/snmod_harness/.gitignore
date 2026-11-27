@@ -1,0 +1,40 @@
+# snmod harness (row 24f) — the snort-module config-owner PAIR (chapter-21
+# 21: the config-owner face of src/main/sn*mod...ule — ground names ride PATHS).
+# TRACKED faces EXACTLY-7: .gitignore + build.sh + probe.cc + probe_faceA.cc
+# + witness_row.cc + vectors.txt + vectors_faceA.txt.
+# THE ZERO-GATE ROW LAW: NO gate.txt EVER ships HERE (the walked census
+# STAYS 31/9/23/1 — the 24d zero-gate control face re-ridden); NO
+# gate_main.cc; NO PLAN.md; NO stderr-wall faces (the row ships NO banner:
+# the honest omission vs the 24d pristine-.errA face).
+copy/
+o2/
+copy/main/snort_module.cc
+copy/main/snort_module.h
+probe_x
+probe_x_O2
+probe_x_cross
+probe_faceA_x
+probe_faceA_x_O2
+probe.o
+probe_faceA.o
+witness.o
+leg_*.o
+vectors_O0.txt
+vectors_O2.txt
+vectors_O2b.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+E4_bare.txt
+E4_graft.txt
+E4_real.txt
+E4_ut.txt
+E9_dup.txt
+E_leg_*.txt
+nm_U_plain.txt
+nm_U_ut.txt
+gate_md5_lineages.txt
+.e9dup
+.tamper_v
+.tamper_va
+stageables.txt
+*.o

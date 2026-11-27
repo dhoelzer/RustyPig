@@ -5606,3 +5606,84 @@ Structural deviations (behavior preserved):
   cite-comment face ONLY); the harness runs the REAL ground bodies
   over the REAL gate_main runner; the twin drives the 12 CHECK legs'
   assertions through the Rust port.
+
+## main snort-module config-owner pair (row 24f, snort_module.cc 1,338 + snort_module.h 93 @ fe29cbe)
+
+- THE THIRD ZERO-GATE CONTROL row (the 24b/24d pattern): the in-TU TEST
+  faces EXACTLY-0 (TEST_CASE/TEST(/CATCH x2 files, re-walked EVERY
+  harness build + the twin); the main/test CMake carries EXACTLY-2
+  add-cppu dialect faces (the thread test + the ENABLE_SHELL-conditional
+  distill test — the distill SOURCES the anal-yzer TU, the 24d face;
+  NEITHER names the row TU — grep EXACTLY-0) and the Cpp-UT host ABSENT
+  find-0 EVERY build (the frozen arms prove the dialect NEVER landed);
+  the walked census STAYS UNMOVED 31/9/23/1 — NO gate ships HERE (the
+  mod-stor 24e flip STAYS the last census move); the pair seats ride
+  main/CMakeLists.txt :52/:53 PLAIN seats (the dialect-gated ac-sh-ell
+  pair at :20-:22 names NOTHING of THIS row).
+- THE E4 THREE-way honest divergence face: bare dies EXACTLY-1 fatal at
+  cc :32:10 (the first donor-absent head); the DONOR-GRAFT daq face
+  MEASURED EXACTLY-0 errors — this pair pulls ZERO daq_version/msg drift
+  (the HONEST face: like the 24e registry TU, NOT the 24d's EXACTLY-51 —
+  NEVER assumed); the REAL libdaq @ c8d4083 SWAP (4 md5-pinned heads;
+  the closure NEVER pulls a daq_version.h seat — ZERO sed faces needed,
+  the honest set-algebra 176 = 140 donor + 2 row + 33 fresh + 1 SDK-
+  seat-count net-zero after ground-WINS) -> plain + -DUNIT_TEST posts
+  BOTH SILENT rc0 (the post VACUOUS: the UNIT_TEST legs declare/call
+  ONLY catch_set_filter via the ground-win catch/unit_test.h head — NO
+  Catch TEST body exists in the TU).
+- THE nm face honestly DIVERGENT from the 24d 137/137 precedent: plain
+  EXACTLY-98 / ut EXACTLY-99 — the delta rides EXACTLY-1 leg
+  (catch_set_filter, the UNIT_TEST post's ONLY dialect leg): this TU HAS
+  real UNIT_TEST code (unlike 24d's empty posture), so the ZERO-gate
+  face holds at the TEST-BODY level (Catch:: class legs EXACTLY-0 BOTH
+  posts) while the leg-level delta is 1 — MEASURED, pinned, diff-arms
+  prove the plain face rides a strict subset. E9 dup twins EXACTLY-12
+  (the snort_trace tbss + the 11 file-statics/inline twins — NEVER the
+  24a-44/24e-53 numbers).
+- THE [[noreturn]]-ATTR law (authoring hazard banked): the ground help
+  header attributes the ENTIRE help_*/dump_*/list_* family [[noreturn]]
+  (help.h :34-:61) — a returning witness mirror under -O2 makes GCC
+  dead-code-elide the rest of the set() else-if chain (a 16M-line
+  runaway face); the harness drives THOSE legs NEVER: they ride the
+  vectors as 8 present-only pfind rows; the landing maps them to seam
+  legs whose NEVER-return posture is cited at every leg.
+- THE s_params table: THE biggest CLI-parameter face of the port — the
+  ground 143 named rows + sentinel land CONTIGUOUS; at the MEASURED
+  cmake posture (create_options.cmake: ENABLE_SHELL :19 OFF,
+  ENABLE_UNIT_TESTS :20 OFF, ENABLE_DEBUG_MSGS :47 OFF; REG_TEST +
+  ENABLE_DETECTION_OFFLOAD tokens ABSENT cmake grep-0) 9 rows are
+  dialect (SHELL x6: -j + the control-socket quartet + --shell;
+  REG_TEST x2; the UNIT_TEST-family --catch-test x1) and land as CITED
+  comment faces at their ground slots — the LIVE C-compiled table counts
+  EXACTLY-135 (134 named + sentinel), FACE-A pinned; the landing's live
+  table matches that face (the 23i dialect law). The SHELL-era command
+  block (8 param tables + the 24-row command table, cc :68-:169 whole
+  under the dialect) lands as a CITED census block, NEVER live statics.
+- THE statics law AGAIN: ^static EXACTLY-11 + THREAD_LOCAL EXACTLY-2
+  (the cc :700 snort_trace DEFINITION + the h :33 extern) -> caller-
+  owned fields on the landing record + the row-owned trace-slot seat;
+  the config-mirror struct is the landed SnortConfig face for THIS row
+  (the DEV-001 owner NEVER landed: cites the snort_-home CliConf).
+- ONE-home REUSE faces (NEVER re-forked): the Module/Parameter/Value +
+  Command homes (framework), SFDAQConfig/SFDAQModuleConfig/SFDAQ_MODE_*
+  (the 23a sfdaq_config home), set_instance_max (the 23b thread_config
+  home :726), the Shell lua-sandbox legs (the 24c sh-ell home), the
+  in_main_thread seat (the thread home), the trough/parse/parse_utils/
+  config_file homes the ladder drives; the modules.rs :3605 'new
+  SnortModule (main/snort_module.cc :702)' cite REACHES this landing
+  (ONE-HOME: modules.rs NEVER re-forks the table; the landing NEVER
+  touches it). The harness links the REAL ground module.cc + value.cc +
+  parse_utils.cc + sf_ip.cc + sfdaq_config.cc + util.cc .o legs under
+  the hull (the mod-stor real-leg law); the rest ride the witness.
+- The mod.rs cascade FLIPPED 10->11 IN-COMMIT (the 62d6fac complete-flip
+  law, walked face): 4 build.sh holders (the trio + the sh-ell holder) +
+  4 twin riders (the h-process / sh-ell / anal-yzer / mod-ules twins) —
+  every -eq 10 arm rider-flipped token-safe; the sn-proc mod.rs
+  concat-guard NEVER breaks (measured 0 post-flip, the seat name rides
+  the GROUND name snort_module, the C file's OWN name — NOT an own
+  token); the walked census/readers stay 31/9/23/1 UNMOVED.
+- The twin replays the DEC/FACE-A numeric faces + the census UNMOVED
+  walk + the backbone + the docs seed tripwires (LINE semantics, the
+  23i t9 law) + the own-fold ZERO family (the dir-name home EXACTLY-1,
+  the file-BODY faces EXACTLY-0); cargo 900/0 over 94 result-lines
+  (885 + 15 twin fns, MEASURED at the staged face).

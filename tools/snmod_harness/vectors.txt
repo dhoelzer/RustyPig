@@ -1,0 +1,126 @@
+P0 ctor usage=0 global=1 name=snort help=command line configuration
+P1 prof0=daq peg0=local_commands counts=10 gcount=0
+W SnortConfig.mirror_ctor
+K0 conf batch=64 mru=1518 uid=-1 gid=-1 retry=200
+B1 begin=1
+L -T set=1 run_flags=40000 out=0 warn=0 batch=64 mru=1518 imax=1
+W Sc.set_obfuscate 1
+L -O set=1 run_flags=40000 out=0 warn=0 batch=64 mru=1518 imax=1
+L -q set=1 run_flags=40000 out=0 warn=0 batch=64 mru=1518 imax=1
+L -H set=1 run_flags=40020 out=0 warn=0 batch=64 mru=1518 imax=1
+W Sc.set_dump_chars_only 1
+L -C set=1 run_flags=40020 out=0 warn=0 batch=64 mru=1518 imax=1
+W Sc.set_dump_payload 1
+L -d set=1 run_flags=40020 out=0 warn=0 batch=64 mru=1518 imax=1
+W Sc.set_decode_data_link 1
+L -e set=1 run_flags=40020 out=0 warn=0 batch=64 mru=1518 imax=1
+W Sc.set_dump_payload_verbose 1
+L -X set=1 run_flags=40020 out=0 warn=0 batch=64 mru=1518 imax=1
+L --pedantic set=1 run_flags=40220 out=0 warn=0 batch=64 mru=1518 imax=1
+W Sc.set_no_logging_timestamps 1
+L --nostamps set=1 run_flags=40220 out=0 warn=0 batch=64 mru=1518 imax=1
+L --id-subdir set=1 run_flags=40220 out=0 warn=0 batch=64 mru=1518 imax=1
+ID id_subdir=1 id_zero=0
+L --id-zero set=1 run_flags=40220 out=0 warn=0 batch=64 mru=1518 imax=1
+ID2 id_zero=1
+W Sc.set_dirty_pig 1
+L --dirty-pig set=1 run_flags=40220 out=0 warn=0 batch=64 mru=1518 imax=1
+L --enable-inline-test set=1 run_flags=40a20 out=0 warn=0 batch=64 mru=1518 imax=1
+L --nolock-pidfile set=1 run_flags=40aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+L --show-file-codes set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+W Sc.set_alert_before_pass 1
+L --alert-before-pass set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+L --no-warn-flowbits set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+L --no-warn-rules set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+W PluginManager::set_close_all_plugins 1
+L --close-all-plugins set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+W PigPen::open_syslog
+L -M set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+L -v set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+LG syslog=1 quiet=1 verbose=1 warn=0
+L --daq set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+DQ mods=1 name=pcap mode=0 vars=0
+L --daq-mode set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+DQ2 mode=2
+L --daq-var set=1 run_flags=42aa0 out=0 warn=0 batch=64 mru=1518 imax=1
+DQ3 vars=1 kv=k=v
+L --daq-batch-size set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=1518 imax=1
+L --daq-dir set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=1518 imax=1
+DD dirs=2
+L --daq-mode set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=1518 imax=1
+DQ4 mode=2
+W ThreadConfig::set_instance_max 4
+L -z set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=1518 imax=4
+L --id-offset set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=1518 imax=4
+L -G set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=1518 imax=4
+IO id_offset=7 logid=3
+L -s set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=300 imax=4
+L -n set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=300 imax=4
+L --skip set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=300 imax=4
+PK pkt=5 skip=2 mru=300
+L --snaplen set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=400 imax=4
+L --retry-timeout set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=400 imax=4
+RT retry=2000
+L --bpf set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=400 imax=4
+L --run-prefix set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=400 imax=4
+L --metadata-filter set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=400 imax=4
+ST bpf=inbound pfx=pfx mf=mf
+W Sc.set_tweaks talos
+L --talos set=1 run_flags=42aa0 out=0 warn=0 batch=37 mru=400 imax=4
+W Trough::add_source type=1 a.pcap b.pcap
+L --pcap-list set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W Trough::add_source type=0 list.f
+L --pcap-file set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W Trough::add_source type=2 dir
+L --pcap-dir set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W Trough::set_filter flt
+L --pcap-filter set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+L --pcap-loop set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W Trough::set_filter (null)
+L --pcap-no-filter set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+PL loop=3 queue=3 read=0
+W config_conf snort.lua
+L -c set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W parser_append_rules drop tcp any any
+L --rule set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W parser_append_rules include .rules
+L -R set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W parser_append_includes /rules
+L --rule-path set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W ConfigChecksumMode noip
+L -k set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W Sc.set_max_procs 4
+L --max-procs set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+W Sc.set_create_pid_file 1
+W Sc.set_pid_filename []
+L --create-pidfile set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+PF pidfile=0 create=0
+W Sc.set_create_instance_file 1
+L --create-instance-file set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+L --stdin-rules set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+SI stdin=1
+L --dump-builtin-options set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+NF -h present=1 noreturn-cited
+NF -V present=1 noreturn-cited
+NF --version present=1 noreturn-cited
+NF --help-plugins present=1 noreturn-cited
+NF --help-options present=1 noreturn-cited
+NF --help-signals present=1 noreturn-cited
+NF --dump-builtin-rules present=1 noreturn-cited
+NF --dump-version present=1 noreturn-cited
+L --dump-config set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+DC dt=1 quiet=1
+L --dump-config-text set=1 run_flags=42aa1 out=0 warn=0 batch=37 mru=400 imax=4
+L --warn-all set=1 run_flags=42aa1 out=0 warn=ffffffff batch=37 mru=400 imax=4
+L --warn-flowbits set=1 run_flags=42aa1 out=0 warn=ffffffff batch=37 mru=400 imax=4
+WA warn=ffffffff
+L -j ABSENT
+L --shell ABSENT
+L --exit-after-reload ABSENT
+L --catch-test ABSENT
+IS pause first=1 repeat=1 run_flags=46aa1 pause=1
+E1 end=1 warn=fffffe7f (end clears the flowbits+rules WARNING legs)
+IS2 post pause(repeat)=1 file-codes(repeat)=1 rule-meta(first)=1 run_flags=46aa9
+SM gcount_after_reset=0 trace_opt0=inspector_manager
+fin=PASS
+W SnortConfig.mirror_dtor

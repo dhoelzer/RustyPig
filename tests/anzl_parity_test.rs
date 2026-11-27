@@ -766,7 +766,7 @@ fn t14_docs_seed_token_tripwires() {
     assert_eq!(this.matches(land.as_str()).count(), 0);
     // the mod.rs rider-flip face (the 62d6fac complete-flip law):
     let mrs = std::fs::read_to_string("/opt/data/snort3-rust/src/main/mod.rs").unwrap();
-    assert_eq!(mrs.lines().count(), 10); // [24c rider 7->8 + 24d rider 8->9 + 24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]
+    assert_eq!(mrs.lines().count(), 11); // [24c rider 7->8 + 24d rider 8->9 + 24e rider 9->10: the module-registry landing's ONE new wiring line (the 62d6fac law, walked face)]   [24f rider 10->11: the snort-module config-owner pair's ONE new wiring line (the 62d6fac law, walked face)]
     assert_eq!(mrs.matches("pub mod analyzer").count(), 1);
     // the row NEVER touches the seed faces (the pin faces UNMOVED):
     assert_eq!(NEXTMD.matches("5 TEST(").count(), 1);

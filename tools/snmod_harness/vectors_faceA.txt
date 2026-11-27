@@ -1,0 +1,14 @@
+A1 named=134 first=-? last=--x2s
+A2 sentinel type=21 name=null
+A3 implied=68 enum_or_select=3
+A4 help=command line configuration usage=0
+A5 trace=inspector_manager id=0
+A6 trace_named=1
+A7 prof0=daq parent=null
+A7 prof1=decode parent=null
+A7 prof2=mpse parent=null
+A7 prof3=rule_eval parent=null
+A7 prof4=eventq parent=null
+A8 prof_count=5
+A9 batch=64 mru=1518 timeout=1000
+fin=PASS
