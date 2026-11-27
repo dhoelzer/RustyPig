@@ -284,11 +284,11 @@ test "$(grep -rl "$MN" "$R"/tools "$R"/tests --include='*.sh' --include='*.rs' -
 test "$(grep -rl "$MN" "$R"/src --include=*.rs 2>/dev/null | wc -l)" -eq 0
 # the SELF-HIT truth (the 23c law): THIS file rides ZERO joined own-token
 # the strict sf-daq holder faces stay PINNED by the family arms (da-qio :171
-# 6 / dir-stor :139 1 / sf-mod :186 2 / sf-inst :224 6 / ac-t :171 8) — this
+# 8 / dir-stor :139 3 / sf-mod :186 4 / sf-inst :224 8 / ac-t :171 10) — this
 # row NEVER moves them; the walked face re-echoed HERE with the union exclusion
 # set (the family arms stay NEVER edited):
 holders=$(grep -rl "$SD" "$R"/tools/*/build.sh "$R"/tests/*.rs 2>/dev/null | grep -v "sf""inst" | grep -v "tools/daq""io_harness/build.sh$" | grep -v "tools/misc""3_harness/build.sh$" | grep -v "tools/mpls_harness/build.sh$" | grep -v "tools/sf""mod_harness/build.sh$" | grep -v "tools/dir""stor_harness/build.sh$" | grep -v "tools/pc""gate_harness/build.sh$" | grep -v "tools/misc""3_harness/witness_trio.cc$" | grep -v "tools/misc""3_harness/gate.txt$" | grep -v "tools/pt""rmod_harness/build.sh$" | grep -v "tests/daq""io_parity_test.rs$" | grep -v "tests/misc""3_parity_test.rs$" | grep -v "tests/ac""t_parity_test.rs$" | grep -v "tests/pt""rmod_parity_test.rs$" | wc -l || true)
-test "$holders" -eq 1   # [24e rider 0 -> 1: the module-registry MEGA harness rides ONE sf-daq header fresh-cp PATH line in its FRESH list (one-home REUSE, the 62d6fac law, walked face); BEYOND that THIS row adds ZERO new sf-daq joined holders]
+test "$holders" -eq 2   # [24f rider-flip: the sn-mod harness legitimately link-legs + FRESH-cp PATH-cites the LANDED 23a sf-daq-config home (one-home REUSE law; the 62d6fac complete-flip law, walked face; every comment hyphen-safe per the family law)]   # [24e rider 0 -> 1: the module-registry MEGA harness rides ONE sf-daq header fresh-cp PATH line in its FRESH list (one-home REUSE, the 62d6fac law, walked face); BEYOND that THIS row adds ZERO new sf-daq joined holders]
 
 # ---- STATE-AWARE stageables dual guard (9 faces: the 8-face shape + the
 # E4 undecl probe = the daqio 9-face precedent) ----
