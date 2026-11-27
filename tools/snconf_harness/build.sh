@@ -438,7 +438,7 @@ test "$(md5sum "$PT2"/vectors_faceA.txt | awk '{print $1}')"   = "3a9b0a4b31ba29
 # ---- the landed-home faces (the mod.rs 11->12 FLIP ALREADY ON DISK at
 # THIS row: the landing child added the ONE wiring line — 62d6fac law,
 # walked face; THIS harness PINS, NEVER edits) ----
-test "$(wc -l < "$R"/src/main/mod.rs)" -eq 12                          # THE flip 11->12 at THIS row  # [24g flip 11->12: the snort-config owner pair's ONE new wiring line (the 62d6fac law, walked face)]
+test "$(wc -l < "$R"/src/main/mod.rs)" -eq 13                             # [24i rider 12->13: the an-al-yzer-com-mand own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]                          # THE flip 11->12 at THIS row  # [24g flip 11->12: the snort-config owner pair's ONE new wiring line (the 62d6fac law, walked face)]
 test "$(grep -c 'pub mod snort_conf' "$R"/src/main/mod.rs)" -eq 1      # the GROUND name (the C pair is snort_config.cc — NOT an own token; the carrier law)
 test -f "$R"/src/main/snort_configp.rs                                 # the landing home (24g; the 1,936-L pair mirror — the ZERO-attribute / ZERO-in-safe law asserted IN the landing + the cold audit, NEVER md5-pinned from the C harness)
 test "$(grep -c 'pub const DAQ_VERDICT' "$R"/src/packet_io/sf""daq.rs)" -ge 6   # the LANDED verdict-constant home REUSED (the one-home law)

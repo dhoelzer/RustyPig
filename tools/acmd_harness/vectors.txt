@@ -1,0 +1,155 @@
+W ControlConn.ctor fd=3 local=1
+W ControlConn.ctor fd=4 local=0
+W ThreadConfig::set_instance_max 2
+W SnortConfig.ctor ex=(none)
+W SFDAQInstance.ctor if=w0 id=0
+W Analyzer.ctor id=1 daq=0 state=0
+W Analyzer.ctor id=0 daq=1 state=3
+B1 a0.state=0 a1.state=3 a1.idling=0
+R V remote=7
+L V remote=7
+L V local=9
+K1 str=START,RUN,RUN,STOP,PAUSE,RESUME,ROTATE
+W Analyzer.start
+K2 start=1 W Analyzer.run paused=0
+run=1 W Analyzer.run paused=1
+runp=1 W Analyzer.stop
+stop=1 W Analyzer.pause
+pause=1 W Analyzer.resume cnt=12
+resume=1 W Analyzer.rotate
+rotate=1 nur=0
+W MM.reset_stats type=0
+W MM.reset_stats type=7
+W MM.reset_stats type=-1
+RS str=RESET_STATS type_daq=0 type_all=7 type_inv=-1
+W PM.get_all_modules n=3
+G0 refs=1,2,1 fmt_str=GET_STATS
+W PM.get_thread_stats 7|11|13|17
+W MM.is_dynamic_stats ProbeModA
+W MM.is_dynamic_stats ProbeModG
+W MM.is_dynamic_stats ProbeModN
+G1 ex=1
+G2 pre-dtor countsA=2 nmods-seen-above=3
+W MM.get_accumulated_counts ProbeModA t=1
+W MM.collect_global_dump_stats ProbeModG
+W PM.get_global_stats 101|103|107|109
+W DropStats acc=1 sum4=468 sum2=222 fmt=0 ctrl=1
+R ==================================================
+W MM.clear_global_active_counters
+G3 resA=7,9 resG_sz=1 resN_sz=0
+W Swapper.ctor
+S1 new-state=0
+W SnortConfig.clear_tuner_list
+W Swapper.dtor
+W HostAttributesManager.swap_cleanup
+W ReloadTracker.end prompt=0
+L == reload complete
+W Swapper.ctor
+W Swapper.apply
+S2 null-conf=1
+W Swapper.dtor
+W HostAttributesManager.swap_cleanup
+W ReloadTracker.end prompt=0
+L == reload complete
+W Swapper.ctor
+W Swapper.apply
+L ReloadResourceTuner[0] start
+X tuner.tinit ProbeTunerA keep=1
+X tuner.tinit ProbeTunerB keep=0
+L ReloadResourceTuner[0] running ProbeTunerA
+X tuner.tpc ProbeTunerA n=1 v=0
+X1 leg1=0
+W Swapper.apply
+X tuner.tpc ProbeTunerA n=2 v=0
+X2 leg2=0
+W Swapper.apply
+X tuner.tpc ProbeTunerA n=3 v=0
+X tuner.report_progress ProbeTunerA calls=1
+X3 leg3=0
+W Swapper.apply
+X tuner.tpc ProbeTunerA n=4 v=1
+L ReloadResourceTuner[0] complete
+W Swapper.finish
+X4 leg4=1
+W SnortConfig.clear_tuner_list
+W Swapper.dtor
+W HostAttributesManager.swap_cleanup
+W ReloadTracker.end prompt=0
+L == reload complete
+W HostAttributesManager.initialize
+W HostAttributesManager.swap_cleanup
+W ReloadTracker.end prompt=0
+R == reload host attributes complete
+L == reload host attributes complete
+W Analyzer.reload_daq
+L == daq module reload complete
+W ScratchAllocator.ctor
+X alloc.update
+SU ex=1
+R == scratch update complete
+L == scratch update complete
+W ReloadTracker.end prompt=1
+W ScratchAllocator.dtor
+W SFDAQ.ioctl call=0 cmd=15 arglen=12
+CP ex1=1 idx=0
+W SFDAQ.ioctl call=1 cmd=15 arglen=12
+CP ex2=1 idx=1
+W SFDAQ.ioctl call=2 cmd=15 arglen=12
+R Fetching profile data failed from DAQ instance 0
+CP ex3-fail=1 idx=2
+W ThreadConfig::get_instance_tid 0
+R 0   	3100   	12.5% 	25.0% 	6.0%
+W ThreadConfig::get_instance_tid 1
+R 1   	3101   	2.5% 	5.0% 	1.0%
+R 
+Summary 	7.5% 	15.0% 	3.5%
+W SFDAQ.ioctl call=3 cmd=16 arglen=360
+LT ex1=1 idx=3
+W SFDAQ.ioctl call=4 cmd=16 arglen=360
+LT ex2=1 idx=4
+R Fetching latency data failed from DAQ instance
+LT ex3-null=1 idx=5
+LT gdi=1,0
+W ThreadConfig::get_instance_tid 0
+R 
+================ Instance: 0   ================
+ThreadID: 3100
+R   [TCP]
+R     Max Latency (us, since restart): 2
+R     Total Packet Count in last 5mins: 8
+R     Sum of Packet Latencies in last 5mins (us): 4
+R     Null ConnMeta Count in last 5mins: 3
+R     Average Packet Latency in last 5mins (us): 0.500
+R     Maximum Observed Latency in last 5mins (us): 1
+R     5min Max Latency Packet 5-tuple: 203.2.113.7:80 -> 203.2.113.9:443 (TCP)
+R     Max Latency Packet 5-tuple (us, since restart): 10.0.0.1:53 -> 2001:db8::1:5353 (TCP)
+R   [UDP]
+R   [Others]
+R     Max Latency (us, since restart): 0
+R     Total Packet Count in last 5mins: 16
+R     Sum of Packet Latencies in last 5mins (us): 6
+R     Average Packet Latency in last 5mins (us): 0.375
+R ------------------------------------------------------------
+W ThreadConfig::get_instance_tid 1
+R 
+================ Instance: 1   ================
+ThreadID: 3101
+R   [TCP]
+R     Total Packet Count in last 5mins: 8
+R     Sum of Packet Latencies in last 5mins (us): 1
+R     Average Packet Latency in last 5mins (us): 0.125
+R     Maximum Observed Latency in last 5mins (us): 2
+R     5min Max Latency Packet 5-tuple: 2001:db8:0:1::2:8080 -> fe80::9:443 (TCP)
+R   [UDP]
+R   [Others]
+R ------------------------------------------------------------
+NF inet_ntop-fail invalid_ip strcpy leg cited (poke-wall unreachable)
+NF Analyzer message-loop cited wall
+NF DropStats real banner home cited (utils/stats NEVER lands)
+W ControlConn.dtor fd=4
+W ControlConn.dtor fd=3
+fin=PASS
+W Analyzer.dtor
+W Analyzer.dtor
+W SFDAQInstance.dtor
+W SnortConfig.dtor

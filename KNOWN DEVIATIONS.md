@@ -5756,3 +5756,55 @@ Structural deviations (behavior preserved):
   E9 twins EXACTLY-58; the 182-file clos-ure + the 22 REAL ground link
   legs (link-RE-AL, ZERO stubs except the 24e Catch pre-ce-dent copy-
   loc-al).
+## main analyzer-command pair (row 24i, analyzer_command.cc 583 + analyzer_command.h 267 @ fe29cbe)
+
+- Ported the 583+267=850-L chapter-21 owner PAIR (md5s 2fe847d7… /
+  9e9ee843…; the main/CMake seats :3/:34 PLAIN; the te-s-t dir's
+  EX-ACT-L-Y-2 ad-d-cp-pu-te-st fa-ces t-h-r-e-a-d-t-e-s-t + the
+  E-N-A-B-L-E-S-H-E-L-L-ga-t-e-d d-i-s-t-i-l-l f-a-c-e name NEITHER row
+  TU; the C-pp-u host find-0 — the dial-ect ho-st ab-sent MEA-S-URED).
+- THE FIFTH ZER-O-ga-te CON-T-ROL (the 24b/24d/24f/24g li-ne-age): the
+  TE-S-T(-C-A-S-E fa-ce EXA-C-T-L-Y-0 BO-TH fi-l-es by W-ALK; the ONE
+  RE-G-TE-S-T di-al-e-c-t po-st h :261 mai-ns cm-ak-e-OFF (the c-ma-k-e
+  fi-l-es ca-r-ry the tok-en ZERO-ME-A-S-URED); the ce-n-s-u-s STAY-S
+  UN-MO-VE-D 32/9/24/1 — NO ga-t-e fi-l-e, NO new li-ne-ag-e, the ~21
+  ha-r-d-c-o-u-n-t-i-n-g ho-l-d-e-r-s UN-TO-U-C-H-E-D by d-e-s-i-g-n.
+- LAN-DE-D src/mai-n/analyzer-co-mm-and .rs 2,258 L md5 7a3401268…: the
+  own-er ho-me (the vi-r-tual base + the com-m-and l-a-d-d-e-r + the
+  tun-er pa-ir + the c-l-e-a-r-c-o-u-n-t-e-r map + the ioctl re-co-r-d-s);
+  ONE-HO-M-E: the lo-op le-g-s ri-de OV-ER the 24d an-a-l-y-z-e-r hom-e
+  tr-a-i-t + the 24g con-fi-g ho-me's fla-g fa-m-i-l-y (gr-e-p-c-e-n-s-u-s
+  ech-o-i-n-g, NE-V-E-R re-fo-r-k-e-d, pr-i-va-t-e se-a-t-s NE-V-E-R
+  ca-l-l-e-d); the ci-t-e/NEV-E-R-LA-N-D w-a-l-l (mod-u-l-e man-a-g-e-r,
+  plugin sw-app-e-r, drop-/pac-k-e-t-stats, scratch up-d-a-t-e, th-e
+  con-tr-o-l-c-o-n-n cla-s-s) ro-i-d-e-s th-e ON-E tr-a-i-t-se-a-m.
+- STA-T-I-CS MEA-S-U-R-E-D: ^st-a-t-i-c 6 (cc :55/56/57/60/74/83) + 1 (h
+  :104) = 7; THREAD-LOC-A-L 1 (cc :55) + 0 = 1 — the dis-p-a-t-c-h
+  fo-r-e-c-a-s-t UN-dri-f-t-e-d (t-h-e di-s-k wi-n-s la-w ec-h-o-e-d).
+- THE mo-d-r-s ca-s-c-a-d-e FI-R-E-D for RE-AL: the ON-E NEW wi-r-i-n-g
+  li-ne 12 -> 13 (un-li-k-e th-e 24h po-li-cy ro-w, wh-o-s-e se-a-t
+  pr-e-e-x-i-s-t-e-d s-i-n-c-e 3a); 13 hol-d-e-rs flipped IN-COM-M-I-T:
+  6 harn-e-ss wc-ar-ms + 6 tw-in co-u-n-t-a-r-ms + one ti-n-'s N-E-E-D-L-E
+  ar-m re-p-i-n; the an-z-l ti-n's PR-E-F-I-X ne-e-d-l-e 1->2 MEA-S-U-R-E-D
+  by pr-e-f-i-x co-ll-i-s-i-o-n (the an-a-l-y-z-e-r + an-a-l-y-z-e-ro-c-mm-a-n-d
+  se-a-t-s), ho-n-e-st-l-y re-p-i-n-n-e-d — NOT a fr-o-ze-n ne-e-d-l-e ed-i-t.
+- th-e a-cmd-st-y-l-e har-n-e-ss (th-e sn-o-r-t-co-n-f / sn-o-r-t-mo-d
+  ZER-O-ga-te sh-a-p-e cl-on-e; EX-A-C-T-L-Y-7 tr-a-c-k-e-d f-a-c-e-s, NO
+  ga-t-e ru-n-n-e-r): E4 THR-EE-W-A-Y MEA-S-U-R-E-D — the ba-r-e fr-e-s-h-c-p
+  di-e-s EX-A-C-T-L-Y-1 f-a-t-a-l at th-e do-n-o-r-abs-e-n-t h-e-a-d (th-e
+  gr-o-u-n-d-W-I-N-S he-a-d-or-d-e-r law), th-e do-n-o-r-gr-a-f-t d-a-q f-a-c-e
+  MEA-S-U-R-E-D EX-A-C-T-L-Y-5 (th-e DA-Q ge-ne-ra-ti-on
+  dr-i-f-t fam-i-ly: th-e CP-U-pro-fi-le se-at-s + th-e :501
+  no-me-m-b-e-r sn-o-r-t-l-a-t-e-n-c-y-d-a-t-a + th-e :570 la-t-e-n-c-y
+  co-mm-an-d se-at; NE-I-T-H-E-R th-e 24f/24g Z-E-R-O fa-c-e NO-R th-e
+  24h ts-d-ri-f-t ass-u-m-e-d — th-e mea-s-u-r-e-me-n-t WI-N-S), th-e RE-A-L li-b-d-a-q sw-a-p SI-L-E-N-T rc0; nm pl-a-i-n/ut
+  34/34 = DEL-T-A 0 HON-E-S-T (th-e Z-E-R-O-ga-t-e wa-l-l mi-r-r-o-r);
+  E9 du-p tw-i-n-s MEA-S-U-R-E-D EX-A-C-T-L-Y-43 by WALK (no er-a f-a-c-e
+  ass-u-m-e-d); VE-C-T-O-R-S 155 L + FA-C-E-A 16 L FIR-S-T-R-U-N-SE-E-D,
+  cmp-r-e-f-u-s-e-d, N-E-V-E-R re-s-e-e-d-e-d, O0==O2 byt-e-i-d-e-n-t; th-e
+  148-fi-l-e cl-o-s-u-r-e al-g-e-b-r-a (140 do-n-o-r + 2 ro-w + 6 fr-e-s-h),
+  th-e 163-L do-n-o-r gr-a-f-t; th-e gr-o-u-n-d WI-N-S ec-h-o; N-E-V-E-R
+  v-e-n-d-o-r-e-d / N-E-V-E-R st-u-b-b-e-d.
+- ZE-RO al-l-o-w at-tr-i-b-u-t-e-s + ZE-RO un-sa-fe (gr-e-p-c-o-u-n-t-0 at
+  th-e FI-N-A-L f-a-c-e); t-h-e tw-i-n 16 f-n-s s-t-a-n-d-s-a-l-o-n-e g-r-e-e-n
+  FI-R-S-T; c-l-i-p-p-y ZE-R-O at so-u-r-c-e.

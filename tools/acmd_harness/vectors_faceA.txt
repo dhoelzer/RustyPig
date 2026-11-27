@@ -1,0 +1,16 @@
+A1 ordinals: INVALID=-1 DAQ=0 MODULE=1 APPID=2 FILE_ID=3 SNORT=4 HA=5 MESSAGING=6 ALL=7
+A2 map_sz=7 map[0]=daq map[6]=mp_data_bus all_gap=1
+A3 strlen45=46 cpu_sz=12 lat_sz=360 proto_max=3
+A4 statsfmt=0,1
+A5 REG_TEST main_unicast_command DECL ABSENT (h :261 dialect, cmake OFF walked)
+W Analyzer.ctor id=1 daq=0 state=2
+W Analyzer.ctor id=2 daq=0 state=3
+B1 state=2,3 idling=0 src=fa,fb
+B2 maxwork=3,32767
+B3 map_identity=1
+C1 v4=203.2.113.7
+C2 v6=2001:db8::1
+C3 v6z=::
+fin=PASS
+W Analyzer.dtor
+W Analyzer.dtor
