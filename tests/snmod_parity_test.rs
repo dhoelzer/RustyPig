@@ -414,7 +414,7 @@ fn t10_zero_law_self_census() {
 #[test]
 fn t11_mod_rider_eleven_seats() {
     let mrs = read(&["/opt/data/snort3-rust/src/mai", "n/mod.rs"].concat());
-    assert_eq!(mrs.lines().count(), 11, "the mod.rs 10 -> 11 rider face (the complete-flip law)");
+    assert_eq!(mrs.lines().count(), 12, "the mod.rs 10 -> 11 rider face (the complete-flip law)");  // [24g rider 11->12: the snor-t-confi-g own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]
     let seats: Vec<&str> = mrs.lines().collect();
     let want: [&str; 11] = [
         "pub mod analyzer;",

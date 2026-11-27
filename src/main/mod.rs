@@ -9,3 +9,4 @@ pub mod thread;
 pub mod thread_config;
 pub mod modules;
 pub mod snort_module;
+pub mod snort_configp;

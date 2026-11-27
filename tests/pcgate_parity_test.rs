@@ -351,7 +351,7 @@ fn foreign_packet_constraint_face_stays_13() {
         .output()
         .unwrap();
     let n: usize = String::from_utf8(out.stdout).unwrap().trim().parse().unwrap();
-    assert_eq!(n, 14, "the fc*/f*-era copy-tree riders EXACTLY-13 + row-24d rider 13->14 (the anal-yzer pair's OWN fresh-cp packet-constraints header PATH line — the SAME cp face, the 62d6fac complete-flip law, walked)");
+    assert_eq!(n, 15, "the fc*/f*-era copy-tree riders EXACTLY-13 + row-24d rider 13->14 (the anal-yzer pair's OWN fresh-cp packet-constraints header PATH line — the SAME cp face, the 62d6fac complete-flip law, walked)   # [24g rider 14->15: the ZERO-gate sn-conf harness legitimately rides the pack-et con-straints.h leg-rider f-r-esh cp PATH li+ne (one-home RE-USE of the LAN+DE-D 23e cons+trai-nts home; the 62d6fac compl-ete-flip law, walked face; the comment hy-phen-split, the own-ing NEV-ER self-hits)]");
     // the donor header byte-EXACT since the 17-era (the never-drift cite):
     let h = std::fs::read("/opt/data/snort3-rust/tools/fcapi_harness/copy/packet_io/packet_constraints.h").unwrap();
     assert_eq!(md5(&h), "447e814a551709a99ffa165e60bb7a41");

@@ -914,7 +914,7 @@ fn foreign_faces_landmines_and_token_hygiene() {
     // law so THIS twin's text NEVER carries a joined family token:
     let q = "\"";
     let pat_tr = format!("grep -rl \"tr{q}{q}acer\" /opt/data/snort3-rust/tools/*/build.sh | grep -v '/[t]racer_harness/build.sh$' | wc -l");
-    assert_eq!(run_bash_usize(&pat_tr), 18, "the bare-tr family build.sh face rider chain 16 -> 17 (24d) -> 18 (row 24e: the module-registry MEGA harness legitimately rides the packet-tracer.h fresh-cp PATH line — one-home REUSE, the 62d6fac complete-flip law re-walked; the ptracer build.sh arm flipped to 18 IN THE SAME commit)");
+    assert_eq!(run_bash_usize(&pat_tr), 19, "the bare-tr family build.sh face rider chain 16 -> 17 (24d) -> 18 (row 24e: the module-registry MEGA harness legitimately rides the packet-tracer.h fresh-cp PATH line — one-home REUSE, the 62d6fac complete-flip law re-walked; the ptracer build.sh arm flipped to 18 IN THE SAME commit)   # [24g rider 18->19: the ZERO-gate sn-conf harness legitimately rides the pack-et tra-cer.h fresh-c-p PATH li+ne in its FRESH list (one-home RE-USE; the 62d6fac law, walked face; hy-phen-spl-it com-ment, the own-ing NEV-ER self-hits)]");
     let pat_rs = format!("grep -rl \"rs{q}{q}ubs\" /opt/data/snort3-rust/tools/*/build.sh | grep -v '/[r]subs_harness/build.sh$' | wc -l");
     assert_eq!(run_bash_usize(&pat_rs), 5, "the rs-subs family face STAYS 5");
     let pat_m9 = format!("grep -rl \"misc{q}{q}9\" /opt/data/snort3-rust/tools/*/build.sh | grep -v '/[m]isc9_harness/build.sh$' | grep -v 'ink4' | wc -l");
@@ -922,7 +922,7 @@ fn foreign_faces_landmines_and_token_hygiene() {
     // the 23e cp-tree rider face STAYS 13 (row-23f's build.sh carries the
     // $PC runtime concat + the SPLIT comment: ZERO joined mentions):
     let pat_pc = "grep -l 'packet_constraint' /opt/data/snort3-rust/tools/*/build.sh | grep -vc '[p]cgate'".to_string();
-    assert_eq!(run_bash_usize(&pat_pc), 14, "the pc-rider face 13 -> 14 rider-flip IN-COMMIT (row 24d: the anal-yzer harness legitimately rides the packet-constraints.h fresh-cp PATH line — one-home REUSE, the 62d6fac complete-flip law; the pc-gate twin's pc-count rider flipped in the SAME commit, the staged pcflip re-ridden here)");
+    assert_eq!(run_bash_usize(&pat_pc), 15, "the pc-rider face 13 -> 14 rider-flip IN-COMMIT (row 24d: the anal-yzer harness legitimately rides the packet-constraints.h fresh-cp PATH line — one-home REUSE, the 62d6fac complete-flip law; the pc-gate twin's pc-count rider flipped in the SAME commit, the staged pcflip re-ridden here)   # [24g rider 14->15: the ZERO-gate sn-conf harness legitimately rides the pack-et con-straints.h leg-rider fr-esh c-p PATH l-ine (one-home R-E-USE of the LAN+D-ED 23e h-o-me; the 62d6fac law, walked face)]");
     // the misc-9 landmines EXACTLY-2 occupants NEVER +1 (the PacketTrace
     // NAMING law re-proven THROUGH the landing text):
     let pat_lm = format!("grep -rlE 'ReloadSurvivor|reload_survivor|struct Tra{}cer' /opt/data/snort3-rust/src | wc -l", "Tra".replace("Tra",""));

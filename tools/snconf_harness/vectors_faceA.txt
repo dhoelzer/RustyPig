@@ -1,0 +1,35 @@
+A1 runflags_live=26
+A2 runflag_top=4000000
+A3 RUN_FLAG__SHELL ABSENT (h :79 ifdef dialect, cmake OFF walked)
+A4 RUN_FLAG__EXIT_AFTER_RELOAD ABSENT (h :83 ifdef dialect)
+A5 outflags=14 wide_hex=800
+A6 logflags=1|2|4 tunnels=10 dump=0,1,2,3
+A7 logdir=. pidfile=snort.pid
+W ActionManager.new_config
+W PolicyMap.ctor
+W DataBus.ctor
+W NetworkPolicy.ctor id=0
+W DataBus.ctor
+A8 nsDMI plain out=0 wide_hex=0 (the :214 WIDE_HEX twin CITED)
+W IpsPolicy.ctor id=0
+A9 drs=1 (cc :982 INHERIT_ENABLE -> global NSDMI true)
+B0 daemon=0 inline=0 ips_passive=0 read=0
+B1 daemon=1 inline_cleared=0 static_hash=0 (set_conf not called: null gate h :726)
+B2 pid=snort.pid dump_config_mode=0
+W FreeRuleLists
+W PortTablesFree
+W ThresholdConfigFree
+W RateFilter_ConfigFree
+W DetectionFilterConfigFree
+W fpDeleteFastPacketDetection
+W OtnLookupFree
+W PolicyMap.dtor
+W NetworkPolicy.dtor
+W DataBus.dtor
+W ActionManager.delete_config
+W ThreadConfig.dtor
+W DataBus.dtor
+W Profiler.clear
+W trim_heap
+fin=PASS
+W IpsPolicy.dtor

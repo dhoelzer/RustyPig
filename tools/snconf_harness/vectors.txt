@@ -1,0 +1,117 @@
+W ActionManager.new_config
+W PolicyMap.ctor
+W DataBus.ctor
+W NetworkPolicy.ctor id=0
+W DataBus.ctor
+W PolicyMap.get_policies
+D0 ctor run=0 out=0 warn=0 rid=1
+S1 abp=1 run=100
+S2 daemon=1 run_daemon=1
+S3 max_procs=23 clamped=0
+S4 wd=9 wdmin=3
+S5 umask=77
+S6 dirty_pig=1
+M1 out=27e utc=1 year=1 app=1 char=1 verb=1 dlink=1 nostamp=1
+M2 obf=1 out=2fe netfam=2 netbits=112
+M3 obf=0 mask_stays_bit=0 out=27e
+W eth_pton 00:11:22:33:44:55
+G1 dst_mac set=1 b0=a0 b5=a5
+W eth_pton zz
+W ParseError
+G2 reject_keeps=1
+G3 cleared=0
+W Analyzer::set_main_hook who=1
+A1M out_str=alert_fast alerts=1 dlink=1 app=1
+W Analyzer::set_main_hook who=3
+A2M out_str=codecs
+W SFDAQ::get_tunnel_bypass 40
+T1 mask=81 gtp_bypass=0 gre_bypass=1
+W ParseError
+T2 mask=81
+P1 inc=/inc plug=p1:p2 scripts=2 tweaks=t42
+W ActionManager.new_config
+W PolicyMap.ctor
+W DataBus.ctor
+W NetworkPolicy.ctor id=0
+W DataBus.ctor
+W ThreadConfig::set_instance_max 3
+V1 run 102|4502 out 67e|67e pause=1 pae=1
+V2 logdir=. orig=. umask_kept=77 pkt=11 skip=3 pause_cnt=5 imax_slots=3
+V3 cksum_eval=1 cksum_drop=80000000 chroot=/ch bpf=inbound mf=mf off=0
+V4 scratchers=0 slots=3
+W PolicyMap.setup_network_policies
+VFY ok=1
+LG syslog=1 verbose=1 quiet0=0
+LQ quiet=1
+LQ2 bypassed=0
+LQ3 restored=1
+WF warn=8
+W ActionManager.new_config
+W PolicyMap.ctor
+W DataBus.ctor
+W NetworkPolicy.ctor id=0
+W DataBus.ctor
+R1 rid_a=1
+W PolicyMap.get_policies
+R2 rid_c=3 same_obj=1
+R3 rid_c2=4
+W PolicyMap.get_policies
+INT same=1 diff=0 n1=gamma n3=delta
+W ScratchAllocator.ctor
+SC s0=0 s1=1
+W main_broadcast_command
+SC2 done
+NF set_uid noreturn-false cited wall
+NF set_gid cited wall
+NF setup cited parse wall
+NF generate_dump cited thread wall
+W FileService::close
+CL done
+W FreeRuleLists
+W PortTablesFree
+W ThresholdConfigFree
+W RateFilter_ConfigFree
+W DetectionFilterConfigFree
+W fpDeleteFastPacketDetection
+W OtnLookupFree
+W PolicyMap.dtor
+W NetworkPolicy.dtor
+W DataBus.dtor
+W ActionManager.delete_config
+W ThreadConfig.dtor
+W DataBus.dtor
+W Profiler.clear
+W trim_heap
+W FreeRuleLists
+W PortTablesFree
+W ThresholdConfigFree
+W RateFilter_ConfigFree
+W DetectionFilterConfigFree
+W fpDeleteFastPacketDetection
+W OtnLookupFree
+W PolicyMap.dtor
+W NetworkPolicy.dtor
+W DataBus.dtor
+W ActionManager.delete_config
+W ThreadConfig.dtor
+W DataBus.dtor
+W Profiler.clear
+W trim_heap
+W FreeRuleLists
+W PortTablesFree
+W ThresholdConfigFree
+W RateFilter_ConfigFree
+W DetectionFilterConfigFree
+W EventQueueConfigFree
+W fpDeleteFastPacketDetection
+W OtnLookupFree
+W PolicyMap.dtor
+W NetworkPolicy.dtor
+W DataBus.dtor
+W ActionManager.delete_config
+W ThreadConfig.dtor
+W DataBus.dtor
+W Profiler.clear
+W trim_heap
+fin=PASS
+W ScratchAllocator.dtor
