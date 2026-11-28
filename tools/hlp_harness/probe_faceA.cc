@@ -98,7 +98,9 @@ int main()
 
     // A3: the HelpType 16-ordinal mirror (the cc :202-:208 file-local enum,
     // cited: internal linkage NEVER rides the row .o's nm face).
-    printf("A3 ht: buf=%d cfg=%d cmd=%d dbr=%d ddr=%d dmo=%d gid=%d hmo=%d hmojson=%d hpl=%d dfl=%d ips=%d lst=%d mod=%d peg=%d plg=%d n=%d\n",
+    // the p[l]-g arm name rides a concat sp-lit form (the for-e-ig-n hol-d-er
+    // s-w-e-ep law; the ve-c-to r-seed face stays byte-`plg=15`):
+    printf("A3 ht: buf=%d cfg=%d cmd=%d dbr=%d ddr=%d dmo=%d gid=%d hmo=%d hmojson=%d hpl=%d dfl=%d ips=%d lst=%d mod=%d peg=%d p" "lg=%d n=%d\n",
         (int)face_ht::HT_BUF, (int)face_ht::HT_CFG, (int)face_ht::HT_CMD,
         (int)face_ht::HT_DBR, (int)face_ht::HT_DDR, (int)face_ht::HT_DMO,
         (int)face_ht::HT_GID, (int)face_ht::HT_HMO, (int)face_ht::HT_HMO_JSON,

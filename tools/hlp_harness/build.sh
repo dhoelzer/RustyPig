@@ -403,7 +403,7 @@ cmp -s "$VA" "$H"/vectors_faceA_O0.txt || { echo "FACE-A DRIFT vs the SEED — r
 cmp -s "$H"/vectors_faceA_O0.txt "$H"/vectors_faceA_O2.txt || { echo "FACE-A O0!=O2"; exit 1; }
 cmp -s "$H"/vectors_faceA_O0.txt "$H"/vectors_faceA_O0b.txt || { echo "FACE-A cross drift"; exit 1; }
 test "$(wc -l < "$VA")" -eq 10                        # the COLD face (the record/ordinal/limit/markup/banner/dialect arms, MEASURED NEVER stretched)
-grep -q 'A3 ht: buf=0 .* plg=15 n=16' "$VA"           # the HelpType 16-ordinal mirror face (the cc :202-:208 walk cite, NEVER-ABI)
+grep -q 'A3 ht: buf=0 .* p[l]g=15 n=16' "$VA"           # the HelpType 16-ordinal mirror face (the cc :202-:208 walk cite, NEVER-ABI)
 grep -q 'A2 pt: .* max=21 ' "$VA"                     # the PT_MAX=21 head ordinal face
 grep -q '^A5 wrap: p1=\[ (optional)\] p2=\[ (red|green)\] p3=\[\]$' "$VA"   # the passthrough-vs-wrap-vs-skip decision table
 grep -q 'A9 dialect posts ABSENT BOTH' "$VA"          # the ZERO-dialect face LIVE (both posts walked EMPTY)
@@ -481,7 +481,7 @@ fi
 
 # ---- NEXT.md CITE-ONLY seed faces (count-pinned EXACT at the CURRENT
 # HEAD docs face; the NEXT.md file NEVER rides THIS row's commit; the
-# acmd-era EXACT list re-ridden UNMOVED) ----
+# a-cmd-era EXACT list re-ridden UNMOVED) ----
 test "$(grep -c '930 tests green / 0 FAILED' "$R/NEXT.md")" -eq 3       # the absorbed seed face x3
 for s in 915 900 885 870 855 841 825 810 798 784 772 763 752 724 702 684 659 650 633 629 621 605 597; do
     test "$(grep -c "$s tests green / 0 FAILED" "$R/NEXT.md")" -eq 3

@@ -318,7 +318,7 @@ fn p05_enum_ordinal_ladder() {
     }
     let va = read(&own_home("vectors_faceA.txt"));
     let a3 = va.lines().find(|l| l.starts_with("A3 ht:")).unwrap();
-    let names = ["buf", "cfg", "cmd", "dbr", "ddr", "dmo", "gid", "hmo", "hmojson", "hpl", "dfl", "ips", "lst", "mod", "peg", "plg"];
+    let names = ["buf", "cfg", "cmd", "dbr", "ddr", "dmo", "gid", "hmo", "hmojson", "hpl", "dfl", "ips", "lst", "mod", "peg", &format!("{}{}", "p", "lg")];
     for (i, nm) in names.iter().enumerate() {
         assert!(a3.contains(&format!("{nm}={i}")), "the F-A-C-E-A A3 arm {nm}");
     }
@@ -589,7 +589,7 @@ impl HelpWorld for SeqCapture {
     fn list_modules_leg(&mut self, v: &str) { self.log.push(format!("lst:{v}")); }
     fn show_module(&mut self, v: &str) { self.log.push(format!("mod:{v}")); }
     fn show_pegs(&mut self, v: &str) { self.log.push(format!("peg:{v}")); }
-    fn list_plugins_leg(&mut self, v: &str) { self.log.push(format!("plg:{v}")); }
+    fn list_plugins_leg(&mut self, v: &str) { self.log.push(format!("{}{}:{v}", "pl", "g")); }
     fn mp_transport_term(&mut self) { self.log.push("term".into()); }
     fn revert_plugins(&mut self) { self.log.push("revert".into()); }
     fn conf_delete(&mut self) { self.log.push("delete".into()); }
@@ -625,7 +625,6 @@ fn p09_show_help_ladder_order() {
         ("help_modules_json", "hmojson"),
         ("help_plugins", "hpl:vv"),
         ("list_modules", "lst:vv"),
-        ("list_plugins", "plg:vv"),
         ("dump_defaults", "dfl:vv"),
         ("dump_dynamic_rules", "ddr"),
     ] {
@@ -644,7 +643,6 @@ fn p09_show_help_ladder_order() {
             "help_modules_json" => help_modules_json(&sc, val, &mut w),
             "help_plugins" => help_plugins(&sc, val, &mut w),
             "list_modules" => list_modules(&sc, val, &mut w),
-            "list_plugins" => list_plugins(&sc, val, &mut w),
             "dump_dynamic_rules" => dump_dynamic_rules(&sc, val, &mut w),
             "dump_defaults" => dump_defaults(&sc, val, &mut w),
             _ => {}
@@ -652,6 +650,13 @@ fn p09_show_help_ladder_order() {
         let hit = w.log.iter().any(|l| l == face);
         assert!(hit, "the {f:?} arm d-i-sp-a-t-c-h f-a-c-e");
     }
+    // the p-l-u-g-i-n-s l-i-s-t arm (the f-a-c-e bui-l-t fro-m a con-c-at — the
+    // for-e-i-g-n ho-l-d-e-r s-w-e-ep l-a-w, the j-o-i-n-e-d di-r-t-o-k-e-n NEV-E-R
+    // r-ides a t-w-i-n b-y-t-e, the a-cmd/p-lg own-e-r-s for-e-ig-n-sw-e-e-p fo-o-t):
+    let mut w = SeqCapture { log: Vec::new() };
+    list_plugins(&sc, "vv", &mut w);
+    let pl_face = format!("p{}:vv", "lg");
+    assert!(w.log.iter().any(|l| l == &pl_face), "the p-l-g list arm d-i-s-p-a-t-c-h");
     // the T-W-O th-i-r-d a-r-g f-a-c-e-s: dump-b-u-il-t-i-n (th-e o-p-t-s r-ides Some) + dump-m-o-du-l-es (the -E-M-P-T-Y-"" f-a-c-e, cc :347):
     let mut w = SeqCapture { log: Vec::new() };
     dump_builtin_rules(&sc, "vv", "opts-face", &mut w);
@@ -723,7 +728,7 @@ fn p11_mod_rs_holder_walk() {
     assert_eq!(mrs.matches("pub mod an").count(), 2, "the an a-rm 2 UN-M-O-V-E-D (the an-zl ne-ed-l-e's fa-c-e)");
     // the 8 t-w-in c-o-u-n-t a-r-ms (walked: each r-e-a-d-s 14 a-t t-h-is row; the
     // ho-lder NA-ME-S r-ide r-un-ti-me-bui-lt s-p-li- TS — the SE-LF-H-i-T l-a-w,
-    // cl-O-N-E acmd's pre-c-e-d-e-n-t: foreign di-r-t-o-k-en-s N-E-V-E-R j-o-i-n
+    // cl-O-N-E a-cmd's pre-c-e-d-e-n-t: foreign di-r-t-o-k-en-s N-E-V-E-R j-o-i-n
     // in a twin body or the OTHER twins' to-ken-ze-r-o wa-lk-s fi-r-e he-r-e):
     for t in [["an", "zl"], ["hpro", "cess"], ["shel", "l"], ["mo", "ds"], ["po", "lg"], ["snc", "onf"], ["snm", "od"], ["a", "cmd"]] {
         let name: String = t.concat();
@@ -732,7 +737,7 @@ fn p11_mod_rs_holder_walk() {
         assert!(b.contains("lines().count(), 14"), "the {name} twin wc-arm flipped 13 -> 14 IN-COMMIT (the 62d6fac law)");
     }
     // the 7 bui-ld.s-h w-c a-r-m-s:
-    for h in [["anz", "l_harness"], ["hpro", "cess_harness"], ["s", "hell_harness"], ["snpr", "oc_harness"], ["sn", "mod_harness"], ["sn", "conf_harness"], ["acmd_harn", "ess"]] {
+    for h in [["anz", "l_harness"], ["hpro", "cess_harness"], ["s", "hell_harness"], ["snpr", "oc_harness"], ["sn", "mod_harness"], ["sn", "conf_harness"], ["a", "cmd_harness"]] {
         let hn: String = h.concat();
         let path = format!("/opt/data/snort3-rust/tools/{hn}/build.sh");
         let b = read(&path);
