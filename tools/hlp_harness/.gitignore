@@ -1,0 +1,47 @@
+# the row-24j harness (chapter-21 TENTH body: the main help PAIR — ground names
+# ride PATHS; the dir token rides ONLY the runtime concat, NEVER joined HERE,
+# not even one hyphen-less letter of it).
+# TRACKED faces EXACTLY-7: .gitignore + build.sh + probe.cc + probe_faceA.cc
+# + witness_row.cc + vectors.txt + vectors_faceA.txt.
+# THE SIXTH ZERO-GATE CONTROL ROW: NO gate.txt EVER ships HERE (the walked
+# census STAYS 32/9/24/1 — the 24b/24d/24f/24g/24i control face re-ridden);
+# NO gate_main.cc; NO PLAN.md; NO stderr-wall faces (the pair's walls NEVER
+# land — the honest omission).
+copy/
+o2/
+copy/main/help.cc
+copy/main/help.h
+copy/dnet.h
+copy/utils/dnet_header.h
+probe_x
+probe_x_O2
+probe_x_cross
+probe_faceA_x
+probe_faceA_x_O2
+probe_faceA_x_cross
+probe.o
+probe_faceA.o
+witness.o
+leg_*.o
+copy/main/help.o
+E_leg_*.txt
+vectors_O0.txt
+vectors_O2.txt
+vectors_O2b.txt
+vectors_faceA_O0.txt
+vectors_faceA_O2.txt
+vectors_faceA_O0b.txt
+E4_bare.txt
+E4_graft.txt
+E4_real.txt
+E4_ut.txt
+E9_dup.txt
+nm_U_plain.txt
+nm_U_ut.txt
+gate_md5_lineages.txt
+.e9dup
+.tamper_v
+.tamper_va
+stageables.txt
+run*.log
+*.o

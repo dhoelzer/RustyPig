@@ -1,0 +1,95 @@
+B0 table_rows=6 sizeof_Parameter=40
+
+Snort has several options to get more help:
+
+-? list command line options (same as --help)
+--help this overview of help
+--help-commands [<module prefix>] output matching commands
+--help-config [<module prefix>] output matching config options
+--help-counts [<module prefix>] output matching peg counts
+--help-limits print the int upper bounds denoted by max*
+--help-module <module> output description of given module
+--help-modules list all available modules with brief help
+--help-modules-json dump description of all available modules in JSON format
+--help-plugins list all available plugins with brief help
+--help-options [<option prefix>] output matching command line options
+--help-signals dump available control signals
+--list-buffers output available inspection buffers
+--list-builtin [<module prefix>] output matching builtin rules
+--list-gids [<module prefix>] output matching generators
+--list-modules [<module type>] list all known modules
+--list-plugins list all known modules
+--show-plugins list module and plugin versions
+
+--help* and --list* options preempt other processing so should be last on the
+command line since any following options are ignored.  To ensure options like
+--markup and --plugin-path take effect, place them ahead of the help or list
+options.
+
+Options that filter output based on a matching prefix, such as --help-config
+won't output anything if there is no match.  If no prefix is given, everything
+matches.
+
+Report bugs to bugs@snort.org.
+
+X basic exit=0
+usage:
+    snort -?: list options
+    snort -V: output version
+    snort --help: help summary
+    snort [-options] -c conf [-T]: validate conf
+    snort [-options] -c conf -i iface: process live
+    snort [-options] -c conf -r pcap: process readback
+X usage1 exit=0
+usage:
+    snort3-static-build -?: list options
+    snort3-static-build -V: output version
+    snort3-static-build --help: help summary
+    snort3-static-build [-options] -c conf [-T]: validate conf
+    snort3-static-build [-options] -c conf -i iface: process live
+    snort3-static-build [-options] -c conf -r pcap: process readback
+X usage2 exit=0
+limits:
+max31 = 2147483647
+max32 = 4294967295
+max53 = 9007199254740992
+maxSZ = 9007199254740992
+X limits exit=0
+row24j-parity
+X version exit=0
+----dashname dash-skip name face (0:10)
+selectwrap bare-wrap range face (red|green)
+optstrings paren passthrough face (optional)
+plainport null-range skip face
+X ha-all-empty exit=0
+selectwrap bare-wrap range face (red|green)
+X ha-select exit=0
+optstrings paren passthrough face (optional)
+X ha-optstr exit=0
+X ha-none exit=0
+P1 config_markup-applied markup=on
+* *----dashname* dash-skip name face (0:10)
+* *selectwrap* bare-wrap range face (red|green)
+* *optstrings* paren passthrough face (optional)
+* *plainport* null-range skip face
+X ha-null-pfx exit=0
+* *----dashname* dash-skip name face (0:10)
+X ha-case-dash exit=0
+X ha-dash-pfx exit=0
+X ha-range-wrap exit=0
+----dashname dash-skip name face (0:10)
+selectwrap bare-wrap range face (red|green)
+optstrings paren passthrough face (optional)
+plainport null-range skip face
+X ha-off-again exit=0
+* *----dashname* dash-skip name face (0:10)
+* *selectwrap* bare-wrap range face (red|green)
+* *optstrings* paren passthrough face (optional)
+* *plainport* null-range skip face
+X ha-on-again exit=0
+NF list_daqs SFDAQ load/print/unload daq wall cited (wrapper NEVER called)
+NF help_signals process.cc signal-dump wall cited (wrapper NEVER called)
+NF help_version DisplayBanner wall cited (wrapper NEVER called)
+NF show_help HT x16 new-SnortConfig + load-plugins walls cited (wrappers NEVER called)
+NF SnortConfig ctor/set_conf show-help-prelude wall cited (nullptr conf NEVER dereferenced)
+fin=PASS

@@ -1,0 +1,10 @@
+A1 sizeof_Parameter=40 sizeof_int64=8
+A2 pt: table=0 list=1 dynamic=2 bool=3 int=4 port=7 string=8 select=9 max=21 name=TABLE/MAX
+A3 ht: buf=0 cfg=1 cmd=2 dbr=3 ddr=4 dmo=5 gid=6 hmo=7 hmojson=8 hpl=9 dfl=10 ips=11 lst=12 mod=13 peg=14 plg=15 n=16
+A4 max31=2147483647 max32=4294967295 max53=9007199254740992 maxSZ=9007199254740992 sz8=1
+A5 wrap: p1=[ (optional)] p2=[ (red|green)] p3=[]
+A6 markup-off item=[] emph=[,]
+A7 markup-on item=[* ] emph=[*,*] esc=[`a*b`] em=[*tag*]
+A8 banner_len=1477 banner_nl=32
+A9 dialect posts ABSENT BOTH (the walked zero-gate face)
+fin=PASS

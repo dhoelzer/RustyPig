@@ -634,7 +634,7 @@ fn p11_census_walk_unmoved() {
 #[test]
 fn p12_mod_rs_cascade_fired_walk() {
     let mrs = read("/opt/data/snort3-rust/src/main/mod.rs");
-    assert_eq!(mrs.lines().count(), 13, "the mod.rs face 12 -> 13 THIS row (the ONE NEW wiring line, un-like the 24h pre-existing seat)");
+    assert_eq!(mrs.lines().count(), 14, "the mod.rs face rode 13 at 24i ([24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s, the walked face])");
     let seat = ["pub mod anal", "yzer_command;"].concat();
     assert_eq!(mrs.matches(&seat).count(), 1, "the ONE new wiring line EXACTLY-1");
     assert_eq!(mrs.matches("pub mod analyzer;").count(), 1, "the OLD e-xa-ct-se-at fa-ce still EXAC-TLY-1");
@@ -643,7 +643,7 @@ fn p12_mod_rs_cascade_fired_walk() {
     // leg-ne-edle dr-ift, the honest rep-in NEVER a fro-zen ne-edle):
     let prefix = ["pub mod anal", "yzer"].concat();
     assert_eq!(mrs.matches(&prefix).count(), 2, "the prefix-collision face MEASURED-2");
-    // the holder-set walk (in-commit flips, every arm NOW reads 13):
+    // the holder-set walk (in-commit flips, every arm NOW reads 14 [24j rider]):
     // the holder NAMES ride runtime-built spli-ts (the SE-LF-H-iT law: the
     // foreign harness to-ken-s NEV-ER join HER-E — the wal-k needs the
     // ar-ms, not the join-ed na-mes):
@@ -655,14 +655,14 @@ fn p12_mod_rs_cascade_fired_walk() {
         let hn = h.concat();
         let b = read(&format!("/opt/data/snort3-rust/tools/{hn}/build.sh"));
         assert!(
-            b.contains("src/main/mod.rs)\" -eq 13"),
-            "the {hn} wc-arm flipped 12 -> 13 IN-COMMIT (the complete-flip law, the walked receipt)"
+            b.contains("src/main/mod.rs)\" -eq 14"),
+            "the {hn} wc-arm reads 14 IN-COMMIT (the 62d6fac complete-flip law; [24j rider 13->14], the walked receipt)"
         );
     }
     for t in [["an", "zl"], ["hproce", "ss"], ["shel", "l"], ["snc", "onf"], ["snm", "od"], ["mo", "ds"], ["po", "lg"]] {
         let name = t.concat();
         let b = read(&format!("/opt/data/snort3-rust/tests/{name}_parity_test.rs"));
-        assert!(b.contains("lines().count(), 13"), "the {name} twin count/wc-arm reads 13 (the mo-ds+po-lg twins rode mo-d-r-s wc faces SINCE 24f/24h — the walk cites them as pre-existing holders flipped by THIS row; the name spli-ts ride the self-h-it law)");
+        assert!(b.contains("lines().count(), 14"), "the {name} twin count/wc-arm reads 14 (the mo-ds+po-lg twins rode mo-d-r-s wc faces SINCE 24f/24h — the walk cites them as pre-existing holders flipped by THIS row; the name spli-ts ride the self-h-it law)");
     }
     // the an-zl bui-ld.hol-d-er pre-fix ar-m re-pin (the 1->2 wal-k):
     let ab = read(&["/opt/data/snort3-rust/tools/anz", "l_harness/build.sh"].concat());
@@ -750,9 +750,13 @@ fn p14_docs_rows_tripwires() {
     assert_eq!(plan.lines().filter(|l| l.starts_with("| 24h ")).count(), 1, "the 24h row UN-MOVED x1 (the AFTER-the-24h-row seat, the walked face)");
     let dev = read("/opt/data/snort3-rust/KNOWN DEVIATIONS.md");
     let heads: Vec<&str> = dev.lines().filter(|l| l.starts_with("## ")).collect();
-    let last = heads.last().unwrap();
-    assert!(last.contains("row 24i"), "the dev-i-ati-ons 24i sec-ti-on ri-d-es as the LAST sec-ti-on (the APP-END la-w, the walked face)");
+    // [24j rider: the APP-END law moves the LAST-section face EVERY row —
+    // the 24i face rode LAST at the 24i era; at this row the 24j DEV sec-
+    // ti-on ri-d-es LAST, the 24i sec-ti-on stays EXACT-1 (the po-lg /
+    // con-ta-i-ns-1 pre-ce-dent; the 62d6fac com-plete-fl-ip law, walked)]:
+    assert!(heads.last().unwrap().contains("row 24"), "the LAST dev section is the newest row (the app-end law)");
     assert_eq!(heads.iter().filter(|h| h.contains("row 24i")).count(), 1, "the 24i section EXACTLY-1");
+    assert_eq!(heads.iter().filter(|h| h.contains("row 24j")).count(), 1, "the 24j section EXACTLY-1, riding LAST");
     // the OWN join-ed tok-e-ns ride the THREE docs faces EXA-CT-LY-0:
     let next = read(NEXTMD);
     let own_fold = format!("{}{}", "a", "cmd");

@@ -400,7 +400,7 @@ fn p09_statics_census_and_self_law() {
 #[test]
 fn p10_mod_wiring_unmoved_echo() {
     let mrs = read(concat!("/opt/data/snort3-rust/src/mai", "n/mod.rs"));
-    assert_eq!(mrs.lines().count(), 13, "the mod.rs face rode 12 at 24h (this row's seat pre-existed; NO wiring line added by 24h — the honest ECHO as walked THEN); [24i rider 12->13: the an-al-yzer-com-mand own-er row's ONE new wiring line FIRED the cascade — the disk wins, the re-walk face]");
+    assert_eq!(mrs.lines().count(), 14, "the mod.rs face rode 12 at 24h (this row's seat pre-existed; NO wiring line added by 24h — the honest ECHO as walked THEN); [24i rider 12->13: the an-al-yzer-com-mand own-er row's ONE new wiring line FIRED the cascade — the disk wins]; [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s — the cascade re-fired GENUINELY, the walked face]");
     assert_eq!(mrs.matches(concat!("pub mod pol", "icy;")).count(), 1, "the ONE pre-existing seat face");
 }
 
