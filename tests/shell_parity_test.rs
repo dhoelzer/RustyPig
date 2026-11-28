@@ -568,7 +568,7 @@ fn t13_docs_seed_tripwires() {
     assert_eq!(linecount(done.as_str()), 0, "the DONE echo NEVER rides NEXT.md");
     // the mod.rs rider-flip face (the 62d6fac complete-flip law):
     let mrs = std::fs::read_to_string(repo_path().join("src/main/mod.rs")).unwrap();
-    assert_eq!(mrs.lines().count(), 14, "the 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14 rider-flip chain (the 62d6fac law, walked face)");  // [24j rider 13->14: the he-lp own-er pair's ONE new wiring line, walked]  // [24i rider 12->13: the an-al-yzer-com-mand own-er row's ONE new wiring line, walked]  // [24g rider 11->12: the snor-t-confi-g own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]
+    assert_eq!(mrs.lines().count(), 15, "the 7 -> ... -> 14 -> 15 rider-flip chain (the 62d6fac law, walked face; [24k rider])");  // [24j rider 13->14: the he-lp own-er pair's ONE new wiring line, walked]  // [24i rider 12->13: the an-al-yzer-com-mand own-er row's ONE new wiring line, walked]  // [24g rider 11->12: the snor-t-confi-g own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]
     assert_eq!(mrs.matches(format!("pub mod shell{}", "p").as_str()).count(), 1, "the ONE new seat");
     // the PLAN row + the deviations section banked IN the code commit:
     let plan = std::fs::read_to_string(repo_path().join("PORTING_PLAN.md")).unwrap();

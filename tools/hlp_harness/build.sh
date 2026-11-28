@@ -458,7 +458,7 @@ test "$(md5sum "$PT2"/vectors_faceA.txt | awk '{print $1}')"   = "3a9b0a4b31ba29
 # ambiguated grep face proving NO sibling row shares the 'he' prefix) ALL
 # FIRE by WALK. ----
 if [ -f "$R"/src/main/help.rs ]; then
-    test "$(wc -l < "$R"/src/main/mod.rs)" -eq 14                      # the landing face (the 62d6fac law, walked when the twin lands)
+    test "$(wc -l < "$R"/src/main/mod.rs)" -eq 15                      # the landing face (the 62d6fac law, walked when the twin lands)  # [24k rider 14->15: the ne-twork own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]
     test "$(grep -c 'pub mod help' "$R"/src/main/mod.rs)" -eq 1        # the GROUND-name wiring line (the carrier law)
     test "$(grep -c 'pub mod he' "$R"/src/main/mod.rs)" -eq 1          # the PREFIX-COLLISION face MEASURED honestly (the 'he' prefix rides the ONE walker at this row)
 fi

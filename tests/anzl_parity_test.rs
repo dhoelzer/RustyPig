@@ -766,7 +766,7 @@ fn t14_docs_seed_token_tripwires() {
     assert_eq!(this.matches(land.as_str()).count(), 0);
     // the mod.rs rider-flip face (the 62d6fac complete-flip law):
     let mrs = std::fs::read_to_string("/opt/data/snort3-rust/src/main/mod.rs").unwrap();
-    assert_eq!(mrs.lines().count(), 14); // [24c 7->8 + 24d 8->9 + 24e 9->10 + 24f 10->11 + 24g 11->12]# #   [24i rider 12->13: the an-al-yzer-com-mand own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]   [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]
+    assert_eq!(mrs.lines().count(), 15);   // [24k rider 14->15: the ne-twork own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)] // [24c 7->8 + 24d 8->9 + 24e 9->10 + 24f 10->11 + 24g 11->12]# #   [24i rider 12->13: the an-al-yzer-com-mand own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]   [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]
     assert_eq!(mrs.matches("pub mod analyzer").count(), 2); // the walk face: the PRE-FIX leg-needle now prefix-collides with the 24i own-er wiring line (an-al-yzer + an-al-yzer-com-mand) — MEASURED-2, the honest drift face NEVER frozen
     // the row NEVER touches the seed faces (the pin faces UNMOVED):
     assert_eq!(NEXTMD.matches("5 TEST(").count(), 1);

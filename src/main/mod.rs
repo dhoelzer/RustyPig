@@ -12,3 +12,4 @@ pub mod snort_module;
 pub mod snort_configp;
 pub mod analyzer_command;
 pub mod help;
+pub mod network_module;

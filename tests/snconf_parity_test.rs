@@ -574,7 +574,7 @@ fn t8_posture_faces() {
 #[test]
 fn t9_mod_seat_ladder_twelve() {
     let mrs = read("/opt/data/snort3-rust/src/main/mod.rs");
-    assert_eq!(mrs.lines().count(), 14, "the LIVE face (the 62d+6fac walk)");  // [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (walked)]  // [24i rider 12->13: the an-al-yzer-com-mand own-er pair's ONE new wiring line in the mo+d-r+s (the complete-flip law, walked face)]
+    assert_eq!(mrs.lines().count(), 15, "the LIVE face (the 62d+6fac walk; [24k rider 14->15])");  // [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (walked)]  // [24i rider 12->13: the an-al-yzer-com-mand own-er pair's ONE new wiring line in the mo+d-r+s (the complete-flip law, walked face)]
     let want: [&str; 12] = [
         "pub mod analyzer;",
         "pub mod numa;",
@@ -775,8 +775,8 @@ fn t12_backbone_docs_tripwires() {
 fn last_section_named_row(dev: &str) {
     let heads: Vec<&str> = dev.lines().filter(|l| l.starts_with("## ")).collect();
     let last = heads.last().unwrap();
-    // [24j rider: the AP+PEND law moved the LA+ST-se-cti-on fa-ce at THIS ro-w (the he-l-p PA-IR DEV sec-ti-on rides LAST; the 24i sec-ti-on stays EXAC-T-1 — the con-ta-i-ns-1 wal-k, t-h-e 62d6fac com-pl-ete-fl-ip law):]
-    assert!(last.contains("24j"), "the dev-i-ati-ons LA+ST sec-ti-on is the NEWEST row (the AP+PEND law, the walked face — [24i rider 24h->24i, then the 24j rider 24i->24j, the LAST-SECT-ION walk fl-ips])");
+    // [24k rider: the AP+PEND law moved the LA+ST-se-cti-on fa-ce at THIS ro-w (the ne-t-work-own-er PAIR DEV sec-ti-on rides LAST; the 24j/24i sec-ti-ons stay EXAC-T-1 — the con-ta-i-ns-1 wal-k, t-h-e 62d6fac com-pl-ete-fl-ip law; the 24j rider face 24h->24i then 24i->24j rode BEFORE, the walked chain):]
+    assert!(last.contains("24k"), "the dev-i-ati-ons LA+ST sec-ti-on is the NEWEST row (the AP+PEND law, the walked face — [24k rider 24j->24k, the LAST-SECT-ION walk fl-ips])");
     assert_eq!(heads.iter().filter(|h| h.contains("24h")).count(), 1, "EXACTLY-1");
     assert_eq!(heads.iter().filter(|h| h.contains("24i")).count(), 1, "the 24i LA+ST sec-ti-on EXACTLY-1");
 }
@@ -906,18 +906,18 @@ fn t15_holder_ledger_faces() {
     let rd = |p: &str| std::fs::read_to_string(r.join(p)).unwrap();
     // the mod-r-s wc arms (all flipp+ed thi+s commit; the live f-a-c-e = 12):
     let mrs = rd("src/main/mod.rs");
-    assert_eq!(mrs.lines().count(), 14, "the cas-c-a+de's live face 14 [24j rider 13->14: the he-lp own-er row's ONE new wiring line, the walk face]");
+    assert_eq!(mrs.lines().count(), 15, "the cas-c-a+de's live face 15 [24k rider 14->15: the ne-twork row's ONE new wiring line] [24j rider 13->14: the he-lp own-er row's ONE new wiring line, the walk face]");
     for f in [
         ["anz", "l_harness"].concat(), ["h", "process_harness"].concat(), ["sh", "ell_harness"].concat(),
         ["sn", "proc_harness"].concat(), ["sn", "mod_harness"].concat(),
     ] {
         let bs = rd(&format!("tools/{f}/build.sh"));
-        let needle = concat!("wc -l < \"", "$R\"/src/main/mod.rs)\" -eq 14");  // [24j rider: the 13->14 walk face]
+        let needle = concat!("wc -l < \"", "$R\"/src/main/mod.rs)\" -eq 15");  // [24k rider: the 14->15 walk face]
         assert!(bs.contains(needle), "the {f} wi-c arm flipped 11->12 IN-COMMIT (the walk face)");
     }
     for f in [["mods", "_parity_test.rs"].concat(), ["sn", "mod_parity_test.rs"].concat()] {
         let t = rd(&format!("tests/{f}"));
-        assert!(t.contains("lines().count(), 14"), "the {f} tw-in arm flipped to 14 [24j rider, the twin-si+de ri+de law re-ridden]");
+        assert!(t.contains("lines().count(), 15"), "the {f} tw-in arm flipped to 15 [24k rider] [24j rider, the twin-si+de ri+de law re-ridden]");
     }
     // the st-r-i-c-t fam-i-ly live faces vs the fl-i-pp-i-n-g pi-ns (run-t-i-
     // me-bu-i-ll-t ne-edl-e-s; the arm+s' excl-usi-on s-e-ets re-ri-d-e):

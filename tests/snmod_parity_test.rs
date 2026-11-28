@@ -414,7 +414,7 @@ fn t10_zero_law_self_census() {
 #[test]
 fn t11_mod_rider_eleven_seats() {
     let mrs = read(&["/opt/data/snort3-rust/src/mai", "n/mod.rs"].concat());
-    assert_eq!(mrs.lines().count(), 14, "the LIVE face (the complete-flip law)");  // [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (walked)]# #   [24i rider 12->13: the an-al-yzer-com-mand own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]
+    assert_eq!(mrs.lines().count(), 15, "the LIVE face (the complete-flip law; [24k rider 14->15])");  // [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (walked)]# #   [24i rider 12->13: the an-al-yzer-com-mand own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]
     let seats: Vec<&str> = mrs.lines().collect();
     let want: [&str; 11] = [
         "pub mod analyzer;",

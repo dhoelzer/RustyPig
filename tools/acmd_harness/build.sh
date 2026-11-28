@@ -377,7 +377,7 @@ test "$(md5sum "$PT2"/vectors_faceA.txt | awk '{print $1}')"   = "3a9b0a4b31ba29
 # twin lands (the 13-L pin rides ONLY behind the landing's existence — the
 # pre-landing line-count face is NEVER pinned anywhere in this file). ----
 if [ -f "$R"/src/main/analyzer_command.rs ]; then
-    test "$(wc -l < "$R"/src/main/mod.rs)" -eq 14  # [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]                       # the landing face (the 62d6fac law, walked when the twin lands)
+    test "$(wc -l < "$R"/src/main/mod.rs)" -eq 15  # [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]                       # the landing face (the 62d6fac law, walked when the twin lands)  # [24k rider 14->15: the ne-twork own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law, walked face)]
     test "$(grep -c 'pub mod analyzer_command' "$R"/src/main/mod.rs)" -eq 1   # the GROUND-name wiring line (the carrier law)
 fi
 

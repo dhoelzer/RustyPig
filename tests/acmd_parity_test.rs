@@ -548,6 +548,12 @@ fn p10_one_home_walk() {
             "src/main/analyzer.rs",            // the UN-com-pl-e-t-e-WR-AP-P-E bor-r-ow-er (the 24d hom-e, the ONE home re-u-s-e fa-ce)
             "src/main/analyzer_command.rs",    // the OW-ner land-i-ng
             "src/main/mod.rs",                 // the ON-E wir-ing lin-e seat
+            // [24k rider 5 -> 6: the ne-twork own-er landing legit-i-mately RE-U-SE-
+            // ci-tes the 24i own-er home (the Con-t-ro-l-Con-n-Fa-ce qu-e-ry-fr-om-
+            // l-u-a seam, ONE-HOME law, the cited ci-te-ON-L-Y f-a-c-e — NO code
+            // for-k; the 62d6fac comp-lete-f-lip law, w-alk-ed fac-e, the 24e mo-du-
+            // le-r-e-g-i-s-try re-u-se p-re-c-e-d-e-n-t]:
+            concat!("src/main/ne", "twork_module.rs"),
             concat!("src/packet_io/packet_", "tracer_module.rs"), // the CI-TE-ON-L-Y fa-ce (the de-b-u-g com-m-and pa-ir's ba-se ci-te at 23f; the SPLIT ne-ed-le ri+de-s the fo-re-i-g-n fam-i-ly wa-lk law — the twin's BYT-ES stay ZERO-joi-n-ed, the 23f self-h-i-t prov-en)
         ],
         "the ONE-home face: the landi-ng + the wiring seat + the 24d borrower + TWO pre-existing CITE-ONLY homes (NO second fork; the cite-only homes ride COMMENTS, NEVER a code fork)"
@@ -634,7 +640,7 @@ fn p11_census_walk_unmoved() {
 #[test]
 fn p12_mod_rs_cascade_fired_walk() {
     let mrs = read("/opt/data/snort3-rust/src/main/mod.rs");
-    assert_eq!(mrs.lines().count(), 14, "the mod.rs face rode 13 at 24i ([24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s, the walked face])");
+    assert_eq!(mrs.lines().count(), 15, "the mod.rs face ([24k rider 14->15: this row's ONE new wiring line, walked face]; [24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s, the walked face])");
     let seat = ["pub mod anal", "yzer_command;"].concat();
     assert_eq!(mrs.matches(&seat).count(), 1, "the ONE new wiring line EXACTLY-1");
     assert_eq!(mrs.matches("pub mod analyzer;").count(), 1, "the OLD e-xa-ct-se-at fa-ce still EXAC-TLY-1");
@@ -655,14 +661,14 @@ fn p12_mod_rs_cascade_fired_walk() {
         let hn = h.concat();
         let b = read(&format!("/opt/data/snort3-rust/tools/{hn}/build.sh"));
         assert!(
-            b.contains("src/main/mod.rs)\" -eq 14"),
+            b.contains("src/main/mod.rs)\" -eq 15"),  // [24k rider 14->15: the walker face re-pinned by walk]
             "the {hn} wc-arm reads 14 IN-COMMIT (the 62d6fac complete-flip law; [24j rider 13->14], the walked receipt)"
         );
     }
     for t in [["an", "zl"], ["hproce", "ss"], ["shel", "l"], ["snc", "onf"], ["snm", "od"], ["mo", "ds"], ["po", "lg"]] {
         let name = t.concat();
         let b = read(&format!("/opt/data/snort3-rust/tests/{name}_parity_test.rs"));
-        assert!(b.contains("lines().count(), 14"), "the {name} twin count/wc-arm reads 14 (the mo-ds+po-lg twins rode mo-d-r-s wc faces SINCE 24f/24h — the walk cites them as pre-existing holders flipped by THIS row; the name spli-ts ride the self-h-it law)");
+        assert!(b.contains("lines().count(), 15"), "the {name} twin count/wc-arm reads 15 ([24k rider]), the 24j cite chain below (the mo-ds+po-lg twins rode mo-d-r-s wc faces SINCE 24f/24h — the walk cites them as pre-existing holders flipped by THIS row; the name spli-ts ride the self-h-it law)");
     }
     // the an-zl bui-ld.hol-d-er pre-fix ar-m re-pin (the 1->2 wal-k):
     let ab = read(&["/opt/data/snort3-rust/tools/anz", "l_harness/build.sh"].concat());

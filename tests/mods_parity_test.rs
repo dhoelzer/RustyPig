@@ -508,7 +508,7 @@ fn t15_tokens_wiring_landmines_seeds() {
     assert_eq!(rs.lines().filter(|l| l.contains(&["un", "safe"].concat()) && !l.contains("un-safe")).count(), 0, "ZERO bare un-safe (the hyphen prose face NEVER counted)");
     // the mod.rs rider face (9 -> 10, the ONE new wiring line):
     let mrs = read(&format!("{root}/src/mai{}n/mod.rs", ""));
-    assert_eq!(mrs.lines().count(), 14, "the LIVE face at this row (the 62d6fac law, walked)");  // [24i rider 12->13: the an-al-yzer-com-mand own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law)][24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (the walked face)]
+    assert_eq!(mrs.lines().count(), 15, "the LIVE face at this row (the 62d6fac law, walked; [24k rider 14->15: the ne-twork own-er row's ONE new wiring line])");  // [24i rider 12->13: the an-al-yzer-com-mand own-er pair's ONE new wiring line in the mo-d-r-s (the 62d6fac complete-flip law)][24j rider 13->14: the he-lp own-er pair's ONE new wiring line in the mo-d-r-s (the walked face)]
     assert_eq!(mrs.matches(&["pub mod modu", "les;"].concat()).count(), 1, "the ONE new seat EXACTLY-1");
     // the landmine trio face (the 24e legit ONE-home reuse rider 2 -> 3;
     // pieces runtime-built so THIS file NEVER carries a joined face):

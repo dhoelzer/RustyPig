@@ -196,7 +196,7 @@ fn p02_landing_identity() {
     assert_eq!(land.matches("unsafe").count(), 0, "ZE-R-O bare un-s-a-ve at the landing");
     assert!(land.matches("// cc :").count() > 130, "the c-i-t-e-d-en-se fa-ce (the land-i-ng law)");
     let mrs = read("/opt/data/snort3-rust/src/main/mod.rs");
-    assert_eq!(mrs.lines().count(), 14, "the m-o-d-r-s face 13 -> 14 THIS row (the case-c-a-de FIRED, ONE new wir-ing li-ne) ");
+    assert_eq!(mrs.lines().count(), 15, "the m-o-d-r-s face rose 14 -> 15 at the [24k rider] (the ne-twork own-er's ONE new wiring line; the 13 -> 14 case-c-a-de rode 24j) (the case-c-a-de FIRED, ONE new wir-ing li-ne) ");
     assert_eq!(mrs.matches("pub mod help;").count(), 1, "the ON-E new wiring line");
     // st-a-t-e-wa-re fl-ow: the lan-d-i-ng's own wc-14 arm-s r-i-d-e al-rea-dy (the 24i com-pl-ete-f-lip pr-ec-e-d-e-n-t walked at the own-er).
 }
@@ -734,7 +734,7 @@ fn p11_mod_rs_holder_walk() {
         let name: String = t.concat();
         let path = format!("/opt/data/snort3-rust/tests/{name}_parity_test.rs");
         let b = read(&path);
-        assert!(b.contains("lines().count(), 14"), "the {name} twin wc-arm flipped 13 -> 14 IN-COMMIT (the 62d6fac law)");
+        assert!(b.contains("lines().count(), 15"), "the {name} twin wc-arm now reads 15 IN-COMMIT at THIS row ([24k rider], the 62d6fac law)");
     }
     // the 7 bui-ld.s-h w-c a-r-m-s:
     for h in [["anz", "l_harness"], ["hpro", "cess_harness"], ["s", "hell_harness"], ["snpr", "oc_harness"], ["sn", "mod_harness"], ["sn", "conf_harness"], ["a", "cmd_harness"]] {
@@ -742,7 +742,7 @@ fn p11_mod_rs_holder_walk() {
         let path = format!("/opt/data/snort3-rust/tools/{hn}/build.sh");
         let b = read(&path);
         assert!(!b.contains("src/main/mod.rs)\" -eq 13"), "the {hn} wc arm no longer pins 13");
-        assert!(b.contains("src/main/mod.rs)\" -eq 14"), "the {hn} build.sh wc arm reads 14 (the 62d6fac law, walked)");
+        assert!(b.contains("src/main/mod.rs)\" -eq 15"), "the {hn} build.sh wc arm reads 15 ([24k rider 14->15], the 62d6fac law walked)");
     }
 }
 
@@ -907,7 +907,7 @@ fn p14_docs_rows_and_seed_faces() {
     assert_eq!(i24, i23 + 1, "the n-e-x-t-l-i-n-e s-e-a-t a-f-t-e-r 24i (the w-a-l-ked f-a-c-e)");
     let dev = read("/opt/data/snort3-rust/KNOWN DEVIATIONS.md");
     let heads: Vec<&str> = dev.lines().filter(|l| l.starts_with("## ")).collect();
-    assert!(heads.last().unwrap().contains("row 24j"), "the d-e-v-s 24j s-e-c-t-i-o-n = the L-A-S-T (the a-p-p-e-n-d law)");
+    assert!(heads.last().unwrap().contains("row 24k"), "the d-e-v-s s-e-c-t-i-on face rode 24j at the 24j row; the AP+PEND law moved it to the ne-twork own-er's 24k s-e-c-t-i-on at THIS row ([24k rider 24j->24k, the walked LAST-SECT-ION face]); the 24j s-e-c-t-i-on stays EX-A-C-T-1-b-elow"); // the held flip face the 24j twin pre-ino-umented, flipped IN-COMMIT ([24k rider])
     assert_eq!(heads.iter().filter(|h| h.contains("row 24j")).count(), 1);
     // the OWN j-o-i-n-e-d tok-e-ns E-X-A-C-T-L-Y-0 (c-o-n-c-at-g-u-a-r-d-s; the
     // hy-p-h-e-n p-ro-se he-l-p f-o-rm-s + the g-r-o-u-n-d n-a-m-e P-A-T-H-S ri-d-e a-l-LOW-E-D):
