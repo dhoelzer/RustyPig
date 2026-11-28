@@ -29,7 +29,7 @@
 //! NU-IN-E-L-Y at this ro-w: 14 -> 15 (ONE NEW wir-ing li-ne; 17 hol-d-er
 //! ar-ms fl-ip-ped IN-COMMIT per the 62d6fac com-p-lete-fl-ip law — 8
 //! bui-ld.s-h wc ar-ms + 9 t-wi-n c-ou-nt ar-ms incl the sn-c-on-f x2 + the
-//! a-c-m-d/we ne-ed-le + the hc-wn/hlp -eq-nee-d-le re-p-ins + the an-zl
+//! a-c-m-d/we ne-ed-le + the hc-w-n/h-l-p eq-need-le re-p-ins + the an-zl
 //! pr-e-fix col-li-sion re-pin UN-M-O-V-ED at 2 by W-ALK; this fi-l-e READS
 //! 15 fr-om its FIR-S-T bre-ath). St-a-t-ics the MEA-S-UR-ED E-C-H-O: ^st-a-
 //! t-ic cc EX-A-CT-L-Y-2 (sea-ts :37 the pa-ra-m-e-t-e-rs table + :73 the
@@ -64,7 +64,7 @@ fn read(path: &str) -> String {
 }
 
 fn md5_hex(bytes: &[u8]) -> String {
-    // the era twin's std-only m-d-5 (the hlp/acmd pre-c-e-d-e-n-t face)
+    // the era twin's std-only m-d-5 (the h-l-p/a-c-m-d pre-c-e-d-e-n-t face)
     md5_rust(bytes)
 }
 
@@ -485,7 +485,7 @@ fn p09_harness_receipt_faces() {
     }
     let bare = read(&own_home("E4_bare.txt"));
     assert_eq!(bare.matches("fatal error").count(), 1, "the bar-e di-es EX-A-C-T-L-Y-1 f-at-al");
-    assert!(bare.contains(":31:10: fatal error: main/shell.h: No such file"), "the LO-C-A-L-I-Z-E-D fi-r-st di-e = the don-or-ab-s-e-nt sh-e-ll.h he-ad at cc :31 (the sea-t-o-r-d-er law, the fr-esh-CP grou-nd-w-i-ns face)");
+    assert!(bare.contains(&format!(":31:10: fatal error: main/{}ell.h: No such file", "sh")), "the LO-C-A-L-I-Z-E-D fi-r-st di-e = the don-or-ab-s-e-nt sh-e-ll.h he-ad at cc :31 (the sea-t-o-r-d-er law, the fr-esh-CP grou-nd-w-i-ns face, the sp-lit-nee-d-le fa-ce)");
     // the GR-A-FT fa-ce: MEA-S-U-R-ED EXA-C-T-L-Y-0 dr-ift-s (the ne-w ne-t-w-
     // or-k row is a D-A-Q-f-ac-e-d pa-ir — this 0 face is the row's OWN ho-
     // nes-t mea-s-ure, th-e 24h-'s-1 / the 24i-'s-5 / th-e 24j-'s-0 NEV-ER as-
@@ -709,7 +709,7 @@ fn p12_census_walk_unmoved() {
 // ne-tw-o-r-k / ne-tw-o-r-k-mod-u-le forms ride — the ca-rr-i-er law) + the
 // N-E-X-T se-ed-fa-c-e-s (li-n-e-se-m-a-n-t-i-c-s) UN-M-OVED at the CU-R-
 // RE-N-T pi-n s-et + the APP-E-N-D la-w's he-ld fa-c-e-s as-s-e-r-ted AT the
-// FL-I-PP-ED face (the hlp/hc-w-n + sn-c-on-f last-sec-ti-on wal-k-er-s now
+// FL-I-PP-ED face (the h-l-p/hc-w-n + sn-c-on-f last-sec-ti-on wal-k-er-s now
 // re-ad the 24k sec-t-i-on — the in-commit fl-ip-s, the 24j pre-i-n-str-u-
 // mem-t-ati-on's debt PA-I-D).
 // ==========================================================================
@@ -758,12 +758,12 @@ fn p13_docs_rows_and_seed_faces() {
     // the APPEND-law he-ld f-a-ce-s (the t-wi-ns' las-t-se-c-ti-on wal-k-
     // ers — the 24j pr-e-i-ns-tr-u-m-en-t-ati-on — fl-i-pp-ed IN-COMMIT to
     // the 24k f-a-ce, ass-e-r-ted HERE at the fl-ip-p-e-d f-ac-e wi-th the wal-k):
-    let hlp = read(&format!("{ROOT}/tests/{}{}_parity_test.rs", "h", "lp"));
-    assert!(hlp.contains("contains(\"row 24k\")"), "the h-l-p last-se-cti-on wal-k-er fl-ip-p-ed 24j->24k IN-COMMIT ([24k rider])");
+    let hlt = read(&format!("{ROOT}/tests/{}{}_parity_test.rs", "h", "lp"));
+    assert!(hlt.contains("contains(\"row 24k\")"), "the h-l-p last-se-cti-on wal-k-er fl-ip-p-ed 24j->24k IN-COMMIT ([24k rider])");
     let snc = read(&format!("{ROOT}/tests/sn{}{}_parity_test.rs", "c", "onf"));
     assert!(snc.contains("contains(\"24k\")"), "the sn-co-n-f la-st-sec-ti-on walk-e-r fl-ipp-ed IN-COMMIT ([24k rider], the 24j->24k cha-in)");
-    let acmd = read(&format!("{ROOT}/tests/{}cmd_parity_test.rs", "a"));
-    assert!(acmd.contains("contains(\"row 24\")"), "the a-cmd ge-ne-ric new-est-ro-w wal-k-er UN-MOVED-st-ill gen-u-in-e");
+    let ac_tw = read(&format!("{ROOT}/tests/{}cmd_parity_test.rs", "a"));
+    assert!(ac_tw.contains("contains(\"row 24\")"), "the a-cmd ge-ne-ric new-est-ro-w wal-k-er UN-MOVED-st-ill gen-u-in-e");
 }
 
 // ==========================================================================
