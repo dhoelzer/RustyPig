@@ -1,0 +1,10 @@
+A1 sizeof(Parameter)=40 sizeof(Command)=40
+A2 pt: TABLE=0 LIST=1 DYNAMIC=2 BOOL=3 INT=4 INTERVAL=5 REAL=6 PORT=7 STRING=8 SELECT=9 MULTI=10 ENUM=11 MAC=12 IP4=13 ADDR=14 BIT_LIST=15 INT_LIST=16 ADDR_LIST=17 IMPLIED=18 STR_LIST=19 DYNAMICS=20 MAX=21 n=22
+A3 np slots=8+1sentinel multi=2 sent-type=21 index(icmp)=7 index(noudp)=6
+A4 cmds=1 tail-sentinel=1 setparams=1 sp-sentinel=1 params-live=1 name0=set_policy sp0=id sp0-type=4
+A5 usage: g=0 c=1 i=2 d=3 row=1
+A6 guard double-include ok ctor2=network
+A7 ck: ip=1 tcp=2 udp=4 icmp=8 all=15 def=2147483648
+A8 max: sz=9007199254740992 max53=9007199254740992 max31=2147483647 min-int--5
+A9 dialect posts ABSENT BOTH
+finA=PASS

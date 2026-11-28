@@ -1,0 +1,56 @@
+Q row24k-dec-ladder
+P policy_map shape-init
+W SnortConfig.ctor ex=(none) (witness shape-init)
+D1 ctor name=network help=configure basic network parameters usage=1-1 params=live
+D2 p0 checksum_drop type=10 deflt=none
+D2 p1 checksum_eval type=10 deflt=all
+D2 p2 id type=4 deflt=1
+D2 p3 min_ttl type=4 deflt=1
+D2 p4 new_ttl type=4 deflt=1
+D2 p5 layers type=4 deflt=40
+D2 p6 max_ip6_extensions type=4 deflt=0
+D2 p7 max_ip_layers type=4 deflt=0
+D2 rows=8 multi=2 select=0 sentinel=1
+P policy shape-init id=0 ips_id=0 uid=1 min=1 new=5 eval=0x8000000f drop=0x80000000
+K checksum_eval in=all eval=0xf drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=none eval=0x0 drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=ip eval=0x1 drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=noip eval=0xe drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=tcp eval=0x2 drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=notcp eval=0xd drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=udp eval=0x4 drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=noudp eval=0xb drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=icmp eval=0x8 drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=noicmp eval=0x7 drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=all icmp eval=0xf drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_eval in=tcp noicmp eval=0x2 drop=0x80000000 dropsno-Tcpno-Udpno-Icmp
+K checksum_drop in=all eval=0x2 drop=0xf drops-Tcp-Udp-Icmp
+K checksum_drop in=noip notcp eval=0x2 drop=0xc dropsno-Tcp-Udp-Icmp
+K checksum_drop in=none eval=0x2 drop=0x0 dropsno-Tcpno-Udpno-Icmp
+K preds ip=0 udp=0 tcp=1 icmp=0
+D4 id=4242 max53=9007199254740992
+D4 min=3 new=64
+D5 layers=40 ip6ext=7 iplayers=9
+D6 cmd0 set_policy args=(id) canrun=0 help=set the network policy for commands given the user policy id
+D6 rows=1 tail-sentinel=1
+D7 lua-state=1
+W SnortConfig.ctor ex=(none) (witness shape-init)
+W PolicyMap.get_user_network uid=7 HIT
+W Shell.set_network_policy_user_id L=1 uid=7 (she-ll home NEVER lands)
+D7a hit rc=0 top=1
+W PolicyMap.get_user_network uid=0 miss
+W ControlConn.query_from_lua -> nil (mirror)
+W LogMessage[nil-conn]: Error: invalid network.id; no policy found
+D7b zero rc=0 top=1
+W PolicyMap.get_user_network uid=99 miss
+W ControlConn.query_from_lua -> nil (mirror)
+W LogMessage[nil-conn]: Error: invalid network.id; no policy found
+D7c miss rc=0 top=1
+D7 closed=1
+NF ParseError-unknown-token wall NEVER fires (only valid tokens ride)
+NF Analyzer-set-main-hook + DetectionEngine-inspect (the config-conf home) NEVER fire
+NF ControlConn non-nil respond legs NEVER fire (query_from_lua mirror-nil)
+NF LogMessage FILE-pointer overload NEVER fires
+NF no-arg lua arm (optstring NULL into strtoull UB) NEVER drives
+fin=PASS
+W SnortConfig.dtor (witness shape)
